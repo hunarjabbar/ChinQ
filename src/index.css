@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-rtl: marquee-rtl 30s linear infinite;
+  --animate-liquid-glass-pulse: liquid-glass-pulse 1.5s ease-in-out infinite;
+  
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  @keyframes marquee-rtl {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes liquid-glass-pulse {
+    0%, 100% {
+      box-shadow: 0 0 12px rgba(153, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+      background-color: rgba(153, 0, 0, 0.85);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 24px rgba(153, 0, 0, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.65);
+      background-color: rgba(210, 15, 15, 0.95);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+}

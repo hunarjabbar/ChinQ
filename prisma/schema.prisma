@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String    @default("")
+  name      String
+  role      String    @default("AUTHOR") // ADMIN, EDITOR, AUTHOR
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  articles  Article[]
+  studies   Study[]
+  stripeCustomerId String? @unique
+  subscriptionStatus String @default("INACTIVE") // INACTIVE, ACTIVE, CANCELED, PAST_DUE
+  subscriptionPlan   String? // PREMIUM, ENTERPRISE
+  subscriptionEndDate DateTime?
+
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  slug     String    @unique
+  name     String
+  nameEn   String
+  nameAr   String
+  nameZh   String
+  articles Article[]
+}
+
+model Article {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  status     String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  imageUrl   String?
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  translations ArticleTranslation[]
+  tags         Tag[]
+}
+
+model ArticleTranslation {
+  id        String  @id @default(cuid())
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  lang      String // 'en', 'ar', 'zh'
+  title     String
+  excerpt   String
+  content   String
+  seoTitle  String?
+  seoDesc   String?
+
+  @@unique([articleId, lang])
+}
+
+model Tag {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  articles Article[]
+}
+
+model MarketData {
+  id            String   @id @default(cuid())
+  symbol        String   @unique // e.g., BRENT, CNY_USD, IQD_USD
+  name          String
+  price         Float
+  change        Float
+  changePercent Float
+  updatedAt     DateTime @updatedAt
+}
+
+model LiveEvent {
+  id          String       @id @default(uuid())
+  slug        String       @unique
+  isActive    Boolean      @default(true)
+  titleEn     String
+  titleAr     String
+  titleZh     String
+  titleCkb    String       @default("")
+  summaryEn   String?
+  summaryAr   String?
+  summaryZh   String?
+  summaryCkb  String?
+  updates     LiveUpdate[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model LiveUpdate {
+  id          String    @id @default(uuid())
+  eventId     String
+  event       LiveEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  contentEn   String
+  contentAr   String
+  contentZh   String
+  contentCkb  String    @default("")
+  isImportant Boolean   @default(false)
+  authorName  String    @default("ChinQ Live Desk")
+  createdAt   DateTime  @default(now())
+}
+
+model Study {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  titleEn    String
+  titleAr    String
+  titleZh    String
+  titleCkb   String   @default("")
+  excerptEn  String
+  excerptAr  String
+  excerptZh  String
+  excerptCkb String   @default("")
+  contentEn  String
+  contentAr  String
+  contentZh  String
+  contentCkb String   @default("")
+  imageUrl   String?
+  isPrivate  Boolean  @default(false)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model PartnershipApplication {
+  id        String   @id @default(cuid())
+  fullName  String
+  email     String
+  company   String
+  role      String
+  bio       String
+  fileUrl   String?
+  hash      String   @unique
+  bureau    String
+  status    String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt DateTime @default(now())
+}
+
+model TelexDispatch {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String
+  bureau    String
+  message   String
+  telexRef  String   @unique
+  status    String   @default("UNREAD") // UNREAD, ARCHIVED, REPLIED
+  createdAt DateTime @default(now())
+}
+
+

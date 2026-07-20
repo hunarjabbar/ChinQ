@@ -1,0 +1,6 @@
+{
+  "name": "ChinQ",
+  "description": "China-Iraq News Portal",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
