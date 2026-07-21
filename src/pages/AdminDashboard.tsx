@@ -327,47 +327,57 @@ export function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <div className="max-w-4xl mx-auto bg-white p-8 border border-neutral-200 shadow-sm rounded-xl">
+      <div className="max-w-6xl mx-auto bg-white p-6 md:p-10 border border-neutral-200 shadow-sm rounded-xl">
+        <div className="mb-8 border-b-4 border-[#111111] pb-4 flex justify-between items-end">
+          <div>
+            <h2 className="text-3xl font-serif font-black text-[#111111] uppercase tracking-tight mb-1">Command Center</h2>
+            <p className="text-sm text-gray-500 font-mono">Manage publications, intel studies, and enterprise signals.</p>
+          </div>
+          <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 font-mono">
+            System Online
+          </div>
+        </div>
+
         {/* Tab Headers */}
-        <div className="flex flex-wrap gap-2 border-b border-neutral-200 mb-6 pb-2">
+        <div className="flex flex-wrap gap-2 border-b border-neutral-200 mb-8 pb-0">
           <button 
             onClick={() => setActiveTab('article')}
-            className={`pb-2 px-4 font-bold text-base transition-all cursor-pointer ${activeTab === 'article' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all cursor-pointer uppercase ${activeTab === 'article' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            {t('createArticle')} (Manual)
+            Create Article
           </button>
           <button 
             onClick={() => setActiveTab('live')}
-            className={`pb-2 px-4 font-bold text-base transition-all cursor-pointer ${activeTab === 'live' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all cursor-pointer uppercase ${activeTab === 'live' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            Publish Live Update
+            Live Update
           </button>
           <button 
             onClick={() => setActiveTab('search')}
-            className={`pb-2 px-4 font-bold text-base transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'search' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all flex items-center gap-2 cursor-pointer uppercase ${activeTab === 'search' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            <Sparkles size={16} className="text-[#990000]" />
-            AI Search & Import
+            <Sparkles size={16} className={activeTab === 'search' ? "text-[#990000]" : "text-neutral-400"} />
+            AI Import
           </button>
           <button 
             onClick={() => setActiveTab('applications')}
-            className={`pb-2 px-4 font-bold text-base transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'applications' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all flex items-center gap-2 cursor-pointer uppercase ${activeTab === 'applications' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            <Users size={16} className="text-[#990000]" />
+            <Users size={16} className={activeTab === 'applications' ? "text-[#990000]" : "text-neutral-400"} />
             Partnerships ({applications.length})
           </button>
           <button 
             onClick={() => setActiveTab('telexes')}
-            className={`pb-2 px-4 font-bold text-base transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'telexes' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all flex items-center gap-2 cursor-pointer uppercase ${activeTab === 'telexes' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            <Terminal size={16} className="text-[#990000]" />
+            <Terminal size={16} className={activeTab === 'telexes' ? "text-[#990000]" : "text-neutral-400"} />
             Telex ({telexes.length})
           </button>
           <button 
             onClick={() => setActiveTab('studies')}
-            className={`pb-2 px-4 font-bold text-base transition-all flex items-center gap-1.5 cursor-pointer ${activeTab === 'studies' ? 'text-[#990000] border-b-2 border-[#990000]' : 'text-neutral-500 hover:text-neutral-800'}`}
+            className={`pb-3 px-5 font-bold text-sm tracking-wide transition-all flex items-center gap-2 cursor-pointer uppercase ${activeTab === 'studies' ? 'text-[#990000] border-b-4 border-[#990000]' : 'text-neutral-400 hover:text-neutral-800'}`}
           >
-            <BookOpen size={16} className="text-[#990000]" />
+            <BookOpen size={16} className={activeTab === 'studies' ? "text-[#990000]" : "text-neutral-400"} />
             Studies ({studies.length})
           </button>
         </div>
@@ -382,7 +392,7 @@ export function AdminDashboard() {
                   type="text" 
                   required 
                   placeholder="e.g. basra-water-project-deal"
-                  className="w-full border border-neutral-300 p-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#990000] focus:border-[#990000]" 
+                  className="w-full border-2 border-neutral-200 bg-neutral-50 p-2.5 text-sm focus:outline-none focus:bg-white focus:border-[#111111] transition-colors rounded-none" 
                   value={formData.slug} 
                   onChange={e => setFormData({...formData, slug: e.target.value})} 
                 />
@@ -391,7 +401,7 @@ export function AdminDashboard() {
                 <label className="block text-sm font-bold text-neutral-700 mb-1">Category</label>
                 <select 
                   required 
-                  className="w-full border border-neutral-300 p-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#990000] focus:border-[#990000]" 
+                  className="w-full border-2 border-neutral-200 bg-neutral-50 p-2.5 text-sm focus:outline-none focus:bg-white focus:border-[#111111] transition-colors rounded-none" 
                   value={formData.categoryId} 
                   onChange={e => setFormData({...formData, categoryId: e.target.value})}
                 >
@@ -408,7 +418,7 @@ export function AdminDashboard() {
               <input 
                 type="url" 
                 placeholder="https://images.unsplash.com/photo-..."
-                className="w-full border border-neutral-300 p-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#990000] focus:border-[#990000]" 
+                className="w-full border-2 border-neutral-200 bg-neutral-50 p-2.5 text-sm focus:outline-none focus:bg-white focus:border-[#111111] transition-colors rounded-none" 
                 value={formData.imageUrl} 
                 onChange={e => setFormData({...formData, imageUrl: e.target.value})} 
               />

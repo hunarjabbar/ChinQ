@@ -9,9 +9,16 @@
   --animate-marquee-rtl: marquee-rtl 30s linear infinite;
   --animate-liquid-glass-pulse: liquid-glass-pulse 1.5s ease-in-out infinite;
   
+  --animate-marquee-vertical: marquee-vertical 25s linear infinite;
+
   @keyframes marquee {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
+  }
+  
+  @keyframes marquee-vertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
   }
   
   @keyframes marquee-rtl {

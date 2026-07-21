@@ -526,6 +526,8 @@ ${preset.letterZh(companyName, businessField, representative)}`;
 
   const selectedPresetObj = CORRESPONDENCE_PRESETS.find(p => p.id === selectedPreset);
 
+  const transitionConfig = { duration: 0.25, ease: "easeOut" as const };
+
   return (
     <>
       {/* ENTERPRISE SIDEBAR TRIGGER TOP CORNER HAMBURGER */}
@@ -534,7 +536,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
         animate={{ 
           x: isOpen ? (isRtl ? sidebarWidth : -sidebarWidth) : 0,
         }}
-        transition={{ type: 'spring', damping: 25, stiffness: 150 }}
+        transition={transitionConfig}
         className={cn(
           "fixed top-4 z-50 bg-[#990000] hover:bg-[#770000] text-white p-3 rounded-md shadow-lg flex items-center justify-center cursor-pointer border border-[#990000]/20 group select-none hover:scale-105 active:scale-95",
           isRtl ? "left-4" : "right-4"
@@ -563,24 +565,18 @@ ${preset.letterZh(companyName, businessField, representative)}`;
             <motion.div 
               initial={{ 
                 x: isRtl ? '-100%' : '100%',
-                rotateY: isRtl ? -90 : 90,
-                opacity: 0
+                opacity: 0.9
               }}
               animate={{ 
                 x: 0,
-                rotateY: 0,
                 opacity: 1
               }}
               exit={{ 
                 x: isRtl ? '-100%' : '100%',
-                rotateY: isRtl ? -90 : 90,
-                opacity: 0
+                opacity: 0.9
               }}
-              transition={{ type: 'spring', damping: 25, stiffness: 150 }}
+              transition={transitionConfig}
               style={{ 
-                transformOrigin: isRtl ? "left center" : "right center",
-                perspective: 1200,
-                transformStyle: 'preserve-3d',
                 width: sidebarWidth
               }}
               className={cn(

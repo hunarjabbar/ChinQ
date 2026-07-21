@@ -77,11 +77,21 @@ model Tag {
 
 model MarketData {
   id            String   @id @default(cuid())
-  symbol        String   @unique // e.g., BRENT, CNY_USD, IQD_USD
+  symbol        String   @unique // e.g., BRENT, CNY_USD, IQD_USD, HSI, 0700.HK
   name          String
+  nameZh        String   @default("")
+  nameAr        String   @default("")
+  category      String   @default("INDEX") // INDEX, CHINA_STOCK, HK_STOCK, COMMODITY, FOREX
   price         Float
   change        Float
   changePercent Float
+  volume        String   @default("1.2M")
+  high          Float    @default(0.0)
+  low           Float    @default(0.0)
+  open          Float    @default(0.0)
+  currency      String   @default("USD")
+  marketCap     String   @default("-")
+  peRatio       Float    @default(0.0)
   updatedAt     DateTime @updatedAt
 }
 

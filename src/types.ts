@@ -43,9 +43,19 @@ export interface MarketData {
   id: string;
   symbol: string;
   name: string;
+  nameZh?: string;
+  nameAr?: string;
+  category?: 'INDEX' | 'CHINA_STOCK' | 'HK_STOCK' | 'COMMODITY' | 'FOREX' | string;
   price: number;
   change: number;
   changePercent: number;
+  volume?: string;
+  high?: number;
+  low?: number;
+  open?: number;
+  currency?: string;
+  marketCap?: string;
+  peRatio?: number;
   updatedAt: string;
 }
 

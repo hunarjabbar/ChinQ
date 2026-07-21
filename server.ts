@@ -6,6 +6,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { autoSeedMoreNews } from "./server/newsSeeder.js";
 import { seedOpinions } from "./server/opinionSeeder.js";
 import { seedStudies } from "./server/studySeeder.js";
+import { seedMarketData } from "./server/marketSeeder.js";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -82,6 +83,7 @@ async function startServer() {
   await autoSeedMoreNews();
   await seedOpinions();
   await seedStudies();
+  await seedMarketData();
   await ensureTestCredentials();
 
   const app = express();
@@ -419,7 +421,21 @@ async function startServer() {
     }
   });
 
-  // 2. Market Data SSE endpoint
+  // 2. Market Data REST & SSE endpoints
+  app.get("/api/market", async (req, res) => {
+    try {
+      let marketItems = await prisma.marketData.findMany();
+      if (!marketItems || marketItems.length === 0) {
+        await seedMarketData();
+        marketItems = await prisma.marketData.findMany();
+      }
+      res.json(marketItems);
+    } catch (e: any) {
+      console.error("Error fetching market items:", e);
+      res.status(500).json({ error: "Failed to fetch market data" });
+    }
+  });
+
   app.get("/api/market/stream", async (req, res) => {
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');

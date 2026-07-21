@@ -8,8 +8,8 @@ import { EnterpriseSidebar } from './EnterpriseSidebar';
 export function Layout({ lang, children }: { lang: Locale; children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#111111] font-sans flex flex-col items-center">
-      <MarketTicker lang={lang} />
       <Header lang={lang} />
+      <MarketTicker lang={lang} />
       {children}
       <EnterpriseSidebar lang={lang} />
       <footer className="bg-white border-t-4 border-double border-[#111111] max-w-[1024px] w-full mt-16 px-6 py-12 text-xs text-[#111111] flex flex-col gap-10">

@@ -1,20 +1,50 @@
 import { SubscriptionCard } from '../components/SubscriptionCard';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
-import { useState, useCallback, useMemo } from 'react';
-import { Article, Locale, Study } from '../types';
+import { useState, useCallback, useMemo, useEffect } from 'react';
+import { Article, Locale, Study, MarketData } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { useAuthStore } from '../store/useAuthStore';
-import { BookOpen, Lock, ChevronRight, Sparkles, AlertCircle } from 'lucide-react';
+import { BookOpen, Lock, ChevronRight, Sparkles, AlertCircle, Activity } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS } from 'date-fns/locale';
 import { cn } from '../lib/utils';
+import { InvestIraq } from '../components/InvestIraq';
+import { ContactUs } from '../components/ContactUs';
+import { MarketIndicesSection } from '../components/MarketIndicesSection';
 
 export function Home() {
   const { lang } = useParams<{ lang: Locale }>();
   const { t } = useI18n(lang!);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
+  const [marketData, setMarketData] = useState<MarketData[]>([]);
+
+  useEffect(() => {
+    fetch('/api/market')
+      .then(res => res.json())
+      .then(items => {
+        if (Array.isArray(items) && items.length > 0) {
+          setMarketData(items);
+        }
+      })
+      .catch(() => {});
+
+    const eventSource = new EventSource('/api/market/stream');
+    eventSource.onmessage = (event) => {
+      try {
+        const parsed = JSON.parse(event.data);
+        if (Array.isArray(parsed)) {
+          setMarketData(parsed);
+        }
+      } catch (e) {
+        console.error("Failed to parse market stream", e);
+      }
+    };
+    return () => {
+      eventSource.close();
+    };
+  }, []);
   
   const { user } = useAuthStore();
   const isSubscribed = user?.subscriptionStatus === 'ACTIVE';
@@ -106,6 +136,28 @@ export function Home() {
 
   return (
     <div className="flex flex-col w-full bg-[#FAFAFA]">
+      
+      {/* CHINQ DAILY VERTICAL TICKER */}
+      <div className="w-full max-w-[1024px] mx-auto bg-[#111111] text-white border-b-4 border-[#990000] flex overflow-hidden h-12 relative items-center px-4 shadow-sm">
+        <div className="flex-shrink-0 font-serif font-black text-white pe-4 border-e border-white/20 uppercase tracking-widest text-sm z-10 bg-[#111111] h-full flex items-center shadow-lg">
+          <Activity size={16} className="me-2 text-[#990000] animate-pulse" />
+          {lang === 'ar' ? 'تشينك ديلي' : lang === 'zh' ? '钦克日报' : lang === 'ckb' ? 'شینک دەیلی' : 'CHINQ DAILY'}
+        </div>
+        <div className="flex-grow h-full relative overflow-hidden ms-4">
+          <div className="animate-marquee-vertical flex flex-col absolute top-0 left-0 w-full">
+            {[...articles.slice(0, 8), ...articles.slice(0, 8)].map((article, i) => {
+              const tr = getTranslation(article);
+              return (
+                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer hover:text-[#990000] transition-colors" onClick={() => setSelectedArticle(article)}>
+                   <span className="text-[10px] text-gray-400 font-mono me-3 shrink-0">{new Date(article.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                   <span className="text-sm font-bold font-serif line-clamp-1">{tr?.title}</span>
+                 </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x rtl:divide-x-reverse divide-[#111111]/10 w-full max-w-[1024px] mx-auto bg-[#FAFAFA] relative">
       
       {/* Column 1: Secondary Trending */}
@@ -260,6 +312,11 @@ export function Home() {
         {/* ENTERPRISE CALL TO ACTION */}
         <SubscriptionCard />
       </section>
+
+      {/* CHINA & HONG KONG STOCK CHARTS & INDICES TERMINAL SECTION */}
+      <div className="w-full max-w-[1024px] mx-auto my-8 px-2 sm:px-0">
+        <MarketIndicesSection data={marketData} lang={lang!} />
+      </div>
 
       {/* OPINION & ANALYSIS BOARD */}
       {articles.filter(a => a.category?.slug === 'opinion').length > 0 && (
@@ -669,6 +726,68 @@ export function Home() {
           </div>
         </div>
       )}
+
+      {/* POLITICAL NEWS SECTION */}
+      {articles.filter(a => a.category?.slug === 'politics').length > 0 && (
+        <section className="w-full max-w-[1024px] mx-auto bg-white border-t-4 border-[#111111] p-6 md:p-8 mt-12 mb-12">
+          <div className="flex justify-between items-baseline border-b border-[#111111]/15 pb-3 mb-6">
+            <h2 className="font-serif text-2xl md:text-3xl font-black tracking-tight text-[#111111] uppercase flex items-center gap-2">
+              <span className="w-3.5 h-3.5 bg-blue-900"></span>
+              {lang === 'ar' ? 'الأخبار السياسية' : lang === 'zh' ? '政治新闻' : lang === 'ckb' ? 'هەواڵە سیاسییەکان' : 'Political News'}
+            </h2>
+            <Link 
+              to={`/${lang}/category/politics`} 
+              className="text-xs font-black uppercase tracking-widest text-[#990000] hover:underline"
+            >
+              {lang === 'ar' ? 'عرض المزيد ←' : lang === 'zh' ? '查看更多 →' : lang === 'ckb' ? 'بینینی زیاتر ←' : 'View More →'}
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {articles.filter(a => a.category?.slug === 'politics').slice(0, 10).map((article) => {
+              const tr = getTranslation(article);
+              return (
+                <div 
+                  key={article.id}
+                  onClick={() => setSelectedArticle(article)}
+                  className="cursor-pointer group flex flex-col h-full bg-neutral-50/50 hover:bg-neutral-50 border border-neutral-200 transition-all duration-300 rounded overflow-hidden shadow-xs hover:shadow-md"
+                >
+                  {article.imageUrl ? (
+                    <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-neutral-200 shrink-0">
+                      <img 
+                        src={article.imageUrl} 
+                        alt={tr?.title || 'Political News'} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fetchPriority="low"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center shrink-0">
+                      <span className="text-gray-400 font-serif italic text-xs">No Image</span>
+                    </div>
+                  )}
+                  
+                  <div className="p-3 flex flex-col flex-grow">
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-gray-500 mb-2">
+                      {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
+                    </span>
+                    <h3 className="font-serif font-bold text-sm leading-snug text-[#111111] group-hover:text-blue-900 transition-colors line-clamp-3">
+                      {tr?.title}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Invest Iraq Section */}
+      <InvestIraq lang={lang as Locale} />
+
+      {/* Contact Us Section */}
+      <ContactUs lang={lang as Locale} />
 
     </main>
    </div>

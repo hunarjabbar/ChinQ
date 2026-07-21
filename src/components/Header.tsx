@@ -2,6 +2,7 @@ import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header({ lang }: { lang: Locale }) {
   const { t } = useI18n(lang);
@@ -24,19 +25,48 @@ export function Header({ lang }: { lang: Locale }) {
   };
 
   return (
-    <div className="max-w-[1024px] mx-auto w-full">
-      {/* Main Masthead */}
-      <header className="flex flex-col items-center pt-8 pb-4 border-b-4 border-[#111111]">
-        <div className="text-[11px] font-bold uppercase tracking-[0.4em] mb-2">The Bridge Between China and Iraq</div>
-        <Link to={`/${lang}`}>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black tracking-tight mb-2 text-[#990000] hover:text-[#770000] transition-colors duration-200 leading-none text-center">
-            CHINQ
-          </h1>
-        </Link>
-        <div className="w-full flex justify-between px-6 text-[10px] uppercase font-bold tracking-widest mt-2">
-          <span>VOL. CLXII NO. 402</span>
-          <span>{new Date().toLocaleDateString(lang === 'ar' ? 'ar-EG' : lang === 'zh' ? 'zh-CN' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          <span>Price: 15 CNY / 2500 IQD</span>
+    <div className="max-w-[1024px] mx-auto w-full relative z-40">
+      {/* Main Masthead - NO overflow-hidden on main header container so controls are never clipped */}
+      <header className="relative flex flex-col items-center pt-6 pb-4 border-b-4 border-[#111111] bg-white/75 backdrop-blur-xl shadow-inner z-50">
+        {/* Pulsing red glaring circles underneath - overflow-hidden strictly isolated to background div */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Small top-left red accent */}
+          <div className="absolute top-2 left-6 w-16 h-16 bg-red-600/35 rounded-full blur-xl animate-pulse" />
+          {/* Compact top-right red circle */}
+          <div className="absolute top-3 right-10 w-12 h-12 bg-[#990000]/40 rounded-full blur-lg animate-pulse [animation-duration:3s]" />
+          {/* Small bottom-left circle */}
+          <div className="absolute bottom-2 left-1/4 w-20 h-20 bg-red-700/30 rounded-full blur-xl animate-pulse [animation-duration:4s]" />
+          {/* Subtle focal dot */}
+          <div className="absolute top-1/2 left-1/12 -translate-y-1/2 w-8 h-8 bg-rose-500/50 rounded-full blur-md animate-pulse [animation-duration:2s]" />
+          {/* Compact bottom-right accent */}
+          <div className="absolute bottom-1 right-12 w-14 h-14 bg-[#800000]/35 rounded-full blur-lg animate-pulse [animation-duration:3.5s]" />
+          {/* Tiny center-below glow */}
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-16 h-16 bg-red-500/25 rounded-full blur-xl animate-pulse [animation-duration:2.5s]" />
+        </div>
+
+        <div className="relative z-10 flex flex-col items-center w-full px-4 sm:px-6">
+          <div className="text-[11px] font-black uppercase tracking-[0.3em] text-[#111111] text-center mb-2">
+            The Bridge Between China and Iraq
+          </div>
+
+          <div className="relative inline-flex flex-col md:flex-row items-center justify-center my-2 gap-3 md:gap-0">
+            <Link to={`/${lang}`}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-black tracking-tight mb-1 text-red-600 hover:text-red-700 drop-shadow-[0_2px_10px_rgba(220,38,38,0.35)] transition-colors duration-200 leading-none text-center m-0">
+                CHINQ
+              </h1>
+            </Link>
+            
+            {/* Language Switcher positioned to the RIGHT SIDE of the letter Q with space */}
+            <div className="md:absolute md:left-full md:top-1/2 md:-translate-y-1/2 md:ml-6 flex items-center shrink-0">
+              <LanguageSwitcher lang={lang} />
+            </div>
+          </div>
+
+          <div className="w-full flex flex-wrap justify-between items-center px-2 text-[10px] uppercase font-black tracking-widest mt-2 text-[#111111] border-t border-[#111111]/15 pt-2 gap-2">
+            <span>VOL. CLXII NO. 402</span>
+            <span>{new Date().toLocaleDateString(lang === 'ar' ? 'ar-EG' : lang === 'zh' ? 'zh-CN' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <span>Price: 15 CNY / 2500 IQD</span>
+          </div>
         </div>
       </header>
 
