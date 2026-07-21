@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { ADDITIONAL_TOPICS } from '../src/data/topics.js';
-import { seedOpinions } from '../src/db/opinionSeeder.js';
+import { seedOpinions } from '../server/opinionSeeder.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();

@@ -98,7 +98,7 @@ export function SubscriptionCard() {
       } else {
         alert(data.error || l.error);
       }
-    } catch (e) {
+    } catch (e: any) {
       alert(l.error);
     } finally {
       setLoading(false);

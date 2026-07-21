@@ -24,7 +24,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
       try {
         const parsed = JSON.parse(event.data);
         setData(parsed);
-      } catch (e) {
+      } catch (e: any) {
         console.error("Error parsing market data", e);
       }
     };

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate, useParams, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Layout } from './components/Layout';
@@ -27,7 +27,7 @@ import { JoinUs } from './pages/JoinUs';
 const queryClient = new QueryClient();
 
 function LangWrapper() {
-  const { lang } = useParams();
+  const { lang } = useParams<{ lang: string }>();
   
   useEffect(() => {
     document.documentElement.lang = lang || 'en';
@@ -52,7 +52,7 @@ function LangWrapper() {
 }
 
 function AdminLangWrapper() {
-  const { lang } = useParams();
+  const { lang } = useParams<{ lang: string }>();
   
   useEffect(() => {
     document.documentElement.lang = lang || 'en';
@@ -74,38 +74,43 @@ function AdminLangWrapper() {
   );
 }
 
+const router = createBrowserRouter([
+  { path: "/", element: <Navigate to="/en" replace /> },
+  { path: "/admin", element: <Navigate to="/en/admin" replace /> },
+  { path: "/admin/*", element: <Navigate to="/en/admin" replace /> },
+  { path: "/live/*", element: <Navigate to="/en" replace /> },
+  {
+    path: "/:lang",
+    element: <LangWrapper />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "join", element: <JoinUs /> },
+      { path: "category/:slug", element: <CategoryPage /> },
+      { path: "live", element: <LivePortal /> },
+      { path: "live/:slug", element: <LiveEventPage /> }
+    ]
+  },
+  {
+    path: "/:lang/admin",
+    element: <AdminLangWrapper />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "articles", element: <AdminArticles /> },
+      { path: "articles/new", element: <AdminArticleNew /> },
+      { path: "live-publish", element: <AdminDashboard /> },
+      { path: "users", element: <AdminUsers /> },
+      { path: "media", element: <AdminMedia /> },
+      { path: "settings", element: <AdminSettings /> }
+    ]
+  },
+  { path: "*", element: <NotFound /> }
+]);
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/en" replace />} />
-          <Route path="/admin" element={<Navigate to="/en/admin" replace />} />
-          <Route path="/admin/*" element={<Navigate to="/en/admin" replace />} />
-          <Route path="/live/*" element={<Navigate to="/en" replace />} />
-          <Route path="/:lang">
-            <Route element={<LangWrapper />}>
-              <Route index element={<Home />} />
-              <Route path="about" element={<About />} />
-              <Route path="join" element={<JoinUs />} />
-              <Route path="category/:slug" element={<CategoryPage />} />
-              <Route path="live" element={<LivePortal />} />
-              <Route path="live/:slug" element={<LiveEventPage />} />
-            </Route>
-            <Route element={<AdminLangWrapper />}>
-              <Route path="admin" element={<AdminDashboard />} />
-              <Route path="admin/articles" element={<AdminArticles />} />
-              <Route path="admin/articles/new" element={<AdminArticleNew />} />
-              <Route path="admin/live-publish" element={<AdminDashboard />} />
-              <Route path="admin/users" element={<AdminUsers />} />
-              <Route path="admin/media" element={<AdminMedia />} />
-              <Route path="admin/settings" element={<AdminSettings />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

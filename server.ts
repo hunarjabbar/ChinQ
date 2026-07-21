@@ -1,11 +1,22 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { prisma } from "./src/db.js";
+import { prisma } from "./server/db.js";
 import { GoogleGenAI, Type } from "@google/genai";
-import { autoSeedMoreNews } from "./src/db/newsSeeder.js";
-import { seedOpinions } from "./src/db/opinionSeeder.js";
-import { seedStudies } from "./src/db/studySeeder.js";
+import { autoSeedMoreNews } from "./server/newsSeeder.js";
+import { seedOpinions } from "./server/opinionSeeder.js";
+import { seedStudies } from "./server/studySeeder.js";
+import cors from "cors";
+import helmet from "helmet";
+
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    console.warn("WARNING: JWT_SECRET is not set in the environment. Using a fallback secret for development ONLY. Do NOT do this in production.");
+    return "chinq_secret_key_123";
+  }
+  return secret;
+}
 
 let aiClient: GoogleGenAI | null = null;
 function getGeminiClient() {
@@ -76,6 +87,8 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  app.use(helmet({ contentSecurityPolicy: false })); // Disabled CSP for Vite HMR
+  app.use(cors());
   app.use(express.json());
   // Auth Routes
   app.post("/api/auth/register", async (req, res) => {
@@ -109,10 +122,10 @@ async function startServer() {
       if (!isValid) return res.status(401).json({ error: "Invalid credentials" });
 
       const jwt = await import("jsonwebtoken");
-      const token = (jwt.default || jwt).sign({ id: user.id, role: user.role }, process.env.JWT_SECRET || "chinq_secret_key_123", { expiresIn: "1d" });
+      const token = (jwt.default || jwt).sign({ id: user.id, role: user.role }, getJwtSecret(), { expiresIn: "1d" });
       
       res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role, subscriptionStatus: user.subscriptionStatus, subscriptionPlan: user.subscriptionPlan, subscriptionEndDate: user.subscriptionEndDate } });
-    } catch (e) {
+    } catch (e: any) {
       console.error("Login Error:", e); res.status(500).json({ error: "Login failed: " + e.message });
     }
   });
@@ -123,11 +136,11 @@ async function startServer() {
       if (!authHeader) return res.status(401).json({ error: "No token provided" });
       const token = authHeader.split(" ")[1];
       const jwt = await import("jsonwebtoken");
-      const decoded: any = (jwt.default || jwt).verify(token, process.env.JWT_SECRET || "chinq_secret_key_123");
+      const decoded: any = (jwt.default || jwt).verify(token, getJwtSecret());
       const user = await prisma.user.findUnique({ where: { id: decoded.id } });
       if (!user) return res.status(401).json({ error: "User not found" });
       res.json({ user: { id: user.id, email: user.email, name: user.name, role: user.role, subscriptionStatus: user.subscriptionStatus, subscriptionPlan: user.subscriptionPlan, subscriptionEndDate: user.subscriptionEndDate } });
-    } catch (e) {
+    } catch (e: any) {
       res.status(401).json({ error: "Invalid token" });
     }
   });
@@ -153,7 +166,7 @@ async function startServer() {
         orderBy: { createdAt: 'desc' }
       });
       res.json(articles);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch articles" });
     }
@@ -166,7 +179,7 @@ async function startServer() {
         include: { translations: true, category: true, author: true }
       });
       res.json(article);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch article" });
     }
@@ -180,7 +193,7 @@ async function startServer() {
         orderBy: { createdAt: 'desc' }
       });
       res.json(studies);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch studies" });
     }
@@ -193,7 +206,7 @@ async function startServer() {
         include: { author: true }
       });
       res.json(study);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch study" });
     }
@@ -297,7 +310,7 @@ async function startServer() {
       }
       
       res.json(events);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -336,7 +349,7 @@ async function startServer() {
       }
 
       res.json(event);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -380,7 +393,7 @@ async function startServer() {
       console.log(`--------------------------------------------\n`);
 
       res.json({ success: true, updateId: newUpdate.id });
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed to dispatch live update execution block:', e);
       res.status(500).json({ success: false, error: 'Database write operation failed.' });
     }
@@ -400,7 +413,7 @@ async function startServer() {
       console.log(`--------------------------------------------\n`);
 
       res.json({ success: true, message: `Cache purged for tag: ${tag}` });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: 'Cache invalidation engine error' });
     }
@@ -427,7 +440,7 @@ async function startServer() {
           changePercent: d.changePercent + (Math.random() - 0.5) * 0.1
         }));
         res.write(`data: ${JSON.stringify(updated)}\n\n`);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
       }
     }, 3000);
@@ -452,7 +465,7 @@ async function startServer() {
         },
       });
       res.json(articles);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch articles" });
     }
@@ -465,12 +478,12 @@ async function startServer() {
       if (!authHeader) return res.status(401).json({ error: "Unauthorized" });
       const token = authHeader.split(" ")[1];
       const jwt = await import("jsonwebtoken");
-      const decoded: any = (jwt.default || jwt).verify(token, process.env.JWT_SECRET || "chinq_secret_key_123");
+      const decoded: any = (jwt.default || jwt).verify(token, getJwtSecret());
       const user = await prisma.user.findUnique({ where: { id: decoded.id } });
       if (!user) return res.status(401).json({ error: "Unauthorized" });
       req.user = user;
       next();
-    } catch (e) {
+    } catch (e: any) {
       res.status(401).json({ error: "Invalid token" });
     }
   };
@@ -490,7 +503,7 @@ async function startServer() {
         }
       });
       res.json({ success: true, user: { id: user.id, email: user.email, name: user.name, role: user.role, subscriptionStatus: user.subscriptionStatus, subscriptionPlan: user.subscriptionPlan, subscriptionEndDate: user.subscriptionEndDate } });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to process subscription" });
     }
@@ -536,7 +549,7 @@ async function startServer() {
         orderBy: { createdAt: "desc" }
       });
       res.json(apps);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch applications" });
     }
@@ -550,7 +563,7 @@ async function startServer() {
         data: { status }
       });
       res.json(app);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to update application" });
     }
@@ -562,7 +575,7 @@ async function startServer() {
         where: { id: req.params.id }
       });
       res.json({ success: true });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to delete application" });
     }
@@ -575,7 +588,7 @@ async function startServer() {
         orderBy: { createdAt: "desc" }
       });
       res.json(telexes);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch telex dispatches" });
     }
@@ -589,7 +602,7 @@ async function startServer() {
         data: { status }
       });
       res.json(tlx);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to update telex dispatch" });
     }
@@ -601,7 +614,7 @@ async function startServer() {
         where: { id: req.params.id }
       });
       res.json({ success: true });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to delete telex dispatch" });
     }
@@ -641,7 +654,7 @@ async function startServer() {
         }
       });
       res.json(study);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to save study" });
     }
@@ -653,7 +666,7 @@ async function startServer() {
         where: { id: req.params.id }
       });
       res.json({ success: true });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to delete study" });
     }
@@ -728,7 +741,7 @@ async function startServer() {
       console.log(`-----------------------------------------\n`);
 
       res.json(article);
-    } catch (e) {
+    } catch (e: any) {
       console.error("Failed to save article:", e);
       res.status(500).json({ error: "Failed to save article" });
     }
@@ -830,7 +843,7 @@ async function startServer() {
         });
       }
       res.json(users);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch users" });
     }
@@ -846,7 +859,7 @@ async function startServer() {
         data: { name, email, role: role || 'AUTHOR' }
       });
       res.json(user);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to create user" });
     }
@@ -865,7 +878,7 @@ async function startServer() {
         data: updateData
       });
       res.json(user);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to update user" });
     }
@@ -877,7 +890,7 @@ async function startServer() {
         where: { id: req.params.id }
       });
       res.json({ success: true });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to delete user" });
     }

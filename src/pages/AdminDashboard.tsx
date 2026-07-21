@@ -89,7 +89,7 @@ export function AdminDashboard() {
       if (res.ok) {
         refetchApps();
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };
@@ -103,7 +103,7 @@ export function AdminDashboard() {
       if (res.ok) {
         refetchApps();
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };
@@ -118,7 +118,7 @@ export function AdminDashboard() {
       if (res.ok) {
         refetchTelexes();
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };
@@ -132,7 +132,7 @@ export function AdminDashboard() {
       if (res.ok) {
         refetchTelexes();
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };
@@ -169,7 +169,7 @@ export function AdminDashboard() {
         const data = await res.json();
         alert('Error saving study: ' + data.error);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };
@@ -183,7 +183,7 @@ export function AdminDashboard() {
       if (res.ok) {
         refetchStudies();
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
     }
   };

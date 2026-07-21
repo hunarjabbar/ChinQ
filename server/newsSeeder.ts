@@ -1,5 +1,5 @@
-import { prisma } from '../db.js';
-import { ADDITIONAL_TOPICS } from '../data/topics.js';
+import { prisma } from './db.js';
+import { ADDITIONAL_TOPICS } from '../src/data/topics.js';
 
 export async function autoSeedMoreNews() {
   try {

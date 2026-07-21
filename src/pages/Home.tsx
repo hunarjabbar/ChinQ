@@ -1,7 +1,7 @@
 import { SubscriptionCard } from '../components/SubscriptionCard';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Article, Locale, Study } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { useAuthStore } from '../store/useAuthStore';
@@ -37,34 +37,34 @@ export function Home() {
     }
   });
 
-  const getStudyTitle = (study: Study) => {
+  const getStudyTitle = useCallback((study: Study) => {
     if (lang === 'ar') return study.titleAr;
     if (lang === 'zh') return study.titleZh;
     if (lang === 'ckb') return study.titleCkb || study.titleEn;
     return study.titleEn;
-  };
+  }, [lang]);
 
-  const getStudyExcerpt = (study: Study) => {
+  const getStudyExcerpt = useCallback((study: Study) => {
     if (lang === 'ar') return study.excerptAr;
     if (lang === 'zh') return study.excerptZh;
     if (lang === 'ckb') return study.excerptCkb || study.excerptEn;
     return study.excerptEn;
-  };
+  }, [lang]);
 
-  const getStudyContent = (study: Study) => {
+  const getStudyContent = useCallback((study: Study) => {
     if (lang === 'ar') return study.contentAr;
     if (lang === 'zh') return study.contentZh;
     if (lang === 'ckb') return study.contentCkb || study.contentEn;
     return study.contentEn;
-  };
+  }, [lang]);
 
-  const getTranslation = (article: Article) => {
+  const getTranslation = useCallback((article: Article) => {
     return article.translations.find(tr => tr.lang === lang) || 
            article.translations.find(tr => tr.lang === 'en') || 
            article.translations[0];
-  };
+  }, [lang]);
 
-  const getCategoryName = (category: any) => {
+  const getCategoryName = useCallback((category: any) => {
     if (!category) return '';
     if (lang === 'ar') return category.nameAr || category.name;
     if (lang === 'zh') return category.nameZh || category.name;
@@ -80,9 +80,9 @@ export function Home() {
       return name;
     }
     return category.nameEn || category.name;
-  };
+  }, [lang]);
 
-  const dateLocale = lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS;
+  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
 
   if (isLoading) {
     return (

@@ -4,7 +4,7 @@ import { Article, Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS } from 'date-fns/locale';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { ADDITIONAL_TOPICS } from '../data/topics';
 
 export function CategoryPage() {
@@ -21,13 +21,13 @@ export function CategoryPage() {
     }
   });
 
-  const getTranslation = (article: Article) => {
+  const getTranslation = useCallback((article: Article) => {
     return article.translations.find(tr => tr.lang === lang) || 
            article.translations.find(tr => tr.lang === 'en') || 
            article.translations[0];
-  };
+  }, [lang]);
 
-  const getCategoryName = (category: any) => {
+  const getCategoryName = useCallback((category: any) => {
     if (!category) return '';
     if (lang === 'ar') return category.nameAr || category.name;
     if (lang === 'zh') return category.nameZh || category.name;
@@ -47,9 +47,9 @@ export function CategoryPage() {
       return name;
     }
     return category.nameEn || category.name;
-  };
+  }, [lang]);
 
-  const dateLocale = lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS;
+  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
 
   if (isLoading) {
     return <div className="animate-pulse space-y-8 max-w-[1024px] mx-auto w-full py-12">

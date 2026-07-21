@@ -159,7 +159,7 @@ export function LivePortal() {
             <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
               {mainEvent ? (
                 <div className="dark-timeline">
-                  <LiveTimeline slug={mainEvent.slug} lang={lang} darkTheme={true} />
+                  <LiveTimeline slug={mainEvent.slug} lang={lang || 'en'} darkTheme={true} />
                 </div>
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-gray-500 text-sm gap-2">
