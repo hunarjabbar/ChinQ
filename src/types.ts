@@ -86,3 +86,124 @@ export interface Study {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Book {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  authorEn: string;
+  authorAr: string;
+  authorZh: string;
+  authorCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  coverUrl: string;
+  category: 'HISTORY' | 'GEOPOLITICS' | 'ECONOMY' | 'CULTURE' | 'MEMOIR' | 'LITERATURE' | string;
+  region: 'CHINA' | 'IRAQ' | 'KURDISTAN' | 'SINO_ARAB' | string;
+  rating: number;
+  pages: number;
+  year: number;
+  publisher: string;
+  isbn?: string | null;
+  purchaseUrl?: string | null;
+  isTrending: boolean;
+  isFeatured: boolean;
+  downloads?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TourismSpot {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  city: string;
+  region: 'CHINA' | 'IRAQ' | 'KURDISTAN' | string;
+  category: 'UNESCO_HERITAGE' | 'ANCIENT_SILK_ROAD' | 'NATURE_ADVENTURE' | 'GASTRONOMY' | 'CULTURAL_EXCHANGE' | 'MODERN_WONDER' | string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  imageUrl: string;
+  galleryUrls?: string;
+  bestTimeToVisit: string;
+  visaPolicy: string;
+  flightInfo: string;
+  rating: number;
+  estimatedCost: string;
+  isFeatured: boolean;
+  isTrending: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WomenProfile {
+  id: string;
+  slug: string;
+  nameEn: string;
+  nameAr: string;
+  nameZh: string;
+  nameCkb: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  region: 'CHINA' | 'IRAQ' | 'KURDISTAN' | 'BILATERAL' | string;
+  category: 'PROMINENT_FIGURE' | 'POLICY_RIGHTS' | 'ACHIEVEMENTS' | 'PUBLICATIONS' | string;
+  summaryEn: string;
+  summaryAr: string;
+  summaryZh: string;
+  summaryCkb: string;
+  bioEn: string;
+  bioAr: string;
+  bioZh: string;
+  bioCkb: string;
+  imageUrl: string;
+  organization: string;
+  publicationUrl?: string | null;
+  isFeatured: boolean;
+  isTrending: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VisaFlightRecord {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  serviceType: 'VISA_ASSISTANCE' | 'FLIGHT_ROUTE' | 'PASSPORT_DIPLOMATIC' | 'TRAVEL_PUBLICATION' | 'CONSULAR_GUIDE' | string;
+  originRegion: 'CHINA' | 'IRAQ' | 'KURDISTAN' | 'BILATERAL' | string;
+  destinationRegion: 'CHINA' | 'IRAQ' | 'KURDISTAN' | 'BILATERAL' | string;
+  summaryEn: string;
+  summaryAr: string;
+  summaryZh: string;
+  summaryCkb: string;
+  detailsEn: string;
+  detailsAr: string;
+  detailsZh: string;
+  detailsCkb: string;
+  airlineOrAuthority: string;
+  processingTime: string;
+  feeOrCost: string;
+  imageUrl: string;
+  officialLink?: string | null;
+  isFeatured: boolean;
+  isTrending: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+
+
+

@@ -7,6 +7,10 @@ import { autoSeedMoreNews } from "./server/newsSeeder.js";
 import { seedOpinions } from "./server/opinionSeeder.js";
 import { seedStudies } from "./server/studySeeder.js";
 import { seedMarketData } from "./server/marketSeeder.js";
+import { seedBooks } from "./server/bookSeeder.js";
+import { seedTourism } from "./server/tourismSeeder.js";
+import { seedWomenFeatures } from "./server/womenSeeder.js";
+import { seedVisaFlights } from "./server/visaFlightSeeder.js";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -84,6 +88,8 @@ async function startServer() {
   await seedOpinions();
   await seedStudies();
   await seedMarketData();
+  await seedTourism();
+  await seedWomenFeatures();
   await ensureTestCredentials();
 
   const app = express();
@@ -524,6 +530,680 @@ async function startServer() {
       res.status(500).json({ error: "Failed to process subscription" });
     }
   });
+
+  // Books API Endpoints
+  app.get("/api/books", async (req, res) => {
+    try {
+      let count = await prisma.book.count();
+      if (count < 50) {
+        await seedBooks();
+      }
+
+      const { q, region, category, trending, featured } = req.query;
+      const where: any = {};
+
+      if (region && typeof region === 'string' && region !== 'ALL') {
+        where.region = region;
+      }
+      if (category && typeof category === 'string' && category !== 'ALL') {
+        where.category = category;
+      }
+      if (trending === 'true') {
+        where.isTrending = true;
+      }
+      if (featured === 'true') {
+        where.isFeatured = true;
+      }
+
+      let books = await prisma.book.findMany({
+        where,
+        orderBy: { createdAt: "desc" }
+      });
+
+      if (q && typeof q === 'string' && q.trim().length > 0) {
+        const query = q.toLowerCase();
+        books = books.filter(b => 
+          b.titleEn.toLowerCase().includes(query) ||
+          b.titleAr.includes(query) ||
+          b.titleZh.includes(query) ||
+          b.titleCkb.includes(query) ||
+          b.authorEn.toLowerCase().includes(query) ||
+          b.authorAr.includes(query) ||
+          b.descriptionEn.toLowerCase().includes(query)
+        );
+      }
+
+      res.json(books);
+    } catch (e: any) {
+      console.error("Error fetching books:", e);
+      res.status(500).json({ error: "Failed to fetch books: " + e.message });
+    }
+  });
+
+  app.get("/api/books/:idOrSlug", async (req, res) => {
+    try {
+      const { idOrSlug } = req.params;
+      const book = await prisma.book.findFirst({
+        where: {
+          OR: [
+            { id: idOrSlug },
+            { slug: idOrSlug }
+          ]
+        }
+      });
+      if (!book) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+      res.json(book);
+    } catch (e: any) {
+      console.error("Error fetching book:", e);
+      res.status(500).json({ error: "Failed to fetch book detail" });
+    }
+  });
+
+  app.post("/api/books", authMiddleware, async (req, res) => {
+    try {
+      const {
+        titleEn, titleAr, titleZh, titleCkb,
+        authorEn, authorAr, authorZh, authorCkb,
+        descriptionEn, descriptionAr, descriptionZh, descriptionCkb,
+        coverUrl, category, region, rating, pages, year, publisher, isbn, purchaseUrl,
+        isTrending, isFeatured
+      } = req.body;
+
+      if (!titleEn || !authorEn || !descriptionEn || !coverUrl || !category || !region) {
+        return res.status(400).json({ error: "Missing required book fields (titleEn, authorEn, descriptionEn, coverUrl, category, region)" });
+      }
+
+      const slug = `book-${Date.now()}-${titleEn.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30)}`;
+
+      const newBook = await prisma.book.create({
+        data: {
+          slug,
+          titleEn,
+          titleAr: titleAr || "",
+          titleZh: titleZh || "",
+          titleCkb: titleCkb || "",
+          authorEn,
+          authorAr: authorAr || "",
+          authorZh: authorZh || "",
+          authorCkb: authorCkb || "",
+          descriptionEn,
+          descriptionAr: descriptionAr || "",
+          descriptionZh: descriptionZh || "",
+          descriptionCkb: descriptionCkb || "",
+          coverUrl,
+          category,
+          region,
+          rating: rating ? Number(rating) : 4.8,
+          pages: pages ? Number(pages) : 300,
+          year: year ? Number(year) : 2024,
+          publisher: publisher || "ChinQ Academic Press",
+          isbn: isbn || null,
+          purchaseUrl: purchaseUrl || null,
+          isTrending: isTrending !== undefined ? Boolean(isTrending) : true,
+          isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : false
+        }
+      });
+
+      res.status(201).json(newBook);
+    } catch (e: any) {
+      console.error("Error creating book:", e);
+      res.status(500).json({ error: "Failed to create book: " + e.message });
+    }
+  });
+
+  app.put("/api/books/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
+
+      if (data.rating) data.rating = Number(data.rating);
+      if (data.pages) data.pages = Number(data.pages);
+      if (data.year) data.year = Number(data.year);
+
+      const updatedBook = await prisma.book.update({
+        where: { id },
+        data
+      });
+
+      res.json(updatedBook);
+    } catch (e: any) {
+      console.error("Error updating book:", e);
+      res.status(500).json({ error: "Failed to update book: " + e.message });
+    }
+  });
+
+  app.delete("/api/books/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      await prisma.book.delete({ where: { id } });
+      res.json({ success: true, message: "Book deleted successfully" });
+    } catch (e: any) {
+      console.error("Error deleting book:", e);
+      res.status(500).json({ error: "Failed to delete book" });
+    }
+  });
+
+  app.post("/api/books/seed", async (req, res) => {
+    try {
+      await seedBooks();
+      const count = await prisma.book.count();
+      res.json({ success: true, count, message: `Reseeded books database (${count} books present)` });
+    } catch (e: any) {
+      console.error("Error reseeding books:", e);
+      res.status(500).json({ error: "Failed to reseed books" });
+    }
+  });
+
+  // Tourism API Endpoints
+  app.get("/api/tourism", async (req, res) => {
+    try {
+      let count = await prisma.tourismSpot.count();
+      if (count === 0) {
+        await seedTourism();
+      }
+
+      const { q, region, category, trending, featured } = req.query;
+      const where: any = {};
+
+      if (region && typeof region === 'string' && region !== 'ALL') {
+        where.region = region;
+      }
+      if (category && typeof category === 'string' && category !== 'ALL') {
+        where.category = category;
+      }
+      if (trending === 'true') {
+        where.isTrending = true;
+      }
+      if (featured === 'true') {
+        where.isFeatured = true;
+      }
+
+      let spots = await prisma.tourismSpot.findMany({
+        where,
+        orderBy: { createdAt: "desc" }
+      });
+
+      if (q && typeof q === 'string' && q.trim().length > 0) {
+        const query = q.toLowerCase();
+        spots = spots.filter(s =>
+          s.titleEn.toLowerCase().includes(query) ||
+          s.titleAr.includes(query) ||
+          s.titleZh.includes(query) ||
+          s.titleCkb.includes(query) ||
+          s.city.toLowerCase().includes(query) ||
+          s.descriptionEn.toLowerCase().includes(query)
+        );
+      }
+
+      res.json(spots);
+    } catch (e: any) {
+      console.error("Error fetching tourism spots:", e);
+      res.status(500).json({ error: "Failed to fetch tourism spots: " + e.message });
+    }
+  });
+
+  app.get("/api/tourism/:idOrSlug", async (req, res) => {
+    try {
+      const { idOrSlug } = req.params;
+      const spot = await prisma.tourismSpot.findFirst({
+        where: {
+          OR: [
+            { id: idOrSlug },
+            { slug: idOrSlug }
+          ]
+        }
+      });
+      if (!spot) {
+        return res.status(404).json({ error: "Tourism spot not found" });
+      }
+      res.json(spot);
+    } catch (e: any) {
+      console.error("Error fetching tourism spot:", e);
+      res.status(500).json({ error: "Failed to fetch tourism spot detail" });
+    }
+  });
+
+  app.post("/api/tourism", authMiddleware, async (req, res) => {
+    try {
+      const {
+        titleEn, titleAr, titleZh, titleCkb,
+        city, region, category,
+        descriptionEn, descriptionAr, descriptionZh, descriptionCkb,
+        imageUrl, bestTimeToVisit, visaPolicy, flightInfo, rating, estimatedCost,
+        isFeatured, isTrending
+      } = req.body;
+
+      if (!titleEn || !city || !region || !category || !descriptionEn || !imageUrl) {
+        return res.status(400).json({ error: "Missing required fields (titleEn, city, region, category, descriptionEn, imageUrl)" });
+      }
+
+      const slug = `tourism-${Date.now()}-${titleEn.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30)}`;
+
+      const newSpot = await prisma.tourismSpot.create({
+        data: {
+          slug,
+          titleEn,
+          titleAr: titleAr || "",
+          titleZh: titleZh || "",
+          titleCkb: titleCkb || "",
+          city,
+          region,
+          category,
+          descriptionEn,
+          descriptionAr: descriptionAr || "",
+          descriptionZh: descriptionZh || "",
+          descriptionCkb: descriptionCkb || "",
+          imageUrl,
+          bestTimeToVisit: bestTimeToVisit || "Spring & Autumn",
+          visaPolicy: visaPolicy || "Visa on Arrival / E-Visa available",
+          flightInfo: flightInfo || "Direct & transfer flights available",
+          rating: rating ? Number(rating) : 4.9,
+          estimatedCost: estimatedCost || "$800 - $1,500",
+          isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : true,
+          isTrending: isTrending !== undefined ? Boolean(isTrending) : true
+        }
+      });
+
+      res.json(newSpot);
+    } catch (e: any) {
+      console.error("Error creating tourism spot:", e);
+      res.status(500).json({ error: "Failed to create tourism spot: " + e.message });
+    }
+  });
+
+  app.put("/api/tourism/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
+
+      if (data.rating) data.rating = Number(data.rating);
+
+      const updatedSpot = await prisma.tourismSpot.update({
+        where: { id },
+        data
+      });
+
+      res.json(updatedSpot);
+    } catch (e: any) {
+      console.error("Error updating tourism spot:", e);
+      res.status(500).json({ error: "Failed to update tourism spot: " + e.message });
+    }
+  });
+
+  app.delete("/api/tourism/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      await prisma.tourismSpot.delete({ where: { id } });
+      res.json({ success: true, message: "Tourism spot deleted successfully" });
+    } catch (e: any) {
+      console.error("Error deleting tourism spot:", e);
+      res.status(500).json({ error: "Failed to delete tourism spot" });
+    }
+  });
+
+  app.post("/api/tourism/seed", async (req, res) => {
+    try {
+      await seedTourism();
+      const count = await prisma.tourismSpot.count();
+      res.json({ success: true, count, message: `Reseeded tourism database (${count} spots present)` });
+    } catch (e: any) {
+      console.error("Error reseeding tourism spots:", e);
+      res.status(500).json({ error: "Failed to reseed tourism spots" });
+    }
+  });
+
+  // --- Women Leadership, Policy & Cultural Exchange API ---
+  app.get("/api/women", async (req, res) => {
+    try {
+      let count = await prisma.womenFeature.count();
+      if (count === 0) {
+        await seedWomenFeatures();
+      }
+
+      const { q, region, category, trending, featured } = req.query;
+      const where: any = {};
+
+      if (region && typeof region === 'string' && region !== 'ALL') {
+        where.region = region;
+      }
+      if (category && typeof category === 'string' && category !== 'ALL') {
+        where.category = category;
+      }
+      if (trending === 'true') {
+        where.isTrending = true;
+      }
+      if (featured === 'true') {
+        where.isFeatured = true;
+      }
+
+      let features = await prisma.womenFeature.findMany({
+        where,
+        orderBy: { createdAt: "desc" }
+      });
+
+      if (q && typeof q === 'string' && q.trim().length > 0) {
+        const query = q.toLowerCase();
+        features = features.filter(f =>
+          f.nameEn.toLowerCase().includes(query) ||
+          f.nameAr.includes(query) ||
+          f.nameZh.includes(query) ||
+          f.nameCkb.includes(query) ||
+          f.titleEn.toLowerCase().includes(query) ||
+          f.summaryEn.toLowerCase().includes(query)
+        );
+      }
+
+      res.json(features);
+    } catch (e: any) {
+      console.error("Error fetching women features:", e);
+      res.status(500).json({ error: "Failed to fetch women features: " + e.message });
+    }
+  });
+
+  app.get("/api/women/:idOrSlug", async (req, res) => {
+    try {
+      const { idOrSlug } = req.params;
+      const feature = await prisma.womenFeature.findFirst({
+        where: {
+          OR: [
+            { id: idOrSlug },
+            { slug: idOrSlug }
+          ]
+        }
+      });
+      if (!feature) {
+        return res.status(404).json({ error: "Women feature record not found" });
+      }
+      res.json(feature);
+    } catch (e: any) {
+      console.error("Error fetching women feature record:", e);
+      res.status(500).json({ error: "Failed to fetch women feature detail" });
+    }
+  });
+
+  app.post("/api/women", authMiddleware, async (req, res) => {
+    try {
+      const {
+        nameEn, nameAr, nameZh, nameCkb,
+        titleEn, titleAr, titleZh, titleCkb,
+        region, category,
+        summaryEn, summaryAr, summaryZh, summaryCkb,
+        bioEn, bioAr, bioZh, bioCkb,
+        imageUrl, organization, publicationUrl,
+        isFeatured, isTrending
+      } = req.body;
+
+      if (!nameEn || !titleEn || !region || !category || !summaryEn || !imageUrl) {
+        return res.status(400).json({ error: "Missing required fields (nameEn, titleEn, region, category, summaryEn, imageUrl)" });
+      }
+
+      const slug = `women-${Date.now()}-${nameEn.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30)}`;
+
+      const newFeature = await prisma.womenFeature.create({
+        data: {
+          slug,
+          nameEn,
+          nameAr: nameAr || "",
+          nameZh: nameZh || "",
+          nameCkb: nameCkb || "",
+          titleEn,
+          titleAr: titleAr || "",
+          titleZh: titleZh || "",
+          titleCkb: titleCkb || "",
+          region,
+          category,
+          summaryEn,
+          summaryAr: summaryAr || "",
+          summaryZh: summaryZh || "",
+          summaryCkb: summaryCkb || "",
+          bioEn: bioEn || "",
+          bioAr: bioAr || "",
+          bioZh: bioZh || "",
+          bioCkb: bioCkb || "",
+          imageUrl,
+          organization: organization || "Sino-Iraqi Women Empowerment Initiative",
+          publicationUrl: publicationUrl || null,
+          isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : true,
+          isTrending: isTrending !== undefined ? Boolean(isTrending) : true
+        }
+      });
+
+      res.json(newFeature);
+    } catch (e: any) {
+      console.error("Error creating women feature record:", e);
+      res.status(500).json({ error: "Failed to create women feature record: " + e.message });
+    }
+  });
+
+  app.put("/api/women/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
+
+      const updatedFeature = await prisma.womenFeature.update({
+        where: { id },
+        data
+      });
+
+      res.json(updatedFeature);
+    } catch (e: any) {
+      console.error("Error updating women feature record:", e);
+      res.status(500).json({ error: "Failed to update women feature record: " + e.message });
+    }
+  });
+
+  app.delete("/api/women/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      await prisma.womenFeature.delete({ where: { id } });
+      res.json({ success: true, message: "Women feature record deleted successfully" });
+    } catch (e: any) {
+      console.error("Error deleting women feature record:", e);
+      res.status(500).json({ error: "Failed to delete women feature record" });
+    }
+  });
+
+  app.post("/api/women/seed", async (req, res) => {
+    try {
+      await seedWomenFeatures();
+      const count = await prisma.womenFeature.count();
+      res.json({ success: true, count, message: `Reseeded women database (${count} records present)` });
+    } catch (e: any) {
+      console.error("Error reseeding women database:", e);
+      res.status(500).json({ error: "Failed to reseed women database" });
+    }
+  });
+
+  // --- Visa & Flight Portal API ---
+  app.get("/api/visa-flights", async (req, res) => {
+    try {
+      let count = await prisma.visaFlight.count();
+      if (count === 0) {
+        await seedVisaFlights();
+      }
+
+      const { q, serviceType, originRegion, destinationRegion, trending, featured } = req.query;
+      const where: any = {};
+
+      if (serviceType && typeof serviceType === 'string' && serviceType !== 'ALL') {
+        where.serviceType = serviceType;
+      }
+      if (originRegion && typeof originRegion === 'string' && originRegion !== 'ALL') {
+        where.originRegion = originRegion;
+      }
+      if (destinationRegion && typeof destinationRegion === 'string' && destinationRegion !== 'ALL') {
+        where.destinationRegion = destinationRegion;
+      }
+      if (trending === 'true') {
+        where.isTrending = true;
+      }
+      if (featured === 'true') {
+        where.isFeatured = true;
+      }
+
+      let items = await prisma.visaFlight.findMany({
+        where,
+        orderBy: { createdAt: "desc" }
+      });
+
+      if (q && typeof q === 'string' && q.trim().length > 0) {
+        const query = q.toLowerCase();
+        items = items.filter(f =>
+          f.titleEn.toLowerCase().includes(query) ||
+          f.titleAr.includes(query) ||
+          f.titleZh.includes(query) ||
+          f.titleCkb.includes(query) ||
+          f.summaryEn.toLowerCase().includes(query) ||
+          f.airlineOrAuthority.toLowerCase().includes(query)
+        );
+      }
+
+      res.json(items);
+    } catch (e: any) {
+      console.error("Error fetching visa & flight records:", e);
+      res.status(500).json({ error: "Failed to fetch visa & flight records: " + e.message });
+    }
+  });
+
+  app.get("/api/visa-flights/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await prisma.visaFlight.findUnique({ where: { id } });
+      if (!item) return res.status(404).json({ error: "Visa & Flight record not found" });
+      res.json(item);
+    } catch (e: any) {
+      console.error("Error fetching visa & flight item:", e);
+      res.status(500).json({ error: "Failed to fetch visa & flight item" });
+    }
+  });
+
+  app.post("/api/visa-flights", authMiddleware, async (req, res) => {
+    try {
+      const body = req.body;
+      const slug = body.slug || (body.titleEn.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now().toString().slice(-4));
+      
+      const newItem = await prisma.visaFlight.create({
+        data: {
+          slug,
+          titleEn: body.titleEn,
+          titleAr: body.titleAr || "",
+          titleZh: body.titleZh || "",
+          titleCkb: body.titleCkb || "",
+          serviceType: body.serviceType || "VISA_ASSISTANCE",
+          originRegion: body.originRegion || "CHINA",
+          destinationRegion: body.destinationRegion || "BILATERAL",
+          summaryEn: body.summaryEn || "",
+          summaryAr: body.summaryAr || "",
+          summaryZh: body.summaryZh || "",
+          summaryCkb: body.summaryCkb || "",
+          detailsEn: body.detailsEn || "",
+          detailsAr: body.detailsAr || "",
+          detailsZh: body.detailsZh || "",
+          detailsCkb: body.detailsCkb || "",
+          airlineOrAuthority: body.airlineOrAuthority || "Consular & Civil Aviation Authority",
+          processingTime: body.processingTime || "24 - 48 Hours",
+          feeOrCost: body.feeOrCost || "Consular Tariff",
+          imageUrl: body.imageUrl || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1000",
+          officialLink: body.officialLink || null,
+          isFeatured: body.isFeatured !== undefined ? body.isFeatured : true,
+          isTrending: body.isTrending !== undefined ? body.isTrending : true
+        }
+      });
+      res.json(newItem);
+    } catch (e: any) {
+      console.error("Error creating visa & flight record:", e);
+      res.status(500).json({ error: "Failed to create visa & flight record: " + e.message });
+    }
+  });
+
+  app.put("/api/visa-flights/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+
+      const updated = await prisma.visaFlight.update({
+        where: { id },
+        data: {
+          ...(body.titleEn !== undefined && { titleEn: body.titleEn }),
+          ...(body.titleAr !== undefined && { titleAr: body.titleAr }),
+          ...(body.titleZh !== undefined && { titleZh: body.titleZh }),
+          ...(body.titleCkb !== undefined && { titleCkb: body.titleCkb }),
+          ...(body.serviceType !== undefined && { serviceType: body.serviceType }),
+          ...(body.originRegion !== undefined && { originRegion: body.originRegion }),
+          ...(body.destinationRegion !== undefined && { destinationRegion: body.destinationRegion }),
+          ...(body.summaryEn !== undefined && { summaryEn: body.summaryEn }),
+          ...(body.summaryAr !== undefined && { summaryAr: body.summaryAr }),
+          ...(body.summaryZh !== undefined && { summaryZh: body.summaryZh }),
+          ...(body.summaryCkb !== undefined && { summaryCkb: body.summaryCkb }),
+          ...(body.detailsEn !== undefined && { detailsEn: body.detailsEn }),
+          ...(body.detailsAr !== undefined && { detailsAr: body.detailsAr }),
+          ...(body.detailsZh !== undefined && { detailsZh: body.detailsZh }),
+          ...(body.detailsCkb !== undefined && { detailsCkb: body.detailsCkb }),
+          ...(body.airlineOrAuthority !== undefined && { airlineOrAuthority: body.airlineOrAuthority }),
+          ...(body.processingTime !== undefined && { processingTime: body.processingTime }),
+          ...(body.feeOrCost !== undefined && { feeOrCost: body.feeOrCost }),
+          ...(body.imageUrl !== undefined && { imageUrl: body.imageUrl }),
+          ...(body.officialLink !== undefined && { officialLink: body.officialLink }),
+          ...(body.isFeatured !== undefined && { isFeatured: body.isFeatured }),
+          ...(body.isTrending !== undefined && { isTrending: body.isTrending })
+        }
+      });
+      res.json(updated);
+    } catch (e: any) {
+      console.error("Error updating visa & flight record:", e);
+      res.status(500).json({ error: "Failed to update visa & flight record: " + e.message });
+    }
+  });
+
+  app.delete("/api/visa-flights/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      await prisma.visaFlight.delete({ where: { id } });
+      res.json({ success: true, message: "Visa & Flight record deleted successfully" });
+    } catch (e: any) {
+      console.error("Error deleting visa & flight record:", e);
+      res.status(500).json({ error: "Failed to delete visa & flight record" });
+    }
+  });
+
+  app.post("/api/visa-flights/seed", async (req, res) => {
+    try {
+      await seedVisaFlights();
+      const count = await prisma.visaFlight.count();
+      res.json({ success: true, count, message: `Reseeded visa & flight database (${count} records present)` });
+    } catch (e: any) {
+      console.error("Error reseeding visa & flight database:", e);
+      res.status(500).json({ error: "Failed to reseed visa & flight database" });
+    }
+  });
+
+  app.post("/api/visa-flights/apply", async (req, res) => {
+    try {
+      const { fullName, email, passportNumber, origin, destination, travelDate, serviceType, notes } = req.body;
+      if (!fullName || !email || !passportNumber || !serviceType) {
+        return res.status(400).json({ error: "Missing required fields for visa/flight request" });
+      }
+      res.json({ 
+        success: true, 
+        ticketId: "VF-" + Math.floor(100000 + Math.random() * 900000), 
+        message: "Your visa/flight assistance inquiry has been transmitted to the Consular & Aviation Concierge Secretariat." 
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: "Failed to process application" });
+    }
+  });
+
 
   // Public submissions for Partnership Applications & Telexes
   app.post("/api/public/applications", async (req, res) => {

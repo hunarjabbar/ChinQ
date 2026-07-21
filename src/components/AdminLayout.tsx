@@ -1,5 +1,5 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, Radio, Image as ImageIcon, Users, Settings, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon } from 'lucide-react';
+import { LayoutDashboard, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useState } from 'react';
@@ -69,6 +69,9 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   const navItems = [
     { name: 'Dashboard', href: `/admin`, icon: LayoutDashboard },
     { name: 'Articles', href: `/admin/articles`, icon: FileText },
+    { name: 'Women Leadership', href: `/admin/women`, icon: UserIcon },
+    { name: 'Tourism Portal', href: `/admin/tourism`, icon: Compass },
+    { name: 'Books Library', href: `/admin/books`, icon: BookOpen },
     { name: 'Live Command', href: `/admin/live-publish`, icon: Radio },
     { name: 'Media Library', href: `/admin/media`, icon: ImageIcon },
     { name: 'User Management', href: `/admin/users`, icon: Users, role: 'ADMIN' },

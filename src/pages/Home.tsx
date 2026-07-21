@@ -12,6 +12,11 @@ import { cn } from '../lib/utils';
 import { InvestIraq } from '../components/InvestIraq';
 import { ContactUs } from '../components/ContactUs';
 import { MarketIndicesSection } from '../components/MarketIndicesSection';
+import { TrendingBooksSection } from '../components/TrendingBooksSection';
+import { RecommendedBooksSection } from '../components/RecommendedBooksSection';
+import { TourismSection } from '../components/TourismSection';
+import { WomenSection } from '../components/WomenSection';
+import { VisaFlightSection } from '../components/VisaFlightSection';
 
 export function Home() {
   const { lang } = useParams<{ lang: Locale }>();
@@ -783,8 +788,22 @@ export function Home() {
         </section>
       )}
 
+      {/* Trending Books Section (Space for 4 trending books on web) */}
+      <TrendingBooksSection lang={lang as Locale} />
+
+      {/* Recommended Books Spotlight Section */}
+      <RecommendedBooksSection lang={lang as Locale} />
+
+      {/* Bilateral Tourism Showcase Section */}
+      <TourismSection lang={lang as Locale} />
+
+      {/* Women Leadership, Rights & Policy Forum */}
+      <WomenSection lang={lang as Locale} />
+
       {/* Invest Iraq Section */}
       <InvestIraq lang={lang as Locale} />
+
+      <VisaFlightSection lang={lang} />
 
       {/* Contact Us Section */}
       <ContactUs lang={lang as Locale} />

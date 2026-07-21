@@ -174,4 +174,123 @@ model TelexDispatch {
   createdAt DateTime @default(now())
 }
 
+model Book {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+  authorEn       String
+  authorAr       String   @default("")
+  authorZh       String   @default("")
+  authorCkb      String   @default("")
+  descriptionEn  String
+  descriptionAr  String   @default("")
+  descriptionZh  String   @default("")
+  descriptionCkb String   @default("")
+  coverUrl       String
+  category       String   // HISTORY, GEOPOLITICS, ECONOMY, CULTURE, MEMOIR, LITERATURE
+  region         String   // CHINA, IRAQ, KURDISTAN, SINO_ARAB
+  rating         Float    @default(4.8)
+  pages          Int      @default(320)
+  year           Int      @default(2023)
+  publisher      String   @default("ChinQ Academic Press")
+  isbn           String?
+  purchaseUrl    String?
+  isTrending     Boolean  @default(true)
+  isFeatured     Boolean  @default(false)
+  downloads      Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model TourismSpot {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  titleEn         String
+  titleAr         String   @default("")
+  titleZh         String   @default("")
+  titleCkb        String   @default("")
+  city            String   @default("Erbil")
+  region          String   // CHINA, IRAQ, KURDISTAN
+  category        String   // UNESCO_HERITAGE, ANCIENT_SILK_ROAD, NATURE_ADVENTURE, GASTRONOMY, CULTURAL_EXCHANGE, MODERN_WONDER
+  descriptionEn   String
+  descriptionAr   String   @default("")
+  descriptionZh   String   @default("")
+  descriptionCkb  String   @default("")
+  imageUrl        String
+  galleryUrls     String   @default("[]")
+  bestTimeToVisit String   @default("Spring & Autumn")
+  visaPolicy      String   @default("Visa on Arrival / E-Visa available")
+  flightInfo      String   @default("Direct and transfer flights connecting China, Baghdad, and Erbil")
+  rating          Float    @default(4.9)
+  estimatedCost   String   @default("$800 - $1,500")
+  isFeatured      Boolean  @default(true)
+  isTrending      Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model WomenFeature {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  nameEn         String
+  nameAr         String   @default("")
+  nameZh         String   @default("")
+  nameCkb        String   @default("")
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+  region         String   // CHINA, IRAQ, KURDISTAN, BILATERAL
+  category       String   // PROMINENT_FIGURE, POLICY_RIGHTS, ACHIEVEMENTS, PUBLICATIONS
+  summaryEn      String
+  summaryAr      String   @default("")
+  summaryZh      String   @default("")
+  summaryCkb     String   @default("")
+  bioEn          String   @default("")
+  bioAr          String   @default("")
+  bioZh          String   @default("")
+  bioCkb         String   @default("")
+  imageUrl       String
+  organization   String   @default("Sino-Iraqi Women Empowerment Initiative")
+  publicationUrl String?
+  isFeatured     Boolean  @default(true)
+  isTrending     Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model VisaFlight {
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  titleEn            String
+  titleAr            String   @default("")
+  titleZh            String   @default("")
+  titleCkb           String   @default("")
+  serviceType        String   // VISA_ASSISTANCE, FLIGHT_ROUTE, PASSPORT_DIPLOMATIC, TRAVEL_PUBLICATION, CONSULAR_GUIDE
+  originRegion       String   // CHINA, IRAQ, KURDISTAN, BILATERAL
+  destinationRegion  String   // CHINA, IRAQ, KURDISTAN, BILATERAL
+  summaryEn          String
+  summaryAr          String   @default("")
+  summaryZh          String   @default("")
+  summaryCkb         String   @default("")
+  detailsEn          String   @default("")
+  detailsAr          String   @default("")
+  detailsZh          String   @default("")
+  detailsCkb         String   @default("")
+  airlineOrAuthority String   @default("Consular Affairs & Civil Aviation Authority")
+  processingTime     String   @default("24 - 48 Hours / Direct Flight")
+  feeOrCost          String   @default("Consular Standard Fee")
+  imageUrl           String
+  officialLink       String?
+  isFeatured         Boolean  @default(true)
+  isTrending         Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+
+
 

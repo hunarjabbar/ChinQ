@@ -64,6 +64,15 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
               {lang === 'ar' ? 'القوانين والروابط' : lang === 'zh' ? '法律与链接' : lang === 'ckb' ? 'بەستەر و یاساییەکان' : 'Legal & Links'}
             </h4>
             <div className="flex flex-col gap-2">
+              <Link to={`/${lang}/women`} className="text-gray-600 hover:text-[#990000] font-mono text-[10px] font-bold tracking-wider uppercase transition-colors flex items-center gap-1">
+                <span className="text-[#990000]">▪</span> {lang === 'ar' ? 'بوابة المرأة والسياسات والتمكين' : lang === 'zh' ? '女性与双边政策专区' : lang === 'ckb' ? 'دەروازەی ماف و بەهێزکردنی ئافرەتان' : 'Women Leadership & Policy Portal'}
+              </Link>
+              <Link to={`/${lang}/tourism`} className="text-gray-600 hover:text-[#990000] font-mono text-[10px] font-bold tracking-wider uppercase transition-colors flex items-center gap-1">
+                <span className="text-[#990000]">▪</span> {lang === 'ar' ? 'بوابة السياحة والتبادل الثقافي' : lang === 'zh' ? '文旅与双向遗产门户' : lang === 'ckb' ? 'دەروازەی گەشتوگوزار و کەلەپوور' : 'Bilateral Tourism & Heritage Portal'}
+              </Link>
+              <Link to={`/${lang}/books`} className="text-gray-600 hover:text-[#990000] font-mono text-[10px] font-bold tracking-wider uppercase transition-colors flex items-center gap-1">
+                <span className="text-[#990000]">▪</span> {lang === 'ar' ? 'المكتبة السيادية والكتب (50 مجلداً)' : lang === 'zh' ? '主权书库与学术图书 (50册)' : lang === 'ckb' ? 'کتێبخانەی شینک (٥٠ بەرگ)' : 'Sovereign Books Library (50 Vols)'}
+              </Link>
               <Link to={`/${lang}/about`} className="text-gray-600 hover:text-[#990000] font-mono text-[10px] font-bold tracking-wider uppercase transition-colors flex items-center gap-1">
                 <span className="text-[#990000]">▪</span> {lang === 'ar' ? 'حول المجموعة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارەی ئێمە' : 'About ChinQ'}
               </Link>

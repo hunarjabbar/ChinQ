@@ -94,9 +94,18 @@ export function Header({ lang }: { lang: Locale }) {
             )}
           </div>
         </div>
-        <div className="absolute right-0 rtl:right-auto rtl:left-0 top-0 bottom-0 z-10 flex items-center px-4 bg-[#FAFAFA] border-l rtl:border-l-0 rtl:border-r border-[#111111]/20">
-           <Link to={`/${lang}/live`} className="text-xs font-bold uppercase tracking-widest hover:text-[#990000] text-[#990000] transition-colors flex items-center gap-1.5 mr-4 rtl:mr-0 rtl:ml-4"><span className="w-2 h-2 bg-[#990000] rounded-full animate-pulse"></span> LIVE</Link>
-           <Link to={`/${lang}/admin`} className="text-xs font-bold uppercase tracking-widest hover:text-[#990000] transition-colors ">ADMIN</Link>
+        <div className="absolute right-0 rtl:right-auto rtl:left-0 top-0 bottom-0 z-10 flex items-center px-4 bg-[#FAFAFA] border-l rtl:border-l-0 rtl:border-r border-[#111111]/20 gap-3">
+           <Link to={`/${lang}/women`} className="text-[14px] font-mono font-black uppercase tracking-widest hover:text-[#990000] text-[#111111] transition-colors flex items-center gap-1">
+             <span className="text-[#990000]">👩‍💼</span> {lang === 'ar' ? 'المرأة' : lang === 'zh' ? '女性' : lang === 'ckb' ? 'ئافرەتان' : 'WOMEN'}
+           </Link>
+           <Link to={`/${lang}/tourism`} className="text-[14px] font-mono font-black uppercase tracking-widest hover:text-[#990000] text-[#111111] transition-colors flex items-center gap-1">
+             <span className="text-[#990000]">✈️</span> {lang === 'ar' ? 'السياحة' : lang === 'zh' ? '文旅' : lang === 'ckb' ? 'گەشتوگوزار' : 'TOURISM'}
+           </Link>
+           <Link to={`/${lang}/books`} className="text-[14px] font-mono font-black uppercase tracking-widest hover:text-[#990000] text-[#111111] transition-colors flex items-center gap-1">
+             <span className="text-[#990000]">📚</span> {lang === 'ar' ? 'الكتب' : lang === 'zh' ? '图书' : lang === 'ckb' ? 'کتێبەکان' : 'BOOKS'}
+           </Link>
+           <Link to={`/${lang}/live`} className="text-xs font-bold uppercase tracking-widest hover:text-[#990000] text-[#990000] transition-colors flex items-center gap-1.5"><span className="w-2 h-2 bg-[#990000] rounded-full animate-pulse"></span> LIVE</Link>
+           <Link to={`/${lang}/admin`} className="text-xs font-bold uppercase tracking-widest hover:text-[#990000] transition-colors">ADMIN</Link>
         </div>
       </nav>
     </div>

@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider, Navigate, useParams, Outlet } from
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Layout } from './components/Layout';
+import { AdminLayout } from './components/AdminLayout';
 import { Home } from './pages/Home';
 import { CategoryPage } from './pages/CategoryPage';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -23,6 +24,14 @@ import { AdminSettings } from './pages/AdminSettings';
 
 import { About } from './pages/About';
 import { JoinUs } from './pages/JoinUs';
+import { BooksPage } from './pages/BooksPage';
+import { AdminBooks } from './pages/AdminBooks';
+import { TourismPage } from './pages/TourismPage';
+import { AdminTourism } from './pages/AdminTourism';
+import { WomenPage } from './pages/WomenPage';
+import { AdminWomen } from './pages/AdminWomen';
+import { VisaFlightPage } from './pages/VisaFlightPage';
+import { AdminVisaFlight } from './pages/AdminVisaFlight';
 
 const queryClient = new QueryClient();
 
@@ -86,6 +95,10 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "join", element: <JoinUs /> },
+      { path: "women", element: <WomenPage /> },
+      { path: "tourism", element: <TourismPage /> },
+      { path: "books", element: <BooksPage /> },
+      { path: "visa-flights", element: <VisaFlightPage /> },
       { path: "category/:slug", element: <CategoryPage /> },
       { path: "live", element: <LivePortal /> },
       { path: "live/:slug", element: <LiveEventPage /> }
@@ -98,6 +111,10 @@ const router = createBrowserRouter([
       { index: true, element: <AdminDashboard /> },
       { path: "articles", element: <AdminArticles /> },
       { path: "articles/new", element: <AdminArticleNew /> },
+      { path: "women", element: <AdminLayout><AdminWomen /></AdminLayout> },
+      { path: "tourism", element: <AdminLayout><AdminTourism /></AdminLayout> },
+      { path: "visa-flights", element: <AdminLayout><AdminVisaFlight /></AdminLayout> },
+      { path: "books", element: <AdminBooks /> },
       { path: "live-publish", element: <AdminDashboard /> },
       { path: "users", element: <AdminUsers /> },
       { path: "media", element: <AdminMedia /> },
