@@ -44,10 +44,10 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
   return (
     <div className="w-full max-w-3xl mx-auto text-start">
       {isActive && (
-        <div className={`flex items-center gap-2 mb-8 p-3 border rounded font-bold uppercase text-sm tracking-wide ${darkTheme ? 'bg-[#990000]/20 text-[#ff4444] border-[#990000]/50' : 'bg-red-50 text-[#990000] border-red-200'}`}>
+        <div className={`flex items-center gap-2 mb-12 p-3 border rounded font-bold uppercase text-sm tracking-wide ${darkTheme ? 'bg-brand-800/20 text-brand-500 border-brand-800/50' : 'bg-brand-50 text-brand-800 border-brand-200'}`}>
           <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#990000] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#990000]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-800 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-800"></span>
           </span>
           {lang === 'ar' ? 'تحديثات مباشرة' : lang === 'ckb' ? 'تایملاینی ڕاستەوخۆ' : lang === 'zh' ? '实时更新' : 'Live Updates Active'}
         </div>
@@ -57,11 +57,11 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
         {updates.map((update) => (
           <div key={update.id} className="relative ps-6">
             {/* Timeline Dot */}
-            <div className={`absolute -start-[9px] top-1 h-4 w-4 rounded-full border-2 ${update.isImportant ? 'bg-[#990000]' : 'bg-gray-400'} ${darkTheme ? 'border-[#111111]' : 'border-white'}`}></div>
+            <div className={`absolute -start-[9px] top-1 h-4 w-4 rounded-full border-2 ${update.isImportant ? 'bg-brand-800' : 'bg-gray-400'} ${darkTheme ? 'border-brand-800' : 'border-white'}`}></div>
             
             <div className={`p-5 rounded-lg border ${
               update.isImportant 
-                ? (darkTheme ? 'border-[#990000] bg-[#990000]/10' : 'border-[#990000] bg-red-50') 
+                ? (darkTheme ? 'border-brand-800 bg-brand-800/10' : 'border-brand-800 bg-brand-50') 
                 : (darkTheme ? 'border-gray-800 bg-[#161616]' : 'border-gray-200 bg-white')
             }`}>
               <div className={`flex items-center gap-3 text-sm mb-3 border-b pb-2 ${darkTheme ? 'text-gray-400 border-gray-800' : 'text-gray-500 border-gray-100'}`}>
@@ -70,9 +70,9 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
                   {new Date(update.createdAt).toLocaleTimeString(lang === 'ar' ? 'ar-IQ' : lang === 'ckb' ? 'ku-IQ' : lang === 'zh' ? 'zh-CN' : 'en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Baghdad' })}
                 </time>
                 <span className={`w-1 h-1 rounded-full ${darkTheme ? 'bg-gray-700' : 'bg-gray-300'}`}></span>
-                <span className={`uppercase text-xs font-bold tracking-wider ${darkTheme ? 'text-gray-200' : 'text-[#111111]'}`}>{update.authorName}</span>
+                <span className={`uppercase text-xs font-bold tracking-wider ${darkTheme ? 'text-gray-200' : 'text-ink-900'}`}>{update.authorName}</span>
                 {update.isImportant && (
-                  <span className={`ms-auto flex items-center gap-1 font-bold text-xs uppercase ${darkTheme ? 'text-[#ff4444]' : 'text-[#990000]'}`}>
+                  <span className={`ms-auto flex items-center gap-1 font-bold text-xs uppercase ${darkTheme ? 'text-brand-500' : 'text-brand-800'}`}>
                     <AlertCircle size={14} /> Key Event
                   </span>
                 )}

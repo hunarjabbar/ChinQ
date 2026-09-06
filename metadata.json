@@ -1,6 +1,6 @@
 {
-  "name": "ChinQ",
-  "description": "China-Iraq News Portal",
+  "name": "Iraqi-Chinese Agency",
+  "description": "Iraqi-Chinese Agency News Portal. Covering Bilateral Projects, Legal & Regulatory Intelligence, Executive & Diplomatic Voices, Verified Enterprise Directory, and Morning Briefings.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

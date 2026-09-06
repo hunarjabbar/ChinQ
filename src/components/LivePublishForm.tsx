@@ -17,7 +17,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
   const [contentZh, setContentZh] = useState('');
   const [contentCk, setContentCk] = useState('');
   const [isImportant, setIsImportant] = useState(false);
-  const [authorName, setAuthorName] = useState('ChinQ Live Desk');
+  const [authorName, setAuthorName] = useState('Iraqi-Chinese Agency Live Desk');
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -86,7 +86,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
             <select 
               value={selectedEventId}
               onChange={(e) => setSelectedEventId(e.target.value)}
-              className="w-full text-sm font-medium p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#990000] outline-none"
+              className="w-full text-sm font-medium p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none"
             >
               {events.map((ev) => (
                 <option key={ev.id} value={ev.id}>{ev.titleEn} (/{ev.slug})</option>
@@ -97,7 +97,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
                 href={`/${lang || 'en'}/live/${events.find(e => e.id === selectedEventId)?.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-bold text-[#990000] hover:underline whitespace-nowrap"
+                className="text-xs font-bold text-brand-800 hover:underline whitespace-nowrap"
               >
                 Preview Stream ↗
               </a>
@@ -112,7 +112,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
               type="text"
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
-              className="p-2 text-sm bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#990000] outline-none font-mono"
+              className="p-2 text-sm bg-white border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none font-mono"
             />
           </div>
 
@@ -121,7 +121,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
             onClick={() => setIsImportant(!isImportant)}
             className={`self-end flex items-center gap-2 px-4 py-2 rounded text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
               isImportant 
-                ? 'bg-red-100 text-[#990000] border border-[#990000] shadow-xs' 
+                ? 'bg-brand-100 text-brand-800 border border-brand-800 shadow-xs' 
                 : 'bg-white text-gray-500 border border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -197,9 +197,9 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
       {/* Dynamic Status Notifications */}
       {statusMessage && (
         <div className={`mx-6 mb-4 p-3 rounded-lg border flex items-center gap-3 text-sm font-medium ${
-          statusMessage.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'
+          statusMessage.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-brand-50 text-brand-800 border-brand-200'
         }`}>
-          {statusMessage.type === 'success' ? <CheckCircle2 size={18} className="text-green-600" /> : <AlertCircle size={18} className="text-red-600" />}
+          {statusMessage.type === 'success' ? <CheckCircle2 size={18} className="text-green-600" /> : <AlertCircle size={18} className="text-brand-600" />}
           <span>{statusMessage.text}</span>
         </div>
       )}
@@ -214,7 +214,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
           type="button"
           disabled={isSubmitting}
           onClick={handleSubmit}
-          className="w-full sm:w-auto ms-auto flex justify-center items-center gap-2 px-6 py-3 bg-[#990000] text-white font-black uppercase tracking-wider text-sm rounded shadow-xs hover:bg-[#7a0000] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          className="w-full sm:w-auto ms-auto flex justify-center items-center gap-2 px-6 py-3 bg-brand-800 text-white font-black uppercase tracking-wider text-sm rounded shadow-xs hover:bg-brand-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           <Zap size={16} className={isSubmitting ? 'animate-bounce' : ''} />
           {isSubmitting ? 'Broadcasting Stream...' : 'Publish Update Live'}

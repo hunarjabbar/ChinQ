@@ -111,7 +111,7 @@ export async function seedWomenFeatures() {
         bioCkb: "ئەم چوارچێوە سیاسییە سەرنج دەخاتە سەر ٣ کۆڵەکەی سەرەکی: دەستپێگەیشتنی یەکسان بۆ سەرمایەی وەبەرهێنان، هاوکاری یاسایی دووقۆڵی و ئاڵوگۆڕی ئەکادیمی.",
         imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000",
         organization: "Trilateral Women Rights Commission (Beijing-Baghdad-Erbil)",
-        publicationUrl: "https://chinq.media/policy/women-declaration-2026.pdf",
+        publicationUrl: "https://iraqchinadaily.media/policy/women-declaration-2026.pdf",
         isFeatured: true,
         isTrending: true
       },
@@ -137,7 +137,7 @@ export async function seedWomenFeatures() {
         bioCkb: "لووتکەی ٢٠٢٦ بڕی ۲.٥ ملیۆن دۆلاری وەک یارمەتی بەخشی بە دامەزرێنەرانی ئافرەت کە لە بواری فرۆکەی بێفرۆکەوان و زیرەکی دەستکرددا کاردەکەن.",
         imageUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1000",
         organization: "Sino-Arab Female Tech Leaders Forum",
-        publicationUrl: "https://chinq.media/summit/women-tech-2026",
+        publicationUrl: "https://iraqchinadaily.media/summit/women-tech-2026",
         isFeatured: true,
         isTrending: true
       },
@@ -162,8 +162,8 @@ export async function seedWomenFeatures() {
         bioZh: "由王秀英教授与阿迈勒·曼苏尔博士联合撰写，披露了大量两河流域与宋代中国女性商贾的历史文献，为新时代中伊中库文化合作确立了学术基石。",
         bioCkb: "لە نووسینی هاوبەشی د. وانگ شیوینگ و د. ئەمەل مەنسورە کە تیشک دەخاتە سەر بەڵگەنامە کۆنەکانی بازرگانانی ئافرەت لە میسۆپۆتامیا و چین.",
         imageUrl: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1000",
-        organization: "ChinQ Academic Press & Center for Silk Road Women Studies",
-        publicationUrl: "https://chinq.media/books/silkroad-women-diplomacy.pdf",
+        organization: "Iraq-China Daily Academic Press & Center for Silk Road Women Studies",
+        publicationUrl: "https://iraqchinadaily.media/books/silkroad-women-diplomacy.pdf",
         isFeatured: true,
         isTrending: true
       }

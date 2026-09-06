@@ -22,7 +22,7 @@ export const initialBooks = [
     rating: 4.9,
     pages: 384,
     year: 2024,
-    publisher: "Routledge / ChinQ Press",
+    publisher: "Routledge / Iraq-China Daily Press",
     isbn: "978-0367431289",
     isTrending: true,
     isFeatured: true
@@ -172,7 +172,7 @@ export const initialBooks = [
     rating: 4.75,
     pages: 298,
     year: 2023,
-    publisher: "MIT Press / ChinQ Academic",
+    publisher: "MIT Press / Iraq-China Daily Academic",
     isbn: "978-0262047812",
     isTrending: true,
     isFeatured: false
@@ -376,7 +376,7 @@ export const initialBooks = [
     rating: 4.91,
     pages: 310,
     year: 2023,
-    publisher: "Erbil Citadel Conservation Commission / ChinQ Press",
+    publisher: "Erbil Citadel Conservation Commission / Iraq-China Daily Press",
     isbn: "978-0199238120",
     isTrending: true,
     isFeatured: false
@@ -514,7 +514,7 @@ export const initialBooks = [
     titleAr: "المؤلف والمدارس: بناء 1000 مدرسة صينية في العراق",
     titleZh: "校园与基建：千所中国建设学校在伊拉克落地记",
     titleCkb: "قوتابخانەکان و ئاوەدانکردنەوە: دروستکردنی ١٠٠٠ قوتابخانەی چینی لە عێراق",
-    authorEn: "ChinQ Research Collective & PowerChina Team",
+    authorEn: "Iraq-China Daily Research Collective & PowerChina Team",
     authorAr: "فريق أبحاث تشينك وإدارة باور تشاينا",
     authorZh: "钦克智库 与 中国电建联合课题组",
     authorCkb: "تیمی توێژینەوەی شینک و پاوەرچاینا",
@@ -528,7 +528,7 @@ export const initialBooks = [
     rating: 4.94,
     pages: 260,
     year: 2024,
-    publisher: "ChinQ Academic Monograph Series",
+    publisher: "Iraq-China Daily Academic Monograph Series",
     isbn: "978-9922100821",
     isTrending: true,
     isFeatured: true
@@ -654,7 +654,7 @@ export const initialBooks = [
     rating: 4.9,
     pages: 270,
     year: 2024,
-    publisher: "ChinQ Clean Energy Institute",
+    publisher: "Iraq-China Daily Clean Energy Institute",
     isbn: "978-9922100999",
     isTrending: true,
     isFeatured: false
@@ -903,7 +903,7 @@ export const initialBooks = [
       rating: Number((4.6 + (idx % 4) * 0.1).toFixed(2)),
       pages: 220 + (idx * 7) % 250,
       year: 2020 + (idx % 5),
-      publisher: idx % 3 === 0 ? "ChinQ Strategic Studies Press" : "Baghdad & Erbil Academic Press",
+      publisher: idx % 3 === 0 ? "Iraq-China Daily Strategic Studies Press" : "Baghdad & Erbil Academic Press",
       isbn: `978-9922${100000 + idx}`,
       isTrending: idx % 2 === 0,
       isFeatured: false

@@ -191,13 +191,13 @@ const BRIEFS = [
     id: 'finance',
     category: 'finance',
     titleEn: 'IQD-CNY Swaps: Sovereign Cleared Channel Approved',
-    titleAr: 'مقاصة الدنانير واليوان: اعتماد قناة تسوية سيادية',
+    titleAr: 'مقاصة الدنانير واليوان: اعتماد قناة تسوية مستقلة',
     titleZh: '中伊本币清算：主权直接结算通道获批',
     titleCkb: 'ئاڵوگۆڕی دینار-یوان: پەسەندکردنی کەناڵی سیادی',
     date: 'July 15, 2026',
     author: 'Sino-Iraqi Finance Observatory',
     summaryEn: 'Deep-dive analysis on the recent bilateral sovereign currency clearing mechanism designed to bypass intermediary currencies for major energy transactions.',
-    summaryAr: 'تحليل معمق حول آلية المقاصة السيادية المعتمدة حديثاً بين البنكين المركزيين لتجنب استخدام عملات وسيطة في تسوية صفقات الطاقة الكبرى.',
+    summaryAr: 'تحليل معمق حول آلية المقاصة المستقلة المعتمدة حديثاً بين البنكين المركزيين لتجنب استخدام عملات وسيطة في تسوية صفقات الطاقة الكبرى.',
     summaryZh: '深入解析近期中伊两国中央银行批准的主权本币直接清算结算机制，该机制旨在绕过中间货币进行大宗能源交易结算。',
     summaryCkb: 'شیکردنەوەی قووڵ لەسەر میکانیزمی نوێی ئاڵوگۆڕی دراو بەبێ ناوبەندەکان بۆ تێچووی وزە.',
     fullContentEn: `In an unprecedented shift in geopolitical finance, the Central Bank of Iraq and the People’s Bank of China have finalized the sovereign settlement framework. From Q4 2026, 35% of crude exports from Basra will be cleared directly in Renminbi (RMB), which will flow into dedicated development capital reserves in Beijing to fund Iraqi civil works and technology acquisitions.
@@ -206,7 +206,7 @@ Key Impacts:
 1. Reduction in Transaction Friction: Importers bypass USD/IQD hedging fees, saving an estimated 3.8% on capital overhead.
 2. Sovereign Infrastructure Fund: Renminbi balances will directly collateralize large-scale grid developments managed by Sino-Hydro.
 3. Liquidity Guarantees: Iraq establishes a liquid buffer of CNY to stabilize raw material procurement, mitigating global supply shocks.`,
-    fullContentAr: `في تحول غير مسبوق في المشهد المالي الجيوسياسي، وضع البنك المركزي العراقي وبنك الشعب الصيني اللمسات الأخيرة على إطار التسوية السيادية. بدءاً من الربع الرابع لعام 2026، ستتم تسوية 35% من صادرات النفط الخام من البصرة مباشرة باليوان الصيني، على أن تصب العوائد في صندوق رأسمال استثماري مخصص في بكين لتمويل مشاريع البنية التحتية والمدنية العراقية.
+    fullContentAr: `في تحول غير مسبوق في المشهد المالي الجيوسياسي، وضع البنك المركزي العراقي وبنك الشعب الصيني اللمسات الأخيرة على إطار التسوية المستقلة. بدءاً من الربع الرابع لعام 2026، ستتم تسوية 35% من صادرات النفط الخام من البصرة مباشرة باليوان الصيني، على أن تصب العوائد في صندوق رأسمال استثماري مخصص في بكين لتمويل مشاريع البنية التحتية والمدنية العراقية.
 
 أبرز النتائج الاستراتيجية:
 1. تقليص تكاليف التبادل: يتجنب المستوردون رسوم التحوط للدولار، مما يوفر حوالي 3.8% من التكاليف الرأسمالية.
@@ -222,7 +222,7 @@ Key Impacts:
 
 کاریگەرییە سەرەکییەکان:
 ١. کەمکردنەوەی لێکخشاندنی مامەڵەکان: هاوردەکاران کرێی پاراستنی دۆلار تێدەپەڕێنن.
-٢. سندوقی ژێرخانی سەروەری: هاوسەنگییەکانی یوان ڕاستەوخۆ دەبنە بارمتەی گەشەپێدانی تۆڕی کارەبایی گەورە لەلایەن سینۆ-هایدرۆوە.
+٢. سندوقی ژێرخانی سەربەخۆ: هاوسەنگییەکانی یوان ڕاستەوخۆ دەبنە بارمتەی گەشەپێدانی تۆڕی کارەبایی گەورە لەلایەن سینۆ-هایدرۆوە.
 ٣. گەرەنتی نەختینەیی: عێراق یەدەگێکی نەختینەیی لە CNY دادەمەزرێنێت بۆ جێگیرکردنی کڕینی کەرەستەی خاو.`
   },
   {
@@ -406,7 +406,7 @@ Practical Advice:
 
 export function EnterpriseSidebar({ lang }: { lang: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'topics' | 'market' | 'projects' | 'b2b' | 'briefs'>('topics');
+  const [activeTab, setActiveTab] = useState<'topics' | 'market' | 'projects' | 'b2b' | 'briefs' | ''>('');
   
   // Market Ticker Rates State
   const [rates, setRates] = useState({
@@ -480,7 +480,7 @@ export function EnterpriseSidebar({ lang }: { lang: Locale }) {
     const preset = CORRESPONDENCE_PRESETS.find(p => p.id === selectedPreset);
     if (!preset) return;
 
-    const fullLetter = `CHINQ ENTERPRISE SUITE - BILATERAL CORRESPONDENCE DRAFT
+    const fullLetter = `IRAQI-CHINESE AGENCY ENTERPRISE SUITE - BILATERAL CORRESPONDENCE DRAFT
 --------------------------------------------------------------
 [ENGLISH]
 ${preset.letterEn(companyName, businessField, representative)}
@@ -538,7 +538,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
         }}
         transition={transitionConfig}
         className={cn(
-          "fixed top-4 z-50 bg-[#990000] hover:bg-[#770000] text-white p-3 rounded-md shadow-lg flex items-center justify-center cursor-pointer border border-[#990000]/20 group select-none hover:scale-105 active:scale-95",
+          "fixed top-4 z-50 bg-brand-800 hover:bg-[#770000] text-white p-3 rounded-md shadow-sm hover:shadow-md flex items-center justify-center cursor-pointer border border-brand-800/20 group select-none hover:scale-105 active:scale-95",
           isRtl ? "left-4" : "right-4"
         )}
       >
@@ -580,94 +580,60 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                 width: sidebarWidth
               }}
               className={cn(
-                "fixed top-0 bottom-0 max-w-full bg-[#FAFAFA] border-[#111111]/15 shadow-2xl z-50 flex flex-col h-screen overflow-hidden",
+                "fixed top-0 bottom-0 max-w-full bg-white dark:bg-neutral-900 dark:bg-neutral-900 border-gray-200 dark:border-neutral-800 shadow-2xl z-50 flex flex-col h-screen overflow-hidden",
                 isRtl ? "left-0 border-r" : "right-0 border-l"
               )}
             >
               {/* Header */}
-              <div className="p-5 bg-white border-b border-[#111111]/10 flex items-center justify-between shrink-0">
-                <div className="flex items-center space-x-2.5 rtl:space-x-reverse">
-                  <div className="w-6 h-6 rounded-xs bg-[#990000] flex items-center justify-center text-white font-serif font-bold text-xs shadow-sm">
+              <div className="px-6 py-5 bg-ink-900 dark:bg-neutral-950 border-b border-brand-800 flex items-center justify-between shrink-0 shadow-sm">
+                <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div className="w-8 h-8 rounded-sm bg-brand-800 flex items-center justify-center text-white font-serif font-black text-sm shadow-sm">
                     Q
                   </div>
                   <div>
-                    <h2 className="text-xs font-black uppercase tracking-wider text-[#111111]">
-                      {lang === 'ar' ? 'بوابة شينك للمؤسسات' : lang === 'zh' ? 'CHINQ 企业套件' : lang === 'ckb' ? 'شینک ئینتەرپرایز' : 'ChinQ Enterprise Suite'}
+                    <h2 className="text-sm font-black uppercase tracking-widest text-white">
+                      {lang === 'ar' ? 'بوابة الوكالة للمؤسسات' : lang === 'zh' ? '伊拉克-中国通讯社 企业套件' : lang === 'ckb' ? 'دەروازەی دامەزراوەیی ئاژانس' : 'Iraqi-Chinese Agency Enterprise Suite'}
                     </h2>
-                    <p className="text-[9px] text-[#990000] font-bold uppercase tracking-widest mt-0.5">
-                      Bilateral Trade & Intelligence Portal
+                    <p className="text-[10px] text-brand-400 font-bold uppercase tracking-widest mt-0.5">
+                      Bilateral Trade & Information Portal
                     </p>
                   </div>
                 </div>
                 <button 
                   onClick={toggleSidebar}
-                  className="p-1 rounded-xs border border-transparent hover:border-[#111111]/20 hover:bg-neutral-50 text-[#111111] transition-all cursor-pointer"
+                  className="p-1.5 rounded-md border border-neutral-700 bg-neutral-800 hover:bg-brand-800 hover:border-brand-700 hover:text-white text-neutral-400 transition-all cursor-pointer shadow-sm"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Navigation Tabs */}
-              <div className="flex border-b border-[#111111]/10 text-[10px] font-bold uppercase tracking-wider bg-white shrink-0">
-                <button 
-                  onClick={() => { setActiveTab('topics'); setActiveBrief(null); }}
-                  className={cn(
-                    "flex-1 py-3 text-center border-b-2 cursor-pointer transition-colors flex flex-col items-center gap-1",
-                    activeTab === 'topics' ? "border-[#990000] text-[#990000]" : "border-transparent text-gray-500 hover:text-[#111111]"
-                  )}
-                >
-                  <Menu className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'الأقسام' : lang === 'zh' ? '分类' : lang === 'ckb' ? 'بەشەکان' : 'Topics'}</span>
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('market'); setActiveBrief(null); }}
-                  className={cn(
-                    "flex-1 py-3 text-center border-b-2 cursor-pointer transition-colors flex flex-col items-center gap-1",
-                    activeTab === 'market' ? "border-[#990000] text-[#990000]" : "border-transparent text-gray-500 hover:text-[#111111]"
-                  )}
-                >
-                  <TrendingUp className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'المؤشرات' : lang === 'zh' ? '指数' : lang === 'ckb' ? 'مۆدێلەکان' : 'Indices'}</span>
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('projects'); setActiveBrief(null); }}
-                  className={cn(
-                    "flex-1 py-3 text-center border-b-2 cursor-pointer transition-colors flex flex-col items-center gap-1",
-                    activeTab === 'projects' ? "border-[#990000] text-[#990000]" : "border-transparent text-gray-500 hover:text-[#111111]"
-                  )}
-                >
-                  <Compass className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'المشاريع' : lang === 'zh' ? '项目' : lang === 'ckb' ? 'پڕۆژەکان' : 'Projects'}</span>
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('b2b'); setActiveBrief(null); }}
-                  className={cn(
-                    "flex-1 py-3 text-center border-b-2 cursor-pointer transition-colors flex flex-col items-center gap-1",
-                    activeTab === 'b2b' ? "border-[#990000] text-[#990000]" : "border-transparent text-gray-500 hover:text-[#111111]"
-                  )}
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'الخطابات' : lang === 'zh' ? '公文' : lang === 'ckb' ? 'نامەکان' : 'Letters'}</span>
-                </button>
-                <button 
-                  onClick={() => { setActiveTab('briefs'); }}
-                  className={cn(
-                    "flex-1 py-3 text-center border-b-2 cursor-pointer transition-colors flex flex-col items-center gap-1",
-                    activeTab === 'briefs' ? "border-[#990000] text-[#990000]" : "border-transparent text-gray-500 hover:text-[#111111]"
-                  )}
-                >
-                  <Lock className="w-3.5 h-3.5" />
-                  <span>{lang === 'ar' ? 'التقارير' : lang === 'zh' ? '简报' : lang === 'ckb' ? 'ڕاپۆرتەکان' : 'Briefs'}</span>
-                </button>
-              </div>
-
               {/* Dynamic Scrolling Body Content */}
-              <div className="flex-grow overflow-y-auto p-5 space-y-6 text-start">
+              <div className="flex-grow overflow-y-auto p-6 space-y-6 text-start bg-neutral-50 dark:bg-neutral-900/50">
                 
                 
                 {/* 0. TOPICS (NEW) */}
-                {activeTab === 'topics' && (
-                  <div className="animate-fadeIn">
+                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'topics' ? '' : 'topics')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Menu className="w-4 h-4 text-brand-800" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                        {lang === 'ar' ? 'الأقسام' : lang === 'zh' ? '分类' : lang === 'ckb' ? 'بەشەکان' : 'Topics & Sections'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'topics' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'topics' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
                     <div className="border-b-2 border-black pb-2 mb-4">
                       <h3 className="font-serif font-black text-2xl tracking-tight text-black">Sections</h3>
                     </div>
@@ -680,7 +646,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         { label: lang === 'ar' ? 'تكنولوجيا' : lang === 'zh' ? '科技' : lang === 'ckb' ? 'تەکنەلۆژیا' : 'Technology', slug: 'technology', desc: 'Innovation & Tech' },
                         { label: lang === 'ar' ? 'ثقافة' : lang === 'zh' ? '文化' : lang === 'ckb' ? 'کالچەر' : 'Culture', slug: 'culture', desc: 'Arts & Society' },
                         { label: lang === 'ar' ? 'آراء' : lang === 'zh' ? '观点' : lang === 'ckb' ? 'بۆچوون' : 'Opinion', slug: 'opinion', desc: 'Editorials & Voices' },
-                        { label: lang === 'ar' ? 'الذكاء الاصطناعي' : lang === 'zh' ? '人工智能' : lang === 'ckb' ? 'زیرەکی دەستکرد' : 'AI', slug: 'ai', desc: 'Artificial Intelligence' },
+                        { label: lang === 'ar' ? 'الذكاء الاصطناعي' : lang === 'zh' ? '人工智能' : lang === 'ckb' ? 'زیرەکی دەستکرد' : 'AI', slug: 'ai', desc: 'Artificial Information' },
                         { label: lang === 'ar' ? 'الأغذية والمشروبات' : lang === 'zh' ? '餐饮' : lang === 'ckb' ? 'خۆراک و خواردنەوە' : 'Food & Beverage', slug: 'food-beverage', desc: 'Culinary Industry' },
                         { label: lang === 'ar' ? 'معرض' : lang === 'zh' ? '博览会' : lang === 'ckb' ? 'پێشانگا' : 'Expo', slug: 'expo', desc: 'Trade Fairs' },
                         { label: lang === 'ar' ? 'إحصاءات الأعمال' : lang === 'zh' ? '商业统计' : lang === 'ckb' ? 'ئاماری بازرگانی' : 'Business Statistics', slug: 'business-statistics', desc: 'Market Data' },
@@ -696,26 +662,49 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           className="flex flex-col py-3 border-b border-gray-200 hover:bg-neutral-50 transition-colors group cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-serif font-bold text-lg text-black group-hover:text-[#990000]">{c.label}</span>
-                            <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-[#990000]" />
+                            <span className="font-serif font-bold text-lg text-black group-hover:text-brand-800">{c.label}</span>
+                            <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-brand-800" />
                           </div>
                           <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider mt-1">{c.desc}</span>
                         </a>
                       ))}
                     </div>
-                  </div>
-                )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* 1. MARKET DATA INDICES */}
-                {activeTab === 'market' && (
-                  <div className="space-y-4 animate-fadeIn">
-                    <div className="bg-white border border-[#111111]/10 p-4 rounded-xs">
-                      <div className="flex items-center justify-between mb-3 border-b border-[#111111]/5 pb-2">
-                        <h4 className="text-[10px] font-black uppercase text-[#111111] flex items-center">
-                          <Activity className="w-3 h-3 text-[#990000] me-1.5" />
+                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'market' ? '' : 'market')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <TrendingUp className="w-4 h-4 text-brand-800" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                        {lang === 'ar' ? 'المؤشرات' : lang === 'zh' ? '指数' : lang === 'ckb' ? 'مۆدێلەکان' : 'Market Data Indices'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'market' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'market' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
+                    <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs">
+                      <div className="flex items-center justify-between mb-3 border-b border-brand-800/5 pb-2">
+                        <h4 className="text-[10px] font-black uppercase text-ink-900 flex items-center">
+                          <Activity className="w-3 h-3 text-brand-800 me-1.5" />
                           Silk Road Freight & Commodity Futures
                         </h4>
-                        <span className="text-[8px] bg-red-100 text-[#990000] px-1.5 py-0.5 font-bold uppercase rounded-xs">Real-time</span>
+                        <span className="text-[8px] bg-brand-100 text-brand-800 px-1.5 py-0.5 font-bold uppercase rounded-xs">Real-time</span>
                       </div>
 
                       {/* INDICES ROWS */}
@@ -724,11 +713,11 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Shanghai-Basra Freight Rate */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-[#111111]">Shanghai-Basra Cargo Surcharge (SBMFR)</div>
+                            <div className="text-[10px] font-bold text-ink-900">Shanghai-Basra Cargo Surcharge (SBMFR)</div>
                             <div className="text-[9px] text-gray-500 font-mono">Ocean spot index per 40ft High-Cube FEU</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-[#111111]">${rates.sbmfr.toLocaleString()}</div>
+                            <div className="font-mono font-bold text-xs text-ink-900">${rates.sbmfr.toLocaleString()}</div>
                             <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+1.7%</span>
@@ -739,26 +728,26 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Basra Heavy Crude Oil */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-[#111111]">Basra Heavy Oil Crude Index</div>
+                            <div className="text-[10px] font-bold text-ink-900">Basra Heavy Oil Crude Index</div>
                             <div className="text-[9px] text-gray-500 font-mono">BHP sovereign contract pricing</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-[#111111]">${rates.crude}</div>
-                            <div className="text-[9px] font-bold text-red-600 flex items-center justify-end">
+                            <div className="font-mono font-bold text-xs text-ink-900">${rates.crude}</div>
+                            <div className="text-[9px] font-bold text-brand-600 flex items-center justify-end">
                               <ArrowDownRight className="w-2.5 h-2.5" />
                               <span>-0.4%</span>
                             </div>
                           </div>
                         </div>
 
-                        {/* ChinQ Silk Road Integration Index */}
+                        {/* Iraqi-Chinese Agency Silk Road Integration Index */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-[#111111]">ChinQ Silk Road Integration Index (SRIX)</div>
+                            <div className="text-[10px] font-bold text-ink-900">Iraqi-Chinese Agency Silk Road Integration Index (SRIX)</div>
                             <div className="text-[9px] text-gray-500 font-mono">Aggregate bilateral liquidity flow score</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-[#111111]">{rates.silkIndex} pt</div>
+                            <div className="font-mono font-bold text-xs text-ink-900">{rates.silkIndex} pt</div>
                             <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+0.22%</span>
@@ -769,11 +758,11 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* IQD / CNY Cross Clearing Rate */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-[#111111]">Dinar-Yuan Cross Direct Rate (IQD/CNY)</div>
+                            <div className="text-[10px] font-bold text-ink-900">Dinar-Yuan Cross Direct Rate (IQD/CNY)</div>
                             <div className="text-[9px] text-gray-500 font-mono">Direct central sovereign swap rate</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-[#111111]">{rates.iqdcny}</div>
+                            <div className="font-mono font-bold text-xs text-ink-900">{rates.iqdcny}</div>
                             <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+0.85%</span>
@@ -796,8 +785,8 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                     </div>
 
                     {/* Simple Bar chart mockup */}
-                    <div className="bg-white border border-[#111111]/10 p-4 rounded-xs">
-                      <h4 className="text-[10px] font-black uppercase text-[#111111] mb-3">
+                    <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs">
+                      <h4 className="text-[10px] font-black uppercase text-ink-900 mb-3">
                         Monthly Freight Volatility Trend (2026)
                       </h4>
                       <div className="h-28 flex items-end justify-between px-2 pt-2 gap-2">
@@ -806,7 +795,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                             <div 
                               className={cn(
                                 "w-full rounded-t-xs transition-all duration-1000",
-                                i === 5 ? "bg-[#990000]" : "bg-neutral-300"
+                                i === 5 ? "bg-brand-800" : "bg-neutral-300"
                               )} 
                               style={{ height: `${val}%` }}
                             ></div>
@@ -817,12 +806,35 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         ))}
                       </div>
                     </div>
-                  </div>
-                )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* 2. BELT & ROAD PROJECTS TRACKER */}
-                {activeTab === 'projects' && (
-                  <div className="space-y-4 animate-fadeIn">
+                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'projects' ? '' : 'projects')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Compass className="w-4 h-4 text-brand-800" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                        {lang === 'ar' ? 'المشاريع' : lang === 'zh' ? '项目' : lang === 'ckb' ? 'پڕۆژەکان' : 'Belt & Road Projects'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'projects' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'projects' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
                     <p className="text-[11px] text-gray-600">
                       Monitor major energy grids, maritime, and gas investments funded through the bilateral investment agreements.
                     </p>
@@ -835,8 +847,8 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           className={cn(
                             "py-2 px-1 text-center border rounded-xs transition-all cursor-pointer text-[9px] font-bold uppercase",
                             selectedProject?.id === p.id 
-                              ? "bg-[#990000] text-white border-[#990000] shadow-sm" 
-                              : "bg-white text-gray-600 border-[#111111]/10 hover:border-[#111111]/30"
+                              ? "bg-brand-800 text-white border-brand-800 shadow-sm" 
+                              : "bg-white dark:bg-neutral-900 text-gray-600 border-gray-200 dark:border-neutral-800 hover:border-brand-800/30"
                           )}
                         >
                           {p.id === 'faw-port' ? 'Faw Port' : p.id === 'maysan-gas' ? 'Maysan Gas' : 'Samawa Solar'}
@@ -845,23 +857,23 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                     </div>
 
                     {selectedProject && (
-                      <div className="bg-white border border-[#111111]/10 p-4 rounded-xs space-y-4">
+                      <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs space-y-4">
                         {/* Project Heading */}
                         <div>
-                          <span className="text-[9px] font-black text-[#990000] uppercase tracking-wider block mb-0.5">
+                          <span className="text-[9px] font-black text-brand-800 uppercase tracking-wider block mb-0.5">
                             Active Bilateral Initiative
                           </span>
-                          <h3 className="font-serif text-base font-black leading-tight text-[#111111]">
+                          <h3 className="font-serif text-base font-black leading-tight text-ink-900">
                             {getLocalizedProject(selectedProject).name}
                           </h3>
                         </div>
 
                         {/* Location / Funding Details */}
-                        <div className="grid grid-cols-2 gap-3 text-xs border-y border-[#111111]/5 py-2">
+                        <div className="grid grid-cols-2 gap-3 text-xs border-y border-brand-800/5 py-2">
                           <div>
                             <span className="text-[8px] text-gray-500 font-bold uppercase block">Province / Location</span>
-                            <span className="font-medium text-[#111111] flex items-center gap-1 mt-0.5">
-                              <MapPin className="w-3 h-3 text-[#990000]" />
+                            <span className="font-medium text-ink-900 flex items-center gap-1 mt-0.5">
+                              <MapPin className="w-3 h-3 text-brand-800" />
                               {getLocalizedProject(selectedProject).location}
                             </span>
                           </div>
@@ -876,26 +888,26 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Progress Bar */}
                         <div>
                           <div className="flex justify-between items-center text-[10px] font-bold mb-1">
-                            <span className="text-[#111111] uppercase">Deployment Benchmark</span>
-                            <span className="font-mono text-[#990000]">{selectedProject.progress}%</span>
+                            <span className="text-ink-900 uppercase">Deployment Benchmark</span>
+                            <span className="font-mono text-brand-800">{selectedProject.progress}%</span>
                           </div>
-                          <div className="w-full bg-neutral-100 h-2 rounded-full overflow-hidden border border-[#111111]/5">
+                          <div className="w-full bg-neutral-100 h-2 rounded-full overflow-hidden border border-brand-800/5">
                             <div 
-                              className="bg-gradient-to-r from-[#990000] to-red-500 h-full rounded-full transition-all duration-1000"
+                              className="bg-gradient-to-r from-brand-800 to-brand-500 h-full rounded-full transition-all duration-1000"
                               style={{ width: `${selectedProject.progress}%` }}
                             ></div>
                           </div>
                         </div>
 
                         {/* Status Label */}
-                        <div className="bg-[#FAFAFA] p-2.5 border border-[#111111]/5 rounded-xs text-[11px] leading-relaxed">
+                        <div className="bg-neutral-50 dark:bg-neutral-900/50 p-2.5 border border-brand-800/5 rounded-xs text-[11px] leading-relaxed">
                           <span className="text-[8px] text-gray-500 font-bold uppercase block mb-0.5">Current Engineering Status</span>
-                          <strong className="text-[#111111]">{getLocalizedProject(selectedProject).status}</strong>
+                          <strong className="text-ink-900">{getLocalizedProject(selectedProject).status}</strong>
                         </div>
 
                         {/* Real-time Project Log */}
                         <div>
-                          <span className="text-[9px] font-black text-[#111111] uppercase tracking-wider block mb-2">
+                          <span className="text-[9px] font-black text-ink-900 uppercase tracking-wider block mb-2">
                             Bilateral Logistics Log
                           </span>
                           <ul className="space-y-2 text-[10px] text-gray-600 font-mono list-disc list-inside">
@@ -909,26 +921,49 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         </div>
                       </div>
                     )}
-                  </div>
-                )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* 3. TRILINGUAL B2B LETTER GENERATOR */}
-                {activeTab === 'b2b' && (
-                  <div className="space-y-4 animate-fadeIn">
+                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'b2b' ? '' : 'b2b')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FileText className="w-4 h-4 text-brand-800" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                        {lang === 'ar' ? 'الخطابات' : lang === 'zh' ? '公文' : lang === 'ckb' ? 'نامەکان' : 'B2B Letter Generator'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'b2b' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'b2b' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
                     <p className="text-[11px] text-gray-600">
                       Draft formal diplomatic and commercial correspondence between Chinese and Iraqi entities instantly with real-time field injection.
                     </p>
 
                     {/* Select Letter Type */}
                     <div className="space-y-1">
-                      <label className="text-[9px] font-black uppercase text-[#111111]">Select Communication Template</label>
+                      <label className="text-[9px] font-black uppercase text-ink-900">Select Communication Template</label>
                       <select 
                         value={selectedPreset}
                         onChange={(e) => {
                           setSelectedPreset(e.target.value);
                           setCopied(false);
                         }}
-                        className="w-full bg-white border border-[#111111]/15 px-3 py-2 text-xs rounded-xs font-medium text-[#111111] focus:outline-none focus:border-[#990000] cursor-pointer"
+                        className="w-full bg-white dark:bg-neutral-900 border border-brand-800/15 px-3 py-2 text-xs rounded-xs font-medium text-ink-900 focus:outline-none focus:border-brand-800 cursor-pointer"
                       >
                         {CORRESPONDENCE_PRESETS.map((p) => (
                           <option key={p.id} value={p.id}>
@@ -939,7 +974,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                     </div>
 
                     {/* Input Variables */}
-                    <div className="grid grid-cols-2 gap-3.5 bg-white border border-[#111111]/10 p-4 rounded-xs">
+                    <div className="grid grid-cols-2 gap-3.5 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs">
                       <div className="space-y-1">
                         <label className="text-[8px] font-bold uppercase text-gray-500 block">Enterprise Name</label>
                         <input 
@@ -947,7 +982,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           placeholder="e.g. Al-Faw Logistics Co."
                           value={companyName}
                           onChange={(e) => setCompanyName(e.target.value)}
-                          className="w-full bg-[#FAFAFA] border border-[#111111]/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-[#990000]"
+                          className="w-full bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-brand-800"
                         />
                       </div>
                       <div className="space-y-1">
@@ -957,7 +992,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           placeholder="e.g. Solar Energy Plant"
                           value={businessField}
                           onChange={(e) => setBusinessField(e.target.value)}
-                          className="w-full bg-[#FAFAFA] border border-[#111111]/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-[#990000]"
+                          className="w-full bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-brand-800"
                         />
                       </div>
                       <div className="col-span-2 space-y-1">
@@ -967,7 +1002,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           placeholder="e.g. Director General Al-Sabah"
                           value={representative}
                           onChange={(e) => setRepresentative(e.target.value)}
-                          className="w-full bg-[#FAFAFA] border border-[#111111]/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-[#990000]"
+                          className="w-full bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2 py-1.5 text-xs rounded-xs focus:outline-none focus:border-brand-800"
                         />
                       </div>
                     </div>
@@ -975,14 +1010,14 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                     {/* Preview Area (Trilingual letter excerpt) */}
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-[9px] font-black uppercase text-[#111111]">Draft Preview (Injected)</span>
+                        <span className="text-[9px] font-black uppercase text-ink-900">Draft Preview (Injected)</span>
                         <button 
                           onClick={copyB2BLetter}
                           className={cn(
                             "flex items-center gap-1.5 text-[10px] font-bold uppercase px-3 py-1 cursor-pointer border rounded-xs transition-all",
                             copied 
                               ? "bg-emerald-500 border-emerald-500 text-white" 
-                              : "bg-white border-[#111111]/20 text-[#111111] hover:bg-neutral-50"
+                              : "bg-white dark:bg-neutral-900 border-brand-800/20 text-ink-900 hover:bg-neutral-50"
                           )}
                         >
                           {copied ? <FileCheck className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -990,46 +1025,69 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         </button>
                       </div>
 
-                      <div className="bg-white border border-[#111111]/10 p-4 rounded-xs h-48 overflow-y-auto font-mono text-[10px] space-y-4 text-gray-700 leading-normal whitespace-pre-wrap">
+                      <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs h-48 overflow-y-auto font-mono text-[10px] space-y-4 text-gray-700 leading-normal whitespace-pre-wrap">
                         {selectedPresetObj && (
                           <>
-                            <div className="border-b border-[#111111]/5 pb-2">
-                              <span className="text-[8px] bg-red-100 text-[#990000] font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1">ENGLISH</span>
+                            <div className="border-b border-brand-800/5 pb-2">
+                              <span className="text-[8px] bg-brand-100 text-brand-800 font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1">ENGLISH</span>
                               {selectedPresetObj.letterEn(companyName, businessField, representative)}
                             </div>
-                            <div className="border-b border-[#111111]/5 pb-2 text-right" dir="rtl">
-                              <span className="text-[8px] bg-red-100 text-[#990000] font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1 ml-auto">العربية</span>
+                            <div className="border-b border-brand-800/5 pb-2 text-right" dir="rtl">
+                              <span className="text-[8px] bg-brand-100 text-brand-800 font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1 ml-auto">العربية</span>
                               {selectedPresetObj.letterAr(companyName, businessField, representative)}
                             </div>
                             <div className="pb-2">
-                              <span className="text-[8px] bg-red-100 text-[#990000] font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1">中文</span>
+                              <span className="text-[8px] bg-brand-100 text-brand-800 font-black px-1.5 py-0.5 rounded-xs uppercase tracking-wider block w-fit mb-1">中文</span>
                               {selectedPresetObj.letterZh(companyName, businessField, representative)}
                             </div>
                           </>
                         )}
                       </div>
                     </div>
-                  </div>
-                )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* 4. STRATEGIC INTELLIGENCE BRIEFS */}
-                {activeTab === 'briefs' && (
-                  <div className="space-y-4 animate-fadeIn">
+                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'briefs' ? '' : 'briefs')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Lock className="w-4 h-4 text-brand-800" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                        {lang === 'ar' ? 'التقارير' : lang === 'zh' ? '简报' : lang === 'ckb' ? 'ڕاپۆرتەکان' : 'Strategic Information Briefs'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'briefs' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'briefs' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-4 space-y-4">
                     {activeBrief ? (
                       /* Display Full Report Detail */
-                      <div className="bg-white border border-[#111111]/10 p-5 rounded-xs space-y-4 animate-fadeIn">
+                      <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-5 rounded-xs space-y-4 animate-fadeIn">
                         <button 
                           onClick={() => setActiveBrief(null)}
-                          className="text-[10px] font-bold uppercase tracking-wider text-[#990000] hover:underline flex items-center gap-1 cursor-pointer"
+                          className="text-[10px] font-bold uppercase tracking-wider text-brand-800 hover:underline flex items-center gap-1 cursor-pointer"
                         >
-                          ← Back to Intelligence Feed
+                          ← Back to Information Feed
                         </button>
 
                         <div>
-                          <span className="text-[8px] font-black text-[#990000] uppercase tracking-widest block mb-1">
+                          <span className="text-[8px] font-black text-brand-800 uppercase tracking-widest block mb-1">
                             Sovereign Analysis Draft
                           </span>
-                          <h3 className="font-serif text-lg font-black leading-tight text-[#111111]">
+                          <h3 className="font-serif text-lg font-black leading-tight text-ink-900">
                             {lang === 'ar' ? activeBrief.titleAr : lang === 'zh' ? activeBrief.titleZh : activeBrief.titleEn}
                           </h3>
                           <div className="flex items-center gap-2 mt-2 text-[9px] text-gray-500 font-bold uppercase">
@@ -1039,12 +1097,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           </div>
                         </div>
 
-                        <div className="prose prose-neutral max-w-none text-xs leading-relaxed text-gray-700 whitespace-pre-line border-t border-[#111111]/5 pt-4">
+                        <div className="prose prose-neutral max-w-none text-xs leading-relaxed text-gray-700 whitespace-pre-line border-t border-brand-800/5 pt-4">
                           {lang === 'ar' ? activeBrief.fullContentAr : lang === 'zh' ? activeBrief.fullContentZh : activeBrief.fullContentEn}
                         </div>
 
-                        <div className="bg-neutral-50 p-3 border border-dashed border-[#111111]/15 text-[10px] text-gray-500 text-center font-mono uppercase tracking-wider">
-                          🔒 END OF HIGH CONFIDENTIALITY MEMO • CHINQ INTEL
+                        <div className="bg-neutral-50 p-3 border border-dashed border-brand-800/15 text-[10px] text-gray-500 text-center font-mono uppercase tracking-wider">
+                          🔒 END OF HIGH CONFIDENTIALITY MEMO • IRAQI-CHINESE AGENCY INTEL
                         </div>
                       </div>
                     ) : (
@@ -1060,10 +1118,10 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                             return (
                               <div 
                                 key={brief.id} 
-                                className="bg-white border border-[#111111]/10 p-4 rounded-xs relative group transition-all duration-300"
+                                className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs relative group transition-all duration-300"
                               >
                                 <div className="flex justify-between items-start gap-4 mb-2">
-                                  <span className="text-[8px] font-black text-[#990000] uppercase tracking-wider">
+                                  <span className="text-[8px] font-black text-brand-800 uppercase tracking-wider">
                                     {brief.author}
                                   </span>
                                   <span className="text-[8px] text-gray-500 font-mono font-bold">
@@ -1071,7 +1129,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                   </span>
                                 </div>
 
-                                <h4 className="font-serif text-sm font-bold text-[#111111] leading-snug group-hover:text-[#990000] transition-colors duration-200">
+                                <h4 className="font-serif text-sm font-bold text-ink-900 leading-snug group-hover:text-brand-800 transition-colors duration-200">
                                   {lang === 'ar' ? brief.titleAr : lang === 'zh' ? brief.titleZh : brief.titleEn}
                                 </h4>
 
@@ -1080,11 +1138,11 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                 </p>
 
                                 {/* Unlock action panel */}
-                                <div className="mt-4 border-t border-[#111111]/5 pt-3.5 flex items-center justify-between">
+                                <div className="mt-4 border-t border-brand-800/5 pt-3.5 flex items-center justify-between">
                                   {isUnlocked ? (
                                     <button 
                                       onClick={() => setActiveBrief(brief)}
-                                      className="text-[10px] bg-[#111111] hover:bg-[#990000] text-white font-bold uppercase tracking-wider px-3.5 py-1.5 cursor-pointer rounded-xs transition-colors flex items-center gap-1.5 shadow-sm"
+                                      className="text-[10px] bg-brand-800 hover:bg-brand-700 text-white font-bold uppercase tracking-wider px-3.5 py-1.5 cursor-pointer rounded-xs transition-colors flex items-center gap-1.5 shadow-sm"
                                     >
                                       <Unlock className="w-3.5 h-3.5 text-yellow-400" />
                                       <span>Read Sovereign Brief</span>
@@ -1101,11 +1159,11 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                           placeholder="Enter corporate email to unlock"
                                           value={emailInput}
                                           onChange={(e) => setEmailInput(e.target.value)}
-                                          className="flex-grow bg-[#FAFAFA] border border-[#111111]/15 px-2.5 py-1 text-[10px] rounded-xs focus:outline-none focus:border-[#990000] font-mono text-gray-600"
+                                          className="flex-grow bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2.5 py-1 text-[10px] rounded-xs focus:outline-none focus:border-brand-800 font-mono text-gray-600"
                                         />
                                         <button 
                                           type="submit"
-                                          className="text-[10px] bg-[#990000] hover:bg-[#770000] text-white font-bold uppercase px-3 py-1 cursor-pointer rounded-xs transition-all flex items-center gap-1 shrink-0"
+                                          className="text-[10px] bg-brand-800 hover:bg-[#770000] text-white font-bold uppercase px-3 py-1 cursor-pointer rounded-xs transition-all flex items-center gap-1 shrink-0"
                                         >
                                           <Lock className="w-3 h-3 text-yellow-400" />
                                           <span>Unlock</span>
@@ -1113,7 +1171,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                       </form>
                                       
                                       {unlockError && (
-                                        <p className="text-[9px] text-red-600 font-bold mt-1.5 font-mono">
+                                        <p className="text-[9px] text-brand-600 font-bold mt-1.5 font-mono">
                                           ⚠ {unlockError}
                                         </p>
                                       )}
@@ -1126,14 +1184,16 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         </div>
                       </div>
                     )}
-                  </div>
-                )}
-
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
 
               {/* Sidebar Footer */}
-              <div className="p-4 bg-neutral-50 border-t border-[#111111] text-center text-[9px] text-black font-bold tracking-widest shrink-0 uppercase">
-                CHINQ INTELLIGENCE SERVICES • BEIJING / BAGHDAD
+              <div className="p-4 bg-neutral-50 border-t border-brand-800 text-center text-[9px] text-black font-bold tracking-widest shrink-0 uppercase">
+                IRAQI-CHINESE AGENCY INTELLIGENCE SERVICES • BEIJING / BAGHDAD
               </div>
 
             </motion.div>

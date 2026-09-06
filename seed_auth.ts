@@ -7,14 +7,14 @@ async function main() {
   const hashedPassword = await bcrypt.hash('admin123', 10);
   
   await prisma.user.upsert({
-    where: { email: 'admin@chinq.media' },
+    where: { email: 'admin@iraqchinadaily.media' },
     update: {
       password: hashedPassword,
       name: 'Test Admin',
       role: 'ADMIN'
     },
     create: {
-      email: 'admin@chinq.media',
+      email: 'admin@iraqchinadaily.media',
       password: hashedPassword,
       name: 'Test Admin',
       role: 'ADMIN'
@@ -24,14 +24,14 @@ async function main() {
   const hashedEditor = await bcrypt.hash('editor123', 10);
   
   await prisma.user.upsert({
-    where: { email: 'editor@chinq.media' },
+    where: { email: 'editor@iraqchinadaily.media' },
     update: {
       password: hashedEditor,
       name: 'Test Editor',
       role: 'EDITOR'
     },
     create: {
-      email: 'editor@chinq.media',
+      email: 'editor@iraqchinadaily.media',
       password: hashedEditor,
       name: 'Test Editor',
       role: 'EDITOR'
@@ -39,8 +39,8 @@ async function main() {
   });
 
   console.log('✅ Temporary auth credentials seeded:');
-  console.log('Admin: admin@chinq.media / admin123');
-  console.log('Editor: editor@chinq.media / editor123');
+  console.log('Admin: admin@iraqchinadaily.media / admin123');
+  console.log('Editor: editor@iraqchinadaily.media / editor123');
 }
 
 main()

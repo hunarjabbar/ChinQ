@@ -218,16 +218,16 @@ export function AdminWomen() {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white border-2 border-[#111111] p-6 rounded-xs shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border-2 border-brand-800 p-6 rounded-xs shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="bg-[#990000] text-white font-mono text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider flex items-center gap-1">
+            <span className="bg-brand-800 text-white font-mono text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider flex items-center gap-1">
               <Users className="w-3.5 h-3.5" />
               Sovereign Administration
             </span>
             <span className="text-gray-500 font-mono text-xs">Beijing • Baghdad • Erbil</span>
           </div>
-          <h1 className="text-2xl font-serif font-bold text-[#111111]">
+          <h1 className="text-2xl font-serif font-bold text-ink-900">
             Women Leadership & Policy Management
           </h1>
           <p className="text-gray-600 text-xs font-mono">
@@ -239,7 +239,7 @@ export function AdminWomen() {
           <button
             onClick={() => reseedMutation.mutate()}
             disabled={reseedMutation.isPending}
-            className="bg-white hover:bg-gray-100 text-[#111111] border border-[#111111] px-3 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5"
+            className="bg-white hover:bg-gray-100 text-ink-900 border border-brand-800 px-3 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${reseedMutation.isPending ? 'animate-spin' : ''}`} />
             <span>Seed Default Data</span>
@@ -247,7 +247,7 @@ export function AdminWomen() {
 
           <button
             onClick={() => { resetForm(); setIsModalOpen(true); }}
-            className="bg-[#990000] hover:bg-[#7a0000] text-white px-4 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5 shadow-xs"
+            className="bg-brand-800 hover:bg-brand-700 text-white px-4 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5 shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add Women Record</span>
@@ -258,15 +258,15 @@ export function AdminWomen() {
       {/* Status Notifications */}
       {statusMessage && (
         <div className={`p-4 border font-mono text-xs flex items-center gap-2 ${
-          statusMessage.type === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-800' : 'bg-red-50 border-red-500 text-red-800'
+          statusMessage.type === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-800' : 'bg-brand-50 border-brand-500 text-brand-800'
         }`}>
-          {statusMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+          {statusMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-brand-600" />}
           <span>{statusMessage.text}</span>
         </div>
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white border-2 border-[#111111] p-4 rounded-xs space-y-3">
+      <div className="bg-white border-2 border-brand-800 p-4 rounded-xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3 justify-between items-stretch md:items-center">
           <div className="relative flex-1">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -275,12 +275,12 @@ export function AdminWomen() {
               placeholder="Search by name, title, or organization..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-mono text-[#111111] focus:outline-none focus:border-[#990000]"
+              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-mono text-ink-900 focus:outline-none focus:border-brand-800"
             />
           </div>
 
           <div className="flex items-center gap-2 font-mono text-xs text-gray-500">
-            <span>Total Records: <strong className="text-[#990000]">{profiles.length}</strong></span>
+            <span>Total Records: <strong className="text-brand-800">{profiles.length}</strong></span>
           </div>
         </div>
 
@@ -292,7 +292,7 @@ export function AdminWomen() {
                 key={r}
                 onClick={() => setSelectedRegion(r)}
                 className={`px-2.5 py-0.5 text-xs font-mono transition-colors ${
-                  selectedRegion === r ? 'bg-[#111111] text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
+                  selectedRegion === r ? 'bg-brand-800 text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {r}
@@ -307,7 +307,7 @@ export function AdminWomen() {
                 key={c}
                 onClick={() => setSelectedCategory(c)}
                 className={`px-2.5 py-0.5 text-xs font-mono transition-colors ${
-                  selectedCategory === c ? 'bg-[#990000] text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
+                  selectedCategory === c ? 'bg-brand-800 text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {c.replace('_', ' ')}
@@ -318,9 +318,9 @@ export function AdminWomen() {
       </div>
 
       {/* Data Table */}
-      <div className="bg-white border-2 border-[#111111] rounded-xs overflow-x-auto">
+      <div className="bg-white border-2 border-brand-800 rounded-xs overflow-x-auto">
         <table className="w-full text-left text-xs font-mono">
-          <thead className="bg-[#111111] text-white uppercase text-[10px] tracking-wider border-b border-[#111111]">
+          <thead className="bg-brand-800 text-white uppercase text-[10px] tracking-wider border-b border-brand-800">
             <tr>
               <th className="p-3">Record / Name</th>
               <th className="p-3">Region</th>
@@ -346,22 +346,22 @@ export function AdminWomen() {
             ) : (
               filteredProfiles.map((p) => (
                 <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="p-3 font-medium text-[#111111]">
+                  <td className="p-3 font-medium text-ink-900">
                     <div className="flex items-center gap-3">
                       <img src={p.imageUrl} alt={p.nameEn} className="w-10 h-10 object-cover border border-gray-300 rounded-xs shrink-0" />
                       <div>
-                        <p className="font-bold font-serif text-sm text-[#111111]">{p.nameEn}</p>
-                        <p className="text-[11px] text-[#990000] truncate max-w-xs">{p.titleEn}</p>
+                        <p className="font-bold font-serif text-sm text-ink-900">{p.nameEn}</p>
+                        <p className="text-[11px] text-brand-800 truncate max-w-xs">{p.titleEn}</p>
                       </div>
                     </div>
                   </td>
                   <td className="p-3">
-                    <span className="bg-[#111111] text-white text-[10px] px-2 py-0.5 font-bold">
+                    <span className="bg-brand-800 text-white text-[10px] px-2 py-0.5 font-bold">
                       {p.region}
                     </span>
                   </td>
                   <td className="p-3">
-                    <span className="bg-[#990000] text-white text-[10px] px-2 py-0.5 font-bold">
+                    <span className="bg-brand-800 text-white text-[10px] px-2 py-0.5 font-bold">
                       {p.category.replace('_', ' ')}
                     </span>
                   </td>
@@ -379,7 +379,7 @@ export function AdminWomen() {
                     <button
                       onClick={() => toggleStatus(p, 'isTrending')}
                       title="Toggle Trending"
-                      className={`p-1 rounded-xs border ${p.isTrending ? 'bg-rose-100 border-rose-400 text-rose-800' : 'bg-gray-100 text-gray-400 border-gray-300'}`}
+                      className={`p-1 rounded-xs border ${p.isTrending ? 'bg-brand-100 border-brand-400 text-brand-800' : 'bg-gray-100 text-gray-400 border-gray-300'}`}
                     >
                       <TrendingUp className="w-3.5 h-3.5" />
                     </button>
@@ -387,7 +387,7 @@ export function AdminWomen() {
                   <td className="p-3 text-right space-x-1">
                     <button
                       onClick={() => handleEdit(p)}
-                      className="p-1.5 bg-gray-100 hover:bg-[#111111] hover:text-white transition-colors border border-gray-300"
+                      className="p-1.5 bg-gray-100 hover:bg-brand-800 hover:text-white transition-colors border border-gray-300"
                       title="Edit Record"
                     >
                       <Edit className="w-3.5 h-3.5" />
@@ -398,7 +398,7 @@ export function AdminWomen() {
                           deleteMutation.mutate(p.id);
                         }
                       }}
-                      className="p-1.5 bg-red-50 hover:bg-[#990000] hover:text-white text-red-700 transition-colors border border-red-200"
+                      className="p-1.5 bg-brand-50 hover:bg-brand-800 hover:text-white text-brand-700 transition-colors border border-brand-200"
                       title="Delete Record"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -419,17 +419,17 @@ export function AdminWomen() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border-2 border-[#111111] max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-5 rounded-xs shadow-2xl relative"
+              className="bg-white border-2 border-brand-800 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-5 rounded-xs shadow-2xl relative"
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 bg-gray-100 hover:bg-[#990000] hover:text-white p-1.5 transition-colors"
+                className="absolute top-4 right-4 bg-gray-100 hover:bg-brand-800 hover:text-white p-1.5 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="space-y-1">
-                <h3 className="font-serif text-2xl font-bold text-[#111111]">
+                <h3 className="font-serif text-2xl font-bold text-ink-900">
                   {editingProfile ? 'Edit Women Record' : 'Create Women Record'}
                 </h3>
                 <p className="text-xs text-gray-500 font-mono">
@@ -451,7 +451,7 @@ export function AdminWomen() {
                     <select
                       value={formData.region}
                       onChange={e => setFormData({ ...formData, region: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-[#990000]"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-brand-800"
                     >
                       <option value="CHINA">CHINA 🇨🇳</option>
                       <option value="IRAQ">IRAQ 🇮🇶</option>
@@ -465,7 +465,7 @@ export function AdminWomen() {
                     <select
                       value={formData.category}
                       onChange={e => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-[#990000]"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-brand-800"
                     >
                       <option value="PROMINENT_FIGURE">PROMINENT FIGURE (Pioneer)</option>
                       <option value="POLICY_RIGHTS">POLICY & LEGAL RIGHTS</option>
@@ -477,7 +477,7 @@ export function AdminWomen() {
 
                 {/* Names (Quadrilingual) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-[#990000] uppercase">1. Names (Quadrilingual)</h4>
+                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">1. Names (Quadrilingual)</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
@@ -513,7 +513,7 @@ export function AdminWomen() {
 
                 {/* Titles (Quadrilingual) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-[#990000] uppercase">2. Title / Role (Quadrilingual)</h4>
+                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">2. Title / Role (Quadrilingual)</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
@@ -549,7 +549,7 @@ export function AdminWomen() {
 
                 {/* Summaries (English & Arabic mandatory or auto fallback) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-[#990000] uppercase">3. Short Summaries</h4>
+                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">3. Short Summaries</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <textarea
                       rows={2}
@@ -571,7 +571,7 @@ export function AdminWomen() {
 
                 {/* Biography / Policy Text */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-[#990000] uppercase">4. Detailed Bio / Legal Policy Text (English)</h4>
+                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">4. Detailed Bio / Legal Policy Text (English)</h4>
                   <textarea
                     rows={4}
                     placeholder="Full biography, research abstract, or legal policy text..."
@@ -625,7 +625,7 @@ export function AdminWomen() {
                       type="checkbox"
                       checked={formData.isFeatured}
                       onChange={e => setFormData({ ...formData, isFeatured: e.target.checked })}
-                      className="accent-[#990000] w-4 h-4"
+                      className="accent-brand-800 w-4 h-4"
                     />
                     <span>Featured Spotlight</span>
                   </label>
@@ -635,7 +635,7 @@ export function AdminWomen() {
                       type="checkbox"
                       checked={formData.isTrending}
                       onChange={e => setFormData({ ...formData, isTrending: e.target.checked })}
-                      className="accent-[#990000] w-4 h-4"
+                      className="accent-brand-800 w-4 h-4"
                     />
                     <span>Trending Priority</span>
                   </label>
@@ -654,7 +654,7 @@ export function AdminWomen() {
                   <button
                     type="submit"
                     disabled={saveMutation.isPending}
-                    className="px-6 py-2 bg-[#990000] hover:bg-[#7a0000] text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs"
+                    className="px-6 py-2 bg-brand-800 hover:bg-brand-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs"
                   >
                     {saveMutation.isPending && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
                     <span>{editingProfile ? 'Save Changes' : 'Create Record'}</span>

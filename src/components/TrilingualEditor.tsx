@@ -138,7 +138,7 @@ export function TrilingualEditor() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`px-4 py-2 text-sm font-bold rounded-lg transition-all cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-white text-[#990000] shadow-sm border border-gray-200'
+                  ? 'bg-white text-brand-800 shadow-sm border border-gray-200'
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-200/50'
               }`}
             >
@@ -171,7 +171,7 @@ export function TrilingualEditor() {
                   ? '在此输入标题...' 
                   : 'Enter headline here...'
               }
-              className="w-full text-3xl font-serif font-extrabold p-3 border-b border-gray-100 focus:border-[#990000] outline-none bg-transparent transition-colors placeholder-gray-300"
+              className="w-full text-3xl font-serif font-extrabold p-3 border-b border-gray-100 focus:border-brand-800 outline-none bg-transparent transition-colors placeholder-gray-300"
             />
           </div>
 
@@ -187,14 +187,14 @@ export function TrilingualEditor() {
                   ? 'کورتەیەک یاخود وەسفێکی خێرا بۆ بزوێنەری گەڕان...' 
                   : 'Write a brief, punchy excerpt for social previews and search engines...'
               }
-              className="w-full p-3 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-[#990000] focus:border-transparent text-sm resize-none"
+              className="w-full p-3 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-brand-800 focus:border-transparent text-sm resize-none"
             />
           </div>
 
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="block text-xs font-black uppercase tracking-widest text-gray-400">Body Content</label>
-              <span className="text-xs font-semibold text-[#990000] flex items-center gap-1.5 bg-red-50 px-2 py-1 rounded">
+              <span className="text-xs font-semibold text-brand-800 flex items-center gap-1.5 bg-brand-50 px-2 py-1 rounded">
                 <Sparkles size={12} /> Rich Editor Enabled
               </span>
             </div>
@@ -213,7 +213,7 @@ export function TrilingualEditor() {
         {/* Publish Card */}
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5 space-y-4">
           <h3 className="font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
-            <Globe size={18} className="text-[#990000]" /> Publish Settings
+            <Globe size={18} className="text-brand-800" /> Publish Settings
           </h3>
           
           <div className="flex justify-between items-center text-sm">
@@ -223,9 +223,9 @@ export function TrilingualEditor() {
           
           {statusMessage && (
             <div className={`p-3 rounded-lg border flex items-start gap-2.5 text-xs font-semibold ${
-              statusMessage.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'
+              statusMessage.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-brand-50 text-brand-800 border-brand-200'
             }`}>
-              {statusMessage.type === 'success' ? <CheckCircle2 size={16} className="text-green-600 shrink-0 mt-0.5" /> : <AlertCircle size={16} className="text-red-600 shrink-0 mt-0.5" />}
+              {statusMessage.type === 'success' ? <CheckCircle2 size={16} className="text-green-600 shrink-0 mt-0.5" /> : <AlertCircle size={16} className="text-brand-600 shrink-0 mt-0.5" />}
               <span>{statusMessage.text}</span>
             </div>
           )}
@@ -235,7 +235,7 @@ export function TrilingualEditor() {
               type="button"
               onClick={handlePublish}
               disabled={publishMutation.isPending}
-              className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-[#990000] text-white font-bold text-sm rounded-lg hover:bg-[#7a0000] transition-colors shadow-xs outline-none focus:ring-2 focus:ring-red-200 disabled:opacity-50 cursor-pointer"
+              className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-brand-800 text-white font-bold text-sm rounded-lg hover:bg-brand-800 transition-colors shadow-xs outline-none focus:ring-2 focus:ring-brand-200 disabled:opacity-50 cursor-pointer"
             >
               <Save size={16} /> 
               {publishMutation.isPending ? 'Publishing...' : 'Publish Article'}
@@ -263,7 +263,7 @@ export function TrilingualEditor() {
                 value={slug}
                 onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
                 placeholder="e.g. trade-relations-growing" 
-                className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-[#990000] focus:border-transparent text-xs font-mono"
+                className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-800 focus:border-transparent text-xs font-mono"
               />
             </div>
           </div>
@@ -275,7 +275,7 @@ export function TrilingualEditor() {
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 required
-                className="w-full p-2.5 border border-gray-300 rounded-lg appearance-none bg-white outline-none focus:ring-2 focus:ring-[#990000] text-xs font-medium cursor-pointer"
+                className="w-full p-2.5 border border-gray-300 rounded-lg appearance-none bg-white outline-none focus:ring-2 focus:ring-brand-800 text-xs font-medium cursor-pointer"
               >
                 <option value="">Select Category</option>
                 {categories.map((cat) => (
@@ -293,7 +293,7 @@ export function TrilingualEditor() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               placeholder="https://images.unsplash.com/..." 
-              className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-[#990000] focus:border-transparent text-xs font-mono"
+              className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-brand-800 focus:border-transparent text-xs font-mono"
             />
           </div>
         </div>
@@ -301,11 +301,11 @@ export function TrilingualEditor() {
 
       {/* Previews Modal overlay */}
       {isPreviewOpen && (
-        <div className="fixed inset-0 bg-[#111111]/75 backdrop-blur-md flex items-center justify-center z-50 p-4 sm:p-6 md:p-8">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full h-[85vh] flex flex-col overflow-hidden text-start">
+        <div className="fixed inset-0 bg-brand-800/75 backdrop-blur-md flex items-center justify-center z-50 p-4 sm:p-6 md:p-8">
+          <div className="bg-white rounded-xl shadow-2xl max-w-6xl w-full h-[85vh] flex flex-col overflow-hidden text-start">
             <div className="px-6 py-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center shrink-0">
               <div className="flex items-center gap-2">
-                <Layout size={18} className="text-[#990000]" />
+                <Layout size={18} className="text-brand-800" />
                 <h3 className="font-black text-gray-950 uppercase tracking-wider text-sm">
                   Simultaneous Quadrilingual Output Preview
                 </h3>

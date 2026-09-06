@@ -64,17 +64,6 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isFlashing, setIsFlashing] = useState<boolean>(false);
 
-  // Sync with incoming prop data from SSE or parent
-  useEffect(() => {
-    if (data && data.length > 0) {
-      setMarketItems(data);
-      setLastUpdated(new Date());
-      setIsFlashing(true);
-      const timer = setTimeout(() => setIsFlashing(false), 700);
-      return () => clearTimeout(timer);
-    }
-  }, [data]);
-
   // Direct fetch function for auto-refresh
   const handleFetchLatest = async () => {
     setIsRefreshing(true);
@@ -110,6 +99,19 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
     setTimeout(() => setIsFlashing(false), 700);
     setIsRefreshing(false);
   };
+
+  // Sync with incoming prop data from SSE or parent
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setMarketItems(data);
+      setLastUpdated(new Date());
+      setIsFlashing(true);
+      const timer = setTimeout(() => setIsFlashing(false), 700);
+      return () => clearTimeout(timer);
+    } else if (marketItems.length === 0) {
+      handleFetchLatest();
+    }
+  }, [data]);
 
   // Auto-refresh interval timer loop
   useEffect(() => {
@@ -194,13 +196,13 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
 
   return (
     <div className={cn(
-      "w-full bg-[#111111] text-white font-sans border-y-4 border-[#990000] shadow-2xl relative transition-all duration-300",
+      "w-full bg-brand-800 text-white font-sans border-y-4 border-brand-800 shadow-2xl relative transition-all duration-300",
       isModal ? "p-4 md:p-8 rounded-lg max-w-6xl mx-auto my-4 max-h-[90vh] overflow-y-auto" : "p-4 md:p-6"
     )}>
       {/* Header bar */}
       <div className="flex flex-wrap items-center justify-between border-b border-white/10 pb-4 mb-4 gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-[#990000] rounded flex items-center justify-center text-white font-black shadow-md">
+          <div className="w-9 h-9 bg-white/10 border border-white/20 rounded flex items-center justify-center text-white font-black shadow-md backdrop-blur-sm">
             <BarChart2 size={20} />
           </div>
           <div>
@@ -208,8 +210,8 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               <h2 className="font-serif font-black text-xl md:text-2xl text-white tracking-tight">
                 {lang === 'ar' ? 'مؤشرات الأسواق والأسهم الصينية والأسيوية' : lang === 'zh' ? '中国及香港股市指数与龙头大盘' : lang === 'ckb' ? 'نیشاندەرانی بازاڕی چین و هۆنگ کۆنگ' : 'China & Hong Kong Stock Indices & Equities'}
               </h2>
-              <span className="bg-red-500/20 text-red-400 border border-red-500/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+              <span className="bg-brand-800/20 text-brand-300 border border-brand-800/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
                 REAL-TIME SSE/HKEX FEED
               </span>
             </div>
@@ -228,7 +230,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={lang === 'zh' ? '搜索股票/指数...' : lang === 'ar' ? 'بحث عن سهم أو مؤشر...' : 'Search symbol/stock...'}
-              className="bg-white/5 border border-white/15 focus:border-[#990000] text-xs text-white rounded ps-8 pe-3 py-1.5 w-40 sm:w-48 focus:outline-none transition-colors"
+              className="bg-white/5 border border-white/15 focus:border-brand-800 text-xs text-white rounded ps-8 pe-3 py-1.5 w-40 sm:w-48 focus:outline-none transition-colors"
             />
           </div>
 
@@ -251,16 +253,16 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           <div className="flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded border border-white/10">
             <span className={cn(
               "w-2.5 h-2.5 rounded-full transition-all duration-300",
-              refreshInterval > 0 ? "bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" : "bg-amber-500"
+              refreshInterval > 0 ? "bg-green-500 animate-pulse shadow-[0_0_8px_var(--color-brand-800)]" : "bg-brand-800"
             )} />
             <span className="font-bold text-gray-200">
               {refreshInterval > 0 ? (
                 <span>
                   {lang === 'zh' ? `自动刷新中: ` : lang === 'ar' ? `تحديث تلقائي: ` : `Auto-Refreshing: `}
-                  <span className="text-emerald-400 font-black">{countdown}s</span>
+                  <span className="text-brand-300 font-black">{countdown}s</span>
                 </span>
               ) : (
-                <span className="text-amber-400 font-bold">
+                <span className="text-gray-300 font-bold">
                   {lang === 'zh' ? '自动刷新已暂停' : lang === 'ar' ? 'التحديث التلقائي متوقف' : 'Auto-Refresh Paused'}
                 </span>
               )}
@@ -279,7 +281,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                 }}
                 className={cn(
                   "px-2 py-0.5 text-[10px] font-bold rounded transition-colors",
-                  refreshInterval === sec ? "bg-[#990000] text-white shadow" : "text-gray-400 hover:text-white hover:bg-white/10"
+                  refreshInterval === sec ? "bg-brand-800 text-white shadow" : "text-gray-400 hover:text-white hover:bg-white/10"
                 )}
               >
                 {sec}s
@@ -296,7 +298,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               }}
               className={cn(
                 "px-2 py-0.5 text-[10px] font-bold rounded transition-colors flex items-center gap-0.5",
-                refreshInterval === 0 ? "bg-amber-600 text-white" : "text-gray-400 hover:text-white hover:bg-white/10"
+                refreshInterval === 0 ? "bg-brand-800 text-white" : "text-gray-400 hover:text-white hover:bg-white/10"
               )}
               title={refreshInterval === 0 ? "Resume Timer" : "Pause Timer"}
             >
@@ -313,9 +315,9 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               setCountdown(refreshInterval || 5);
             }}
             disabled={isRefreshing}
-            className="px-3 py-1 bg-[#990000] hover:bg-red-700 active:scale-95 text-white rounded text-[11px] font-bold flex items-center gap-1.5 transition-all disabled:opacity-50 cursor-pointer shadow-md"
+            className="px-3 py-1 bg-brand-800 hover:bg-brand-700 active:scale-95 text-white rounded text-[11px] font-bold flex items-center gap-1.5 transition-all disabled:opacity-50 cursor-pointer shadow-md"
           >
-            <RefreshCw size={12} className={cn(isRefreshing && "animate-spin text-emerald-300")} />
+            <RefreshCw size={12} className={cn(isRefreshing && "animate-spin text-brand-300")} />
             <span>{lang === 'zh' ? '刷新' : lang === 'ar' ? 'تحديث' : 'Refresh Now'}</span>
           </button>
 
@@ -353,11 +355,11 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
             </div>
 
             <div className="text-end">
-              <div className={cn("text-3xl font-mono font-black transition-all duration-300", isFlashing ? "text-emerald-300 scale-105" : "text-white")}>
+              <div className={cn("text-3xl font-mono font-black transition-all duration-300", isFlashing ? "text-brand-300 scale-105" : "text-white")}>
                 {activeStock.price.toLocaleString(undefined, { minimumFractionDigits: activeStock.symbol === 'BRENT' ? 2 : 2 })}
                 <span className="text-xs text-gray-400 ms-1 font-sans">{activeStock.currency}</span>
               </div>
-              <div className={cn("text-xs font-mono font-bold flex items-center justify-end gap-1 mt-0.5", isUp ? "text-emerald-400" : "text-rose-400")}>
+              <div className={cn("text-xs font-mono font-bold flex items-center justify-end gap-1 mt-0.5", isUp ? "text-brand-300" : "text-brand-400")}>
                 {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
                 <span>{isUp ? '+' : ''}{activeStock.change.toFixed(2)}</span>
                 <span>({isUp ? '+' : ''}{activeStock.changePercent.toFixed(2)}%)</span>
@@ -374,7 +376,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                   onClick={() => setTimeframe(tf)}
                   className={cn(
                     "px-2.5 py-1 text-[11px] font-mono font-bold rounded transition-colors",
-                    timeframe === tf ? "bg-[#990000] text-white" : "text-gray-400 hover:text-white hover:bg-white/5"
+                    timeframe === tf ? "bg-brand-800 text-white" : "text-gray-400 hover:text-white hover:bg-white/5"
                   )}
                 >
                   {tf}
@@ -383,7 +385,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
             </div>
 
             <div className="text-[10px] font-mono text-gray-400 flex items-center gap-1">
-              <Activity size={12} className="text-emerald-400 animate-pulse" />
+              <Activity size={12} className="text-brand-300 animate-pulse" />
               <span>LIVE INTERVAL: 5 SEC</span>
             </div>
           </div>
@@ -394,25 +396,25 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               <AreaChart data={chartPoints} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorStockUp" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.4}/>
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.0}/>
+                    <stop offset="5%" stopColor="#ffffff" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#ffffff" stopOpacity={0.0}/>
                   </linearGradient>
                   <linearGradient id="colorStockDown" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.4}/>
-                    <stop offset="95%" stopColor="#f43f5e" stopOpacity={0.0}/>
+                    <stop offset="5%" stopColor="var(--color-brand-500)" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="var(--color-brand-500)" stopOpacity={0.0}/>
                   </linearGradient>
                 </defs>
                 <XAxis 
                   dataKey="time" 
                   stroke="#666666" 
                   tick={{ fontSize: 10, fill: '#888888' }} 
-                  axisLine={{ stroke: '#333333' }}
+                  axisLine={{ stroke: '#3B3A39' }}
                 />
                 <YAxis 
                   domain={['dataMin - 1', 'dataMax + 1']} 
                   stroke="#666666" 
                   tick={{ fontSize: 10, fill: '#888888' }}
-                  axisLine={{ stroke: '#333333' }}
+                  axisLine={{ stroke: '#3B3A39' }}
                 />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#444444', borderRadius: '6px', color: '#ffffff', fontSize: '12px' }}
@@ -421,7 +423,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                 <Area 
                   type="monotone" 
                   dataKey="price" 
-                  stroke={isUp ? "#10b981" : "#f43f5e"} 
+                  stroke={isUp ? "#ffffff" : "var(--color-brand-500)"} 
                   strokeWidth={2}
                   fillOpacity={1} 
                   fill={isUp ? "url(#colorStockUp)" : "url(#colorStockDown)"} 
@@ -469,7 +471,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                 className={cn(
                   "px-2.5 py-1 text-[11px] font-bold rounded uppercase transition-colors",
                   activeTab === tab.id 
-                    ? "bg-[#990000] text-white shadow-sm" 
+                    ? "bg-brand-800 text-white shadow-sm" 
                     : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
                 )}
               >
@@ -496,13 +498,13 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                     className={cn(
                       "p-3 rounded border cursor-pointer transition-all flex items-center justify-between group",
                       isSelected 
-                        ? "bg-[#990000]/20 border-[#990000] text-white" 
+                        ? "bg-brand-800/20 border-brand-800 text-white" 
                         : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 text-gray-300"
                     )}
                   >
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="font-bold font-serif text-sm text-white group-hover:text-[#990000] transition-colors">
+                        <span className="font-bold font-serif text-sm text-white group-hover:text-brand-800 transition-colors">
                           {getItemDisplayName(item)}
                         </span>
                         <span className="text-[10px] font-mono text-gray-400 bg-black/40 px-1.5 py-0.2 rounded">
@@ -518,7 +520,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                       <div className="font-mono font-bold text-sm text-white">
                         {item.price.toLocaleString(undefined, { minimumFractionDigits: item.symbol === 'BRENT' ? 2 : 2 })}
                       </div>
-                      <div className={cn("text-[11px] font-mono font-bold flex items-center justify-end gap-0.5", itemUp ? "text-emerald-400" : "text-rose-400")}>
+                      <div className={cn("text-[11px] font-mono font-bold flex items-center justify-end gap-0.5", itemUp ? "text-brand-300" : "text-brand-400")}>
                         {itemUp ? '▲' : '▼'} {itemUp ? '+' : ''}{item.changePercent.toFixed(2)}%
                       </div>
                     </div>
@@ -529,10 +531,10 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           </div>
 
           {/* Quick Sino-Iraqi Market Note */}
-          <div className="p-3 bg-red-950/30 border border-red-900/40 rounded text-[10px] text-red-200/80 font-mono flex items-start gap-2">
-            <ShieldCheck size={16} className="text-red-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-black/30 border border-white/10 rounded text-[10px] text-white/80 font-mono flex items-start gap-2">
+            <ShieldCheck size={16} className="text-brand-300 shrink-0 mt-0.5" />
             <div>
-              <span className="font-bold text-red-300 uppercase">Sino-Iraqi Sovereign Market Feed:</span> Streaming real-time market data across Shanghai (SSE), Shenzhen (SZSE), Hong Kong (HKEX), and Iraq Stock Exchange (ISX).
+              <span className="font-bold text-white uppercase">Sino-Iraqi Sovereign Market Feed:</span> Streaming real-time market data across Shanghai (SSE), Shenzhen (SZSE), Hong Kong (HKEX), and Iraq Stock Exchange (ISX).
             </div>
           </div>
         </div>

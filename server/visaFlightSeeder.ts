@@ -107,7 +107,7 @@ export async function seedVisaFlights() {
         processingTime: "Instant Digital Download (PDF)",
         feeOrCost: "Free Open Access Academic Publication",
         imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1000",
-        officialLink: "https://chinq.org/publications/aviation-guide-2026.pdf",
+        officialLink: "https://iraq-china-daily.org/publications/aviation-guide-2026.pdf",
         isFeatured: true,
         isTrending: true
       },
@@ -160,6 +160,56 @@ export async function seedVisaFlights() {
         officialLink: "https://airchina.com",
         isFeatured: true,
         isTrending: true
+      },
+      {
+        slug: "basra-shenzhen-energy-tech-corridor",
+        titleEn: "Basra & Southern Iraq to Shenzhen & Hong Kong Energy Technology Corridor",
+        titleAr: "ممر تكنولوجيا الطاقة واللوجستيات بين البصرة وجنوب العراق وشنتشن وهونغ كونغ",
+        titleZh: "巴士拉/伊拉克南部 至 深圳/香港 能源与高新产业直通快线",
+        titleCkb: "ڕێڕەوی تەکنەلۆجیای وزە لەنێوان بەسرە، باشووری عێراق، شێنزین و هۆنگ کۆنگ",
+        serviceType: "CARGO_LOGISTICS",
+        originRegion: "IRAQ",
+        destinationRegion: "CHINA",
+        summaryEn: "Specialized logistical line and fast-track technical visas for petroleum engineers, offshore drilling specialists, and telecom experts operating between Basra Oil Fields and Greater Bay Area tech hubs.",
+        summaryAr: "خط لوجستي متخصص وتأشيرات فنية سريعة لمهندسي النفط وخبراء الحفر البحري والاتصالات العاملين بين حقول نفط البصرة ومراكز التكنولوجيا في منطقة خليج قوانغدونغ.",
+        summaryZh: "为往返于巴士拉油田与粤港澳大湾区科技高地之间的石油工程师、深海与陆地钻探专家及通信工程师提供专项物流保障与加急技术签证通道。",
+        summaryCkb: "هێڵی تایبەتی لۆجیستی و ڤیزای خێرای تەکنیکی بۆ ئەندازیارانی نەوت لەنێوان بەسرە و شێنزین.",
+        detailsEn: "Coordinated with the Iraqi Ministry of Oil and Southern Gas Company. Includes bonded express cargo handling at Basra International Airport (BSR) and direct customs facilitation at Shenzhen Bao'an (SZX).",
+        detailsAr: "بالتنسيق مع وزارة النفط العراقية وشركة غاز الجنوب. يشمل مناولة البضائع السريعة في مطار البصرة الدولي والتسهيلات الجمركية المباشرة في مطار شنتشن باوآن.",
+        detailsZh: "由伊拉克石油部及南方天然气公司联合支持。在巴士拉国际机场（BSR）提供保税急件处理，并在深圳宝安国际机场（SZX）享有海关绿色通道。",
+        detailsCkb: "بە هەماهەنگی لەگەڵ وەزارەتی نەوتی عێراق بۆ گواستنەوەی کەلوپەل لە فرۆکەخانەی بەسرە بۆ شێنزین.",
+        airlineOrAuthority: "Basra Civil Aviation & Shenzhen Aviation Logistics Bureau",
+        processingTime: "48 Hours Cargo & Technical Permit Issuance",
+        feeOrCost: "Bilateral Energy Partner Tariff",
+        imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1000",
+        officialLink: "https://basra-airport.gov.iq",
+        isFeatured: true,
+        isTrending: false
+      },
+      {
+        slug: "sulaymaniyah-chengdu-academic-cultural-exchange",
+        titleEn: "Sulaymaniyah & Erbil to Chengdu & Xi'an Academic & Cultural Fast-Track",
+        titleAr: "المسار الأكاديمي والثقافي السريع بين السليمانية وأربيل وتشنغدو وشيان",
+        titleZh: "苏莱曼尼亚/埃尔比勒 至 成都/西安 高校与学术考察免面签互惠协议",
+        titleCkb: "ڕێڕەوی ئەکادیمی و کەلتووری خێرا لەنێوان سلێمانی، هەولێر، چێنگدو و شیان",
+        serviceType: "CONSULAR_GUIDE",
+        originRegion: "KURDISTAN",
+        destinationRegion: "CHINA",
+        summaryEn: "Expedited cultural, archaeological, and academic exchange visas for university faculties, postgraduate researchers, and heritage preservation delegations.",
+        summaryAr: "تأشيرات تبادل أكاديمي وثقافي وآثاري سريعة لأعضاء الهيئات التدريسية الجامعية وباحثي الدراسات العليا ووفود حماية التراث.",
+        summaryZh: "为高校教师、硕博科研学者及文物古迹保护联合考察队提供免面试、快速下签的学术科研出入境互惠服务。",
+        summaryCkb: "ڤیزای خێرای ئەکادیمی و کەلتووری بۆ مامۆستایانی زانکۆ و توێژەران لەنێوان کوردستان و چین.",
+        detailsEn: "Includes biometric fee waivers for bilateral government scholarships and university exchange programs between Sichuan University, Northwest University Xi'an, University of Sulaimani, and Salahaddin University Erbil.",
+        detailsAr: "يشمل إعفاءات من رسوم البصمات للمنح الدراسية الحكومية وبرامج التبادل الجامعي المشترك.",
+        detailsZh: "涵盖四川大学、西北大学与苏莱曼尼亚大学、萨拉赫丁大学联合培养项目的免指纹费与快速返照服务。",
+        detailsCkb: "تسهیلاتی تەواوی داشکاندنی کرێی بایۆمەتری بۆ خوێندکارانی زانکۆ لەخۆدەگرێت.",
+        airlineOrAuthority: "Kurdistan Higher Education Board & Chinese Cultural Bureau",
+        processingTime: "5 Working Days Academic Verification",
+        feeOrCost: "Exempted / Standard Scholarship Rate",
+        imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000",
+        officialLink: "https://mhe.gov.krd",
+        isFeatured: false,
+        isTrending: true
       }
     ];
 
@@ -172,3 +222,112 @@ export async function seedVisaFlights() {
     console.error("[VisaFlightSeeder] Error seeding Visa & Flight data:", error);
   }
 }
+
+export async function seedVisaFlightInquiries() {
+  try {
+    const count = await prisma.visaFlightInquiry.count();
+    if (count > 0) {
+      console.log(`[VisaFlightSeeder] Found ${count} existing inquiries in database.`);
+      return;
+    }
+
+    console.log("[VisaFlightSeeder] Seeding initial realistic visa/flight inquiries...");
+
+    const inquiries = [
+      {
+        ticketId: "VF-2026-90412",
+        fullName: "Dr. Chen Weidong",
+        email: "weidong.chen@sino-petro.cn",
+        passportNumber: "PE-8829104",
+        nationality: "Chinese",
+        origin: "Beijing Capital (PEK)",
+        destination: "Erbil International (EBL)",
+        travelDate: "2026-09-18",
+        serviceType: "VISA_ASSISTANCE",
+        notes: "Leading a 6-member petroleum geological survey delegation. Requesting expedited bilateral multi-entry commercial visa on arrival clearance.",
+        status: "PENDING",
+        priority: "EXPEDITED",
+        contactPhone: "+86 10 8820 4491",
+        assignedOfficer: "Erbil Consular Secretariat Desk",
+        adminNotes: "Delegation letter verified against Sino-Iraqi Energy Council credentials."
+      },
+      {
+        ticketId: "VF-2026-87321",
+        fullName: "Mohammed Baqir Al-Hakim",
+        email: "m.alhakim@iraqchamber.org",
+        passportNumber: "A-9921844",
+        nationality: "Iraqi",
+        origin: "Baghdad (BGW)",
+        destination: "Guangzhou Baiyun (CAN)",
+        travelDate: "2026-10-12",
+        serviceType: "FLIGHT_ROUTE",
+        notes: "Iraqi Federation of Chambers delegation attending the 140th Canton Fair. Inquiring about group charter seats on Iraqi Airways direct flight.",
+        status: "APPROVED",
+        priority: "DIPLOMATIC",
+        contactPhone: "+964 780 112 3456",
+        assignedOfficer: "Baghdad Aviation Coordination Desk",
+        adminNotes: "Group allocation reserved under booking code CAN-BGW-GR99. Official chamber letter attached."
+      },
+      {
+        ticketId: "VF-2026-76509",
+        fullName: "Zhang Jingyu",
+        email: "j.zhang@powerchina.intl",
+        passportNumber: "G-4401923",
+        nationality: "Chinese",
+        origin: "Shanghai Pudong (PVG)",
+        destination: "Basra International (BSR)",
+        travelDate: "2026-09-28",
+        serviceType: "PASSPORT_DIPLOMATIC",
+        notes: "Infrastructure engineering coordinator visiting the Grand Faw Port project. Requires fast-track transit via Baghdad with technical cargo declaration.",
+        status: "UNDER_REVIEW",
+        priority: "DIPLOMATIC",
+        contactPhone: "+86 21 6890 1234",
+        assignedOfficer: "Basra Port Security Liaison",
+        adminNotes: "Awaiting final clearance from Ministry of Transport port oversight division."
+      },
+      {
+        ticketId: "VF-2026-65481",
+        fullName: "Soran H. Qadir",
+        email: "soran.qadir@kurd-trade.net",
+        passportNumber: "A-5491028",
+        nationality: "Iraqi (Kurdistan Region)",
+        origin: "Sulaymaniyah (ISU)",
+        destination: "Yiwu / Hangzhou (HGH)",
+        travelDate: "2026-11-05",
+        serviceType: "CONSULAR_GUIDE",
+        notes: "Import-export merchant purchasing solar panels and electric utility equipment. Requesting M-visa consular interview waiver through Chamber Green Channel.",
+        status: "CONTACTED",
+        priority: "STANDARD",
+        contactPhone: "+964 770 987 6543",
+        assignedOfficer: "Erbil Consular Secretariat Desk",
+        adminNotes: "Client notified via phone and WhatsApp. Verification code sent for consular portal submission."
+      },
+      {
+        ticketId: "VF-2026-54129",
+        fullName: "Prof. Lin Xiaomin",
+        email: "lin.xm@silkroad-arch.edu.cn",
+        passportNumber: "PE-7721094",
+        nationality: "Chinese",
+        origin: "Chengdu Tianfu (TFU)",
+        destination: "Erbil (EBL)",
+        travelDate: "2026-10-01",
+        serviceType: "TRAVEL_PUBLICATION",
+        notes: "Archaeological research team doing joint excavation and LiDAR scanning at Shanidar Cave. Requesting customs compliance handbook and equipment transit permit.",
+        status: "APPROVED",
+        priority: "STANDARD",
+        contactPhone: "+86 28 8540 9988",
+        assignedOfficer: "Kurdistan Heritage Liaison",
+        adminNotes: "Customs clearance certificate issued. PDF Handbook dispatched to applicant email."
+      }
+    ];
+
+    for (const inq of inquiries) {
+      await prisma.visaFlightInquiry.create({ data: inq });
+    }
+
+    console.log(`[VisaFlightSeeder] Successfully seeded ${inquiries.length} inquiries.`);
+  } catch (error) {
+    console.error("[VisaFlightSeeder] Error seeding Visa & Flight inquiries:", error);
+  }
+}
+

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LiveTimeline } from '../components/LiveTimeline';
+import { Video, Radio } from 'lucide-react';
 
 export function LiveEventPage() {
   const { lang, slug } = useParams();
@@ -28,7 +29,6 @@ export function LiveEventPage() {
         setLoading(false);
       }
     };
-
     fetchEvent();
   }, [slug, lang, navigate]);
 
@@ -47,32 +47,103 @@ export function LiveEventPage() {
     return event.titleEn;
   };
 
+  const getSummary = () => {
+    if (lang === 'ar') return event.summaryAr;
+    if (lang === 'ckb') return event.summaryCkb || event.summaryEn;
+    if (lang === 'zh') return event.summaryZh;
+    return event.summaryEn;
+  }
+
   return (
-    <main className="bg-white min-h-screen w-full">
+    <div className="w-full bg-white dark:bg-neutral-900 border-x border-brand-800/10 dark:border-neutral-800 shadow-xs min-h-[70vh]">
       {/* Live Event Hero */}
-      <div className="bg-[#111111] text-white py-12 px-4 sm:px-6 lg:px-8 border-b-8 border-[#990000] w-full">
-        <div className="max-w-4xl mx-auto">
-          <span className="inline-block bg-[#990000] text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-sm mb-4">
+      <div className="bg-brand-800 text-white p-6 sm:p-8 border-b-4 border-brand-800 w-full">
+        <div className="w-full">
+          <span className="inline-flex items-center gap-2 bg-brand-800 text-white text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-xs mb-3">
+            {event.isActive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>}
             {lang === 'ar' ? 'تغطية مباشرة' : lang === 'ckb' ? 'ڕووماڵی ڕاستەوخۆ' : lang === 'zh' ? '现场直播' : 'Live Coverage'}
           </span>
-          <h1 className="text-4xl sm:text-5xl font-serif font-black leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-serif font-black leading-tight mb-3">
             {getTitle()}
           </h1>
+          <p className="text-sm sm:text-base text-gray-300 max-w-3xl leading-relaxed">
+            {getSummary()}
+          </p>
         </div>
       </div>
 
-      {/* Timeline Container */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-8">
-        <div className="flex-1">
+      <div className="w-full p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+        <div className="flex-1 space-y-6">
+          
+          {/* Main Video/Stream Area */}
+          <div className="relative aspect-video bg-black rounded-xs overflow-hidden border border-gray-200 dark:border-neutral-700 shadow-xs group">
+            {event.videoUrl ? (
+              <iframe 
+                src={event.videoUrl} 
+                title={getTitle()}
+                className="w-full h-full border-0 absolute inset-0 z-10"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                <div className="flex flex-col items-center gap-4 text-gray-500">
+                  <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center">
+                    <Radio size={32} className="text-gray-400 opacity-50" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest">No Live Video Signal Detected</span>
+                </div>
+              </div>
+            )}
+            
+            {event.isActive && event.videoUrl && (
+              <div className="absolute top-4 left-4 z-20 pointer-events-none">
+                <div className="bg-brand-800 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-2 shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                  LIVE
+                </div>
+              </div>
+            )}
+          </div>
+
           <LiveTimeline slug={slug as string} lang={lang as 'en' | 'ar' | 'zh' | 'ckb'} />
         </div>
         
         {/* Optional Sidebar for Context */}
-        <div className="hidden lg:block w-72 border-s border-gray-200 ps-8">
-          <h3 className="font-bold uppercase tracking-wider text-sm mb-4 border-b border-gray-200 pb-2">
+        <div className="hidden lg:block w-72 lg:w-80 border-s border-gray-200 dark:border-neutral-800 ps-6">
+          <div className="bg-gray-50 dark:bg-neutral-800/80 p-5 rounded-xs border border-gray-200 dark:border-neutral-700 mb-6">
+            <h3 className="font-bold uppercase tracking-wider text-xs text-ink-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
+              Broadcast Info
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Region</span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-white dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 text-xs font-bold text-gray-700 dark:text-neutral-200">
+                  {event.region}
+                </span>
+              </div>
+              <div>
+                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Category</span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-white dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 text-xs font-bold text-gray-700 dark:text-neutral-200">
+                  {event.category}
+                </span>
+              </div>
+              <div>
+                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Status</span>
+                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs border text-xs font-bold ${
+                  event.isActive ? 'bg-brand-50 dark:bg-brand-900/30 border-brand-200 dark:border-brand-700 text-brand-700 dark:text-brand-300' : 'bg-gray-100 dark:bg-neutral-700 border-gray-200 dark:border-neutral-600 text-gray-700 dark:text-neutral-300'
+                }`}>
+                  {event.isActive && <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>}
+                  {event.isActive ? 'LIVE' : 'ARCHIVED'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="font-bold uppercase tracking-wider text-xs text-ink-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
             {lang === 'ar' ? 'سياق' : lang === 'ckb' ? 'پاشخان' : lang === 'zh' ? '背景' : 'Context'}
           </h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-xs text-gray-600 dark:text-neutral-400 leading-relaxed bg-neutral-50 dark:bg-neutral-800/60 p-4 rounded-xs border border-neutral-200 dark:border-neutral-700">
             {lang === 'ar' 
               ? 'هذه قصة قيد التطوير. تقوم فرق التحرير لدينا في بكين والسليمانية بتحديث هذه الصفحة في الوقت الفعلي. تعكس الطوابع الزمنية التوقيت المحلي العراقي (UTC+3).'
               : lang === 'ckb'
@@ -83,6 +154,6 @@ export function LiveEventPage() {
           </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

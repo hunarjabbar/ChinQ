@@ -27,7 +27,7 @@ export function AdminArticles() {
           </div>
           <Link
             to={`/${lang}/admin/articles/new`}
-            className="inline-flex items-center gap-2 bg-[#990000] text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-[#7a0000] transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 bg-brand-800 text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-brand-800 transition-colors shadow-sm"
           >
             <Plus size={16} /> Create Article
           </Link>
@@ -40,11 +40,11 @@ export function AdminArticles() {
             <input
               type="text"
               placeholder="Search headlines, authors, or tags..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-[#990000] focus:border-transparent outline-none"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-brand-800 focus:border-transparent outline-none"
             />
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
-            <select className="border border-gray-300 rounded-md text-sm py-2 px-3 focus:ring-2 focus:ring-[#990000] outline-none bg-white">
+            <select className="border border-gray-300 rounded-md text-sm py-2 px-3 focus:ring-2 focus:ring-brand-800 outline-none bg-white">
               <option>All Statuses</option>
               <option>Published</option>
               <option>Drafts</option>
@@ -53,63 +53,74 @@ export function AdminArticles() {
         </div>
 
         {/* Data Table */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden text-start">
+        <div className="bg-white border border-neutral-200 rounded-xl shadow-sm overflow-hidden text-start">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 text-gray-500 font-medium border-b border-gray-200">
+            <table className="w-full text-sm text-left border-collapse">
+              <thead className="bg-neutral-50/50 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 border-b border-neutral-200">
                 <tr>
-                  <th className="px-6 py-4">Headline (EN)</th>
-                  <th className="px-6 py-4">Category</th>
-                  <th className="px-6 py-4">Author</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4">Last Updated</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
+                  <th className="px-8 py-5">Headline & Dispatch</th>
+                  <th className="px-8 py-5">Bilateral Category</th>
+                  <th className="px-8 py-5">Sovereign Author</th>
+                  <th className="px-8 py-5">Status</th>
+                  <th className="px-8 py-5">Last Synchronized</th>
+                  <th className="px-8 py-5 text-right">Operational Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-neutral-100">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
-                      Loading...
+                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-serif">
+                      Synchronizing article ledger...
                     </td>
                   </tr>
                 ) : articles.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
-                      No articles found.
+                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-serif">
+                      No active dispatches found in registry.
                     </td>
                   </tr>
                 ) : (
                   articles.map((article) => {
                     const title = article.translations?.[0]?.title || 'Untitled Draft';
                     return (
-                      <tr key={article.id} className="hover:bg-gray-50 transition-colors group">
-                        <td className="px-6 py-4 font-medium text-gray-900 max-w-xs truncate">
-                          {title}
+                      <tr key={article.id} className="hover:bg-neutral-50/50 transition-colors group">
+                        <td className="px-8 py-5">
+                          <div className="flex flex-col">
+                            <span className="font-bold text-ink-900 line-clamp-1">{title}</span>
+                            <span className="text-[10px] text-neutral-400 font-mono mt-0.5">UID: {article.id.substring(0, 8)}</span>
+                          </div>
                         </td>
-                        <td className="px-6 py-4 text-gray-500">
-                          <span className="bg-gray-100 px-2.5 py-1 rounded-md text-xs">{article.category?.name || 'Uncategorized'}</span>
+                        <td className="px-8 py-5">
+                          <span className="inline-flex items-center px-2.5 py-1 bg-neutral-100 text-neutral-600 rounded text-[9px] font-black uppercase tracking-widest">{article.category?.name || 'Uncategorized'}</span>
                         </td>
-                        <td className="px-6 py-4 text-gray-500">{article.author?.name || 'Unknown'}</td>
-                        <td className="px-6 py-4">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        <td className="px-8 py-5 text-neutral-600 font-medium">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-black text-neutral-400">
+                              {article.author?.name?.[0] || '?'}
+                            </div>
+                            {article.author?.name || 'Unknown'}
+                          </div>
+                        </td>
+                        <td className="px-8 py-5">
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
                             article.status === 'PUBLISHED' 
-                              ? 'bg-green-100 text-green-800' 
-                              : 'bg-yellow-100 text-yellow-800'
+                              ? 'bg-green-50 text-green-700 border border-green-100' 
+                              : 'bg-amber-50 text-amber-700 border border-amber-100'
                           }`}>
+                            <div className={`w-1 h-1 rounded-full ${article.status === 'PUBLISHED' ? 'bg-green-600' : 'bg-amber-600'}`} />
                             {article.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-gray-500">
+                        <td className="px-8 py-5 text-neutral-500 font-mono text-[10px] font-bold">
                           {new Date(article.updatedAt).toLocaleDateString()}
                         </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Link to={`/${lang}/admin/articles/${article.id}`} className="text-gray-400 hover:text-blue-600">
-                              <Edit size={16} />
+                        <td className="px-8 py-5 text-right">
+                          <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                            <Link to={`/${lang}/admin/articles/${article.id}`} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
+                              <Edit size={14} />
                             </Link>
-                            <button className="text-gray-400 hover:text-gray-900">
-                              <MoreVertical size={16} />
+                            <button className="p-2 text-neutral-400 hover:text-ink-900 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
+                              <MoreVertical size={14} />
                             </button>
                           </div>
                         </td>

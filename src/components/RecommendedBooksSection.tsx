@@ -56,14 +56,14 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
   };
 
   return (
-    <section className="w-full max-w-[1024px] mx-auto bg-[#111111] text-white p-6 md:p-8 my-10 shadow-xl rounded-xs relative overflow-hidden border-b-4 border-[#990000]">
+    <section className="w-full bg-brand-800 text-white p-4 sm:p-6 md:p-8 shadow-md rounded-xs relative overflow-hidden border-b-4 border-brand-800">
       {/* Background Accent */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-[#990000]/10 blur-3xl pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-brand-800/10 blur-3xl pointer-events-none" />
 
       {/* Header bar */}
       <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/20 pb-4 mb-6 gap-3">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
             <Award className="w-3.5 h-3.5" />
             <span>
               {currentLang === 'ar' ? 'توصيات مركز الأبحاث' :
@@ -74,7 +74,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
           </div>
           <h2 className="text-2xl md:text-3xl font-serif font-black tracking-tight text-white">
             {currentLang === 'ar' ? 'الكتب الموصى بها دراسياً وعلمياً' :
-             currentLang === 'zh' ? 'ChinQ 智库核心推荐主权与地缘著作' :
+             currentLang === 'zh' ? 'Iraqi-Chinese Agency 智库核心推荐主权与地缘著作' :
              currentLang === 'ckb' ? 'کتێبە پێشنیارکراوە زانستییەکان' :
              'Recommended Academic Publications'}
           </h2>
@@ -82,7 +82,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
 
         <Link
           to={`/${currentLang}/books`}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-red-400 hover:text-white transition-colors shrink-0 uppercase tracking-wider"
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-300 hover:text-white transition-colors shrink-0 uppercase tracking-wider"
         >
           <span>
             {currentLang === 'ar' ? 'فهرس الكتب الكامل ←' :
@@ -97,11 +97,11 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-64 bg-neutral-800 rounded-xs" />
+            <div key={i} className="h-64 bg-white/10 rounded-xs" />
           ))}
         </div>
       ) : recommendedBooks.length === 0 ? (
-        <div className="p-8 text-center bg-neutral-900 border border-neutral-800 rounded-xs">
+        <div className="p-8 text-center bg-brand-800 border border-white/10 rounded-xs">
           <p className="text-xs font-mono text-gray-400">No recommended books configured yet in administration portal.</p>
         </div>
       ) : (
@@ -110,32 +110,28 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
             <div
               key={book.id}
               onClick={() => setActiveBook(book)}
-              className="group bg-neutral-900/90 border border-neutral-800 hover:border-[#990000] p-4 rounded-xs flex flex-col justify-between transition-all cursor-pointer shadow-md hover:shadow-xl"
+              className="group bg-brand-800/90 border border-white/10 hover:border-brand-800 p-4 rounded-xs flex flex-col justify-between transition-all cursor-pointer shadow-md hover:shadow-xl"
             >
               <div className="space-y-3">
                 {/* Image + Rating */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-950 rounded-xs border border-neutral-800">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-black/50 rounded-xs border border-white/10">
                   <img
                     src={book.coverUrl}
                     alt={getBookTitle(book)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute top-2 left-2 bg-[#990000] text-white text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-xs">
+                  <div className="absolute top-2 left-2 bg-brand-800 text-white text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-xs">
                     Recommended
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black/90 text-amber-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded-xs flex items-center gap-1 border border-amber-300/20">
-                    <Star className="w-3 h-3 fill-amber-300" />
-                    <span>{book.rating}</span>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="text-[10px] font-mono font-bold text-red-400 uppercase tracking-wider mb-1">
+                  <div className="text-[10px] font-mono font-bold text-brand-300 uppercase tracking-wider mb-1">
                     {book.category} • {book.year}
                   </div>
-                  <h3 className="text-base font-serif font-bold text-white group-hover:text-red-400 line-clamp-2 leading-snug transition-colors">
+                  <h3 className="text-base font-serif font-bold text-white group-hover:text-brand-300 line-clamp-2 leading-snug transition-colors">
                     {getBookTitle(book)}
                   </h3>
                   <p className="text-xs font-sans text-gray-400 line-clamp-1 mt-1">
@@ -148,9 +144,9 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
               </div>
 
               {/* Card Footer */}
-              <div className="pt-3 mt-3 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-gray-400">
+              <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-gray-400">
                 <span>{book.pages} Pages</span>
-                <span className="text-red-400 font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
+                <span className="text-brand-300 font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
                   <span>Read Monograph</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </span>
@@ -168,7 +164,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white border-2 border-[#111111] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-xs shadow-2xl space-y-6 relative"
+              className="bg-white border-2 border-brand-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-xs shadow-2xl space-y-6 relative"
             >
               <button
                 onClick={() => setActiveBook(null)}
@@ -179,7 +175,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="space-y-3">
-                  <div className="aspect-[3/4] w-full overflow-hidden border-2 border-[#111111] rounded-xs shadow-md">
+                  <div className="aspect-[3/4] w-full overflow-hidden border-2 border-brand-800 rounded-xs shadow-md">
                     <img
                       src={activeBook.coverUrl}
                       alt={getBookTitle(activeBook)}
@@ -205,23 +201,19 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                 <div className="sm:col-span-2 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-black uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs">
                         {activeBook.region.replace('_', ' ')}
                       </span>
                       <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-[10px] font-mono font-bold uppercase rounded-xs">
                         {activeBook.category}
                       </span>
-                      <span className="text-amber-600 text-xs font-bold flex items-center gap-1 ml-auto">
-                        <Star className="w-3.5 h-3.5 fill-amber-500" />
-                        {activeBook.rating}
-                      </span>
                     </div>
 
-                    <h2 className="text-2xl font-serif font-black text-[#111111] leading-tight">
+                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
                       {getBookTitle(activeBook)}
                     </h2>
                     
-                    <p className="text-sm font-bold text-[#990000] mt-1">
+                    <p className="text-sm font-bold text-brand-800 mt-1">
                       {getBookAuthor(activeBook)}
                     </p>
                   </div>
@@ -240,8 +232,8 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                       onClick={() => handleDownload(activeBook.id)}
                       className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer ${
                         downloaded[activeBook.id]
-                          ? 'bg-emerald-700 text-white'
-                          : 'bg-[#990000] hover:bg-red-800 text-white'
+                          ? 'bg-green-700 text-white'
+                          : 'bg-brand-800 hover:bg-brand-700 text-white'
                       }`}
                     >
                       {downloaded[activeBook.id] ? (

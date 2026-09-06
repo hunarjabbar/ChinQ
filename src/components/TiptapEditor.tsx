@@ -124,7 +124,7 @@ export default function TiptapEditor({ value, onChange, dir }: TiptapEditorProps
             onClick={() => setShowHtml(!showHtml)}
             className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded transition-all ${
               showHtml 
-                ? 'bg-red-50 text-[#990000] border border-red-200' 
+                ? 'bg-brand-50 text-brand-800 border border-brand-200' 
                 : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100 border border-transparent'
             }`}
           >

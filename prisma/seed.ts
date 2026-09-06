@@ -17,6 +17,16 @@ async function main() {
   await prisma.marketData.deleteMany();
   await prisma.tag.deleteMany();
   await prisma.category.deleteMany();
+  await prisma.study.deleteMany();
+  await prisma.partnershipApplication.deleteMany();
+  await prisma.telexDispatch.deleteMany();
+  await prisma.book.deleteMany();
+  await prisma.tourismSpot.deleteMany();
+  await prisma.womenFeature.deleteMany();
+  await prisma.visaFlight.deleteMany();
+  await prisma.podcast.deleteMany();
+  await prisma.systemAnnouncement.deleteMany();
+  await prisma.newsletterSubscriber.deleteMany();
   await prisma.user.deleteMany();
 
   // 2. Seed Users
@@ -26,7 +36,7 @@ async function main() {
 
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@chinq.post',
+      email: 'admin@iraqchinaagency.com',
       password: adminHash,
       name: 'System Admin',
       role: 'ADMIN',
@@ -35,7 +45,7 @@ async function main() {
 
   const adminMedia = await prisma.user.create({
     data: {
-      email: 'admin@chinq.media',
+      email: 'admin@iraqchinaagency.media',
       password: adminHash,
       name: 'Test Admin',
       role: 'ADMIN',
@@ -44,7 +54,7 @@ async function main() {
 
   const editorMedia = await prisma.user.create({
     data: {
-      email: 'editor@chinq.media',
+      email: 'editor@iraqchinaagency.media',
       password: editorHash,
       name: 'Test Editor',
       role: 'EDITOR',
@@ -53,7 +63,7 @@ async function main() {
 
   const author1 = await prisma.user.create({
     data: {
-      email: 'j.aliraqi@chinq.post',
+      email: 'j.aliraqi@iraqchinaagency.com',
       name: 'Jasim Al-Iraqi',
       role: 'AUTHOR',
     },
@@ -61,7 +71,7 @@ async function main() {
 
   const author2 = await prisma.user.create({
     data: {
-      email: 'w.chen@chinq.post',
+      email: 'w.chen@iraqchinaagency.com',
       name: 'Wei Chen',
       role: 'AUTHOR',
     },

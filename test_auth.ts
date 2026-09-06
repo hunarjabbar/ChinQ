@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function test() {
-  const admin = await prisma.user.findUnique({ where: { email: 'admin@chinq.media' }});
+  const admin = await prisma.user.findUnique({ where: { email: 'admin@iraqchinadaily.media' }});
   if (!admin) {
     console.log("Admin not found!");
   } else {

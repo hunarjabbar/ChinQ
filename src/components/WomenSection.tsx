@@ -75,19 +75,19 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
   };
 
   return (
-    <section className="bg-white border-2 border-[#111111] p-6 sm:p-8 rounded-xs shadow-md space-y-6 my-10 relative overflow-hidden">
+    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-brand-800 p-4 sm:p-6 md:p-8 rounded-xs shadow-xs space-y-6 relative overflow-hidden">
       {/* Visual Header Badge */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-[#111111] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-brand-800 pb-6">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="bg-[#990000] text-white font-mono text-[10px] font-bold px-2 py-0.5 tracking-wider uppercase flex items-center gap-1">
+            <span className="bg-brand-800 text-white font-mono text-xs font-bold px-2.5 py-1 tracking-wider uppercase flex items-center gap-1 rounded-sm">
               <Users className="w-3.5 h-3.5" />
               {currentLang === 'ar' ? 'منصة المرأة والتمكين' : currentLang === 'zh' ? '双边女性领导力与政策专区' : currentLang === 'ckb' ? 'دەروازەی مافی ئافرەتان' : 'Women Leadership & Policy Forum'}
             </span>
-            <span className="text-gray-500 font-mono text-[11px]">Beijing • Baghdad • Erbil</span>
+            <span className="text-neutral-500 dark:text-neutral-400 font-mono text-xs">Beijing • Baghdad • Erbil</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#111111] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-ink-900 dark:text-white tracking-tight">
             {currentLang === 'ar' 
               ? 'مساحة المرأة: الشخصيات المرموقة، السياسات، والإنجازات' 
               : currentLang === 'zh' 
@@ -97,9 +97,9 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
               : 'Women Forum: Prominent Figures, Rights, Policy & Achievements'}
           </h2>
 
-          <p className="text-gray-600 text-sm max-w-3xl leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base max-w-3xl leading-relaxed">
             {currentLang === 'ar'
-              ? 'مساحة سيادية مخصصة لإبراز القامات النسائية في الصين والعراق وإقليم كردستان، وتعزيز الأطر القانونية لحقوق المرأة، ونشر الأبحاث الأكاديمية والسياسات الثنائية.'
+              ? 'مساحة مستقلة مخصصة لإبراز القامات النسائية في الصين والعراق وإقليم كردستان، وتعزيز الأطر القانونية لحقوق المرأة، ونشر الأبحاث الأكاديمية والسياسات الثنائية.'
               : currentLang === 'zh'
               ? '专为中伊及库尔德斯坦女性设立的高规格展示与交流平台，涵盖杰出女性代表、法治权益保障政策、科技创新成果与中伊交流学术著作。'
               : currentLang === 'ckb'
@@ -110,18 +110,18 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
 
         <Link
           to={`/${currentLang}/women`}
-          className="self-start md:self-auto inline-flex items-center gap-2 bg-[#990000] text-white hover:bg-[#7a0000] px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-xs shrink-0"
+          className="self-start md:self-auto inline-flex items-center gap-2 bg-brand-800 text-white hover:bg-brand-900 px-5 py-2.5 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-sm shrink-0 rounded-lg"
         >
           <span>{currentLang === 'ar' ? 'استكشف البوابة كاملة' : currentLang === 'zh' ? '进入完整女性门户' : currentLang === 'ckb' ? 'سەردانی تەواوی بەشەکە بکە' : 'Explore Women Portal'}</span>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-4 h-4 rtl:rotate-180" />
         </Link>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#F4F4F0] p-3 border border-[#111111]/20 rounded-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#F4F4F0] dark:bg-neutral-800/60 p-3 border border-brand-800/20 dark:border-neutral-700 rounded-xs">
         {/* Region Filters */}
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-[11px] font-mono font-bold uppercase text-gray-500 mr-1 flex items-center gap-1">
+          <span className="text-[11px] font-mono font-bold uppercase text-gray-500 dark:text-neutral-400 mr-1 flex items-center gap-1">
             <Globe2 className="w-3.5 h-3.5" />
             {currentLang === 'ar' ? 'الإقليم:' : currentLang === 'zh' ? '地区:' : currentLang === 'ckb' ? 'هەرێم:' : 'Region:'}
           </span>
@@ -135,10 +135,10 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
             <button
               key={r.id}
               onClick={() => setSelectedRegion(r.id)}
-              className={`px-2.5 py-1 text-xs font-mono transition-colors ${
+              className={`px-2.5 py-1 text-xs font-mono transition-colors rounded-xs cursor-pointer ${
                 selectedRegion === r.id
-                  ? 'bg-[#111111] text-white font-bold'
-                  : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-300'
+                  ? 'bg-brand-800 text-white font-bold'
+                  : 'bg-white dark:bg-neutral-700 text-gray-700 dark:text-neutral-200 hover:bg-gray-200 dark:hover:bg-neutral-600 border border-gray-300 dark:border-neutral-600'
               }`}
             >
               {currentLang === 'ar' ? r.labelAr : currentLang === 'zh' ? r.labelZh : currentLang === 'ckb' ? r.labelCkb : r.labelEn}
@@ -160,7 +160,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
               onClick={() => setSelectedCategory(c.id)}
               className={`px-2.5 py-1 text-xs font-mono transition-colors ${
                 selectedCategory === c.id
-                  ? 'bg-[#990000] text-white font-bold'
+                  ? 'bg-brand-800 text-white font-bold'
                   : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-300'
               }`}
             >
@@ -178,13 +178,13 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
           ))}
         </div>
       ) : filteredProfiles.length === 0 ? (
-        <div className="text-center py-12 bg-[#F4F4F0] border border-dashed border-gray-400 p-6 space-y-2">
-          <p className="text-gray-600 font-serif text-lg">
+        <div className="text-center py-20 bg-[#F4F4F0] dark:bg-neutral-800 border border-dashed border-gray-400 dark:border-neutral-600 p-6 space-y-2">
+          <p className="text-gray-600 dark:text-neutral-300 font-serif text-lg">
             {currentLang === 'ar' ? 'لا توجد سجلات مطابقة حالياً' : currentLang === 'zh' ? '暂无匹配的女性专题记录' : currentLang === 'ckb' ? 'هیچ تۆمارێک نەدۆزرایەوە' : 'No matching records found'}
           </p>
           <button
             onClick={() => { setSelectedRegion('ALL'); setSelectedCategory('ALL'); }}
-            className="text-[#990000] font-mono text-xs underline font-bold"
+            className="text-brand-800 dark:text-brand-400 font-mono text-xs underline font-bold"
           >
             {currentLang === 'ar' ? 'إعادة ضبط التصفية' : currentLang === 'zh' ? '重置筛选条件' : currentLang === 'ckb' ? 'پاكکردنەوەی فلتەر' : 'Reset Filters'}
           </button>
@@ -195,7 +195,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
             <div
               key={item.id}
               onClick={() => setActiveProfile(item)}
-              className="group bg-white border border-[#111111] hover:border-[#990000] hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer relative overflow-hidden"
+              className="group bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between cursor-pointer relative overflow-hidden rounded-xs"
             >
               <div>
                 {/* Image & Badges Container */}
@@ -209,17 +209,17 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
 
                   {/* Top Badges */}
                   <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                    <span className="bg-[#111111] text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase tracking-wider border border-white/20">
+                    <span className="bg-brand-800 text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase tracking-wider border border-white/20">
                       {item.region}
                     </span>
-                    <span className="bg-[#990000] text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase tracking-wider">
+                    <span className="bg-brand-800 text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase tracking-wider">
                       {item.category.replace('_', ' ')}
                     </span>
                   </div>
 
                   {/* Name overlay */}
                   <div className="absolute bottom-2 left-3 right-3 text-white">
-                    <h3 className="font-serif text-lg font-bold leading-tight group-hover:text-red-300 transition-colors">
+                    <h3 className="font-serif text-lg font-bold leading-tight group-hover:text-brand-300 transition-colors">
                       {getName(item)}
                     </h3>
                   </div>
@@ -227,21 +227,21 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
 
                 {/* Content info */}
                 <div className="p-4 space-y-3">
-                  <p className="text-xs font-mono font-bold text-[#990000] line-clamp-1">
+                  <p className="text-xs font-mono font-bold text-brand-800 dark:text-brand-400 line-clamp-1">
                     {getTitle(item)}
                   </p>
-                  <p className="text-gray-600 text-xs line-clamp-3 leading-relaxed">
+                  <p className="text-gray-600 dark:text-neutral-300 text-xs line-clamp-3 leading-relaxed">
                     {getSummary(item)}
                   </p>
                 </div>
               </div>
 
               {/* Card Footer */}
-              <div className="p-4 pt-0 border-t border-gray-100 mt-2 flex items-center justify-between text-xs font-mono text-gray-500">
+              <div className="p-4 pt-0 border-t border-gray-100 dark:border-neutral-700 mt-2 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-neutral-400">
                 <span className="truncate max-w-[180px]">{item.organization}</span>
-                <span className="text-[#990000] font-bold group-hover:underline flex items-center gap-1 shrink-0">
+                <span className="text-brand-800 dark:text-brand-400 font-bold group-hover:underline flex items-center gap-1 shrink-0">
                   {currentLang === 'ar' ? 'عرض السيرة/التفاصيل' : currentLang === 'zh' ? '查看详情' : currentLang === 'ckb' ? 'بینینی زانیاری' : 'View Details'}
-                  <ChevronRight className="w-3.5 h-3.5" />
+                  <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </span>
               </div>
             </div>
@@ -257,11 +257,11 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border-2 border-[#111111] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 rounded-xs shadow-2xl relative"
+              className="bg-white border-2 border-brand-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 rounded-xs shadow-2xl relative"
             >
               <button
                 onClick={() => setActiveProfile(null)}
-                className="absolute top-4 right-4 bg-gray-100 hover:bg-[#990000] hover:text-white p-1.5 transition-colors"
+                className="absolute top-4 right-4 bg-gray-100 hover:bg-brand-800 hover:text-white p-1.5 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -271,23 +271,23 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
                 <img
                   src={activeProfile.imageUrl}
                   alt={getName(activeProfile)}
-                  className="w-full sm:w-36 h-36 object-cover border-2 border-[#111111] shrink-0"
+                  className="w-full sm:w-36 h-36 object-cover border-2 border-brand-800 shrink-0"
                 />
                 <div className="space-y-2 flex-1">
                   <div className="flex flex-wrap gap-1.5">
-                    <span className="bg-[#111111] text-white text-[10px] font-mono font-bold px-2 py-0.5">
+                    <span className="bg-brand-800 text-white text-[10px] font-mono font-bold px-2 py-0.5">
                       {activeProfile.region}
                     </span>
-                    <span className="bg-[#990000] text-white text-[10px] font-mono font-bold px-2 py-0.5">
+                    <span className="bg-brand-800 text-white text-[10px] font-mono font-bold px-2 py-0.5">
                       {activeProfile.category.replace('_', ' ')}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-serif font-bold text-[#111111]">
+                  <h3 className="text-2xl font-serif font-bold text-ink-900">
                     {getName(activeProfile)}
                   </h3>
 
-                  <p className="text-sm font-mono font-bold text-[#990000]">
+                  <p className="text-sm font-mono font-bold text-brand-800">
                     {getTitle(activeProfile)}
                   </p>
 
@@ -309,14 +309,14 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
               {activeProfile.publicationUrl && (
                 <div className="bg-[#F4F4F0] p-3 border border-gray-300 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-mono">
-                    <BookOpen className="w-4 h-4 text-[#990000]" />
+                    <BookOpen className="w-4 h-4 text-brand-800" />
                     <span className="font-bold">Official Document / Publication Link</span>
                   </div>
                   <a
                     href={activeProfile.publicationUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 bg-[#111111] text-white hover:bg-[#990000] px-3 py-1 font-mono text-xs font-bold transition-colors"
+                    className="inline-flex items-center gap-1 bg-brand-800 text-white hover:bg-brand-800 px-3 py-1 font-mono text-xs font-bold transition-colors"
                   >
                     <span>Open Link</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -326,8 +326,8 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
 
               {/* Form to submit inquiry / join delegation */}
               <div className="space-y-3 pt-2">
-                <h4 className="font-serif text-base font-bold text-[#111111] flex items-center gap-2">
-                  <HeartHandshake className="w-4 h-4 text-[#990000]" />
+                <h4 className="font-serif text-base font-bold text-ink-900 flex items-center gap-2">
+                  <HeartHandshake className="w-4 h-4 text-brand-800" />
                   {currentLang === 'ar' ? 'انضم إلى شبكة قيادات المرأة الصينية العراقية' : currentLang === 'zh' ? '申请加入中伊女性领导力与政策合作网络' : currentLang === 'ckb' ? 'پەیوەندی بکە بە تۆڕی ئافرەتانی سەرکردە' : 'Join Sino-Iraqi Women Leadership Network'}
                 </h4>
 
@@ -345,7 +345,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
                         placeholder="Full Name"
                         value={joinForm.name}
                         onChange={e => setJoinForm({ ...joinForm, name: e.target.value })}
-                        className="bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-[#990000]"
+                        className="bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
                       />
                       <input
                         type="email"
@@ -353,7 +353,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
                         placeholder="Official Email"
                         value={joinForm.email}
                         onChange={e => setJoinForm({ ...joinForm, email: e.target.value })}
-                        className="bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-[#990000]"
+                        className="bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
                       />
                     </div>
                     <input
@@ -361,18 +361,18 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
                       placeholder="Organization / University / Ministry"
                       value={joinForm.organization}
                       onChange={e => setJoinForm({ ...joinForm, organization: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-[#990000]"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
                     />
                     <textarea
                       rows={2}
                       placeholder="Proposal or Collaboration Note..."
                       value={joinForm.message}
                       onChange={e => setJoinForm({ ...joinForm, message: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-[#990000]"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
                     />
                     <button
                       type="submit"
-                      className="w-full bg-[#990000] hover:bg-[#7a0000] text-white py-2 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                      className="w-full bg-brand-800 hover:bg-brand-700 text-white py-2 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>Transmit Application to Secretariat</span>

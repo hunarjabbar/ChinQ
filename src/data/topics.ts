@@ -152,7 +152,7 @@ export const ADDITIONAL_TOPICS: Topic[] = [
     nameZh: '双边条约与协定',
     nameCkb: 'ڕێککەوتنە دوولایەنەکان',
     descEn: 'Diplomatic compacts and sovereign pacts',
-    descAr: 'الاتفاقيات الدبلوماسية والمواثيق السيادية',
+    descAr: 'الاتفاقيات الدبلوماسية والمواثيق المستقلة',
     descZh: '外交条约与主权协定',
     descCkb: 'ڕێککەوتننامە دیپلۆماسییەکان'
   },
@@ -308,7 +308,7 @@ export const ADDITIONAL_TOPICS: Topic[] = [
     nameZh: '外商直接投资 (FDI)',
     nameCkb: 'وەبەرهێنانی ڕاستەوخۆی دەرەکی',
     descEn: 'Capital flows and sovereign guarantees',
-    descAr: 'التدفقات الرأسمالية والضمانات السيادية',
+    descAr: 'التدفقات الرأسمالية والضمانات المستقلة',
     descZh: '资本流动与主权担保政策',
     descCkb: 'هاتنی سەرمایە و گرەنتییە دەوڵەتییەکان'
   },
@@ -340,7 +340,7 @@ export const ADDITIONAL_TOPICS: Topic[] = [
     slug: 'swf',
     name: 'Sovereign Wealth',
     nameEn: 'Sovereign Wealth',
-    nameAr: 'صناديق الثروة السيادية',
+    nameAr: 'صناديق الثروة المستقلة',
     nameZh: '主权财富基金动态',
     nameCkb: 'سندوقی سامانی نیشتمانی',
     descEn: 'State investment funds and pipelines',

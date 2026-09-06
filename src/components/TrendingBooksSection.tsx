@@ -56,11 +56,11 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
   };
 
   return (
-    <section className="w-full max-w-[1024px] mx-auto bg-white border-t-4 border-[#990000] p-6 md:p-8 my-10 shadow-sm relative rounded-xs">
+    <section className="w-full bg-white dark:bg-neutral-900 border-t-4 border-brand-800 p-4 sm:p-6 md:p-8 shadow-xs relative rounded-xs">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-[#111111] pb-4 mb-6 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-brand-800 pb-4 mb-6 gap-3">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
             <Sparkles className="w-3 h-3" />
             <span>
               {currentLang === 'ar' ? 'الكتب الأكثر تداولاً' :
@@ -69,7 +69,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                'TRENDING BOOKS'}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-serif font-black text-[#111111] tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-serif font-black text-ink-900 dark:text-neutral-100 tracking-tight">
             {currentLang === 'ar' ? 'أبرز 4 كتب متداولة حول الصين والعراق وكردستان' :
              currentLang === 'zh' ? '四部精选热门著作：中国、伊拉克与中东局势' :
              currentLang === 'ckb' ? '٤ کتێبی زۆرترین خوێنراو دەربارەی چین و عێراق و کوردستان' :
@@ -79,7 +79,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
 
         <Link
           to={`/${currentLang}/books`}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#990000] hover:text-black transition-colors shrink-0 uppercase tracking-wider"
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-800 dark:text-brand-400 hover:text-black dark:hover:text-white transition-colors shrink-0 uppercase tracking-wider"
         >
           <span>
             {currentLang === 'ar' ? 'تصفح الـ 50 كتاباً بالكامل ←' :
@@ -94,12 +94,12 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 animate-pulse">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-80 bg-neutral-200 rounded-xs" />
+            <div key={i} className="h-80 bg-neutral-200 dark:bg-neutral-800 rounded-xs" />
           ))}
         </div>
       ) : trendingFour.length === 0 ? (
-        <div className="p-8 text-center bg-neutral-50 border border-dashed border-gray-300 rounded-xs">
-          <p className="text-xs font-mono text-gray-500">No trending books selected yet in admin portal.</p>
+        <div className="p-8 text-center bg-neutral-50 dark:bg-neutral-800 border border-dashed border-gray-300 dark:border-neutral-700 rounded-xs">
+          <p className="text-xs font-mono text-gray-500 dark:text-neutral-400">No trending books selected yet in admin portal.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -109,47 +109,43 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
               onClick={() => setActiveBook(book)}
-              className="group bg-white border border-gray-200 hover:border-[#990000] hover:shadow-lg transition-all p-3.5 rounded-xs flex flex-col justify-between cursor-pointer relative"
+              className="group bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-500 hover:shadow-md transition-all p-3.5 rounded-xs flex flex-col justify-between cursor-pointer relative"
             >
               {/* Badge for Order */}
-              <div className="absolute top-2 left-2 z-10 w-6 h-6 bg-[#990000] text-white font-mono font-black text-xs flex items-center justify-center rounded-xs shadow-xs">
+              <div className="absolute top-2 left-2 z-10 w-6 h-6 bg-brand-800 text-white font-mono font-black text-xs flex items-center justify-center rounded-xs shadow-xs">
                 #{index + 1}
               </div>
 
               <div className="space-y-3">
                 {/* Book Cover Image */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 rounded-xs border border-gray-200 shadow-xs">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-700 rounded-xs border border-gray-200 dark:border-neutral-700 shadow-xs">
                   <img
                     src={book.coverUrl}
                     alt={getBookTitle(book)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute bottom-2 right-2 bg-black/80 text-amber-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded-xs flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-amber-300" />
-                    <span>{book.rating}</span>
-                  </div>
                 </div>
 
                 {/* Metadata */}
                 <div>
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-gray-500 mb-1">
-                    <span className="text-[#990000] uppercase">{book.region.replace('_', ' ')}</span>
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-gray-500 dark:text-neutral-400 mb-1">
+                    <span className="text-brand-800 dark:text-brand-400 uppercase">{book.region.replace('_', ' ')}</span>
                     <span>{book.year}</span>
                   </div>
-                  <h3 className="text-sm font-serif font-bold text-[#111111] group-hover:text-[#990000] line-clamp-2 leading-snug transition-colors">
+                  <h3 className="text-sm font-serif font-bold text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 line-clamp-2 leading-snug transition-colors">
                     {getBookTitle(book)}
                   </h3>
-                  <p className="text-xs font-sans text-gray-600 line-clamp-1 mt-1 font-medium">
+                  <p className="text-xs font-sans text-gray-600 dark:text-neutral-400 line-clamp-1 mt-1 font-medium">
                     {getBookAuthor(book)}
                   </p>
                 </div>
               </div>
 
               {/* Action Link Footer */}
-              <div className="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between text-[11px] font-mono">
-                <span className="text-gray-500 font-bold">{book.pages} Pages</span>
-                <span className="text-[#990000] font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
+              <div className="pt-3 mt-3 border-t border-gray-100 dark:border-neutral-700 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-gray-500 dark:text-neutral-400 font-bold">{book.pages} Pages</span>
+                <span className="text-brand-800 dark:text-brand-400 font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
                   <span>View Details</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </span>
@@ -167,7 +163,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white border-2 border-[#111111] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-xs shadow-2xl space-y-6 relative"
+              className="bg-white border-2 border-brand-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-xs shadow-2xl space-y-6 relative"
             >
               <button
                 onClick={() => setActiveBook(null)}
@@ -178,7 +174,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="space-y-3">
-                  <div className="aspect-[3/4] w-full overflow-hidden border-2 border-[#111111] rounded-xs shadow-md">
+                  <div className="aspect-[3/4] w-full overflow-hidden border-2 border-brand-800 rounded-xs shadow-md">
                     <img
                       src={activeBook.coverUrl}
                       alt={getBookTitle(activeBook)}
@@ -204,23 +200,19 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                 <div className="sm:col-span-2 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-black uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs">
                         {activeBook.region.replace('_', ' ')}
                       </span>
                       <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-[10px] font-mono font-bold uppercase rounded-xs">
                         {activeBook.category}
                       </span>
-                      <span className="text-amber-600 text-xs font-bold flex items-center gap-1 ml-auto">
-                        <Star className="w-3.5 h-3.5 fill-amber-500" />
-                        {activeBook.rating}
-                      </span>
                     </div>
 
-                    <h2 className="text-2xl font-serif font-black text-[#111111] leading-tight">
+                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
                       {getBookTitle(activeBook)}
                     </h2>
                     
-                    <p className="text-sm font-bold text-[#990000] mt-1">
+                    <p className="text-sm font-bold text-brand-800 mt-1">
                       {getBookAuthor(activeBook)}
                     </p>
                   </div>
@@ -240,7 +232,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                       className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer ${
                         downloaded[activeBook.id]
                           ? 'bg-emerald-700 text-white'
-                          : 'bg-[#990000] hover:bg-red-800 text-white'
+                          : 'bg-brand-800 hover:bg-brand-800 text-white'
                       }`}
                     >
                       {downloaded[activeBook.id] ? (

@@ -4,10 +4,10 @@ export async function seedStudies() {
   try {
     console.log('📚 Checking and seeding professional studies...');
 
-    // Retrieve Jasim Al-Iraqi (j.aliraqi@chinq.post), Wei Chen (w.chen@chinq.post), and Test Editor (editor@chinq.media)
-    const author1 = await prisma.user.findUnique({ where: { email: 'j.aliraqi@chinq.post' } });
-    const author2 = await prisma.user.findUnique({ where: { email: 'w.chen@chinq.post' } });
-    const editor = await prisma.user.findUnique({ where: { email: 'editor@chinq.media' } });
+    // Retrieve Jasim Al-Iraqi (j.aliraqi@iraqchinadaily.post), Wei Chen (w.chen@iraqchinadaily.post), and Test Editor (editor@iraqchinadaily.media)
+    const author1 = await prisma.user.findUnique({ where: { email: 'j.aliraqi@iraqchinadaily.post' } });
+    const author2 = await prisma.user.findUnique({ where: { email: 'w.chen@iraqchinadaily.post' } });
+    const editor = await prisma.user.findUnique({ where: { email: 'editor@iraqchinadaily.media' } });
 
     // Fallbacks if those users are not seeded yet
     const defaultAuthor = author1 || author2 || editor || await prisma.user.findFirst();

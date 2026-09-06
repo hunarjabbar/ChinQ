@@ -1,3 +1,5 @@
+import { AdminLayout } from '../components/AdminLayout';
+import { useAuthStore } from '../store/useAuthStore';
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Book } from '../types';
@@ -33,7 +35,7 @@ export function AdminBooks() {
     rating: 4.8,
     pages: 320,
     year: 2024,
-    publisher: 'ChinQ Academic Press',
+    publisher: 'Iraqi-Chinese Agency Academic Press',
     isbn: '',
     purchaseUrl: '',
     isTrending: true,
@@ -49,7 +51,7 @@ export function AdminBooks() {
     }
   });
 
-  const token = localStorage.getItem('chinq_token') || '';
+  const token = useAuthStore.getState().token || '';
 
   const createMutation = useMutation({
     mutationFn: async (data: any) => {
@@ -153,7 +155,7 @@ export function AdminBooks() {
       rating: 4.8,
       pages: 320,
       year: 2024,
-      publisher: 'ChinQ Academic Press',
+      publisher: 'Iraqi-Chinese Agency Academic Press',
       isbn: '',
       purchaseUrl: '',
       isTrending: true,
@@ -182,7 +184,7 @@ export function AdminBooks() {
       rating: book.rating || 4.8,
       pages: book.pages || 320,
       year: book.year || 2024,
-      publisher: book.publisher || 'ChinQ Academic Press',
+      publisher: book.publisher || 'Iraqi-Chinese Agency Academic Press',
       isbn: book.isbn || '',
       purchaseUrl: book.purchaseUrl || '',
       isTrending: book.isTrending ?? true,
@@ -257,16 +259,16 @@ export function AdminBooks() {
   });
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto p-6 space-y-8">
+    <AdminLayout><div className="w-full space-y-8">
       
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border-2 border-[#111111] p-6 shadow-sm rounded-xs">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border-2 border-brand-800 p-6 shadow-sm rounded-xs">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-black uppercase rounded-xs mb-2">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs mb-2">
             <BookOpen className="w-3.5 h-3.5" />
             <span>Admin Library Portal</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-serif font-black text-[#111111]">
+          <h1 className="text-2xl md:text-3xl font-serif font-black text-ink-900">
             Books & Academic Publications Manager
           </h1>
           <p className="text-xs text-gray-600 font-mono mt-1">
@@ -290,7 +292,7 @@ export function AdminBooks() {
               resetForm();
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-[#990000] hover:bg-red-800 text-white text-xs font-mono font-bold uppercase rounded-xs shadow-xs transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 bg-brand-800 hover:bg-brand-800 text-white text-xs font-mono font-bold uppercase rounded-xs shadow-xs transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Book</span>
@@ -309,13 +311,13 @@ export function AdminBooks() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
         <div className="bg-white border border-gray-200 p-4 rounded-xs shadow-xs flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-[#990000] rounded-xs animate-pulse" />
+            <span className="w-3 h-3 bg-brand-800 rounded-xs animate-pulse" />
             <div>
-              <span className="font-bold text-[#111111] block">Trending Space (Web Showcase)</span>
+              <span className="font-bold text-ink-900 block">Trending Space (Web Showcase)</span>
               <span className="text-[10px] text-gray-500">Dedicated 4 books featured on homepage</span>
             </div>
           </div>
-          <span className="text-lg font-black text-[#990000]">
+          <span className="text-lg font-black text-brand-800">
             {books.filter(b => b.isTrending).length} Active
           </span>
         </div>
@@ -324,7 +326,7 @@ export function AdminBooks() {
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-500" />
             <div>
-              <span className="font-bold text-[#111111] block">Recommended Monograph Spotlight</span>
+              <span className="font-bold text-ink-900 block">Recommended Monograph Spotlight</span>
               <span className="text-[10px] text-gray-500">Featured recommended titles</span>
             </div>
           </div>
@@ -344,7 +346,7 @@ export function AdminBooks() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Filter books by title, author, or category..."
-              className="w-full pl-9 pr-4 py-2 text-xs font-bold border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000] bg-neutral-50"
+              className="w-full pl-9 pr-4 py-2 text-xs font-bold border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800 bg-neutral-50"
             />
           </div>
 
@@ -354,7 +356,7 @@ export function AdminBooks() {
               onClick={() => setSelectedStatus('ALL')}
               className={`px-3 py-1.5 rounded-xs transition-colors cursor-pointer ${
                 selectedStatus === 'ALL'
-                  ? 'bg-[#111111] text-white font-black'
+                  ? 'bg-brand-800 text-white font-black'
                   : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
               }`}
             >
@@ -364,8 +366,8 @@ export function AdminBooks() {
               onClick={() => setSelectedStatus('TRENDING')}
               className={`px-3 py-1.5 rounded-xs transition-colors cursor-pointer flex items-center gap-1 ${
                 selectedStatus === 'TRENDING'
-                  ? 'bg-[#990000] text-white font-black'
-                  : 'bg-neutral-100 text-[#990000] hover:bg-red-50'
+                  ? 'bg-brand-800 text-white font-black'
+                  : 'bg-neutral-100 text-brand-800 hover:bg-brand-50'
               }`}
             >
               <span>🔥 Trending</span>
@@ -389,7 +391,7 @@ export function AdminBooks() {
                 onClick={() => setSelectedRegion(reg)}
                 className={`px-3 py-1.5 text-xs font-mono font-bold rounded-xs cursor-pointer ${
                   selectedRegion === reg
-                    ? 'bg-[#111111] text-white font-black'
+                    ? 'bg-brand-800 text-white font-black'
                     : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
                 }`}
               >
@@ -441,7 +443,7 @@ export function AdminBooks() {
                       />
                     </td>
                     <td className="py-2.5 px-4 max-w-xs">
-                      <div className="font-bold text-[#111111] line-clamp-1">{book.titleEn}</div>
+                      <div className="font-bold text-ink-900 line-clamp-1">{book.titleEn}</div>
                       <div className="text-[11px] text-gray-500 line-clamp-1">{book.authorEn}</div>
                     </td>
                     <td className="py-2.5 px-4 font-mono font-bold text-[10px] text-gray-700">
@@ -449,7 +451,7 @@ export function AdminBooks() {
                         {book.region.replace('_', ' ')}
                       </span>
                     </td>
-                    <td className="py-2.5 px-4 font-mono text-[10px] text-[#990000] font-bold">
+                    <td className="py-2.5 px-4 font-mono text-[10px] text-brand-800 font-bold">
                       {book.category}
                     </td>
                     <td className="py-2.5 px-4 font-mono text-gray-600">
@@ -465,7 +467,7 @@ export function AdminBooks() {
                           onClick={() => toggleTrendingMutation.mutate({ id: book.id, isTrending: !book.isTrending })}
                           className={`inline-flex items-center gap-1 px-2 py-1 font-bold rounded-xs cursor-pointer transition-colors border ${
                             book.isTrending
-                              ? 'bg-[#990000] text-white border-[#990000] hover:bg-red-900'
+                              ? 'bg-brand-800 text-white border-brand-800 hover:bg-brand-900'
                               : 'bg-neutral-100 text-gray-500 border-gray-200 hover:bg-neutral-200'
                           }`}
                           title="Toggle Trending Status (Featured in 4 Trending space on web)"
@@ -503,7 +505,7 @@ export function AdminBooks() {
                               deleteMutation.mutate(book.id);
                             }
                           }}
-                          className="p-1.5 bg-red-50 hover:bg-red-100 text-[#990000] rounded-xs cursor-pointer transition-colors"
+                          className="p-1.5 bg-brand-50 hover:bg-brand-100 text-brand-800 rounded-xs cursor-pointer transition-colors"
                           title="Delete Book"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -521,10 +523,10 @@ export function AdminBooks() {
       {/* Create / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-white border-2 border-[#111111] max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-6">
+          <div className="bg-white border-2 border-brand-800 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-6">
             <div className="flex items-center justify-between border-b border-gray-200 pb-3">
-              <h2 className="text-lg font-serif font-black text-[#111111] flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#990000]" />
+              <h2 className="text-lg font-serif font-black text-ink-900 flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-brand-800" />
                 <span>{editingBook ? 'Edit Publication' : 'Add New Publication'}</span>
               </h2>
               <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-black">
@@ -695,7 +697,7 @@ export function AdminBooks() {
                     type="checkbox"
                     checked={formData.isTrending}
                     onChange={(e) => setFormData({ ...formData, isTrending: e.target.checked })}
-                    className="w-4 h-4 text-[#990000]"
+                    className="w-4 h-4 text-brand-800"
                   />
                   <span>Mark as Trending</span>
                 </label>
@@ -705,7 +707,7 @@ export function AdminBooks() {
                     type="checkbox"
                     checked={formData.isFeatured}
                     onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                    className="w-4 h-4 text-[#990000]"
+                    className="w-4 h-4 text-brand-800"
                   />
                   <span>Spotlight Featured</span>
                 </label>
@@ -723,7 +725,7 @@ export function AdminBooks() {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="flex items-center gap-2 px-5 py-2 bg-[#990000] hover:bg-red-800 text-white font-mono font-bold uppercase rounded-xs shadow-xs cursor-pointer"
+                  className="flex items-center gap-2 px-5 py-2 bg-brand-800 hover:bg-brand-800 text-white font-mono font-bold uppercase rounded-xs shadow-xs cursor-pointer"
                 >
                   <Save className="w-4 h-4" />
                   <span>{editingBook ? 'Save Changes' : 'Publish Book'}</span>
@@ -735,5 +737,6 @@ export function AdminBooks() {
       )}
 
     </div>
+    </AdminLayout>
   );
 }

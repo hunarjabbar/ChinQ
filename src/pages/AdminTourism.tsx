@@ -1,3 +1,4 @@
+import { useAuthStore } from '../store/useAuthStore';
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { TourismSpot } from '../types';
@@ -8,7 +9,7 @@ import {
 
 export function AdminTourism() {
   const queryClient = useQueryClient();
-  const token = localStorage.getItem('chinq_token');
+  const token = useAuthStore.getState().token;
 
   const [search, setSearch] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
@@ -190,10 +191,10 @@ export function AdminTourism() {
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#990000] text-white text-[10px] font-mono font-bold uppercase rounded-xs mb-1">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-bold uppercase rounded-xs mb-1">
             <Compass className="w-3 h-3" /> Bilateral Tourism Portal Admin
           </div>
-          <h1 className="text-2xl font-serif font-black text-[#111111]">
+          <h1 className="text-2xl font-serif font-black text-ink-900">
             Manage Tourism Destinations & Heritage Sites
           </h1>
           <p className="text-xs text-gray-500 font-mono">
@@ -213,7 +214,7 @@ export function AdminTourism() {
 
           <button
             onClick={openFormForNew}
-            className="px-4 py-2 bg-[#990000] hover:bg-red-800 text-white text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+            className="px-4 py-2 bg-brand-800 hover:bg-brand-800 text-white text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add Destination</span>
@@ -231,24 +232,27 @@ export function AdminTourism() {
               placeholder="Search destination title, city, or category..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-xs text-xs font-mono focus:outline-none focus:border-[#990000]"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-xs text-xs font-mono focus:outline-none focus:border-brand-800"
             />
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto">
-            {['ALL', 'CHINA', 'IRAQ', 'KURDISTAN'].map((reg) => (
-              <button
-                key={reg}
-                onClick={() => setSelectedRegion(reg)}
-                className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors whitespace-nowrap cursor-pointer ${
-                  selectedRegion === reg
-                    ? 'bg-[#111111] text-white'
-                    : 'bg-neutral-100 text-gray-700 hover:bg-neutral-200'
-                }`}
-              >
-                {reg}
-              </button>
-            ))}
+          <div className="w-full md:w-auto min-w-[200px]">
+            <select
+              value={selectedRegion}
+              onChange={(e) => setSelectedRegion(e.target.value)}
+              className="w-full px-3 py-2 text-xs font-mono font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:border-brand-800 cursor-pointer appearance-none relative"
+              style={{
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 0.7rem top 50%',
+                backgroundSize: '0.65rem auto',
+              }}
+            >
+              <option value="ALL">ALL REGIONS</option>
+              <option value="CHINA">CHINA</option>
+              <option value="IRAQ">IRAQ</option>
+              <option value="KURDISTAN">KURDISTAN</option>
+            </select>
           </div>
         </div>
       </div>
@@ -296,8 +300,8 @@ export function AdminTourism() {
                     </div>
                   </td>
                   <td className="py-3 px-4 font-mono text-xs">
-                    <span className="font-bold text-[#111111]">{spot.city}</span>
-                    <span className="block text-[10px] text-[#990000]">{spot.region}</span>
+                    <span className="font-bold text-ink-900">{spot.city}</span>
+                    <span className="block text-[10px] text-brand-800">{spot.region}</span>
                   </td>
                   <td className="py-3 px-4 font-mono text-[11px] text-gray-600 uppercase">
                     {spot.category.replace('_', ' ')}
@@ -311,7 +315,7 @@ export function AdminTourism() {
                         onClick={() => updateMutation.mutate({ id: spot.id, data: { isTrending: !spot.isTrending } })}
                         className={`px-2 py-1 font-bold rounded-xs cursor-pointer border ${
                           spot.isTrending
-                            ? 'bg-[#990000] text-white border-[#990000]'
+                            ? 'bg-brand-800 text-white border-brand-800'
                             : 'bg-neutral-100 text-gray-500 border-gray-200'
                         }`}
                         title="Toggle Trending"
@@ -347,7 +351,7 @@ export function AdminTourism() {
                             deleteMutation.mutate(spot.id);
                           }
                         }}
-                        className="p-1.5 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xs cursor-pointer transition-colors"
+                        className="p-1.5 text-brand-600 hover:text-brand-800 hover:bg-brand-50 rounded-xs cursor-pointer transition-colors"
                         title="Delete Destination"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -364,7 +368,7 @@ export function AdminTourism() {
       {/* Destination Form Modal */}
       {isFormOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
-          <div className="bg-white border-2 border-[#111111] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-4 relative">
+          <div className="bg-white border-2 border-brand-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-4 relative">
             <button
               onClick={closeForm}
               className="absolute top-4 right-4 text-gray-500 hover:text-black p-1 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer"
@@ -372,7 +376,7 @@ export function AdminTourism() {
               <X className="w-6 h-6" />
             </button>
 
-            <h2 className="text-xl font-serif font-black text-[#111111]">
+            <h2 className="text-xl font-serif font-black text-ink-900">
               {editingSpot ? 'Edit Tourism Destination' : 'Add New Tourism Destination'}
             </h2>
 
@@ -386,7 +390,7 @@ export function AdminTourism() {
                     required
                     value={formData.titleEn}
                     onChange={e => setFormData({ ...formData, titleEn: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -395,7 +399,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.titleAr}
                     onChange={e => setFormData({ ...formData, titleAr: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -404,7 +408,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.titleZh}
                     onChange={e => setFormData({ ...formData, titleZh: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -413,7 +417,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.titleCkb}
                     onChange={e => setFormData({ ...formData, titleCkb: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
               </div>
@@ -427,7 +431,7 @@ export function AdminTourism() {
                     required
                     value={formData.city}
                     onChange={e => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -435,7 +439,7 @@ export function AdminTourism() {
                   <select
                     value={formData.region}
                     onChange={e => setFormData({ ...formData, region: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   >
                     <option value="CHINA">CHINA</option>
                     <option value="IRAQ">IRAQ</option>
@@ -447,7 +451,7 @@ export function AdminTourism() {
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   >
                     <option value="UNESCO_HERITAGE">UNESCO World Heritage</option>
                     <option value="ANCIENT_SILK_ROAD">Ancient Silk Road</option>
@@ -468,7 +472,7 @@ export function AdminTourism() {
                     required
                     value={formData.imageUrl}
                     onChange={e => setFormData({ ...formData, imageUrl: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -477,7 +481,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.estimatedCost}
                     onChange={e => setFormData({ ...formData, estimatedCost: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
               </div>
@@ -490,7 +494,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.visaPolicy}
                     onChange={e => setFormData({ ...formData, visaPolicy: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
                 <div>
@@ -499,7 +503,7 @@ export function AdminTourism() {
                     type="text"
                     value={formData.flightInfo}
                     onChange={e => setFormData({ ...formData, flightInfo: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                   />
                 </div>
               </div>
@@ -512,7 +516,7 @@ export function AdminTourism() {
                   required
                   value={formData.descriptionEn}
                   onChange={e => setFormData({ ...formData, descriptionEn: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-[#990000]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800"
                 />
               </div>
 
@@ -550,7 +554,7 @@ export function AdminTourism() {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="px-6 py-2 bg-[#990000] hover:bg-red-800 text-white font-bold uppercase rounded-xs transition-colors cursor-pointer shadow-xs"
+                  className="px-6 py-2 bg-brand-800 hover:bg-brand-800 text-white font-bold uppercase rounded-xs transition-colors cursor-pointer shadow-xs"
                 >
                   {createMutation.isPending || updateMutation.isPending ? 'Saving...' : editingSpot ? 'Update Destination' : 'Create Destination'}
                 </button>

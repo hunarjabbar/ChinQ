@@ -37,8 +37,12 @@ export async function publishLiveUpdate(data: any) {
     });
     
     if (!res.ok) {
-      const errorData = await res.json();
-      return { success: false, error: errorData.error || 'Failed to publish' };
+      let errorMsg = 'Failed to publish';
+      try {
+        const errorData = await res.json();
+        errorMsg = errorData.error || errorMsg;
+      } catch {}
+      return { success: false, error: errorMsg };
     }
     
     const result = await res.json();

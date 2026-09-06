@@ -249,7 +249,7 @@ export async function seedPoliticalNews() {
   let author = await prisma.user.findFirst({ where: { role: 'ADMIN' } });
   if (!author) {
     author = await prisma.user.create({
-      data: { email: 'admin_pol@chinq.com', name: 'Political Editor', role: 'ADMIN' }
+      data: { email: 'admin_pol@iraq-china-daily.com', name: 'Political Editor', role: 'ADMIN' }
     });
   }
 
@@ -290,13 +290,6 @@ export async function seedPoliticalNews() {
 
   console.log("✅ Finished seeding mocked political news.");
 }
-
-seedPoliticalNews()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
 
 const moreArticles = [
   {
@@ -386,5 +379,3 @@ async function seedMore() {
     console.log(`[Created] Article: ${art.slug}`);
   }
 }
-
-seedMore().then(() => console.log("Done seeding extra"));

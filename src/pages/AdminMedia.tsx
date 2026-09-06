@@ -136,8 +136,8 @@ export function AdminMedia() {
           onClick={triggerFileSelect}
           className={`border-2 border-dashed rounded-xl p-10 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-3 relative ${
             dragActive 
-              ? 'border-[#990000] bg-red-50/55' 
-              : 'border-gray-300 hover:border-[#990000] bg-white hover:bg-gray-50/30'
+              ? 'border-brand-800 bg-brand-50/55' 
+              : 'border-gray-300 hover:border-brand-800 bg-white hover:bg-gray-50/30'
           }`}
         >
           <input 
@@ -147,12 +147,12 @@ export function AdminMedia() {
             accept="image/*"
             onChange={handleFileInput}
           />
-          <div className="p-4 bg-red-50 text-[#990000] rounded-full">
+          <div className="p-4 bg-brand-50 text-brand-800 rounded-full">
             <Upload size={28} />
           </div>
           <div>
             <p className="text-sm font-bold text-gray-800">
-              Drag and drop your asset file here, or <span className="text-[#990000] hover:underline">browse files</span>
+              Drag and drop your asset file here, or <span className="text-brand-800 hover:underline">browse files</span>
             </p>
             <p className="text-xs text-gray-500 mt-1">Supports PNG, JPG, WEBP and SVG up to 10MB.</p>
           </div>
@@ -167,7 +167,7 @@ export function AdminMedia() {
               placeholder="Filter assets by filename or category..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-[#990000] focus:border-transparent outline-none"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-brand-800 focus:border-transparent outline-none"
             />
           </div>
         </div>
@@ -175,7 +175,7 @@ export function AdminMedia() {
         {/* Grid Display */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredMedia.map((media) => (
-            <div key={media.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all group flex flex-col">
+            <div key={media.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group flex flex-col">
               {/* Image Thumbnail Preview */}
               <div className="h-44 bg-gray-100 overflow-hidden relative">
                 <img 
@@ -184,7 +184,7 @@ export function AdminMedia() {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                 />
-                <span className="absolute top-2 left-2 bg-[#111111]/85 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                <span className="absolute top-2 left-2 bg-brand-800/85 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                   {media.category}
                 </span>
               </div>
@@ -223,7 +223,7 @@ export function AdminMedia() {
                   </button>
                   <button
                     onClick={() => deleteMedia(media.id)}
-                    className="p-1.5 text-gray-400 hover:text-[#990000] border border-gray-200 hover:border-[#990000] rounded transition-colors"
+                    className="p-1.5 text-gray-400 hover:text-brand-800 border border-gray-200 hover:border-brand-800 rounded transition-colors"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -233,7 +233,7 @@ export function AdminMedia() {
           ))}
 
           {filteredMedia.length === 0 && (
-            <div className="col-span-full py-12 text-center text-gray-500">
+            <div className="col-span-full py-20 text-center text-gray-500">
               No assets match your filter criteria. Try searching for a different keyword.
             </div>
           )}
