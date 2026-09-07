@@ -748,7 +748,7 @@ export function AdminUsersContent() {
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
                           className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
-                          placeholder="tariq@iraqchinadaily.media"
+                          placeholder="tariq@iraqi-chineseagency.com"
                         />
                       </div>
                     </div>

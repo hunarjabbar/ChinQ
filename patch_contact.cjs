@@ -12,7 +12,7 @@ content = content.replace(
 );
 
 content = content.replace(
-  "<div>hq@iraqchinadaily.media</div>",
+  "<div>hq@iraqi-chineseagency.com</div>",
   "<div>{contactEmail}</div>"
 );
 

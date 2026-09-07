@@ -97,7 +97,7 @@ export async function autoSeedMoreNews() {
           authorId: author.id,
           categoryId: catEnergy.id,
           status: 'PUBLISHED',
-          imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop',
+          imageUrl: 'https://images.unsplash.com/photo-1473876637764-4f5bad606397?q=80&w=1200&auto=format&fit=crop',
           translations: {
             create: [
               {
@@ -187,7 +187,7 @@ export async function autoSeedMoreNews() {
           authorId: author.id,
           categoryId: catEconomy.id,
           status: 'PUBLISHED',
-          imageUrl: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop',
+          imageUrl: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200&auto=format&fit=crop',
           translations: {
             create: [
               {
@@ -230,7 +230,7 @@ export async function autoSeedMoreNews() {
           authorId: author.id,
           categoryId: catEconomy.id,
           status: 'PUBLISHED',
-          imageUrl: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop',
+          imageUrl: 'https://images.unsplash.com/photo-1520612142081-3bb0326b7746?q=80&w=1200&auto=format&fit=crop',
           translations: {
             create: [
               {
@@ -320,7 +320,7 @@ export async function autoSeedMoreNews() {
           authorId: author.id,
           categoryId: catPolitics.id,
           status: 'PUBLISHED',
-          imageUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop',
+          imageUrl: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1200&auto=format&fit=crop',
           translations: {
             create: [
               {

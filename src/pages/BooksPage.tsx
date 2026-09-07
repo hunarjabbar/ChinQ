@@ -494,7 +494,7 @@ export function BooksPage() {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <button onClick={() => window.location.href = 'mailto:library@iraqchinadaily.media'} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer bg-brand-800 hover:bg-brand-800 text-white"><Download className="w-4 h-4" /><span>Request Academic Copy</span></button>
+                    <button onClick={() => window.location.href = 'mailto:library@iraqi-chineseagency.com'} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer bg-brand-800 hover:bg-brand-800 text-white"><Download className="w-4 h-4" /><span>Request Academic Copy</span></button>
 
                     {activeBook.purchaseUrl && (
                       <a

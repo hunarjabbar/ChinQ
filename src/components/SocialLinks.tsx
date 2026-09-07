@@ -74,7 +74,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: '脸书官方主页',
     nameAr: 'فيسبوك - الصفحة الرسمية',
     nameCkb: 'فەیسبووک - پەڕەی فەرمی',
-    handle: '@IraqChinaDaily',
+    handle: '@IraqiChineseAgency',
     badge: '185K Followers',
     badgeZh: '18.5万 关注者',
     badgeAr: '١٨٥ ألف متابع',
@@ -91,7 +91,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: 'Instagram 纪实影集',
     nameAr: 'إنستغرام - التوثيق المصور',
     nameCkb: 'ئینستاگرام - وێنە و ڤیدیۆ',
-    handle: '@iraqchinadaily',
+    handle: '@iraqi-chineseagency',
     badge: 'Visual Dispatches',
     badgeZh: '光影现场图录',
     badgeAr: 'معارض ميدانية',
@@ -108,7 +108,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: '领英双边企业网络',
     nameAr: 'لينكد إن - شبكة الأعمال',
     nameCkb: 'لینکدئین - تۆڕی بازرگانی',
-    handle: 'Iraqi-Chinese Agency Syndicate',
+    handle: 'Iraqi-Chinese Agency',
     badge: 'B2B & Trade Network',
     badgeZh: '双边经贸企业智库',
     badgeAr: 'منظومة الشراكات',
@@ -142,7 +142,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: '微信官方公众号',
     nameAr: 'ويتشات - الحساب المؤسسي',
     nameCkb: 'ویچات - ئەژماری فەرمی',
-    handle: 'IraqChinaDaily_Official',
+    handle: 'IraqiChineseAgency_Official',
     badge: 'Scan QR / Direct ID',
     badgeZh: '扫码订阅 / 公众号',
     badgeAr: 'رمز الاستجابة السريعة',
@@ -160,7 +160,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: 'YouTube 纪录片与直播',
     nameAr: 'يوتيوب - التحقيقات الوثائقية',
     nameCkb: 'یوتیوب - دۆکیۆمێنتاری و ڤیدیۆ',
-    handle: '@IraqChinaDaily',
+    handle: '@IraqiChineseAgency',
     badge: '4K Broadcasts',
     badgeZh: '高清专题纪录片',
     badgeAr: 'بث وثائقي فائق الدقة',
@@ -177,7 +177,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     nameZh: 'X 实时快讯社群',
     nameAr: 'منصة إكس (تويتر سابقاً)',
     nameCkb: 'ئێکس (تویتەری پێشوو)',
-    handle: '@IraqChinaDaily',
+    handle: '@IraqiChineseAgency',
     badge: 'Live Wire Telex',
     badgeZh: '即时双语电报',
     badgeAr: 'تغطيات حية 24/7',
@@ -233,7 +233,7 @@ export function WeChatModal({
   lang: Locale; 
 }) {
   const [copied, setCopied] = useState(false);
-  const wechatId = 'IraqChinaDaily_Official';
+  const wechatId = 'IraqiChineseAgency_Official';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(wechatId);
@@ -371,14 +371,14 @@ export function WeChatModal({
 export function SocialHeaderBar({ lang }: { lang: Locale }) {
   const [activeWechat, setActiveWechat] = useState(false);
   const socialLinks = useSiteStore(state => state.socialLinks || {
-    whatsapp: 'https://chat.whatsapp.com/IraqChinaDailyOfficial',
-    facebook: 'https://facebook.com/IraqChinaDaily',
-    instagram: 'https://instagram.com/iraqchinadaily',
-    linkedin: 'https://linkedin.com/company/iraq-china-daily',
-    weibo: 'https://weibo.com/iraqchinadaily',
-    wechat: 'IraqChinaDaily_Official',
-    youtube: 'https://youtube.com/@IraqChinaDaily',
-    x: 'https://x.com/IraqChinaDaily',
+    whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
+    facebook: 'https://facebook.com/IraqiChineseAgency',
+    instagram: 'https://instagram.com/iraqi-chineseagency',
+    linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
+    weibo: 'https://weibo.com/iraqi-chineseagency',
+    wechat: 'IraqiChineseAgency_Official',
+    youtube: 'https://youtube.com/@IraqiChineseAgency',
+    x: 'https://x.com/IraqiChineseAgency',
   });
 
   const getUrl = (key: SocialPlatformKey) => {
@@ -437,14 +437,14 @@ export function SocialHeaderBar({ lang }: { lang: Locale }) {
 export function SocialFooterShowcase({ lang }: { lang: Locale }) {
   const [activeWechat, setActiveWechat] = useState(false);
   const socialLinks = useSiteStore(state => state.socialLinks || {
-    whatsapp: 'https://chat.whatsapp.com/IraqChinaDailyOfficial',
-    facebook: 'https://facebook.com/IraqChinaDaily',
-    instagram: 'https://instagram.com/iraqchinadaily',
-    linkedin: 'https://linkedin.com/company/iraq-china-daily',
-    weibo: 'https://weibo.com/iraqchinadaily',
-    wechat: 'IraqChinaDaily_Official',
-    youtube: 'https://youtube.com/@IraqChinaDaily',
-    x: 'https://x.com/IraqChinaDaily',
+    whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
+    facebook: 'https://facebook.com/IraqiChineseAgency',
+    instagram: 'https://instagram.com/iraqi-chineseagency',
+    linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
+    weibo: 'https://weibo.com/iraqi-chineseagency',
+    wechat: 'IraqiChineseAgency_Official',
+    youtube: 'https://youtube.com/@IraqiChineseAgency',
+    x: 'https://x.com/IraqiChineseAgency',
   });
 
   const getUrl = (key: SocialPlatformKey) => {
@@ -560,14 +560,14 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeWechat, setActiveWechat] = useState(false);
   const socialLinks = useSiteStore(state => state.socialLinks || {
-    whatsapp: 'https://chat.whatsapp.com/IraqChinaDailyOfficial',
-    facebook: 'https://facebook.com/IraqChinaDaily',
-    instagram: 'https://instagram.com/iraqchinadaily',
-    linkedin: 'https://linkedin.com/company/iraq-china-daily',
-    weibo: 'https://weibo.com/iraqchinadaily',
-    wechat: 'IraqChinaDaily_Official',
-    youtube: 'https://youtube.com/@IraqChinaDaily',
-    x: 'https://x.com/IraqChinaDaily',
+    whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
+    facebook: 'https://facebook.com/IraqiChineseAgency',
+    instagram: 'https://instagram.com/iraqi-chineseagency',
+    linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
+    weibo: 'https://weibo.com/iraqi-chineseagency',
+    wechat: 'IraqiChineseAgency_Official',
+    youtube: 'https://youtube.com/@IraqiChineseAgency',
+    x: 'https://x.com/IraqiChineseAgency',
   });
 
   const getUrl = (key: SocialPlatformKey) => {

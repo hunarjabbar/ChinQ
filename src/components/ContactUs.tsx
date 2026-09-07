@@ -70,7 +70,7 @@ export function ContactUs({ lang }: { lang: Locale }) {
                   {lang === 'ar' ? 'مكتب الصين (بكين)' : lang === 'zh' ? '北京分社' : lang === 'ckb' ? 'ئۆفیسی چین (پەکین)' : 'China Bureau (Beijing)'}
                 </div>
                 <div>TEL: +86 10 5555 1234</div>
-                <div>beijing@iraqchinadaily.media</div>
+                <div>beijing@iraqi-chineseagency.com</div>
               </div>
             </div>
           </div>

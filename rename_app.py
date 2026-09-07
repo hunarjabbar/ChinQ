@@ -11,9 +11,9 @@ def process_file(filepath):
         # But honestly, a case-insensitive replace of "ChinQ" to "Iraq-China Daily"
         # in text content is fine, except for things like "chinq.post" or "chinq_token".
 
-        # Let's handle emails: "chinq.post" -> "iraqchinadaily.post" (or we leave emails alone, but let's change them)
-        content = content.replace("chinq.post", "iraqchinadaily.post")
-        content = content.replace("chinq.media", "iraqchinadaily.media")
+        # Let's handle emails: "chinq.post" -> "iraqi-chineseagency.com" (or we leave emails alone, but let's change them)
+        content = content.replace("chinq.post", "iraqi-chineseagency.com")
+        content = content.replace("chinq.media", "iraqi-chineseagency.com")
         
         # tokens/localStorage
         content = content.replace("chinq_token", "iraq_china_daily_token")

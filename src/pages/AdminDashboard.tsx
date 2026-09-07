@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../lib/api';
 import { AdminLayout } from '../components/AdminLayout';
+import { useAuthStore } from '../store/useAuthStore';
 import { 
   Radio, 
   Sparkles, 
@@ -24,21 +25,25 @@ import { AdminTelex } from '../components/admin/AdminTelex';
 import { AdminStudies } from '../components/admin/AdminStudies';
 import { AdminSubscribers } from '../components/admin/AdminSubscribers';
 import { AdminAnnouncements } from '../components/admin/AdminAnnouncements';
+import { AdminAuditLogs } from '../components/admin/AdminAuditLogs';
+import { AdminReviewQueue } from '../components/admin/AdminReviewQueue';
 import { LivePublishForm } from '../components/LivePublishForm';
 import { AdminUsersContent } from './AdminUsers';
+import { Clock } from 'lucide-react';
 
-type TabType = 'overview' | 'users' | 'article' | 'live' | 'search' | 'applications' | 'telexes' | 'studies' | 'subscribers' | 'announcements';
+type TabType = 'overview' | 'users' | 'article' | 'review' | 'live' | 'search' | 'applications' | 'telexes' | 'studies' | 'subscribers' | 'announcements' | 'audit';
 
 export function AdminDashboard() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState<TabType>('overview');
 
   // Synchronize activeTab with URL tab parameters
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tabParam = params.get('tab');
-    if (tabParam && ['overview', 'users', 'article', 'live', 'search', 'applications', 'telexes', 'studies', 'subscribers', 'announcements'].includes(tabParam)) {
+    if (tabParam && ['overview', 'users', 'article', 'review', 'live', 'search', 'applications', 'telexes', 'studies', 'subscribers', 'announcements', 'audit'].includes(tabParam)) {
       setActiveTab(tabParam as TabType);
     }
   }, [location.search]);
@@ -92,8 +97,32 @@ export function AdminDashboard() {
     }
   });
 
+  const { data: adminArticles = [] } = useQuery<any[]>({
+    queryKey: ['admin-articles'],
+    queryFn: async () => {
+      const res = await apiFetch('/api/admin/articles');
+      if (!res.ok) return [];
+      return res.json();
+    }
+  });
+
   const pendingDossiers = applications.filter((a: any) => a.status === 'PENDING').length;
   const unreadTelex = telexes.filter((t: any) => t.status === 'UNREAD').length;
+  const pendingArticlesCount = adminArticles.filter((a: any) => a.status === 'PENDING').length;
+
+  if (user && user.role !== 'ADMIN') {
+    return (
+      <AdminLayout>
+        <div className="space-y-6 text-start max-w-5xl mx-auto py-6">
+          <div className="bg-amber-50 border border-amber-200 p-6 rounded-xl text-amber-900 text-sm">
+            <span className="font-black uppercase tracking-widest block mb-1">Restricted Secretarial Clearance</span>
+            As an editorial contributor (<span className="font-mono font-bold">{user.role}</span>), all administrative governance modules, user management, and executive sections have vanished. You are authorized exclusively for Article Registry and Draft Dispatch.
+          </div>
+          <AdminArticleEditor />
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -132,6 +161,7 @@ export function AdminDashboard() {
             { id: 'overview', label: 'Overview', icon: LayoutDashboard },
             { id: 'users', label: 'User Management', icon: Users, badge: adminUsers.length },
             { id: 'article', label: 'Draft Dispatch', icon: FileText },
+            { id: 'review', label: 'Review Queue', icon: Clock, badge: pendingArticlesCount },
             { id: 'search', label: 'AI Information', icon: Sparkles },
             { id: 'live', label: 'Live Signals', icon: Radio },
             { id: 'announcements', label: 'Global Broadcast', icon: Megaphone },
@@ -139,6 +169,7 @@ export function AdminDashboard() {
             { id: 'telexes', label: 'Telex Ledger', icon: Terminal, badge: unreadTelex },
             { id: 'studies', label: 'Sovereign Studies', icon: BookOpen },
             { id: 'subscribers', label: 'Subscriber List', icon: Mail },
+            { id: 'audit', label: 'Audit Logs', icon: Terminal },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -165,6 +196,7 @@ export function AdminDashboard() {
           {activeTab === 'overview' && <AdminOverview onSelectTab={(tab) => handleTabChange(tab as TabType)} />}
           {activeTab === 'users' && <AdminUsersContent />}
           {activeTab === 'article' && <AdminArticleEditor />}
+          {activeTab === 'review' && <AdminReviewQueue />}
           {activeTab === 'search' && <AdminAIImport categories={categories} />}
           {activeTab === 'live' && (
             <div className="space-y-8 animate-in fade-in duration-500">
@@ -188,6 +220,7 @@ export function AdminDashboard() {
           {activeTab === 'telexes' && <AdminTelex />}
           {activeTab === 'studies' && <AdminStudies />}
           {activeTab === 'subscribers' && <AdminSubscribers />}
+          {activeTab === 'audit' && <AdminAuditLogs />}
         </div>
       </div>
     </AdminLayout>

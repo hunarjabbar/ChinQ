@@ -4,10 +4,10 @@ export async function seedStudies() {
   try {
     console.log('📚 Checking and seeding professional studies...');
 
-    // Retrieve Jasim Al-Iraqi (j.aliraqi@iraqchinadaily.post), Wei Chen (w.chen@iraqchinadaily.post), and Test Editor (editor@iraqchinadaily.media)
-    const author1 = await prisma.user.findUnique({ where: { email: 'j.aliraqi@iraqchinadaily.post' } });
-    const author2 = await prisma.user.findUnique({ where: { email: 'w.chen@iraqchinadaily.post' } });
-    const editor = await prisma.user.findUnique({ where: { email: 'editor@iraqchinadaily.media' } });
+    // Retrieve Jasim Al-Iraqi (j.aliraqi@iraqi-chineseagency.com), Wei Chen (w.chen@iraqi-chineseagency.com), and Test Editor (editor@iraqi-chineseagency.com)
+    const author1 = await prisma.user.findUnique({ where: { email: 'j.aliraqi@iraqi-chineseagency.com' } });
+    const author2 = await prisma.user.findUnique({ where: { email: 'w.chen@iraqi-chineseagency.com' } });
+    const editor = await prisma.user.findUnique({ where: { email: 'editor@iraqi-chineseagency.com' } });
 
     // Fallbacks if those users are not seeded yet
     const defaultAuthor = author1 || author2 || editor || await prisma.user.findFirst();
@@ -88,7 +88,7 @@ This paper evaluates the performance, funding mechanisms, and construction veloc
 
 - دامەزراندنی لیژنەی هاوبەشی چاودێری ئەندازیاری کە لە پلاندانەرانی شارەوانی ناوخۆیی و ئەندازیارانی شارستانی نێودەوڵەتی پێکبێت.
 - خێراکردنی گرێدانی هێڵەکانی کارەبای پەستانی بەرز بۆ دابینکردنی وزە بۆ ناوچە قوتابخانەییە نوێیەکان و شارۆچکە پیشەسازییەکان.`,
-        imageUrl: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
         isPrivate: false,
         authorId: u1.id
       },
@@ -143,7 +143,7 @@ As global trade systems gradually adapt to multi-currency clearing frameworks, t
 
 ١. **حەوزەکانی شلەمەنی سەروەری**: شیکردنەوەی ڕێککەوتنی ئاڵوگۆڕی دراوی دوولایەنە لە نێوان بانکی گەلی چین (PBOC) و بانکی ناوەندی عێراق (CBI).
 ٢. **داشکاندنی بەهای مامەڵەکان**: چۆن فرۆشتنی نەوت بە یوانی چینی دەبێتە هۆی کەمکردنەوەی خەرجییەکانی مامەڵەکردن بە ڕێژەی ١.٨٪ بۆ ٢.٤٪ بۆ کڕیارە چینییەکان، لەکاتێکدا سەرمایەیەکی خێرا بۆ عێراق دابین دەکات بۆ کڕینی کەرەستەی پیشەسازی لە پەکین.`,
-        imageUrl: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200&auto=format&fit=crop',
         isPrivate: true,
         authorId: u2.id
       },
@@ -193,7 +193,7 @@ The integration of Al-Faw into the Maritime Silk Road network establishes a high
 
 - **قوڵایی**: بە قووڵایی ١٩.٥ مەتر، بەندەری فاو دەتوانێت گەورەترین تانکەرەکانی نەوت و کەشتییەکانی کۆنتێنەر تا ٢٤,٠٠٠ TEU وەربگرێت.
 - **خێرایی ڕاپەڕاندنی کارەکان**: جێگیرکردنی ئامێرە ئۆتۆماتیکییەکانی بەرزکەرەوە کە لە لایەن پلاتفۆرمی لۆجستیکی هاوبەشەوە بەڕێوەدەبرێن، ئامانجی کەمکردنەوەی کاتی مانەوەی کەشتییەکانە بە ڕێژەی ٣٠٪ بەراورد بە بەندەرەکانی تری ناوچەکە.`,
-        imageUrl: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1494412574743-0112f05c78ec?q=80&w=1200&auto=format&fit=crop',
         isPrivate: false,
         authorId: u1.id
       },
@@ -243,7 +243,7 @@ By standardizing core routers and switching nodes on unified Chinese protocols, 
 
 ١. **سەروەری داتا**: دامەزراندنی سەنتەرە مایکڕۆییەکانی داتا لە هەولێر و بەغدا کە ئاسایشی داتای نیشتمانی لە ناوخۆدا دەپارێزێت.
 ٢. **تێکەڵبوونی دارایی**: تۆڕەکانی 5G یارمەتی بانکی ناوەندی عێراقیان داوە بۆ بڵاوکردنەوەی سیستەمی پارەدان و پاڵپشتی دارایی خێرا لە سەدان لقی لادێیی دوورەدەستدا.`,
-        imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
         isPrivate: false,
         authorId: ue.id
       },
@@ -298,7 +298,7 @@ While federal infrastructure projects focus primarily on southern port and refin
 
 - **سەربەخۆیی ئیداری**: سیستەمی نوێی ڕێککارەکانی گومرگی لە ناوچەی ئابووری سلێمانی پڕۆسەی ڕوونکرنەوەی گومرگی بۆ ئامێرە وردەکان زۆر خێرا کردووە.
 - **چوارچێوەکانی وەبەرهێنان**: شیکردنەوەی پێکهاتەی هاوبەشی سەرمایە لە نێوان کۆنسۆرتیۆمی کۆمپانیا تایبەتەکانی چین و گەشەپێدەرانی پیشەسازی ناوخۆیی کورد.`,
-        imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
         isPrivate: true,
         authorId: u2.id
       }

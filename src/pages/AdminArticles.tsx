@@ -1,12 +1,13 @@
 import { apiFetch } from '../lib/api';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
-import { Plus, Search, MoreVertical, Edit, Trash2 } from 'lucide-react';
+import { Plus, Search, MoreVertical, Edit, Trash2, CheckCircle2 } from 'lucide-react';
 import { AdminLayout } from '../components/AdminLayout';
+import { useAuthStore } from '../store/useAuthStore';
 
 export function AdminArticles() {
   const { lang } = useParams<{ lang: string }>();
-
+  const { user } = useAuthStore();
   
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
@@ -19,6 +20,20 @@ export function AdminArticles() {
       queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
       queryClient.invalidateQueries({ queryKey: ['articles'] });
       queryClient.invalidateQueries({ queryKey: ['article'] });
+    }
+  });
+
+  const approveMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const res = await apiFetch(`/api/admin/articles/${id}/approve`, { method: 'POST' });
+      if (!res.ok) throw new Error('Failed to approve article');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
+      alert('Article approved and published successfully.');
     }
   });
 
@@ -137,10 +152,19 @@ export function AdminArticles() {
                         </td>
                         <td className="px-8 py-5 text-right">
                           <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
-                            <Link to={`/${lang}/admin/articles/${article.id}`} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
+                            {user?.role === 'ADMIN' && article.status === 'PENDING' && (
+                              <button 
+                                onClick={() => approveMutation.mutate(article.id)} 
+                                title="Approve & Publish Article"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
+                              >
+                                <CheckCircle2 size={14} /> Approve
+                              </button>
+                            )}
+                            <Link to={`/${lang}/admin/articles/${article.id}`} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all" title="Edit Article">
                               <Edit size={14} />
                             </Link>
-                            <button onClick={() => handleDelete(article.id, title)} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
+                            <button onClick={() => handleDelete(article.id, title)} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all" title="Delete Article">
                               <Trash2 size={14} />
                             </button>
                           </div>

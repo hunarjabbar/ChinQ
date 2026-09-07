@@ -14,6 +14,7 @@ import { seedVisaFlights } from "./server/visaFlightSeeder.js";
 import { seedPodcasts } from "./server/podcastSeeder.js";
 import { seedPoliticalNews } from "./server/politicalNewsSeeder.js";
 import { seedPaymentData } from "./server/paymentSeeder.js";
+import { seedBricsTopics } from "./server/bricsSeeder.js";
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -24,7 +25,7 @@ function getJwtSecret() {
     console.warn(
       "WARNING: JWT_SECRET is not set in the environment. Using a fallback secret for development ONLY. Do NOT do this in production.",
     );
-    return "iraq-china-daily_secret_key_123";
+    return "iraqi-chinese-agency_secret_key_888";
   }
   return secret;
 }
@@ -57,39 +58,15 @@ async function ensureTestCredentials() {
 
     const credentialsToEnsure = [
       {
-        email: "editor@iraq-china-agency.com",
+        email: "editor@iraqi-chineseagency.com",
         password: "editor123",
         name: "ICA Chief Editor",
         role: "EDITOR",
       },
       {
-        email: "admin@iraq-china-agency.com",
+        email: "admin@iraqi-chineseagency.com",
         password: "admin123",
         name: "ICA Sovereign Admin",
-        role: "ADMIN",
-      },
-      {
-        email: "editor@iraqchineseagency.com",
-        password: "editor123",
-        name: "ICA Chief Editor",
-        role: "EDITOR",
-      },
-      {
-        email: "admin@iraqchineseagency.com",
-        password: "admin123",
-        name: "ICA Sovereign Admin",
-        role: "ADMIN",
-      },
-      {
-        email: "editor@iraqchinadaily.media",
-        password: "editor123",
-        name: "Test Editor",
-        role: "EDITOR",
-      },
-      {
-        email: "admin@iraqchinadaily.media",
-        password: "admin123",
-        name: "Test Admin",
         role: "ADMIN",
       }
     ];
@@ -130,6 +107,7 @@ async function runStartupSeeders() {
     await seedPodcasts();
     await seedPoliticalNews();
     await seedPaymentData();
+    await seedBricsTopics();
     await ensureTestCredentials();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
@@ -324,7 +302,7 @@ async function startServer() {
       if (!user) {
         const bcrypt = await import("bcryptjs");
         if (
-          (cleanEmail === "editor@iraq-china-agency.com" || cleanEmail === "editor@iraqchineseagency.com" || cleanEmail === "editor@iraqchinadaily.media") &&
+          (cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com") &&
           password === "editor123"
         ) {
           const hash = await (bcrypt.default || bcrypt).hash("editor123", 10);
@@ -339,7 +317,7 @@ async function startServer() {
             },
           });
         } else if (
-          (cleanEmail === "admin@iraq-china-agency.com" || cleanEmail === "admin@iraqchineseagency.com" || cleanEmail === "admin@iraqchinadaily.media") &&
+          (cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com") &&
           password === "admin123"
         ) {
           const hash = await (bcrypt.default || bcrypt).hash("admin123", 10);
@@ -471,6 +449,19 @@ async function startServer() {
   // --- API Routes ---
 
   // 1. Articles endpoint (public)
+
+  app.get("/api/brics-topics", async (req, res) => {
+    try {
+      const topics = await prisma.bricsTopic.findMany({
+        orderBy: { order: 'asc' },
+        where: { isFeatured: true }
+      });
+      res.json(topics);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch BRICS topics" });
+    }
+  });
 
   app.get("/api/articles", async (req, res) => {
     try {
@@ -1023,6 +1014,56 @@ async function startServer() {
   });
 
   // 3. Admin CRUD
+  // --- BRICS Topics Admin ---
+  app.get("/api/admin/brics-topics", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const topics = await prisma.bricsTopic.findMany({
+        orderBy: { createdAt: 'desc' }
+      });
+      res.json(topics);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch BRICS topics" });
+    }
+  });
+
+  app.post("/api/admin/brics-topics", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const topic = await prisma.bricsTopic.create({
+        data: req.body
+      });
+      res.json(topic);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to create BRICS topic" });
+    }
+  });
+
+  app.put("/api/admin/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const topic = await prisma.bricsTopic.update({
+        where: { id: req.params.id },
+        data: req.body
+      });
+      res.json(topic);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to update BRICS topic" });
+    }
+  });
+
+  app.delete("/api/admin/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      await prisma.bricsTopic.delete({
+        where: { id: req.params.id }
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to delete BRICS topic" });
+    }
+  });
+
   app.get("/api/admin/articles", editorOrAdminMiddleware, async (req, res) => {
     try {
       const articles = await prisma.article.findMany({
@@ -2652,15 +2693,27 @@ async function startServer() {
   });
 
 
-  app.post("/api/admin/articles", authMiddleware, async (req, res) => {
-    const { slug, categoryId, imageUrl, translations } = req.body;
+  app.post("/api/admin/articles", authMiddleware, async (req: any, res: any) => {
+    const { slug, categoryId, imageUrl, translations, status: requestedStatus } = req.body;
     try {
-      let author = await prisma.user.findFirst({ where: { role: "ADMIN" } });
+      const userRole = req.user?.role || "ADMIN";
+      const userId = req.user?.id;
+
+      let author;
+      if (userId) {
+        author = await prisma.user.findUnique({ where: { id: userId } });
+      }
+      if (!author) {
+        author = await prisma.user.findFirst({ where: { role: "ADMIN" } });
+      }
       if (!author) {
         author = await prisma.user.create({
           data: { email: "admin@test.com", name: "Admin", role: "ADMIN" },
         });
       }
+
+      // Determine article status: Non-admins must be pending approval; admins can publish or set status
+      const articleStatus = userRole === "ADMIN" ? (requestedStatus || "PUBLISHED") : "PENDING";
 
       // Check if article with slug already exists for Force Save/Overwrite support
       const existing = await prisma.article.findUnique({
@@ -2680,14 +2733,14 @@ async function startServer() {
             categoryId,
             authorId: author.id,
             imageUrl,
-            status: "PUBLISHED",
+            status: articleStatus,
             translations: {
               create: translations,
             },
           },
         });
         console.log(
-          `[FORCE SAVE] Successfully updated/overwrote article slug: ${slug}`,
+          `[FORCE SAVE] Successfully updated/overwrote article slug: ${slug} with status: ${articleStatus}`,
         );
       } else {
         article = await prisma.article.create({
@@ -2696,27 +2749,49 @@ async function startServer() {
             categoryId,
             authorId: author.id,
             imageUrl,
-            status: "PUBLISHED",
+            status: articleStatus,
             translations: {
               create: translations,
             },
           },
         });
-        console.log(`[CREATE] Successfully created new article slug: ${slug}`);
+        console.log(`[CREATE] Successfully registered article slug: ${slug} with status: ${articleStatus}`);
       }
 
-      // Simulate Next-style revalidatePath() for quadrilingual article paths
-      console.log(`\n--- [ISR] TRIGGERING PATH REVALIDATION ---`);
-      console.log(`[ISR] revalidatePath("/en/articles/${slug}") -> Success`);
-      console.log(`[ISR] revalidatePath("/ar/articles/${slug}") -> Success`);
-      console.log(`[ISR] revalidatePath("/zh/articles/${slug}") -> Success`);
-      console.log(`[ISR] revalidatePath("/ckb/articles/${slug}") -> Success`);
-      console.log(`-----------------------------------------\n`);
+      // Simulate Next-style revalidatePath() for quadrilingual article paths if published
+      if (articleStatus === "PUBLISHED") {
+        console.log(`\n--- [ISR] TRIGGERING PATH REVALIDATION ---`);
+        console.log(`[ISR] revalidatePath("/en/articles/${slug}") -> Success`);
+        console.log(`[ISR] revalidatePath("/ar/articles/${slug}") -> Success`);
+        console.log(`[ISR] revalidatePath("/zh/articles/${slug}") -> Success`);
+        console.log(`[ISR] revalidatePath("/ckb/articles/${slug}") -> Success`);
+        console.log(`-----------------------------------------\n`);
+      }
 
       res.json(article);
     } catch (e: any) {
       console.error("Failed to save article:", e);
       res.status(500).json({ error: "Failed to save article" });
+    }
+  });
+
+  app.post("/api/admin/articles/:id/approve", authMiddleware, async (req: any, res: any) => {
+    try {
+      const userRole = req.user?.role;
+      if (userRole !== "ADMIN") {
+        return res.status(403).json({ error: "Only administrators can approve articles for publication." });
+      }
+
+      const article = await prisma.article.update({
+        where: { id: req.params.id },
+        data: { status: "PUBLISHED" },
+      });
+
+      console.log(`[ADMIN APPROVAL] Article ID ${req.params.id} approved and published.`);
+      res.json(article);
+    } catch (e: any) {
+      console.error("Failed to approve article:", e);
+      res.status(500).json({ error: "Failed to approve article" });
     }
   });
 
@@ -3127,6 +3202,22 @@ async function startServer() {
     res.status(err.status || 500).json({
       error: err.message || "Internal Server Error",
     });
+  });
+
+  // Audit Logs API
+  app.get("/api/admin/audit-logs", authMiddleware, async (req: any, res) => {
+    if (req.user.role !== 'ADMIN') {
+      return res.status(403).json({ error: "Forbidden: Admin role required" });
+    }
+    try {
+      const logs = await prisma.auditLog.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 200
+      });
+      res.json(logs);
+    } catch (e) {
+      res.status(500).json({ error: "Failed to fetch audit logs" });
+    }
   });
 
   // --- Vite Middleware ---

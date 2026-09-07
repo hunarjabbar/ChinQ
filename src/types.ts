@@ -333,6 +333,29 @@ export interface PaymentQuote {
   };
 }
 
+export interface BricsTopic {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  summaryEn: string;
+  summaryAr: string;
+  summaryZh: string;
+  summaryCkb: string;
+  contentEn: string;
+  contentAr: string;
+  contentZh: string;
+  contentCkb: string;
+  imageUrl: string | null;
+  category: string;
+  isFeatured: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 
 
 

@@ -242,7 +242,7 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
 
           {/* Footer note */}
           <div className="text-[9px] text-neutral-400 text-center leading-relaxed">
-            This digital certificate serves as legitimate proof of settlement under Sino-Iraqi sovereign economic treaties. For authentication inquiries, contact payments@iraq-china-agency.com or verify on the Iraqi-Chinese Agency Portal.
+            This digital certificate serves as legitimate proof of settlement under Sino-Iraqi sovereign economic treaties. For authentication inquiries, contact payments@iraqi-chineseagency.com or verify on the Iraqi-Chinese Agency Portal.
           </div>
 
         </div>

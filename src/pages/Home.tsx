@@ -25,6 +25,7 @@ import { PaymentGatewayShowcase } from '../components/payments/PaymentGatewaySho
 import { ArticleModal } from '../components/ArticleModal';
 import { NewsletterSubscriptionModal } from '../components/NewsletterSubscriptionModal';
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
+import { BricsSection } from '../components/BricsSection';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 
 export function Home() {
@@ -322,6 +323,7 @@ export function Home() {
 
       {/* Column 3: Most Popular & Widget */}
       <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-neutral-50 dark:bg-neutral-900/50">
+        <BricsSection lang={lang as Locale} />
         <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-sm p-6 flex-grow">
           <h3 className="text-base sm:text-lg uppercase font-black tracking-widest mb-6 flex items-center text-ink-900 dark:text-neutral-100 border-b-2 border-brand-800 pb-3">
             <span className="w-2.5 h-2.5 bg-brand-800 rounded-sm me-3 animate-pulse"></span>

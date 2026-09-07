@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Copy, Sparkles, Key, Zap, Menu, X } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Copy, Sparkles, Key, Zap, Menu, X, Globe2 } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -29,10 +29,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   const handleQuickFill = (role: 'editor' | 'admin' = 'editor', e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     if (role === 'admin') {
-      setEmail('admin@iraq-china-agency.com');
+      setEmail('admin@iraqi-chineseagency.com');
       setPassword('admin123');
     } else {
-      setEmail('editor@iraq-china-agency.com');
+      setEmail('editor@iraqi-chineseagency.com');
       setPassword('editor123');
     }
     setError('');
@@ -43,8 +43,8 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   const handleCopyCredentials = (role: 'editor' | 'admin', e: React.MouseEvent) => {
     e.stopPropagation();
     const text = role === 'admin'
-      ? 'admin@iraq-china-agency.com\nadmin123'
-      : 'editor@iraq-china-agency.com\neditor123';
+      ? 'admin@iraqi-chineseagency.com\nadmin123'
+      : 'editor@iraqi-chineseagency.com\neditor123';
     try {
       navigator.clipboard?.writeText(text);
     } catch {}
@@ -100,20 +100,21 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
   const navItems = [
-    { name: 'Dashboard', href: `/${lang}/admin`, icon: LayoutDashboard },
-    { name: 'Articles', href: `/${lang}/admin/articles`, icon: FileText },
-    { name: 'Women Leadership', href: `/${lang}/admin/women`, icon: UserIcon },
-    { name: 'Tourism Portal', href: `/${lang}/admin/tourism`, icon: Compass },
-    { name: 'Books Library', href: `/${lang}/admin/books`, icon: BookOpen },
-    { name: 'Podcasts', href: `/${lang}/admin/podcasts`, icon: Mic },
-    { name: 'Visa & Flights', href: `/${lang}/admin/visa-flights`, icon: Plane },
-    { name: 'Market Data', href: `/${lang}/admin/market`, icon: Activity },
-    { name: 'IQD & e-CNY Payments', href: `/${lang}/admin/payments`, icon: Coins },
-    { name: 'Live Command', href: `/${lang}/admin?tab=live`, icon: Radio },
-    { name: 'Sourcing Desk', href: `/${lang}/admin/sourcing`, icon: Ship, },
-    { name: 'Partners', href: `/${lang}/admin/partners`, icon: Briefcase },
-    { name: 'Live Streams', href: `/${lang}/admin/live-events`, icon: Video },
-    { name: 'Media Library', href: `/${lang}/admin/media`, icon: ImageIcon },
+    { name: 'Articles Registry', href: `/${lang}/admin/articles`, icon: FileText, adminOnly: false },
+    { name: 'Dashboard', href: `/${lang}/admin`, icon: LayoutDashboard, adminOnly: true },
+    { name: 'BRICS Observatory', href: `/${lang}/admin/brics`, icon: Globe2, adminOnly: true },
+    { name: 'Women Leadership', href: `/${lang}/admin/women`, icon: UserIcon, adminOnly: true },
+    { name: 'Tourism Portal', href: `/${lang}/admin/tourism`, icon: Compass, adminOnly: true },
+    { name: 'Books Library', href: `/${lang}/admin/books`, icon: BookOpen, adminOnly: true },
+    { name: 'Podcasts', href: `/${lang}/admin/podcasts`, icon: Mic, adminOnly: true },
+    { name: 'Visa & Flights', href: `/${lang}/admin/visa-flights`, icon: Plane, adminOnly: true },
+    { name: 'Market Data', href: `/${lang}/admin/market`, icon: Activity, adminOnly: true },
+    { name: 'IQD & e-CNY Payments', href: `/${lang}/admin/payments`, icon: Coins, adminOnly: true },
+    { name: 'Live Command', href: `/${lang}/admin?tab=live`, icon: Radio, adminOnly: true },
+    { name: 'Sourcing Desk', href: `/${lang}/admin/sourcing`, icon: Ship, adminOnly: true },
+    { name: 'Partners', href: `/${lang}/admin/partners`, icon: Briefcase, adminOnly: true },
+    { name: 'Live Streams', href: `/${lang}/admin/live-events`, icon: Video, adminOnly: true },
+    { name: 'Media Library', href: `/${lang}/admin/media`, icon: ImageIcon, adminOnly: true },
     { name: 'User Management', href: `/${lang}/admin/users`, icon: Users, adminOnly: true },
     { name: 'Audit Logs', href: `/${lang}/admin/audit-logs`, icon: ClipboardList, adminOnly: true },
     { name: 'System Settings', href: `/${lang}/admin/settings`, icon: Settings, adminOnly: true },
@@ -198,7 +199,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             {restrictedText}
           </p>
 
-          {isLogin && (
+          {false && isLogin && (
             <div className="mb-6 p-4 bg-gradient-to-br from-brand-50/95 via-white to-brand-50/60 border border-brand-200/90 rounded-xl shadow-xs transition-all duration-200">
               <div className="flex items-center justify-between mb-2.5">
                 <p className="text-[10px] font-black font-mono text-brand-800 uppercase tracking-widest flex items-center gap-1.5">
@@ -225,7 +226,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                       {isAr ? 'الوكالة العراقية الصينية' : isZh ? '伊中通讯社' : 'Iraqi-Chinese Agency'}
                     </span>
                     <span className="font-mono font-bold text-xs text-neutral-900 tracking-tight">
-                      editor@iraq-china-agency.com
+                      editor@iraqi-chineseagency.com
                     </span>
                     <span className="text-neutral-300 font-mono text-xs hidden sm:inline">/</span>
                     <span className="font-mono text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
@@ -276,7 +277,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                       {isAr ? 'الإدارة المركزية' : isZh ? '中央管理总署' : 'Central Command'}
                     </span>
                     <span className="font-mono font-bold text-xs text-neutral-900 tracking-tight">
-                      admin@iraq-china-agency.com
+                      admin@iraqi-chineseagency.com
                     </span>
                     <span className="text-neutral-300 font-mono text-xs hidden sm:inline">/</span>
                     <span className="font-mono text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
@@ -343,7 +344,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2.5 sm:py-3 bg-neutral-50/50 hover:bg-white focus:bg-white border border-neutral-300 focus:border-brand-800 rounded-lg text-sm font-mono text-neutral-900 placeholder:text-neutral-400 shadow-xs focus:ring-2 focus:ring-brand-800/20 focus:outline-none transition-all duration-200"
-                  placeholder="editor@iraq-china-agency.com"
+                  placeholder="editor@iraqi-chineseagency.com"
                   autoComplete="email"
                 />
               </div>

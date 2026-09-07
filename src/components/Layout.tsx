@@ -238,7 +238,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 >
                   <span className="w-1.5 h-1.5 bg-brand-800 dark:bg-brand-400 group-hover:scale-125 transition-transform rounded-full shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">
-                    {lang === 'ar' ? 'سياسة الخصوصية وحماية البيانات' : lang === 'zh' ? '隐私政策与数据保护' : lang === 'ckb' ? 'سیاسەتی تایبەتمەندی و پاراستنی داتا' : 'Privacy Policy & Data Protection'}
+                    {lang === 'ar' ? 'حقوق الخصوصية وحماية البيانات السيادية' : lang === 'zh' ? '个人隐私权益与主权数据保护' : lang === 'ckb' ? 'مافەکانی تایبەتمەندی و پاراستنی داتا' : 'Privacy Rights & Sovereign Data Protection'}
                   </span>
                 </button>
                 <button
@@ -247,7 +247,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 >
                   <span className="w-1.5 h-1.5 bg-brand-800 dark:bg-brand-400 group-hover:scale-125 transition-transform rounded-full shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">
-                    {lang === 'ar' ? 'شروط وقواعد استخدام الخدمة' : lang === 'zh' ? '服务条款与使用协议' : lang === 'ckb' ? 'مەرجەکانی بەکارهێنانی خزمەتگوزاری' : 'Terms of Use & Service Agreement'}
+                    {lang === 'ar' ? 'شروط الاستخدام والحقوق التنظيمية' : lang === 'zh' ? '使用条款与法律监管权利' : lang === 'ckb' ? 'مەرجەکانی بەکارهێنان و مافە یاساییەکان' : 'Terms of Use & Regulatory Rights'}
                   </span>
                 </button>
               </div>
@@ -263,7 +263,18 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                   <a href="tel:+96415551235" className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">FAX: +964 1 555 1235</a>
                 </div>
                 <div>
-                  <a href={`mailto:${contactEmail}`} className="text-brand-800 dark:text-brand-400 hover:underline lowercase font-bold transition-colors">{contactEmail}</a>
+                  <a 
+                    href={`mailto:${contactEmail}`} 
+                    className="inline-flex items-center gap-2 group/email text-brand-800 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 transition-all duration-300"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-800 opacity-20"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-800/40"></span>
+                    </span>
+                    <span className="lowercase font-bold border-b border-brand-800/20 group-hover/email:border-brand-800 transition-colors">
+                      {contactEmail}
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>

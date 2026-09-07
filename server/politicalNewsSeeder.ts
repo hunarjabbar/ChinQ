@@ -123,7 +123,7 @@ const mockArticles = [
   },
   {
     slug: 'xi-jinping-belt-and-road-expansion',
-    imageUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1547154495-99a0d63b88a8?auto=format&fit=crop&q=80&w=1200',
     translations: [
       {
         lang: 'en',
@@ -324,7 +324,7 @@ const moreArticles = [
   },
   {
     slug: 'iraqi-delegation-visits-beijing',
-    imageUrl: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1547154495-99a0d63b88a8?auto=format&fit=crop&q=80&w=1200',
     translations: [
       {
         lang: 'en',

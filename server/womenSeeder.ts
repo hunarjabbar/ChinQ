@@ -3,10 +3,7 @@ import { prisma } from "./db.js";
 export async function seedWomenFeatures() {
   try {
     const count = await prisma.womenFeature.count();
-    if (count > 0) {
-      console.log(`[WomenSeeder] Found ${count} women features in database.`);
-      return;
-    }
+    console.log(`[WomenSeeder] Found ${count} women features in database. Checking for updates...`);
 
     console.log("[WomenSeeder] Seeding women figures, policies, achievements, and publications for China, Iraq, and Kurdistan...");
 
@@ -31,7 +28,7 @@ export async function seedWomenFeatures() {
         bioAr: "أدى البحث الابتكاري لـ تو يويو في الجمع بين الطب الصيني التقليدي وعلم الصيدلة الحديث إلى استخلاص الأرتيميسينين، مما أحدث ثورة في العلاج الصحي العالمي ووضع معياراً ملهماً للباحثات في جميع أنحاء العالم.",
         bioZh: "屠呦呦将中国传统中医药宝库与现代药学相结合，攻坚克难提取青蒿素，引发全球抗疟新药革命。她的科研足迹激励着中国、中东乃至全球无数女性科研工作者。",
         bioCkb: "توێژینەوە بێوێنەکانی تو یویو لە تێکەڵکردنی پزیشکی نەریتی چینی و دەرمانسازی نوێدا شۆڕشێکی لە چارەسەری تەندروستی جیهانیدا دروست کرد.",
-        imageUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1579152276508-4e8979a613be?auto=format&fit=crop&q=80&w=1200",
         organization: "China Academy of Chinese Medical Sciences",
         publicationUrl: "https://nobelprize.org",
         isFeatured: true,
@@ -57,7 +54,7 @@ export async function seedWomenFeatures() {
         bioAr: "صممت زها حديد معالم عالمية بارزة بما في ذلك دار أوبرا جوانجتشو في الصين، ومطار بيكين داكسينغ الدولي. يربط إرثها بين التراث العراقي والمعجزات المعمارية الصينية والقيادة الفنية العالمية.",
         bioZh: "扎哈·哈迪德设计了广州大剧院、北京大兴国际机场等众多中国与全球标志性建筑。她的作品将伊拉克古老底蕴、中国现代工程力量与全球女性艺术创造力完美结合。",
         bioCkb: "زەها حەدید نەخشەی چەندین تەلاری گەورەی جیهانی کێشا لەوانە ئۆپێرای گوانگژۆ لە چین و فڕۆکەخانەی داكسینگ لە پەکین.",
-        imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&q=80&w=1200",
         organization: "Zaha Hadid Architects / Iraqi Cultural Heritage Network",
         publicationUrl: "https://zaha-hadid.com",
         isFeatured: true,
@@ -83,7 +80,7 @@ export async function seedWomenFeatures() {
         bioAr: "أسست مبادرات تمكين المرأة المبكرة، وأرشيفات التراث المدني، وشبكات نشر حقوق الإنسان في إقليم كردستان، مما مد جسور الحوار مع الوفود النسائية الدولية.",
         bioZh: "在库尔德斯坦地区创立早期妇女赋权项目、民间文化遗产档案以及人权出版网络，有效推动了与国际女性代表团的深化对话。",
         bioCkb: "پێشەنگایەتی کرد لە دامەزراندنی پڕۆژەکانی بەهێزکردنی ئافرەتان و بڵاوکراوەکانی مافی مرۆڤ لە هەرێمی کوردستان.",
-        imageUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1524230507669-5ff97982bb5e?auto=format&fit=crop&q=80&w=1200",
         organization: "Kurdistan Civil Heritage Foundation",
         publicationUrl: null,
         isFeatured: true,
@@ -109,9 +106,9 @@ export async function seedWomenFeatures() {
         bioAr: "يركز هذا الإطار السياساتي على ثلاثة ركائز أساسية: 1) تكافؤ الفرص للحصول على رؤوس الأموال الخضراء لسيدات الأعمال؛ 2) شبكة المساعدة القانونية الثنائية للتجارة؛ 3) حصص التبادل الأكاديمي للباحثات الشابات في التكنولوجيا والدبلوماسية.",
         bioZh: "该政策框架紧扣三大实施支柱：1）保障女性创业者平等获得绿色创新资金；2）构建跨国女性商贸法律援助联合网络；3）设立科技与外交领域青年女学者定向交流名额。",
         bioCkb: "ئەم چوارچێوە سیاسییە سەرنج دەخاتە سەر ٣ کۆڵەکەی سەرەکی: دەستپێگەیشتنی یەکسان بۆ سەرمایەی وەبەرهێنان، هاوکاری یاسایی دووقۆڵی و ئاڵوگۆڕی ئەکادیمی.",
-        imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1200",
         organization: "Trilateral Women Rights Commission (Beijing-Baghdad-Erbil)",
-        publicationUrl: "https://iraqchinadaily.media/policy/women-declaration-2026.pdf",
+        publicationUrl: "https://iraqi-chineseagency.com/policy/women-declaration-2026.pdf",
         isFeatured: true,
         isTrending: true
       },
@@ -135,9 +132,9 @@ export async function seedWomenFeatures() {
         bioAr: "منحت قمة 2026 تمويلاً قدره 2.5 مليون دولار للمؤسسات اللاتي يبنين إدارة الطائرات الزراعية بدون طيار، والنماذج اللغوية الكردية، وشبكات التطبيب عن بعد.",
         bioZh: "2026年度峰会现场向女性创业者颁发250万美元种子基金，重点扶持跨国农业无人机系统、本地化库尔德语大语言模型以及便民远程医疗网络。",
         bioCkb: "لووتکەی ٢٠٢٦ بڕی ۲.٥ ملیۆن دۆلاری وەک یارمەتی بەخشی بە دامەزرێنەرانی ئافرەت کە لە بواری فرۆکەی بێفرۆکەوان و زیرەکی دەستکرددا کاردەکەن.",
-        imageUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200",
         organization: "Sino-Arab Female Tech Leaders Forum",
-        publicationUrl: "https://iraqchinadaily.media/summit/women-tech-2026",
+        publicationUrl: "https://iraqi-chineseagency.com/summit/women-tech-2026",
         isFeatured: true,
         isTrending: true
       },
@@ -161,17 +158,19 @@ export async function seedWomenFeatures() {
         bioAr: "تأليف مشترك بين الدكتورة وانغ شيوينغ والدكتورة أمل المنصور، يسلط هذا البحث الضوء على السجلات المخطوطة للمعتمدات والتجارات في بلاد الرافدين والصين.",
         bioZh: "由王秀英教授与阿迈勒·曼苏尔博士联合撰写，披露了大量两河流域与宋代中国女性商贾的历史文献，为新时代中伊中库文化合作确立了学术基石。",
         bioCkb: "لە نووسینی هاوبەشی د. وانگ شیوینگ و د. ئەمەل مەنسورە کە تیشک دەخاتە سەر بەڵگەنامە کۆنەکانی بازرگانانی ئافرەت لە میسۆپۆتامیا و چین.",
-        imageUrl: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1000",
+        imageUrl: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1200",
         organization: "Iraq-China Daily Academic Press & Center for Silk Road Women Studies",
-        publicationUrl: "https://iraqchinadaily.media/books/silkroad-women-diplomacy.pdf",
+        publicationUrl: "https://iraqi-chineseagency.com/books/silkroad-women-diplomacy.pdf",
         isFeatured: true,
         isTrending: true
       }
     ];
 
     for (const item of features) {
-      await prisma.womenFeature.create({
-        data: item
+      await prisma.womenFeature.upsert({
+        where: { slug: item.slug },
+        update: item,
+        create: item
       });
     }
 

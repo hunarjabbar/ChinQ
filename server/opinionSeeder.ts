@@ -17,7 +17,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 1. Ambassador Cui Wei
   {
     slug: "cui-wei-golden-era-sino-iraqi-strategic-trust",
-    authorEmail: "cui.wei@iraqchinadaily.post",
+    authorEmail: "cui.wei@iraqi-chineseagency.com",
     authorName: "Amb. Cui Wei",
     imageUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -50,7 +50,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 2. Dr. Ihsan Al-Shammari
   {
     slug: "al-shammari-balancing-giants-iraqi-sovereignty",
-    authorEmail: "ihsan.shammari@iraqchinadaily.post",
+    authorEmail: "ihsan.shammari@iraqi-chineseagency.com",
     authorName: "Dr. Ihsan Al-Shammari",
     imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -83,9 +83,9 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 3. Dr. Wang Jin
   {
     slug: "wang-jin-unpacking-oil-for-construction-model",
-    authorEmail: "wang.jin@iraqchinadaily.post",
+    authorEmail: "wang.jin@iraqi-chineseagency.com",
     authorName: "Dr. Wang Jin",
-    imageUrl: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
     translations: [
       {
         lang: "en",
@@ -116,7 +116,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 4. Dr. Bilal Wahab
   {
     slug: "bilal-wahab-erbil-pivot-kurdistans-energy-diversification",
-    authorEmail: "bilal.wahab@iraqchinadaily.post",
+    authorEmail: "bilal.wahab@iraqi-chineseagency.com",
     authorName: "Dr. Bilal Wahab",
     imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -149,9 +149,9 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 5. Prof. Lin Minwang
   {
     slug: "lin-minwang-synergy-of-seas-development-road",
-    authorEmail: "lin.minwang@iraqchinadaily.post",
+    authorEmail: "lin.minwang@iraqi-chineseagency.com",
     authorName: "Prof. Lin Minwang",
-    imageUrl: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1520612142081-3bb0326b7746?q=80&w=1200&auto=format&fit=crop",
     translations: [
       {
         lang: "en",
@@ -182,9 +182,9 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 6. Dr. Mudher Mohammad Saleh
   {
     slug: "mudher-saleh-modernizing-iraq-financial-architecture-yuan",
-    authorEmail: "mudher.saleh@iraqchinadaily.post",
+    authorEmail: "mudher.saleh@iraqi-chineseagency.com",
     authorName: "Dr. Mudher Mohammad Saleh",
-    imageUrl: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200&auto=format&fit=crop",
     translations: [
       {
         lang: "en",
@@ -215,7 +215,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 7. Zheng Qingyi
   {
     slug: "zheng-qingyi-financial-silk-road-currency-corridors",
-    authorEmail: "zheng.qingyi@iraqchinadaily.post",
+    authorEmail: "zheng.qingyi@iraqi-chineseagency.com",
     authorName: "Zheng Qingyi",
     imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -248,7 +248,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 8. Yasser Al-Maliki
   {
     slug: "yasser-al-maliki-opec-tightrope-basra-crude-china",
-    authorEmail: "yasser.maliki@iraqchinadaily.post",
+    authorEmail: "yasser.maliki@iraqi-chineseagency.com",
     authorName: "Yasser Al-Maliki",
     imageUrl: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -281,7 +281,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 9. Sajad Jiyad
   {
     slug: "sajad-jiyad-beyond-concrete-local-labor-integration",
-    authorEmail: "sajad.jiyad@iraqchinadaily.post",
+    authorEmail: "sajad.jiyad@iraqi-chineseagency.com",
     authorName: "Sajad Jiyad",
     imageUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -314,7 +314,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 10. Shwan Zulal
   {
     slug: "shwan-zulal-sino-kurdish-synergy-private-capital-gas",
-    authorEmail: "shwan.zulal@iraqchinadaily.post",
+    authorEmail: "shwan.zulal@iraqi-chineseagency.com",
     authorName: "Shwan Zulal",
     imageUrl: "https://images.unsplash.com/photo-1413882353057-a159e44437aa?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -347,7 +347,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 11. Dr. Qian Xuejie
   {
     slug: "qian-xuejie-green-energy-transition-associated-gas",
-    authorEmail: "qian.xuejie@iraqchinadaily.post",
+    authorEmail: "qian.xuejie@iraqi-chineseagency.com",
     authorName: "Dr. Qian Xuejie",
     imageUrl: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -380,7 +380,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 12. Farhad Alaaldin
   {
     slug: "farhad-alaaldin-al-faw-port-iraq-sovereign-gateway",
-    authorEmail: "farhad.alaaldin@iraqchinadaily.post",
+    authorEmail: "farhad.alaaldin@iraqi-chineseagency.com",
     authorName: "Farhad Alaaldin",
     imageUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -413,7 +413,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 13. Dr. Wang Jin (second theme on academic pipelines)
   {
     slug: "wang-jin-scholarly-pipelines-human-capital-china-iraq",
-    authorEmail: "wang.jin@iraqchinadaily.post",
+    authorEmail: "wang.jin@iraqi-chineseagency.com",
     authorName: "Dr. Wang Jin",
     imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -446,7 +446,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 14. Sherwan Al-Salihi
   {
     slug: "sherwan-al-salihi-historic-silk-highway-reconnecting- Kirkuk",
-    authorEmail: "sherwan.salihi@iraqchinadaily.post",
+    authorEmail: "sherwan.salihi@iraqi-chineseagency.com",
     authorName: "Sherwan Al-Salihi",
     imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -479,7 +479,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 15. Bayan Sami Abdul Rahman
   {
     slug: "bayan-rahman-multi-vector-foreign-policy-kurdistan-region",
-    authorEmail: "bayan.rahman@iraqchinadaily.post",
+    authorEmail: "bayan.rahman@iraqi-chineseagency.com",
     authorName: "Bayan Sami Abdul Rahman",
     imageUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -512,7 +512,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 16. Dr. Dastan Qader
   {
     slug: "dastan-qader-bridging-erbil-beijing-academic-exchange",
-    authorEmail: "dastan.qader@iraqchinadaily.post",
+    authorEmail: "dastan.qader@iraqi-chineseagency.com",
     authorName: "Dr. Dastan Qader",
     imageUrl: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -545,7 +545,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 17. Dr. Ihsan Al-Shammari (second theme on administrative reforms)
   {
     slug: "al-shammari-administrative-lessons-from-china",
-    authorEmail: "ihsan.shammari@iraqchinadaily.post",
+    authorEmail: "ihsan.shammari@iraqi-chineseagency.com",
     authorName: "Dr. Ihsan Al-Shammari",
     imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -578,7 +578,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 18. Hanaa Edwar
   {
     slug: "hanaa-edwar-social-environmental-impact-rebuilding",
-    authorEmail: "hanaa.edwar@iraqchinadaily.post",
+    authorEmail: "hanaa.edwar@iraqi-chineseagency.com",
     authorName: "Hanaa Edwar",
     imageUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -611,7 +611,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 19. Sarkawt Shamsulddin
   {
     slug: "sarkawt-shamsulddin-decentralized-belt-road-northern-provinces",
-    authorEmail: "sarkawt.shamsulddin@iraqchinadaily.post",
+    authorEmail: "sarkawt.shamsulddin@iraqi-chineseagency.com",
     authorName: "Sarkawt Shamsulddin",
     imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -644,7 +644,7 @@ const OPINIONS_DATA: OpinionArticle[] = [
   // 20. Ambassador Cui Wei (second theme on cultural deep bridges)
   {
     slug: "cui-wei-cultural-bridges-cradle-civilizations",
-    authorEmail: "cui.wei@iraqchinadaily.post",
+    authorEmail: "cui.wei@iraqi-chineseagency.com",
     authorName: "Amb. Cui Wei",
     imageUrl: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=1200&auto=format&fit=crop",
     translations: [
@@ -719,14 +719,10 @@ export async function seedOpinions() {
       where: { slug: op.slug }
     });
 
-    if (existingArticle) {
-      console.log(`[Opinion Seeder] Article "${op.slug}" already exists. Skipping.`);
-      continue;
-    }
-
-    // Create Article
-    await prisma.article.create({
-      data: {
+    // Create Article or update image
+    await prisma.article.upsert({
+      where: { slug: op.slug },
+      create: {
         slug: op.slug,
         status: "PUBLISHED",
         imageUrl: op.imageUrl,
@@ -735,10 +731,13 @@ export async function seedOpinions() {
         translations: {
           create: op.translations
         }
+      },
+      update: {
+        imageUrl: op.imageUrl
       }
     });
 
-    console.log(`[Opinion Seeder] Created opinion article: "${op.slug}"`);
+    console.log(`[Opinion Seeder] Processed opinion article: "${op.slug}"`);
   }
 
   console.log("✅ [Opinion Seeder] 20 opinions seeded successfully!");

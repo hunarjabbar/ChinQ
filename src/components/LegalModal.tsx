@@ -33,10 +33,10 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
             </div>
             <div>
               <h3 className="font-serif text-lg sm:text-xl font-bold">
-                {isAr ? 'المركز القانوني وسياسة الخصوصية' : isZh ? '法律合规与隐私政策中心' : isCkb ? 'ناوەندی یاسایی و سیاسەتی تایبەتمەندی' : 'Legal & Compliance Hub'}
+                {isAr ? 'المركز القانوني وسياسة الخصوصية السيادية' : isZh ? '法律合规与主权隐私政策中心' : isCkb ? 'ناوەندی یاسایی و سیاسەتی تایبەتمەندی' : 'Legal & Sovereign Compliance Hub'}
               </h3>
               <p className="text-xs font-mono text-brand-200 opacity-90">
-                {isAr ? 'مجموعة الوكالة العراقية الصينية - الشروط والأحكام والخصوصية السيادية' : isZh ? '伊中通讯社传媒集团 • 主权合规与隐私保护条款' : isCkb ? 'گرووپی ئاژانسی عێراقی - چینی • مەرج و ڕێساکانی پاراستنی زانیاری' : 'Iraqi-Chinese Media Group • Sovereign Governance & Terms'}
+                {isAr ? 'مجموعة الوكالة العراقية الصينية - الشروط والأحكام والخصوصية وحماية البيانات' : isZh ? '伊中通讯社传媒集团 • 主权合规与隐私保护条款' : isCkb ? 'گرووپی ئاژانسي عێراقی - چینی • مەرج و ڕێساکانی پاراستنی زانیاری' : 'Iraqi-Chinese Media Group • Sovereign Data Governance & Terms'}
               </p>
             </div>
           </div>
@@ -135,6 +135,75 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                     : 'We utilize essential session cookies strictly to preserve your selected language preference (Arabic, Chinese, Kurdish, English), dark/light display mode state, and subscriber authentication token. You may disable cookies in your browser settings, though portal interactivity may be restricted.'}
                 </p>
               </div>
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-brand-800" />
+                  <span>4. {isAr ? 'حقوق بيانات المستخدم (الوصول، التصحيح، الحذف)' : isZh ? '4. 用户数据权利（访问、更正、删除）' : isCkb ? '4. مافی داتای بەکارهێنەر (دەستگەیشتن، ڕاستکردنەوە، سڕینەوە)' : '4. User Data Rights (Access, Rectification, Erasure)'}</span>
+                </h5>
+                <p>
+                  {isAr 
+                    ? 'يحتفظ المستخدمون بالحق السيادي في الوصول إلى معرفاتهم الشخصية أو تصحيحها أو طلب مسحها داخل قاعدة بيانات المجموعة. يمكن توجيه طلبات نقل البيانات أو تقييد المعالجة إلى مسؤول حماية البيانات الإقليمي عبر المكتب القانوني الرسمي.'
+                    : isZh
+                    ? '用户对其在财团数据库中的个人识别信息拥有访问、更正及请求删除的主权权利。数据迁移或限制处理的请求可通过官方法律事务处提交至区域数据保护专员。'
+                    : isCkb
+                    ? 'بەکارهێنەران مافی تەواویان هەیە بۆ دەستگەیشتن، ڕاستکردنەوە، یان داواکردنی سڕینەوەی زانیارییە کەسییەکانیان لە داتابەیسەکانی گرووپەکەدا.'
+                    : 'Users maintain the sovereign right to access, rectify, or request the erasure of their personal identifiers within the syndicate’s database. Requests for data portability or restricted processing can be directed to the regional Data Protection Officer via the official legal desk.'}
+                </p>
+                <div className="bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 space-y-2 mt-2">
+                  <h6 className="font-bold text-xs uppercase tracking-widest text-brand-800 dark:text-brand-400">
+                    {isAr ? 'بروتوكول طلب البيانات والتحقق السيادي' : isZh ? '数据请求协议与主权验证' : 'Data Request Protocol & Sovereign Verification'}
+                  </h6>
+                  <ul className="list-disc list-inside space-y-1 text-xs">
+                    <li>{isAr ? 'التحقق من الهوية السيادية مطلوب قبل أي إفصاح عن البيانات الحساسة.' : isZh ? '在任何敏感数据披露前需进行严格的主权身份验证。' : 'Sovereign identity verification is mandated prior to any sensitive data disclosure.'}</li>
+                    <li>{isAr ? 'تتم معالجة الطلبات الرسمية في غضون ١٠ إلى ١٥ يوم عمل.' : isZh ? '官方请求将在 10 至 15 个工作日内完成审核。' : 'Official requests are processed within 10 to 15 standard business days.'}</li>
+                    <li>{isAr ? 'يتم أرشفة جميع سجلات التدقيق لطلبات البيانات بشكل آمن لمدة سنتين كاملتين.' : isZh ? '所有数据请求的审计日志将安全保留两个完整日历年。' : 'All audit logs for data requests are securely retained for two full calendar years.'}</li>
+                    <li>{isAr ? 'للاستفسارات القانونية، تواصل مع: desk@iraqi-chineseagency.com' : isZh ? '法律咨询请联系：desk@iraqi-chineseagency.com' : 'For formal legal inquiries: desk@iraqi-chineseagency.com'}</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Lock className="w-5 h-5 text-brand-800" />
+                  <span>5. {isAr ? 'الحماية ضد التهديدات الإلكترونية وسرقة البيانات' : isZh ? '5. 网络威胁防护与数据泄露防御' : '5. Protection Against Cyber Threats & Data Breach'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'تستخدم المجموعة جدران حماية من الجيل التالي وأنظمة كشف التسلل النشطة لحماية البنية التحتية للمعلومات الثنائية. في حالة حدوث خرق أمني غير محتمل، سيتم إخطار المستخدمين المتأثرين في غضون ٤٨ ساعة.'
+                    : isZh
+                    ? '集团采用下一代防火墙和主动入侵检测系统来保护双边信息基础设施。在极少数发生数据泄露的情况下，受影响用户将在 48 小时内获得通知。'
+                    : 'The syndicate employs next-generation firewalls and active intrusion detection systems to safeguard the bilateral information infrastructure. In the unlikely event of a security breach, affected users will be notified within 48 hours.'}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-brand-800" />
+                  <span>6. {isAr ? 'سياسات حفظ البيانات والأرشفة' : isZh ? '6. 数据保留与存档政策' : isCkb ? '6. سیاسەتەکانی پاراستنی داتا و ئەرشیفکردن' : '6. Data Retention & Archive Policies'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'يتم الاحتفاظ بالبيانات الشخصية المرتبطة باشتراكات النشرة الإخبارية وقوائم دليل الأعمال طوال مدة الارتباط الثنائي النشط. يتم تخزين سجلات الأرشيف للتدقيق الإداري بشكل آمن لمدة ٧ سنوات وفقاً لمعايير حفظ السجلات التجارية الدولية.'
+                    : isZh
+                    ? '与新闻订阅及企业名录相关的个人数据将在双边业务存续期间保留。用于行政审计的归档日志将根据国际商业记录保存标准安全存储7年。'
+                    : isCkb
+                    ? 'زانیارییە کەسییەکان بۆ ماوەی چالاکبوونی پەیوەندییەکان دەپارێزرێن. تۆمارە ئەکادیمییەکان بۆ ماوەی ٧ ساڵ دەپارێزرێن بەپێی پێوەرە نێودەوڵەتییەکان.'
+                    : 'Personal data associated with newsletter subscriptions and business directory listings is retained for the duration of the active bilateral engagement. Archival logs for administrative auditing are stored securely for 7 years in accordance with international commercial record-keeping standards.'}
+                </p>
+              </div>
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Building2 className="w-5 h-5 text-brand-800" />
+                  <span>7. {isAr ? 'الامتثال للوائح حماية البيانات الإقليمية والدولية' : isZh ? '7. 区域与国际数据保护条例合规性' : '7. Compliance with Regional & International Data Regulations'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'تلتزم مجموعة الوكالة العراقية الصينية بأطر حماية البيانات الوطنية في العراق والصين، بالإضافة إلى التوافق مع المعايير الدولية لحماية البيانات الصحفية. نضمن أن معالجة البيانات تتم بشفافية كاملة ولأغراض مهنية محددة فقط.'
+                    : isZh
+                    ? '伊中通讯社传媒集团严格遵守伊拉克与中国国家级数据保护框架，并与国际新闻数据保护标准保持一致。我们确保所有数据处理过程完全透明，且仅用于明确的专业传播目的。'
+                    : 'The Iraqi-Chinese Media Group strictly adheres to national data protection frameworks in Iraq and China, while maintaining alignment with international journalistic data protection standards. We ensure all data processing is conducted with full transparency and exclusively for defined professional dissemination purposes.'}
+                </p>
+              </div>
             </div>
           ) : (
             <div className="space-y-6">
@@ -192,6 +261,77 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                     : isCkb
                     ? 'ئەم مەرجانە بەپێی یاساکانی عێراق و چین جێبەجێ دەبن. لە کاتی هەر مشتومڕێکدا، دادگا و دەزگا دادوەرییە پەیوەندیدارەکانی بەغداد و پەکین دەسەڵاتی یەکلاکەرەوەیان دەبێت.'
                     : 'This agreement is governed by and construed in accordance with the sovereign legal frameworks of the Republic of Iraq and the People’s Republic of China. Any disputes arising from portal operations, IP enforcement, or bilateral syndication shall be settled under the jurisdiction of competent tribunals in Baghdad and Beijing.'}
+                </p>
+              </div>
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Lock className="w-5 h-5 text-brand-800" />
+                  <span>4. {isAr ? 'قيود الاستخدام والسلوك المهني' : isZh ? '4. 使用限制与专业行为准则' : isCkb ? '4. مەرجەکانی بەکارهێنان و ڕەفتاری پیشەیی' : '4. Usage Restrictions & Professional Conduct'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'يوافق المستخدمون على استخدام المنصة لأغراض البحوث المهنية والأكاديمية والتجارية فقط. تشمل الإجراءات المحظورة جمع البيانات الآلي (Scraping)، أو محاولات حجب الخدمة، أو نشر الشائعات الثنائية غير المؤكدة. يؤدي انتهاك هذه المعايير إلى إلغاء فوري لاعتمادات الوصول للمؤسسة.'
+                    : isZh
+                    ? '用户同意仅将门户用于专业、学术及商业研究目的。严禁行为包括自动化数据抓取（Scraping）、拒绝服务攻击（DoS）或传播未经证实的双边谣言。违反此类规范将导致立即撤销企业访问凭证。'
+                    : isCkb
+                    ? 'بەکارهێنەران ڕازی دەبن کە سەکۆکە تەنها بۆ مەبەستی پیشەیی و ئەکادیمی بەکاربهێنن. کۆکردنەوەی زانیاری بە شێوەی ئۆتۆماتیکی و بڵاوکردنەوەی دەنگۆی ناڕاست قەدەغەیە.'
+                    : 'Users agree to utilize the portal for professional, academic, and commercial research only. Prohibited actions include automated data harvesting (scraping), denial-of-service attempts, or the propagation of unverified bilateral rumors. Violation of these norms results in immediate revocation of enterprise access credentials.'}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Building2 className="w-5 h-5 text-brand-800" />
+                  <span>5. {isAr ? 'بند استمرارية الخدمة والسيادة' : isZh ? '5. 服务持续性与主权条款' : isCkb ? '5. بەردەوامی خزمەتگوزاری و مەرجی سەروەری' : '5. Service Continuity & Sovereignty Clause'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'تحتفظ مجموعة الوكالة العراقية الصينية بالحق في تعديل أو تعليق أو تقييد وظائف المنصة للامتثال للوائح الاتصالات الإقليمية المتطورة أو التوجيهات الأمنية السيادية في بغداد أو بكين. يتم تقديم مستويات الخدمة على أساس "حسب التوفر" دون ضمان وقت تشغيل محدد.'
+                    : isZh
+                    ? '伊中通讯社传媒集团保留修改、暂停或限制门户功能以符合巴格达或北京不断变化的区域电信法规或主权安全指令的权利。服务按“现有”基础提供，不保证持续运行时间。'
+                    : isCkb
+                    ? 'ئاژانسی عێراقی - چینی مافی گۆڕانکاری و ڕاگرتنی خزمەتگوزارییەکانی هەیە بەپێی یاساکانی پەيوەندی لە بەغداد و پەکین.'
+                    : 'The Iraqi-Chinese Media Group reserves the right to modify, suspend, or restrict portal functionality to comply with evolving regional telecommunications regulations or sovereign security directives in Baghdad or Beijing. Service levels are provided on an "as-available" basis without guaranteed uptime.'}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Globe className="w-5 h-5 text-brand-800" />
+                  <span>6. {isAr ? 'سياسة روابط الطرف الثالث والاعتماد' : isZh ? '6. 第三方链接与认证政策' : '6. Third-Party Links & Accreditation Policy'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'قد تحتوي المنصة على روابط لمواقع خارجية. لا تتحمل المجموعة مسؤولية المحتوى أو دقة المعلومات على تلك المواقع. يجب أن يتم توثيق أي ادعاء بالاعتماد من قبل المجموعة عبر القنوات الرسمية فقط.'
+                    : isZh
+                    ? '本平台可能包含指向第三方网站的链接。集团不对该等网站的内容或信息的准确性负责。任何声称获得集团认证的主张必须仅通过官方渠道进行核实。'
+                    : 'The portal may contain links to external websites. The syndicate assumes no responsibility for the content or accuracy of information on such sites. Any claims of accreditation by the syndicate must be verified exclusively through official channels.'}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                  <Lock className="w-5 h-5 text-brand-800" />
+                  <span>7. {isAr ? 'إنهاء الوصول وإلغاء الاشتراك والجزاءات القانونية' : isZh ? '7. 终止访问、注销订阅与法律制裁' : '7. Termination of Access, Unsubscription & Legal Sanctions'}</span>
+                </h5>
+                <p>
+                  {isAr
+                    ? 'نحتفظ بالحق في إنهاء وصول المستخدمين الذين ينخرطون في سلوكيات تنتهك معايير النزاهة الإعلامية أو يحاولون التلاعب بالبيانات الاقتصادية المنشورة. قد تتبع الانتهاكات الخطيرة إجراءات قانونية رسمية أمام المحاكم المختصة.'
+                    : isZh
+                    ? '我们保留终止从事违反媒体诚信准则或试图操纵发布的经济数据的用户访问权限的权利。严重违规行为可能会在相关法院面临正式的法律诉讼。'
+                    : 'We reserve the right to terminate access for users who engage in conduct that violates media integrity standards or attempts to manipulate published economic data. Serious violations may be followed by formal legal proceedings before competent courts.'}
+                </p>
+              </div>
+              <div className="bg-brand-50 dark:bg-brand-950/20 p-5 rounded-xl border border-brand-100 dark:border-brand-900/30 mt-6">
+                <h6 className="text-sm font-bold text-brand-900 dark:text-brand-300 mb-2">
+                  {isAr ? 'إعلان الامتثال الرسمي' : isZh ? '正式合规声明' : 'Official Compliance Declaration'}
+                </h6>
+                <p className="text-xs leading-relaxed opacity-80 italic">
+                  {isAr 
+                    ? 'يُقر المستخدم من خلال الاستمرار في استخدام هذه المنصة بأنه قد قرأ وفهم جميع الشروط والأحكام والسياسات المذكورة أعلاه، ويوافق على الالتزام بها كإطار تعاقدي ملزم بينه وبين مجموعة الوكالة العراقية الصينية.'
+                    : isZh
+                    ? '通过继续使用本平台，用户确认已阅读并理解上述所有条款、条件和政策，并同意将其作为其与伊中通讯社传媒集团之间具有约束力的合同框架。'
+                    : 'By continuing to use this platform, the user acknowledges that they have read and understood all the terms, conditions, and policies stated above, and agrees to be bound by them as a binding contractual framework between them and the Iraqi-Chinese Media Group.'}
                 </p>
               </div>
             </div>

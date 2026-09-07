@@ -34,9 +34,9 @@ interface SiteStore extends SiteConfig {
 const DEFAULT_SOCIAL_LINKS: SocialLinksConfig = {
   whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
   facebook: 'https://facebook.com/IraqiChineseAgency',
-  instagram: 'https://instagram.com/iraqichineseagency',
+  instagram: 'https://instagram.com/iraqi-chineseagency',
   linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
-  weibo: 'https://weibo.com/iraqichineseagency',
+  weibo: 'https://weibo.com/iraqi-chineseagency',
   wechat: 'IraqiChineseAgency_Official',
   youtube: 'https://youtube.com/@IraqiChineseAgency',
   x: 'https://x.com/IraqiChineseAgency',
@@ -44,7 +44,7 @@ const DEFAULT_SOCIAL_LINKS: SocialLinksConfig = {
 
 const DEFAULT_STATE: SiteConfig = {
   siteName: 'Iraqi-Chinese Agency',
-  contactEmail: 'desk@iraqichineseagency.com',
+  contactEmail: 'desk@iraqi-chineseagency.com',
   cachingEnabled: true,
   autoTranslate: true,
   geoLatencyRoute: 'baghdad-beijing',

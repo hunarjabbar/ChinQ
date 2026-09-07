@@ -32,14 +32,14 @@ export function AdminSettings() {
     inkColor: siteSettings.inkColor || '#1A1A1A',
     paperColor: siteSettings.paperColor || '#FAFAFA',
     socialLinks: siteSettings.socialLinks || {
-      whatsapp: 'https://chat.whatsapp.com/IraqChinaDailyOfficial',
-      facebook: 'https://facebook.com/IraqChinaDaily',
-      instagram: 'https://instagram.com/iraqchinadaily',
-      linkedin: 'https://linkedin.com/company/iraq-china-daily',
-      weibo: 'https://weibo.com/iraqchinadaily',
-      wechat: 'IraqChinaDaily_Official',
-      youtube: 'https://youtube.com/@IraqChinaDaily',
-      x: 'https://x.com/IraqChinaDaily',
+      whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
+      facebook: 'https://facebook.com/IraqiChineseAgency',
+      instagram: 'https://instagram.com/iraqi-chineseagency',
+      linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
+      weibo: 'https://weibo.com/iraqi-chineseagency',
+      wechat: 'IraqiChineseAgency_Official',
+      youtube: 'https://youtube.com/@IraqiChineseAgency',
+      x: 'https://x.com/IraqiChineseAgency',
     }
   });
 
@@ -205,7 +205,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, facebook: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://facebook.com/IraqChinaDaily"
+                  placeholder="https://facebook.com/IraqiChineseAgency"
                 />
               </div>
 
@@ -223,7 +223,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, instagram: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://instagram.com/iraqchinadaily"
+                  placeholder="https://instagram.com/iraqi-chineseagency"
                 />
               </div>
 
@@ -241,7 +241,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, linkedin: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://linkedin.com/company/iraq-china-daily"
+                  placeholder="https://linkedin.com/company/iraqi-chinese-agency"
                 />
               </div>
 
@@ -259,7 +259,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, weibo: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://weibo.com/iraqchinadaily"
+                  placeholder="https://weibo.com/iraqi-chineseagency"
                 />
               </div>
 
@@ -277,7 +277,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, wechat: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="IraqChinaDaily_Official"
+                  placeholder="IraqiChineseAgency_Official"
                 />
               </div>
 
@@ -295,7 +295,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, youtube: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://youtube.com/@IraqChinaDaily"
+                  placeholder="https://youtube.com/@IraqiChineseAgency"
                 />
               </div>
 
@@ -313,7 +313,7 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, x: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
-                  placeholder="https://x.com/IraqChinaDaily"
+                  placeholder="https://x.com/IraqiChineseAgency"
                 />
               </div>
             </div>
