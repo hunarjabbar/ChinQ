@@ -67,6 +67,7 @@ export function TrilingualEditor() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
       queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
       setStatusMessage({ type: 'success', text: 'Article published successfully across all 4 languages!' });
       setTimeout(() => {

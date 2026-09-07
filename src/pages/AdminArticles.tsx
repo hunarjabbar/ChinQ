@@ -1,11 +1,32 @@
 import { apiFetch } from '../lib/api';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
-import { Plus, Search, MoreVertical, Edit } from 'lucide-react';
+import { Plus, Search, MoreVertical, Edit, Trash2 } from 'lucide-react';
 import { AdminLayout } from '../components/AdminLayout';
 
 export function AdminArticles() {
   const { lang } = useParams<{ lang: string }>();
+
+  
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const res = await apiFetch(`/api/admin/articles/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
+    }
+  });
+
+  const handleDelete = (id: string, title: string) => {
+    if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
+      deleteMutation.mutate(id);
+    }
+  };
 
   const { data: articles = [], isLoading } = useQuery<any[]>({
     queryKey: ['admin-articles'],
@@ -119,8 +140,8 @@ export function AdminArticles() {
                             <Link to={`/${lang}/admin/articles/${article.id}`} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
                               <Edit size={14} />
                             </Link>
-                            <button className="p-2 text-neutral-400 hover:text-ink-900 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
-                              <MoreVertical size={14} />
+                            <button onClick={() => handleDelete(article.id, title)} className="p-2 text-neutral-400 hover:text-brand-800 bg-white border border-neutral-100 rounded-lg hover:shadow-sm transition-all">
+                              <Trash2 size={14} />
                             </button>
                           </div>
                         </td>

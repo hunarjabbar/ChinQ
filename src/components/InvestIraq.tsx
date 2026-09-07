@@ -36,7 +36,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
         </svg>
       </div>
 
-      <div className="w-full relative z-10 space-y-6">
+      <div className="w-full relative z-10 space-y-6 bg-brand-950/20 p-8 rounded-2xl border border-white/10 backdrop-blur-sm shadow-inner">
         {/* Pulsing Big White Banner for Invest in Iraq & Kurdistan Region */}
         <div className="text-center py-4 px-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl animate-pulse">
           <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.3em] uppercase text-brand-200 block mb-1">
@@ -47,7 +47,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
           </h1>
         </div>
 
-        <div className="text-[11px] font-mono text-white/40 uppercase tracking-[0.4em] mb-2 flex items-center gap-3">
+        <div className="text-[11px] font-mono text-white/70 uppercase tracking-[0.4em] mb-2 flex items-center gap-3 bg-brand-900/40 px-4 py-1.5 rounded-sm w-fit border border-white/5 shadow-sm">
           <span className="w-8 h-px bg-white/20" />
           {lang === 'ar' ? 'مبادرة الاستثمار الاستراتيجية' : lang === 'zh' ? '战略投资倡议' : lang === 'ckb' ? 'دەستپێشخەری وەبەرهێنانی ستراتیژی' : 'Strategic Investment Initiative'}
         </div>

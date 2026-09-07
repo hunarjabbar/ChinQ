@@ -20,6 +20,7 @@ import SearchPage from './pages/SearchPage';
 
 import { AdminArticles } from './pages/AdminArticles';
 import { AdminArticleNew } from './pages/AdminArticleNew';
+import { AdminAuditLogs } from './pages/AdminAuditLogs';
 import { AdminUsers } from './pages/AdminUsers';
 import { AdminMedia } from './pages/AdminMedia';
 import { AdminSettings } from './pages/AdminSettings';
@@ -216,7 +217,8 @@ const router = createBrowserRouter([
       { path: "payments", element: <AdminLayout><AdminPayments /></AdminLayout> },
       { path: "partners", element: <AdminLayout><AdminPartners /></AdminLayout> },
       { path: "sourcing", element: <AdminLayout><AdminSourcing /></AdminLayout> },
-      { path: "users", element: <AdminUsers /> },
+                { path: "audit-logs", element: <AdminAuditLogs /> },
+          { path: "users", element: <AdminUsers /> },
       { path: "media", element: <AdminMedia /> },
       { path: "settings", element: <AdminSettings /> }
     ]

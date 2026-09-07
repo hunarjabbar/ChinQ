@@ -49,6 +49,7 @@ export function AdminArticleEditor() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
       queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
       alert('Article saved successfully');
       setFormData({

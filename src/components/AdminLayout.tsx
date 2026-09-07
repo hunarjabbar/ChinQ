@@ -1,5 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Copy, Sparkles, Key, Zap, Menu, X } from 'lucide-react';
+import { ErrorBoundary } from './ErrorBoundary';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Copy, Sparkles, Key, Zap, Menu, X } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -113,9 +114,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
     { name: 'Partners', href: `/${lang}/admin/partners`, icon: Briefcase },
     { name: 'Live Streams', href: `/${lang}/admin/live-events`, icon: Video },
     { name: 'Media Library', href: `/${lang}/admin/media`, icon: ImageIcon },
-    { name: 'User Management', href: `/${lang}/admin/users`, icon: Users },
-    { name: 'System Settings', href: `/${lang}/admin/settings`, icon: Settings },
-  ];
+    { name: 'User Management', href: `/${lang}/admin/users`, icon: Users, adminOnly: true },
+    { name: 'Audit Logs', href: `/${lang}/admin/audit-logs`, icon: ClipboardList, adminOnly: true },
+    { name: 'System Settings', href: `/${lang}/admin/settings`, icon: Settings, adminOnly: true },
+  ].filter(item => !item.adminOnly || user?.role === 'ADMIN');
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -566,7 +568,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
       {/* Main Workspace */}
       <main className="flex-1 flex flex-col min-h-screen overflow-hidden bg-paper-50">
         <header className="h-20 bg-white border-b border-neutral-100 shrink-0 shadow-sm z-10 flex justify-center">
-          <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 md:px-10 lg:px-12 flex items-center justify-between h-full">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between h-full">
             <div className="flex items-center gap-3 sm:gap-4">
               <button 
                 type="button"
@@ -579,6 +581,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               </button>
               <div className="w-1 h-6 bg-brand-800 rounded-full hidden sm:block"></div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                <IcaLogo size={24} variant="mark" className="hidden sm:block opacity-80" />
                 <h1 className="text-xs font-black text-ink-900 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
                   Authorized Environment
                 </h1>
@@ -669,8 +672,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           </div>
           </div>
         </header>
-        <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 md:px-10 lg:px-12 py-6 md:py-10 lg:py-12 flex-1 overflow-y-auto">
-          {children}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 flex-1 overflow-y-auto">
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
         </div>
       </main>
     </div>

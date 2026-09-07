@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useAnimation } from 'motion/react';
 import { ExternalLink, X, Building2 } from 'lucide-react';
 import { Locale } from '../types';
 
@@ -58,6 +58,14 @@ const FALLBACK_PARTNERS: PartnerItem[] = [
 
 export default function PartnersSection({ lang }: { lang: Locale }) {
   const [selectedPartner, setSelectedPartner] = useState<PartnerItem | null>(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({
+      x: ['0%', '-50%'],
+      transition: { repeat: Infinity, duration: 32, ease: 'linear', repeatType: 'loop' }
+    });
+  }, [controls]);
 
   const { data: partners = FALLBACK_PARTNERS } = useQuery<PartnerItem[]>({
     queryKey: ['partners-home'],
@@ -86,50 +94,49 @@ export default function PartnersSection({ lang }: { lang: Locale }) {
   }[lang];
 
   return (
-    <div className="w-full bg-neutral-50 dark:bg-neutral-900 border-y border-gray-200 dark:border-neutral-800 py-16 relative overflow-hidden shadow-xs my-8">
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 mb-12 flex justify-center">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black tracking-widest text-ink-900 dark:text-neutral-100 uppercase border-b-2 border-brand-800 pb-3 flex items-center gap-3">
-          <span className="w-3 h-3 bg-brand-800 rounded-sm" />
-          {t.title}
-        </h2>
+    <div className="w-full relative overflow-hidden my-8">
+      <div className="absolute inset-0 bg-neutral-900/40 z-10" />
+      <div className="absolute inset-0 z-0">
+        <img src="https://iraqchinainstitute.org/wp-content/uploads/2025/02/16b-1024x731.png" alt="Background" className="w-full h-full object-cover blur-sm opacity-60" />
       </div>
-
-      <div className="relative w-full flex overflow-x-hidden border-y border-gray-100 dark:border-neutral-800/50 py-10 bg-white dark:bg-neutral-800/20">
-        <div className="animate-marquee whitespace-nowrap flex items-stretch gap-6 sm:gap-8 px-6 sm:px-8">
-          {partners.map(p => (
-            <div 
-              key={p.id} 
-              onClick={() => setSelectedPartner(p)}
-              className="cursor-pointer group flex-shrink-0 w-[280px] sm:w-[320px] bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-brand-800 dark:hover:border-brand-500 hover:shadow-md"
-            >
-              <div className="h-16 w-full flex items-center justify-center">
-                <img src={p.logoUrl} alt={p.name} className="h-full object-contain max-w-[180px] grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
-              </div>
-              <div className="w-full h-px bg-gray-100 dark:bg-neutral-800 my-2" />
-              <div className="text-center">
-                <h4 className="font-serif font-bold text-ink-900 dark:text-neutral-100 text-lg group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors truncate w-full">{p.name}</h4>
-                <p className="text-[10px] font-mono font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest mt-1">{t.type}</p>
-              </div>
-            </div>
-          ))}
-          {/* Duplicate for infinite scroll */}
-          {partners.map(p => (
-            <div 
-              key={`dup-${p.id}`} 
-              onClick={() => setSelectedPartner(p)}
-              className="cursor-pointer group flex-shrink-0 w-[280px] sm:w-[320px] bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-brand-800 dark:hover:border-brand-500 hover:shadow-md"
-            >
-              <div className="h-16 w-full flex items-center justify-center">
-                <img src={p.logoUrl} alt={p.name} className="h-full object-contain max-w-[180px] grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
-              </div>
-              <div className="w-full h-px bg-gray-100 dark:bg-neutral-800 my-2" />
-              <div className="text-center">
-                <h4 className="font-serif font-bold text-ink-900 dark:text-neutral-100 text-lg group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors truncate w-full">{p.name}</h4>
-                <p className="text-[10px] font-mono font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest mt-1">{t.type}</p>
-              </div>
-            </div>
-          ))}
+      <div className="relative z-20 w-full bg-brand-800/80 py-16 backdrop-blur-md shadow-2xl border-y border-white/10">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 mb-12 flex justify-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black tracking-widest text-white uppercase border-b-2 border-brand-800 pb-3 flex items-center gap-3">
+            <span className="w-3 h-3 bg-brand-800 rounded-sm" />
+            {t.title}
+          </h2>
         </div>
+
+        <div 
+          className="relative w-full flex overflow-hidden border-y border-brand-800/50 py-10 bg-brand-950/40 backdrop-blur-xl shadow-inner"
+        onMouseEnter={() => controls.stop()}
+        onMouseLeave={() => controls.start({
+          x: ['0%', '-50%'],
+          transition: { repeat: Infinity, duration: 32, ease: 'linear', repeatType: 'loop' }
+        })}
+      >
+        <motion.div 
+          className="flex items-stretch gap-6 sm:gap-8 px-6 sm:px-8 whitespace-nowrap"
+          animate={controls}
+          style={{ width: 'max-content' }}
+        >
+          {[...partners, ...partners].map((p, idx) => (
+            <div 
+              key={`${p.id}-${idx}`} 
+              onClick={() => setSelectedPartner(p)}
+              className="cursor-pointer group/card flex-shrink-0 w-[280px] sm:w-[320px] bg-black/50 backdrop-blur-sm border border-neutral-800 rounded-lg p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-brand-800 hover:bg-black/70 hover:shadow-lg hover:-translate-y-1"
+            >
+              <div className="h-16 w-full flex items-center justify-center">
+                <img src={p.logoUrl} alt={p.name} className="h-full object-contain max-w-[180px] grayscale opacity-70 group-hover/card:grayscale-0 group-hover/card:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
+              </div>
+              <div className="w-full h-px bg-neutral-800 my-2" />
+              <div className="text-center">
+                <h4 className="font-serif font-bold text-white text-lg group-hover/card:text-brand-400 transition-colors truncate w-full">{p.name}</h4>
+                <p className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-widest mt-1">{t.type}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       <AnimatePresence>
@@ -196,6 +203,7 @@ export default function PartnersSection({ lang }: { lang: Locale }) {
           </div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 }

@@ -165,6 +165,61 @@ async function startServer() {
     next();
   });
   app.use(express.json());
+
+  // Global Audit Log Middleware
+  app.use((req, res, next) => {
+    if (['POST', 'PUT', 'DELETE'].includes(req.method) && req.path.startsWith('/api/') && !req.path.startsWith('/api/auth/')) {
+      const originalJson = res.json;
+      let responseBody: any = null;
+      res.json = function(body: any) {
+        responseBody = body;
+        return originalJson.call(this, body);
+      };
+      
+      res.on('finish', () => {
+        const user = (req as any).user;
+        if (res.statusCode >= 200 && res.statusCode < 300 && user) {
+          // Attempt to extract item ID
+          let itemId = null;
+          if (responseBody && typeof responseBody === 'object' && responseBody.id) {
+            itemId = responseBody.id;
+          } else {
+            const parts = req.path.split('/');
+            if (parts.length > 3 && parts[parts.length - 1] !== 'seed') {
+              itemId = parts[parts.length - 1];
+            }
+          }
+          
+          let resource = req.path.replace('/api/', '').split('/')[0];
+          if (resource === 'admin') {
+            resource = req.path.replace('/api/admin/', '').split('/')[0];
+          }
+          
+          // Truncate details
+          let details = null;
+          if (req.body) {
+            try {
+              const bodyCopy = { ...req.body };
+              if (bodyCopy.password) bodyCopy.password = '***';
+              details = JSON.stringify(bodyCopy).substring(0, 500);
+            } catch (e) {}
+          }
+          
+          prisma.auditLog.create({
+            data: {
+              userEmail: user.email,
+              action: req.method,
+              resource: resource || 'system',
+              itemId: itemId ? String(itemId) : null,
+              details: details
+            }
+          }).catch(err => console.error("Audit log error:", err));
+        }
+      });
+    }
+    next();
+  });
+
   const rateLimit = (await import("express-rate-limit")).default;
   const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -239,6 +294,20 @@ async function startServer() {
       if (e.code === "P2002")
         return res.status(400).json({ error: "Email already exists" });
       res.status(500).json({ error: "Registration failed" });
+    }
+  });
+
+
+  app.get("/api/admin/audit-logs", adminMiddleware, async (req, res) => {
+    try {
+      const logs = await prisma.auditLog.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 100
+      });
+      res.json(logs);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch audit logs" });
     }
   });
 
@@ -1654,6 +1723,103 @@ async function startServer() {
 
   // --- Visa & Flight Portal API ---
   let visaFlightsInitialized = false;
+  
+  app.get("/api/visa-flights/stats", async (req, res) => {
+    try {
+      const pendingInquiries = await prisma.visaFlightInquiry.count({
+        where: { status: "PENDING" }
+      });
+      res.json({ pendingInquiries });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
+  app.get("/api/visa-flights/inquiries", authMiddleware, async (req, res) => {
+    try {
+      const inquiries = await prisma.visaFlightInquiry.findMany({
+        orderBy: { createdAt: 'desc' }
+      });
+      res.json(inquiries);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch inquiries" });
+    }
+  });
+
+  app.post("/api/visa-flights/inquiries/seed", authMiddleware, async (req, res) => {
+    try {
+      // Create some fake inquiries
+      await prisma.visaFlightInquiry.createMany({
+        data: [
+          {
+            ticketId: "VF-" + Math.random().toString(36).substring(2, 8).toUpperCase(),
+            fullName: "Ahmed Al-Hassan",
+            email: "ahmed@example.com",
+            passportNumber: "A12345678",
+            origin: "Baghdad",
+            destination: "Beijing",
+            serviceType: "VISA_ASSISTANCE",
+            status: "PENDING",
+          }
+        ]
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to seed inquiries" });
+    }
+  });
+
+  app.put("/api/visa-flights/inquiries/:id", authMiddleware, async (req, res) => {
+    try {
+      const updated = await prisma.visaFlightInquiry.update({
+        where: { id: req.params.id },
+        data: req.body
+      });
+      res.json(updated);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to update inquiry" });
+    }
+  });
+
+  app.delete("/api/visa-flights/inquiries/:id", authMiddleware, async (req, res) => {
+    try {
+      await prisma.visaFlightInquiry.delete({
+        where: { id: req.params.id }
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to delete inquiry" });
+    }
+  });
+
+  app.post("/api/visa-flights/clone/:id", authMiddleware, async (req, res) => {
+    try {
+      const existing = await prisma.visaFlight.findUnique({
+        where: { id: req.params.id }
+      });
+      if (!existing) {
+        return res.status(404).json({ error: "Not found" });
+      }
+      
+      const { id, createdAt, updatedAt, slug, ...data } = existing;
+      const newService = await prisma.visaFlight.create({
+        data: {
+          ...data,
+          slug: existing.slug + "-copy-" + Date.now()
+        }
+      });
+      res.json(newService);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to clone service" });
+    }
+  });
+
   app.get("/api/visa-flights", async (req, res) => {
     try {
       if (!visaFlightsInitialized) {
@@ -2554,6 +2720,22 @@ async function startServer() {
     }
   });
 
+  
+  app.delete("/api/admin/articles/:id", authMiddleware, async (req, res) => {
+    try {
+      await prisma.articleTranslation.deleteMany({
+        where: { articleId: req.params.id }
+      });
+      await prisma.article.delete({
+        where: { id: req.params.id }
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to delete article" });
+    }
+  });
+
   app.post("/api/admin/news-search", editorOrAdminMiddleware, aiSearchLimiter, async (req, res) => {
     try {
       const { country, topic } = req.body;
@@ -2700,7 +2882,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/users", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/admin/users", adminMiddleware, async (req, res) => {
     try {
       let users = await prisma.user.findMany({
         orderBy: { createdAt: "desc" },
@@ -2755,7 +2937,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/users", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/admin/users", adminMiddleware, async (req, res) => {
     const { 
       name, email, role, department, title, clearanceLevel, badgeStatus, digitalId, memberCode,
       nationality, passportOrIdNumber, asaishCode, iraqiInfoCard, addressHouseNo, addressStreetNo, addressDistrictName, addressDistrictNumber,
@@ -2810,7 +2992,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/users/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/admin/users/:id", adminMiddleware, async (req, res) => {
     const {
       name,
       email,
@@ -2875,7 +3057,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/users/:id/renew", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/admin/users/:id/renew", adminMiddleware, async (req, res) => {
     try {
       const existing = await prisma.user.findUnique({ where: { id: req.params.id } });
       if (!existing) return res.status(404).json({ error: "Member not found" });
@@ -2901,7 +3083,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/users/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/admin/users/:id", adminMiddleware, async (req, res) => {
     try {
       await prisma.user.delete({
         where: { id: req.params.id },

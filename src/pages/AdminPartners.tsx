@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Plus, Edit2, Trash2, X, Save, Image as ImageIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function AdminPartners() {
+  const queryClient = useQueryClient();
   const [partners, setPartners] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -56,6 +58,7 @@ export default function AdminPartners() {
       if (res.ok) {
         setIsModalOpen(false);
         fetchPartners();
+        queryClient.invalidateQueries({ queryKey: ['partners-home'] });
       }
     } catch (e) {
       console.error(e);
@@ -71,6 +74,7 @@ export default function AdminPartners() {
       });
       if (res.ok) {
         fetchPartners();
+        queryClient.invalidateQueries({ queryKey: ['partners-home'] });
       }
     } catch (e) {
       console.error(e);
@@ -191,11 +195,35 @@ export default function AdminPartners() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1 flex items-center gap-1"><ImageIcon size={12}/> Logo URL</label>
-                  <input required type="url" value={formData.logoUrl} onChange={e => setFormData({...formData, logoUrl: e.target.value})} className="w-full text-xs border border-gray-300 p-2 focus:border-brand-800 focus:outline-none" />
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1 flex items-center gap-1"><ImageIcon size={12}/> Logo URL or SVG Upload</label>
+                  <div className="flex gap-2">
+                    <input required type="text" value={formData.logoUrl} onChange={e => setFormData({...formData, logoUrl: e.target.value})} placeholder="https://... or upload SVG below" className="w-full text-xs border border-gray-300 p-2 focus:border-brand-800 focus:outline-none" />
+                    <label className="cursor-pointer bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 px-3 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 text-ink-900 transition-colors">
+                      <ImageIcon size={14} className="text-brand-800" />
+                      Upload SVG
+                      <input 
+                        type="file" 
+                        accept=".svg,image/svg+xml,image/*" 
+                        className="hidden" 
+                        onChange={e => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = (event) => {
+                            const result = event.target?.result as string;
+                            if (result) {
+                              setFormData(prev => ({ ...prev, logoUrl: result }));
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }} 
+                      />
+                    </label>
+                  </div>
                   {formData.logoUrl && (
-                    <div className="mt-2 p-2 border border-dashed border-gray-300 inline-block bg-gray-50">
-                      <img src={formData.logoUrl} alt="Preview" className="h-12 object-contain" />
+                    <div className="mt-2 p-3 border border-dashed border-gray-300 inline-flex items-center gap-4 bg-gray-50 rounded-lg">
+                      <img src={formData.logoUrl} alt="Logo Preview" className="h-10 max-w-[120px] object-contain" />
+                      <span className="text-[10px] font-mono text-gray-500 truncate max-w-[200px]">{formData.logoUrl}</span>
                     </div>
                   )}
                 </div>

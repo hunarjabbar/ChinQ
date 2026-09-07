@@ -597,7 +597,7 @@ export function AdminUsersContent() {
         {/* Digital ID Credential Card Modal */}
         {credentialCardUser && (
           <div className="fixed inset-0 bg-brand-800/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-md shadow-2xl max-w-lg w-full overflow-hidden border-2 border-brand-800 text-start">
+            <div className="bg-white rounded-md shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto border-2 border-brand-800 text-start flex flex-col">
               <div className="bg-brand-900 text-white px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-brand-300" />
@@ -605,7 +605,7 @@ export function AdminUsersContent() {
                 </div>
                 <button onClick={() => setCredentialCardUser(null)} className="text-white hover:text-gray-300 text-lg font-bold">&times;</button>
               </div>
-              <div className="p-8 space-y-6 bg-paper-50">
+              <div className="p-8 space-y-6 bg-paper-50 flex-1 overflow-y-auto">
                 <div ref={badgeRef} className="bg-white p-6 rounded-sm shadow-sm border border-gray-200 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-800/5 rounded-full -mr-16 -mt-16 pointer-events-none" />
                   
@@ -702,7 +702,7 @@ export function AdminUsersContent() {
         {/* Create / Edit Full Member Registration Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-brand-800/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-sm shadow-2xl max-w-2xl w-full overflow-hidden text-start">
+            <div className="bg-white rounded-sm shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto text-start flex flex-col">
               <div className="px-6 py-4 border-b border-gray-200 bg-paper-50 flex items-center justify-between">
                 <h3 className="text-sm font-black uppercase tracking-widest text-ink-900 flex items-center gap-2">
                   <Shield className="w-4 h-4 text-brand-800" />

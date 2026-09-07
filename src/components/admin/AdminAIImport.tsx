@@ -83,6 +83,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
       
       setSavedSlugs(prev => ({ ...prev, [slug]: true }));
       queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
       queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
     } catch (err: any) {
       alert(`Force Save error: ${err.message}`);

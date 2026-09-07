@@ -488,3 +488,13 @@ model PaymentExchangeRate {
   lastUpdatedBy         String?   @default("PBOC / CBI Clearing Interbank Feed")
   updatedAt             DateTime  @updatedAt
 }
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userEmail String
+  action    String
+  resource  String
+  itemId    String?
+  details   String?  
+}
