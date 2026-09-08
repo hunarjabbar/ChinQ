@@ -207,15 +207,15 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="font-serif font-black text-xl md:text-2xl text-white tracking-tight">
+              <h2 className="font-black text-xl md:text-2xl text-white tracking-tight">
                 {lang === 'ar' ? 'مؤشرات الأسواق والأسهم الصينية والأسيوية' : lang === 'zh' ? '中国及香港股市指数与龙头大盘' : lang === 'ckb' ? 'نیشاندەرانی بازاڕی چین و هۆنگ کۆنگ' : 'China & Hong Kong Stock Indices & Equities'}
               </h2>
-              <span className="bg-brand-800/20 text-brand-300 border border-brand-800/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
+              <span className="bg-brand-800/20 text-brand-300 border border-brand-800/30 text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
                 REAL-TIME SSE/HKEX FEED
               </span>
             </div>
-            <p className="text-xs text-gray-400 font-mono mt-0.5">
+            <p className="text-xs text-gray-400 mt-0.5">
               {lang === 'ar' ? 'بيانات حية ومباشرة للبورصات الرئيسية في بكين وشنغهاي وهونغ كونغ وبغداد' : lang === 'zh' ? '沪深港三大交易所及中伊贸易龙头企业实盘走势' : 'Live intraday charts & streaming updates for Shanghai, Shenzhen, HKEX & Sino-Iraqi markets'}
             </p>
           </div>
@@ -271,7 +271,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
 
           {/* Interval selection pills */}
           <div className="flex items-center gap-1 bg-black/40 p-1 rounded border border-white/10">
-            <span className="text-[10px] text-gray-400 font-sans px-1 hidden sm:inline">Interval:</span>
+            <span className="text-xs text-gray-400 font-sans px-1 hidden sm:inline">Interval:</span>
             {[3, 5, 10, 30].map((sec) => (
               <button
                 key={sec}
@@ -280,7 +280,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                   setCountdown(sec);
                 }}
                 className={cn(
-                  "px-2 py-0.5 text-[10px] font-bold rounded transition-colors",
+                  "px-2 py-0.5 text-xs font-bold rounded transition-colors",
                   refreshInterval === sec ? "bg-brand-800 text-white shadow" : "text-gray-400 hover:text-white hover:bg-white/10"
                 )}
               >
@@ -297,7 +297,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                 }
               }}
               className={cn(
-                "px-2 py-0.5 text-[10px] font-bold rounded transition-colors flex items-center gap-0.5",
+                "px-2 py-0.5 text-xs font-bold rounded transition-colors flex items-center gap-0.5",
                 refreshInterval === 0 ? "bg-brand-800 text-white" : "text-gray-400 hover:text-white hover:bg-white/10"
               )}
               title={refreshInterval === 0 ? "Resume Timer" : "Pause Timer"}
@@ -339,27 +339,27 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           <div className="flex flex-wrap items-baseline justify-between border-b border-white/10 pb-4 mb-4 gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl md:text-3xl font-black font-serif text-white">
+                <span className="text-2xl md:text-3xl font-black text-white">
                   {getItemDisplayName(activeStock)}
                 </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-gray-400 bg-white/10 px-2 py-0.5 rounded">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-white/10 px-2 py-0.5 rounded">
                   {activeStock.symbol}
                 </span>
-                <span className="text-[10px] uppercase font-bold text-gray-400 border border-white/15 px-2 py-0.5 rounded">
+                <span className="text-xs uppercase font-bold text-gray-400 border border-white/15 px-2 py-0.5 rounded">
                   {activeStock.currency || 'USD'}
                 </span>
               </div>
-              <div className="text-xs font-mono text-gray-400 mt-1">
+              <div className="text-xs text-gray-400 mt-1">
                 Category: <span className="text-white font-bold">{activeStock.category || 'INDEX'}</span> | Volume: <span className="text-white font-bold">{activeStock.volume || '1.2M'}</span>
               </div>
             </div>
 
             <div className="text-end">
-              <div className={cn("text-3xl font-mono font-black transition-all duration-300", isFlashing ? "text-brand-300 scale-105" : "text-white")}>
+              <div className={cn("text-3xl font-black transition-all duration-300", isFlashing ? "text-brand-300 scale-105" : "text-white")}>
                 {activeStock.price.toLocaleString(undefined, { minimumFractionDigits: activeStock.symbol === 'BRENT' ? 2 : 2 })}
                 <span className="text-xs text-gray-400 ms-1 font-sans">{activeStock.currency}</span>
               </div>
-              <div className={cn("text-xs font-mono font-bold flex items-center justify-end gap-1 mt-0.5", isUp ? "text-brand-300" : "text-brand-400")}>
+              <div className={cn("text-xs font-bold flex items-center justify-end gap-1 mt-0.5", isUp ? "text-brand-300" : "text-brand-400")}>
                 {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
                 <span>{isUp ? '+' : ''}{activeStock.change.toFixed(2)}</span>
                 <span>({isUp ? '+' : ''}{activeStock.changePercent.toFixed(2)}%)</span>
@@ -375,7 +375,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                   key={tf}
                   onClick={() => setTimeframe(tf)}
                   className={cn(
-                    "px-2.5 py-1 text-[11px] font-mono font-bold rounded transition-colors",
+                    "px-2.5 py-1 text-[11px] font-bold rounded transition-colors",
                     timeframe === tf ? "bg-brand-800 text-white" : "text-gray-400 hover:text-white hover:bg-white/5"
                   )}
                 >
@@ -384,7 +384,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
               ))}
             </div>
 
-            <div className="text-[10px] font-mono text-gray-400 flex items-center gap-1">
+            <div className="text-xs text-gray-400 flex items-center gap-1">
               <Activity size={12} className="text-brand-300 animate-pulse" />
               <span>LIVE INTERVAL: 5 SEC</span>
             </div>
@@ -435,19 +435,19 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           {/* Key Fundamentals Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-white/10 text-xs font-mono">
             <div className="bg-black/30 p-2.5 rounded border border-white/5">
-              <div className="text-gray-400 text-[10px] uppercase font-bold">24H High</div>
+              <div className="text-gray-400 text-xs uppercase font-bold">24H High</div>
               <div className="text-white font-bold text-sm mt-0.5">{activeStock.high ? activeStock.high.toLocaleString() : '-'}</div>
             </div>
             <div className="bg-black/30 p-2.5 rounded border border-white/5">
-              <div className="text-gray-400 text-[10px] uppercase font-bold">24H Low</div>
+              <div className="text-gray-400 text-xs uppercase font-bold">24H Low</div>
               <div className="text-white font-bold text-sm mt-0.5">{activeStock.low ? activeStock.low.toLocaleString() : '-'}</div>
             </div>
             <div className="bg-black/30 p-2.5 rounded border border-white/5">
-              <div className="text-gray-400 text-[10px] uppercase font-bold">Market Cap</div>
+              <div className="text-gray-400 text-xs uppercase font-bold">Market Cap</div>
               <div className="text-white font-bold text-sm mt-0.5">{activeStock.marketCap || '-'}</div>
             </div>
             <div className="bg-black/30 p-2.5 rounded border border-white/5">
-              <div className="text-gray-400 text-[10px] uppercase font-bold">P/E Ratio</div>
+              <div className="text-gray-400 text-xs uppercase font-bold">P/E Ratio</div>
               <div className="text-white font-bold text-sm mt-0.5">{activeStock.peRatio ? activeStock.peRatio.toFixed(1) : '-'}</div>
             </div>
           </div>
@@ -504,23 +504,23 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                   >
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="font-bold font-serif text-sm text-white group-hover:text-brand-800 transition-colors">
+                        <span className="font-bold text-sm text-white group-hover:text-brand-800 transition-colors">
                           {getItemDisplayName(item)}
                         </span>
-                        <span className="text-[10px] font-mono text-gray-400 bg-black/40 px-1.5 py-0.2 rounded">
+                        <span className="text-xs text-gray-400 bg-black/40 px-1.5 py-0.2 rounded">
                           {item.symbol}
                         </span>
                       </div>
-                      <div className="text-[10px] text-gray-400 font-mono mt-0.5">
+                      <div className="text-xs text-gray-400 mt-0.5">
                         Vol: {item.volume || '1.2M'} | {item.currency || 'USD'}
                       </div>
                     </div>
 
                     <div className="text-end">
-                      <div className="font-mono font-bold text-sm text-white">
+                      <div className="font-bold text-sm text-white">
                         {item.price.toLocaleString(undefined, { minimumFractionDigits: item.symbol === 'BRENT' ? 2 : 2 })}
                       </div>
-                      <div className={cn("text-[11px] font-mono font-bold flex items-center justify-end gap-0.5", itemUp ? "text-brand-300" : "text-brand-400")}>
+                      <div className={cn("text-[11px] font-bold flex items-center justify-end gap-0.5", itemUp ? "text-brand-300" : "text-brand-400")}>
                         {itemUp ? '▲' : '▼'} {itemUp ? '+' : ''}{item.changePercent.toFixed(2)}%
                       </div>
                     </div>
@@ -531,7 +531,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
           </div>
 
           {/* Quick Sino-Iraqi Market Note */}
-          <div className="p-3 bg-black/30 border border-white/10 rounded text-[10px] text-white/80 font-mono flex items-start gap-2">
+          <div className="p-3 bg-black/30 border border-white/10 rounded text-xs text-white/80 flex items-start gap-2">
             <ShieldCheck size={16} className="text-brand-300 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-white uppercase">Sino-Iraqi Sovereign Market Feed:</span> Streaming real-time market data across Shanghai (SSE), Shenzhen (SZSE), Hong Kong (HKEX), and Iraq Stock Exchange (ISX).

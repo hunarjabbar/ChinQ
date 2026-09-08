@@ -63,7 +63,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
       {/* Header bar */}
       <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/20 pb-4 mb-6 gap-3">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-xs font-black uppercase tracking-wider rounded-xs mb-2">
             <Award className="w-3.5 h-3.5" />
             <span>
               {currentLang === 'ar' ? 'توصيات مركز الأبحاث' :
@@ -72,7 +72,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                'RECOMMENDED BOOKS'}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-serif font-black tracking-tight text-white">
+          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">
             {currentLang === 'ar' ? 'الكتب الموصى بها دراسياً وعلمياً' :
              currentLang === 'zh' ? 'Iraqi-Chinese Agency 智库核心推荐主权与地缘著作' :
              currentLang === 'ckb' ? 'کتێبە پێشنیارکراوە زانستییەکان' :
@@ -82,7 +82,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
 
         <Link
           to={`/${currentLang}/books`}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-300 hover:text-white transition-colors shrink-0 uppercase tracking-wider"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-300 hover:text-white transition-colors shrink-0 uppercase tracking-wider"
         >
           <span>
             {currentLang === 'ar' ? 'فهرس الكتب الكامل ←' :
@@ -102,7 +102,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
         </div>
       ) : recommendedBooks.length === 0 ? (
         <div className="p-8 text-center bg-brand-800 border border-white/10 rounded-xs">
-          <p className="text-xs font-mono text-gray-400">No recommended books configured yet in administration portal.</p>
+          <p className="text-xs text-gray-400">No recommended books configured yet in administration portal.</p>
         </div>
       ) : (
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -121,17 +121,17 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute top-2 left-2 bg-brand-800 text-white text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-xs">
+                  <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-bold uppercase px-2 py-0.5 rounded-xs">
                     Recommended
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="text-[10px] font-mono font-bold text-brand-300 uppercase tracking-wider mb-1">
+                  <div className="text-xs font-bold text-brand-300 uppercase tracking-wider mb-1">
                     {book.category} • {book.year}
                   </div>
-                  <h3 className="text-base font-serif font-bold text-white group-hover:text-brand-300 line-clamp-2 leading-snug transition-colors">
+                  <h3 className="text-base font-bold text-white group-hover:text-brand-300 line-clamp-2 leading-snug transition-colors">
                     {getBookTitle(book)}
                   </h3>
                   <p className="text-xs font-sans text-gray-400 line-clamp-1 mt-1">
@@ -144,7 +144,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
               </div>
 
               {/* Card Footer */}
-              <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-gray-400">
+              <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
                 <span>{book.pages} Pages</span>
                 <span className="text-brand-300 font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
                   <span>Read Monograph</span>
@@ -182,7 +182,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] font-mono space-y-1.5 text-gray-700">
+                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] space-y-1.5 text-gray-700">
                     <div className="flex justify-between">
                       <span className="text-gray-500">Publisher:</span>
                       <span className="font-bold text-gray-900 line-clamp-1">{activeBook.publisher}</span>
@@ -201,15 +201,15 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                 <div className="sm:col-span-2 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-brand-800 text-white text-xs font-black uppercase rounded-xs">
                         {activeBook.region.replace('_', ' ')}
                       </span>
-                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-[10px] font-mono font-bold uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-xs font-bold uppercase rounded-xs">
                         {activeBook.category}
                       </span>
                     </div>
 
-                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
+                    <h2 className="text-2xl font-black text-brand-800 leading-tight">
                       {getBookTitle(activeBook)}
                     </h2>
                     
@@ -219,7 +219,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                   </div>
 
                   <div className="border-t border-b border-gray-100 py-3">
-                    <h4 className="text-xs font-mono font-black uppercase tracking-wider text-gray-500 mb-2">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-gray-500 mb-2">
                       Recommendation & Synopsis
                     </h4>
                     <p className="text-xs sm:text-sm font-sans text-gray-700 leading-relaxed text-justify">
@@ -230,7 +230,7 @@ export function RecommendedBooksSection({ lang = 'en' }: RecommendedBooksSection
                   <div className="flex flex-wrap gap-3 pt-2">
                     <button
                       onClick={() => handleDownload(activeBook.id)}
-                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-xs transition-colors cursor-pointer ${
                         downloaded[activeBook.id]
                           ? 'bg-green-700 text-white'
                           : 'bg-brand-800 hover:bg-brand-700 text-white'

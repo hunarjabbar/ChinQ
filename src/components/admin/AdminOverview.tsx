@@ -87,19 +87,19 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
               if (onSelectTab && stat.tab) onSelectTab(stat.tab);
               else if (stat.tab === 'users') navigate(`/${lang}/admin/users`);
             }}
-            className="bg-white border border-neutral-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer hover:border-brand-300"
+            className="bg-white border border-neutral-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer hover:border-brand-300"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-lg ${stat.bg} ${stat.color}`}>
-                <stat.icon size={20} />
+              <div className={`p-2.5 rounded-lg ${stat.bg} ${stat.color}`}>
+                <stat.icon size={18} />
               </div>
-              <span className="text-[10px] font-mono font-bold text-neutral-400 flex items-center gap-1">
-                View <ArrowUpRight size={10} />
+              <span className="text-xs font-bold text-brand-600 flex items-center gap-1 opacity-80 hover:opacity-100 transition-opacity">
+                View <ArrowUpRight size={12} />
               </span>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-black text-ink-900 tracking-tight">{stat.value}</div>
-              <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">{stat.name}</div>
+              <div className="text-3xl font-black text-brand-900 tracking-tight">{stat.value}</div>
+              <div className="text-xs font-bold text-neutral-500 uppercase tracking-wider">{stat.name}</div>
             </div>
           </div>
         ))}
@@ -110,18 +110,18 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white border border-neutral-200 rounded-xl overflow-hidden shadow-sm">
             <div className="px-6 py-4 border-b border-neutral-200 bg-neutral-50/50 flex justify-between items-center">
-              <h3 className="text-sm font-black uppercase tracking-widest text-ink-900 flex items-center gap-2">
+              <h3 className="text-sm font-black uppercase tracking-widest text-brand-900 flex items-center gap-2">
                 <Activity size={16} className="text-brand-800" />
                 Critical Command Queue
               </h3>
               <div className="flex gap-2">
                 {pendingDossiers > 0 && (
-                  <span className="bg-brand-800 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                  <span className="bg-brand-800 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
                     {pendingDossiers} Pending Dossiers
                   </span>
                 )}
                 {unreadTelex > 0 && (
-                  <span className="bg-green-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                  <span className="bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
                     {unreadTelex} Unread Telex
                   </span>
                 )}
@@ -129,7 +129,7 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
             </div>
             <div className="divide-y divide-neutral-100">
               {pendingDossiers === 0 && unreadTelex === 0 ? (
-                <div className="px-6 py-12 text-center text-neutral-500 italic text-sm font-mono">
+                <div className="px-6 py-12 text-center text-neutral-500 text-sm font-medium">
                   All enterprise queues are currently clear.
                 </div>
               ) : (
@@ -137,11 +137,11 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                   {applications.filter(a => a.status === 'PENDING').slice(0, 3).map(app => (
                     <div key={app.id} className="px-6 py-4 hover:bg-neutral-50 transition-colors flex justify-between items-center">
                       <div className="space-y-1">
-                        <p className="text-sm font-bold text-ink-900">{app.fullName}</p>
-                        <p className="text-[11px] text-neutral-500 uppercase tracking-wide font-mono">{app.company} • {app.bureau} Node</p>
+                        <p className="text-sm font-bold text-brand-900">{app.fullName}</p>
+                        <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">{app.company} • {app.bureau} Node</p>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="text-[10px] font-bold text-neutral-400 font-mono">{new Date(app.createdAt).toLocaleDateString()}</span>
+                        <span className="text-xs font-bold text-neutral-400">{new Date(app.createdAt).toLocaleDateString()}</span>
                         <div className="w-2 h-2 bg-brand-800 rounded-full animate-pulse"></div>
                       </div>
                     </div>
@@ -149,11 +149,11 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                   {telexes.filter(t => t.status === 'UNREAD').slice(0, 3).map(tlx => (
                     <div key={tlx.id} className="px-6 py-4 hover:bg-neutral-50 transition-colors flex justify-between items-center">
                       <div className="space-y-1">
-                        <p className="text-sm font-bold text-ink-900">Telex Ref: {tlx.telexRef}</p>
-                        <p className="text-[11px] text-neutral-500 uppercase tracking-wide font-mono">From: {tlx.name} ({tlx.company})</p>
+                        <p className="text-sm font-bold text-brand-900">Telex Ref: {tlx.telexRef}</p>
+                        <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">From: {tlx.name} ({tlx.company})</p>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="text-[10px] font-bold text-neutral-400 font-mono">{new Date(tlx.createdAt).toLocaleDateString()}</span>
+                        <span className="text-xs font-bold text-neutral-400">{new Date(tlx.createdAt).toLocaleDateString()}</span>
                         <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse"></div>
                       </div>
                     </div>
@@ -169,12 +169,12 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                 <Radio size={160} />
               </div>
               <div className="relative z-10 space-y-6">
-                <h3 className="text-xl font-serif font-black leading-tight">Authorize Global Broadcast</h3>
-                <p className="text-neutral-400 text-[10px] leading-relaxed max-w-md font-medium uppercase tracking-wider">
+                <h3 className="text-xl font-bold text-brand-900 leading-tight">Authorize Global Broadcast</h3>
+                <p className="text-neutral-400 text-xs leading-relaxed max-w-md font-medium uppercase tracking-wider">
                   Instantly synchronize a trilingual signal across all public headers. Used for high-priority bilateral dispatches.
                 </p>
                 <div className="pt-4 flex flex-wrap gap-3">
-                  <button className="bg-brand-800 hover:bg-brand-700 text-white font-black text-[9px] px-5 py-2.5 rounded-lg uppercase tracking-widest transition-all cursor-pointer shadow-lg flex items-center gap-2">
+                  <button className="bg-brand-800 hover:bg-brand-700 text-white font-black text-xs px-5 py-2.5 rounded-lg uppercase tracking-widest transition-all cursor-pointer shadow-lg flex items-center gap-2">
                     <Radio size={12} className="animate-pulse" />
                     Initialize Signal
                   </button>
@@ -182,7 +182,7 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
               </div>
             </div>
             <div className="bg-white border border-neutral-200 p-8 rounded-2xl shadow-sm space-y-6">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-400 border-b border-neutral-100 pb-4">Command & Operations Hub</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-neutral-400 border-b border-neutral-100 pb-4">Command & Operations Hub</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                  {[
                    { label: 'User Hub', icon: Users, color: 'text-purple-600', bg: 'bg-purple-50', tab: 'users' },
@@ -203,7 +203,7 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                       <div className={`w-9 h-9 ${item.bg} ${item.color} rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform`}>
                         <item.icon size={16} />
                       </div>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-neutral-700">{item.label}</span>
+                      <span className="text-xs font-black uppercase tracking-widest text-neutral-700">{item.label}</span>
                    </button>
                  ))}
               </div>
@@ -214,7 +214,7 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
         {/* Global Signals Section */}
         <div className="space-y-6">
           <div className="bg-white border border-neutral-200 rounded-xl overflow-hidden shadow-sm p-6">
-            <h3 className="text-sm font-black uppercase tracking-widest text-ink-900 mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-black uppercase tracking-widest text-brand-900 mb-6 flex items-center gap-2">
               <Globe size={16} className="text-brand-800" />
               Information Nodes
             </h3>
@@ -228,14 +228,14 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                 <div key={node.city} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`w-2 h-2 rounded-full ${node.color}`}></div>
-                    <span className="text-xs font-bold text-ink-900 uppercase tracking-tight">{node.city}</span>
+                    <span className="text-xs font-bold text-brand-900 uppercase tracking-tight">{node.city}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-neutral-400 font-bold">{node.latency}</span>
+                  <span className="text-xs text-neutral-400 font-bold">{node.latency}</span>
                 </div>
               ))}
             </div>
             <div className="mt-8 pt-6 border-t border-neutral-100">
-               <button className="w-full bg-neutral-50 hover:bg-neutral-100 text-neutral-700 font-bold text-[10px] py-2.5 rounded uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer border border-neutral-200">
+               <button className="w-full bg-neutral-50 hover:bg-neutral-100 text-neutral-700 font-bold text-xs py-2.5 rounded uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer border border-neutral-200">
                 <Activity size={12} />
                 Network Diagnostics
               </button>
@@ -248,12 +248,12 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
             </div>
             <div className="relative z-10 space-y-4">
               <h4 className="text-xs font-black uppercase tracking-widest text-white/80">Sovereign Intel Brief</h4>
-              <p className="text-lg font-serif font-black leading-tight italic">
+              <p className="text-lg font-bold text-brand-900 leading-tight">
                 "Bilateral trade clearing mechanism finalized for Basra-Beijing energy corridor."
               </p>
               <div className="flex items-center gap-2 pt-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded">Confidential</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest border border-white/30 px-2 py-0.5 rounded">Tier 1</span>
+                <span className="text-xs font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded">Confidential</span>
+                <span className="text-xs font-bold uppercase tracking-widest border border-white/30 px-2 py-0.5 rounded">Tier 1</span>
               </div>
             </div>
           </div>

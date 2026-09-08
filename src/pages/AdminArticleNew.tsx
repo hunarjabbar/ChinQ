@@ -22,7 +22,7 @@ export function AdminArticleNew() {
         {/* Dashboard Masthead */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="space-y-1">
-            <h1 className="text-3xl font-serif font-black tracking-tight flex items-center gap-2">
+            <h1 className="text-3xl font-bold font-black tracking-tight flex items-center gap-2">
               <FileText className="text-brand-800" size={28} />
               Create Article
             </h1>

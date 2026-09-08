@@ -173,11 +173,11 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
       <div className="bg-ink-900 text-white p-6 sm:p-8 border-b-2 border-brand-800">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1.5 text-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800/80 border border-brand-500/40 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase text-amber-300">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800/80 border border-brand-500/40 rounded-full text-xs font-bold tracking-widest uppercase text-amber-300">
               <Sparkles size={12} />
               <span>Sino-Iraqi Sovereign FinTech Gateway</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-serif font-black tracking-tight text-white">
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
               {labels.title}
             </h2>
             <p className="text-neutral-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
@@ -188,10 +188,10 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
           <div className="flex items-center gap-2 bg-black/40 border border-white/10 px-4 py-2.5 rounded-xl self-start md:self-auto">
             <Clock size={16} className="text-amber-400 animate-pulse" />
             <div className="text-start">
-              <div className="text-[9px] font-mono uppercase text-neutral-400 tracking-wider">
+              <div className="text-xs uppercase text-neutral-400 tracking-wider">
                 {labels.rateGuaranteed}
               </div>
-              <div className="text-sm font-mono font-black text-amber-300">
+              <div className="text-sm font-black text-amber-300">
                 {formatTime(lockCountdown)}
               </div>
             </div>
@@ -226,10 +226,10 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-black text-ink-900 dark:text-white">
+                  <span className="text-sm font-black text-brand-900 dark:text-white">
                     {labels.retailTab}
                   </span>
-                  <span className="text-[10px] bg-brand-100 dark:bg-brand-900/50 text-brand-800 dark:text-brand-300 font-mono font-bold px-2 py-0.5 rounded">
+                  <span className="text-xs bg-brand-100 dark:bg-brand-900/50 text-brand-800 dark:text-brand-300 font-bold px-2 py-0.5 rounded">
                     0.75% Fee
                   </span>
                 </div>
@@ -260,10 +260,10 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-black text-ink-900 dark:text-white">
+                  <span className="text-sm font-black text-brand-900 dark:text-white">
                     {labels.businessTab}
                   </span>
-                  <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 font-mono font-bold px-2 py-0.5 rounded">
+                  <span className="text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded">
                     0.35% Wholesale
                   </span>
                 </div>
@@ -280,7 +280,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
         <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/60 p-3 rounded-xl border border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center gap-2">
             <Coins size={18} className="text-brand-800 dark:text-brand-400" />
-            <span className="text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white">
+            <span className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white">
               {direction === 'IQD_TO_ECNY' ? labels.directionIqdToCny : labels.directionCnyToIqd}
             </span>
           </div>
@@ -288,7 +288,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
           <button
             type="button"
             onClick={handleSwap}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-600 border border-neutral-300 dark:border-neutral-600 rounded-lg text-xs font-bold text-ink-900 dark:text-white transition-all cursor-pointer shadow-xs active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-600 border border-neutral-300 dark:border-neutral-600 rounded-lg text-xs font-bold text-brand-900 dark:text-white transition-all cursor-pointer shadow-xs active:scale-95"
           >
             <ArrowRightLeft size={14} className="text-brand-800 dark:text-brand-400" />
             <span>Switch Direction</span>
@@ -304,7 +304,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
               <label className="text-[11px] font-black uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                 {labels.youPay}
               </label>
-              <span className="text-xs font-mono font-bold text-ink-900 dark:text-white px-2 py-0.5 bg-white dark:bg-neutral-700 rounded border border-neutral-200 dark:border-neutral-600">
+              <span className="text-xs font-bold text-brand-900 dark:text-white px-2 py-0.5 bg-white dark:bg-neutral-700 rounded border border-neutral-200 dark:border-neutral-600">
                 {direction === 'IQD_TO_ECNY' ? 'IQD (د.ع)' : 'e-CNY (¥)'}
               </span>
             </div>
@@ -316,7 +316,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
                 step="any"
                 value={amountStr}
                 onChange={(e) => setAmountStr(e.target.value)}
-                className="w-full text-2xl sm:text-3xl font-mono font-black text-ink-900 dark:text-white bg-white dark:bg-neutral-900 px-4 py-3 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none"
+                className="w-full text-2xl sm:text-3xl font-black text-brand-900 dark:text-white bg-white dark:bg-neutral-900 px-4 py-3 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none"
                 placeholder="0.00"
               />
             </div>
@@ -328,7 +328,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
                   key={val}
                   type="button"
                   onClick={() => setAmountStr(val.toString())}
-                  className="text-[10px] font-mono font-bold px-2 py-1 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded hover:border-brand-800 hover:text-brand-800 transition-colors cursor-pointer"
+                  className="text-xs font-bold px-2 py-1 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded hover:border-brand-800 hover:text-brand-800 transition-colors cursor-pointer"
                 >
                   {val.toLocaleString()} {direction === 'IQD_TO_ECNY' ? 'IQD' : '¥'}
                 </button>
@@ -341,7 +341,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
             <div className="w-10 h-10 rounded-full bg-brand-800 text-white flex items-center justify-center shadow-md mb-1">
               <ArrowRightLeft size={16} />
             </div>
-            <div className="text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-400">
+            <div className="text-xs font-bold text-neutral-500 dark:text-neutral-400">
               1 e-CNY = {(quote?.effectiveRate || baseRate).toFixed(2)} IQD
             </div>
           </div>
@@ -352,20 +352,20 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
               <label className="text-[11px] font-black uppercase tracking-wider text-brand-900 dark:text-brand-300">
                 {labels.youReceive}
               </label>
-              <span className="text-xs font-mono font-bold text-brand-900 dark:text-brand-200 px-2 py-0.5 bg-white dark:bg-neutral-800 rounded border border-brand-300 dark:border-brand-700">
+              <span className="text-xs font-bold text-brand-900 dark:text-brand-200 px-2 py-0.5 bg-white dark:bg-neutral-800 rounded border border-brand-300 dark:border-brand-700">
                 {direction === 'IQD_TO_ECNY' ? 'e-CNY (¥)' : 'IQD (د.ع)'}
               </span>
             </div>
 
             <div className="bg-white dark:bg-neutral-900 px-4 py-3 border-2 border-brand-800/30 rounded-xl">
-              <div className="text-2xl sm:text-3xl font-mono font-black text-brand-800 dark:text-brand-400 truncate">
+              <div className="text-2xl sm:text-3xl font-black text-brand-800 dark:text-brand-400 truncate">
                 {quote ? quote.targetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
               </div>
             </div>
 
-            <div className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 flex items-center justify-between pt-1">
+            <div className="text-xs text-neutral-500 dark:text-neutral-400 flex items-center justify-between pt-1">
               <span>{labels.serviceFee} ({quote?.feePercent ?? 0.75}%):</span>
-              <span className="font-bold text-ink-900 dark:text-neutral-200">
+              <span className="font-bold text-brand-900 dark:text-neutral-200">
                 {quote?.feeAmount.toLocaleString()} {direction === 'IQD_TO_ECNY' ? 'e-CNY' : 'IQD'}
               </span>
             </div>
@@ -376,7 +376,7 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
         {/* Value Proposition vs SWIFT Comparison */}
         {quote && (
           <div className="p-5 bg-neutral-50 dark:bg-neutral-800/40 border border-neutral-200 dark:border-neutral-700 rounded-xl space-y-4">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white">
               <TrendingDown size={16} className="text-emerald-600 dark:text-emerald-400" />
               <span>{labels.comparisonHeadline}</span>
             </div>
@@ -384,37 +384,37 @@ export function PaymentCalculator({ rates, lang, onInitiatePayment }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-start">
               
               <div className="bg-white dark:bg-neutral-900 p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <span className="text-[10px] font-mono uppercase text-neutral-400 block mb-1">
+                <span className="text-xs uppercase text-neutral-400 block mb-1">
                   {labels.speedLabel}
                 </span>
                 <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
                   <Zap size={13} /> {labels.speedFast}
                 </span>
-                <span className="text-[10px] text-neutral-400 block mt-1 line-through">
+                <span className="text-xs text-neutral-400 block mt-1 line-through">
                   Legacy: {labels.speedSlow}
                 </span>
               </div>
 
               <div className="bg-white dark:bg-neutral-900 p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <span className="text-[10px] font-mono uppercase text-neutral-400 block mb-1">
+                <span className="text-xs uppercase text-neutral-400 block mb-1">
                   {labels.savingsLabel}
                 </span>
-                <span className="text-xs font-mono font-bold text-brand-800 dark:text-brand-400">
+                <span className="text-xs font-bold text-brand-800 dark:text-brand-400">
                   ≈ {quote.comparison.feeSavedEstimated.toLocaleString()} {quote.sourceCurrency}
                 </span>
-                <span className="text-[10px] text-neutral-400 block mt-1">
+                <span className="text-xs text-neutral-400 block mt-1">
                   Bypasses USD intermediary conversions
                 </span>
               </div>
 
               <div className="bg-white dark:bg-neutral-900 p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <span className="text-[10px] font-mono uppercase text-neutral-400 block mb-1">
+                <span className="text-xs uppercase text-neutral-400 block mb-1">
                   Compliance Status
                 </span>
-                <span className="text-xs font-bold text-ink-900 dark:text-white flex items-center gap-1.5">
+                <span className="text-xs font-bold text-brand-900 dark:text-white flex items-center gap-1.5">
                   <ShieldCheck size={13} className="text-emerald-500" /> Pre-Screened Corridor
                 </span>
-                <span className="text-[10px] text-neutral-400 block mt-1">
+                <span className="text-xs text-neutral-400 block mt-1">
                   CBI & PBOC anti-sanctions guarantee
                 </span>
               </div>

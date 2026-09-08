@@ -328,7 +328,7 @@ export function GlazedLanguageModal({ lang, className }: GlazedLanguageModalProp
 
               {/* Minimal Header (just for pinning/closing) */}
               <div className="relative z-10 px-3 pt-2 pb-1.5 flex items-center justify-between border-b border-red-500/20">
-                <span className="text-[9px] font-black uppercase text-white/80 tracking-widest">
+                <span className="text-xs font-black uppercase text-white/80 tracking-widest">
                   {isPaused ? t.pausedText : t.autoDismiss}
                 </span>
                 <div className="flex items-center gap-1">

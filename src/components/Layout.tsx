@@ -67,7 +67,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
       </motion.main>
       <EnterpriseSidebar lang={lang} />
       <footer id="legal" className="w-full bg-white dark:bg-neutral-900 border-t-2 border-ink-900 dark:border-neutral-700 mt-8 transition-colors duration-300">
-        <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 py-10 md:py-14 text-xs text-ink-900 dark:text-neutral-300 flex flex-col gap-8">
+        <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 py-10 md:py-14 text-xs text-neutral-700 dark:text-neutral-300 flex flex-col gap-8">
           {/* Top Section: Grid layout for columns */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-neutral-100 dark:border-neutral-800">
 
@@ -79,11 +79,11 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-800 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-800"></span>
                   </span>
-                  <span className="font-mono text-[11px] font-black uppercase tracking-widest text-brand-800 dark:text-rose-400">
+                  <span className="text-[11px] font-black uppercase tracking-widest text-brand-800 dark:text-rose-400">
                     {lang === 'ar' ? 'بوابة الكوادر والفرص الثنائية' : lang === 'zh' ? '伊中双边人才与学术使团准入' : lang === 'ckb' ? 'دەروازەی تواناکان و دەرفەتی دوولایەنە' : 'Talent & Bilateral Fellowship Gateway'}
                   </span>
                 </div>
-                <h3 className="text-lg sm:text-xl font-serif font-black text-ink-900 dark:text-neutral-100 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-black text-brand-800 dark:text-neutral-100 tracking-tight">
                   {lang === 'ar' ? 'انضم إلى شبكة المتطوعين والباحثين المتدربين' : lang === 'zh' ? '申请加入志愿使团或智库研学实习生计划' : lang === 'ckb' ? 'پەیوەندی بە دەستەی خۆبەخشان و فێرخوازانەوە بکە' : 'Join Our Sovereign Network as an Accredited Volunteer or Intern'}
                 </h3>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed">
@@ -104,7 +104,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                   id="btn-volunteer-register"
                   type="button"
                   onClick={() => openTalentModal('volunteer')}
-                  className="relative group flex items-center justify-center gap-3 px-6 py-3.5 bg-brand-800 hover:bg-brand-700 text-white rounded-xl font-mono text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-brand-800/25 active:scale-98 cursor-pointer border border-brand-700 overflow-hidden shrink-0"
+                  className="relative group flex items-center justify-center gap-3 px-6 py-3.5 bg-brand-800 hover:bg-brand-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-brand-800/25 active:scale-98 cursor-pointer border border-brand-700 overflow-hidden shrink-0"
                 >
                   {/* Outer Pulsing Glow */}
                   <span className="absolute -inset-0.5 rounded-xl bg-brand-800 opacity-40 group-hover:opacity-75 blur-sm animate-pulse transition duration-1000"></span>
@@ -127,7 +127,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                   id="btn-intern-register"
                   type="button"
                   onClick={() => openTalentModal('intern')}
-                  className="relative group flex items-center justify-center gap-3 px-6 py-3.5 bg-brand-800 hover:bg-brand-700 text-white rounded-xl font-mono text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-brand-800/25 active:scale-98 cursor-pointer border border-brand-700 overflow-hidden shrink-0"
+                  className="relative group flex items-center justify-center gap-3 px-6 py-3.5 bg-brand-800 hover:bg-brand-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-brand-800/25 active:scale-98 cursor-pointer border border-brand-700 overflow-hidden shrink-0"
                 >
                   {/* Outer Pulsing Glow */}
                   <span className="absolute -inset-0.5 rounded-xl bg-brand-800 opacity-40 group-hover:opacity-75 blur-sm animate-pulse transition duration-1000 delay-300"></span>
@@ -152,10 +152,10 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
             <div className="flex items-center gap-3">
               <IcaLogo size={42} variant="mark" />
               <div>
-                <div className="font-serif text-2xl font-black tracking-tight text-brand-800 rtl:font-sans">
+                <div className="text-2xl font-black tracking-tight text-brand-800 rtl:font-sans">
                   {lang === 'ar' ? 'مجموعة الوكالة العراقية الصينية' : lang === 'zh' ? '伊中通讯社传媒集团' : lang === 'ckb' ? 'گرووپی ئاژانسی عێراقی - چینی' : `${siteName} Media Group`}
                 </div>
-                <div className="text-[9px] font-black text-neutral-400 uppercase tracking-[0.2em]">
+                <div className="text-xs font-black text-neutral-400 uppercase tracking-[0.2em]">
                   &copy; {new Date().getFullYear()} {lang === 'ar' ? 'مجموعة الوكالة العراقية الصينية. جميع الحقوق محفوظة.' : lang === 'zh' ? '伊中通讯社传媒集团。保留所有权利。' : lang === 'ckb' ? 'گرووپی ئاژانسی عێراقی - چینی. هەموو مافەکان پارێزراون.' : `${siteName} Media Group. All rights reserved.`}
                 </div>
               </div>
@@ -175,20 +175,20 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
 
           {/* Column 2: Bureaus */}
           <div className="md:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-ink-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
               {lang === 'ar' ? 'المكاتب الإقليمية' : lang === 'zh' ? '分社机构' : lang === 'ckb' ? 'نووسینگەکان' : 'Regional Bureaus'}
             </h4>
             <ul className="space-y-4 text-xs text-neutral-500 dark:text-neutral-400 font-medium">
               <li className="flex flex-col gap-0.5">
-                <span className="font-bold text-ink-900 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مكتب بغداد الرئيسي' : lang === 'zh' ? '巴格达总部' : lang === 'ckb' ? 'ئۆفیسی سەرەکی بەغداد' : 'Baghdad HQ'}</span>
+                <span className="font-bold text-brand-800 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مكتب بغداد الرئيسي' : lang === 'zh' ? '巴格达总部' : lang === 'ckb' ? 'ئۆفیسی سەرەکی بەغداد' : 'Baghdad HQ'}</span>
                 <span className="opacity-75">Karada District, Baghdad, Iraq</span>
               </li>
               <li className="flex flex-col gap-0.5">
-                <span className="font-bold text-ink-900 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مكتب بكين' : lang === 'zh' ? '北京办事处' : lang === 'ckb' ? 'ئۆفیسی پەکین' : 'Beijing Bureau'}</span>
+                <span className="font-bold text-brand-800 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مكتب بكين' : lang === 'zh' ? '北京办事处' : lang === 'ckb' ? 'ئۆفیسی پەکین' : 'Beijing Bureau'}</span>
                 <span className="opacity-75">Chaoyang District, Beijing, PRC</span>
               </li>
               <li className="flex flex-col gap-0.5">
-                <span className="font-bold text-ink-900 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مركز البصرة اللوجستي' : lang === 'zh' ? '巴士拉枢纽' : lang === 'ckb' ? 'سەنتەری لۆجستی بەسرە' : 'Basra Logistics Hub'}</span>
+                <span className="font-bold text-brand-800 dark:text-neutral-200 uppercase tracking-wider">{lang === 'ar' ? 'مركز البصرة اللوجستي' : lang === 'zh' ? '巴士拉枢纽' : lang === 'ckb' ? 'سەنتەری لۆجستی بەسرە' : 'Basra Logistics Hub'}</span>
                 <span className="opacity-75">Al-Ashar, Basra, Iraq</span>
               </li>
             </ul>
@@ -196,7 +196,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
 
           {/* Column 3: Links & Compliance */}
           <div className="md:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-ink-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
               {lang === 'ar' ? 'القوانين والروابط' : lang === 'zh' ? '法律与链接' : lang === 'ckb' ? 'بەستەر و یاساییەکان' : 'Legal & Links'}
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -223,7 +223,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                       }
                     }
                   }}
-                  className="text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 group py-0.5"
+                  className="text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 group py-0.5"
                 >
                   <span className="w-1.5 h-1.5 bg-neutral-300 dark:bg-neutral-700 group-hover:bg-brand-800 dark:group-hover:bg-brand-400 transition-colors rounded-full shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">{link.label}</span>
@@ -234,7 +234,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
               <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800 flex flex-col gap-2">
                 <button
                   onClick={() => openLegalModal('privacy')}
-                  className="text-left rtl:text-right text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-2 group py-0.5"
+                  className="text-left rtl:text-right text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 group py-0.5"
                 >
                   <span className="w-1.5 h-1.5 bg-brand-800 dark:bg-brand-400 group-hover:scale-125 transition-transform rounded-full shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">
@@ -243,7 +243,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 </button>
                 <button
                   onClick={() => openLegalModal('terms')}
-                  className="text-left rtl:text-right text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-2 group py-0.5"
+                  className="text-left rtl:text-right text-neutral-500 hover:text-brand-800 dark:hover:text-brand-400 text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 group py-0.5"
                 >
                   <span className="w-1.5 h-1.5 bg-brand-800 dark:bg-brand-400 group-hover:scale-125 transition-transform rounded-full shrink-0"></span>
                   <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">
@@ -252,8 +252,8 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 </button>
               </div>
 
-              <div className="text-neutral-400 dark:text-neutral-500 font-mono text-xs pt-4 mt-1 border-t border-neutral-100 dark:border-neutral-800 space-y-1.5">
-                <div className="text-ink-900 dark:text-neutral-200 font-bold uppercase tracking-wider mb-2">
+              <div className="text-neutral-400 dark:text-neutral-500 text-xs pt-4 mt-1 border-t border-neutral-100 dark:border-neutral-800 space-y-1.5">
+                <div className="text-brand-800 dark:text-neutral-200 font-bold uppercase tracking-wider mb-2">
                   {lang === 'ar' ? 'غرفة الأخبار والاتصالات' : lang === 'zh' ? '新闻室与通联' : lang === 'ckb' ? 'پەیوەندی ژووری هەواڵ' : 'Newsroom & Telex'}
                 </div>
                 <div>
@@ -293,7 +293,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
         <SocialFooterShowcase lang={lang} />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-gray-400 font-bold tracking-wider uppercase">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 font-bold tracking-wider uppercase">
           <div>
             IRAQI-CHINESE AGENCY SINO-IRAQI NEWS & STRATEGIC STUDY NETWORK
           </div>

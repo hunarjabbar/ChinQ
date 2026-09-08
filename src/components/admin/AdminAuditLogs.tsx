@@ -51,11 +51,11 @@ export function AdminAuditLogs() {
             <Shield size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tight text-ink-900">Global Audit Logs</h2>
+            <h2 className="text-2xl font-black uppercase tracking-tight text-brand-900">Global Audit Logs</h2>
             <p className="text-sm text-gray-500">History of all administrative CRUD operations</p>
           </div>
         </div>
-        <div className="text-xs font-mono bg-neutral-100 px-3 py-1 rounded border border-neutral-200 text-neutral-600">
+        <div className="text-xs font-medium bg-neutral-100 px-3 py-1 rounded border border-neutral-200 text-neutral-600">
           Total Logs: {logs.length}
         </div>
       </div>
@@ -107,15 +107,15 @@ export function AdminAuditLogs() {
               ) : (
                 logs.map((log) => (
                   <tr key={log.id} className="hover:bg-neutral-50 transition-colors group">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-600">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">
                       {format(new Date(log.createdAt), 'MMM dd, HH:mm:ss')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm font-bold text-ink-900">{log.userEmail}</span>
+                      <span className="text-sm font-bold text-brand-900">{log.userEmail}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={cn(
-                        "text-[10px] font-black uppercase px-2 py-1 rounded-sm border",
+                        "text-xs font-black uppercase px-2 py-1 rounded-sm border",
                         log.action === 'POST' ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
                         log.action === 'PUT' ? "bg-amber-50 text-amber-700 border-amber-200" :
                         "bg-rose-50 text-rose-700 border-rose-200"
@@ -125,13 +125,13 @@ export function AdminAuditLogs() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex flex-col">
-                        <span className="text-sm font-black uppercase tracking-tight text-ink-900">{log.resource}</span>
-                        {log.itemId && <span className="text-[10px] font-mono text-gray-400">ID: {log.itemId}</span>}
+                        <span className="text-sm font-black uppercase tracking-tight text-brand-900">{log.resource}</span>
+                        {log.itemId && <span className="text-xs font-medium text-gray-400">ID: {log.itemId}</span>}
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="max-w-xs overflow-hidden">
-                        <p className="text-xs text-gray-500 line-clamp-2 font-mono bg-neutral-50 p-1.5 rounded border border-neutral-100 group-hover:bg-white transition-colors">
+                        <p className="text-xs text-gray-500 line-clamp-2 font-medium bg-neutral-50 p-1.5 rounded border border-neutral-100 group-hover:bg-white transition-colors">
                           {log.details || 'No payload'}
                         </p>
                       </div>

@@ -221,16 +221,16 @@ export function AdminWomen() {
       <div className="bg-white border-2 border-brand-800 p-6 rounded-xs shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="bg-brand-800 text-white font-mono text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider flex items-center gap-1">
+            <span className="bg-brand-800 text-white font-medium text-xs font-bold px-2 py-0.5 uppercase tracking-wider flex items-center gap-1">
               <Users className="w-3.5 h-3.5" />
               Sovereign Administration
             </span>
-            <span className="text-gray-500 font-mono text-xs">Beijing • Baghdad • Erbil</span>
+            <span className="text-gray-500 font-medium text-xs">Beijing • Baghdad • Erbil</span>
           </div>
-          <h1 className="text-2xl font-serif font-bold text-ink-900">
+          <h1 className="text-2xl font-bold font-bold text-brand-800">
             Women Leadership & Policy Management
           </h1>
-          <p className="text-gray-600 text-xs font-mono">
+          <p className="text-gray-600 text-xs font-medium">
             Manage prominent female figures, legal rights declarations, tech achievements, and academic monographs.
           </p>
         </div>
@@ -239,7 +239,7 @@ export function AdminWomen() {
           <button
             onClick={() => reseedMutation.mutate()}
             disabled={reseedMutation.isPending}
-            className="bg-white hover:bg-gray-100 text-ink-900 border border-brand-800 px-3 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5"
+            className="bg-white hover:bg-gray-100 text-ink-900 border border-brand-800 px-3 py-2 font-medium text-xs font-bold uppercase transition-colors flex items-center gap-1.5"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${reseedMutation.isPending ? 'animate-spin' : ''}`} />
             <span>Seed Default Data</span>
@@ -247,7 +247,7 @@ export function AdminWomen() {
 
           <button
             onClick={() => { resetForm(); setIsModalOpen(true); }}
-            className="bg-brand-800 hover:bg-brand-700 text-white px-4 py-2 font-mono text-xs font-bold uppercase transition-colors flex items-center gap-1.5 shadow-xs"
+            className="bg-brand-800 hover:bg-brand-700 text-white px-4 py-2 font-medium text-xs font-bold uppercase transition-colors flex items-center gap-1.5 shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add Women Record</span>
@@ -257,7 +257,7 @@ export function AdminWomen() {
 
       {/* Status Notifications */}
       {statusMessage && (
-        <div className={`p-4 border font-mono text-xs flex items-center gap-2 ${
+        <div className={`p-4 border font-medium text-xs flex items-center gap-2 ${
           statusMessage.type === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-800' : 'bg-brand-50 border-brand-500 text-brand-800'
         }`}>
           {statusMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-brand-600" />}
@@ -275,23 +275,23 @@ export function AdminWomen() {
               placeholder="Search by name, title, or organization..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-mono text-ink-900 focus:outline-none focus:border-brand-800"
+              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-medium text-ink-900 focus:outline-none focus:border-brand-800"
             />
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-xs text-gray-500">
+          <div className="flex items-center gap-2 font-medium text-xs text-gray-500">
             <span>Total Records: <strong className="text-brand-800">{profiles.length}</strong></span>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-200">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-mono font-bold text-gray-500 mr-1">Region:</span>
+            <span className="text-[11px] font-medium font-bold text-gray-500 mr-1">Region:</span>
             {['ALL', 'CHINA', 'IRAQ', 'KURDISTAN', 'BILATERAL'].map(r => (
               <button
                 key={r}
                 onClick={() => setSelectedRegion(r)}
-                className={`px-2.5 py-0.5 text-xs font-mono transition-colors ${
+                className={`px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   selectedRegion === r ? 'bg-brand-800 text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -301,12 +301,12 @@ export function AdminWomen() {
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-mono font-bold text-gray-500 mr-1">Category:</span>
+            <span className="text-[11px] font-medium font-bold text-gray-500 mr-1">Category:</span>
             {['ALL', 'PROMINENT_FIGURE', 'POLICY_RIGHTS', 'ACHIEVEMENTS', 'PUBLICATIONS'].map(c => (
               <button
                 key={c}
                 onClick={() => setSelectedCategory(c)}
-                className={`px-2.5 py-0.5 text-xs font-mono transition-colors ${
+                className={`px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   selectedCategory === c ? 'bg-brand-800 text-white font-bold' : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -319,8 +319,8 @@ export function AdminWomen() {
 
       {/* Data Table */}
       <div className="bg-white border-2 border-brand-800 rounded-xs overflow-x-auto">
-        <table className="w-full text-left text-xs font-mono">
-          <thead className="bg-brand-800 text-white uppercase text-[10px] tracking-wider border-b border-brand-800">
+        <table className="w-full text-left text-xs font-medium">
+          <thead className="bg-brand-800 text-white uppercase text-xs tracking-wider border-b border-brand-800">
             <tr>
               <th className="p-3">Record / Name</th>
               <th className="p-3">Region</th>
@@ -350,18 +350,18 @@ export function AdminWomen() {
                     <div className="flex items-center gap-3">
                       <img src={p.imageUrl} alt={p.nameEn} className="w-10 h-10 object-cover border border-gray-300 rounded-xs shrink-0" />
                       <div>
-                        <p className="font-bold font-serif text-sm text-ink-900">{p.nameEn}</p>
+                        <p className="font-bold font-bold text-sm text-ink-900">{p.nameEn}</p>
                         <p className="text-[11px] text-brand-800 truncate max-w-xs">{p.titleEn}</p>
                       </div>
                     </div>
                   </td>
                   <td className="p-3">
-                    <span className="bg-brand-800 text-white text-[10px] px-2 py-0.5 font-bold">
+                    <span className="bg-brand-800 text-white text-xs px-2 py-0.5 font-bold">
                       {p.region}
                     </span>
                   </td>
                   <td className="p-3">
-                    <span className="bg-brand-800 text-white text-[10px] px-2 py-0.5 font-bold">
+                    <span className="bg-brand-800 text-white text-xs px-2 py-0.5 font-bold">
                       {p.category.replace('_', ' ')}
                     </span>
                   </td>
@@ -429,10 +429,10 @@ export function AdminWomen() {
               </button>
 
               <div className="space-y-1">
-                <h3 className="font-serif text-2xl font-bold text-ink-900">
+                <h3 className="font-bold text-2xl font-bold text-brand-800">
                   {editingProfile ? 'Edit Women Record' : 'Create Women Record'}
                 </h3>
-                <p className="text-xs text-gray-500 font-mono">
+                <p className="text-xs text-gray-500 font-medium">
                   Fill quadrilingual metadata for female pioneers, policy frameworks, tech summits, or publications.
                 </p>
               </div>
@@ -447,11 +447,11 @@ export function AdminWomen() {
                 {/* Region & Category Selector */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#F4F4F0] p-3 border border-gray-300">
                   <div>
-                    <label className="block text-[11px] font-mono font-bold uppercase text-gray-700 mb-1">Region *</label>
+                    <label className="block text-[11px] font-medium font-bold uppercase text-gray-700 mb-1">Region *</label>
                     <select
                       value={formData.region}
                       onChange={e => setFormData({ ...formData, region: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-brand-800"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-medium focus:border-brand-800"
                     >
                       <option value="CHINA">CHINA 🇨🇳</option>
                       <option value="IRAQ">IRAQ 🇮🇶</option>
@@ -461,11 +461,11 @@ export function AdminWomen() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono font-bold uppercase text-gray-700 mb-1">Category *</label>
+                    <label className="block text-[11px] font-medium font-bold uppercase text-gray-700 mb-1">Category *</label>
                     <select
                       value={formData.category}
                       onChange={e => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full bg-white border border-gray-300 p-2 text-xs font-mono focus:border-brand-800"
+                      className="w-full bg-white border border-gray-300 p-2 text-xs font-medium focus:border-brand-800"
                     >
                       <option value="PROMINENT_FIGURE">PROMINENT FIGURE (Pioneer)</option>
                       <option value="POLICY_RIGHTS">POLICY & LEGAL RIGHTS</option>
@@ -477,7 +477,7 @@ export function AdminWomen() {
 
                 {/* Names (Quadrilingual) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">1. Names (Quadrilingual)</h4>
+                  <h4 className="font-medium text-xs font-bold text-brand-800 uppercase">1. Names (Quadrilingual)</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
@@ -485,35 +485,35 @@ export function AdminWomen() {
                       placeholder="Name (English) *"
                       value={formData.nameEn}
                       onChange={e => setFormData({ ...formData, nameEn: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                     <input
                       type="text"
                       placeholder="الاسم (العربية)"
                       value={formData.nameAr}
                       onChange={e => setFormData({ ...formData, nameAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
                     />
                     <input
                       type="text"
                       placeholder="姓名 (中文)"
                       value={formData.nameZh}
                       onChange={e => setFormData({ ...formData, nameZh: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                     <input
                       type="text"
                       placeholder="ناو (کوردی سۆرانی)"
                       value={formData.nameCkb}
                       onChange={e => setFormData({ ...formData, nameCkb: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
                     />
                   </div>
                 </div>
 
                 {/* Titles (Quadrilingual) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">2. Title / Role (Quadrilingual)</h4>
+                  <h4 className="font-medium text-xs font-bold text-brand-800 uppercase">2. Title / Role (Quadrilingual)</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
@@ -521,35 +521,35 @@ export function AdminWomen() {
                       placeholder="Title (English) *"
                       value={formData.titleEn}
                       onChange={e => setFormData({ ...formData, titleEn: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                     <input
                       type="text"
                       placeholder="اللقب / المنصب (العربية)"
                       value={formData.titleAr}
                       onChange={e => setFormData({ ...formData, titleAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
                     />
                     <input
                       type="text"
                       placeholder="头衔/职务 (中文)"
                       value={formData.titleZh}
                       onChange={e => setFormData({ ...formData, titleZh: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                     <input
                       type="text"
                       placeholder="ناونیشان / پلە (کوردی)"
                       value={formData.titleCkb}
                       onChange={e => setFormData({ ...formData, titleCkb: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
                     />
                   </div>
                 </div>
 
                 {/* Summaries (English & Arabic mandatory or auto fallback) */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">3. Short Summaries</h4>
+                  <h4 className="font-medium text-xs font-bold text-brand-800 uppercase">3. Short Summaries</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <textarea
                       rows={2}
@@ -557,70 +557,70 @@ export function AdminWomen() {
                       placeholder="Summary (English) *"
                       value={formData.summaryEn}
                       onChange={e => setFormData({ ...formData, summaryEn: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                     <textarea
                       rows={2}
                       placeholder="ملخص قصير (العربية)"
                       value={formData.summaryAr}
                       onChange={e => setFormData({ ...formData, summaryAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
                     />
                   </div>
                 </div>
 
                 {/* Biography / Policy Text */}
                 <div className="space-y-2">
-                  <h4 className="font-mono text-xs font-bold text-brand-800 uppercase">4. Detailed Bio / Legal Policy Text (English)</h4>
+                  <h4 className="font-medium text-xs font-bold text-brand-800 uppercase">4. Detailed Bio / Legal Policy Text (English)</h4>
                   <textarea
                     rows={4}
                     placeholder="Full biography, research abstract, or legal policy text..."
                     value={formData.bioEn}
                     onChange={e => setFormData({ ...formData, bioEn: e.target.value })}
-                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                   />
                 </div>
 
                 {/* Media & External Links */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase text-gray-700 mb-1">Image URL *</label>
+                    <label className="block text-xs font-medium font-bold uppercase text-gray-700 mb-1">Image URL *</label>
                     <input
                       type="url"
                       required
                       placeholder="https://images.unsplash.com/..."
                       value={formData.imageUrl}
                       onChange={e => setFormData({ ...formData, imageUrl: e.target.value })}
-                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase text-gray-700 mb-1">Organization</label>
+                    <label className="block text-xs font-medium font-bold uppercase text-gray-700 mb-1">Organization</label>
                     <input
                       type="text"
                       placeholder="China-Iraq Women Network"
                       value={formData.organization}
                       onChange={e => setFormData({ ...formData, organization: e.target.value })}
-                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase text-gray-700 mb-1">Publication URL</label>
+                    <label className="block text-xs font-medium font-bold uppercase text-gray-700 mb-1">Publication URL</label>
                     <input
                       type="url"
                       placeholder="https://..."
                       value={formData.publicationUrl}
                       onChange={e => setFormData({ ...formData, publicationUrl: e.target.value })}
-                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono"
+                      className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium"
                     />
                   </div>
                 </div>
 
                 {/* Checkboxes */}
                 <div className="flex items-center gap-6 pt-2">
-                  <label className="flex items-center gap-2 font-mono text-xs font-bold text-gray-800 cursor-pointer">
+                  <label className="flex items-center gap-2 font-medium text-xs font-bold text-gray-800 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={formData.isFeatured}
@@ -630,7 +630,7 @@ export function AdminWomen() {
                     <span>Featured Spotlight</span>
                   </label>
 
-                  <label className="flex items-center gap-2 font-mono text-xs font-bold text-gray-800 cursor-pointer">
+                  <label className="flex items-center gap-2 font-medium text-xs font-bold text-gray-800 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={formData.isTrending}
@@ -646,7 +646,7 @@ export function AdminWomen() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-mono text-xs font-bold uppercase"
+                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs font-bold uppercase"
                   >
                     Cancel
                   </button>
@@ -654,7 +654,7 @@ export function AdminWomen() {
                   <button
                     type="submit"
                     disabled={saveMutation.isPending}
-                    className="px-6 py-2 bg-brand-800 hover:bg-brand-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs"
+                    className="px-6 py-2 bg-brand-800 hover:bg-brand-700 text-white font-medium text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs"
                   >
                     {saveMutation.isPending && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
                     <span>{editingProfile ? 'Save Changes' : 'Create Record'}</span>

@@ -24,7 +24,7 @@ function LiveDateTime({ lang }: { lang: Locale }) {
 
   return (
     <div className="flex flex-col gap-0.5">
-      <div className="text-xs font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100 whitespace-nowrap flex items-center gap-1.5">
+      <div className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 whitespace-nowrap flex items-center gap-1.5">
         <Clock className="w-3 h-3 text-brand-800 dark:text-brand-400 animate-pulse" />
         <span>{formattedTime}</span>
       </div>
@@ -59,7 +59,7 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
       <Link 
         to={`/${lang}/payments`} 
         onClick={() => { setIsOpen(false); setIsHovered(false); }}
-        className="relative flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white rounded font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-brand-900 transition-all shadow-[0_0_15px_rgba(185,28,28,0.5)] group z-10"
+        className="relative flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white rounded text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-brand-900 transition-all shadow-[0_0_15px_rgba(185,28,28,0.5)] group z-10"
       >
         <span className="absolute inset-0 rounded ring-2 ring-brand-400 animate-pulse opacity-80"></span>
         <span className="absolute -inset-1 rounded bg-brand-500/30 animate-ping blur-[1px] opacity-70"></span>
@@ -79,14 +79,14 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
               transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] } 
             }}
             style={{ transformOrigin: isRtl ? 'top left' : 'top right' }}
-            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-2 w-[290px] sm:w-[340px] bg-white dark:bg-neutral-900 border-2 border-brand-800 dark:border-brand-600 rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-[100] p-4 text-ink-900 dark:text-neutral-100`}
+            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-2 w-[290px] sm:w-[340px] bg-white dark:bg-neutral-900 border-2 border-brand-800 dark:border-brand-600 rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-[100] p-4 text-brand-900 dark:text-neutral-100`}
           >
             {/* Arrow pointer */}
             <div className={`absolute -top-2 ${isRtl ? 'left-6' : 'right-6'} w-4 h-4 bg-white dark:bg-neutral-900 border-t-2 border-l-2 border-brand-800 dark:border-brand-600 transform rotate-45 z-10`}></div>
             
             <div className="relative z-20 flex flex-col gap-2.5 text-left rtl:text-right">
               <div className="flex items-center justify-between">
-                <span className="text-[9px] font-black uppercase text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 px-2.5 py-0.5 rounded-full tracking-widest border border-brand-200 dark:border-brand-800">
+                <span className="text-xs font-black uppercase text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 px-2.5 py-0.5 rounded-full tracking-widest border border-brand-200 dark:border-brand-800">
                   {lang === 'ar' ? 'بوابة تسوية رسمية' : lang === 'zh' ? '官方结算网关' : lang === 'ckb' ? 'دەروازەی فەرمی پارەدان' : 'Official Gateway'}
                 </span>
                 <button 
@@ -96,7 +96,7 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
                     setIsOpen(false); 
                     setIsHovered(false);
                   }} 
-                  className="text-neutral-400 hover:text-ink-900 dark:hover:text-white p-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                  className="text-neutral-400 hover:text-brand-900 dark:hover:text-white p-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
                   title="Close popup"
                   aria-label="Close"
                 >
@@ -105,7 +105,7 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
               </div>
               
               <div>
-                <h4 className="text-sm font-black text-ink-900 dark:text-neutral-100 uppercase font-serif tracking-tight">
+                <h4 className="text-sm font-black text-brand-900 dark:text-neutral-100 uppercase tracking-tight">
                   {lang === 'ar' ? 'منظومة تسوية المدفوعات الثنائية' : lang === 'zh' ? '中伊双边跨境支付结算' : lang === 'ckb' ? 'سیستەمی پارەدانی دوولایەنە' : 'Bilateral Payment Settlement'}
                 </h4>
                 <p className="text-[11px] text-neutral-600 dark:text-neutral-300 leading-relaxed font-medium mt-1">
@@ -123,7 +123,7 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
               <Link
                 to={`/${lang}/payments`}
                 onClick={() => { setIsOpen(false); setIsHovered(false); }}
-                className="mt-1 w-full flex items-center justify-center gap-2 py-2 px-3 bg-brand-800 hover:bg-brand-900 text-white rounded-md font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-98"
+                className="mt-1 w-full flex items-center justify-center gap-2 py-2 px-3 bg-brand-800 hover:bg-brand-900 text-white rounded-md text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-98"
               >
                 <span>{lang === 'ar' ? 'دخول بوابة المدفوعات' : lang === 'zh' ? '进入结算网关' : lang === 'ckb' ? 'چوونە ناو دەروازەی پارەدان' : 'Open Settlement Gateway'}</span>
                 <ChevronRight size={14} className="rtl:rotate-180" />
@@ -183,7 +183,7 @@ export function Header({ lang }: { lang: Locale }) {
         >
           <div className="relative z-10 flex flex-col items-center w-full">
             {/* Eyebrow Label */}
-            <div className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] sm:tracking-[0.35em] text-neutral-600 dark:text-neutral-300 text-center mb-2 sm:mb-3">
+            <div className="text-xs sm:text-xs font-black uppercase tracking-[0.25em] sm:tracking-[0.35em] text-neutral-600 dark:text-neutral-300 text-center mb-2 sm:mb-3">
               {lang === 'ar' 
                 ? 'الممر المعلوماتي والمستقل • جمهورية العراق — جمهورية الصين الشعبية'
                 : lang === 'zh' 
@@ -196,7 +196,7 @@ export function Header({ lang }: { lang: Locale }) {
             <div className="w-full flex flex-row items-center justify-between gap-4 md:gap-8 mb-6">
               {/* Left Info Column */}
               <div className="hidden lg:flex flex-col items-start gap-1.5 w-1/4 text-left rtl:items-start rtl:text-right shrink-0">
-                <span className="text-xs font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100 whitespace-nowrap">
+                <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 whitespace-nowrap">
                   {lang === 'ar' ? 'المجلد CLXII العدد 402' : lang === 'zh' ? '第 CLXII 卷 第 402 期' : lang === 'ckb' ? 'بەرگی CLXII ژمارە ٤٠٢' : 'Vol. CLXII No. 402'}
                 </span>
                 <LiveDateTime lang={lang} />
@@ -212,22 +212,22 @@ export function Header({ lang }: { lang: Locale }) {
                     {lang === 'ar' ? (
                       <>
                         <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">الوكالة العراقية الصينية</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-ink-900 dark:text-neutral-100 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : lang === 'ckb' ? (
                       <>
                         <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">ئاژانسی عێراقی - چینی</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-ink-900 dark:text-neutral-100 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : lang === 'zh' ? (
                       <>
-                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-serif font-black tracking-wider text-2xl sm:text-4xl lg:text-5xl">伊中通讯社</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-ink-900 dark:text-neutral-100 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-wider text-2xl sm:text-4xl lg:text-5xl">伊中通讯社</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : (
                       <>
                         <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">IRAQI-CHINESE</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-ink-900 dark:text-neutral-100 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     )}
                   </div>
@@ -278,7 +278,7 @@ export function Header({ lang }: { lang: Locale }) {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder={lang === 'zh' ? "搜索企业和基建项目..." : "Search enterprise directory..."}
-                      className="w-full pl-9 pr-4 py-2 text-xs font-bold border-none bg-neutral-50 dark:bg-neutral-800 text-ink-900 dark:text-neutral-100 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-1 focus:ring-brand-800/20 rounded-sm transition-all placeholder:text-neutral-400"
+                      className="w-full pl-9 pr-4 py-2 text-xs font-bold border-none bg-neutral-50 dark:bg-neutral-800 text-brand-900 dark:text-neutral-100 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-1 focus:ring-brand-800/20 rounded-sm transition-all placeholder:text-neutral-400"
                     />
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
                   </div>
@@ -290,7 +290,7 @@ export function Header({ lang }: { lang: Locale }) {
                     <button
                       key={tag}
                       onClick={() => navigate(`/${lang}/search?category=${encodeURIComponent(tag.toLowerCase())}`)}
-                      className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-brand-50 hover:text-brand-800 dark:hover:bg-brand-900/30 dark:hover:text-brand-400 transition-colors rounded whitespace-nowrap cursor-pointer"
+                      className="text-xs font-bold uppercase tracking-wider px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-brand-50 hover:text-brand-800 dark:hover:bg-brand-900/30 dark:hover:text-brand-400 transition-colors rounded whitespace-nowrap cursor-pointer"
                     >
                       {lang === 'ar' && tag === 'Energy' ? 'الطاقة' 
                         : lang === 'ar' && tag === 'Economy' ? 'الاقتصاد'

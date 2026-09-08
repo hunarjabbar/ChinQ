@@ -66,11 +66,11 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
             }`}>
               <div className={`flex items-center gap-3 text-sm mb-3 border-b pb-2 ${darkTheme ? 'text-gray-400 border-gray-800' : 'text-gray-500 border-gray-100'}`}>
                 <Clock size={14} />
-                <time className="font-mono font-semibold">
+                <time className="font-semibold">
                   {new Date(update.createdAt).toLocaleTimeString(lang === 'ar' ? 'ar-IQ' : lang === 'ckb' ? 'ku-IQ' : lang === 'zh' ? 'zh-CN' : 'en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Baghdad' })}
                 </time>
                 <span className={`w-1 h-1 rounded-full ${darkTheme ? 'bg-gray-700' : 'bg-gray-300'}`}></span>
-                <span className={`uppercase text-xs font-bold tracking-wider ${darkTheme ? 'text-gray-200' : 'text-ink-900'}`}>{update.authorName}</span>
+                <span className={`uppercase text-xs font-bold tracking-wider ${darkTheme ? 'text-gray-200' : 'text-brand-900'}`}>{update.authorName}</span>
                 {update.isImportant && (
                   <span className={`ms-auto flex items-center gap-1 font-bold text-xs uppercase ${darkTheme ? 'text-brand-500' : 'text-brand-800'}`}>
                     <AlertCircle size={14} /> Key Event
@@ -78,7 +78,7 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
                 )}
               </div>
               
-              <div className={`text-lg font-serif leading-relaxed whitespace-pre-wrap ${darkTheme ? 'text-gray-200' : 'text-gray-900'}`}>
+              <div className={`text-lg leading-relaxed whitespace-pre-wrap ${darkTheme ? 'text-gray-200' : 'text-gray-900'}`}>
                 {getContent(update)}
               </div>
             </div>

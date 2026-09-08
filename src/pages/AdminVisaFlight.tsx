@@ -476,7 +476,7 @@ export function AdminVisaFlight() {
               </span>
               <span>Enterprise Diplomatic & Aviation Command</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[10px] text-emerald-400 font-mono">LIVE SYNCHRONIZED</span>
+              <span className="text-xs text-emerald-400 font-medium">LIVE SYNCHRONIZED</span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
               Visa & Flight Administration
@@ -538,7 +538,7 @@ export function AdminVisaFlight() {
               <Plane className="w-3.5 h-3.5 text-amber-400" />
             </div>
             <div className="text-xl font-black text-gray-900 mt-1">{stats?.totalRecords ?? records.length}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">{stats?.totalFeatured ?? 0} Featured & Promoted</div>
+            <div className="text-xs text-gray-500 mt-0.5">{stats?.totalFeatured ?? 0} Featured & Promoted</div>
           </div>
 
           <div className="bg-gray-50/60 backdrop-blur rounded-xl p-3 border border-gray-200">
@@ -547,7 +547,7 @@ export function AdminVisaFlight() {
               <Compass className="w-3.5 h-3.5 text-sky-400" />
             </div>
             <div className="text-xl font-black text-sky-300 mt-1">{stats?.totalRoutes ?? 0}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">Aviation & Cargo lines</div>
+            <div className="text-xs text-gray-500 mt-0.5">Aviation & Cargo lines</div>
           </div>
 
           <div className="bg-gray-50/60 backdrop-blur rounded-xl p-3 border border-gray-200">
@@ -556,7 +556,7 @@ export function AdminVisaFlight() {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
             </div>
             <div className="text-xl font-black text-emerald-300 mt-1">{stats?.totalVisas ?? 0}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">E-Visas & On Arrival</div>
+            <div className="text-xs text-gray-500 mt-0.5">E-Visas & On Arrival</div>
           </div>
 
           <div className="bg-gray-50/60 backdrop-blur rounded-xl p-3 border border-gray-200">
@@ -565,7 +565,7 @@ export function AdminVisaFlight() {
               <Award className="w-3.5 h-3.5 text-purple-400" />
             </div>
             <div className="text-xl font-black text-purple-300 mt-1">{stats?.totalDiplomatic ?? 0}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">Chambers & Consulates</div>
+            <div className="text-xs text-gray-500 mt-0.5">Chambers & Consulates</div>
           </div>
 
           <div className="bg-gray-50/60 backdrop-blur rounded-xl p-3 border border-gray-200">
@@ -574,7 +574,7 @@ export function AdminVisaFlight() {
               <Ticket className="w-3.5 h-3.5 text-brand-600" />
             </div>
             <div className="text-xl font-black text-brand-500 mt-1">{stats?.totalInquiries ?? inquiries.length}</div>
-            <div className="text-[10px] text-amber-400 font-semibold mt-0.5">{stats?.pendingInquiries ?? 0} Pending Attention</div>
+            <div className="text-xs text-amber-400 font-semibold mt-0.5">{stats?.pendingInquiries ?? 0} Pending Attention</div>
           </div>
 
           <div className="bg-gray-50/60 backdrop-blur rounded-xl p-3 border border-gray-200">
@@ -583,7 +583,7 @@ export function AdminVisaFlight() {
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
             </div>
             <div className="text-xl font-black text-emerald-400 mt-1">{stats?.approvedInquiries ?? 0}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">Dispatched clearances</div>
+            <div className="text-xs text-gray-500 mt-0.5">Dispatched clearances</div>
           </div>
         </div>
       </div>
@@ -644,11 +644,11 @@ export function AdminVisaFlight() {
             <Ticket className="w-4 h-4" />
             <span>Concierge Inquiries & Dossiers</span>
             {stats?.pendingInquiries && stats.pendingInquiries > 0 ? (
-              <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-950">
+              <span className="ml-1 px-1.5 py-0.5 rounded-full text-xs font-black bg-amber-400 text-slate-950">
                 {stats.pendingInquiries}
               </span>
             ) : (
-              <span className="text-[10px] text-gray-500">({inquiries.length})</span>
+              <span className="text-xs text-gray-500">({inquiries.length})</span>
             )}
           </button>
 
@@ -808,7 +808,7 @@ export function AdminVisaFlight() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs text-gray-600">
-                    <thead className="bg-gray-50 text-gray-500 uppercase font-mono tracking-wider text-[11px] border-b border-gray-200">
+                    <thead className="bg-gray-50 text-gray-500 uppercase font-medium tracking-wider text-[11px] border-b border-gray-200">
                       <tr>
                         <th className="p-4">Service & Multilingual Titles</th>
                         <th className="p-4">Corridor (Origin → Dest)</th>
@@ -832,10 +832,10 @@ export function AdminVisaFlight() {
                               <div className="space-y-1">
                                 <div className="font-bold text-gray-900 text-sm leading-snug line-clamp-2">{item.titleEn}</div>
                                 <div className="text-[11px] text-amber-400/90 font-semibold tracking-wide flex items-center gap-1.5">
-                                  <span className="px-1.5 py-0.5 rounded bg-amber-400/10 border border-amber-400/20 text-[10px]">
+                                  <span className="px-1.5 py-0.5 rounded bg-amber-400/10 border border-amber-400/20 text-xs">
                                     {item.serviceType.replace('_', ' ')}
                                   </span>
-                                  {item.titleZh && <span className="text-gray-500 text-[10px] line-clamp-1">{item.titleZh}</span>}
+                                  {item.titleZh && <span className="text-gray-500 text-xs line-clamp-1">{item.titleZh}</span>}
                                 </div>
                               </div>
                             </div>
@@ -843,7 +843,7 @@ export function AdminVisaFlight() {
 
                           {/* Corridor */}
                           <td className="p-4 whitespace-nowrap">
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 border border-gray-200 text-xs font-mono font-bold text-gray-700">
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 border border-gray-200 text-xs font-medium font-bold text-gray-700">
                               <span>{item.originRegion}</span>
                               <ArrowRight className="w-3 h-3 text-amber-400" />
                               <span>{item.destinationRegion}</span>
@@ -858,7 +858,7 @@ export function AdminVisaFlight() {
                                 href={item.officialLink} 
                                 target="_blank" 
                                 rel="noreferrer" 
-                                className="text-[10px] text-brand-600 hover:text-brand-500 flex items-center gap-1 mt-0.5"
+                                className="text-xs text-brand-600 hover:text-brand-500 flex items-center gap-1 mt-0.5"
                               >
                                 <span>Official Link</span>
                                 <ExternalLink className="w-2.5 h-2.5" />
@@ -872,20 +872,20 @@ export function AdminVisaFlight() {
                               <Clock className="w-3 h-3 text-brand-600" />
                               <span>{item.processingTime}</span>
                             </div>
-                            <div className="text-emerald-400 font-mono text-[11px] mt-0.5">{item.feeOrCost}</div>
+                            <div className="text-emerald-400 font-medium text-[11px] mt-0.5">{item.feeOrCost}</div>
                           </td>
 
                           {/* Status Badges */}
                           <td className="p-4 text-center">
                             <div className="flex flex-col items-center gap-1">
                               {item.isFeatured && (
-                                <span className="inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded text-[10px] font-bold">
+                                <span className="inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded text-xs font-bold">
                                   <Star className="w-2.5 h-2.5 fill-current" />
                                   <span>Featured</span>
                                 </span>
                               )}
                               {item.isTrending && (
-                                <span className="inline-flex items-center gap-1 bg-indigo-500/20 text-brand-500 border border-indigo-500/30 px-2 py-0.5 rounded text-[10px] font-bold">
+                                <span className="inline-flex items-center gap-1 bg-indigo-500/20 text-brand-500 border border-indigo-500/30 px-2 py-0.5 rounded text-xs font-bold">
                                   <TrendingUp className="w-2.5 h-2.5" />
                                   <span>Trending</span>
                                 </span>
@@ -966,7 +966,7 @@ export function AdminVisaFlight() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                       <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                        <span className="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-gray-50/80 backdrop-blur text-amber-400 border border-amber-400/30">
+                        <span className="px-2.5 py-1 rounded-md text-xs font-black uppercase tracking-wider bg-gray-50/80 backdrop-blur text-amber-400 border border-amber-400/30">
                           {item.serviceType.replace('_', ' ')}
                         </span>
                       </div>
@@ -982,7 +982,7 @@ export function AdminVisaFlight() {
                           </span>
                         )}
                       </div>
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono font-bold text-gray-700">
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
                         <span className="px-2 py-0.5 rounded bg-gray-50/80 backdrop-blur border border-gray-200">
                           {item.originRegion} → {item.destinationRegion}
                         </span>
@@ -1133,7 +1133,7 @@ export function AdminVisaFlight() {
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs text-gray-600">
-                  <thead className="bg-gray-50 text-gray-500 uppercase font-mono tracking-wider text-[11px] border-b border-gray-200">
+                  <thead className="bg-gray-50 text-gray-500 uppercase font-medium tracking-wider text-[11px] border-b border-gray-200">
                     <tr>
                       <th className="p-4">Ticket & Priority</th>
                       <th className="p-4">Applicant & Passport</th>
@@ -1148,18 +1148,18 @@ export function AdminVisaFlight() {
                       <tr key={inq.id} className="hover:bg-gray-50 transition-colors">
                         {/* Ticket & Priority */}
                         <td className="p-4 whitespace-nowrap">
-                          <div className="font-mono font-black text-gray-900 text-sm">{inq.ticketId}</div>
+                          <div className="font-medium font-black text-gray-900 text-sm">{inq.ticketId}</div>
                           <div className="mt-1">
                             {inq.priority === 'DIPLOMATIC' ? (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                              <span className="px-2 py-0.5 rounded text-xs font-black bg-purple-500/20 text-purple-300 border border-purple-500/30">
                                 👑 DIPLOMATIC
                               </span>
                             ) : inq.priority === 'EXPEDITED' ? (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-black bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                              <span className="px-2 py-0.5 rounded text-xs font-black bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                 ⚡ EXPEDITED
                               </span>
                             ) : (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200">
+                              <span className="px-2 py-0.5 rounded text-xs font-bold bg-gray-100 text-gray-500 border border-gray-200">
                                 STANDARD
                               </span>
                             )}
@@ -1173,7 +1173,7 @@ export function AdminVisaFlight() {
                             <Mail className="w-3 h-3 text-gray-400" />
                             <span>{inq.email}</span>
                           </div>
-                          <div className="text-gray-500 text-[11px] font-mono mt-0.5">
+                          <div className="text-gray-500 text-[11px] font-medium mt-0.5">
                             Passport: <strong className="text-gray-700">{inq.passportNumber}</strong> ({inq.nationality || 'Iraqi/Chinese'})
                           </div>
                         </td>
@@ -1183,13 +1183,13 @@ export function AdminVisaFlight() {
                           <div className="font-semibold text-amber-400 text-[11px]">
                             {inq.serviceType.replace('_', ' ')}
                           </div>
-                          <div className="text-gray-700 font-mono text-[11px] mt-0.5 flex items-center gap-1">
+                          <div className="text-gray-700 font-medium text-[11px] mt-0.5 flex items-center gap-1">
                             <span>{inq.origin}</span>
                             <ArrowRight className="w-3 h-3 text-gray-400" />
                             <span>{inq.destination}</span>
                           </div>
                           {inq.notes && (
-                            <p className="text-gray-500 text-[10px] line-clamp-1 italic mt-1 max-w-xs">
+                            <p className="text-gray-500 text-xs line-clamp-1 italic mt-1 max-w-xs">
                               "{inq.notes}"
                             </p>
                           )}
@@ -1197,11 +1197,11 @@ export function AdminVisaFlight() {
 
                         {/* Travel Date */}
                         <td className="p-4 whitespace-nowrap">
-                          <div className="text-gray-600 font-mono flex items-center gap-1">
+                          <div className="text-gray-600 font-medium flex items-center gap-1">
                             <Calendar className="w-3.5 h-3.5 text-gray-400" />
                             <span>{inq.travelDate || 'Flexible / Unspecified'}</span>
                           </div>
-                          <div className="text-[10px] text-gray-400 mt-0.5">
+                          <div className="text-xs text-gray-400 mt-0.5">
                             Desk: {inq.assignedOfficer || 'General Desk'}
                           </div>
                         </td>
@@ -1296,15 +1296,15 @@ export function AdminVisaFlight() {
               <div className="space-y-2 pt-2">
                 <div className="flex justify-between items-center text-xs bg-gray-50 p-2.5 rounded-lg border border-gray-200">
                   <span className="font-semibold text-gray-600">Baghdad ↔ Guangzhou (CAN)</span>
-                  <span className="text-emerald-400 font-mono font-bold">2x Weekly Direct</span>
+                  <span className="text-emerald-400 font-medium font-bold">2x Weekly Direct</span>
                 </div>
                 <div className="flex justify-between items-center text-xs bg-gray-50 p-2.5 rounded-lg border border-gray-200">
                   <span className="font-semibold text-gray-600">Erbil ↔ Beijing / Shanghai</span>
-                  <span className="text-sky-400 font-mono font-bold">Consular Fast-Track</span>
+                  <span className="text-sky-400 font-medium font-bold">Consular Fast-Track</span>
                 </div>
                 <div className="flex justify-between items-center text-xs bg-gray-50 p-2.5 rounded-lg border border-gray-200">
                   <span className="font-semibold text-gray-600">Air China Cargo (PVG ↔ BGW)</span>
-                  <span className="text-purple-400 font-mono font-bold">Heavy Freight 777-F</span>
+                  <span className="text-purple-400 font-medium font-bold">Heavy Freight 777-F</span>
                 </div>
               </div>
             </div>
@@ -1341,17 +1341,17 @@ export function AdminVisaFlight() {
               </p>
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <div className="bg-gray-50 p-3 rounded-xl border border-gray-200 text-center">
-                  <div className="text-[10px] text-gray-500 font-bold uppercase">Average Response</div>
+                  <div className="text-xs text-gray-500 font-bold uppercase">Average Response</div>
                   <div className="text-lg font-black text-amber-400 mt-1">&lt; 4 Hours</div>
                 </div>
                 <div className="bg-gray-50 p-3 rounded-xl border border-gray-200 text-center">
-                  <div className="text-[10px] text-gray-500 font-bold uppercase">Clearance Rate</div>
+                  <div className="text-xs text-gray-500 font-bold uppercase">Clearance Rate</div>
                   <div className="text-lg font-black text-emerald-400 mt-1">98.4%</div>
                 </div>
               </div>
               <div className="text-[11px] text-gray-500 bg-gray-50 p-2 rounded-lg border border-gray-200 flex items-center justify-between">
                 <span>Direct Aviation Liaison Desk:</span>
-                <span className="font-mono text-brand-600">+964 790 191 2315</span>
+                <span className="font-medium text-brand-600">+964 790 191 2315</span>
               </div>
             </div>
           </div>
@@ -1733,7 +1733,7 @@ export function AdminVisaFlight() {
               </button>
 
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-brand-600">
+                <div className="flex items-center gap-2 text-xs font-medium font-bold text-brand-600">
                   <Ticket className="w-4 h-4" />
                   <span>OFFICIAL CONSULAR DOSSIER</span>
                   <span>•</span>
@@ -1750,46 +1750,46 @@ export function AdminVisaFlight() {
               <div className="space-y-4 bg-gray-50 p-5 rounded-xl border border-gray-200 text-xs">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Email Address</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Email Address</div>
                     <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.email}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Phone Contact</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Phone Contact</div>
                     <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.contactPhone || 'Not provided'}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Passport Number</div>
-                    <div className="font-mono font-bold text-gray-700 mt-0.5">{selectedInquiryDetail.passportNumber}</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Passport Number</div>
+                    <div className="font-medium font-bold text-gray-700 mt-0.5">{selectedInquiryDetail.passportNumber}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Nationality</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Nationality</div>
                     <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.nationality || 'Iraqi / Chinese'}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Route Requested</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Route Requested</div>
                     <div className="font-semibold text-amber-400 mt-0.5">
                       {selectedInquiryDetail.origin} → {selectedInquiryDetail.destination}
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Intended Travel Date</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Intended Travel Date</div>
                     <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.travelDate || 'Flexible'}</div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="text-gray-400 font-bold uppercase text-[10px]">Service Classification</div>
+                  <div className="text-gray-400 font-bold uppercase text-xs">Service Classification</div>
                   <div className="font-bold text-brand-600 mt-0.5">{selectedInquiryDetail.serviceType}</div>
                 </div>
 
                 {selectedInquiryDetail.notes && (
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Applicant Travel Notes</div>
+                    <div className="text-gray-400 font-bold uppercase text-xs">Applicant Travel Notes</div>
                     <div className="bg-white p-3 rounded-lg border border-gray-200 text-gray-600 mt-1 leading-relaxed">
                       {selectedInquiryDetail.notes}
                     </div>
@@ -1797,14 +1797,14 @@ export function AdminVisaFlight() {
                 )}
 
                 <div>
-                  <div className="text-gray-400 font-bold uppercase text-[10px]">Assigned Officer / Desk</div>
+                  <div className="text-gray-400 font-bold uppercase text-xs">Assigned Officer / Desk</div>
                   <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.assignedOfficer || 'Consular Desk'}</div>
                 </div>
 
                 {selectedInquiryDetail.adminNotes && (
                   <div>
-                    <div className="text-gray-400 font-bold uppercase text-[10px]">Internal Admin & Secretariat Notes</div>
-                    <div className="bg-white p-3 rounded-lg border border-gray-200 text-amber-300 mt-1 font-mono text-[11px]">
+                    <div className="text-gray-400 font-bold uppercase text-xs">Internal Admin & Secretariat Notes</div>
+                    <div className="bg-white p-3 rounded-lg border border-gray-200 text-amber-300 mt-1 font-medium text-[11px]">
                       {selectedInquiryDetail.adminNotes}
                     </div>
                   </div>
@@ -1938,7 +1938,7 @@ export function AdminVisaFlight() {
                     value={inquiryFormData.adminNotes}
                     onChange={(e) => setInquiryFormData({ ...inquiryFormData, adminNotes: e.target.value })}
                     placeholder="Internal verification notes, visa grant numbers, flight confirmation references..."
-                    className="w-full bg-gray-100 border border-gray-200 rounded-lg p-2.5 text-gray-900 font-mono"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg p-2.5 text-gray-900 font-medium"
                   />
                 </div>
 
@@ -1994,11 +1994,11 @@ export function AdminVisaFlight() {
                   <img src={previewService.imageUrl} alt="" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
                   <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-gray-50/80 text-amber-400 border border-amber-400/30">
+                    <span className="px-2.5 py-1 rounded-md text-xs font-black uppercase tracking-wider bg-gray-50/80 text-amber-400 border border-amber-400/30">
                       {previewService.serviceType.replace('_', ' ')}
                     </span>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono font-bold text-gray-700">
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
                     <span className="px-2 py-0.5 rounded bg-gray-50/80 border border-gray-200">
                       {previewService.originRegion} → {previewService.destinationRegion}
                     </span>
@@ -2017,7 +2017,7 @@ export function AdminVisaFlight() {
                   
                   {previewService.detailsEn && (
                     <div className="bg-white p-3.5 rounded-xl border border-gray-200 text-xs text-gray-600 leading-relaxed">
-                      <div className="font-bold text-amber-400 mb-1 uppercase text-[10px]">Operational Policy:</div>
+                      <div className="font-bold text-amber-400 mb-1 uppercase text-xs">Operational Policy:</div>
                       {previewService.detailsEn}
                     </div>
                   )}

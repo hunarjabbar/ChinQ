@@ -366,7 +366,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 dark:bg-neutral-900 text-ink-900 dark:text-neutral-100 font-sans pb-8 rounded-xs border border-gray-200 dark:border-neutral-800 shadow-xs overflow-hidden">
+    <div className="w-full min-h-screen bg-gray-50 dark:bg-neutral-900 text-brand-900 dark:text-neutral-100 font-sans pb-8 rounded-xs border border-gray-200 dark:border-neutral-800 shadow-xs overflow-hidden">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gray-50 dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 pt-8 pb-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-500/10 dark:from-brand-500/5 via-transparent to-transparent opacity-60"></div>
@@ -377,7 +377,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <span>{t.badge}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-ink-900 dark:text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-brand-900 dark:text-white tracking-tight leading-tight">
               {t.heroTitle}
             </h1>
 
@@ -396,7 +396,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
 
               <a
                 href="#eligibility-checker"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 border border-gray-200 dark:border-neutral-700 text-ink-900 dark:text-white font-semibold transition-all text-sm shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white dark:bg-neutral-800 hover:bg-gray-50 dark:hover:bg-neutral-700 border border-gray-200 dark:border-neutral-700 text-brand-900 dark:text-white font-semibold transition-all text-sm shadow-sm"
               >
                 <ShieldCheck className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                 <span>{t.checkEligibility}</span>
@@ -434,7 +434,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-ink-900 dark:text-white">{t.checkEligibility}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-brand-900 dark:text-white">{t.checkEligibility}</h2>
               <p className="text-xs sm:text-sm text-gray-500 dark:text-neutral-400">Instant visa policy, clearance speed & flight connections between China, Iraq & Erbil</p>
             </div>
           </div>
@@ -447,7 +447,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <select
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-ink-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                className="w-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-brand-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
               >
                 <option value="CHINA">China Passport / Citizen (中国公民)</option>
                 <option value="KURDISTAN">Erbil / Kurdistan Region Citizen (هەرێمی کوردستان)</option>
@@ -462,7 +462,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <select
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-ink-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                className="w-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-brand-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none"
               >
                 <option value="KURDISTAN">Erbil International Airport (EBL) / Kurdistan</option>
                 <option value="IRAQ">Baghdad International Airport (BGW) / Iraq</option>
@@ -475,7 +475,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
           <div className="bg-gray-50 dark:bg-neutral-900 rounded-xl p-5 border border-gray-200 dark:border-neutral-700 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
             <div>
               <div className="text-xs text-brand-600 dark:text-brand-400 font-semibold mb-1">Visa Category & Status</div>
-              <div className="font-bold text-ink-900 dark:text-white text-base">{currentEligibility.visaType}</div>
+              <div className="font-bold text-brand-900 dark:text-white text-base">{currentEligibility.visaType}</div>
               <div className="text-xs text-gray-500 dark:text-neutral-400 mt-1">{currentEligibility.validity}</div>
             </div>
 
@@ -498,7 +498,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
 
             <div>
               <div className="text-xs text-brand-600 dark:text-brand-400 font-semibold mb-1">Consular Emergency Hotline</div>
-              <div className="text-xs text-gray-700 dark:text-neutral-300 font-mono mt-1 bg-white dark:bg-neutral-800 p-2 rounded border border-gray-200 dark:border-neutral-700">
+              <div className="text-xs text-gray-700 dark:text-neutral-300 mt-1 bg-white dark:bg-neutral-800 p-2 rounded border border-gray-200 dark:border-neutral-700">
                 {currentEligibility.contact}
               </div>
               <button
@@ -524,7 +524,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               placeholder={t.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl pl-11 pr-4 py-3 text-sm text-ink-900 dark:text-neutral-100 placeholder-gray-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl pl-11 pr-4 py-3 text-sm text-brand-900 dark:text-neutral-100 placeholder-gray-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
           </form>
 
@@ -534,7 +534,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 dark:text-neutral-100 uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-amber-500 appearance-none relative"
+                className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-bold text-brand-900 dark:text-neutral-100 uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-amber-500 appearance-none relative"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F1F5F9%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -554,7 +554,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-bold text-ink-900 dark:text-neutral-100 uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-500 appearance-none relative"
+                className="w-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-bold text-brand-900 dark:text-neutral-100 uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-500 appearance-none relative"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F1F5F9%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -604,7 +604,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
 
                     {item.isFeatured && (
-                      <span className="absolute top-3 left-3 bg-amber-500/90 text-slate-950 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+                      <span className="absolute top-3 left-3 bg-amber-500/90 text-slate-950 font-bold text-xs px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
                         FEATURED
                       </span>
                     )}
@@ -620,7 +620,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                         <span>{item.serviceType.replace('_', ' ')}</span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-ink-900 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors leading-snug">
+                      <h3 className="text-lg font-bold text-brand-900 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors leading-snug">
                         {title}
                       </h3>
 
@@ -667,7 +667,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                             href={item.officialLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 text-gray-600 dark:text-neutral-300 hover:text-ink-900 dark:hover:text-white transition-colors"
+                            className="p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 text-gray-600 dark:text-neutral-300 hover:text-brand-900 dark:hover:text-white transition-colors"
                             title={t.officialPortal}
                           >
                             <ExternalLink className="w-4 h-4" />
@@ -686,10 +686,10 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
       {/* Modal for viewing detailed record */}
       {activeModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative text-ink-900 dark:text-neutral-100 shadow-2xl">
+          <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative text-brand-900 dark:text-neutral-100 shadow-2xl">
             <button
               onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 text-gray-500 dark:text-neutral-400 hover:text-ink-900 dark:text-neutral-100"
+              className="absolute top-4 right-4 p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 text-gray-500 dark:text-neutral-400 hover:text-brand-900 dark:text-neutral-100"
             >
               <X className="w-5 h-5" />
             </button>
@@ -699,7 +699,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
               <span>{activeModal.serviceType} | {activeModal.originRegion} → {activeModal.destinationRegion}</span>
             </div>
 
-            <h2 className="text-2xl font-black text-ink-900 dark:text-white mb-4">
+            <h2 className="text-2xl font-black text-brand-900 dark:text-white mb-4">
               {getLocalizedTitle(activeModal)}
             </h2>
 
@@ -730,12 +730,12 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
 
             <div className="space-y-4 mb-6 text-sm text-gray-600 dark:text-neutral-300 leading-relaxed">
               <div>
-                <h4 className="font-bold text-ink-900 dark:text-white text-base mb-1">Executive Summary</h4>
+                <h4 className="font-bold text-brand-900 dark:text-white text-base mb-1">Executive Summary</h4>
                 <p>{getLocalizedSummary(activeModal)}</p>
               </div>
 
               <div>
-                <h4 className="font-bold text-ink-900 dark:text-white text-base mb-1">Detailed Operational Rules & Guidance</h4>
+                <h4 className="font-bold text-brand-900 dark:text-white text-base mb-1">Detailed Operational Rules & Guidance</h4>
                 <p className="whitespace-pre-line">{getLocalizedDetails(activeModal)}</p>
               </div>
             </div>
@@ -776,19 +776,19 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                 setFormOpen(false);
                 setFormSuccess(null);
               }}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 text-gray-500 dark:text-neutral-400 hover:text-ink-900 dark:text-neutral-100"
+              className="absolute top-4 right-4 p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 text-gray-500 dark:text-neutral-400 hover:text-brand-800 dark:text-neutral-100"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-bold text-ink-900 dark:text-white mb-2">{t.requestConcierge}</h3>
+            <h3 className="text-xl font-bold text-brand-800 dark:text-white mb-2">{t.requestConcierge}</h3>
             <p className="text-xs text-gray-500 dark:text-neutral-400 mb-6">Transmit your visa assistance or flight charter reservation request directly to our bilateral concierge secretariat.</p>
 
             {formSuccess ? (
               <div className="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800/50 p-6 rounded-xl text-center space-y-3">
                 <CheckCircle className="w-12 h-12 text-emerald-600 dark:text-emerald-400 mx-auto" />
                 <h4 className="text-lg font-bold text-emerald-900 dark:text-emerald-50">{t.successMsg}</h4>
-                <div className="bg-white dark:bg-neutral-900 p-3 rounded-lg border border-emerald-100 dark:border-emerald-800/30 text-xs font-mono text-emerald-700 dark:text-emerald-400">
+                <div className="bg-white dark:bg-neutral-900 p-3 rounded-lg border border-emerald-100 dark:border-emerald-800/30 text-xs text-emerald-700 dark:text-emerald-400">
                   Tracking Ticket ID: {formSuccess.ticketId}
                 </div>
                 <p className="text-xs text-gray-600 dark:text-neutral-300 leading-relaxed">{formSuccess.message}</p>

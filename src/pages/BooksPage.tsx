@@ -103,12 +103,12 @@ export function BooksPage() {
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-brand-800/10 blur-3xl pointer-events-none" />
         
         <div className="relative z-10 space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800 text-white text-[10px] font-mono font-black uppercase tracking-widest rounded-xs">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800 text-white text-xs font-black uppercase tracking-widest rounded-xs">
             <BookOpen className="w-3.5 h-3.5" />
             {currentLang === 'ar' ? 'المكتبة المستقلة الأكاديمية' : currentLang === 'zh' ? '伊中通讯社主权学术书库' : currentLang === 'ckb' ? 'کتێبخانەی سەربەخۆ شینک' : 'IRAQ-CHINA DAILY SOVEREIGN LIBRARY'}
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-serif font-black tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
             {currentLang === 'ar' ? 'مجموعات الكتب الحديثة حول الصين والعراق وكردستان' :
              currentLang === 'zh' ? '中国、伊拉克与库尔德斯坦精选学术著作库' :
              currentLang === 'ckb' ? 'کۆکراوەی کتێبە گرنگەکانی چین، عێراق و کوردستان' :
@@ -125,19 +125,19 @@ export function BooksPage() {
           {/* Quick Metrics Bar */}
           <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/15 text-xs font-mono">
             <div>
-              <span className="text-gray-400 block text-[10px] uppercase">{currentLang === 'ar' ? 'إجمالي المجلدات' : 'TOTAL TITLES'}</span>
+              <span className="text-gray-400 block text-xs uppercase">{currentLang === 'ar' ? 'إجمالي المجلدات' : 'TOTAL TITLES'}</span>
               <span className="text-xl font-bold text-white">50 Volumes</span>
             </div>
             <div>
-              <span className="text-gray-400 block text-[10px] uppercase">{currentLang === 'ar' ? 'المناطق المغطاة' : 'REGIONS'}</span>
+              <span className="text-gray-400 block text-xs uppercase">{currentLang === 'ar' ? 'المناطق المغطاة' : 'REGIONS'}</span>
               <span className="text-xl font-bold text-brand-400">4 Bureaus</span>
             </div>
             <div>
-              <span className="text-gray-400 block text-[10px] uppercase">{currentLang === 'ar' ? 'الترجمات المتاحة' : 'LANGUAGES'}</span>
+              <span className="text-gray-400 block text-xs uppercase">{currentLang === 'ar' ? 'الترجمات المتاحة' : 'LANGUAGES'}</span>
               <span className="text-xl font-bold text-white">EN / AR / ZH / CKB</span>
             </div>
             <div>
-              <span className="text-gray-400 block text-[10px] uppercase">{currentLang === 'ar' ? 'الوصول الرقمي' : 'DIGITAL ACCESS'}</span>
+              <span className="text-gray-400 block text-xs uppercase">{currentLang === 'ar' ? 'الوصول الرقمي' : 'DIGITAL ACCESS'}</span>
               <span className="text-xl font-bold text-emerald-400">100% Full Scale</span>
             </div>
           </div>
@@ -176,7 +176,7 @@ export function BooksPage() {
           {/* Trending Toggle Pill */}
           <button
             onClick={() => setOnlyTrending(!onlyTrending)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xs text-xs font-mono font-bold uppercase transition-all cursor-pointer shrink-0 border ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xs text-xs font-bold uppercase transition-all cursor-pointer shrink-0 border ${
               onlyTrending
                 ? 'bg-brand-800 text-white border-brand-800'
                 : 'bg-white dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 border-gray-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-700'
@@ -189,7 +189,7 @@ export function BooksPage() {
 
         {/* Region Tabs */}
         <div className="space-y-2 pt-2 border-t border-gray-100">
-          <div className="text-[10px] font-mono uppercase font-black tracking-wider text-gray-500 flex items-center gap-1.5">
+          <div className="text-xs uppercase font-black tracking-wider text-gray-500 flex items-center gap-1.5">
             <Globe2 className="w-3 h-3 text-brand-800" />
             <span>{currentLang === 'ar' ? 'تصفية حسب المنطقة' : currentLang === 'zh' ? '按地域分类' : currentLang === 'ckb' ? 'پۆڵێنکردن بەپێی ناوچە' : 'Filter by Region'}</span>
           </div>
@@ -216,7 +216,7 @@ export function BooksPage() {
 
         {/* Subject Category Chips */}
         <div className="space-y-2 pt-2 border-t border-gray-100">
-          <div className="text-[10px] font-mono uppercase font-black tracking-wider text-gray-500 flex items-center gap-1.5">
+          <div className="text-xs uppercase font-black tracking-wider text-gray-500 flex items-center gap-1.5">
             <Layers className="w-3 h-3 text-brand-800" />
             <span>{currentLang === 'ar' ? 'تصفية حسب التخصص' : currentLang === 'zh' ? '按学科主题' : currentLang === 'ckb' ? 'پۆڵێنکردن بەپێی بابەت' : 'Filter by Subject'}</span>
           </div>
@@ -249,11 +249,11 @@ export function BooksPage() {
           <div className="flex items-center justify-between border-b-2 border-brand-800 pb-2">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 bg-brand-800" />
-              <h2 className="text-xl font-serif font-black uppercase tracking-tight">
+              <h2 className="text-xl font-black uppercase tracking-tight">
                 {currentLang === 'ar' ? 'المؤلفات البارزة والموصى بها' : currentLang === 'zh' ? '重点关注与特约推荐' : currentLang === 'ckb' ? 'کتێبە دیارەکانی پێشنیارکراو' : 'Featured Spotlight Titles'}
               </h2>
             </div>
-            <span className="text-xs font-mono text-gray-500 font-bold uppercase">{featuredBooks.length} Volumes Spotlighted</span>
+            <span className="text-xs text-gray-500 font-bold uppercase">{featuredBooks.length} Volumes Spotlighted</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -270,20 +270,20 @@ export function BooksPage() {
                       alt={getBookTitle(book)}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-[9px] font-mono font-black uppercase px-2 py-0.5 rounded-xs">
+                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-black uppercase px-2 py-0.5 rounded-xs">
                       {book.region.replace('_', ' ')}
                     </div>
-                    <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-md text-amber-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded-xs flex items-center gap-1">
+                    <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-md text-amber-300 text-xs font-bold px-2 py-0.5 rounded-xs flex items-center gap-1">
                       <Star className="w-3 h-3 fill-amber-300" />
                       <span>{book.rating}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] font-mono font-black uppercase text-brand-800">
+                    <span className="text-xs font-black uppercase text-brand-800">
                       {book.category} • {book.year}
                     </span>
-                    <h3 className="text-base font-serif font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
+                    <h3 className="text-base font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
                       {getBookTitle(book)}
                     </h3>
                     <p className="text-xs font-sans text-gray-600 font-medium mt-1">
@@ -292,7 +292,7 @@ export function BooksPage() {
                   </div>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between text-xs font-mono text-gray-500">
+                <div className="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                   <span>{book.pages} Pages</span>
                   <span className="text-brand-800 font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform flex items-center gap-1">
                     Read & Detail <ChevronRight className="w-3.5 h-3.5" />
@@ -309,11 +309,11 @@ export function BooksPage() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b-2 border-brand-800 pb-2">
           <div className="flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-brand-800" />
-            <h2 className="text-xl font-serif font-black uppercase tracking-tight">
+            <h2 className="text-xl font-black uppercase tracking-tight">
               {currentLang === 'ar' ? 'فهرس المكتبة الشاملة' : currentLang === 'zh' ? '全域图书总目录' : currentLang === 'ckb' ? 'فهرستی گشتی کتێبەکان' : 'Comprehensive Books Catalog'}
             </h2>
           </div>
-          <div className="text-xs font-mono font-bold text-gray-600">
+          <div className="text-xs font-bold text-gray-600">
             Showing <span className="text-brand-800">{filteredBooks.length}</span> of <span className="text-ink-900">{books.length}</span> Books
           </div>
         </div>
@@ -327,7 +327,7 @@ export function BooksPage() {
         ) : filteredBooks.length === 0 ? (
           <div className="text-center py-24 bg-white border border-dashed border-gray-300 rounded-xs space-y-3">
             <BookOpen className="w-10 h-10 text-gray-400 mx-auto" />
-            <h3 className="text-base font-serif font-bold text-gray-800">
+            <h3 className="text-base font-bold text-gray-800">
               {currentLang === 'ar' ? 'لم يتم العثور على كتب مطابقة' : 'No books matched your filter criteria.'}
             </h3>
             <p className="text-xs text-gray-500">
@@ -340,7 +340,7 @@ export function BooksPage() {
                 setSelectedCategory('ALL');
                 setOnlyTrending(false);
               }}
-              className="mt-2 px-4 py-1.5 bg-brand-800 text-white text-xs font-mono font-bold rounded-xs cursor-pointer"
+              className="mt-2 px-4 py-1.5 bg-brand-800 text-white text-xs font-bold rounded-xs cursor-pointer"
             >
               Reset Filters
             </button>
@@ -364,11 +364,11 @@ export function BooksPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                      <div className="absolute top-2 left-2 bg-black/80 text-white text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-xs">
+                      <div className="absolute top-2 left-2 bg-black/80 text-white text-xs font-bold px-1.5 py-0.5 rounded-xs">
                         {book.region.replace('_', ' ')}
                       </div>
                       {book.isTrending && (
-                        <div className="absolute top-2 right-2 bg-brand-800 text-white text-[9px] font-mono font-black uppercase px-1.5 py-0.5 rounded-xs flex items-center gap-1">
+                        <div className="absolute top-2 right-2 bg-brand-800 text-white text-xs font-black uppercase px-1.5 py-0.5 rounded-xs flex items-center gap-1">
                           <Sparkles className="w-2.5 h-2.5" />
                           <span>Trending</span>
                         </div>
@@ -377,11 +377,11 @@ export function BooksPage() {
 
                     {/* Meta & Title */}
                     <div>
-                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 mb-1">
+                      <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
                         <span className="font-bold text-brand-800">{book.category}</span>
                         <span>{book.year}</span>
                       </div>
-                      <h3 className="text-sm font-serif font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
+                      <h3 className="text-sm font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
                         {getBookTitle(book)}
                       </h3>
                       <p className="text-xs font-sans text-gray-600 line-clamp-1 mt-0.5">
@@ -396,7 +396,7 @@ export function BooksPage() {
                       <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
                       {book.rating}
                     </span>
-                    <span className="text-gray-500 font-bold group-hover:text-ink-900 transition-colors">
+                    <span className="text-gray-500 font-bold group-hover:text-brand-800 transition-colors">
                       {book.pages}p
                     </span>
                   </div>
@@ -436,7 +436,7 @@ export function BooksPage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] font-mono space-y-1.5 text-gray-700">
+                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] space-y-1.5 text-gray-700">
                     <div className="flex justify-between">
                       <span className="text-gray-500">Publisher:</span>
                       <span className="font-bold text-gray-900 line-clamp-1">{activeBook.publisher}</span>
@@ -452,7 +452,7 @@ export function BooksPage() {
                     {activeBook.isbn && (
                       <div className="flex justify-between">
                         <span className="text-gray-500">ISBN:</span>
-                        <span className="font-mono text-gray-900 font-bold">{activeBook.isbn}</span>
+                        <span className="text-gray-900 font-bold">{activeBook.isbn}</span>
                       </div>
                     )}
                   </div>
@@ -462,10 +462,10 @@ export function BooksPage() {
                 <div className="sm:col-span-2 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-brand-800 text-white text-xs font-black uppercase rounded-xs">
                         {activeBook.region.replace('_', ' ')}
                       </span>
-                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-[10px] font-mono font-bold uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-xs font-bold uppercase rounded-xs">
                         {activeBook.category}
                       </span>
                       <span className="text-amber-600 text-xs font-bold flex items-center gap-1 ml-auto">
@@ -474,7 +474,7 @@ export function BooksPage() {
                       </span>
                     </div>
 
-                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
+                    <h2 className="text-2xl font-black text-brand-800 leading-tight">
                       {getBookTitle(activeBook)}
                     </h2>
                     
@@ -484,7 +484,7 @@ export function BooksPage() {
                   </div>
 
                   <div className="border-t border-b border-gray-100 py-3">
-                    <h4 className="text-xs font-mono font-black uppercase tracking-wider text-gray-500 mb-2">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-gray-500 mb-2">
                       Synopsis & Academic Overview
                     </h4>
                     <p className="text-xs sm:text-sm font-sans text-gray-700 leading-relaxed text-justify">
@@ -494,14 +494,14 @@ export function BooksPage() {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <button onClick={() => window.location.href = 'mailto:library@iraqi-chineseagency.com'} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer bg-brand-800 hover:bg-brand-800 text-white"><Download className="w-4 h-4" /><span>Request Academic Copy</span></button>
+                    <button onClick={() => window.location.href = 'mailto:library@iraqi-chineseagency.com'} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-xs transition-colors cursor-pointer bg-brand-800 hover:bg-brand-800 text-white"><Download className="w-4 h-4" /><span>Request Academic Copy</span></button>
 
                     {activeBook.purchaseUrl && (
                       <a
                         href={activeBook.purchaseUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 bg-brand-800 hover:bg-black text-white text-xs font-mono font-bold uppercase rounded-xs transition-colors"
+                        className="flex items-center gap-2 px-4 py-2.5 bg-brand-800 hover:bg-black text-white text-xs font-bold uppercase rounded-xs transition-colors"
                       >
                         <span>Official Store</span>
                         <ExternalLink className="w-3.5 h-3.5" />

@@ -191,13 +191,13 @@ export function AdminTourism() {
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-bold uppercase rounded-xs mb-1">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-xs font-medium font-bold uppercase rounded-xs mb-1">
             <Compass className="w-3 h-3" /> Bilateral Tourism Portal Admin
           </div>
-          <h1 className="text-2xl font-serif font-black text-ink-900">
+          <h1 className="text-2xl font-bold font-black text-brand-800">
             Manage Tourism Destinations & Heritage Sites
           </h1>
-          <p className="text-xs text-gray-500 font-mono">
+          <p className="text-xs text-gray-500 font-medium">
             Promote cultural heritage, UNESCO sites, visa policies & aviation routes across China, Iraq & Kurdistan Region.
           </p>
         </div>
@@ -206,7 +206,7 @@ export function AdminTourism() {
           <button
             onClick={() => reseedMutation.mutate()}
             disabled={reseedMutation.isPending}
-            className="px-3 py-2 bg-neutral-100 hover:bg-neutral-200 text-gray-800 text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer border border-gray-300"
+            className="px-3 py-2 bg-neutral-100 hover:bg-neutral-200 text-gray-800 text-xs font-medium font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer border border-gray-300"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${reseedMutation.isPending ? 'animate-spin' : ''}`} />
             <span>Reset Demo Data</span>
@@ -214,7 +214,7 @@ export function AdminTourism() {
 
           <button
             onClick={openFormForNew}
-            className="px-4 py-2 bg-brand-800 hover:bg-brand-800 text-white text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+            className="px-4 py-2 bg-brand-800 hover:bg-brand-800 text-white text-xs font-medium font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add Destination</span>
@@ -232,7 +232,7 @@ export function AdminTourism() {
               placeholder="Search destination title, city, or category..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-xs text-xs font-mono focus:outline-none focus:border-brand-800"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-xs text-xs font-medium focus:outline-none focus:border-brand-800"
             />
           </div>
 
@@ -240,7 +240,7 @@ export function AdminTourism() {
             <select
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-mono font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:border-brand-800 cursor-pointer appearance-none relative"
+              className="w-full px-3 py-2 text-xs font-medium font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:border-brand-800 cursor-pointer appearance-none relative"
               style={{
                 backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                 backgroundRepeat: 'no-repeat',
@@ -259,18 +259,18 @@ export function AdminTourism() {
 
       {/* Destinations Table */}
       {isLoading ? (
-        <div className="p-8 text-center text-xs font-mono text-gray-500 bg-white border border-gray-200 rounded-xs">
+        <div className="p-8 text-center text-xs font-medium text-gray-500 bg-white border border-gray-200 rounded-xs">
           Loading tourism destinations...
         </div>
       ) : filteredSpots.length === 0 ? (
-        <div className="p-8 text-center text-xs font-mono text-gray-500 bg-white border border-dashed border-gray-300 rounded-xs">
+        <div className="p-8 text-center text-xs font-medium text-gray-500 bg-white border border-dashed border-gray-300 rounded-xs">
           No tourism destinations found.
         </div>
       ) : (
         <div className="bg-white border border-gray-200 rounded-xs shadow-xs overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-neutral-50 border-b border-gray-200 text-[11px] font-mono font-black uppercase text-gray-600">
+              <tr className="bg-neutral-50 border-b border-gray-200 text-[11px] font-medium font-black uppercase text-gray-600">
                 <th className="py-3 px-4">Destination</th>
                 <th className="py-3 px-4">Location</th>
                 <th className="py-3 px-4">Category</th>
@@ -290,26 +290,26 @@ export function AdminTourism() {
                         className="w-12 h-10 object-cover rounded-xs border border-gray-200 shrink-0"
                       />
                       <div>
-                        <span className="font-serif font-bold text-gray-900 block leading-snug">
+                        <span className="font-bold font-bold text-gray-900 block leading-snug">
                           {spot.titleEn}
                         </span>
-                        <span className="font-mono text-[10px] text-gray-500">
+                        <span className="font-medium text-xs text-gray-500">
                           {spot.bestTimeToVisit}
                         </span>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-mono text-xs">
+                  <td className="py-3 px-4 font-medium text-xs">
                     <span className="font-bold text-ink-900">{spot.city}</span>
-                    <span className="block text-[10px] text-brand-800">{spot.region}</span>
+                    <span className="block text-xs text-brand-800">{spot.region}</span>
                   </td>
-                  <td className="py-3 px-4 font-mono text-[11px] text-gray-600 uppercase">
+                  <td className="py-3 px-4 font-medium text-[11px] text-gray-600 uppercase">
                     {spot.category.replace('_', ' ')}
                   </td>
-                  <td className="py-3 px-4 font-mono text-xs font-bold text-amber-700">
+                  <td className="py-3 px-4 font-medium text-xs font-bold text-amber-700">
                     ⭐ {spot.rating}
                   </td>
-                  <td className="py-3 px-4 font-mono text-[10px]">
+                  <td className="py-3 px-4 font-medium text-xs">
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => updateMutation.mutate({ id: spot.id, data: { isTrending: !spot.isTrending } })}
@@ -376,11 +376,11 @@ export function AdminTourism() {
               <X className="w-6 h-6" />
             </button>
 
-            <h2 className="text-xl font-serif font-black text-ink-900">
+            <h2 className="text-xl font-bold font-black text-brand-800">
               {editingSpot ? 'Edit Tourism Destination' : 'Add New Tourism Destination'}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+            <form onSubmit={handleSubmit} className="space-y-4 font-medium text-xs">
               {/* Titles */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>

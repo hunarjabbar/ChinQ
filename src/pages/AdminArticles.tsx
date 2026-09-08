@@ -58,12 +58,12 @@ export function AdminArticles() {
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900">Article Registry</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-brand-800">Article Registry</h1>
             <p className="text-sm text-gray-500">Manage trilingual editorial content, drafts, and publications.</p>
           </div>
           <Link
             to={`/${lang}/admin/articles/new`}
-            className="inline-flex items-center gap-2 bg-brand-800 text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-brand-800 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 bg-brand-800 text-white px-4 py-2 rounded-md font-medium text-sm hover:bg-brand-700 transition-colors shadow-sm"
           >
             <Plus size={16} /> Create Article
           </Link>
@@ -92,12 +92,12 @@ export function AdminArticles() {
         <div className="bg-white border border-neutral-200 rounded-xl shadow-sm overflow-hidden text-start">
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left border-collapse">
-              <thead className="bg-neutral-50/50 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 border-b border-neutral-200">
+              <thead className="bg-neutral-50/50 text-xs font-black uppercase tracking-[0.2em] text-neutral-500 border-b border-neutral-200">
                 <tr>
                   <th className="px-8 py-5">Headline & Dispatch</th>
                   <th className="px-8 py-5">Bilateral Category</th>
                   <th className="px-8 py-5">Sovereign Author</th>
-                  <th className="px-8 py-5">Status</th>
+                  <th className="px-8 py-5">Approval Status</th>
                   <th className="px-8 py-5">Last Synchronized</th>
                   <th className="px-8 py-5 text-right">Operational Actions</th>
                 </tr>
@@ -105,13 +105,13 @@ export function AdminArticles() {
               <tbody className="divide-y divide-neutral-100">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-serif">
+                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-bold">
                       Synchronizing article ledger...
                     </td>
                   </tr>
                 ) : articles.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-serif">
+                    <td colSpan={6} className="px-8 py-12 text-center text-neutral-400 italic font-bold">
                       No active dispatches found in registry.
                     </td>
                   </tr>
@@ -123,22 +123,22 @@ export function AdminArticles() {
                         <td className="px-8 py-5">
                           <div className="flex flex-col">
                             <span className="font-bold text-ink-900 line-clamp-1">{title}</span>
-                            <span className="text-[10px] text-neutral-400 font-mono mt-0.5">UID: {article.id.substring(0, 8)}</span>
+                            <span className="text-xs text-neutral-400 font-medium mt-0.5">UID: {article.id.substring(0, 8)}</span>
                           </div>
                         </td>
                         <td className="px-8 py-5">
-                          <span className="inline-flex items-center px-2.5 py-1 bg-neutral-100 text-neutral-600 rounded text-[9px] font-black uppercase tracking-widest">{article.category?.name || 'Uncategorized'}</span>
+                          <span className="inline-flex items-center px-2.5 py-1 bg-neutral-100 text-neutral-600 rounded text-xs font-black uppercase tracking-widest">{article.category?.name || 'Uncategorized'}</span>
                         </td>
                         <td className="px-8 py-5 text-neutral-600 font-medium">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-black text-neutral-400">
+                            <div className="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center text-xs font-black text-neutral-400">
                               {article.author?.name?.[0] || '?'}
                             </div>
                             {article.author?.name || 'Unknown'}
                           </div>
                         </td>
                         <td className="px-8 py-5">
-                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest ${
                             article.status === 'PUBLISHED' 
                               ? 'bg-green-50 text-green-700 border border-green-100' 
                               : 'bg-amber-50 text-amber-700 border border-amber-100'
@@ -147,7 +147,7 @@ export function AdminArticles() {
                             {article.status}
                           </span>
                         </td>
-                        <td className="px-8 py-5 text-neutral-500 font-mono text-[10px] font-bold">
+                        <td className="px-8 py-5 text-neutral-500 font-medium text-xs font-bold">
                           {new Date(article.updatedAt).toLocaleDateString()}
                         </td>
                         <td className="px-8 py-5 text-right">
@@ -156,7 +156,7 @@ export function AdminArticles() {
                               <button 
                                 onClick={() => approveMutation.mutate(article.id)} 
                                 title="Approve & Publish Article"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
                               >
                                 <CheckCircle2 size={14} /> Approve
                               </button>

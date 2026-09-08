@@ -69,7 +69,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="font-mono uppercase tracking-widest text-[10px] text-neutral-300">
+            <span className="uppercase tracking-widest text-xs text-neutral-300">
               {labels.eyebrow}
             </span>
           </div>
@@ -90,7 +90,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
           {/* Left Column: Mission & Highlights */}
           <div className="lg:col-span-7 space-y-4">
             <div className="space-y-2">
-              <h3 className="text-xl sm:text-2xl font-serif font-black tracking-tight text-ink-900 dark:text-white">
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight text-brand-900 dark:text-white">
                 {labels.title}
               </h3>
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
@@ -105,7 +105,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
                   <User size={14} />
                 </div>
                 <div>
-                  <span className="font-bold text-ink-900 dark:text-white block">Ordinary Users</span>
+                  <span className="font-bold text-brand-900 dark:text-white block">Ordinary Users</span>
                   <span className="text-[11px] text-neutral-500">Tuition fees & e-CNY travel wallet top-ups</span>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
                   <Building2 size={14} />
                 </div>
                 <div>
-                  <span className="font-bold text-ink-900 dark:text-white block">Trade & Enterprises</span>
+                  <span className="font-bold text-brand-900 dark:text-white block">Trade & Enterprises</span>
                   <span className="text-[11px] text-neutral-500">Al Faw Port customs & machinery escrow</span>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
 
               <Link
                 to={`/${lang}/payments?tab=tracker`}
-                className="px-5 py-3 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-ink-900 dark:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center gap-2"
+                className="px-5 py-3 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-brand-900 dark:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center gap-2"
               >
                 <span>{labels.trackOrder}</span>
               </Link>
@@ -143,14 +143,14 @@ export function PaymentGatewayShowcase({ lang }: Props) {
           {/* Right Column: Rapid Preview Box */}
           <div className="lg:col-span-5 bg-neutral-50 dark:bg-neutral-800/40 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-700 space-y-4">
             <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-700 pb-2">
-              <span className="text-xs font-mono font-bold uppercase text-neutral-500">
+              <span className="text-xs font-bold uppercase text-neutral-500">
                 Live Quick Converter
               </span>
               <div className="flex gap-1">
                 <button
                   type="button"
                   onClick={() => setCalcType('RETAIL')}
-                  className={`px-2 py-1 text-[10px] font-bold rounded cursor-pointer ${
+                  className={`px-2 py-1 text-xs font-bold rounded cursor-pointer ${
                     calcType === 'RETAIL' ? 'bg-brand-800 text-white' : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600'
                   }`}
                 >
@@ -159,7 +159,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
                 <button
                   type="button"
                   onClick={() => setCalcType('BUSINESS')}
-                  className={`px-2 py-1 text-[10px] font-bold rounded cursor-pointer ${
+                  className={`px-2 py-1 text-xs font-bold rounded cursor-pointer ${
                     calcType === 'BUSINESS' ? 'bg-emerald-700 text-white' : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-600'
                   }`}
                 >
@@ -170,25 +170,25 @@ export function PaymentGatewayShowcase({ lang }: Props) {
 
             <div className="space-y-3">
               <div>
-                <label className="block text-[10px] font-mono uppercase text-neutral-400 mb-1">
+                <label className="block text-xs uppercase text-neutral-400 mb-1">
                   You Send (IQD)
                 </label>
                 <input
                   type="number"
                   value={quickAmount}
                   onChange={(e) => setQuickAmount(e.target.value)}
-                  className="w-full text-lg font-mono font-bold p-2.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg"
+                  className="w-full text-lg font-bold p-2.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg"
                 />
               </div>
 
               <div className="p-3 bg-brand-50/50 dark:bg-brand-950/30 rounded-xl border border-brand-200 dark:border-brand-800">
-                <span className="block text-[10px] font-mono uppercase text-brand-800 dark:text-brand-300">
+                <span className="block text-xs uppercase text-brand-800 dark:text-brand-300">
                   Recipient Credited (Digital Yuan)
                 </span>
-                <span className="text-2xl font-mono font-black text-brand-800 dark:text-brand-400">
+                <span className="text-2xl font-black text-brand-800 dark:text-brand-400">
                   ¥ {netCny.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} e-CNY
                 </span>
-                <span className="block text-[9px] font-mono text-neutral-500 mt-1">
+                <span className="block text-xs text-neutral-500 mt-1">
                   Fee: {feePercent}% (bypasses SWIFT dollar intermediary fee)
                 </span>
               </div>

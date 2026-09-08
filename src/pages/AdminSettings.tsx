@@ -28,7 +28,7 @@ export function AdminSettings() {
     autoTranslate: siteSettings.autoTranslate,
     geoLatencyRoute: siteSettings.geoLatencyRoute,
     systemMaintenance: siteSettings.systemMaintenance,
-    brandColor: siteSettings.brandColor || '#990000',
+    brandColor: siteSettings.brandColor || '#cc0000',
     inkColor: siteSettings.inkColor || '#1A1A1A',
     paperColor: siteSettings.paperColor || '#FAFAFA',
     socialLinks: siteSettings.socialLinks || {
@@ -87,7 +87,7 @@ export function AdminSettings() {
                   type="email"
                   value={settings.contactEmail}
                   onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                 />
               </div>
             </div>
@@ -115,7 +115,7 @@ export function AdminSettings() {
                     type="text"
                     value={settings.brandColor}
                     onChange={(e) => setSettings({ ...settings, brandColor: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono uppercase"
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium uppercase"
                   />
                 </div>
               </div>
@@ -133,7 +133,7 @@ export function AdminSettings() {
                     type="text"
                     value={settings.inkColor}
                     onChange={(e) => setSettings({ ...settings, inkColor: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono uppercase"
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium uppercase"
                   />
                 </div>
               </div>
@@ -151,7 +151,7 @@ export function AdminSettings() {
                     type="text"
                     value={settings.paperColor}
                     onChange={(e) => setSettings({ ...settings, paperColor: e.target.value })}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono uppercase"
+                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium uppercase"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, whatsapp: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://chat.whatsapp.com/..."
                 />
               </div>
@@ -204,7 +204,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, facebook: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://facebook.com/IraqiChineseAgency"
                 />
               </div>
@@ -222,7 +222,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, instagram: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://instagram.com/iraqi-chineseagency"
                 />
               </div>
@@ -240,7 +240,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, linkedin: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://linkedin.com/company/iraqi-chinese-agency"
                 />
               </div>
@@ -258,7 +258,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, weibo: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://weibo.com/iraqi-chineseagency"
                 />
               </div>
@@ -276,7 +276,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, wechat: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="IraqiChineseAgency_Official"
                 />
               </div>
@@ -294,7 +294,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, youtube: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://youtube.com/@IraqiChineseAgency"
                 />
               </div>
@@ -312,7 +312,7 @@ export function AdminSettings() {
                     ...settings,
                     socialLinks: { ...settings.socialLinks, x: e.target.value }
                   })}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-mono"
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
                   placeholder="https://x.com/IraqiChineseAgency"
                 />
               </div>

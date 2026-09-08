@@ -2782,10 +2782,35 @@ async function startServer() {
         return res.status(403).json({ error: "Only administrators can approve articles for publication." });
       }
 
+      const existingArticle = await prisma.article.findUnique({
+        where: { id: req.params.id },
+      });
+
+      if (!existingArticle) {
+        return res.status(404).json({ error: "Article not found" });
+      }
+
       const article = await prisma.article.update({
         where: { id: req.params.id },
         data: { status: "PUBLISHED" },
       });
+
+      if (existingArticle.status === "PENDING") {
+        let userEmail = "admin@system.local";
+        if (req.user?.id) {
+          const u = await prisma.user.findUnique({ where: { id: req.user.id } });
+          if (u) userEmail = u.email;
+        }
+        await prisma.auditLog.create({
+          data: {
+            userEmail,
+            action: "APPROVE_ARTICLE",
+            resource: "ARTICLE",
+            itemId: article.id,
+            details: `Automated Log: Article "${article.slug}" status was changed from PENDING to PUBLISHED by Admin.`,
+          }
+        });
+      }
 
       console.log(`[ADMIN APPROVAL] Article ID ${req.params.id} approved and published.`);
       res.json(article);
@@ -2796,6 +2821,69 @@ async function startServer() {
   });
 
   
+
+  app.get("/api/admin/articles/:id", authMiddleware, async (req: any, res: any) => {
+    try {
+      const article = await prisma.article.findUnique({
+        where: { id: req.params.id },
+        include: { translations: true, category: true, author: true },
+      });
+      if (!article) return res.status(404).json({ error: "Article not found" });
+      res.json(article);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch article" });
+    }
+  });
+
+  app.put("/api/admin/articles/:id", authMiddleware, async (req: any, res: any) => {
+    try {
+      const { slug, categoryId, imageUrl, translations } = req.body;
+      const article = await prisma.article.update({
+        where: { id: req.params.id },
+        data: {
+          slug,
+          categoryId: categoryId || null,
+          imageUrl: imageUrl || null,
+        }
+      });
+      
+      // Update translations
+      if (translations && Array.isArray(translations)) {
+        for (const t of translations) {
+          const existing = await prisma.articleTranslation.findFirst({
+            where: { articleId: article.id, lang: t.lang }
+          });
+          if (existing) {
+            await prisma.articleTranslation.update({
+              where: { id: existing.id },
+              data: {
+                title: t.title,
+                content: t.content,
+                excerpt: t.excerpt
+              }
+            });
+          } else {
+            await prisma.articleTranslation.create({
+              data: {
+                articleId: article.id,
+                lang: t.lang,
+                title: t.title,
+                content: t.content,
+                excerpt: t.excerpt
+              }
+            });
+          }
+        }
+      }
+
+      res.json({ success: true, article });
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to update article" });
+    }
+  });
+
   app.delete("/api/admin/articles/:id", authMiddleware, async (req, res) => {
     try {
       await prisma.articleTranslation.deleteMany({

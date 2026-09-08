@@ -86,7 +86,7 @@ export default function AdminLiveEvents() {
       <div className="w-full space-y-6">
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
           <div>
-            <h2 className="text-2xl font-serif font-semibold text-neutral-900 flex items-center">
+            <h2 className="text-2xl font-bold font-semibold text-neutral-900 flex items-center">
               <Video className="h-6 w-6 mr-2 text-brand-800" />
               Live Streams & Broadcasts
             </h2>
@@ -176,12 +176,12 @@ export default function AdminLiveEvents() {
                   <tr key={ev.id} className="hover:bg-neutral-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       {ev.isActive ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-brand-100 text-brand-700 border border-brand-200">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-brand-100 text-brand-700 border border-brand-200">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
                           LIVE
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-600 border border-gray-200">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-gray-100 text-gray-600 border border-gray-200">
                           Archived
                         </span>
                       )}
@@ -191,7 +191,7 @@ export default function AdminLiveEvents() {
                       <div className="text-xs text-neutral-500 mt-0.5 truncate max-w-xs">{ev.summaryEn}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex flex-col gap-1 text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                      <div className="flex flex-col gap-1 text-xs font-bold uppercase tracking-wider text-gray-500">
                         <span className="flex items-center gap-1"><Tag size={12}/> {ev.category}</span>
                         <span className="flex items-center gap-1"><MapPin size={12}/> {ev.region}</span>
                       </div>

@@ -119,7 +119,7 @@ export class ErrorBoundary extends Component<Props, State> {
         return (
           <div 
             dir={isRtl ? 'rtl' : 'ltr'}
-            className="my-6 p-6 bg-amber-50/70 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-800 rounded-xl text-ink-900 font-sans shadow-sm"
+            className="my-6 p-6 bg-amber-50/70 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-800 rounded-xl text-brand-900 font-sans shadow-sm"
           >
             <div className="flex items-start gap-4">
               <div className="p-2.5 bg-amber-100 dark:bg-amber-900/50 rounded-lg text-amber-700 dark:text-amber-400 shrink-0">
@@ -133,7 +133,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   {strings.subtitle}
                 </p>
                 {this.state.error?.message && (
-                  <div className="p-2.5 bg-white/80 dark:bg-black/40 border border-amber-200 dark:border-amber-900 text-[11px] font-mono text-neutral-600 dark:text-neutral-400 rounded">
+                  <div className="p-2.5 bg-white/80 dark:bg-black/40 border border-amber-200 dark:border-amber-900 text-[11px] text-neutral-600 dark:text-neutral-400 rounded">
                     {strings.details}: {this.state.error.message}
                   </div>
                 )}
@@ -161,7 +161,7 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div 
           dir={isRtl ? 'rtl' : 'ltr'} 
-          className="min-h-screen flex flex-col items-center justify-center p-6 bg-paper-50 text-ink-900 w-full font-sans"
+          className="min-h-screen flex flex-col items-center justify-center p-6 bg-paper-50 text-brand-900 w-full font-sans"
         >
           <div className="max-w-xl w-full bg-white dark:bg-neutral-900 p-8 sm:p-12 border-2 border-ink-900 dark:border-neutral-700 shadow-xl text-center space-y-6 rounded-2xl">
             <div className="flex justify-center text-brand-800 dark:text-brand-400">
@@ -171,7 +171,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
 
             <div className="space-y-2">
-              <h2 className="text-2xl font-serif font-black tracking-tight text-ink-900 dark:text-white">
+              <h2 className="text-2xl font-black tracking-tight text-brand-900 dark:text-white">
                 {this.props.title || strings.title}
               </h2>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed max-w-md mx-auto">
@@ -180,7 +180,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
 
             {this.state.error?.message && (
-              <div className="bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 p-3.5 text-xs font-mono text-neutral-600 dark:text-neutral-400 text-start overflow-x-auto rounded-lg">
+              <div className="bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 p-3.5 text-xs text-neutral-600 dark:text-neutral-400 text-start overflow-x-auto rounded-lg">
                 <span className="font-bold text-brand-800 dark:text-brand-400">{strings.details}: </span>
                 {this.state.error.message}
               </div>
@@ -197,7 +197,7 @@ export class ErrorBoundary extends Component<Props, State> {
               
               <button
                 onClick={this.handleReload}
-                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-5 py-2.5 bg-white dark:bg-neutral-800 border border-ink-900 dark:border-neutral-600 text-ink-900 dark:text-white font-bold text-xs uppercase tracking-wider hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors rounded-lg cursor-pointer"
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-5 py-2.5 bg-white dark:bg-neutral-800 border border-ink-900 dark:border-neutral-600 text-brand-900 dark:text-white font-bold text-xs uppercase tracking-wider hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors rounded-lg cursor-pointer"
               >
                 <RefreshCcw size={14} />
                 <span>{strings.reload}</span>

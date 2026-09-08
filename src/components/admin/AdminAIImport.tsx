@@ -111,14 +111,14 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
             <Sparkles className="text-brand-500" size={24} />
             <h3 className="text-xs font-black uppercase tracking-[0.3em] text-brand-500">Grounded Information Desk</h3>
           </div>
-          <h2 className="text-3xl font-serif font-black text-white leading-tight">Authorize trilingual information scavenging.</h2>
+          <h2 className="text-3xl font-bold font-black text-white leading-tight">Authorize trilingual information scavenging.</h2>
           <p className="text-neutral-400 text-sm leading-relaxed font-medium">
             Deploy the sovereign AI to scan global news lattices, curate factual developments, and formulate trilingual dispatches directly into the article registry.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest">Global Lattice Nodes</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Global Lattice Nodes</label>
               <div className="relative">
                 <Globe className="absolute left-3 top-3 text-neutral-500" size={14} />
                 <input 
@@ -131,7 +131,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest">Intel Theme</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Intel Theme</label>
               <div className="relative">
                 <Search className="absolute left-3 top-3 text-neutral-500" size={14} />
                 <input 
@@ -174,7 +174,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
             </div>
           </div>
           <div className="space-y-2">
-            <h4 className="text-sm font-black uppercase tracking-widest text-ink-900">Formulating Trilingual Dispatch</h4>
+            <h4 className="text-sm font-black uppercase tracking-widest text-brand-900">Formulating Trilingual Dispatch</h4>
             <p className="text-xs text-neutral-500 max-w-sm mx-auto leading-relaxed">
               Verifying facts across 4 language matrices (EN, AR, ZH, CKB). 
               Grounded search grounding ensures sub-42ms data accuracy.
@@ -204,12 +204,12 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
               </div>
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-white/90">Scavenge Result Ledger</h3>
-                <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">{searchResults.length} Authority Dispatches Authenticated</p>
+                <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">{searchResults.length} Authority Dispatches Authenticated</p>
               </div>
             </div>
             <button
               onClick={handleSaveAll}
-              className="bg-white hover:bg-neutral-100 text-black font-black text-[10px] py-2.5 px-6 rounded uppercase tracking-widest transition-all cursor-pointer shadow-lg flex items-center gap-2"
+              className="bg-white hover:bg-neutral-100 text-black font-black text-xs py-2.5 px-6 rounded uppercase tracking-widest transition-all cursor-pointer shadow-lg flex items-center gap-2"
             >
               <Save size={14} />
               Authorize Bulk Publish
@@ -233,7 +233,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="bg-brand-800 text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded shadow-lg">
+                      <span className="bg-brand-800 text-white text-xs font-black uppercase tracking-[0.2em] px-3 py-1 rounded shadow-lg">
                         {art.categorySlug}
                       </span>
                     </div>
@@ -247,20 +247,20 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
                             <button
                               key={langCode}
                               onClick={() => setPreviewLanguages(prev => ({ ...prev, [art.slug]: langCode }))}
-                              className={`text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-md transition-all cursor-pointer ${currentLang === langCode ? 'bg-white text-brand-800 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
+                              className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md transition-all cursor-pointer ${currentLang === langCode ? 'bg-white text-brand-800 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                             >
                               {langCode}
                             </button>
                           ))}
                         </div>
-                        <span className="text-[9px] font-mono font-black text-neutral-300 uppercase">Dispatch #{idx + 1}</span>
+                        <span className="text-xs font-medium font-black text-neutral-300 uppercase">Dispatch #{idx + 1}</span>
                       </div>
 
                       <div className="space-y-3" dir={currentLang === 'ar' || currentLang === 'ckb' ? 'rtl' : 'ltr'}>
-                        <h4 className="font-serif font-black text-2xl text-ink-900 leading-tight">
+                        <h4 className="font-bold font-black text-2xl text-brand-900 leading-tight">
                           {translation?.title}
                         </h4>
-                        <p className="text-xs text-neutral-500 font-serif italic leading-relaxed">
+                        <p className="text-xs text-neutral-500 font-bold italic leading-relaxed">
                           {translation?.excerpt}
                         </p>
                       </div>
@@ -268,7 +268,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
 
                     <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <button className="text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-brand-800 flex items-center gap-1.5 transition-colors cursor-pointer">
+                        <button className="text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-brand-800 flex items-center gap-1.5 transition-colors cursor-pointer">
                           <Eye size={14} />
                           Review Full Dispatch
                         </button>
@@ -277,7 +277,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
                       <button
                         disabled={isSaved || isSaving}
                         onClick={() => handleSaveArticle(art)}
-                        className={`text-[10px] font-black uppercase tracking-widest py-2.5 px-6 rounded-lg transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
+                        className={`text-xs font-black uppercase tracking-widest py-2.5 px-6 rounded-lg transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
                           isSaved 
                             ? 'bg-green-50 text-green-700 border border-green-200' 
                             : 'bg-neutral-900 hover:bg-brand-800 text-white'

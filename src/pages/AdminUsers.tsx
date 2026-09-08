@@ -73,8 +73,8 @@ export function AdminUsersContent() {
       ctx.lineWidth = 3;
       ctx.strokeRect(6, 6, 888, 528);
 
-      // Top Burgundy Header Banner
-      ctx.fillStyle = '#8B0000';
+      // Top Red Header Banner
+      ctx.fillStyle = '#cc0000';
       ctx.fillRect(6, 6, 888, 90);
 
       // Header Text
@@ -87,12 +87,12 @@ export function AdminUsersContent() {
       // Clearance Pill in Header
       ctx.fillStyle = '#FAF0E6';
       ctx.fillRect(720, 26, 150, 40);
-      ctx.fillStyle = '#8B0000';
+      ctx.fillStyle = '#cc0000';
       ctx.font = 'bold 16px sans-serif';
       ctx.fillText(user.clearanceLevel || 'LEVEL-2', 745, 52);
 
       // Avatar Initial Box
-      ctx.fillStyle = '#5A0B0D';
+      ctx.fillStyle = '#b30000';
       ctx.fillRect(35, 120, 110, 125);
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 64px sans-serif';
@@ -139,7 +139,7 @@ export function AdminUsersContent() {
       drawField('Renewals Count', String(user.renewalCount || 0), 630, 395);
 
       // Bottom Footer Bar
-      ctx.fillStyle = '#8B0000';
+      ctx.fillStyle = '#cc0000';
       ctx.fillRect(6, 480, 888, 54);
       ctx.fillStyle = '#FAF0E6';
       ctx.font = 'bold 11px monospace';
@@ -359,7 +359,7 @@ export function AdminUsersContent() {
       {/* Page Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-gray-200">
           <div>
-            <h1 className="text-2xl font-serif font-black tracking-tight text-ink-900 uppercase">Institutional Credentials & Member Database</h1>
+            <h1 className="text-2xl font-bold font-black tracking-tight text-brand-800 uppercase">Institutional Credentials & Member Database</h1>
             <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Complete Sovereign Member Database • Credential Issuance, Personal Records & Annual Renewal Lifecycle.</p>
           </div>
           <button 
@@ -423,8 +423,8 @@ export function AdminUsersContent() {
               <Shield className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Total Registered Members</div>
-              <div className="text-lg font-black text-ink-900">{users.length} Database Records</div>
+              <div className="text-xs text-gray-500 font-bold uppercase tracking-wider">Total Registered Members</div>
+              <div className="text-lg font-black text-brand-800">{users.length} Database Records</div>
             </div>
           </div>
           <div className="bg-white border border-gray-200 p-4 rounded-sm flex items-center gap-4 shadow-xs">
@@ -432,7 +432,7 @@ export function AdminUsersContent() {
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Active Credentials</div>
+              <div className="text-xs text-gray-500 font-bold uppercase tracking-wider">Active Credentials</div>
               <div className="text-lg font-black text-green-800">{users.filter((u:any) => u.badgeStatus === 'ACTIVE').length} Valid</div>
             </div>
           </div>
@@ -441,8 +441,8 @@ export function AdminUsersContent() {
               <AlertCircle className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Level 4 Sovereign Clearance</div>
-              <div className="text-lg font-black text-brand-900">{users.filter((u:any) => u.clearanceLevel === 'LEVEL-4' || u.role === 'ADMIN').length} Personnel</div>
+              <div className="text-xs text-gray-500 font-bold uppercase tracking-wider">Level 4 Sovereign Clearance</div>
+              <div className="text-lg font-black text-brand-800">{users.filter((u:any) => u.clearanceLevel === 'LEVEL-4' || u.role === 'ADMIN').length} Personnel</div>
             </div>
           </div>
         </div>
@@ -453,12 +453,12 @@ export function AdminUsersContent() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-paper-50">
                 <tr>
-                  <th scope="col" className="px-6 py-4 text-left text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Member Identity & ID</th>
-                  <th scope="col" className="px-6 py-4 text-left text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Personal & Passport Info</th>
-                  <th scope="col" className="px-6 py-4 text-left text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Department & Title</th>
-                  <th scope="col" className="px-6 py-4 text-left text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Clearance & Status</th>
-                  <th scope="col" className="px-6 py-4 text-left text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Renewal Status</th>
-                  <th scope="col" className="px-6 py-4 text-right text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Actions & Renewal</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Member Identity & ID</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Personal & Passport Info</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Department & Title</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Clearance & Status</th>
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Renewal Status</th>
+                  <th scope="col" className="px-6 py-4 text-right text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Actions & Renewal</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -492,13 +492,13 @@ export function AdminUsersContent() {
                                 <button 
                                   onClick={() => setCredentialCardUser(user)}
                                   title="View Secure Digital ID Card"
-                                  className="text-brand-800 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 p-1 rounded-sm transition-colors"
+                                  className="text-brand-800 hover:text-brand-700 bg-brand-50 hover:bg-brand-100 p-1 rounded-sm transition-colors"
                                 >
                                   <QrCode className="w-3.5 h-3.5" />
                                 </button>
                               </div>
-                              <div className="text-xs text-gray-500 font-mono flex items-center gap-2 mt-0.5">
-                                <span className="bg-gray-100 px-1.5 py-0.5 rounded text-[10px] font-bold text-gray-700">{user.memberCode || 'ICA-M-0000'}</span>
+                              <div className="text-xs text-gray-500 font-medium flex items-center gap-2 mt-0.5">
+                                <span className="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-bold text-gray-700">{user.memberCode || 'ICA-M-0000'}</span>
                                 <span className="text-brand-800 font-bold">{user.digitalId || 'ICA-DID-2026-XXXX'}</span>
                               </div>
                             </div>
@@ -508,10 +508,10 @@ export function AdminUsersContent() {
                           <div className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
                             <Globe className="w-3.5 h-3.5 text-gray-400" /> {user.nationality || 'Iraqi / Chinese'}
                           </div>
-                          <div className="text-[11px] text-gray-600 font-mono mt-0.5">
+                          <div className="text-[11px] text-gray-600 font-medium mt-0.5">
                             ID: <span className="font-bold text-ink-900">{user.passportOrIdNumber || 'Not Specified'}</span>
                           </div>
-                          <div className="text-[10px] text-gray-500 flex items-center gap-1 mt-0.5">
+                          <div className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
                             <Phone className="w-3 h-3 text-gray-400" /> {user.phoneNumber || 'No phone'}
                           </div>
                         </td>
@@ -521,10 +521,10 @@ export function AdminUsersContent() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="space-y-1">
-                            <span className={`px-2.5 py-0.5 inline-flex text-[9px] leading-4 font-black uppercase tracking-widest rounded-sm ${
+                            <span className={`px-2.5 py-0.5 inline-flex text-xs leading-4 font-black uppercase tracking-widest rounded-sm ${
                               user.role === 'VOLUNTEER' ? 'bg-rose-100 text-brand-800 border border-rose-300' :
                               user.role === 'INTERN' ? 'bg-purple-100 text-purple-900 border border-purple-300' :
-                              user.clearanceLevel === 'LEVEL-4' ? 'bg-brand-900 text-white' : 
+                              user.clearanceLevel === 'LEVEL-4' ? 'bg-brand-800 text-white' : 
                               user.clearanceLevel === 'LEVEL-3' ? 'bg-blue-800 text-white' : 
                               user.clearanceLevel === 'LEVEL-2' ? 'bg-blue-100 text-blue-900' : 
                               'bg-gray-100 text-gray-800'
@@ -543,11 +543,11 @@ export function AdminUsersContent() {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-xs font-mono font-bold text-gray-900 flex items-center gap-1">
+                          <div className="text-xs font-medium font-bold text-gray-900 flex items-center gap-1">
                             <Calendar className="w-3.5 h-3.5 text-brand-800" />
                             {expiryDate ? expiryDate.toLocaleDateString() : 'No Expiry'}
                           </div>
-                          <div className="text-[10px] text-gray-500 mt-0.5 flex items-center gap-2">
+                          <div className="text-xs text-gray-500 mt-0.5 flex items-center gap-2">
                             <span>Renewals: <strong className="text-brand-800">{user.renewalCount || 0}</strong></span>
                             {user.lastRenewedAt && (
                               <span>({new Date(user.lastRenewedAt).toLocaleDateString()})</span>
@@ -559,7 +559,7 @@ export function AdminUsersContent() {
                             <button
                               onClick={() => renewMutation.mutate(user.id)}
                               disabled={renewMutation.isPending}
-                              className="bg-brand-50 hover:bg-brand-100 text-brand-800 px-2.5 py-1 rounded-sm text-[10px] font-black uppercase tracking-wider flex items-center gap-1 transition-colors border border-brand-200"
+                              className="bg-brand-50 hover:bg-brand-100 text-brand-800 px-2.5 py-1 rounded-sm text-xs font-black uppercase tracking-wider flex items-center gap-1 transition-colors border border-brand-200"
                               title="Renew Credential for 1 Year"
                             >
                               <RefreshCw className="w-3 h-3 animate-spin-hover" />
@@ -598,10 +598,10 @@ export function AdminUsersContent() {
         {credentialCardUser && (
           <div className="fixed inset-0 bg-brand-800/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-md shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto border-2 border-brand-800 text-start flex flex-col">
-              <div className="bg-brand-900 text-white px-6 py-4 flex items-center justify-between">
+              <div className="bg-brand-800 text-white px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-brand-300" />
-                  <span className="font-serif font-black uppercase tracking-widest text-sm">Official Institutional Digital Credential ID Card</span>
+                  <span className="font-bold font-black uppercase tracking-widest text-sm">Official Institutional Digital Credential ID Card</span>
                 </div>
                 <button onClick={() => setCredentialCardUser(null)} className="text-white hover:text-gray-300 text-lg font-bold">&times;</button>
               </div>
@@ -611,59 +611,59 @@ export function AdminUsersContent() {
                   
                   <div className="flex justify-between items-start border-b border-gray-200 pb-4 mb-4">
                     <div>
-                      <div className="text-[9px] font-black uppercase tracking-[0.2em] text-brand-800">Iraqi-Chinese Agency (ICA)</div>
+                      <div className="text-xs font-black uppercase tracking-[0.2em] text-brand-800">Iraqi-Chinese Agency (ICA)</div>
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Sovereign Press Credentials</div>
                     </div>
-                    <div className="bg-brand-800 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-sm">
+                    <div className="bg-brand-800 text-white text-xs font-black uppercase px-2.5 py-1 rounded-sm">
                       {credentialCardUser.clearanceLevel || 'LEVEL-2'}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-5 my-4">
-                    <div className="h-16 w-16 bg-brand-900 text-white flex items-center justify-center font-black text-2xl uppercase rounded-sm shadow-sm">
+                    <div className="h-16 w-16 bg-brand-800 text-white flex items-center justify-center font-black text-2xl uppercase rounded-sm shadow-sm">
                       {credentialCardUser.name.charAt(0)}
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-lg font-serif font-black text-ink-900">{credentialCardUser.name}</h4>
+                      <h4 className="text-lg font-bold font-black text-brand-800">{credentialCardUser.name}</h4>
                       <p className="text-xs font-bold text-gray-700">{credentialCardUser.title || 'Strategic Analyst'}</p>
                       <p className="text-[11px] text-gray-500 font-medium">{credentialCardUser.department || 'Editorial & Information'}</p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 bg-gray-50 p-3 rounded-sm border border-gray-200 text-xs font-mono">
+                  <div className="grid grid-cols-2 gap-3 bg-gray-50 p-3 rounded-sm border border-gray-200 text-xs font-medium">
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Member Code</span>
-                      <span className="font-black text-ink-900">{credentialCardUser.memberCode || 'ICA-M-1001'}</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Member Code</span>
+                      <span className="font-black text-brand-800">{credentialCardUser.memberCode || 'ICA-M-1001'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Unique Digital ID</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Unique Digital ID</span>
                       <span className="font-black text-brand-800">{credentialCardUser.digitalId || 'ICA-DID-2026-XXXX'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Passport / National ID</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Passport / National ID</span>
                       <span className="font-bold text-gray-800">{credentialCardUser.passportOrIdNumber || 'N/A'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Asaish Code</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Asaish Code</span>
                       <span className="font-bold text-brand-800">{credentialCardUser.asaishCode || 'Not Assigned'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Iraqi Info Card (بطاقة المعلومات)</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Iraqi Info Card (بطاقة المعلومات)</span>
                       <span className="font-bold text-gray-800">{credentialCardUser.iraqiInfoCard || 'N/A'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Credential Expiry</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Credential Expiry</span>
                       <span className="font-bold text-gray-800">{credentialCardUser.credentialExpiryDate ? new Date(credentialCardUser.credentialExpiryDate).toLocaleDateString() : 'Active'}</span>
                     </div>
                     <div className="col-span-2 pt-1 border-t border-gray-200">
-                      <span className="text-[9px] text-gray-400 block uppercase font-bold tracking-wider">Full Address</span>
+                      <span className="text-xs text-gray-400 block uppercase font-bold tracking-wider">Full Address</span>
                       <span className="font-bold text-gray-800 text-[11px]">
                         House {credentialCardUser.addressHouseNo || '—'}, Street {credentialCardUser.addressStreetNo || '—'}, {credentialCardUser.addressDistrictName || '—'} (Dist. {credentialCardUser.addressDistrictNumber || '—'})
                       </span>
                     </div>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between text-[10px] text-gray-500 border-t border-gray-200 pt-3">
+                  <div className="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-200 pt-3">
                     <div>Nationality: <strong className="text-gray-800">{credentialCardUser.nationality || 'Iraqi / Chinese'}</strong></div>
                     <div>Renewals: <strong className="text-brand-800">{credentialCardUser.renewalCount || 0}</strong></div>
                   </div>
@@ -704,7 +704,7 @@ export function AdminUsersContent() {
           <div className="fixed inset-0 bg-brand-800/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-sm shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto text-start flex flex-col">
               <div className="px-6 py-4 border-b border-gray-200 bg-paper-50 flex items-center justify-between">
-                <h3 className="text-sm font-black uppercase tracking-widest text-ink-900 flex items-center gap-2">
+                <h3 className="text-sm font-black uppercase tracking-widest text-brand-800 flex items-center gap-2">
                   <Shield className="w-4 h-4 text-brand-800" />
                   {editingUser ? 'Modify Member Profile & Institutional Credentials' : 'Provision Member Credentials & Full Registration'}
                 </h3>
@@ -724,7 +724,7 @@ export function AdminUsersContent() {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Full Legal Name *</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Full Legal Name *</label>
                       <div className="relative">
                         <User className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
                         <input
@@ -739,7 +739,7 @@ export function AdminUsersContent() {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Corporate Email *</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Corporate Email *</label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
                         <input
@@ -754,7 +754,7 @@ export function AdminUsersContent() {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Nationality</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Nationality</label>
                       <input
                         type="text"
                         value={formData.nationality}
@@ -765,43 +765,43 @@ export function AdminUsersContent() {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Passport / National ID Number</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Passport / National ID Number</label>
                       <input
                         type="text"
                         value={formData.passportOrIdNumber}
                         onChange={(e) => setFormData({...formData, passportOrIdNumber: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-mono"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-medium"
                         placeholder="IQ-9821849 or CN-49281"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Asaish Code Number</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Asaish Code Number</label>
                       <input
                         type="text"
                         value={formData.asaishCode}
                         onChange={(e) => setFormData({...formData, asaishCode: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-mono uppercase"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-medium uppercase"
                         placeholder="AS-2026-XXXX"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Iraqi Information Card Number (بطاقة المعلومات)</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Iraqi Information Card Number (بطاقة المعلومات)</label>
                       <input
                         type="text"
                         value={formData.iraqiInfoCard}
                         onChange={(e) => setFormData({...formData, iraqiInfoCard: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-mono"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-medium"
                         placeholder="Info Card No / Tamween"
                       />
                     </div>
 
                     <div className="sm:col-span-2 bg-paper-50 p-4 rounded-sm border border-gray-200 space-y-3">
-                      <label className="block text-[10px] font-black text-gray-800 uppercase tracking-widest">Full Address Information</label>
+                      <label className="block text-xs font-black text-gray-800 uppercase tracking-widest">Full Address Information</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <div>
-                          <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">House No.</label>
+                          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">House No.</label>
                           <input
                             type="text"
                             value={formData.addressHouseNo}
@@ -811,7 +811,7 @@ export function AdminUsersContent() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Street No.</label>
+                          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Street No.</label>
                           <input
                             type="text"
                             value={formData.addressStreetNo}
@@ -821,7 +821,7 @@ export function AdminUsersContent() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">District Name</label>
+                          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">District Name</label>
                           <input
                             type="text"
                             value={formData.addressDistrictName}
@@ -831,7 +831,7 @@ export function AdminUsersContent() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">District Number</label>
+                          <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">District Number</label>
                           <input
                             type="text"
                             value={formData.addressDistrictNumber}
@@ -844,18 +844,18 @@ export function AdminUsersContent() {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Phone Number</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Phone Number</label>
                       <input
                         type="text"
                         value={formData.phoneNumber}
                         onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-mono"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm font-medium"
                         placeholder="+964 780 123 4567"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Date of Birth</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Date of Birth</label>
                       <input
                         type="date"
                         value={formData.dateOfBirth}
@@ -865,7 +865,7 @@ export function AdminUsersContent() {
                     </div>
 
                     <div className="sm:col-span-2">
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Emergency Contact Information</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Emergency Contact Information</label>
                       <input
                         type="text"
                         value={formData.emergencyContact}
@@ -879,7 +879,7 @@ export function AdminUsersContent() {
 
                 {!editingUser && (
                   <div>
-                    <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Initial Secure Passkey *</label>
+                    <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Initial Secure Passkey *</label>
                     <input
                       type="password"
                       required
@@ -898,46 +898,46 @@ export function AdminUsersContent() {
                   </h4>
                   <div className="bg-paper-50 p-4 rounded-sm border border-gray-200 space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-black text-gray-700 uppercase tracking-widest">Unique Digital ID & Member Code</span>
+                      <span className="text-xs font-black text-gray-700 uppercase tracking-widest">Unique Digital ID & Member Code</span>
                       <button
                         type="button"
                         onClick={generateUniqueIdentifiers}
-                        className="text-[10px] font-bold text-brand-800 hover:text-brand-900 flex items-center gap-1 uppercase tracking-wider bg-white px-2.5 py-1 border border-brand-200 rounded-sm shadow-xs"
+                        className="text-xs font-bold text-brand-800 hover:text-brand-700 flex items-center gap-1 uppercase tracking-wider bg-white px-2.5 py-1 border border-brand-200 rounded-sm shadow-xs"
                       >
                         <RefreshCw className="w-3 h-3" /> Regenerate IDs
                       </button>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Digital ID (Unique)</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Digital ID (Unique)</label>
                         <input
                           type="text"
                           required
                           value={formData.digitalId}
                           onChange={(e) => setFormData({...formData, digitalId: e.target.value})}
-                          className="w-full px-3 py-1.5 border border-gray-300 rounded-sm font-mono text-xs bg-white uppercase font-bold text-brand-800"
+                          className="w-full px-3 py-1.5 border border-gray-300 rounded-sm font-medium text-xs bg-white uppercase font-bold text-brand-800"
                         />
                       </div>
                       <div>
-                        <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Member Code</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Member Code</label>
                         <input
                           type="text"
                           required
                           value={formData.memberCode}
                           onChange={(e) => setFormData({...formData, memberCode: e.target.value})}
-                          className="w-full px-3 py-1.5 border border-gray-300 rounded-sm font-mono text-xs bg-white uppercase font-bold text-ink-900"
+                          className="w-full px-3 py-1.5 border border-gray-300 rounded-sm font-medium text-xs bg-white uppercase font-bold text-brand-800"
                         />
                       </div>
                     </div>
 
                     <div className="pt-2">
-                      <label className="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Credential Expiry / Renewal Date</label>
+                      <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Credential Expiry / Renewal Date</label>
                       <input
                         type="date"
                         required
                         value={formData.credentialExpiryDate}
                         onChange={(e) => setFormData({...formData, credentialExpiryDate: e.target.value})}
-                        className="w-full px-3 py-1.5 border border-gray-300 rounded-sm text-xs bg-white font-mono font-bold"
+                        className="w-full px-3 py-1.5 border border-gray-300 rounded-sm text-xs bg-white font-medium font-bold"
                       />
                     </div>
                   </div>
@@ -950,7 +950,7 @@ export function AdminUsersContent() {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Department / Bureau</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Department / Bureau</label>
                       <input
                         type="text"
                         value={formData.department}
@@ -959,7 +959,7 @@ export function AdminUsersContent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Official Title</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Official Title</label>
                       <input
                         type="text"
                         value={formData.title}
@@ -968,7 +968,7 @@ export function AdminUsersContent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Institutional Role</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Institutional Role</label>
                       <select
                         value={formData.role}
                         onChange={(e) => setFormData({...formData, role: e.target.value})}
@@ -982,7 +982,7 @@ export function AdminUsersContent() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Security Clearance Level</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Security Clearance Level</label>
                       <select
                         value={formData.clearanceLevel}
                         onChange={(e) => setFormData({...formData, clearanceLevel: e.target.value})}
@@ -995,7 +995,7 @@ export function AdminUsersContent() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Badge Status</label>
+                      <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Badge Status</label>
                       <select
                         value={formData.badgeStatus}
                         onChange={(e) => setFormData({...formData, badgeStatus: e.target.value})}

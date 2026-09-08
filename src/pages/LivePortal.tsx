@@ -48,10 +48,10 @@ export function LivePortal() {
               <Radio size={20} className="text-white animate-pulse" />
             </div>
             <div>
-              <span className="font-serif font-bold text-xl sm:text-2xl uppercase tracking-widest block leading-none">
+              <span className="font-bold text-xl sm:text-2xl uppercase tracking-widest block leading-none">
                 {lang === 'ar' ? 'بث مباشر الوكالة' : lang === 'ckb' ? 'پەخشی ڕاستەوخۆی ئاژانس' : lang === 'zh' ? '伊拉克-中国通讯社 直播' : 'IRAQ - CHINA AGENCY LIVE'}
               </span>
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1 block">Global Broadcast Network</span>
+              <span className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1 block">Global Broadcast Network</span>
             </div>
           </div>
           
@@ -150,7 +150,7 @@ export function LivePortal() {
                   LIVE BROADCAST
                 </div>
                 {mainEvent && (
-                  <div className="bg-black/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded shadow-sm hover:shadow-md border border-white/10">
+                  <div className="bg-black/80 backdrop-blur text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded shadow-sm hover:shadow-md border border-white/10">
                     {mainEvent.category} • {mainEvent.region}
                   </div>
                 )}
@@ -158,7 +158,7 @@ export function LivePortal() {
               
               {!mainEvent?.videoUrl && (
                 <div className="absolute bottom-0 inset-x-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none">
-                  <h2 className="text-3xl md:text-5xl font-serif font-black text-white mb-4 drop-shadow-md leading-tight max-w-4xl">
+                  <h2 className="text-3xl md:text-5xl font-black text-white mb-4 drop-shadow-md leading-tight max-w-4xl">
                     {mainEvent ? getTitle(mainEvent) : 'Awaiting Broadcast Signal...'}
                   </h2>
                   <p className="text-gray-300 text-base md:text-lg max-w-3xl line-clamp-2 leading-relaxed">
@@ -177,7 +177,7 @@ export function LivePortal() {
                     {lang === 'ar' ? 'قنوات البث المتاحة' : lang === 'ckb' ? 'کەناڵەکانی پەخشی بەردەست' : lang === 'zh' ? '可用广播频道' : 'Available Broadcast Channels'}
                   </h3>
                 </div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 bg-black/50 px-3 py-1 rounded border border-gray-800">
+                <div className="text-xs font-bold uppercase tracking-widest text-gray-500 bg-black/50 px-3 py-1 rounded border border-gray-800">
                   {events.length} Feeds
                 </div>
               </div>
@@ -208,8 +208,8 @@ export function LivePortal() {
                         {getTitle(event)}
                       </h4>
                       <div className="flex items-center gap-2">
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-bold uppercase tracking-wider">{event.region}</span>
-                        {event.videoUrl && <span className="text-[9px] px-1.5 py-0.5 rounded bg-brand-800/30 text-blue-400 border border-blue-800 font-bold uppercase tracking-wider">VIDEO</span>}
+                        <span className="text-xs px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-bold uppercase tracking-wider">{event.region}</span>
+                        {event.videoUrl && <span className="text-xs px-1.5 py-0.5 rounded bg-brand-800/30 text-blue-400 border border-blue-800 font-bold uppercase tracking-wider">VIDEO</span>}
                       </div>
                     </div>
                   </Link>
@@ -235,7 +235,7 @@ export function LivePortal() {
                 </h3>
               </div>
               {mainEvent && (
-                <Link to={`/${lang}/live/${mainEvent.slug}`} className="text-[10px] uppercase font-bold text-gray-400 hover:text-white transition-colors border border-gray-700 hover:border-gray-500 px-2 py-1 rounded bg-black/50">
+                <Link to={`/${lang}/live/${mainEvent.slug}`} className="text-xs uppercase font-bold text-gray-400 hover:text-white transition-colors border border-gray-700 hover:border-gray-500 px-2 py-1 rounded bg-black/50">
                    Open <ChevronRight size={12} className="inline -mt-0.5" />
                 </Link>
               )}
@@ -250,7 +250,7 @@ export function LivePortal() {
                 <div className="h-full flex flex-col items-center justify-center text-gray-600 text-sm gap-3 p-8 text-center">
                   <Activity size={32} className="opacity-20" />
                   <p className="font-bold uppercase tracking-widest text-xs">Timeline Standby</p>
-                  <p className="text-[10px] uppercase text-gray-700">Waiting for command desk updates</p>
+                  <p className="text-xs uppercase text-gray-700">Waiting for command desk updates</p>
                 </div>
               )}
             </div>

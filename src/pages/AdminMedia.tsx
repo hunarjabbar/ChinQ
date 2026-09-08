@@ -184,7 +184,7 @@ export function AdminMedia() {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                 />
-                <span className="absolute top-2 left-2 bg-brand-800/85 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                <span className="absolute top-2 left-2 bg-brand-800/85 text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                   {media.category}
                 </span>
               </div>

@@ -53,7 +53,7 @@ export function BricsSection({ lang }: { lang: Locale }) {
           <Globe2 className="w-4 h-4 animate-spin-slow" />
           {lang === 'ar' ? 'مرصد بريكس+' : lang === 'zh' ? '金砖国家+ 观察站' : lang === 'ckb' ? 'چاودێری برێکس+' : 'BRICS+ Observatory'}
         </h3>
-        <span className="text-[10px] font-mono bg-white/20 px-2 py-0.5 rounded-full border border-white/30 backdrop-blur-sm">
+        <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full border border-white/30 backdrop-blur-sm">
           {lang === 'ar' ? 'بث مباشر' : lang === 'zh' ? '实时' : 'LIVE'}
         </span>
       </div>
@@ -77,11 +77,11 @@ export function BricsSection({ lang }: { lang: Locale }) {
               </div>
               <div className="flex-1 space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-bold text-brand-800 dark:text-brand-400 uppercase tracking-widest bg-brand-50 dark:bg-brand-950 px-1.5 py-0.5 rounded border border-brand-100 dark:border-brand-900">
+                  <span className="text-xs font-bold text-brand-800 dark:text-brand-400 uppercase tracking-widest bg-brand-50 dark:bg-brand-950 px-1.5 py-0.5 rounded border border-brand-100 dark:border-brand-900">
                     {topic.category}
                   </span>
                 </div>
-                <h4 className="font-serif font-black text-sm text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 transition-colors leading-tight">
+                <h4 className="font-black text-sm text-brand-900 dark:text-neutral-100 group-hover:text-brand-800 transition-colors leading-tight">
                   {getTitle(topic)}
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-neutral-400 line-clamp-2 leading-relaxed">
@@ -94,7 +94,7 @@ export function BricsSection({ lang }: { lang: Locale }) {
       </div>
 
       <div className="bg-gray-50 dark:bg-neutral-800/50 p-4 border-t border-gray-100 dark:border-neutral-800">
-        <div className="flex items-center gap-3 text-[10px] font-bold text-gray-400 dark:text-neutral-500 uppercase tracking-wider">
+        <div className="flex items-center gap-3 text-xs font-bold text-gray-400 dark:text-neutral-500 uppercase tracking-wider">
           <ShieldCheck className="w-3.5 h-3.5" />
           {lang === 'ar' ? 'تكامل mBridge النشط' : lang === 'zh' ? 'mBridge 激活集成' : 'mBridge Active Integration'}
         </div>

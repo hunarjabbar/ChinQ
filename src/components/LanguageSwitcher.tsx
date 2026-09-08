@@ -50,8 +50,8 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
         className="flex items-center gap-2.5 bg-neutral-50 dark:bg-neutral-800 hover:bg-white dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-ink-900 dark:hover:border-neutral-500 px-3 py-1.5 transition-all cursor-pointer focus:outline-none group rounded-md"
         title="Select Language"
       >
-        <Globe className="w-3.5 h-3.5 text-ink-900 dark:text-neutral-200 shrink-0 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors" />
-        <span className="text-[10px] font-black text-ink-900 dark:text-neutral-200 tracking-[0.1em] uppercase">
+        <Globe className="w-3.5 h-3.5 text-brand-900 dark:text-neutral-200 shrink-0 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors" />
+        <span className="text-xs font-black text-brand-900 dark:text-neutral-200 tracking-[0.1em] uppercase">
           {currentLangObj.label}
         </span>
         <ChevronDown className={cn("w-3 h-3 text-neutral-400 transition-transform duration-300 shrink-0", isOpen && "rotate-180")} />
@@ -63,9 +63,9 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
       {/* Vertical Flow Menu */}
       {isOpen && (
         <div className="absolute right-0 rtl:left-0 rtl:right-auto top-full mt-2 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-xl rounded-md p-1.5 z-[100] flex flex-col gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400 border-b border-neutral-100 dark:border-neutral-700/60 mb-1 flex items-center justify-between">
+          <div className="px-3 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-neutral-400 border-b border-neutral-100 dark:border-neutral-700/60 mb-1 flex items-center justify-between">
             <span>Regional Node</span>
-            <span className="font-mono text-[8px] text-brand-700 dark:text-brand-400">4 DIALECTS</span>
+            <span className="text-[8px] text-brand-700 dark:text-brand-400">4 DIALECTS</span>
           </div>
           {languages.map((item) => {
             const isActive = lang === item.code;
@@ -77,7 +77,7 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
                   "w-full text-left rtl:text-right px-3 py-2 text-[11px] font-bold transition-all flex items-center justify-between cursor-pointer rounded group",
                   isActive
                     ? "bg-ink-900 dark:bg-brand-700 text-white"
-                    : "text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:text-ink-900 dark:hover:text-white"
+                    : "text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:text-brand-900 dark:hover:text-white"
                 )}
               >
                 <span>{item.label}</span>

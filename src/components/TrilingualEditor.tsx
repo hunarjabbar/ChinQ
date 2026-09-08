@@ -11,8 +11,9 @@ interface Category {
   nameEn: string;
 }
 
+import { useEffect } from 'react';
 export function TrilingualEditor() {
-  const { lang } = useParams<{ lang: string }>();
+  const { lang, id } = useParams<{ lang: string, id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -51,11 +52,50 @@ export function TrilingualEditor() {
   // Kurdish (ckb) and Arabic (ar) are RTL
   const isRtl = activeTab === 'ar' || activeTab === 'ckb';
 
+  const { data: existingArticle, isLoading: isLoadingArticle } = useQuery({
+    queryKey: ['admin-article', id],
+    queryFn: async () => {
+      if (!id) return null;
+      const res = await apiFetch('/api/admin/articles/' + id);
+      if (!res.ok) throw new Error('Failed to load article');
+      return res.json();
+    },
+    enabled: !!id
+  });
+
+  
+
+
+  useEffect(() => {
+    if (existingArticle) {
+      setSlug(existingArticle.slug || '');
+      setCategoryId(existingArticle.categoryId || '');
+      setImageUrl(existingArticle.imageUrl || '');
+      
+      const newFormData = { ...formData };
+      if (existingArticle.translations) {
+        existingArticle.translations.forEach((t: any) => {
+          if (newFormData[t.lang as keyof typeof newFormData]) {
+            newFormData[t.lang as keyof typeof newFormData] = {
+              title: t.title || '',
+              excerpt: t.excerpt || '',
+              content: t.content || '',
+            };
+          }
+        });
+      }
+      setFormData(newFormData);
+    }
+  }, [existingArticle]);
+
+
   // Article creation mutation
   const publishMutation = useMutation({
     mutationFn: async (payload: any) => {
-      const res = await apiFetch('/api/admin/articles', {
-        method: 'POST',
+      const endpoint = id ? '/api/admin/articles/' + id : '/api/admin/articles';
+      const method = id ? 'PUT' : 'POST';
+      const res = await apiFetch(endpoint, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
@@ -172,7 +212,7 @@ export function TrilingualEditor() {
                   ? '在此输入标题...' 
                   : 'Enter headline here...'
               }
-              className="w-full text-3xl font-serif font-extrabold p-3 border-b border-gray-100 focus:border-brand-800 outline-none bg-transparent transition-colors placeholder-gray-300"
+              className="w-full text-3xl font-extrabold p-3 border-b border-gray-100 focus:border-brand-800 outline-none bg-transparent transition-colors placeholder-gray-300"
             />
           </div>
 
@@ -325,11 +365,11 @@ export function TrilingualEditor() {
               <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col gap-3">
                 <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                   <span className="text-xs font-black uppercase text-blue-600 tracking-widest">English</span>
-                  <span className="text-[10px] font-mono text-gray-400">LTR</span>
+                  <span className="text-xs text-gray-400">LTR</span>
                 </div>
-                <h4 className="text-xl font-serif font-bold text-gray-900">{formData.en.title || 'Untitled Article'}</h4>
+                <h4 className="text-xl font-bold text-gray-900">{formData.en.title || 'Untitled Article'}</h4>
                 <p className="text-xs text-gray-500 italic">{formData.en.excerpt || 'No excerpt configured.'}</p>
-                <div className="text-sm font-serif text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
+                <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
                   {formData.en.content || 'Body content is empty...'}
                 </div>
               </div>
@@ -338,11 +378,11 @@ export function TrilingualEditor() {
               <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col gap-3" dir="rtl">
                 <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                   <span className="text-xs font-black uppercase text-emerald-600 tracking-widest">العربية</span>
-                  <span className="text-[10px] font-mono text-gray-400">RTL</span>
+                  <span className="text-xs text-gray-400">RTL</span>
                 </div>
-                <h4 className="text-xl font-serif font-bold text-gray-900">{formData.ar.title || 'العنوان غير محدد'}</h4>
+                <h4 className="text-xl font-bold text-gray-900">{formData.ar.title || 'العنوان غير محدد'}</h4>
                 <p className="text-xs text-gray-500 italic">{formData.ar.excerpt || 'لا يوجد مقتطف.'}</p>
-                <div className="text-sm font-serif text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
+                <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
                   {formData.ar.content || 'المحتوى فارغ...'}
                 </div>
               </div>
@@ -351,11 +391,11 @@ export function TrilingualEditor() {
               <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col gap-3" dir="rtl">
                 <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                   <span className="text-xs font-black uppercase text-amber-600 tracking-widest">کوردی (Sorani)</span>
-                  <span className="text-[10px] font-mono text-gray-400">RTL</span>
+                  <span className="text-xs text-gray-400">RTL</span>
                 </div>
-                <h4 className="text-xl font-serif font-bold text-gray-900">{formData.ckb.title || 'بێ ناونیشان'}</h4>
+                <h4 className="text-xl font-bold text-gray-900">{formData.ckb.title || 'بێ ناونیشان'}</h4>
                 <p className="text-xs text-gray-500 italic">{formData.ckb.excerpt || 'هیچ کورتەیەک نییە.'}</p>
-                <div className="text-sm font-serif text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
+                <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap border-t border-gray-50 pt-2 flex-1">
                   {formData.ckb.content || 'ناوەرۆکەکە بەتاڵە...'}
                 </div>
               </div>
@@ -364,7 +404,7 @@ export function TrilingualEditor() {
               <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs flex flex-col gap-3">
                 <div className="flex justify-between items-center border-b border-gray-100 pb-2">
                   <span className="text-xs font-black uppercase text-purple-600 tracking-widest">中文 (Chinese)</span>
-                  <span className="text-[10px] font-mono text-gray-400">LTR</span>
+                  <span className="text-xs text-gray-400">LTR</span>
                 </div>
                 <h4 className="text-xl font-sans font-bold text-gray-900">{formData.zh.title || '未命名文章'}</h4>
                 <p className="text-xs text-gray-500 italic">{formData.zh.excerpt || '没有摘要信息。'}</p>

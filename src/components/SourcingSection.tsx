@@ -265,7 +265,7 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
     <div className="w-full bg-white dark:bg-neutral-900 border-t border-brand-800 p-4 sm:p-6 md:p-12 text-start" dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="max-w-[1440px] mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif font-black text-ink-900 dark:text-neutral-100 uppercase tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-black text-brand-900 dark:text-neutral-100 uppercase tracking-tight mb-4">
             {t.title}
           </h2>
           <p className="text-sm font-sans text-gray-600 dark:text-neutral-400">
@@ -286,7 +286,7 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
                   <div className="w-10 h-10 bg-brand-800 text-white flex items-center justify-center rounded mb-4 group-hover:scale-110 transition-transform">
                     <benefit.icon size={20} />
                   </div>
-                  <h3 className="font-bold text-ink-900 dark:text-neutral-100 uppercase tracking-wider text-xs mb-2 group-hover:text-brand-800 transition-colors">{benefit.title}</h3>
+                  <h3 className="font-bold text-brand-900 dark:text-neutral-100 uppercase tracking-wider text-xs mb-2 group-hover:text-brand-800 transition-colors">{benefit.title}</h3>
                   <p className="text-gray-500 dark:text-neutral-400 text-[11px] leading-relaxed font-sans">{benefit.desc}</p>
                 </div>
               ))}
@@ -296,7 +296,7 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
               <div className="absolute top-1/2 -translate-y-1/2 right-0 p-4 sm:p-8 opacity-5 dark:opacity-10 text-brand-800">
                 <ShieldCheck size={120} />
               </div>
-              <h4 className="font-serif font-black text-lg text-ink-900 dark:text-neutral-100 uppercase tracking-tight mb-2 relative z-10">
+              <h4 className="font-black text-lg text-brand-900 dark:text-neutral-100 uppercase tracking-tight mb-2 relative z-10">
                 {lang === 'ar' ? 'شبكة عالمية موثوقة' : 
                  lang === 'zh' ? '值得信赖的全球网络' : 
                  lang === 'ckb' ? 'تۆڕێکی جیهانی جێی متمانە' : 
@@ -324,28 +324,28 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
                   className="space-y-4"
                 >
                   <div className="mb-6">
-                    <h3 className="font-serif font-black text-xl text-ink-900 dark:text-neutral-100 uppercase">{t.formTitle}</h3>
+                    <h3 className="font-black text-xl text-brand-900 dark:text-neutral-100 uppercase">{t.formTitle}</h3>
                     <p className="text-[11px] text-gray-500 font-sans mt-1">{t.formDesc}</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.fullName}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.fullName}</label>
                       <input required type="text" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} className="w-full text-xs p-2.5 border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-brand-800 focus:outline-none" />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.email}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.email}</label>
                       <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full text-xs p-2.5 border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-brand-800 focus:outline-none" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.company}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.company}</label>
                       <input required type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full text-xs p-2.5 border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-brand-800 focus:outline-none" />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.inquiryType}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.inquiryType}</label>
                       <select value={formData.inquiryType} onChange={e => setFormData({...formData, inquiryType: e.target.value})} className="w-full text-xs p-2.5 border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-brand-800 focus:outline-none">
                         {t.inquiryTypes.map(type => (
                           <option key={type.id} value={type.id}>{type.label}</option>
@@ -355,7 +355,7 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.message}</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-1">{t.fields.message}</label>
                     <textarea required rows={4} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full text-xs p-2.5 border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:border-brand-800 focus:outline-none resize-none" />
                   </div>
 
@@ -379,12 +379,12 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
                   className="text-center py-12"
                 >
                   <CheckCircle className="w-16 h-16 text-emerald-600 mx-auto mb-4" />
-                  <h3 className="text-2xl font-serif font-black text-ink-900 dark:text-neutral-100 mb-2">{t.successTitle}</h3>
+                  <h3 className="text-2xl font-black text-brand-900 dark:text-neutral-100 mb-2">{t.successTitle}</h3>
                   <p className="text-sm text-gray-600 dark:text-neutral-400 mb-6">{t.successDesc}</p>
                   
                   <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 p-4 inline-block mx-auto text-left" dir="ltr">
-                    <span className="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-bold">{t.ticketNo}</span>
-                    <span className="font-mono text-lg font-black text-brand-800">{ticketRef}</span>
+                    <span className="block text-xs text-gray-500 uppercase tracking-widest mb-1 font-bold">{t.ticketNo}</span>
+                    <span className="text-lg font-black text-brand-800">{ticketRef}</span>
                   </div>
                   
                   <div className="mt-8">
@@ -432,8 +432,8 @@ export default function SourcingSection({ lang }: { lang: Locale }) {
                   {selectedBenefit.icon && <selectedBenefit.icon size={32} />}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-black font-serif text-ink-900 dark:text-neutral-100 uppercase tracking-tight">{selectedBenefit.title}</h3>
-                  <p className="text-brand-800 font-bold uppercase tracking-widest text-[10px] mt-1">
+                  <h3 className="text-2xl font-black text-brand-900 dark:text-neutral-100 uppercase tracking-tight">{selectedBenefit.title}</h3>
+                  <p className="text-brand-800 font-bold uppercase tracking-widest text-xs mt-1">
                     {lang === 'en' ? 'Official Agency Partnership' : 
                      lang === 'ar' ? 'شراكة الوكالة الرسمية' :
                      lang === 'ckb' ? 'هاوبەشی فەرمی ئاژانس' : 

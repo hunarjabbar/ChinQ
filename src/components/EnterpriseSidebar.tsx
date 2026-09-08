@@ -587,14 +587,14 @@ ${preset.letterZh(companyName, businessField, representative)}`;
               {/* Header */}
               <div className="px-6 py-5 bg-ink-900 dark:bg-neutral-950 border-b border-brand-800 flex items-center justify-between shrink-0 shadow-sm">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                  <div className="w-8 h-8 rounded-sm bg-brand-800 flex items-center justify-center text-white font-serif font-black text-sm shadow-sm">
+                  <div className="w-8 h-8 rounded-sm bg-brand-800 flex items-center justify-center text-white font-black text-sm shadow-sm">
                     Q
                   </div>
                   <div>
                     <h2 className="text-sm font-black uppercase tracking-widest text-white">
                       {lang === 'ar' ? 'بوابة الوكالة للمؤسسات' : lang === 'zh' ? '伊拉克-中国通讯社 企业套件' : lang === 'ckb' ? 'دەروازەی دامەزراوەیی ئاژانس' : 'Iraqi-Chinese Agency Enterprise Suite'}
                     </h2>
-                    <p className="text-[10px] text-brand-400 font-bold uppercase tracking-widest mt-0.5">
+                    <p className="text-xs text-brand-400 font-bold uppercase tracking-widest mt-0.5">
                       Bilateral Trade & Information Portal
                     </p>
                   </div>
@@ -619,7 +619,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                   >
                     <div className="flex items-center gap-3">
                       <Menu className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
                         {lang === 'ar' ? 'الأقسام' : lang === 'zh' ? '分类' : lang === 'ckb' ? 'بەشەکان' : 'Topics & Sections'}
                       </span>
                     </div>
@@ -635,7 +635,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                       >
                         <div className="p-4 space-y-4">
                     <div className="border-b-2 border-black pb-2 mb-4">
-                      <h3 className="font-serif font-black text-2xl tracking-tight text-black">Sections</h3>
+                      <h3 className="font-black text-2xl tracking-tight text-black">Sections</h3>
                     </div>
                     <div className="flex flex-col">
                       {[
@@ -662,10 +662,10 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           className="flex flex-col py-3 border-b border-gray-200 hover:bg-neutral-50 transition-colors group cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-serif font-bold text-lg text-black group-hover:text-brand-800">{c.label}</span>
+                            <span className="font-bold text-lg text-black group-hover:text-brand-800">{c.label}</span>
                             <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-brand-800" />
                           </div>
-                          <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider mt-1">{c.desc}</span>
+                          <span className="text-xs uppercase font-bold text-gray-500 tracking-wider mt-1">{c.desc}</span>
                         </a>
                       ))}
                     </div>
@@ -683,7 +683,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                   >
                     <div className="flex items-center gap-3">
                       <TrendingUp className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
                         {lang === 'ar' ? 'المؤشرات' : lang === 'zh' ? '指数' : lang === 'ckb' ? 'مۆدێلەکان' : 'Market Data Indices'}
                       </span>
                     </div>
@@ -700,7 +700,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         <div className="p-4 space-y-4">
                     <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs">
                       <div className="flex items-center justify-between mb-3 border-b border-brand-800/5 pb-2">
-                        <h4 className="text-[10px] font-black uppercase text-ink-900 flex items-center">
+                        <h4 className="text-xs font-black uppercase text-brand-900 flex items-center">
                           <Activity className="w-3 h-3 text-brand-800 me-1.5" />
                           Silk Road Freight & Commodity Futures
                         </h4>
@@ -713,12 +713,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Shanghai-Basra Freight Rate */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-ink-900">Shanghai-Basra Cargo Surcharge (SBMFR)</div>
-                            <div className="text-[9px] text-gray-500 font-mono">Ocean spot index per 40ft High-Cube FEU</div>
+                            <div className="text-xs font-bold text-brand-900">Shanghai-Basra Cargo Surcharge (SBMFR)</div>
+                            <div className="text-xs text-gray-500 font-mono">Ocean spot index per 40ft High-Cube FEU</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-ink-900">${rates.sbmfr.toLocaleString()}</div>
-                            <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
+                            <div className="font-bold text-xs text-brand-900">${rates.sbmfr.toLocaleString()}</div>
+                            <div className="text-xs font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+1.7%</span>
                             </div>
@@ -728,12 +728,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Basra Heavy Crude Oil */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-ink-900">Basra Heavy Oil Crude Index</div>
-                            <div className="text-[9px] text-gray-500 font-mono">BHP sovereign contract pricing</div>
+                            <div className="text-xs font-bold text-brand-900">Basra Heavy Oil Crude Index</div>
+                            <div className="text-xs text-gray-500 font-mono">BHP sovereign contract pricing</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-ink-900">${rates.crude}</div>
-                            <div className="text-[9px] font-bold text-brand-600 flex items-center justify-end">
+                            <div className="font-bold text-xs text-brand-900">${rates.crude}</div>
+                            <div className="text-xs font-bold text-brand-600 flex items-center justify-end">
                               <ArrowDownRight className="w-2.5 h-2.5" />
                               <span>-0.4%</span>
                             </div>
@@ -743,12 +743,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Iraqi-Chinese Agency Silk Road Integration Index */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-ink-900">Iraqi-Chinese Agency Silk Road Integration Index (SRIX)</div>
-                            <div className="text-[9px] text-gray-500 font-mono">Aggregate bilateral liquidity flow score</div>
+                            <div className="text-xs font-bold text-brand-900">Iraqi-Chinese Agency Silk Road Integration Index (SRIX)</div>
+                            <div className="text-xs text-gray-500 font-mono">Aggregate bilateral liquidity flow score</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-ink-900">{rates.silkIndex} pt</div>
-                            <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
+                            <div className="font-bold text-xs text-brand-900">{rates.silkIndex} pt</div>
+                            <div className="text-xs font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+0.22%</span>
                             </div>
@@ -758,12 +758,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* IQD / CNY Cross Clearing Rate */}
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] font-bold text-ink-900">Dinar-Yuan Cross Direct Rate (IQD/CNY)</div>
-                            <div className="text-[9px] text-gray-500 font-mono">Direct central sovereign swap rate</div>
+                            <div className="text-xs font-bold text-brand-900">Dinar-Yuan Cross Direct Rate (IQD/CNY)</div>
+                            <div className="text-xs text-gray-500 font-mono">Direct central sovereign swap rate</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-mono font-bold text-xs text-ink-900">{rates.iqdcny}</div>
-                            <div className="text-[9px] font-bold text-emerald-600 flex items-center justify-end">
+                            <div className="font-bold text-xs text-brand-900">{rates.iqdcny}</div>
+                            <div className="text-xs font-bold text-emerald-600 flex items-center justify-end">
                               <ArrowUpRight className="w-2.5 h-2.5" />
                               <span>+0.85%</span>
                             </div>
@@ -775,7 +775,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
 
                     {/* Premium Insights Alert */}
                     <div className="bg-amber-50 border border-amber-200/60 p-4 rounded-xs text-xs">
-                      <h4 className="font-bold text-amber-800 mb-1 flex items-center gap-1.5 uppercase text-[10px]">
+                      <h4 className="font-bold text-amber-800 mb-1 flex items-center gap-1.5 uppercase text-xs">
                         <Globe className="w-3.5 h-3.5" />
                         Bilateral Sovereign Trade Notice
                       </h4>
@@ -786,7 +786,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
 
                     {/* Simple Bar chart mockup */}
                     <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs">
-                      <h4 className="text-[10px] font-black uppercase text-ink-900 mb-3">
+                      <h4 className="text-xs font-black uppercase text-brand-900 mb-3">
                         Monthly Freight Volatility Trend (2026)
                       </h4>
                       <div className="h-28 flex items-end justify-between px-2 pt-2 gap-2">
@@ -820,7 +820,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                   >
                     <div className="flex items-center gap-3">
                       <Compass className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
                         {lang === 'ar' ? 'المشاريع' : lang === 'zh' ? '项目' : lang === 'ckb' ? 'پڕۆژەکان' : 'Belt & Road Projects'}
                       </span>
                     </div>
@@ -845,7 +845,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           key={p.id}
                           onClick={() => setSelectedProject(p)}
                           className={cn(
-                            "py-2 px-1 text-center border rounded-xs transition-all cursor-pointer text-[9px] font-bold uppercase",
+                            "py-2 px-1 text-center border rounded-xs transition-all cursor-pointer text-xs font-bold uppercase",
                             selectedProject?.id === p.id 
                               ? "bg-brand-800 text-white border-brand-800 shadow-sm" 
                               : "bg-white dark:bg-neutral-900 text-gray-600 border-gray-200 dark:border-neutral-800 hover:border-brand-800/30"
@@ -860,10 +860,10 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                       <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs space-y-4">
                         {/* Project Heading */}
                         <div>
-                          <span className="text-[9px] font-black text-brand-800 uppercase tracking-wider block mb-0.5">
+                          <span className="text-xs font-black text-brand-800 uppercase tracking-wider block mb-0.5">
                             Active Bilateral Initiative
                           </span>
-                          <h3 className="font-serif text-base font-black leading-tight text-ink-900">
+                          <h3 className="text-base font-black leading-tight text-brand-900">
                             {getLocalizedProject(selectedProject).name}
                           </h3>
                         </div>
@@ -872,14 +872,14 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         <div className="grid grid-cols-2 gap-3 text-xs border-y border-brand-800/5 py-2">
                           <div>
                             <span className="text-[8px] text-gray-500 font-bold uppercase block">Province / Location</span>
-                            <span className="font-medium text-ink-900 flex items-center gap-1 mt-0.5">
+                            <span className="font-medium text-brand-900 flex items-center gap-1 mt-0.5">
                               <MapPin className="w-3 h-3 text-brand-800" />
                               {getLocalizedProject(selectedProject).location}
                             </span>
                           </div>
                           <div>
                             <span className="text-[8px] text-gray-500 font-bold uppercase block">Investment Commitment</span>
-                            <span className="font-medium text-emerald-700 font-mono mt-0.5 block">
+                            <span className="font-medium text-emerald-700 mt-0.5 block">
                               {selectedProject.investment}
                             </span>
                           </div>
@@ -887,9 +887,9 @@ ${preset.letterZh(companyName, businessField, representative)}`;
 
                         {/* Progress Bar */}
                         <div>
-                          <div className="flex justify-between items-center text-[10px] font-bold mb-1">
-                            <span className="text-ink-900 uppercase">Deployment Benchmark</span>
-                            <span className="font-mono text-brand-800">{selectedProject.progress}%</span>
+                          <div className="flex justify-between items-center text-xs font-bold mb-1">
+                            <span className="text-brand-900 uppercase">Deployment Benchmark</span>
+                            <span className="text-brand-800">{selectedProject.progress}%</span>
                           </div>
                           <div className="w-full bg-neutral-100 h-2 rounded-full overflow-hidden border border-brand-800/5">
                             <div 
@@ -902,15 +902,15 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         {/* Status Label */}
                         <div className="bg-neutral-50 dark:bg-neutral-900/50 p-2.5 border border-brand-800/5 rounded-xs text-[11px] leading-relaxed">
                           <span className="text-[8px] text-gray-500 font-bold uppercase block mb-0.5">Current Engineering Status</span>
-                          <strong className="text-ink-900">{getLocalizedProject(selectedProject).status}</strong>
+                          <strong className="text-brand-900">{getLocalizedProject(selectedProject).status}</strong>
                         </div>
 
                         {/* Real-time Project Log */}
                         <div>
-                          <span className="text-[9px] font-black text-ink-900 uppercase tracking-wider block mb-2">
+                          <span className="text-xs font-black text-brand-900 uppercase tracking-wider block mb-2">
                             Bilateral Logistics Log
                           </span>
-                          <ul className="space-y-2 text-[10px] text-gray-600 font-mono list-disc list-inside">
+                          <ul className="space-y-2 text-xs text-gray-600 list-disc list-inside">
                             {selectedProject.logFeed.map((log, index) => (
                               <li key={index} className="leading-snug">
                                 <span className="text-gray-400 me-1">►</span>
@@ -935,7 +935,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                   >
                     <div className="flex items-center gap-3">
                       <FileText className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
                         {lang === 'ar' ? 'الخطابات' : lang === 'zh' ? '公文' : lang === 'ckb' ? 'نامەکان' : 'B2B Letter Generator'}
                       </span>
                     </div>
@@ -956,14 +956,14 @@ ${preset.letterZh(companyName, businessField, representative)}`;
 
                     {/* Select Letter Type */}
                     <div className="space-y-1">
-                      <label className="text-[9px] font-black uppercase text-ink-900">Select Communication Template</label>
+                      <label className="text-xs font-black uppercase text-brand-900">Select Communication Template</label>
                       <select 
                         value={selectedPreset}
                         onChange={(e) => {
                           setSelectedPreset(e.target.value);
                           setCopied(false);
                         }}
-                        className="w-full bg-white dark:bg-neutral-900 border border-brand-800/15 px-3 py-2 text-xs rounded-xs font-medium text-ink-900 focus:outline-none focus:border-brand-800 cursor-pointer"
+                        className="w-full bg-white dark:bg-neutral-900 border border-brand-800/15 px-3 py-2 text-xs rounded-xs font-medium text-brand-900 focus:outline-none focus:border-brand-800 cursor-pointer"
                       >
                         {CORRESPONDENCE_PRESETS.map((p) => (
                           <option key={p.id} value={p.id}>
@@ -1010,14 +1010,14 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                     {/* Preview Area (Trilingual letter excerpt) */}
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-[9px] font-black uppercase text-ink-900">Draft Preview (Injected)</span>
+                        <span className="text-xs font-black uppercase text-brand-900">Draft Preview (Injected)</span>
                         <button 
                           onClick={copyB2BLetter}
                           className={cn(
-                            "flex items-center gap-1.5 text-[10px] font-bold uppercase px-3 py-1 cursor-pointer border rounded-xs transition-all",
+                            "flex items-center gap-1.5 text-xs font-bold uppercase px-3 py-1 cursor-pointer border rounded-xs transition-all",
                             copied 
                               ? "bg-emerald-500 border-emerald-500 text-white" 
-                              : "bg-white dark:bg-neutral-900 border-brand-800/20 text-ink-900 hover:bg-neutral-50"
+                              : "bg-white dark:bg-neutral-900 border-brand-800/20 text-brand-900 hover:bg-neutral-50"
                           )}
                         >
                           {copied ? <FileCheck className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -1025,7 +1025,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                         </button>
                       </div>
 
-                      <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs h-48 overflow-y-auto font-mono text-[10px] space-y-4 text-gray-700 leading-normal whitespace-pre-wrap">
+                      <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-4 rounded-xs h-48 overflow-y-auto text-xs space-y-4 text-gray-700 leading-normal whitespace-pre-wrap">
                         {selectedPresetObj && (
                           <>
                             <div className="border-b border-brand-800/5 pb-2">
@@ -1058,7 +1058,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                   >
                     <div className="flex items-center gap-3">
                       <Lock className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-ink-900">
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
                         {lang === 'ar' ? 'التقارير' : lang === 'zh' ? '简报' : lang === 'ckb' ? 'ڕاپۆرتەکان' : 'Strategic Information Briefs'}
                       </span>
                     </div>
@@ -1078,7 +1078,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                       <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-5 rounded-xs space-y-4 animate-fadeIn">
                         <button 
                           onClick={() => setActiveBrief(null)}
-                          className="text-[10px] font-bold uppercase tracking-wider text-brand-800 hover:underline flex items-center gap-1 cursor-pointer"
+                          className="text-xs font-bold uppercase tracking-wider text-brand-800 hover:underline flex items-center gap-1 cursor-pointer"
                         >
                           ← Back to Information Feed
                         </button>
@@ -1087,10 +1087,10 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           <span className="text-[8px] font-black text-brand-800 uppercase tracking-widest block mb-1">
                             Sovereign Analysis Draft
                           </span>
-                          <h3 className="font-serif text-lg font-black leading-tight text-ink-900">
+                          <h3 className="text-lg font-black leading-tight text-brand-900">
                             {lang === 'ar' ? activeBrief.titleAr : lang === 'zh' ? activeBrief.titleZh : activeBrief.titleEn}
                           </h3>
-                          <div className="flex items-center gap-2 mt-2 text-[9px] text-gray-500 font-bold uppercase">
+                          <div className="flex items-center gap-2 mt-2 text-xs text-gray-500 font-bold uppercase">
                             <span>{activeBrief.date}</span>
                             <span>•</span>
                             <span>{activeBrief.author}</span>
@@ -1101,7 +1101,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                           {lang === 'ar' ? activeBrief.fullContentAr : lang === 'zh' ? activeBrief.fullContentZh : activeBrief.fullContentEn}
                         </div>
 
-                        <div className="bg-neutral-50 p-3 border border-dashed border-brand-800/15 text-[10px] text-gray-500 text-center font-mono uppercase tracking-wider">
+                        <div className="bg-neutral-50 p-3 border border-dashed border-brand-800/15 text-xs text-gray-500 text-center uppercase tracking-wider">
                           🔒 END OF HIGH CONFIDENTIALITY MEMO • IRAQI-CHINESE AGENCY INTEL
                         </div>
                       </div>
@@ -1124,12 +1124,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                   <span className="text-[8px] font-black text-brand-800 uppercase tracking-wider">
                                     {brief.author}
                                   </span>
-                                  <span className="text-[8px] text-gray-500 font-mono font-bold">
+                                  <span className="text-[8px] text-gray-500 font-bold">
                                     {brief.date}
                                   </span>
                                 </div>
 
-                                <h4 className="font-serif text-sm font-bold text-ink-900 leading-snug group-hover:text-brand-800 transition-colors duration-200">
+                                <h4 className="text-sm font-bold text-brand-900 leading-snug group-hover:text-brand-800 transition-colors duration-200">
                                   {lang === 'ar' ? brief.titleAr : lang === 'zh' ? brief.titleZh : brief.titleEn}
                                 </h4>
 
@@ -1142,7 +1142,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                   {isUnlocked ? (
                                     <button 
                                       onClick={() => setActiveBrief(brief)}
-                                      className="text-[10px] bg-brand-800 hover:bg-brand-700 text-white font-bold uppercase tracking-wider px-3.5 py-1.5 cursor-pointer rounded-xs transition-colors flex items-center gap-1.5 shadow-sm"
+                                      className="text-xs bg-brand-800 hover:bg-brand-700 text-white font-bold uppercase tracking-wider px-3.5 py-1.5 cursor-pointer rounded-xs transition-colors flex items-center gap-1.5 shadow-sm"
                                     >
                                       <Unlock className="w-3.5 h-3.5 text-yellow-400" />
                                       <span>Read Sovereign Brief</span>
@@ -1159,11 +1159,11 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                           placeholder="Enter corporate email to unlock"
                                           value={emailInput}
                                           onChange={(e) => setEmailInput(e.target.value)}
-                                          className="flex-grow bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2.5 py-1 text-[10px] rounded-xs focus:outline-none focus:border-brand-800 font-mono text-gray-600"
+                                          className="flex-grow bg-neutral-50 dark:bg-neutral-900/50 border border-brand-800/15 px-2.5 py-1 text-xs rounded-xs focus:outline-none focus:border-brand-800 text-gray-600"
                                         />
                                         <button 
                                           type="submit"
-                                          className="text-[10px] bg-brand-800 hover:bg-[#770000] text-white font-bold uppercase px-3 py-1 cursor-pointer rounded-xs transition-all flex items-center gap-1 shrink-0"
+                                          className="text-xs bg-brand-800 hover:bg-[#770000] text-white font-bold uppercase px-3 py-1 cursor-pointer rounded-xs transition-all flex items-center gap-1 shrink-0"
                                         >
                                           <Lock className="w-3 h-3 text-yellow-400" />
                                           <span>Unlock</span>
@@ -1171,7 +1171,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                                       </form>
                                       
                                       {unlockError && (
-                                        <p className="text-[9px] text-brand-600 font-bold mt-1.5 font-mono">
+                                        <p className="text-xs text-brand-600 font-bold mt-1.5 font-mono">
                                           ⚠ {unlockError}
                                         </p>
                                       )}
@@ -1192,7 +1192,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
               </div>
 
               {/* Sidebar Footer */}
-              <div className="p-4 bg-neutral-50 border-t border-brand-800 text-center text-[9px] text-black font-bold tracking-widest shrink-0 uppercase">
+              <div className="p-4 bg-neutral-50 border-t border-brand-800 text-center text-xs text-black font-bold tracking-widest shrink-0 uppercase">
                 IRAQI-CHINESE AGENCY INTELLIGENCE SERVICES • BEIJING / BAGHDAD
               </div>
 

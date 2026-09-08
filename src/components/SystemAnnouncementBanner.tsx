@@ -39,7 +39,7 @@ export function SystemAnnouncementBanner({ lang }: { lang: Locale }) {
       >
         <div className="w-full max-w-(--container-width) mx-auto flex items-center h-10 px-4 sm:px-6">
           <div className="flex items-center gap-4 flex-1 overflow-hidden">
-            <span className="flex-shrink-0 text-[10px] font-black uppercase tracking-[0.3em] bg-white/15 px-2 py-0.5 rounded-sm">
+            <span className="flex-shrink-0 text-xs font-black uppercase tracking-[0.3em] bg-white/15 px-2 py-0.5 rounded-sm">
               {announcement.type} SIGNAL
             </span>
             <p className={`text-[11px] font-bold uppercase tracking-widest truncate flex-1 ${lang === 'ar' || lang === 'ckb' ? 'text-right' : 'text-left'}`} dir={lang === 'ar' || lang === 'ckb' ? 'rtl' : 'ltr'}>

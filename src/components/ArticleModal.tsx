@@ -20,13 +20,13 @@ export function ArticleModal({ article, lang, onClose }: ArticleModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header toolbar */}
-        <div className="px-6 py-4 bg-brand-900 text-white border-b border-brand-800 flex justify-between items-center shrink-0 sticky top-0 z-20">
-          <div className="font-mono text-xs font-bold uppercase tracking-widest text-brand-200">
+        <div className="px-6 py-4 bg-brand-800 text-white border-b border-brand-700 flex justify-between items-center shrink-0 sticky top-0 z-20">
+          <div className="text-xs font-bold uppercase tracking-widest text-brand-200">
             {lang === 'ar' ? 'بوابة الأخبار والتحليلات السيادية' : lang === 'zh' ? '主权新闻与深度报道专栏' : lang === 'ckb' ? 'دەروازەی هەواڵ و شیکردنەوە' : 'Sovereign Editorial Dossier'}
           </div>
           <button 
             onClick={onClose}
-            className="text-white hover:text-brand-200 font-mono font-bold text-xs uppercase tracking-widest bg-brand-800 hover:bg-brand-950 px-4 py-2 rounded-lg transition-colors cursor-pointer border border-brand-700 shadow-sm"
+            className="text-white hover:text-brand-200 font-bold text-xs uppercase tracking-widest bg-brand-900/60 hover:bg-brand-950 px-4 py-2 rounded-lg transition-colors cursor-pointer border border-brand-700 shadow-sm"
           >
             {lang === 'ar' ? '✕ إغلاق النافذة' : lang === 'ckb' ? '✕ داخستن' : lang === 'zh' ? '✕ 关闭窗口' : '✕ Close Dossier'}
           </button>

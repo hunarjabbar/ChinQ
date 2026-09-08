@@ -166,7 +166,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
               <Coins size={22} />
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-serif font-black text-white">
+              <h3 className="text-lg sm:text-xl font-black text-white">
                 {isAr ? 'طلب تسوية ومدفوعات (IQD ⇄ E-CNY)' : isZh ? '发起双边清算与支付申请' : 'Initiate Bilateral Payment Order'}
               </h3>
               <p className="text-xs text-neutral-400">
@@ -201,7 +201,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
               className={`py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'RETAIL'
                   ? 'bg-white dark:bg-neutral-900 text-brand-800 dark:text-brand-400 shadow-xs'
-                  : 'text-neutral-500 hover:text-ink-900'
+                  : 'text-neutral-500 hover:text-brand-900'
               }`}
             >
               <User size={14} />
@@ -213,7 +213,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
               className={`py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'BUSINESS'
                   ? 'bg-white dark:bg-neutral-900 text-brand-800 dark:text-brand-400 shadow-xs'
-                  : 'text-neutral-500 hover:text-ink-900'
+                  : 'text-neutral-500 hover:text-brand-900'
               }`}
             >
               <Building2 size={14} />
@@ -224,15 +224,15 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
           {/* Transfer Summary Badge */}
           <div className="p-4 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl flex items-center justify-between text-xs font-mono">
             <div>
-              <span className="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase">
+              <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase">
                 {direction === 'IQD_TO_ECNY' ? 'Sending Currency' : 'Receiving Currency'}
               </span>
-              <span className="text-sm font-black text-ink-900 dark:text-white">
+              <span className="text-sm font-black text-brand-900 dark:text-white">
                 {sourceAmount.toLocaleString()} {direction === 'IQD_TO_ECNY' ? 'IQD' : 'e-CNY (¥)'}
               </span>
             </div>
             <div className="text-end">
-              <span className="text-neutral-500 dark:text-neutral-400 block text-[10px] uppercase">
+              <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase">
                 Corridor Protocol
               </span>
               <span className="text-sm font-bold text-brand-800 dark:text-brand-400">
@@ -243,7 +243,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
           {/* Section 1: Sender Information */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-1.5 flex items-center gap-2">
+            <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-1.5 flex items-center gap-2">
               <User size={14} className="text-brand-800 dark:text-brand-400" />
               <span>{isAr ? 'بيانات الطرف المرسل (العراق / الصين)' : 'Payer / Remitter Details'}</span>
             </h4>
@@ -339,7 +339,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
           {/* Section 2: Recipient Information */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-1.5 flex items-center gap-2">
+            <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-1.5 flex items-center gap-2">
               <QrCode size={14} className="text-brand-800 dark:text-brand-400" />
               <span>{isAr ? 'بيانات الطرف المستلم (المستفيد بالصين أو العراق)' : 'Beneficiary / Recipient in China or Iraq'}</span>
             </h4>
@@ -438,14 +438,14 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
           {/* Section 3: Commercial Documentation (for Corporate) */}
           {orderType === 'BUSINESS' && (
             <div className="space-y-3 bg-neutral-50 dark:bg-neutral-800/40 p-4 rounded-xl border border-neutral-200 dark:border-neutral-700">
-              <h4 className="text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white flex items-center gap-2">
+              <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white flex items-center gap-2">
                 <FileText size={14} className="text-emerald-600 dark:text-emerald-400" />
                 <span>{isAr ? 'الوثائق التجارية والاستيرادية (اختياري / لتسريع التخليص)' : 'Commercial Documentation (For Customs Acceleration)'}</span>
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[10px] font-bold text-neutral-500 mb-1">
+                  <label className="block text-xs font-bold text-neutral-500 mb-1">
                     Invoice Reference
                   </label>
                   <input
@@ -458,7 +458,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-neutral-500 mb-1">
+                  <label className="block text-xs font-bold text-neutral-500 mb-1">
                     Bill of Lading (B/L)
                   </label>
                   <input
@@ -471,7 +471,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-neutral-500 mb-1">
+                  <label className="block text-xs font-bold text-neutral-500 mb-1">
                     Customs Code (Basra/Safwan)
                   </label>
                   <input

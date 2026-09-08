@@ -39,20 +39,20 @@ export function InvestIraq({ lang }: { lang: Locale }) {
       <div className="w-full relative z-10 space-y-6 bg-brand-950/20 p-8 rounded-2xl border border-white/10 backdrop-blur-sm shadow-inner">
         {/* Pulsing Big White Banner for Invest in Iraq & Kurdistan Region */}
         <div className="text-center py-4 px-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl animate-pulse">
-          <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.3em] uppercase text-brand-200 block mb-1">
+          <span className="text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-brand-200 block mb-1">
             {lang === 'ar' ? 'بوابة الفرص الاستثمارية السيادية' : lang === 'zh' ? '主权投资机遇专区' : lang === 'ckb' ? 'دەروازەی هەلی وەبەرهێنانی سەرەکی' : 'Sovereign Investment Gateway'}
           </span>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
             INVEST IN IRAQ & KURDISTAN REGION
           </h1>
         </div>
 
-        <div className="text-[11px] font-mono text-white/70 uppercase tracking-[0.4em] mb-2 flex items-center gap-3 bg-brand-900/40 px-4 py-1.5 rounded-sm w-fit border border-white/5 shadow-sm">
+        <div className="text-[11px] text-white/70 uppercase tracking-[0.4em] mb-2 flex items-center gap-3 bg-black/30 px-4 py-1.5 rounded-sm w-fit border border-white/5 shadow-sm">
           <span className="w-8 h-px bg-white/20" />
           {lang === 'ar' ? 'مبادرة الاستثمار الاستراتيجية' : lang === 'zh' ? '战略投资倡议' : lang === 'ckb' ? 'دەستپێشخەری وەبەرهێنانی ستراتیژی' : 'Strategic Investment Initiative'}
         </div>
         
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black mb-8 leading-tight tracking-tighter drop-shadow-md">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-8 leading-tight tracking-tighter drop-shadow-md">
           {lang === 'ar' ? 'مشاريع البنية التحتية والاستثمار الثنائية' : lang === 'zh' ? '中伊双边战略项目与基础设施通道' : lang === 'ckb' ? 'پڕۆژە ستراتیژی و ژێرخانی ئابوورییە دووقۆڵییەکان' : 'Bilateral Strategic Projects & Infrastructure Hub'}
         </h2>
 
@@ -70,7 +70,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
               <div className="flex items-center gap-3">
                 <FileText className="w-8 h-8 text-brand-200 shrink-0" />
                 <div>
-                  <h3 className="font-serif font-bold text-base text-white">
+                  <h3 className="font-bold text-base text-white">
                     {lang === 'ar' ? 'قوانين الاستثمار الرسمية (جمهورية العراق وإقليم كوردستان)' : lang === 'zh' ? '伊拉克联邦与库尔德斯坦地区官方投资法案' : lang === 'ckb' ? 'یاساکانی وەبەرهێنانی فەرمی (عێراق و هەرێمی كوردستان)' : 'Official Investment Laws (Federal Iraq & KRG)'}
                   </h3>
                   <p className="text-xs text-white/70 font-mono">
@@ -83,10 +83,10 @@ export function InvestIraq({ lang }: { lang: Locale }) {
                 <button
                   onClick={() => handleDownload('iraq')}
                   disabled={downloading === 'iraq'}
-                  className="w-full py-2.5 px-4 bg-white text-brand-900 hover:bg-brand-50 font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer disabled:opacity-75"
+                  className="w-full py-2.5 px-4 bg-white text-brand-800 hover:bg-neutral-100 text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer disabled:opacity-75"
                 >
                   {downloading === 'iraq' ? (
-                    <span className="animate-spin w-4 h-4 border-2 border-brand-900 border-t-transparent rounded-full" />
+                    <span className="animate-spin w-4 h-4 border-2 border-brand-800 border-t-transparent rounded-full" />
                   ) : downloaded === 'iraq' ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   ) : (
@@ -98,7 +98,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
                 <button
                   onClick={() => handleDownload('krg')}
                   disabled={downloading === 'krg'}
-                  className="w-full py-2.5 px-4 bg-brand-900 text-white hover:bg-brand-950 border border-white/20 font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer disabled:opacity-75"
+                  className="w-full py-2.5 px-4 bg-neutral-900 text-white hover:bg-black border border-white/20 text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer disabled:opacity-75"
                 >
                   {downloading === 'krg' ? (
                     <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -116,22 +116,22 @@ export function InvestIraq({ lang }: { lang: Locale }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="bg-white/5 p-6 sm:p-8 border border-white/10 rounded-xs hover:bg-white/15 transition-all duration-500 group shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
-              <div className="text-4xl sm:text-5xl font-bold text-white mb-3 group-hover:scale-105 transition-transform origin-left duration-500 flex items-baseline">10<span className="text-xl opacity-40 ml-2 font-mono italic">Years</span></div>
+              <div className="text-4xl sm:text-5xl font-bold text-white mb-3 group-hover:scale-105 transition-transform origin-left duration-500 flex items-baseline">10<span className="text-xl opacity-40 ml-2 italic">Years</span></div>
               <div className="font-black text-white mb-2 uppercase tracking-[0.2em] text-[11px] border-b border-white/20 pb-2">
                 {lang === 'ar' ? 'إعفاء ضريبي' : lang === 'zh' ? '免税期' : lang === 'ckb' ? 'لێخۆشبوونی باج' : 'Fiscal Immunity'}
               </div>
-              <div className="text-[11px] text-white/50 font-mono leading-relaxed">
+              <div className="text-[11px] text-white/50 leading-relaxed">
                 {lang === 'ar' ? 'بموجب قانون الاستثمار رقم ١٣' : lang === 'zh' ? '根据第13号投资法' : lang === 'ckb' ? 'بەپێی یاسای وەبەرهێنانی ژمارە ١٣' : 'Guaranteed under Investment Law No. 13'}
               </div>
             </div>
 
             <div className="bg-white/5 p-6 sm:p-8 border border-white/10 rounded-xs hover:bg-white/15 transition-all duration-500 group shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
-              <div className="text-4xl sm:text-5xl font-bold text-white mb-3 group-hover:scale-105 transition-transform origin-left duration-500 flex items-baseline">100<span className="text-xl opacity-40 ml-2 font-mono italic">%</span></div>
+              <div className="text-4xl sm:text-5xl font-bold text-white mb-3 group-hover:scale-105 transition-transform origin-left duration-500 flex items-baseline">100<span className="text-xl opacity-40 ml-2 italic">%</span></div>
               <div className="font-black text-white mb-2 uppercase tracking-[0.2em] text-[11px] border-b border-white/20 pb-2">
                 {lang === 'ar' ? 'تحويل الأرباح' : lang === 'zh' ? '利润汇出' : lang === 'ckb' ? 'گواستنەوەی قازانج' : 'Yield Repatriation'}
               </div>
-              <div className="text-[11px] text-white/50 font-mono leading-relaxed">
+              <div className="text-[11px] text-white/50 leading-relaxed">
                 {lang === 'ar' ? 'حرية كاملة لتحويل رأس المال' : lang === 'zh' ? '完全自由的资本和利润转移' : lang === 'ckb' ? 'ئازادی تەواو بۆ گواستنەوەی سەرمایە' : 'Full constitutional freedom of capital transfer'}
               </div>
             </div>
@@ -142,7 +142,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
               <div className="font-black text-white mb-2 uppercase tracking-[0.2em] text-[11px] border-b border-white/20 pb-2">
                 {lang === 'ar' ? 'الحزام والطريق' : lang === 'zh' ? '一带一路' : lang === 'ckb' ? 'پشتێن و ڕێگا' : 'Strategic Corridor'}
               </div>
-              <div className="text-[11px] text-white/50 font-mono leading-relaxed">
+              <div className="text-[11px] text-white/50 leading-relaxed">
                 {lang === 'ar' ? 'شراكة استراتيجية وتجارية' : lang === 'zh' ? '战略与商业伙伴关系' : lang === 'ckb' ? 'هاوبەشی ستراتیژی و بازرگانی' : 'Tier-one global infrastructure partnership'}
               </div>
             </div>
@@ -153,7 +153,7 @@ export function InvestIraq({ lang }: { lang: Locale }) {
               <div className="font-black text-white mb-2 uppercase tracking-[0.2em] text-[11px] border-b border-white/20 pb-2">
                 {lang === 'ar' ? 'تخصيص الأراضي' : lang === 'zh' ? '土地分配' : lang === 'ckb' ? 'تەرخانکردنی زەوی' : 'Sovereign Land'}
               </div>
-              <div className="text-[11px] text-white/50 font-mono leading-relaxed">
+              <div className="text-[11px] text-white/50 leading-relaxed">
                 {lang === 'ar' ? 'تسهيلات مجانية أو مدعومة' : lang === 'zh' ? '免费或提供大量补贴的设施' : lang === 'ckb' ? 'ئاسانکاری بێبەرامبەر یان پاڵپشتیکراو' : 'Priority industrial zone allocations'}
               </div>
             </div>

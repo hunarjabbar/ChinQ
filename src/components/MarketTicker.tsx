@@ -54,7 +54,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
       
       {/* Ticker Bar Inner Container - Unified Alignment */}
       <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6">
-        <div className="h-10 flex items-center justify-between text-[11px] font-mono tracking-wider overflow-hidden">
+        <div className="h-10 flex items-center justify-between text-[11px] tracking-wider overflow-hidden">
           
           {/* Left Live Indicator & Category Filter Toggles */}
           <div className="flex items-center gap-3 shrink-0 pe-3 border-e border-white/15">
@@ -68,7 +68,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
             </button>
 
             {/* Quick Category Filters */}
-            <div className="hidden sm:flex items-center space-x-1 rtl:space-x-reverse text-[10px]">
+            <div className="hidden sm:flex items-center space-x-1 rtl:space-x-reverse text-xs">
               <button
                 onClick={() => setFilterCategory('ALL')}
                 className={cn("px-1.5 py-0.5 rounded transition-colors", filterCategory === 'ALL' ? "bg-white/20 text-white font-bold" : "text-gray-400 hover:text-white")}
@@ -101,16 +101,16 @@ export function MarketTicker({ lang }: { lang: Locale }) {
                   className="flex items-center shrink-0 cursor-pointer hover:bg-white/10 px-2 py-1 rounded transition-colors group"
                   title="Click to view interactive stock chart"
                 >
-                  <span className="text-[9px] font-bold text-gray-400 group-hover:text-white me-1.5 uppercase">
+                  <span className="text-xs font-bold text-gray-400 group-hover:text-white me-1.5 uppercase">
                     {item.symbol}
                   </span>
                   <span className="text-gray-300 font-sans font-medium text-[11px] me-1.5 max-w-[120px] truncate">
                     {getItemLabel(item)}
                   </span>
-                  <span className="font-bold font-mono text-white me-1.5">
+                  <span className="font-bold text-white me-1.5">
                     {item.price.toLocaleString(undefined, { minimumFractionDigits: item.symbol === 'BRENT' ? 2 : 2 })}
                   </span>
-                  <span className={cn("font-bold flex items-center gap-0.5 text-[10px]", isUp ? "text-emerald-400" : "text-brand-400")}>
+                  <span className={cn("font-bold flex items-center gap-0.5 text-xs", isUp ? "text-emerald-400" : "text-brand-400")}>
                     {isUp ? '▲' : '▼'} {isUp ? '+' : ''}{item.changePercent.toFixed(2)}%
                   </span>
                 </div>
@@ -121,7 +121,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
           {/* Right CTA Button to open chart terminal */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="shrink-0 font-sans font-bold text-[10px] uppercase tracking-wider bg-brand-900 hover:bg-brand-950 text-white px-2.5 py-1 rounded flex items-center gap-1.5 transition-colors cursor-pointer ms-2 border border-white/20"
+            className="shrink-0 font-sans font-bold text-xs uppercase tracking-wider bg-brand-900 hover:bg-brand-950 text-white px-2.5 py-1 rounded flex items-center gap-1.5 transition-colors cursor-pointer ms-2 border border-white/20"
           >
             <BarChart2 size={13} />
             <span className="hidden md:inline">{lang === 'zh' ? '股票图表' : lang === 'ar' ? 'رسوم بيانية' : 'Stock Charts'}</span>

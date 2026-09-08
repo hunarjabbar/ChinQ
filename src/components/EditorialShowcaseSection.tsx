@@ -129,14 +129,14 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         <div className="max-w-3xl space-y-2">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-brand-800 rounded-full animate-ping" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-brand-800 dark:text-brand-400">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-800 dark:text-brand-400">
               {content.eyebrow}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black uppercase tracking-tight text-ink-900 dark:text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-brand-900 dark:text-white leading-tight">
             {content.title}
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-serif leading-relaxed text-justify">
+          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed text-justify">
             {content.desc}
           </p>
         </div>
@@ -144,7 +144,7 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           <Link 
             to={`/${lang}/about`}
-            className="px-5 py-2.5 bg-paper-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-500 text-ink-900 dark:text-neutral-100 text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
+            className="px-5 py-2.5 bg-paper-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-500 text-brand-900 dark:text-neutral-100 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
           >
             <Building2 className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
             <span>{content.exploreAboutBtn}</span>
@@ -153,7 +153,7 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
 
           <Link 
             to={`/${lang}/join`}
-            className="px-6 py-2.5 bg-brand-800 hover:bg-brand-700 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+            className="px-6 py-2.5 bg-brand-800 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs"
           >
             <UserPlus className="w-3.5 h-3.5 text-white" />
             <span>{content.joinEditorialBtn}</span>
@@ -172,14 +172,14 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
               className="p-4 bg-paper-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-800 flex flex-col justify-center space-y-1"
             >
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-serif font-black text-brand-800 dark:text-brand-400">
+                <span className="text-3xl sm:text-4xl font-black text-brand-800 dark:text-brand-400">
                   {m.num}
                 </span>
-                <span className="text-xs font-mono font-bold text-ink-900 dark:text-white uppercase tracking-wider">
+                <span className="text-xs font-bold text-brand-900 dark:text-white uppercase tracking-wider">
                   {m.label}
                 </span>
               </div>
-              <p className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
                 {m.sub}
               </p>
             </div>
@@ -189,11 +189,11 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         {/* Bureaus Active Grid */}
         <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
           <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2">
-            <h3 className="text-xs font-mono font-black uppercase tracking-widest text-ink-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-widest text-brand-900 dark:text-white flex items-center gap-2">
               <Radio className="w-4 h-4 text-brand-800 dark:text-brand-400" />
               {content.bureausTitle}
             </h3>
-            <span className="text-[9px] font-mono font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 border border-emerald-200 dark:border-emerald-800">
+            <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 border border-emerald-200 dark:border-emerald-800">
               Live Network Telemetry
             </span>
           </div>
@@ -205,28 +205,28 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
                 className="p-3.5 bg-white dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-600 transition-colors space-y-1.5"
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-serif font-bold text-sm text-ink-900 dark:text-white">
+                  <h4 className="font-bold text-sm text-brand-900 dark:text-white">
                     {b.name}
                   </h4>
-                  <span className="text-[9px] font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-2xs">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-2xs">
                     {b.status}
                   </span>
                 </div>
-                <p className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400">
+                <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
                   {b.role}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="p-3 bg-brand-50/60 dark:bg-brand-950/30 border border-brand-800/20 text-[11px] font-serif text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
+          <div className="p-3 bg-brand-50/60 dark:bg-brand-950/30 border border-brand-800/20 text-[11px] text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-brand-800 dark:text-brand-400 shrink-0" />
               {lang === 'ar' ? 'جميع المراسلات والتقارير متزامنة ومحمية بتشفير عالي الأمان.' : lang === 'zh' ? '所有公文电传与采编简报均受高等级主权加密保护并实时同步。' : lang === 'ckb' ? 'هەموو ڕاپۆرت و بروسکەکان بە تەواوی مشەفەرکراون و پارێزراون.' : 'All dispatches & intelligence reports are synchronized and cryptographically secured.'}
             </span>
             <Link 
               to={`/${lang}/about`} 
-              className="font-mono text-[10px] font-bold text-brand-800 dark:text-brand-400 hover:underline uppercase tracking-wider shrink-0 ml-2 rtl:ml-0 rtl:mr-2"
+              className="text-xs font-bold text-brand-800 dark:text-brand-400 hover:underline uppercase tracking-wider shrink-0 ml-2 rtl:ml-0 rtl:mr-2"
             >
               {lang === 'ar' ? 'عرض السجل' : lang === 'zh' ? '查阅机构章程' : lang === 'ckb' ? 'بینینی وردەکاری' : 'View Protocol'}
             </Link>

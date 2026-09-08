@@ -103,16 +103,16 @@ export function WomenPage() {
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-brand-800/5 pointer-events-none" />
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="bg-brand-800 text-white font-mono text-xs font-bold px-2.5 py-1 tracking-wider uppercase flex items-center gap-1.5">
+          <span className="bg-brand-800 text-white text-xs font-bold px-2.5 py-1 tracking-wider uppercase flex items-center gap-1.5">
             <Users className="w-4 h-4" />
             {currentLang === 'ar' ? 'بوابة المرأة والسياسات' : currentLang === 'zh' ? '中伊库女性与政策专区' : currentLang === 'ckb' ? 'دەروازەی مافی ئافرەتان' : 'Women & Policy Sovereign Portal'}
           </span>
-          <span className="text-gray-500 dark:text-neutral-400 font-mono text-xs">
+          <span className="text-gray-500 dark:text-neutral-400 text-xs">
             Beijing • Baghdad • Erbil Joint Forum
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-serif font-bold text-ink-900 dark:text-neutral-100 leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-bold text-brand-800 dark:text-neutral-100 leading-tight">
           {currentLang === 'ar'
             ? 'منصة تمكين المرأة: الشخصيات المرموقة، التشريعات، والإنجازات'
             : currentLang === 'zh'
@@ -136,7 +136,7 @@ export function WomenPage() {
         <div className="pt-2 flex flex-wrap gap-3">
           <button
             onClick={() => setSubmissionFormOpen(true)}
-            className="bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
+            className="bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <Send className="w-4 h-4" />
             <span>
@@ -146,7 +146,7 @@ export function WomenPage() {
 
           <button
             onClick={() => refetch()}
-            className="bg-white dark:bg-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-700 text-ink-900 dark:text-neutral-100 border border-brand-800 dark:border-neutral-600 px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 cursor-pointer"
+            className="bg-white dark:bg-neutral-800 hover:bg-gray-100 dark:hover:bg-neutral-700 text-ink-900 dark:text-neutral-100 border border-brand-800 dark:border-neutral-600 px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Refresh Portal Data</span>
@@ -173,7 +173,7 @@ export function WomenPage() {
               }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-mono text-ink-900 focus:outline-none focus:border-brand-800"
+              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs text-ink-900 focus:outline-none focus:border-brand-800"
             />
             {searchQuery && (
               <button
@@ -186,7 +186,7 @@ export function WomenPage() {
           </div>
 
           {/* Quick Stats Counter */}
-          <div className="flex items-center gap-2 bg-[#F4F4F0] px-3 py-2 border border-gray-200 text-xs font-mono shrink-0">
+          <div className="flex items-center gap-2 bg-[#F4F4F0] px-3 py-2 border border-gray-200 text-xs shrink-0">
             <span className="font-bold text-brand-800">{profiles.length}</span>
             <span className="text-gray-600">
               {currentLang === 'ar' ? 'سجلات متاحة' : currentLang === 'zh' ? '条专题记录' : currentLang === 'ckb' ? 'تۆماری ئامادەکراو' : 'records available'}
@@ -198,7 +198,7 @@ export function WomenPage() {
         <div className="space-y-3 pt-2 border-t border-gray-200">
           {/* Region selector */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-gray-500 uppercase w-20 flex items-center gap-1">
+            <span className="text-xs font-bold text-gray-500 uppercase w-20 flex items-center gap-1">
               <Globe2 className="w-3.5 h-3.5" /> Region:
             </span>
             {[
@@ -211,10 +211,10 @@ export function WomenPage() {
               <button
                 key={r.id}
                 onClick={() => setSelectedRegion(r.id)}
-                className={`px-3 py-1 text-xs font-mono transition-colors ${
+                className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-sm transition-all duration-200 cursor-pointer ${
                   selectedRegion === r.id
-                    ? 'bg-brand-800 text-white font-bold'
-                    : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200 border border-gray-300'
+                    ? 'bg-brand-800 text-white shadow-xs ring-1 ring-brand-800'
+                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-300 dark:border-neutral-700'
                 }`}
               >
                 {currentLang === 'ar' ? r.labelAr : currentLang === 'zh' ? r.labelZh : currentLang === 'ckb' ? r.labelCkb : r.labelEn}
@@ -224,8 +224,8 @@ export function WomenPage() {
 
           {/* Category selector */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-gray-500 uppercase w-20 flex items-center gap-1">
-              <Filter className="w-3.5 h-3.5" /> Focus:
+            <span className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase w-20 flex items-center gap-1">
+              <Filter className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" /> Focus:
             </span>
             {[
               { id: 'ALL', labelEn: 'All Categories', labelAr: 'جميع المحاور', labelZh: '全部分类', labelCkb: 'هەموو' },
@@ -237,10 +237,10 @@ export function WomenPage() {
               <button
                 key={c.id}
                 onClick={() => setSelectedCategory(c.id)}
-                className={`px-3 py-1 text-xs font-mono transition-colors ${
+                className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-sm transition-all duration-200 cursor-pointer ${
                   selectedCategory === c.id
-                    ? 'bg-brand-800 text-white font-bold'
-                    : 'bg-[#F4F4F0] text-gray-700 hover:bg-gray-200 border border-gray-300'
+                    ? 'bg-brand-800 text-white shadow-xs ring-1 ring-brand-800'
+                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-300 dark:border-neutral-700'
                 }`}
               >
                 {currentLang === 'ar' ? c.labelAr : currentLang === 'zh' ? c.labelZh : currentLang === 'ckb' ? c.labelCkb : c.labelEn}
@@ -254,20 +254,20 @@ export function WomenPage() {
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-72 bg-gray-200 animate-pulse border border-gray-300 rounded-xs" />
+            <div key={i} className="h-72 bg-gray-200 dark:bg-neutral-800 animate-pulse border border-gray-300 dark:border-neutral-700 rounded-lg" />
           ))}
         </div>
       ) : profiles.length === 0 ? (
-        <div className="bg-white border-2 border-brand-800 p-12 text-center space-y-4">
-          <p className="font-serif text-xl text-gray-800">
+        <div className="bg-white dark:bg-neutral-800 border-2 border-brand-800 p-12 text-center space-y-4 rounded-lg">
+          <p className="text-xl text-gray-800 dark:text-neutral-100">
             {currentLang === 'ar' ? 'لم نتمكن من العثور على سجلات مطابقة' : currentLang === 'zh' ? '未找到符合条件的记录' : currentLang === 'ckb' ? 'هیچ زانیارییەک نەدۆزرایەوە' : 'No matching records found'}
           </p>
-          <p className="text-gray-500 text-xs font-mono">
+          <p className="text-gray-500 dark:text-neutral-400 text-xs font-mono">
             Try adjusting your search criteria or reset filters to display all records.
           </p>
           <button
             onClick={() => { setSelectedRegion('ALL'); setSelectedCategory('ALL'); setSearchQuery(''); }}
-            className="inline-block bg-brand-800 text-white px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider hover:bg-brand-800 transition-colors"
+            className="inline-block bg-brand-800 text-white px-5 py-2 text-xs font-bold uppercase tracking-wider hover:bg-brand-700 transition-colors rounded-sm"
           >
             Reset All Filters
           </button>
@@ -278,11 +278,11 @@ export function WomenPage() {
             <div
               key={p.id}
               onClick={() => setActiveProfile(p)}
-              className="group bg-white border border-brand-800 hover:border-brand-800 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden"
+              className="group bg-white dark:bg-neutral-800/95 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-400 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden rounded-lg"
             >
               <div>
                 {/* Image and Overlay Header */}
-                <div className="relative h-52 w-full bg-gray-900 overflow-hidden">
+                <div className="relative h-52 w-full bg-neutral-900 overflow-hidden">
                   <img
                     src={p.imageUrl}
                     alt={getName(p)}
@@ -291,18 +291,18 @@ export function WomenPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
                   {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                    <span className="bg-brand-800 text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase border border-white/20">
+                  <div className="absolute top-3 start-3 flex flex-wrap gap-1.5 z-10">
+                    <span className="bg-black/75 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-sm border border-white/20">
                       {p.region}
                     </span>
-                    <span className="bg-brand-800 text-white text-[10px] font-mono px-2 py-0.5 font-bold uppercase">
+                    <span className="bg-brand-800 text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-sm border border-brand-700/50">
                       {p.category.replace('_', ' ')}
                     </span>
                   </div>
 
                   {/* Name overlay */}
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <h3 className="font-serif text-xl font-bold leading-tight group-hover:text-brand-300 transition-colors">
+                  <div className="absolute bottom-3 start-3 end-3 text-white">
+                    <h3 className="text-xl font-bold leading-tight group-hover:text-brand-300 transition-colors drop-shadow-sm">
                       {getName(p)}
                     </h3>
                   </div>
@@ -310,21 +310,21 @@ export function WomenPage() {
 
                 {/* Info Text */}
                 <div className="p-4 space-y-2">
-                  <p className="text-xs font-mono font-bold text-brand-800">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-brand-800 dark:text-brand-400">
                     {getTitle(p)}
                   </p>
-                  <p className="text-gray-600 text-xs line-clamp-3 leading-relaxed">
+                  <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm line-clamp-3 leading-relaxed">
                     {getSummary(p)}
                   </p>
                 </div>
               </div>
 
               {/* Bottom bar */}
-              <div className="p-4 pt-0 border-t border-gray-100 mt-3 flex items-center justify-between text-xs font-mono text-gray-500">
-                <span className="truncate max-w-[180px]">🏛️ {p.organization}</span>
-                <span className="text-brand-800 font-bold group-hover:underline flex items-center gap-1 shrink-0">
+              <div className="p-4 pt-2 border-t border-neutral-100 dark:border-neutral-700 mt-2 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
+                <span className="truncate max-w-[180px] font-medium">🏛️ {p.organization}</span>
+                <span className="text-brand-800 dark:text-brand-400 font-bold group-hover:underline flex items-center gap-1 shrink-0">
                   <span>View Details</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
+                  <ChevronRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </span>
               </div>
             </div>
@@ -357,23 +357,23 @@ export function WomenPage() {
                 />
                 <div className="space-y-2 flex-1">
                   <div className="flex flex-wrap gap-1.5">
-                    <span className="bg-brand-800 text-white text-[10px] font-mono font-bold px-2 py-0.5">
+                    <span className="bg-brand-800 text-white text-xs font-bold px-2 py-0.5">
                       {activeProfile.region}
                     </span>
-                    <span className="bg-brand-800 text-white text-[10px] font-mono font-bold px-2 py-0.5">
+                    <span className="bg-brand-800 text-white text-xs font-bold px-2 py-0.5">
                       {activeProfile.category.replace('_', ' ')}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-serif font-bold text-ink-900">
+                  <h3 className="text-2xl font-bold text-brand-800">
                     {getName(activeProfile)}
                   </h3>
 
-                  <p className="text-xs font-mono font-bold text-brand-800">
+                  <p className="text-xs font-bold text-brand-800">
                     {getTitle(activeProfile)}
                   </p>
 
-                  <p className="text-xs font-mono text-gray-500">
+                  <p className="text-xs text-gray-500">
                     🏛️ {activeProfile.organization}
                   </p>
                 </div>
@@ -381,7 +381,7 @@ export function WomenPage() {
 
               {/* Biography / Full Text */}
               <div className="space-y-3 border-t border-b border-gray-200 py-4 text-sm text-gray-800 leading-relaxed">
-                <h4 className="font-mono text-xs font-bold text-gray-900 uppercase tracking-wider">
+                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
                   Full Background & Executive Summary:
                 </h4>
                 <p className="whitespace-pre-line">{getBio(activeProfile)}</p>
@@ -398,7 +398,7 @@ export function WomenPage() {
                     href={activeProfile.publicationUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 bg-brand-800 text-white hover:bg-brand-800 px-3 py-1 font-mono text-xs font-bold transition-colors"
+                    className="inline-flex items-center gap-1 bg-brand-800 text-white hover:bg-brand-800 px-3 py-1 text-xs font-bold transition-colors"
                   >
                     <span>Access Link</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -428,7 +428,7 @@ export function WomenPage() {
               </button>
 
               <div className="space-y-1">
-                <h3 className="font-serif text-xl font-bold text-ink-900">
+                <h3 className="text-xl font-bold text-brand-800">
                   Submit Monograph or Female Leadership Nomination
                 </h3>
                 <p className="text-xs text-gray-600 font-mono">
@@ -437,7 +437,7 @@ export function WomenPage() {
               </div>
 
               {submissionSent ? (
-                <div className="bg-emerald-50 border border-emerald-500 p-4 text-emerald-800 text-xs font-mono flex items-center gap-2">
+                <div className="bg-emerald-50 border border-emerald-500 p-4 text-emerald-800 text-xs flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   <span>Submission received and logged with the Women Academic Board. Thank you!</span>
                 </div>
@@ -450,7 +450,7 @@ export function WomenPage() {
                       placeholder="Your Full Name *"
                       value={submission.name}
                       onChange={e => setSubmission({ ...submission, name: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                     />
                     <input
                       type="email"
@@ -458,7 +458,7 @@ export function WomenPage() {
                       placeholder="Email Address *"
                       value={submission.email}
                       onChange={e => setSubmission({ ...submission, email: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                     />
                   </div>
 
@@ -468,7 +468,7 @@ export function WomenPage() {
                     placeholder="Organization / University *"
                     value={submission.organization}
                     onChange={e => setSubmission({ ...submission, organization: e.target.value })}
-                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                   />
 
                   <input
@@ -477,13 +477,13 @@ export function WomenPage() {
                     placeholder="Paper Title / Nominee Name *"
                     value={submission.title}
                     onChange={e => setSubmission({ ...submission, title: e.target.value })}
-                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                   />
 
                   <select
                     value={submission.category}
                     onChange={e => setSubmission({ ...submission, category: e.target.value })}
-                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                   >
                     <option value="PROMINENT_FIGURE">Prominent Figure Nomination</option>
                     <option value="POLICY_RIGHTS">Legal Rights & Policy Paper</option>
@@ -497,12 +497,12 @@ export function WomenPage() {
                     placeholder="Abstract / Summary & Key Highlights *"
                     value={submission.abstract}
                     onChange={e => setSubmission({ ...submission, abstract: e.target.value })}
-                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-mono focus:outline-none focus:border-brand-800"
+                    className="w-full bg-[#F4F4F0] border border-gray-300 p-2 text-xs focus:outline-none focus:border-brand-800"
                   />
 
                   <button
                     type="submit"
-                    className="w-full bg-brand-800 hover:bg-brand-700 text-white py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                    className="w-full bg-brand-800 hover:bg-brand-700 text-white py-2.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Transmit Nomination to Board</span>

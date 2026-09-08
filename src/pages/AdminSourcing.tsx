@@ -83,15 +83,15 @@ export default function AdminSourcing() {
   return (
     <div className="p-6 h-full flex flex-col">
       <div className="mb-6">
-        <h1 className="text-2xl font-black tracking-tight text-ink-900 uppercase">Sourcing Inquiries</h1>
-        <p className="text-gray-500 font-mono text-xs mt-1">Manage global sourcing requests, factory audits, and logistics support tickets.</p>
+        <h1 className="text-2xl font-black tracking-tight text-brand-800 uppercase">Sourcing Inquiries</h1>
+        <p className="text-gray-500 font-medium text-xs mt-1">Manage global sourcing requests, factory audits, and logistics support tickets.</p>
       </div>
 
       <div className="bg-white border border-gray-200 flex-1 overflow-hidden shadow-sm flex flex-col">
         <div className="overflow-x-auto flex-1">
           <table className="w-full text-left border-collapse">
             <thead className="sticky top-0 bg-gray-50 z-10">
-              <tr className="border-b border-gray-200 text-[10px] uppercase font-black text-gray-500 tracking-wider">
+              <tr className="border-b border-gray-200 text-xs uppercase font-black text-gray-500 tracking-wider">
                 <th className="p-4">Ticket ID</th>
                 <th className="p-4">Client</th>
                 <th className="p-4">Company</th>
@@ -101,21 +101,21 @@ export default function AdminSourcing() {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-xs font-mono text-gray-700">
+            <tbody className="text-xs font-medium text-gray-700">
               {inquiries.map(inquiry => (
                 <tr key={inquiry.id} className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedInquiry(inquiry)}>
                   <td className="p-4 font-bold text-brand-800">{inquiry.ticketId}</td>
                   <td className="p-4">
                     <div className="font-bold text-ink-900">{inquiry.fullName}</div>
-                    <div className="text-[10px] text-gray-500 mt-0.5">{inquiry.email}</div>
+                    <div className="text-xs text-gray-500 mt-0.5">{inquiry.email}</div>
                   </td>
                   <td className="p-4">{inquiry.company}</td>
                   <td className="p-4">
-                    <span className="bg-gray-100 px-2 py-1 rounded text-[9px] font-bold uppercase tracking-widest">{getTypeLabel(inquiry.inquiryType)}</span>
+                    <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold uppercase tracking-widest">{getTypeLabel(inquiry.inquiryType)}</span>
                   </td>
                   <td className="p-4 text-gray-500">{new Date(inquiry.createdAt).toLocaleDateString()}</td>
                   <td className="p-4">
-                    <span className={`px-2 py-1 text-[9px] font-black tracking-widest uppercase border ${getStatusColor(inquiry.status)}`}>
+                    <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase border ${getStatusColor(inquiry.status)}`}>
                       {inquiry.status}
                     </span>
                   </td>
@@ -149,12 +149,12 @@ export default function AdminSourcing() {
               <div className="bg-gray-50 p-6 border-b border-gray-200 flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <h2 className="text-xl font-black font-serif text-ink-900">Inquiry Details</h2>
-                    <span className={`px-2 py-1 text-[9px] font-black tracking-widest uppercase border ${getStatusColor(selectedInquiry.status)}`}>
+                    <h2 className="text-xl font-black font-bold text-brand-800">Inquiry Details</h2>
+                    <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase border ${getStatusColor(selectedInquiry.status)}`}>
                       {selectedInquiry.status}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
+                  <div className="flex items-center gap-4 text-xs font-medium text-gray-500">
                     <span className="flex items-center gap-1"><Ticket size={12}/> {selectedInquiry.ticketId}</span>
                     <span className="flex items-center gap-1"><Calendar size={12}/> {new Date(selectedInquiry.createdAt).toLocaleString()}</span>
                   </div>
@@ -165,13 +165,13 @@ export default function AdminSourcing() {
               <div className="p-6 flex-1 overflow-y-auto">
                 <div className="grid grid-cols-2 gap-6 mb-8">
                   <div>
-                    <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">Client Information</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Client Information</h3>
                     <div className="font-bold text-sm text-ink-900 mb-1">{selectedInquiry.fullName}</div>
                     <div className="text-xs flex items-center gap-2 text-gray-600 mb-2"><Mail size={12}/> {selectedInquiry.email}</div>
                     <div className="text-xs flex items-center gap-2 text-gray-600"><Building2 size={12}/> {selectedInquiry.company}</div>
                   </div>
                   <div>
-                    <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">Request Parameters</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Request Parameters</h3>
                     <div className="space-y-2 text-xs">
                       <div className="flex justify-between border-b border-gray-100 pb-1">
                         <span className="text-gray-500">Type</span>
@@ -186,25 +186,25 @@ export default function AdminSourcing() {
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">Message</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Message</h3>
                   <div className="bg-gray-50 p-4 border border-gray-200 text-sm font-sans leading-relaxed text-gray-800 whitespace-pre-wrap">
                     {selectedInquiry.message}
                   </div>
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2">Internal Admin Notes</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Internal Admin Notes</h3>
                   <textarea 
                     className="w-full text-xs p-3 border border-gray-300 focus:border-brand-800 focus:outline-none min-h-[100px] resize-none"
                     placeholder="Add internal notes about this inquiry..."
                     defaultValue={selectedInquiry.adminNotes}
                     onBlur={(e) => updateAdminNotes(selectedInquiry.id, e.target.value)}
                   />
-                  <p className="text-[9px] text-gray-400 mt-1 italic">Notes are saved automatically on blur.</p>
+                  <p className="text-xs text-gray-400 mt-1 italic">Notes are saved automatically on blur.</p>
                 </div>
 
                 <div>
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Update Status</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Update Status</h3>
                   <div className="flex flex-wrap gap-2">
                     <button 
                       onClick={() => updateStatus(selectedInquiry.id, 'PENDING')}

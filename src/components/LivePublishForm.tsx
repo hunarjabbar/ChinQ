@@ -138,12 +138,12 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-black uppercase tracking-widest text-blue-600">English Component (LTR)</span>
-            <span className="text-xs font-mono text-gray-400">{contentEn.length} chars</span>
+            <span className="text-xs text-gray-400">{contentEn.length} chars</span>
           </div>
           <textarea
             value={contentEn}
             onChange={(e) => setContentEn(e.target.value)}
-            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 font-serif text-base leading-relaxed"
+            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-base leading-relaxed"
             placeholder="Type breaking English micro-update update block here..."
           />
         </div>
@@ -152,13 +152,13 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-black uppercase tracking-widest text-emerald-600">Arabic Component (RTL)</span>
-            <span className="text-xs font-mono text-gray-400">{contentAr.length} chars</span>
+            <span className="text-xs text-gray-400">{contentAr.length} chars</span>
           </div>
           <textarea
             value={contentAr}
             onChange={(e) => setContentAr(e.target.value)}
             dir="rtl"
-            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 font-serif text-lg leading-relaxed"
+            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500 text-lg leading-relaxed"
             placeholder="اكتب التحديث المباشر باللغة العربية هنا..."
           />
         </div>
@@ -167,13 +167,13 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-black uppercase tracking-widest text-orange-600">Kurdish (RTL)</span>
-            <span className="text-xs font-mono text-gray-400">{contentCk.length} chars</span>
+            <span className="text-xs text-gray-400">{contentCk.length} chars</span>
           </div>
           <textarea
             value={contentCk}
             onChange={(e) => setContentCk(e.target.value)}
             dir="rtl"
-            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-orange-500 font-serif text-lg leading-relaxed"
+            className="w-full h-64 p-4 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-orange-500 text-lg leading-relaxed"
             placeholder="نوێکردنەوەکە لێرە بنووسە..."
           />
         </div>
@@ -182,7 +182,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-black uppercase tracking-widest text-purple-600">Chinese Component (LTR)</span>
-            <span className="text-xs font-mono text-gray-400">{contentZh.length} chars</span>
+            <span className="text-xs text-gray-400">{contentZh.length} chars</span>
           </div>
           <textarea
             value={contentZh}
@@ -206,7 +206,7 @@ export function LivePublishForm({ events }: { events: LiveEventSelectOption[] })
 
       {/* Persistent Bottom Action Drawer */}
       <div className="bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-between items-center">
-        <span className="text-xs font-mono text-gray-400 hidden sm:inline-block">
+        <span className="text-xs text-gray-400 hidden sm:inline-block">
           💡 Hotkey Shortcut Trigger: <kbd className="bg-white border border-gray-300 px-1.5 py-0.5 rounded shadow-2xs font-sans text-xs font-bold text-gray-600">Ctrl</kbd> + <kbd className="bg-white border border-gray-300 px-1.5 py-0.5 rounded shadow-2xs font-sans text-xs font-bold text-gray-600">Enter</kbd>
         </span>
         

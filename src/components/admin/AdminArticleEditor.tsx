@@ -92,26 +92,26 @@ export function AdminArticleEditor() {
         <div className="bg-white border border-neutral-200 rounded-xl p-8 shadow-sm space-y-6">
           <div className="flex items-center gap-2 mb-2">
             <SettingsIcon className="text-brand-800" size={18} />
-            <h3 className="text-sm font-black uppercase tracking-widest text-ink-900">Publication Parameters</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest text-brand-900">Publication Parameters</h3>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Asset Slug (URL Identity)</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Asset Slug (URL Identity)</label>
               <div className="relative">
                 <Globe className="absolute left-3 top-3 text-neutral-400" size={14} />
                 <input 
                   type="text" 
                   required 
                   placeholder="e.g. basra-digital-economy-expansion"
-                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 pl-9 pr-4 text-sm font-mono focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
+                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 pl-9 pr-4 text-sm font-medium focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
                   value={formData.slug} 
                   onChange={e => setFormData({...formData, slug: e.target.value})} 
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Intel Classification</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Intel Classification</label>
               <select 
                 required 
                 className="w-full border border-neutral-200 bg-neutral-50 py-2.5 px-4 text-sm font-bold focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
@@ -128,7 +128,7 @@ export function AdminArticleEditor() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Hero Visualization (Unsplash/Static URL)</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Hero Visualization (Unsplash/Static URL)</label>
               <div className="relative">
                 <ImageIcon className="absolute left-3 top-3 text-neutral-400" size={14} />
                 <input 
@@ -141,12 +141,12 @@ export function AdminArticleEditor() {
               </div>
             </div>
             <div>
-              <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Publication Status</label>
+              <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Publication Status</label>
               <div className="flex bg-neutral-100 p-1 rounded-lg">
                 <button 
                   type="button"
                   onClick={() => setStatus('PUBLISHED')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${status === 'PUBLISHED' ? 'bg-brand-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${status === 'PUBLISHED' ? 'bg-brand-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                 >
                   <Unlock size={12} />
                   Published
@@ -154,7 +154,7 @@ export function AdminArticleEditor() {
                 <button 
                   type="button"
                   onClick={() => setStatus('DRAFT')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${status === 'DRAFT' ? 'bg-amber-600 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${status === 'DRAFT' ? 'bg-amber-600 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                 >
                   <Lock size={12} />
                   Draft
@@ -175,29 +175,29 @@ export function AdminArticleEditor() {
             <div key={lang.id} className="bg-white border border-neutral-200 rounded-xl overflow-hidden shadow-sm" dir={isRtl(lang.id) ? 'rtl' : 'ltr'}>
               <div className="bg-neutral-50 border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="bg-brand-800 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">{lang.id}</span>
-                  <h4 className="text-xs font-black uppercase tracking-widest text-ink-900">{lang.label}</h4>
+                  <span className="bg-brand-800 text-white text-xs font-black px-2 py-0.5 rounded uppercase tracking-widest">{lang.id}</span>
+                  <h4 className="text-xs font-black uppercase tracking-widest text-brand-900">{lang.label}</h4>
                 </div>
                 <div className="flex items-center gap-2">
-                   <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+                   <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest font-medium">
                     {formData[lang.content as keyof typeof formData].length} Chars
                    </span>
                 </div>
               </div>
               <div className="p-8 space-y-6">
                 <div>
-                  <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Sovereign Headline</label>
+                  <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Sovereign Headline</label>
                   <input 
                     type="text" 
                     placeholder={isRtl(lang.id) ? 'أدخل العنوان هنا...' : 'Enter authoritative headline...'}
                     required={lang.id === 'en'}
-                    className="w-full border border-neutral-200 bg-white py-3 px-4 text-lg font-serif font-black focus:outline-none focus:border-brand-800 transition-all rounded-lg" 
+                    className="w-full border border-neutral-200 bg-white py-3 px-4 text-lg font-bold font-black focus:outline-none focus:border-brand-800 transition-all rounded-lg" 
                     value={formData[lang.title as keyof typeof formData]} 
                     onChange={e => setFormData({...formData, [lang.title]: e.target.value})} 
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Executive Summary (Excerpt)</label>
+                  <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Executive Summary (Excerpt)</label>
                   <textarea 
                     placeholder={isRtl(lang.id) ? 'ملخص تنفيذي قصير...' : 'Concise executive summary for global feeds...'}
                     required={lang.id === 'en'}
@@ -207,7 +207,7 @@ export function AdminArticleEditor() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1.5">Full Intel Dispatch (Content)</label>
+                  <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Full Intel Dispatch (Content)</label>
                   <textarea 
                     placeholder={isRtl(lang.id) ? 'نص المقال الكامل والمفصل...' : 'Full detailed dispatch including project metrics and analysis...'}
                     required={lang.id === 'en'}
@@ -227,11 +227,11 @@ export function AdminArticleEditor() {
             <div className="flex items-center gap-6 px-4">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Editor Status: Active</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">Editor Status: Active</span>
               </div>
               <button 
                 type="button"
-                className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Eye size={14} />
                 Preview Dispatch

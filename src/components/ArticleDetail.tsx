@@ -77,16 +77,16 @@ export function ArticleDetail({ article, lang }: ArticleDetailProps) {
       {/* Article Content */}
       <div className="p-6 md:p-12">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-gray-100 pb-6">
-          <span className="text-[10px] font-black uppercase text-brand-800 tracking-widest bg-brand-50 px-2 py-1 rounded w-fit">
+          <span className="text-xs font-black uppercase text-brand-800 tracking-widest bg-brand-50 px-2 py-1 rounded w-fit">
             {getCategoryName(article.category)}
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-serif font-black leading-tight text-center text-ink-900 tracking-tight mb-8">
+        <h1 className="text-3xl md:text-5xl font-black leading-tight text-center text-brand-900 tracking-tight mb-8">
           {tr?.title}
         </h1>
 
-        <div className="flex justify-center items-center gap-3 text-[10px] font-bold uppercase mb-12 opacity-60 text-ink-900 border-y border-double border-brand-800/20 py-3">
+        <div className="flex justify-center items-center gap-3 text-xs font-bold uppercase mb-12 opacity-60 text-brand-900 border-y border-double border-brand-800/20 py-3">
           <span>By {(article as any).author?.name || 'Staff Writer'}</span>
           <span>•</span>
           <span>
@@ -109,7 +109,7 @@ export function ArticleDetail({ article, lang }: ArticleDetailProps) {
         
         {headings.length > 0 && (
           <div className="mb-10 bg-paper-50 border border-gray-200 rounded-lg p-6 max-w-2xl mx-auto shadow-sm">
-            <h3 className="flex items-center gap-2 text-lg font-bold font-serif mb-4 text-ink-900 border-b border-gray-200 pb-2">
+            <h3 className="flex items-center gap-2 text-lg font-bold mb-4 text-brand-900 border-b border-gray-200 pb-2">
               <ListCollapse className="w-5 h-5 text-brand-800" />
               {lang === 'ar' ? 'محتويات المقال' : lang === 'zh' ? '目录' : lang === 'ckb' ? 'پێڕست' : 'Table of Contents'}
             </h3>
@@ -134,7 +134,7 @@ export function ArticleDetail({ article, lang }: ArticleDetailProps) {
 
         {/* Editorial typography body */}
         <div 
-          className="prose prose-neutral max-w-none font-serif text-lg leading-relaxed text-gray-800 space-y-6 whitespace-pre-wrap md:px-4"
+          className="prose prose-neutral max-w-none text-lg leading-relaxed text-gray-800 space-y-6 whitespace-pre-wrap md:px-4"
           dir={lang === 'ar' || lang === 'ckb' ? 'rtl' : 'ltr'}
         >
           {tr?.content ? (

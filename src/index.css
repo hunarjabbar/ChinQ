@@ -34,8 +34,8 @@
   --color-brand-600: #ff0000;
   --color-brand-700: #e60000;
   --color-brand-800: #cc0000;
-  --color-brand-900: #a30000;
-  --color-brand-950: #7a0000;
+  --color-brand-900: #cc0000;
+  --color-brand-950: #aa0000;
 
   --color-ink-900: #0f172a;
   --color-paper-50: #ffffff;
@@ -70,13 +70,13 @@
 
   @keyframes liquid-glass-pulse {
     0%, 100% {
-      box-shadow: 0 0 12px rgba(153, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
-      background-color: rgba(153, 0, 0, 0.85);
+      box-shadow: 0 0 12px rgba(204, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+      background-color: rgba(204, 0, 0, 0.85);
       border-color: rgba(255, 255, 255, 0.2);
     }
     50% {
-      box-shadow: 0 0 24px rgba(153, 0, 0, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.65);
-      background-color: rgba(210, 15, 15, 0.95);
+      box-shadow: 0 0 24px rgba(204, 0, 0, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.65);
+      background-color: rgba(220, 20, 20, 0.95);
       border-color: rgba(255, 255, 255, 0.5);
     }
   }

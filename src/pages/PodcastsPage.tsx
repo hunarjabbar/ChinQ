@@ -88,7 +88,7 @@ export default function PodcastsPage() {
             <Mic className="h-4 w-4" />
             <span className="font-bold text-xs uppercase tracking-wider">Official Podcast Network</span>
           </motion.div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-ink-900 dark:text-neutral-100 mb-3 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-900 dark:text-neutral-100 mb-3 leading-tight">
             {t.title[language]}
           </h1>
           <p className="text-sm sm:text-base text-gray-600 dark:text-neutral-400">
@@ -105,7 +105,7 @@ export default function PodcastsPage() {
               placeholder={t.search[language]}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-ink-900 dark:text-neutral-100 rounded-xs focus:ring-1 focus:ring-brand-800 focus:border-brand-800 text-xs outline-none transition-all"
+              className="w-full pl-9 pr-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-brand-900 dark:text-neutral-100 rounded-xs focus:ring-1 focus:ring-brand-800 focus:border-brand-800 text-xs outline-none transition-all"
             />
           </div>
           
@@ -159,13 +159,13 @@ export default function PodcastsPage() {
                       <PlayCircle className="h-7 w-7" />
                     </button>
                   </div>
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-xs text-white text-[10px] px-2.5 py-0.5 rounded-xs font-mono font-bold uppercase">
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-xs text-white text-xs px-2.5 py-0.5 rounded-xs font-bold uppercase">
                     {podcast.category}
                   </div>
                 </div>
                 
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-lg font-serif font-black text-ink-900 dark:text-neutral-100 mb-2 line-clamp-2">
+                  <h3 className="text-lg font-black text-brand-900 dark:text-neutral-100 mb-2 line-clamp-2">
                     {getLocalized(podcast, 'title')}
                   </h3>
                   <p className="text-neutral-600 dark:text-neutral-400 text-xs mb-4 line-clamp-3 leading-relaxed">
@@ -180,7 +180,7 @@ export default function PodcastsPage() {
                         </div>
                         <div>
                           <p className="text-xs font-bold text-neutral-900 dark:text-neutral-100">{podcast.guestName}</p>
-                          <p className="text-[10px] text-neutral-500 dark:text-neutral-400">{podcast.guestRole}</p>
+                          <p className="text-xs text-neutral-500 dark:text-neutral-400">{podcast.guestRole}</p>
                         </div>
                       </div>
                     )}
@@ -217,7 +217,7 @@ export default function PodcastsPage() {
         )}
         
         {!loading && filteredPodcasts.length === 0 && (
-          <div className="text-center py-16 text-neutral-500 dark:text-neutral-400 font-serif italic text-sm">
+          <div className="text-center py-16 text-neutral-500 dark:text-neutral-400 italic text-sm">
             No podcasts found matching your criteria.
           </div>
         )}

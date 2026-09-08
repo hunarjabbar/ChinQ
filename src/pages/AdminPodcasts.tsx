@@ -83,7 +83,7 @@ export default function AdminPodcasts() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-serif font-semibold text-neutral-900 flex items-center">
+        <h2 className="text-2xl font-bold font-semibold text-neutral-900 flex items-center">
           <Mic className="h-6 w-6 mr-2" />
           Podcast Management
         </h2>

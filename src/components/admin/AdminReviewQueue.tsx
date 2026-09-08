@@ -44,7 +44,7 @@ export function AdminReviewQueue() {
 
   if (isLoading) {
     return (
-      <div className="py-20 text-center font-mono text-xs text-neutral-400 uppercase tracking-widest animate-pulse">
+      <div className="py-20 text-center font-medium text-xs text-neutral-400 uppercase tracking-widest animate-pulse">
         Synchronizing review queue...
       </div>
     );
@@ -54,12 +54,12 @@ export function AdminReviewQueue() {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex items-center justify-between border-b border-neutral-200 pb-6">
         <div>
-          <h2 className="text-2xl font-serif font-black text-ink-900 tracking-tight">Editorial Review Queue</h2>
-          <p className="text-xs text-neutral-500 font-mono mt-1">
+          <h2 className="text-2xl font-bold font-black text-brand-900 tracking-tight">Editorial Review Queue</h2>
+          <p className="text-xs text-neutral-500 font-medium mt-1">
             Articles submitted by contributors waiting for executive approval and public publication.
           </p>
         </div>
-        <div className="bg-brand-50 border border-brand-200 px-4 py-2 rounded-xl text-brand-900 text-xs font-mono font-bold flex items-center gap-2">
+        <div className="bg-brand-50 border border-brand-200 px-4 py-2 rounded-xl text-brand-900 text-xs font-medium font-bold flex items-center gap-2">
           <Clock size={14} className="text-brand-700 animate-spin" />
           {pendingArticles.length} Pending Submission{pendingArticles.length === 1 ? '' : 's'}
         </div>
@@ -70,8 +70,8 @@ export function AdminReviewQueue() {
           <div className="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center mx-auto text-neutral-400">
             <CheckCircle2 size={24} />
           </div>
-          <h3 className="text-sm font-bold uppercase tracking-widest text-ink-900">Queue is Clear</h3>
-          <p className="text-xs text-neutral-500 max-w-sm mx-auto font-serif">
+          <h3 className="text-sm font-bold uppercase tracking-widest text-brand-900">Queue is Clear</h3>
+          <p className="text-xs text-neutral-500 max-w-sm mx-auto font-bold">
             All submitted articles have been reviewed and processed. New submissions from editorial contributors will appear here automatically.
           </p>
         </div>
@@ -95,26 +95,26 @@ export function AdminReviewQueue() {
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <div className="w-20 h-20 bg-neutral-100 rounded-lg flex items-center justify-center text-neutral-400 shrink-0 font-mono text-[10px]">
+                    <div className="w-20 h-20 bg-neutral-100 rounded-lg flex items-center justify-center text-neutral-400 shrink-0 font-medium text-xs">
                       NO IMAGE
                     </div>
                   )}
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="bg-amber-100 text-amber-900 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      <span className="bg-amber-100 text-amber-900 text-xs font-medium font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                         Pending Review
                       </span>
-                      <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">
+                      <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest">
                         Category: {article.category?.name || 'General'}
                       </span>
                     </div>
-                    <h4 className="text-base font-serif font-bold text-ink-900 leading-snug">
+                    <h4 className="text-base font-bold font-bold text-brand-900 leading-snug">
                       {titleEn}
                     </h4>
-                    <p className="text-xs text-neutral-500 line-clamp-2 font-serif">
+                    <p className="text-xs text-neutral-500 line-clamp-2 font-bold">
                       {excerptEn}
                     </p>
-                    <div className="text-[10px] font-mono text-neutral-400">
+                    <div className="text-xs font-medium text-neutral-400">
                       Author: {article.author?.email || 'Editorial Staff'} • Submitted: {new Date(article.createdAt).toLocaleDateString()}
                     </div>
                   </div>

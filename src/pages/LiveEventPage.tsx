@@ -63,7 +63,7 @@ export function LiveEventPage() {
             {event.isActive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>}
             {lang === 'ar' ? 'تغطية مباشرة' : lang === 'ckb' ? 'ڕووماڵی ڕاستەوخۆ' : lang === 'zh' ? '现场直播' : 'Live Coverage'}
           </span>
-          <h1 className="text-3xl sm:text-4xl font-serif font-black leading-tight mb-3">
+          <h1 className="text-3xl sm:text-4xl font-black leading-tight mb-3">
             {getTitle()}
           </h1>
           <p className="text-sm sm:text-base text-gray-300 max-w-3xl leading-relaxed">
@@ -98,7 +98,7 @@ export function LiveEventPage() {
             
             {event.isActive && event.videoUrl && (
               <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                <div className="bg-brand-800 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-2 shadow-xs">
+                <div className="bg-brand-800 text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-2 shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                   LIVE
                 </div>
@@ -112,24 +112,24 @@ export function LiveEventPage() {
         {/* Optional Sidebar for Context */}
         <div className="hidden lg:block w-72 lg:w-80 border-s border-gray-200 dark:border-neutral-800 ps-6">
           <div className="bg-gray-50 dark:bg-neutral-800/80 p-5 rounded-xs border border-gray-200 dark:border-neutral-700 mb-6">
-            <h3 className="font-bold uppercase tracking-wider text-xs text-ink-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
+            <h3 className="font-bold uppercase tracking-wider text-xs text-brand-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
               Broadcast Info
             </h3>
             <div className="space-y-3">
               <div>
-                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Region</span>
+                <span className="block text-xs text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Region</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-white dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 text-xs font-bold text-gray-700 dark:text-neutral-200">
                   {event.region}
                 </span>
               </div>
               <div>
-                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Category</span>
+                <span className="block text-xs text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Category</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-white dark:bg-neutral-700 border border-gray-200 dark:border-neutral-600 text-xs font-bold text-gray-700 dark:text-neutral-200">
                   {event.category}
                 </span>
               </div>
               <div>
-                <span className="block text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Status</span>
+                <span className="block text-xs text-gray-500 dark:text-neutral-400 font-bold uppercase tracking-widest mb-1">Status</span>
                 <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs border text-xs font-bold ${
                   event.isActive ? 'bg-brand-50 dark:bg-brand-900/30 border-brand-200 dark:border-brand-700 text-brand-700 dark:text-brand-300' : 'bg-gray-100 dark:bg-neutral-700 border-gray-200 dark:border-neutral-600 text-gray-700 dark:text-neutral-300'
                 }`}>
@@ -140,7 +140,7 @@ export function LiveEventPage() {
             </div>
           </div>
 
-          <h3 className="font-bold uppercase tracking-wider text-xs text-ink-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
+          <h3 className="font-bold uppercase tracking-wider text-xs text-brand-900 dark:text-neutral-100 mb-3 border-b border-gray-200 dark:border-neutral-700 pb-2">
             {lang === 'ar' ? 'سياق' : lang === 'ckb' ? 'پاشخان' : lang === 'zh' ? '背景' : 'Context'}
           </h3>
           <p className="text-xs text-gray-600 dark:text-neutral-400 leading-relaxed bg-neutral-50 dark:bg-neutral-800/60 p-4 rounded-xs border border-neutral-200 dark:border-neutral-700">

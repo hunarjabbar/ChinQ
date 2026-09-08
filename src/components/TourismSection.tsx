@@ -65,7 +65,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
       {/* Top Banner & Title */}
       <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-brand-800 pb-6 mb-6 gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white text-xs font-mono font-bold uppercase tracking-wider rounded-sm mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white text-xs font-bold uppercase tracking-wider rounded-sm mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>
               {currentLang === 'ar' ? 'جسر السياحة والثقافة الثنائي' :
@@ -74,7 +74,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                'CHINA - IRAQ - KURDISTAN TOURISM HUB'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-ink-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-900 dark:text-white tracking-tight">
             {currentLang === 'ar' ? 'استكشف وجهات التراث والجمال بين الصين والعراق وكردستان' :
              currentLang === 'zh' ? '探索中国、伊拉克与库尔德斯坦的千年文明与绝美风光' :
              currentLang === 'ckb' ? 'گەشت بکە بۆ شوێنەوار و دیمەنە سەرنجڕاکێشەکانی چین و عێراق و کوردستان' :
@@ -90,7 +90,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
 
         <Link
           to={`/${currentLang}/tourism`}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-bold bg-brand-800 text-white hover:bg-brand-900 px-5 py-2.5 rounded-lg transition-all shadow-sm shrink-0 uppercase tracking-wider"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bg-brand-800 text-white hover:bg-brand-900 px-5 py-2.5 rounded-lg transition-all shadow-sm shrink-0 uppercase tracking-wider"
         >
           <span>
             {currentLang === 'ar' ? 'بوابة السياحة الكاملة ←' :
@@ -104,7 +104,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
       {/* Region Filter Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-neutral-50 dark:bg-neutral-800/60 p-3 border border-gray-200 dark:border-neutral-700 rounded-xs">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-mono font-bold text-gray-500 dark:text-neutral-400 uppercase mr-1 flex items-center gap-1">
+          <span className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase mr-1 flex items-center gap-1">
             <Globe2 className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" /> Region:
           </span>
           {[
@@ -116,7 +116,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
             <button
               key={r.id}
               onClick={() => setSelectedRegion(r.id)}
-              className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 text-xs font-bold uppercase rounded-xs transition-colors cursor-pointer ${
                 selectedRegion === r.id
                   ? 'bg-brand-800 text-white shadow-xs'
                   : 'bg-white dark:bg-neutral-700 text-gray-700 dark:text-neutral-200 border border-gray-300 dark:border-neutral-600 hover:border-black dark:hover:border-white'
@@ -128,7 +128,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
         </div>
 
         {/* Quick Travel Advisory Notice */}
-        <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-xs border border-emerald-200 dark:border-emerald-800">
+        <div className="flex items-center gap-2 text-[11px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-xs border border-emerald-200 dark:border-emerald-800">
           <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           <span>Visa on Arrival & E-Visa Enabled</span>
         </div>
@@ -143,7 +143,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
         </div>
       ) : filteredSpots.length === 0 ? (
         <div className="p-10 text-center bg-neutral-50 dark:bg-neutral-800 border border-dashed border-gray-300 dark:border-neutral-700 rounded-xs">
-          <p className="text-xs font-mono text-gray-500 dark:text-neutral-400">No tourism destinations found for selected filter.</p>
+          <p className="text-xs text-gray-500 dark:text-neutral-400">No tourism destinations found for selected filter.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -164,7 +164,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
-                  <div className="absolute top-2 left-2 bg-brand-800 text-white text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-xs flex items-center gap-1 shadow-xs">
+                  <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-bold uppercase px-2 py-0.5 rounded-xs flex items-center gap-1 shadow-xs">
                     <MapPin className="w-2.5 h-2.5 text-brand-300" />
                     <span>{spot.city}, {spot.region}</span>
                   </div>
@@ -172,10 +172,10 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
 
                 {/* Info */}
                 <div>
-                  <div className="text-[10px] font-mono font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider mb-1">
+                  <div className="text-xs font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider mb-1">
                     {spot.category.replace('_', ' ')}
                   </div>
-                  <h3 className="text-base font-serif font-bold text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 line-clamp-1 leading-snug transition-colors">
+                  <h3 className="text-base font-bold text-brand-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 line-clamp-1 leading-snug transition-colors">
                     {getSpotTitle(spot)}
                   </h3>
                   <p className="text-xs font-sans text-gray-600 dark:text-neutral-300 line-clamp-2 mt-1.5 leading-relaxed">
@@ -221,13 +221,13 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
             >
               {/* Header toolbar */}
               <div className="px-6 py-4 bg-brand-900 text-white border-b border-brand-800 flex justify-between items-center shrink-0 sticky top-0 z-20 shadow-md">
-                <div className="font-mono text-xs font-bold uppercase tracking-widest text-brand-200 flex items-center gap-2">
+                <div className="text-xs font-bold uppercase tracking-widest text-brand-200 flex items-center gap-2">
                   <Compass className="w-4 h-4" />
                   {currentLang === 'ar' ? 'بوابة السياحة الثنائية' : currentLang === 'zh' ? '双边旅游门户' : currentLang === 'ckb' ? 'دەروازەی گەشتیاری دووقۆڵی' : 'Bilateral Tourism Portal'}
                 </div>
                 <button 
                   onClick={() => setActiveSpot(null)}
-                  className="text-white hover:text-brand-200 font-mono font-bold text-xs uppercase tracking-widest bg-brand-800 hover:bg-brand-950 px-4 py-2 rounded-lg transition-colors cursor-pointer border border-brand-700 shadow-sm"
+                  className="text-white hover:text-brand-200 font-bold text-xs uppercase tracking-widest bg-brand-800 hover:bg-brand-950 px-4 py-2 rounded-lg transition-colors cursor-pointer border border-brand-700 shadow-sm"
                 >
                   {currentLang === 'ar' ? '✕ إغلاق النافذة' : currentLang === 'ckb' ? '✕ داخستن' : currentLang === 'zh' ? '✕ 关闭窗口' : '✕ Close Portal'}
                 </button>
@@ -242,16 +242,16 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                       alt={getSpotTitle(activeSpot)}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-xs">
+                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-black uppercase px-2.5 py-0.5 rounded-xs">
                       {activeSpot.region}
                     </div>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-serif font-black text-ink-900 dark:text-neutral-100 leading-tight">
+                    <h2 className="text-2xl font-black text-brand-900 dark:text-neutral-100 leading-tight">
                       {getSpotTitle(activeSpot)}
                     </h2>
-                    <p className="text-xs font-mono font-bold text-brand-800 dark:text-brand-400 mt-2 flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-brand-800 dark:text-brand-400 mt-2 flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5" />
                       {activeSpot.city}, {activeSpot.region} • {activeSpot.category.replace('_', ' ')}
                     </p>
@@ -282,11 +282,11 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                 {/* Tour / Travel Inquiry Form */}
                 <div className="bg-neutral-50 dark:bg-neutral-800/30 p-6 rounded-sm border border-gray-200 dark:border-neutral-700 flex flex-col justify-between h-fit">
                   <div>
-                    <div className="flex items-center gap-1.5 text-xs font-mono font-black uppercase text-brand-800 dark:text-brand-400 mb-2">
+                    <div className="flex items-center gap-1.5 text-xs font-black uppercase text-brand-800 dark:text-brand-400 mb-2">
                       <Sparkles className="w-4 h-4" />
                       <span>Bilateral Tour & Visa Advisory</span>
                     </div>
-                    <h3 className="text-xl font-serif font-bold text-ink-900 dark:text-neutral-100 mb-2">
+                    <h3 className="text-xl font-bold text-brand-900 dark:text-neutral-100 mb-2">
                       Plan Your Trip to {activeSpot.city}
                     </h3>
                     <p className="text-xs font-sans text-gray-600 dark:text-neutral-400 mb-6 leading-relaxed">
@@ -296,13 +296,13 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                     {inquirySent ? (
                       <div className="p-6 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xs text-center space-y-2">
                         <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                        <h4 className="font-mono font-bold text-sm">Inquiry Received!</h4>
+                        <h4 className="font-bold text-sm">Inquiry Received!</h4>
                         <p className="text-xs font-sans">
                           Our bilateral travel officer will contact you shortly with custom itinerary details and visa procedures.
                         </p>
                       </div>
                     ) : (
-                      <form onSubmit={handleInquirySubmit} className="space-y-3 font-mono text-xs">
+                      <form onSubmit={handleInquirySubmit} className="space-y-3 text-xs">
                         <div>
                           <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Full Name</label>
                           <input
@@ -311,7 +311,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                             placeholder="e.g. Dr. Zhang Wei / Azad Ahmed"
                             value={inquiryForm.name}
                             onChange={e => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-ink-900 dark:text-neutral-100"
+                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-brand-900 dark:text-neutral-100"
                           />
                         </div>
 
@@ -323,7 +323,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                             placeholder="name@agency.com"
                             value={inquiryForm.email}
                             onChange={e => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-ink-900 dark:text-neutral-100"
+                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-brand-900 dark:text-neutral-100"
                           />
                         </div>
 
@@ -335,7 +335,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                               required
                               value={inquiryForm.travelDate}
                               onChange={e => setInquiryForm({ ...inquiryForm, travelDate: e.target.value })}
-                              className="w-full px-2 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-ink-900 dark:text-neutral-100 [color-scheme:light] dark:[color-scheme:dark]"
+                              className="w-full px-2 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-brand-900 dark:text-neutral-100 [color-scheme:light] dark:[color-scheme:dark]"
                             />
                           </div>
                           <div>
@@ -343,7 +343,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                             <select
                               value={inquiryForm.travelers}
                               onChange={e => setInquiryForm({ ...inquiryForm, travelers: e.target.value })}
-                              className="w-full px-2 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-ink-900 dark:text-neutral-100"
+                              className="w-full px-2 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-brand-900 dark:text-neutral-100"
                             >
                               <option value="1">1 Person</option>
                               <option value="2-5">2 - 5 Persons</option>
@@ -360,7 +360,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                             placeholder="Specific requests (translator, visa assistance, hotel rating)..."
                             value={inquiryForm.notes}
                             onChange={e => setInquiryForm({ ...inquiryForm, notes: e.target.value })}
-                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-ink-900 dark:text-neutral-100"
+                            className="w-full px-3 py-2 bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 rounded-xs focus:outline-none focus:border-brand-800 text-brand-900 dark:text-neutral-100"
                           />
                         </div>
 
@@ -375,7 +375,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                     )}
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-gray-200 text-[10px] font-mono text-gray-500 text-center">
+                  <div className="mt-4 pt-3 border-t border-gray-200 text-xs text-gray-500 text-center">
                     Official Bilateral Tourism & Cultural Exchange Service
                   </div>
                 </div>

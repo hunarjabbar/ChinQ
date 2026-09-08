@@ -165,17 +165,17 @@ export function AdminBrics() {
       <div className="space-y-6 text-start">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-serif font-black text-ink-900 uppercase tracking-widest flex items-center gap-3">
+            <h1 className="text-2xl font-bold font-black text-brand-800 uppercase tracking-widest flex items-center gap-3">
               <Globe2 className="w-6 h-6 text-brand-800" />
               BRICS+ Observatory Management
             </h1>
-            <p className="text-xs text-gray-500 font-mono mt-2 uppercase tracking-wider">
+            <p className="text-xs text-gray-500 font-medium mt-2 uppercase tracking-wider">
               Control the narrative and geopolitical analysis for BRICS+ Iraq integration.
             </p>
           </div>
           <button
             onClick={() => { resetForm(); setIsModalOpen(true); }}
-            className="inline-flex items-center gap-2 bg-brand-800 text-white px-5 py-2.5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-brand-900 transition-all shadow-md active:scale-95"
+            className="inline-flex items-center gap-2 bg-brand-800 text-white px-5 py-2.5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-brand-700 transition-all shadow-md active:scale-95"
           >
             <Plus size={16} /> New BRICS Topic
           </button>
@@ -190,14 +190,14 @@ export function AdminBrics() {
                 placeholder="Search topics by title or category..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-mono"
+                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
               />
             </div>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left font-sans text-sm">
-              <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-mono">
+              <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-medium">
                 <tr>
                   <th className="px-6 py-4 font-bold border-b border-neutral-200">Topic</th>
                   <th className="px-6 py-4 font-bold border-b border-neutral-200">Category</th>
@@ -209,13 +209,13 @@ export function AdminBrics() {
               <tbody className="divide-y divide-gray-100">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400 font-mono text-xs italic">
+                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400 font-medium text-xs italic">
                       Synchronizing with global BRICS ledger...
                     </td>
                   </tr>
                 ) : filteredTopics.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400 font-mono text-xs">
+                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400 font-medium text-xs">
                       No topics found in observatory.
                     </td>
                   </tr>
@@ -231,25 +231,25 @@ export function AdminBrics() {
                           />
                           <div>
                             <div className="font-bold text-ink-900 leading-tight">{topic.titleEn}</div>
-                            <div className="text-[10px] text-gray-400 font-mono mt-0.5">{topic.slug}</div>
+                            <div className="text-xs text-gray-400 font-medium mt-0.5">{topic.slug}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 bg-brand-50 text-brand-800 border border-brand-200 text-[10px] font-black uppercase tracking-widest rounded-sm font-mono">
+                        <span className="px-2 py-0.5 bg-brand-50 text-brand-800 border border-brand-200 text-xs font-black uppercase tracking-widest rounded-sm font-medium">
                           {topic.category}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         {topic.isFeatured ? (
-                          <span className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-bold uppercase tracking-wider">
+                          <span className="flex items-center gap-1.5 text-emerald-600 text-xs font-bold uppercase tracking-wider">
                             <CheckCircle2 size={12} /> Featured
                           </span>
                         ) : (
-                          <span className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Draft</span>
+                          <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Draft</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 font-mono text-xs text-gray-500">
+                      <td className="px-6 py-4 font-medium text-xs text-gray-500">
                         {topic.order}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -282,10 +282,10 @@ export function AdminBrics() {
           <div className="bg-white border-2 border-brand-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xs shadow-2xl animate-in fade-in zoom-in duration-200 text-start">
             <div className="sticky top-0 bg-paper-50 p-6 border-b border-gray-100 flex justify-between items-center z-10">
               <div>
-                <h2 className="text-xl font-serif font-black text-ink-900 uppercase tracking-widest flex items-center gap-3">
+                <h2 className="text-xl font-bold font-black text-brand-800 uppercase tracking-widest flex items-center gap-3">
                   {editingTopic ? 'Edit BRICS Topic' : 'New BRICS Topic'}
                 </h2>
-                <p className="text-[10px] text-gray-500 font-mono mt-1 uppercase tracking-widest">Observe. Analyze. Publish.</p>
+                <p className="text-xs text-gray-500 font-medium mt-1 uppercase tracking-widest">Observe. Analyze. Publish.</p>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -299,22 +299,22 @@ export function AdminBrics() {
               {/* Basic Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Slug (Unique ID)</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500">Slug (Unique ID)</label>
                   <input
                     required
                     type="text"
                     value={formData.slug}
                     onChange={(e) => setFormData({...formData, slug: e.target.value})}
                     placeholder="e.g. iraq-brics-integration"
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-mono"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Category</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500">Category</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({...formData, category: e.target.value})}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-mono bg-white"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium bg-white"
                   >
                     <option value="GEOPOLITICS">Geopolitics</option>
                     <option value="ECONOMY">Economy</option>
@@ -332,7 +332,7 @@ export function AdminBrics() {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">English Title</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500">English Title</label>
                     <input
                       required
                       type="text"
@@ -342,18 +342,18 @@ export function AdminBrics() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 text-right w-full block">العنوان بالعربية</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-right w-full block">العنوان بالعربية</label>
                     <input
                       required
                       dir="rtl"
                       type="text"
                       value={formData.titleAr}
                       onChange={(e) => setFormData({...formData, titleAr: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-serif"
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-bold"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">中文标题</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500">中文标题</label>
                     <input
                       required
                       type="text"
@@ -363,14 +363,14 @@ export function AdminBrics() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 text-right w-full block">ناونیشان بە کوردی</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-right w-full block">ناونیشان بە کوردی</label>
                     <input
                       required
                       dir="rtl"
                       type="text"
                       value={formData.titleCkb}
                       onChange={(e) => setFormData({...formData, titleCkb: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-serif"
+                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-bold"
                     />
                   </div>
                 </div>
@@ -378,7 +378,7 @@ export function AdminBrics() {
 
               {/* Summary Fields (Trilingual) - Simplified for briefness in this UI */}
               <div className="space-y-4">
-                <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Brief Summaries & Detailed Content</label>
+                <label className="text-xs font-black uppercase tracking-widest text-gray-500">Brief Summaries & Detailed Content</label>
                 <div className="grid grid-cols-1 gap-6">
                    <textarea 
                      placeholder="English Summary"
@@ -398,14 +398,14 @@ export function AdminBrics() {
                         placeholder="الملخص بالعربية"
                         value={formData.summaryAr}
                         onChange={(e) => setFormData({...formData, summaryAr: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xs text-sm min-h-[80px] font-serif"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xs text-sm min-h-[80px] font-bold"
                       />
                       <textarea 
                         dir="rtl"
                         placeholder="ناونیشان بە کوردی"
                         value={formData.summaryCkb}
                         onChange={(e) => setFormData({...formData, summaryCkb: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-xs text-sm min-h-[80px] font-serif"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xs text-sm min-h-[80px] font-bold"
                       />
                    </div>
                    <textarea 
@@ -420,7 +420,7 @@ export function AdminBrics() {
               {/* Visuals & Order */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="md:col-span-2 space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Cover Image URL</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500">Cover Image URL</label>
                   <div className="flex gap-2">
                     <div className="flex-1 relative">
                       <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -428,18 +428,18 @@ export function AdminBrics() {
                         type="text"
                         value={formData.imageUrl}
                         onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-                        className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium"
                       />
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500">Display Order</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500">Display Order</label>
                   <input
                     type="number"
                     value={formData.order}
                     onChange={(e) => setFormData({...formData, order: parseInt(e.target.value) || 0})}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-mono"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium"
                   />
                 </div>
               </div>
@@ -452,7 +452,7 @@ export function AdminBrics() {
                     onChange={(e) => setFormData({...formData, isFeatured: e.target.checked})}
                     className="w-5 h-5 rounded border-gray-300 text-brand-800 focus:ring-brand-800"
                   />
-                  <span className="text-xs font-black uppercase tracking-widest text-ink-900">Featured in Observatory</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-brand-800">Featured in Observatory</span>
                 </label>
               </div>
 
@@ -467,7 +467,7 @@ export function AdminBrics() {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="inline-flex items-center gap-2 bg-brand-800 text-white px-8 py-2.5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-brand-900 transition-all shadow-lg active:scale-95 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 bg-brand-800 text-white px-8 py-2.5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-brand-700 transition-all shadow-lg active:scale-95 disabled:opacity-50"
                 >
                   {createMutation.isPending || updateMutation.isPending ? 'Synchronizing...' : (
                     <>

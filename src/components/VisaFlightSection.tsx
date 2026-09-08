@@ -184,11 +184,11 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
       <div className="w-full relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/20 border border-brand-100 dark:border-brand-800/30 text-brand-800 dark:text-brand-400 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/20 border border-brand-100 dark:border-brand-800/30 text-brand-800 dark:text-brand-400 text-xs font-bold uppercase tracking-wider mb-3">
               <Plane className="w-3.5 h-3.5" />
               <span>{t.badge}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-ink-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-900 dark:text-white tracking-tight">
               {t.title}
             </h2>
             <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
@@ -198,7 +198,7 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
 
           <Link
             to={`/${lang}/visa-flights`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-800 text-white hover:bg-brand-900 dark:bg-brand-700 dark:hover:bg-brand-600 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-sm hover:shadow-md shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-800 text-white hover:bg-brand-900 dark:bg-brand-700 dark:hover:bg-brand-600 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-sm hover:shadow-md shrink-0"
           >
             <span>{t.viewPortal}</span>
             <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -218,17 +218,17 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                <span className="absolute bottom-3 left-3 bg-brand-900/90 text-white border border-white/20 text-xs font-mono font-bold px-2.5 py-1 rounded-md shadow-sm">
+                <span className="absolute bottom-3 left-3 bg-brand-900/90 text-white border border-white/20 text-xs font-bold px-2.5 py-1 rounded-md shadow-sm">
                   {item.originRegion} → {item.destinationRegion}
                 </span>
               </div>
 
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
-                  <div className="text-xs font-mono font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider">
+                  <div className="text-xs font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider">
                     {item.serviceType.replace('_', ' ')}
                   </div>
-                  <h3 className="text-base sm:text-lg font-serif font-bold text-ink-900 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors line-clamp-2 leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-brand-900 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors line-clamp-2 leading-snug">
                     {getLocalizedTitle(item)}
                   </h3>
                   <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed">
@@ -239,11 +239,11 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
                 <div className="pt-3 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-xs font-mono">
                   <div>
                     <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase tracking-wider">{t.processing}</span>
-                    <span className="font-bold text-ink-900 dark:text-white">{item.processingTime}</span>
+                    <span className="font-bold text-brand-900 dark:text-white">{item.processingTime}</span>
                   </div>
                   <div className="text-right">
                     <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase tracking-wider">{t.tariff}</span>
-                    <span className="font-bold text-ink-900 dark:text-white">{item.feeOrCost}</span>
+                    <span className="font-bold text-brand-900 dark:text-white">{item.feeOrCost}</span>
                   </div>
                 </div>
               </div>

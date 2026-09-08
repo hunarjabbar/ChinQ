@@ -664,22 +664,22 @@ export function About() {
     <div className="w-full bg-white dark:bg-neutral-900 shadow-xs border-x border-brand-800/10 dark:border-neutral-800 p-4 sm:p-6 md:p-8 text-start" dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Title & Sovereign Subtitle */}
       <div className="border-b-4 border-brand-800 pb-4 mb-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-ink-900 dark:text-white uppercase">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-brand-800 dark:text-white uppercase">
           {t.title}
         </h2>
-        <p className="font-mono text-xs md:text-sm text-neutral-500 dark:text-neutral-400 font-bold mt-2 uppercase tracking-widest">
+        <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 font-bold mt-2 uppercase tracking-widest">
           {t.subtitle}
         </p>
       </div>
 
       {/* Intro Essay block */}
-      <div className="prose prose-neutral dark:prose-invert max-w-none font-serif text-base sm:text-lg leading-relaxed text-neutral-800 dark:text-neutral-200 space-y-6">
+      <div className="prose prose-neutral dark:prose-invert max-w-none text-base sm:text-lg leading-relaxed text-neutral-800 dark:text-neutral-200 space-y-6">
         <p className="font-bold text-lg sm:text-xl leading-relaxed text-justify">{t.intro}</p>
         
         {/* Two Columns Grid for Project Importance & Future */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 border-y border-neutral-200 dark:border-neutral-800 py-6">
           <div className="space-y-3">
-            <h3 className="text-lg sm:text-xl font-serif font-black text-ink-900 dark:text-white uppercase flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-black text-brand-800 dark:text-white uppercase flex items-center gap-2">
               <Building2 className="w-5 h-5 text-brand-800 dark:text-brand-400" />
               {t.importanceTitle}
             </h3>
@@ -688,7 +688,7 @@ export function About() {
             </p>
           </div>
           <div className="space-y-3">
-            <h3 className="text-lg sm:text-xl font-serif font-black text-ink-900 dark:text-white uppercase flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-black text-brand-800 dark:text-white uppercase flex items-center gap-2">
               <Globe className="w-5 h-5 text-brand-800 dark:text-brand-400" />
               {t.futureTitle}
             </h3>
@@ -701,7 +701,7 @@ export function About() {
         {/* Additional Descriptive Sections on Economic Corridors & Linguistic Sovereignty */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4 pb-4">
           <div className="space-y-3 bg-neutral-50 dark:bg-neutral-800/60 p-6 border border-neutral-200 dark:border-neutral-800 rounded-xs">
-            <h3 className="text-lg font-serif font-black text-ink-900 dark:text-white uppercase flex items-center gap-2">
+            <h3 className="text-lg font-black text-brand-800 dark:text-white uppercase flex items-center gap-2">
               <Award className="w-5 h-5 text-brand-800 dark:text-brand-400" />
               {t.corridorTitle}
             </h3>
@@ -710,7 +710,7 @@ export function About() {
             </p>
           </div>
           <div className="space-y-3 bg-neutral-50 dark:bg-neutral-800/60 p-6 border border-neutral-200 dark:border-neutral-800 rounded-xs">
-            <h3 className="text-lg font-serif font-black text-ink-900 dark:text-white uppercase flex items-center gap-2">
+            <h3 className="text-lg font-black text-brand-800 dark:text-white uppercase flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-brand-800 dark:text-brand-400" />
               {t.sovereigntyTitle}
             </h3>
@@ -724,22 +724,22 @@ export function About() {
       {/* Sovereign Journalistic Manifesto & Live Bureau Telemetry Section */}
       <div className="mt-8 sm:mt-12 bg-white dark:bg-neutral-800/80 border-2 border-brand-800 p-6 md:p-8 space-y-8 rounded-xs">
         <div>
-          <h3 className="text-xl md:text-2xl font-serif font-black uppercase text-ink-900 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase text-brand-800 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             {t.manifestoTitle}
           </h3>
-          <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-3 leading-relaxed text-justify font-serif">
+          <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-3 leading-relaxed text-justify ">
             {t.manifestoDesc}
           </p>
         </div>
 
         <div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-brand-800 pb-2 mb-4 gap-2">
-            <h3 className="text-lg md:text-xl font-serif font-black uppercase text-ink-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-lg md:text-xl font-black uppercase text-brand-800 dark:text-white flex items-center gap-2">
               <Radio className="w-5 h-5 text-brand-800 dark:text-brand-400 animate-pulse" />
               {t.telemetryTitle}
             </h3>
-            <span className="font-mono text-[10px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 font-bold uppercase tracking-wider rounded-xs self-start sm:self-auto">
+            <span className="text-xs bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 font-bold uppercase tracking-wider rounded-xs self-start sm:self-auto">
               {t.telemetrySubtitle}
             </span>
           </div>
@@ -749,10 +749,10 @@ export function About() {
               <div key={i} className="border border-neutral-200 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 p-4 flex flex-col justify-between space-y-2 rounded-xs">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h4 className="font-serif font-bold text-sm text-ink-900 dark:text-white">{bureau.city}</h4>
-                    <span className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">{bureau.region}</span>
+                    <h4 className="font-bold text-sm text-ink-900 dark:text-white">{bureau.city}</h4>
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">{bureau.region}</span>
                   </div>
-                  <span className="font-mono text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 border border-emerald-200 dark:border-emerald-800 rounded-xs">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 border border-emerald-200 dark:border-emerald-800 rounded-xs">
                     {bureau.status}
                   </span>
                 </div>
@@ -772,11 +772,11 @@ export function About() {
       {/* Institutional Pillars Section */}
       <div className="mt-12 sm:mt-16">
         <div className="border-b-2 border-brand-800 pb-3 mb-6">
-          <h3 className="text-xl md:text-2xl font-serif font-black uppercase text-ink-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase text-brand-800 dark:text-white flex items-center gap-2">
             <ShieldCheck className="w-6 h-6 text-brand-800 dark:text-brand-400" />
             {t.pillarsTitle}
           </h3>
-          <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1">
             {t.pillarsSubtitle}
           </p>
         </div>
@@ -794,18 +794,18 @@ export function About() {
                   <div className="p-2 bg-brand-50 dark:bg-brand-950/40 rounded-xs">
                     {getPillarIcon(idx)}
                   </div>
-                  <span className="font-mono text-[10px] font-black text-neutral-400 dark:text-neutral-500">
+                  <span className="text-xs font-black text-neutral-400 dark:text-neutral-500">
                     0{idx + 1}
                   </span>
                 </div>
-                <h4 className="font-serif font-black text-base text-ink-900 dark:text-white leading-snug">
+                <h4 className="font-black text-base text-brand-800 dark:text-white leading-snug">
                   {pillar.title}
                 </h4>
                 <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed text-justify">
                   {pillar.desc}
                 </p>
               </div>
-              <div className="pt-2 border-t border-neutral-100 dark:border-neutral-700/60 flex items-center gap-1.5 text-[10px] font-mono font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider">
+              <div className="pt-2 border-t border-neutral-100 dark:border-neutral-700/60 flex items-center gap-1.5 text-xs font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider">
                 <FileCheck className="w-3.5 h-3.5" />
                 Verified Institutional Protocol
               </div>
@@ -819,7 +819,7 @@ export function About() {
         
         {/* Left Section: Interactive Timelines (Full RTL Alignment Support) */}
         <div className="lg:col-span-7 space-y-6">
-          <h3 className="text-xl md:text-2xl font-serif font-black uppercase text-ink-900 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase text-brand-800 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
             <Calendar className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             {t.milestoneTitle}
           </h3>
@@ -837,10 +837,10 @@ export function About() {
                 {/* Node Bullet - positioned precisely according to writing direction */}
                 <div className={`absolute ${isRtl ? '-right-[33px]' : '-left-[33px]'} top-1 bg-white dark:bg-neutral-900 border-2 border-brand-800 group-hover:bg-brand-800 w-3.5 h-3.5 transition-colors duration-200`} />
                 
-                <span className="font-mono text-xs font-black text-brand-800 dark:text-brand-400 uppercase tracking-wider block">
+                <span className="text-xs font-black text-brand-800 dark:text-brand-400 uppercase tracking-wider block">
                   {milestone.year}
                 </span>
-                <h4 className="text-base md:text-lg font-serif font-bold text-ink-900 dark:text-white mt-0.5">
+                <h4 className="text-base md:text-lg font-bold text-ink-900 dark:text-white mt-0.5">
                   {milestone.title}
                 </h4>
                 <p className="text-xs md:text-sm text-neutral-600 dark:text-neutral-300 mt-1 text-justify leading-relaxed">
@@ -853,7 +853,7 @@ export function About() {
 
         {/* Right Section: Council List with 4 Regional Bureau Directors */}
         <div className="lg:col-span-5 space-y-6">
-          <h3 className="text-xl md:text-2xl font-serif font-black uppercase text-ink-900 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase text-brand-800 dark:text-white border-b-2 border-brand-800 pb-2 flex items-center gap-2">
             <Users className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             {t.councilTitle}
           </h3>
@@ -861,10 +861,10 @@ export function About() {
           <div className="space-y-4">
             {c.map((member, index) => (
               <div key={index} className="bg-white dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 p-4 shadow-sm hover:border-brand-800 transition-all duration-200 rounded-xs">
-                <h4 className="font-serif font-bold text-base text-ink-900 dark:text-white flex items-center gap-1.5">
+                <h4 className="font-bold text-base text-ink-900 dark:text-white flex items-center gap-1.5">
                   {member.name}
                 </h4>
-                <span className="font-mono text-[10px] font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider block mt-0.5">
+                <span className="text-xs font-bold text-brand-800 dark:text-brand-400 uppercase tracking-wider block mt-0.5">
                   {member.role}
                 </span>
                 <p className="text-xs text-neutral-600 dark:text-neutral-300 mt-2 leading-relaxed text-justify">
@@ -878,18 +878,18 @@ export function About() {
       </div>
 
       {/* Editorials / Join Us CTA: Enriched, Formalized & Synchronized */}
-      <div className="mt-12 sm:mt-16 bg-brand-800 text-white p-6 sm:p-8 md:p-12 rounded-xs shadow-md border border-brand-900 relative overflow-hidden text-start">
+      <div className="mt-12 sm:mt-16 bg-brand-800 text-white p-6 sm:p-8 md:p-12 rounded-xs shadow-md border border-brand-800 relative overflow-hidden text-start">
         <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
           <Globe className="w-48 h-48 text-white" />
         </div>
         <div className="relative z-10 flex flex-col items-start max-w-3xl">
-          <span className="font-mono text-[10px] uppercase font-bold tracking-[0.25em] bg-white/10 px-3 py-1 mb-3 text-white">
+          <span className="text-xs uppercase font-bold tracking-[0.25em] bg-white/10 px-3 py-1 mb-3 text-white">
             {t.joinEditorialSubtitle}
           </span>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black uppercase tracking-tight mb-4 text-white">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 text-white">
             {t.joinEditorialTitle}
           </h3>
-          <p className="text-xs sm:text-sm md:text-base opacity-90 leading-relaxed font-serif mb-6 text-justify">
+          <p className="text-xs sm:text-sm md:text-base opacity-90 leading-relaxed mb-6 text-justify">
             {t.joinEditorialDesc}
           </p>
 
@@ -897,10 +897,10 @@ export function About() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mb-8 border-y border-white/20 py-4">
             {t.joinEditorialHighlights.map((hl, i) => (
               <div key={i} className="flex flex-col">
-                <span className="text-[10px] font-mono uppercase font-bold text-white/70">
+                <span className="text-xs uppercase font-bold text-white/70">
                   {hl.label}
                 </span>
-                <span className="text-xs font-mono font-bold text-white mt-0.5">
+                <span className="text-xs font-bold text-white mt-0.5">
                   {hl.detail}
                 </span>
               </div>
@@ -909,9 +909,9 @@ export function About() {
 
           <Link 
             to={`/${currentLang}/join`} 
-            className="bg-white text-brand-900 hover:bg-paper-50 px-8 py-3.5 font-mono text-xs font-bold uppercase tracking-widest transition-all shadow-sm flex items-center gap-3 cursor-pointer self-start"
+            className="bg-white text-brand-800 hover:bg-paper-50 px-8 py-3.5 text-xs font-bold uppercase tracking-widest transition-all shadow-sm flex items-center gap-3 cursor-pointer self-start"
           >
-            <UserPlus className="w-4 h-4 text-brand-900" />
+            <UserPlus className="w-4 h-4 text-brand-800" />
             <span>{t.joinEditorialBtn}</span>
             {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
           </Link>
@@ -921,11 +921,11 @@ export function About() {
       {/* Diplomatic Bureau Telex inquiry Form */}
       <div className="mt-12 sm:mt-16 bg-white dark:bg-neutral-800/80 border-2 border-brand-800 p-6 md:p-8 relative rounded-xs">
         <div className="border-b-2 border-double border-brand-800 pb-3 mb-6">
-          <h3 className="text-xl md:text-2xl font-serif font-black uppercase text-ink-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-xl md:text-2xl font-black uppercase text-brand-800 dark:text-white flex items-center gap-2">
             <ShieldCheck className="w-6 h-6 text-brand-800 dark:text-brand-400" />
             {t.contactTitle}
           </h3>
-          <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1 flex items-center gap-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1 flex items-center gap-1">
             <Lock className="w-3.5 h-3.5" />
             {t.contactSubtitle}
           </p>
@@ -944,7 +944,7 @@ export function About() {
               <div className="space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
                     {t.formName} <span className="text-brand-800">*</span>
                   </label>
                   <input 
@@ -952,14 +952,14 @@ export function About() {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
+                    className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
                   />
-                  {errors.name && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-xs font-bold text-brand-800 mt-1">{errors.name}</p>}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
                     {t.formEmail} <span className="text-brand-800">*</span>
                   </label>
                   <input 
@@ -967,14 +967,14 @@ export function About() {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
+                    className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
                   />
-                  {errors.email && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.email}</p>}
+                  {errors.email && <p className="text-xs font-bold text-brand-800 mt-1">{errors.email}</p>}
                 </div>
 
                 {/* Company / Affiliation */}
                 <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
                     {t.formCompany} <span className="text-brand-800">*</span>
                   </label>
                   <input 
@@ -982,21 +982,21 @@ export function About() {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
+                    className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900"
                   />
-                  {errors.company && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.company}</p>}
+                  {errors.company && <p className="text-xs font-bold text-brand-800 mt-1">{errors.company}</p>}
                 </div>
 
                 {/* Bureau Destination */}
                 <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
                     {t.formBureau}
                   </label>
                   <select 
                     name="bureau"
                     value={formData.bureau}
                     onChange={handleInputChange}
-                    className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 appearance-none"
+                    className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 appearance-none"
                   >
                     {t.bureauList.map(b => (
                       <option key={b.id} value={b.id}>{b.label}</option>
@@ -1008,7 +1008,7 @@ export function About() {
               <div className="flex flex-col justify-between space-y-4">
                 {/* Message Body */}
                 <div className="flex-grow flex flex-col">
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
                     {t.formMessage} <span className="text-brand-800">*</span>
                   </label>
                   <textarea 
@@ -1016,16 +1016,16 @@ export function About() {
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={6}
-                    className="w-full flex-grow text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900 resize-none"
+                    className="w-full flex-grow text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800 p-2.5 focus:outline-none focus:bg-white dark:focus:bg-neutral-900 resize-none"
                   />
-                  {errors.message && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.message}</p>}
+                  {errors.message && <p className="text-xs font-bold text-brand-800 mt-1">{errors.message}</p>}
                 </div>
 
                 {/* Submit button */}
                 <button 
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-brand-800 hover:bg-brand-700 text-white p-3 font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                  className="w-full bg-brand-800 hover:bg-brand-700 text-white p-3 text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                 >
                   {isSending ? (
                     <>
@@ -1054,35 +1054,35 @@ export function About() {
             >
               <CheckCircle className="w-12 h-12 text-brand-800 mx-auto animate-bounce" />
               <div>
-                <h4 className="text-lg font-serif font-black text-brand-800 uppercase">
+                <h4 className="text-lg font-black text-brand-800 uppercase">
                   {t.successTitle}
                 </h4>
-                <p className="text-xs font-mono text-neutral-500 font-bold uppercase tracking-wider mt-1">
+                <p className="text-xs text-neutral-500 font-bold uppercase tracking-wider mt-1">
                   {t.successDesc}
                 </p>
               </div>
 
               {/* Telex receipt */}
-              <div className="max-w-md mx-auto bg-neutral-50 dark:bg-neutral-800 border-2 border-dotted border-neutral-300 dark:border-neutral-700 p-4 text-xs font-mono space-y-2 text-start">
+              <div className="max-w-md mx-auto bg-neutral-50 dark:bg-neutral-800 border-2 border-dotted border-neutral-300 dark:border-neutral-700 p-4 text-xs space-y-2 text-start">
                 <div className="flex justify-between border-b border-neutral-200 dark:border-neutral-700 pb-1.5">
-                  <span className="text-neutral-400 uppercase text-[9px]">{t.telexNo}</span>
+                  <span className="text-neutral-400 uppercase text-xs">{t.telexNo}</span>
                   <span className="font-bold text-brand-800">{telexRef}</span>
                 </div>
                 <div className="flex justify-between border-b border-neutral-200 dark:border-neutral-700 pb-1.5">
-                  <span className="text-neutral-400 uppercase text-[9px]">{t.routingBureau}</span>
+                  <span className="text-neutral-400 uppercase text-xs">{t.routingBureau}</span>
                   <span className="font-bold text-neutral-800 dark:text-neutral-200">
                     {t.bureauList.find(b => b.id === formData.bureau)?.label || formData.bureau}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-400 uppercase text-[9px]">{t.timestamp}</span>
+                  <span className="text-neutral-400 uppercase text-xs">{t.timestamp}</span>
                   <span className="font-bold text-neutral-800 dark:text-neutral-200">{new Date().toUTCString()}</span>
                 </div>
               </div>
 
               <button 
                 onClick={handleReset}
-                className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-2.5 font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 cursor-pointer shadow-xs"
+                className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors duration-300 cursor-pointer shadow-xs"
               >
                 {t.reset}
               </button>

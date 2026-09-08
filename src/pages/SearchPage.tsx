@@ -101,11 +101,11 @@ export default function SearchPage({ lang }: { lang: Locale }) {
 
   return (
     <div className="w-full bg-white dark:bg-neutral-900 border-x border-brand-800/10 dark:border-neutral-800 shadow-xs p-4 sm:p-6 md:p-8 min-h-[60vh]">
-      <h1 className="text-2xl sm:text-3xl font-serif font-black text-ink-900 dark:text-neutral-100 mb-2">{pageTitle}</h1>
+      <h1 className="text-2xl sm:text-3xl font-black text-brand-800 dark:text-neutral-100 mb-2">{pageTitle}</h1>
       <p className="text-gray-600 dark:text-neutral-400 text-sm mb-6">{resultsLabel}: <span className="font-bold text-brand-800 dark:text-brand-400 capitalize">{filterLabel}</span></p>
 
       {filteredItems.length === 0 ? (
-        <p className="text-gray-500 dark:text-neutral-400 text-sm italic font-serif py-8">{lang === 'zh' ? '没有找到相关结果。' : 'No results found.'}</p>
+        <p className="text-gray-500 dark:text-neutral-400 text-sm italic py-8">{lang === 'zh' ? '没有找到相关结果。' : 'No results found.'}</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {filteredItems.map(item => (

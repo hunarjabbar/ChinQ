@@ -74,14 +74,14 @@ export function CategoryPage() {
   return (
     <div className="w-full bg-white dark:bg-neutral-900 shadow-xs border-x border-brand-800/10 dark:border-neutral-800 p-4 sm:p-6 md:p-8">
       <div className="border-b-4 border-brand-800 pb-4 mb-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black tracking-tighter text-ink-900 dark:text-neutral-100 uppercase">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-brand-800 dark:text-neutral-100 uppercase">
           {categoryName}
         </h2>
       </div>
 
       {articles.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16">
-          <p className="text-gray-500 dark:text-neutral-400 font-serif italic text-lg">No stories available in this category.</p>
+          <p className="text-gray-500 dark:text-neutral-400 italic text-lg">No stories available in this category.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -101,19 +101,19 @@ export function CategoryPage() {
                   </div>
                 ) : (
                   <div className="w-full aspect-video flex items-center justify-center bg-brand-800/5 dark:bg-neutral-800 mb-4 rounded-xs">
-                    <span className="text-gray-400 dark:text-neutral-500 font-serif italic text-sm">No image</span>
+                    <span className="text-gray-400 dark:text-neutral-500 italic text-sm">No image</span>
                   </div>
                 )}
-                <span className="text-[10px] text-gray-500 dark:text-neutral-400 font-bold uppercase block mb-1">
+                <span className="text-xs text-gray-500 dark:text-neutral-400 font-bold uppercase block mb-1">
                   {getCategoryName(article.category)}
                 </span>
-                <h4 className="font-serif text-xl sm:text-2xl leading-tight font-black group-hover:text-brand-800 dark:group-hover:text-brand-400 mt-2 text-ink-900 dark:text-neutral-100 mb-3 transition-colors">
+                <h4 className="text-xl sm:text-2xl leading-tight font-black group-hover:text-brand-800 dark:group-hover:text-brand-400 mt-2 text-ink-900 dark:text-neutral-100 mb-3 transition-colors">
                   {tr?.title}
                 </h4>
                 <p className="text-xs text-gray-600 dark:text-neutral-300 line-clamp-3 mb-3 leading-relaxed">
                   {tr?.excerpt}
                 </p>
-                <div className="flex items-center space-x-2 rtl:space-x-reverse text-[10px] text-neutral-500 dark:text-neutral-400 font-bold uppercase">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase">
                   <span>{(article as any).author?.name || 'Staff Writer'}</span>
                   <span>•</span>
                   <span>{formatDistanceToNow(new Date(article.createdAt), { addSuffix: true, locale: dateLocale })}</span>

@@ -56,10 +56,10 @@ export function LiveRateTicker({ rates, lang, onRefresh, isRefreshing }: Props) 
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
-            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase text-neutral-300">
+            <span className="text-xs sm:text-xs font-bold tracking-widest uppercase text-neutral-300">
               {labels.liveFeed}
             </span>
-            <span className="hidden md:inline-flex items-center gap-1 text-[10px] bg-emerald-950/80 border border-emerald-600/40 text-emerald-400 px-2 py-0.5 rounded font-mono">
+            <span className="hidden md:inline-flex items-center gap-1 text-xs bg-emerald-950/80 border border-emerald-600/40 text-emerald-400 px-2 py-0.5 rounded font-mono">
               <CheckCircle2 size={11} /> {labels.mbridgeActive}
             </span>
           </div>
@@ -67,7 +67,7 @@ export function LiveRateTicker({ rates, lang, onRefresh, isRefreshing }: Props) 
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowChart(!showChart)}
-              className="text-[11px] font-mono font-bold text-neutral-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
+              className="text-[11px] font-bold text-neutral-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
             >
               <TrendingUp size={13} className="text-brand-400" />
               <span>{labels.toggleChart}</span>
@@ -93,40 +93,40 @@ export function LiveRateTicker({ rates, lang, onRefresh, isRefreshing }: Props) 
           
           {/* Primary Exchange Rate */}
           <div className="col-span-2 sm:col-span-1 bg-white/5 border border-white/10 p-3.5 rounded-xl">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 mb-1">
               {labels.rateLabel}
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-mono font-black text-amber-400 tracking-tight">
+              <span className="text-2xl sm:text-3xl font-black text-amber-400 tracking-tight">
                 {baseRate.toFixed(2)}
               </span>
-              <span className="text-xs font-mono font-bold text-neutral-400">IQD</span>
-              <span className="text-xs font-mono font-bold text-emerald-400">
+              <span className="text-xs font-bold text-neutral-400">IQD</span>
+              <span className="text-xs font-bold text-emerald-400">
                 +{rates?.change24h ?? 0.42}%
               </span>
             </div>
-            <div className="text-[10px] font-mono text-neutral-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               {labels.inverseLabel} <span className="text-white font-bold">{(1000 * inverseRate).toFixed(2)} e-CNY</span>
             </div>
           </div>
 
           {/* Bid / Ask */}
           <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 mb-1">
               {labels.bidAsk}
             </div>
             <div className="flex items-center justify-between text-xs font-mono">
               <div>
-                <span className="text-[9px] text-neutral-500 uppercase block">Bid</span>
+                <span className="text-xs text-neutral-500 uppercase block">Bid</span>
                 <span className="text-sm font-black text-white">{bidRate.toFixed(2)}</span>
               </div>
               <div className="text-neutral-600 font-sans">/</div>
               <div>
-                <span className="text-[9px] text-neutral-500 uppercase block">Ask</span>
+                <span className="text-xs text-neutral-500 uppercase block">Ask</span>
                 <span className="text-sm font-black text-white">{askRate.toFixed(2)}</span>
               </div>
             </div>
-            <div className="text-[9px] font-mono text-neutral-400 mt-1.5 flex items-center gap-1">
+            <div className="text-xs text-neutral-400 mt-1.5 flex items-center gap-1">
               <ShieldCheck size={10} className="text-brand-400" />
               <span>Interbank Wholesale Tier</span>
             </div>
@@ -134,49 +134,49 @@ export function LiveRateTicker({ rates, lang, onRefresh, isRefreshing }: Props) 
 
           {/* 24h High / Low */}
           <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 mb-1">
               {labels.highLow}
             </div>
             <div className="flex items-center justify-between text-xs font-mono">
               <div>
-                <span className="text-[9px] text-emerald-400 uppercase block">High</span>
+                <span className="text-xs text-emerald-400 uppercase block">High</span>
                 <span className="text-sm font-bold text-white">{(rates?.high24h ?? 189.85).toFixed(2)}</span>
               </div>
               <div className="text-neutral-600 font-sans">/</div>
               <div>
-                <span className="text-[9px] text-rose-400 uppercase block">Low</span>
+                <span className="text-xs text-rose-400 uppercase block">Low</span>
                 <span className="text-sm font-bold text-white">{(rates?.low24h ?? 187.10).toFixed(2)}</span>
               </div>
             </div>
-            <div className="text-[9px] font-mono text-neutral-400 mt-1.5 truncate">
+            <div className="text-xs text-neutral-400 mt-1.5 truncate">
               {labels.volume}: <span className="text-neutral-200">{rates?.volume24h ?? '¥ 54.2M'}</span>
             </div>
           </div>
 
           {/* e-CNY Reserve Pool */}
           <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl hidden lg:block">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1 flex items-center gap-1">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 mb-1 flex items-center gap-1">
               <Database size={11} className="text-brand-400" />
               <span>{labels.ecnyReserve}</span>
             </div>
-            <div className="text-sm font-mono font-bold text-white">
+            <div className="text-sm font-bold text-white">
               ¥ {((rates?.ecnyReservePool ?? 150000000) / 1000000).toFixed(1)}M e-CNY
             </div>
-            <div className="text-[9px] font-mono text-emerald-400 mt-1">
+            <div className="text-xs text-emerald-400 mt-1">
               PBOC Sovereign CBDC Allocation
             </div>
           </div>
 
           {/* IQD Liquidity Pool */}
           <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl hidden md:block">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1 flex items-center gap-1">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 mb-1 flex items-center gap-1">
               <Activity size={11} className="text-amber-400" />
               <span>{labels.iqdReserve}</span>
             </div>
-            <div className="text-sm font-mono font-bold text-white truncate">
+            <div className="text-sm font-bold text-white truncate">
               د.ع {((rates?.iqdReservePool ?? 28275000000) / 1000000000).toFixed(2)}B IQD
             </div>
-            <div className="text-[9px] font-mono text-neutral-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               Central Bank of Iraq Direct Clearing
             </div>
           </div>
@@ -187,10 +187,10 @@ export function LiveRateTicker({ rates, lang, onRefresh, isRefreshing }: Props) 
         {showChart && (
           <div className="mt-4 pt-4 border-t border-white/10">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-300">
                 24-Hour Intraday Clearing Curve (IQD per 1 e-CNY)
               </span>
-              <span className="text-[10px] font-mono text-neutral-400">
+              <span className="text-xs text-neutral-400">
                 Live ticks polled every 15s • mBridge High-Frequency Feed
               </span>
             </div>

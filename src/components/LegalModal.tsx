@@ -32,10 +32,10 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               <Scale className="w-6 h-6 text-brand-200" />
             </div>
             <div>
-              <h3 className="font-serif text-lg sm:text-xl font-bold">
+              <h3 className="text-lg sm:text-xl font-bold">
                 {isAr ? 'المركز القانوني وسياسة الخصوصية السيادية' : isZh ? '法律合规与主权隐私政策中心' : isCkb ? 'ناوەندی یاسایی و سیاسەتی تایبەتمەندی' : 'Legal & Sovereign Compliance Hub'}
               </h3>
-              <p className="text-xs font-mono text-brand-200 opacity-90">
+              <p className="text-xs text-brand-200 opacity-90">
                 {isAr ? 'مجموعة الوكالة العراقية الصينية - الشروط والأحكام والخصوصية وحماية البيانات' : isZh ? '伊中通讯社传媒集团 • 主权合规与隐私保护条款' : isCkb ? 'گرووپی ئاژانسي عێراقی - چینی • مەرج و ڕێساکانی پاراستنی زانیاری' : 'Iraqi-Chinese Media Group • Sovereign Data Governance & Terms'}
               </p>
             </div>
@@ -53,10 +53,10 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
         <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 px-6 pt-3 gap-3">
           <button
             onClick={() => setActiveTab('privacy')}
-            className={`flex items-center gap-2 pb-3 px-4 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider border-b-2 transition-all ${
+            className={`flex items-center gap-2 pb-3 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider border-b-2 transition-all ${
               activeTab === 'privacy'
                 ? 'border-brand-800 text-brand-800 dark:text-brand-400 bg-white dark:bg-neutral-900 rounded-t-lg shadow-2xs'
-                : 'border-transparent text-neutral-500 hover:text-ink-900 dark:hover:text-neutral-200'
+                : 'border-transparent text-neutral-500 hover:text-brand-900 dark:hover:text-neutral-200'
             }`}
           >
             <Lock className="w-4 h-4" />
@@ -64,10 +64,10 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
           </button>
           <button
             onClick={() => setActiveTab('terms')}
-            className={`flex items-center gap-2 pb-3 px-4 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider border-b-2 transition-all ${
+            className={`flex items-center gap-2 pb-3 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider border-b-2 transition-all ${
               activeTab === 'terms'
                 ? 'border-brand-800 text-brand-800 dark:text-brand-400 bg-white dark:bg-neutral-900 rounded-t-lg shadow-2xs'
-                : 'border-transparent text-neutral-500 hover:text-ink-900 dark:hover:text-neutral-200'
+                : 'border-transparent text-neutral-500 hover:text-brand-900 dark:hover:text-neutral-200'
             }`}
           >
             <FileText className="w-4 h-4" />
@@ -80,16 +80,16 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
           {activeTab === 'privacy' ? (
             <div className="space-y-6">
               <div className="border-l-4 border-brand-800 pl-4 rtl:border-r-4 rtl:pr-4 py-1 bg-brand-50/50 dark:bg-brand-950/20 rounded-r-lg">
-                <h4 className="font-bold text-ink-900 dark:text-white text-base">
+                <h4 className="font-bold text-brand-900 dark:text-white text-base">
                   {isAr ? 'إشعار الخصوصية السيادي والتزام حماية بيانات المستخدمين' : isZh ? '主权隐私声明与用户数据保护承诺' : isCkb ? 'ئاگاداری تایبەتمەندی و بەدیهێنانی پاراستنی زانیاری' : 'Sovereign Privacy Notice & Commitment'}
                 </h4>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-mono mt-1">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
                   {isAr ? 'آخر تحديث: سبتمبر ٢٠٢٦ • معتمد من مكاتب بغداد وبكين' : isZh ? '最新更新：2026年9月 • 巴格达与北京联合法律顾问处审核' : isCkb ? 'نوێترین نوێکردنەوە: ئەیلوولی ٢٠٢٦ • پەسەندکراوی ئۆفیسی بەغداد و پەکین' : 'Effective Date: September 2026 • Verified by Baghdad & Beijing Legal Counsels'}
                 </p>
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-brand-800" />
                   <span>1. {isAr ? 'نطاق جمع البيانات والمعلومات الشخصية' : isZh ? '1. 数据收集范围与个人信息' : isCkb ? '1. چوارچێوەی کۆکردنەوەی زانیاری و داتای کەسی' : '1. Scope of Data Collection & Personal Information'}</span>
                 </h5>
@@ -105,7 +105,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Globe className="w-5 h-5 text-brand-800" />
                   <span>2. {isAr ? 'أمن البيانات ونقلها عبر الحدود (بغداد - بكين)' : isZh ? '2. 数据安全与跨境传输（巴格达 - 北京）' : isCkb ? '2. ئەمنی داتا و گواستنەوەی نێوان سنوورەکان (بەغداد - پەکین)' : '2. Data Security & Cross-Border Transmission (Baghdad-Beijing)'}</span>
                 </h5>
@@ -121,7 +121,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-brand-800" />
                   <span>3. {isAr ? 'ملفات تعريف الارتباط (Cookies) وتفضيلات الجلسة' : isZh ? '3. Cookie技术与会话偏好管理' : isCkb ? '3. فایلەکانی کووکی (Cookies) و پەسەندکراوەکانی دانیشتن' : '3. Cookies & Session Preference Management'}</span>
                 </h5>
@@ -136,7 +136,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                 </p>
               </div>
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-brand-800" />
                   <span>4. {isAr ? 'حقوق بيانات المستخدم (الوصول، التصحيح، الحذف)' : isZh ? '4. 用户数据权利（访问、更正、删除）' : isCkb ? '4. مافی داتای بەکارهێنەر (دەستگەیشتن، ڕاستکردنەوە، سڕینەوە)' : '4. User Data Rights (Access, Rectification, Erasure)'}</span>
                 </h5>
@@ -163,7 +163,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Lock className="w-5 h-5 text-brand-800" />
                   <span>5. {isAr ? 'الحماية ضد التهديدات الإلكترونية وسرقة البيانات' : isZh ? '5. 网络威胁防护与数据泄露防御' : '5. Protection Against Cyber Threats & Data Breach'}</span>
                 </h5>
@@ -177,7 +177,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <FileText className="w-5 h-5 text-brand-800" />
                   <span>6. {isAr ? 'سياسات حفظ البيانات والأرشفة' : isZh ? '6. 数据保留与存档政策' : isCkb ? '6. سیاسەتەکانی پاراستنی داتا و ئەرشیفکردن' : '6. Data Retention & Archive Policies'}</span>
                 </h5>
@@ -192,7 +192,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                 </p>
               </div>
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-brand-800" />
                   <span>7. {isAr ? 'الامتثال للوائح حماية البيانات الإقليمية والدولية' : isZh ? '7. 区域与国际数据保护条例合规性' : '7. Compliance with Regional & International Data Regulations'}</span>
                 </h5>
@@ -208,16 +208,16 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
           ) : (
             <div className="space-y-6">
               <div className="border-l-4 border-brand-800 pl-4 rtl:border-r-4 rtl:pr-4 py-1 bg-brand-50/50 dark:bg-brand-950/20 rounded-r-lg">
-                <h4 className="font-bold text-ink-900 dark:text-white text-base">
+                <h4 className="font-bold text-brand-900 dark:text-white text-base">
                   {isAr ? 'شروط وقواعد استخدام الخدمات الإخبارية والمنصات السيادية' : isZh ? '新闻服务与主权平台使用条款协议' : isCkb ? 'مەرج و ڕێساکانی بەکارهێنانی خزمەتگوزاری هەواڵی و سەکۆکان' : 'Terms of Service & Sovereign Platform Agreement'}
                 </h4>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-mono mt-1">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
                   {isAr ? 'تسري الشروط على جميع الزوار، الباحثين، والمؤسسات المسجلة' : isZh ? '本协议适用于所有访问者、学者、注册会员及企业法人代表' : isCkb ? 'ئەم مەرجانە بۆ هەموو سەردانیکەران، توێژەران و کۆمپانیاکان جێبەجێ دەبن' : 'Applies to all portal visitors, researchers, corporate subscribers, and syndication partners.'}
                 </p>
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Scale className="w-5 h-5 text-brand-800" />
                   <span>1. {isAr ? 'حقوق الملكية الفكرية ونشر الدراسات الثنائية' : isZh ? '1. 知识产权与双边研究刊载权' : isCkb ? '1. مافی فیکری و بڵاوکردنەوەی توێژینەوە دوولایەنەکان' : '1. Intellectual Property & Bilateral Research Publication Rights'}</span>
                 </h5>
@@ -233,7 +233,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-brand-800" />
                   <span>2. {isAr ? 'إخلاء المسؤولية عن الاستثمار والأسواق المالية' : isZh ? '2. 金融市场与投资风险免责声明' : isCkb ? '2. بێبەشبوون لە بەرپرسیارێتی دارایی و بازاڕەکان' : '2. Financial Market & Investment Disclaimer'}</span>
                 </h5>
@@ -249,7 +249,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Globe className="w-5 h-5 text-brand-800" />
                   <span>3. {isAr ? 'القانون الحاكم والاختصاص القضائي (بغداد وبكين)' : isZh ? '3. 适用法律与司法管辖权（巴格达与北京）' : isCkb ? '3. یاسای حوکمڕانی و دەسەڵاتی دادوەری (بەغداد و پەکین)' : '3. Governing Law & Jurisdictional Venue (Baghdad & Beijing)'}</span>
                 </h5>
@@ -264,7 +264,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                 </p>
               </div>
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Lock className="w-5 h-5 text-brand-800" />
                   <span>4. {isAr ? 'قيود الاستخدام والسلوك المهني' : isZh ? '4. 使用限制与专业行为准则' : isCkb ? '4. مەرجەکانی بەکارهێنان و ڕەفتاری پیشەیی' : '4. Usage Restrictions & Professional Conduct'}</span>
                 </h5>
@@ -280,7 +280,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-brand-800" />
                   <span>5. {isAr ? 'بند استمرارية الخدمة والسيادة' : isZh ? '5. 服务持续性与主权条款' : isCkb ? '5. بەردەوامی خزمەتگوزاری و مەرجی سەروەری' : '5. Service Continuity & Sovereignty Clause'}</span>
                 </h5>
@@ -296,7 +296,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Globe className="w-5 h-5 text-brand-800" />
                   <span>6. {isAr ? 'سياسة روابط الطرف الثالث والاعتماد' : isZh ? '6. 第三方链接与认证政策' : '6. Third-Party Links & Accreditation Policy'}</span>
                 </h5>
@@ -310,7 +310,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
               </div>
 
               <div className="space-y-4">
-                <h5 className="font-serif font-bold text-ink-900 dark:text-white text-base flex items-center gap-2">
+                <h5 className="font-bold text-brand-900 dark:text-white text-base flex items-center gap-2">
                   <Lock className="w-5 h-5 text-brand-800" />
                   <span>7. {isAr ? 'إنهاء الوصول وإلغاء الاشتراك والجزاءات القانونية' : isZh ? '7. 终止访问、注销订阅与法律制裁' : '7. Termination of Access, Unsubscription & Legal Sanctions'}</span>
                 </h5>
@@ -340,12 +340,12 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
 
         {/* Footer actions */}
         <div className="flex items-center justify-between px-6 py-4 bg-neutral-100 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
-          <div className="text-xs font-mono text-neutral-500">
+          <div className="text-xs text-neutral-500">
             {isAr ? 'جميع الحقوق محفوظة لمجموعة الوكالة العراقية الصينية' : isZh ? '伊中通讯社传媒集团版权所有' : isCkb ? 'هەموو مافەکان پارێزراون' : 'Iraqi-Chinese Media Group • Official Governance Desk'}
           </div>
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-brand-800 hover:bg-brand-900 text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm"
+            className="px-5 py-2 bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-sm"
           >
             {isAr ? 'إغلاق النافذة' : isZh ? '关闭窗口' : isCkb ? 'داخستن' : 'Close Hub'}
           </button>

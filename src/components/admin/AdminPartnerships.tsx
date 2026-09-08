@@ -148,8 +148,8 @@ export function AdminPartnerships() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-200 pb-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-serif font-black text-ink-900 tracking-tight">Sovereign Vetting Registry</h2>
-            <span className="bg-brand-800 text-white text-[10px] font-mono px-2 py-0.5 rounded font-black tracking-widest uppercase">
+            <h2 className="text-2xl font-bold font-black text-brand-900 tracking-tight">Sovereign Vetting Registry</h2>
+            <span className="bg-brand-800 text-white text-xs font-medium px-2 py-0.5 rounded font-black tracking-widest uppercase">
               Live Synchronized
             </span>
           </div>
@@ -256,13 +256,13 @@ export function AdminPartnerships() {
                         <div className={`w-12 h-12 rounded-xl shadow-sm flex items-center justify-center font-black text-xl border ${
                           isVolunteer ? 'bg-rose-50 text-brand-800 border-rose-200' :
                           isIntern ? 'bg-purple-50 text-purple-800 border-purple-200' :
-                          'bg-white text-ink-900 border-neutral-200'
+                          'bg-white text-brand-900 border-neutral-200'
                         }`}>
                           {isVolunteer ? <HeartHandshake size={22} /> : isIntern ? <GraduationCap size={22} /> : app.fullName?.[0]}
                         </div>
 
                         {/* Role Badge */}
-                        <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-md border ${
+                        <span className={`text-xs font-medium font-black uppercase px-2.5 py-1 rounded-md border ${
                           isVolunteer ? 'bg-rose-100 text-brand-800 border-rose-300' :
                           isIntern ? 'bg-purple-100 text-purple-900 border-purple-300' :
                           'bg-neutral-100 text-neutral-700 border-neutral-300'
@@ -272,7 +272,7 @@ export function AdminPartnerships() {
                       </div>
 
                       <div>
-                        <h4 className="text-base font-serif font-black text-ink-900 leading-tight">{app.fullName}</h4>
+                        <h4 className="text-base font-bold font-black text-brand-900 leading-tight">{app.fullName}</h4>
                         <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-500 mt-1">
                           <Building2 size={12} className="shrink-0 text-neutral-400" />
                           <span className="line-clamp-1">{app.company}</span>
@@ -282,7 +282,7 @@ export function AdminPartnerships() {
 
                     <div className="space-y-2 mt-6 pt-4 border-t border-neutral-200">
                       <div className="flex items-center justify-between">
-                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-widest ${
                           app.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
                           app.status === 'REJECTED' ? 'bg-brand-100 text-brand-800' :
                           'bg-amber-100 text-amber-800 animate-pulse'
@@ -297,7 +297,7 @@ export function AdminPartnerships() {
 
                         <button
                           onClick={() => setSelectedAppForCertificate(app)}
-                          className="text-[10px] font-mono font-bold text-brand-800 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 px-2 py-0.5 rounded border border-brand-200 flex items-center gap-1 transition-colors cursor-pointer"
+                          className="text-xs font-medium font-bold text-brand-800 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 px-2 py-0.5 rounded border border-brand-200 flex items-center gap-1 transition-colors cursor-pointer"
                           title="View Official Certificate & PDF"
                         >
                           <Award size={11} />
@@ -305,7 +305,7 @@ export function AdminPartnerships() {
                         </button>
                       </div>
 
-                      <p className="text-[10px] font-mono text-neutral-500 font-bold uppercase truncate">
+                      <p className="text-xs font-medium text-neutral-500 font-bold uppercase truncate">
                         Code: <span className="text-brand-800">{app.hash}</span>
                       </p>
                     </div>
@@ -316,46 +316,46 @@ export function AdminPartnerships() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-3">
                         <div className="space-y-0.5">
-                          <label className="text-[9px] font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+                          <label className="text-xs font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
                             <Mail size={11} /> Contact Channel
                           </label>
-                          <p className="text-xs font-bold text-ink-900 font-mono underline decoration-neutral-200 underline-offset-2">
+                          <p className="text-xs font-bold text-brand-900 font-medium underline decoration-neutral-200 underline-offset-2">
                             {app.email}
                           </p>
                           {app.phoneNumber && (
-                            <p className="text-xs text-neutral-600 font-mono flex items-center gap-1 mt-0.5">
+                            <p className="text-xs text-neutral-600 font-medium flex items-center gap-1 mt-0.5">
                               <Phone size={10} className="text-neutral-400" /> {app.phoneNumber}
                             </p>
                           )}
                         </div>
 
                         <div className="space-y-0.5">
-                          <label className="text-[9px] font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+                          <label className="text-xs font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
                             <Briefcase size={11} /> Assigned Bureau / Track
                           </label>
-                          <p className="text-xs font-bold text-ink-900">
+                          <p className="text-xs font-bold text-brand-900">
                             {app.bureau}
                           </p>
                         </div>
 
                         {(app.nationality || app.passportOrIdNumber) && (
-                          <div className="space-y-0.5 text-xs text-neutral-600 font-mono">
-                            <label className="text-[9px] font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+                          <div className="space-y-0.5 text-xs text-neutral-600 font-medium">
+                            <label className="text-xs font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
                               <Globe size={11} /> Identity & Clearance
                             </label>
                             <div>{app.nationality} • ID: {app.passportOrIdNumber}</div>
                             {app.asaishCode && (
-                              <div className="text-[10px] text-brand-800 font-bold">Asaish Code: {app.asaishCode}</div>
+                              <div className="text-xs text-brand-800 font-bold">Asaish Code: {app.asaishCode}</div>
                             )}
                           </div>
                         )}
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[9px] font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <label className="text-xs font-black text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
                           <ShieldCheck size={11} /> Statement of Motivation / Research Abstract
                         </label>
-                        <p className="text-xs text-neutral-600 font-serif italic leading-relaxed line-clamp-4 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
+                        <p className="text-xs text-neutral-600 font-bold italic leading-relaxed line-clamp-4 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
                           "{app.bio}"
                         </p>
                       </div>
@@ -363,7 +363,7 @@ export function AdminPartnerships() {
 
                     {/* Action Buttons */}
                     <div className="pt-4 border-t border-neutral-100 flex flex-col sm:flex-row justify-between items-center gap-3">
-                      <div className="flex items-center gap-2 text-[10px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+                      <div className="flex items-center gap-2 text-xs font-bold text-neutral-400 uppercase tracking-widest font-medium">
                         <Clock size={11} />
                         Logged: {new Date(app.createdAt).toLocaleDateString()} at {new Date(app.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
@@ -371,14 +371,14 @@ export function AdminPartnerships() {
                       <div className="flex items-center gap-2">
                         <button 
                           onClick={() => statusMutation.mutate({ id: app.id, status: 'APPROVED' })}
-                          className="bg-neutral-900 hover:bg-green-700 text-white font-black text-[10px] px-4 py-1.5 rounded-lg uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                          className="bg-neutral-900 hover:bg-green-700 text-white font-black text-xs px-4 py-1.5 rounded-lg uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                         >
                           <Check size={12} />
                           Authorize Dossier
                         </button>
                         <button 
                           onClick={() => statusMutation.mutate({ id: app.id, status: 'REJECTED' })}
-                          className="bg-white hover:bg-rose-50 border border-neutral-200 text-neutral-600 hover:text-brand-800 font-black text-[10px] px-4 py-1.5 rounded-lg uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                          className="bg-white hover:bg-rose-50 border border-neutral-200 text-neutral-600 hover:text-brand-800 font-black text-xs px-4 py-1.5 rounded-lg uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                         >
                           <X size={12} />
                           Decline
@@ -407,7 +407,7 @@ export function AdminPartnerships() {
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <div className="flex items-center gap-2">
                 <IcaLogo size={32} variant="mark" />
-                <h3 className="font-serif font-black text-lg text-ink-900">
+                <h3 className="font-bold font-black text-lg text-brand-900">
                   Official Synchronized Credential Dossier
                 </h3>
               </div>
@@ -429,7 +429,7 @@ export function AdminPartnerships() {
                 </button>
                 <button
                   onClick={() => setSelectedAppForCertificate(null)}
-                  className="p-1.5 text-neutral-400 hover:text-ink-900 rounded-lg cursor-pointer"
+                  className="p-1.5 text-neutral-400 hover:text-brand-900 rounded-lg cursor-pointer"
                 >
                   <X size={20} />
                 </button>
@@ -444,25 +444,25 @@ export function AdminPartnerships() {
               style={{ 
                 backgroundColor: '#ffffff', 
                 color: '#111827', 
-                border: '4px solid #800000', 
+                border: '4px solid #cc0000', 
                 fontFamily: 'Georgia, serif' 
               }}
             >
               <div 
                 className="pb-4 flex items-center justify-between"
-                style={{ borderBottom: '2px solid #800000' }}
+                style={{ borderBottom: '2px solid #cc0000' }}
               >
                 <div className="flex items-center gap-3">
                   <IcaLogo size={48} variant="mark" />
                   <div>
                     <div 
-                      className="text-[10px] font-mono font-bold uppercase tracking-widest"
-                      style={{ color: '#800000' }}
+                      className="text-xs font-medium font-bold uppercase tracking-widest"
+                      style={{ color: '#cc0000' }}
                     >
                       Republic of Iraq • People's Republic of China
                     </div>
                     <div 
-                      className="text-lg font-serif font-black"
+                      className="text-lg font-bold font-black"
                       style={{ color: '#111827' }}
                     >
                       Iraqi-Chinese Agency • Central Administration Registry
@@ -470,16 +470,16 @@ export function AdminPartnerships() {
                   </div>
                 </div>
 
-                <div className="text-end font-mono">
+                <div className="text-end font-medium">
                   <div 
-                    className="text-[10px] uppercase"
+                    className="text-xs uppercase"
                     style={{ color: '#9ca3af' }}
                   >
                     Synchronized Ref
                   </div>
                   <div 
                     className="text-sm font-black"
-                    style={{ color: '#800000' }}
+                    style={{ color: '#cc0000' }}
                   >
                     {selectedAppForCertificate.hash}
                   </div>
@@ -488,10 +488,10 @@ export function AdminPartnerships() {
 
               <div 
                 className="p-3 rounded-lg text-center"
-                style={{ backgroundColor: '#800000', color: '#ffffff' }}
+                style={{ backgroundColor: '#cc0000', color: '#ffffff' }}
               >
                 <h4 
-                  className="text-base font-serif font-black uppercase tracking-wider"
+                  className="text-base font-bold font-black uppercase tracking-wider"
                   style={{ color: '#ffffff' }}
                 >
                   {selectedAppForCertificate.role?.toLowerCase() === 'volunteer' 
@@ -502,7 +502,7 @@ export function AdminPartnerships() {
                   }
                 </h4>
                 <div 
-                  className="text-[10px] font-sans uppercase tracking-widest mt-0.5"
+                  className="text-xs font-sans uppercase tracking-widest mt-0.5"
                   style={{ color: '#fecaca' }}
                 >
                   Archived & Accredited by Sovereign Information Command
@@ -515,7 +515,7 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     Candidate Name
@@ -532,14 +532,14 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     Category
                   </span>
                   <span 
                     className="font-bold text-xs uppercase"
-                    style={{ color: '#800000' }}
+                    style={{ color: '#cc0000' }}
                   >
                     {selectedAppForCertificate.role}
                   </span>
@@ -549,7 +549,7 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     Assigned Bureau
@@ -566,7 +566,7 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     Affiliation / Track
@@ -583,13 +583,13 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     Contact Channel
                   </span>
                   <span 
-                    className="font-mono text-xs"
+                    className="font-medium text-xs"
                     style={{ color: '#111827' }}
                   >
                     {selectedAppForCertificate.email}
@@ -600,13 +600,13 @@ export function AdminPartnerships() {
                   style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
                 >
                   <span 
-                    className="text-[9px] uppercase font-mono block font-bold"
+                    className="text-xs uppercase font-medium block font-bold"
                     style={{ color: '#9ca3af' }}
                   >
                     National ID / Passport
                   </span>
                   <span 
-                    className="font-mono text-xs"
+                    className="font-medium text-xs"
                     style={{ color: '#111827' }}
                   >
                     {selectedAppForCertificate.passportOrIdNumber || 'Recorded on File'}
@@ -615,7 +615,7 @@ export function AdminPartnerships() {
               </div>
 
               <div 
-                className="p-3 rounded text-xs italic font-serif"
+                className="p-3 rounded text-xs italic font-bold"
                 style={{ 
                   backgroundColor: '#f9fafb', 
                   border: '1px solid #e5e7eb',
@@ -623,7 +623,7 @@ export function AdminPartnerships() {
                 }}
               >
                 <span 
-                  className="not-italic font-mono text-[9px] uppercase font-bold block mb-1"
+                  className="not-italic font-medium text-xs uppercase font-bold block mb-1"
                   style={{ color: '#9ca3af' }}
                 >
                   Statement Logged in Registry:
@@ -632,7 +632,7 @@ export function AdminPartnerships() {
               </div>
 
               <div 
-                className="pt-4 flex justify-between items-center text-[9px] font-mono uppercase"
+                className="pt-4 flex justify-between items-center text-xs font-medium uppercase"
                 style={{ borderTop: '1px solid #e5e7eb', color: '#9ca3af' }}
               >
                 <div>ICA SOVEREIGN ARCHIVE • ID {selectedAppForCertificate.id}</div>

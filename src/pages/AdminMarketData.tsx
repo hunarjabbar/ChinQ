@@ -47,7 +47,7 @@ export function AdminMarketData() {
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 pb-5">
         <div>
-          <h2 className="text-2xl font-serif font-black text-ink-900 uppercase tracking-wide flex items-center gap-2">
+          <h2 className="text-2xl font-bold font-black text-brand-800 uppercase tracking-wide flex items-center gap-2">
             <Activity className="text-brand-800" /> Market Data Control
           </h2>
           <p className="text-sm text-gray-500 mt-1">Manage global market indices and commodities.</p>
@@ -77,7 +77,7 @@ export function AdminMarketData() {
             <tbody className="divide-y divide-gray-200">
               {marketData.map((item: any) => (
                 <tr key={item.id} className="hover:bg-gray-50/50">
-                  <td className="px-6 py-4 font-mono font-bold text-gray-900">{item.symbol}</td>
+                  <td className="px-6 py-4 font-medium font-bold text-gray-900">{item.symbol}</td>
                   <td className="px-6 py-4 text-xs font-bold tracking-wider text-gray-500 uppercase">{item.category}</td>
                   <td className="px-6 py-4">
                     {editingId === item.id ? (
@@ -126,12 +126,12 @@ export function AdminMarketData() {
                     {editingId === item.id ? (
                       <input 
                         type="text" 
-                        className="w-24 px-2 py-1 border rounded bg-white text-sm font-mono"
+                        className="w-24 px-2 py-1 border rounded bg-white text-sm font-medium"
                         value={editForm.volume} 
                         onChange={e => setEditForm({...editForm, volume: e.target.value})} 
                       />
                     ) : (
-                      <span className="font-mono text-gray-600">{item.volume}</span>
+                      <span className="font-medium text-gray-600">{item.volume}</span>
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -155,7 +155,7 @@ export function AdminMarketData() {
             </tbody>
           </table>
           {isLoading && (
-            <div className="p-8 text-center text-gray-500 font-mono text-sm uppercase animate-pulse">
+            <div className="p-8 text-center text-gray-500 font-medium text-sm uppercase animate-pulse">
               Loading market feeds...
             </div>
           )}

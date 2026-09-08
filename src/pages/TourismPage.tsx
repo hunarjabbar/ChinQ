@@ -65,7 +65,7 @@ export function TourismPage() {
       <div className="bg-white dark:bg-neutral-800/90 border-2 border-brand-800 dark:border-neutral-700 p-6 sm:p-8 rounded-xs shadow-xs space-y-4 relative overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-brand-800/5 pointer-events-none" />
 
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800 text-white text-xs font-mono font-black uppercase tracking-wider rounded-xs">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-800 text-white text-xs font-black uppercase tracking-wider rounded-xs">
           <Compass className="w-4 h-4" />
           <span>
             {currentLang === 'ar' ? 'بوابة السياحة والتبادل الثقافي' :
@@ -75,7 +75,7 @@ export function TourismPage() {
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-serif font-black text-ink-900 dark:text-neutral-100 tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-brand-800 dark:text-neutral-100 tracking-tight leading-tight">
           {currentLang === 'ar' ? 'السياحة والتراث بين الصين والعراق وإقليم كوردستان' :
            currentLang === 'zh' ? '连接万里长城与美索不达米亚：中伊库文化旅游合作与精选路线' :
            currentLang === 'ckb' ? 'گەشتوگوزار و کەلەپوور لە نێوان چین و عێراق و هەرێمی کوردستان' :
@@ -128,7 +128,7 @@ export function TourismPage() {
                 placeholder="Search city, site, or keyword..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 bg-neutral-50 border border-gray-300 rounded-xs text-xs font-mono focus:outline-none focus:border-brand-800"
+                className="w-full pl-9 pr-3 py-2 bg-neutral-50 border border-gray-300 rounded-xs text-xs focus:outline-none focus:border-brand-800"
               />
             </div>
 
@@ -137,7 +137,7 @@ export function TourismPage() {
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="w-full px-3 py-2.5 text-xs font-mono font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] cursor-pointer appearance-none relative"
+                className="w-full px-3 py-2.5 text-xs font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1A1A1A] cursor-pointer appearance-none relative"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -159,7 +159,7 @@ export function TourismPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2.5 text-xs font-mono font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-800 cursor-pointer appearance-none relative"
+                className="w-full px-3 py-2.5 text-xs font-bold uppercase rounded-xs bg-neutral-100 text-gray-700 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-800 cursor-pointer appearance-none relative"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                   backgroundRepeat: 'no-repeat',
@@ -188,10 +188,10 @@ export function TourismPage() {
         ) : spots.length === 0 ? (
           <div className="p-12 text-center bg-white border border-dashed border-gray-300 rounded-xs space-y-3">
             <Compass className="w-10 h-10 text-gray-400 mx-auto" />
-            <p className="text-sm font-mono text-gray-600">No tourism destinations match your criteria.</p>
+            <p className="text-sm text-gray-600">No tourism destinations match your criteria.</p>
             <button
               onClick={() => { setSelectedRegion('ALL'); setSelectedCategory('ALL'); setSearchQuery(''); }}
-              className="text-xs font-mono font-bold text-brand-800 hover:underline"
+              className="text-xs font-bold text-brand-800 hover:underline"
             >
               Reset Filters
             </button>
@@ -215,11 +215,11 @@ export function TourismPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />
-                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-xs flex items-center gap-1 shadow-xs">
+                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-bold uppercase px-2 py-0.5 rounded-xs flex items-center gap-1 shadow-xs">
                       <MapPin className="w-2.5 h-2.5 text-brand-800" />
                       <span>{spot.city}, {spot.region}</span>
                     </div>
-                    <div className="absolute bottom-2 right-2 bg-black/80 text-amber-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded-xs flex items-center gap-1">
+                    <div className="absolute bottom-2 right-2 bg-black/80 text-amber-300 text-xs font-bold px-2 py-0.5 rounded-xs flex items-center gap-1">
                       <Star className="w-3 h-3 fill-amber-300" />
                       <span>{spot.rating}</span>
                     </div>
@@ -227,11 +227,11 @@ export function TourismPage() {
 
                   {/* Spot Info */}
                   <div>
-                    <div className="flex items-center justify-between text-[10px] font-mono font-bold text-brand-800 uppercase tracking-wider mb-1">
+                    <div className="flex items-center justify-between text-xs font-bold text-brand-800 uppercase tracking-wider mb-1">
                       <span>{spot.category.replace('_', ' ')}</span>
                       <span className="text-gray-500">{spot.estimatedCost}</span>
                     </div>
-                    <h3 className="text-lg font-serif font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
+                    <h3 className="text-lg font-bold text-ink-900 group-hover:text-brand-800 line-clamp-2 leading-snug transition-colors">
                       {getSpotTitle(spot)}
                     </h3>
                     <p className="text-xs font-sans text-gray-600 line-clamp-2 mt-2 leading-relaxed">
@@ -263,31 +263,31 @@ export function TourismPage() {
         {/* Travel Advisory & Cultural Etiquette Section */}
         <div className="bg-white border-2 border-brand-800 p-6 sm:p-8 rounded-xs shadow-sm space-y-6">
           <div className="border-b border-gray-200 pb-3">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-bold uppercase rounded-xs mb-2">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-xs font-bold uppercase rounded-xs mb-2">
               <Globe2 className="w-3.5 h-3.5 text-brand-800" /> Bilateral Traveler Handbook
             </div>
-            <h3 className="text-xl sm:text-2xl font-serif font-bold text-ink-900">
+            <h3 className="text-xl sm:text-2xl font-bold text-brand-800">
               Essential Travel & Cultural Exchange Guidelines
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-sans">
             <div className="space-y-2 bg-neutral-50 p-4 border border-gray-200 rounded-xs">
-              <h4 className="font-mono font-bold text-sm text-brand-800 uppercase">1. Visa & Entry Formalities</h4>
+              <h4 className="font-bold text-sm text-brand-800 uppercase">1. Visa & Entry Formalities</h4>
               <p className="text-gray-700 leading-relaxed">
                 Chinese citizens traveling to Iraq and the Kurdistan Region receive 30-day Visa on Arrival or E-Visa. Iraqi and Kurdish business delegations receive expedited visa processing through Chinese Embassies in Baghdad and Erbil.
               </p>
             </div>
 
             <div className="space-y-2 bg-neutral-50 p-4 border border-gray-200 rounded-xs">
-              <h4 className="font-mono font-bold text-sm text-brand-800 uppercase">2. Flight Connections</h4>
+              <h4 className="font-bold text-sm text-brand-800 uppercase">2. Flight Connections</h4>
               <p className="text-gray-700 leading-relaxed">
                 Direct flights connect Guangzhou and Chengdu to Baghdad International (BGW) and Erbil International (EBL). Transit options through Dubai, Istanbul, and Doha are also widely available.
               </p>
             </div>
 
             <div className="space-y-2 bg-neutral-50 p-4 border border-gray-200 rounded-xs">
-              <h4 className="font-mono font-bold text-sm text-brand-800 uppercase">3. Currency & Hospitality</h4>
+              <h4 className="font-bold text-sm text-brand-800 uppercase">3. Currency & Hospitality</h4>
               <p className="text-gray-700 leading-relaxed">
                 Chinese Yuan (CNY), Iraqi Dinar (IQD), and USD are widely accepted across business hubs. Kurdish and Iraqi hospitality is world-famous, with traditional tea and meals offered to foreign guests.
               </p>
@@ -321,16 +321,16 @@ export function TourismPage() {
                       alt={getSpotTitle(activeSpot)}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-xs">
+                    <div className="absolute top-2 left-2 bg-brand-800 text-white text-xs font-black uppercase px-2.5 py-0.5 rounded-xs">
                       {activeSpot.region}
                     </div>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
+                    <h2 className="text-2xl font-black text-brand-800 leading-tight">
                       {getSpotTitle(activeSpot)}
                     </h2>
-                    <p className="text-xs font-mono font-bold text-brand-800 mt-1 flex items-center gap-1">
+                    <p className="text-xs font-bold text-brand-800 mt-1 flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5" />
                       {activeSpot.city}, {activeSpot.region} • {activeSpot.category.replace('_', ' ')}
                     </p>
@@ -361,11 +361,11 @@ export function TourismPage() {
                 {/* Tour / Travel Inquiry Form */}
                 <div className="bg-neutral-100 p-5 rounded-xs border border-gray-300 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-1.5 text-xs font-mono font-black uppercase text-brand-800 mb-2">
+                    <div className="flex items-center gap-1.5 text-xs font-black uppercase text-brand-800 mb-2">
                       <Sparkles className="w-4 h-4" />
                       <span>Bilateral Tour & Visa Advisory</span>
                     </div>
-                    <h3 className="text-lg font-serif font-bold text-ink-900 mb-1">
+                    <h3 className="text-lg font-bold text-brand-800 mb-1">
                       Plan Your Trip to {activeSpot.city}
                     </h3>
                     <p className="text-xs font-sans text-gray-600 mb-4">
@@ -375,13 +375,13 @@ export function TourismPage() {
                     {inquirySent ? (
                       <div className="p-6 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xs text-center space-y-2">
                         <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                        <h4 className="font-mono font-bold text-sm">Inquiry Received!</h4>
+                        <h4 className="font-bold text-sm">Inquiry Received!</h4>
                         <p className="text-xs font-sans">
                           Our bilateral travel officer will contact you shortly with custom itinerary details and visa procedures.
                         </p>
                       </div>
                     ) : (
-                      <form onSubmit={handleInquirySubmit} className="space-y-3 font-mono text-xs">
+                      <form onSubmit={handleInquirySubmit} className="space-y-3 text-xs">
                         <div>
                           <label className="block font-bold text-gray-700 mb-1">Full Name</label>
                           <input
@@ -454,7 +454,7 @@ export function TourismPage() {
                     )}
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-gray-200 text-[10px] font-mono text-gray-500 text-center">
+                  <div className="mt-4 pt-3 border-t border-gray-200 text-xs text-gray-500 text-center">
                     Official Bilateral Tourism & Cultural Exchange Service
                   </div>
                 </div>

@@ -141,7 +141,7 @@ export default function TiptapEditor({ value, onChange, dir }: TiptapEditorProps
           value={value}
           onChange={(e) => onChange(e.target.value)}
           dir={dir}
-          className={`w-full min-h-[420px] p-5 font-serif text-lg leading-relaxed outline-none resize-y transition-all bg-white ${
+          className={`w-full min-h-[420px] p-5 text-lg leading-relaxed outline-none resize-y transition-all bg-white ${
             isRtl ? 'text-right' : 'text-left'
           }`}
           placeholder={
@@ -152,7 +152,7 @@ export default function TiptapEditor({ value, onChange, dir }: TiptapEditorProps
         />
 
         {/* Real-time word count details */}
-        <div className="absolute bottom-2 right-4 text-[10px] font-mono text-gray-400 bg-white/80 px-2 py-0.5 rounded pointer-events-none">
+        <div className="absolute bottom-2 right-4 text-xs text-gray-400 bg-white/80 px-2 py-0.5 rounded pointer-events-none">
           {value.trim() ? value.trim().split(/\s+/).length : 0} words | {value.length} chars
         </div>
       </div>

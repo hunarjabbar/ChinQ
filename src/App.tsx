@@ -88,16 +88,18 @@ function ThemeApplier() {
         root.style.setProperty('--color-paper-50', paperColor || '#ffffff');
       }
       if (brandColor) {
-        const bc = brandColor.startsWith('#') ? brandColor : '#8B0000';
-        root.style.setProperty('--color-brand-950', mixColor(bc, '#000000', 0.4));
-        root.style.setProperty('--color-brand-900', mixColor(bc, '#000000', 0.2));
-        root.style.setProperty('--color-brand-800', bc);
-        root.style.setProperty('--color-brand-700', mixColor(bc, '#ffffff', 0.15));
-        root.style.setProperty('--color-brand-600', mixColor(bc, '#ffffff', 0.3));
-        root.style.setProperty('--color-brand-500', mixColor(bc, '#ffffff', 0.5));
-        root.style.setProperty('--color-brand-400', mixColor(bc, '#ffffff', 0.7));
-        root.style.setProperty('--color-brand-300', mixColor(bc, '#ffffff', 0.8));
-        root.style.setProperty('--color-brand-200', mixColor(bc, '#ffffff', 0.88));
+        const bc = (brandColor && brandColor.startsWith('#') && brandColor !== '#8B0000' && brandColor !== '#990000' && brandColor !== '#C91C24' && brandColor !== '#800000' && brandColor !== '#a30000') 
+          ? brandColor 
+          : '#cc0000';
+        root.style.setProperty('--color-brand-950', mixColor(bc, '#000000', 0.18));
+        root.style.setProperty('--color-brand-900', bc); // Exact same red tone as trending background red (#cc0000)
+        root.style.setProperty('--color-brand-800', bc); // Trending background red (#cc0000)
+        root.style.setProperty('--color-brand-700', mixColor(bc, '#ffffff', 0.12));
+        root.style.setProperty('--color-brand-600', mixColor(bc, '#ffffff', 0.25));
+        root.style.setProperty('--color-brand-500', mixColor(bc, '#ffffff', 0.45));
+        root.style.setProperty('--color-brand-400', mixColor(bc, '#ffffff', 0.65));
+        root.style.setProperty('--color-brand-300', mixColor(bc, '#ffffff', 0.78));
+        root.style.setProperty('--color-brand-200', mixColor(bc, '#ffffff', 0.86));
         root.style.setProperty('--color-brand-100', mixColor(bc, '#ffffff', 0.92));
         root.style.setProperty('--color-brand-50', mixColor(bc, '#ffffff', 0.96));
       }

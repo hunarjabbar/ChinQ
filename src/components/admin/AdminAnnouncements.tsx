@@ -73,7 +73,7 @@ export function AdminAnnouncements() {
             <Radio className="text-brand-300 animate-pulse" size={24} />
             <h2 className="text-xs font-black uppercase tracking-[0.4em] text-brand-300">Global Synchronized Broadcast</h2>
           </div>
-          <h3 className="text-3xl font-serif font-black leading-tight">Authorize a trilingual system announcement.</h3>
+          <h3 className="text-3xl font-bold font-black leading-tight">Authorize a trilingual system announcement.</h3>
           <p className="text-brand-100 text-sm font-medium opacity-80 leading-relaxed">
             This message will be instantly synchronized across all public portal headers in English, Arabic, Chinese, and Kurdish. Use for critical summits, market shifts, or sovereign updates.
           </p>
@@ -85,7 +85,7 @@ export function AdminAnnouncements() {
           <form onSubmit={handleSubmit} className="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1.5">
-                <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest">Broadcast Priority</label>
+                <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Broadcast Priority</label>
                 <select 
                   className="w-full border border-neutral-200 bg-neutral-50 py-2.5 px-4 text-xs font-bold rounded-lg focus:outline-none focus:border-brand-800 transition-all"
                   value={formData.type}
@@ -97,19 +97,19 @@ export function AdminAnnouncements() {
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="block text-[10px] font-black text-neutral-500 uppercase tracking-widest">Signal Activation</label>
+                <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Signal Activation</label>
                 <div className="flex bg-neutral-100 p-1 rounded-lg">
                   <button 
                     type="button"
                     onClick={() => setFormData({...formData, isActive: true})}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${formData.isActive ? 'bg-brand-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${formData.isActive ? 'bg-brand-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                   >
                     Active
                   </button>
                   <button 
                     type="button"
                     onClick={() => setFormData({...formData, isActive: false})}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${!formData.isActive ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-black uppercase tracking-wider rounded-md transition-all cursor-pointer ${!formData.isActive ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                   >
                     Inactive
                   </button>
@@ -125,7 +125,7 @@ export function AdminAnnouncements() {
                 { id: 'ckb', label: 'پەخشی کوردی', key: 'contentCkb' },
               ].map((lang) => (
                 <div key={lang.id} className="space-y-1.5" dir={lang.id === 'ar' || lang.id === 'ckb' ? 'rtl' : 'ltr'}>
-                  <label className="block text-[10px] font-black text-neutral-400 uppercase tracking-widest text-start">{lang.label}</label>
+                  <label className="block text-xs font-black text-neutral-400 uppercase tracking-widest text-start">{lang.label}</label>
                   <input 
                     type="text"
                     required
@@ -151,7 +151,7 @@ export function AdminAnnouncements() {
 
         <div className="space-y-6">
           <div className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm space-y-6">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-ink-900 flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-widest text-brand-900 flex items-center gap-2">
               <History size={16} className="text-brand-800" />
               Broadcast History
             </h3>
@@ -164,14 +164,14 @@ export function AdminAnnouncements() {
                     }`}>
                       {ann.isActive ? 'Active' : 'Archived'}
                     </span>
-                    <span className="text-[8px] font-mono text-neutral-400">{new Date(ann.createdAt).toLocaleDateString()}</span>
+                    <span className="text-[8px] font-medium text-neutral-400">{new Date(ann.createdAt).toLocaleDateString()}</span>
                   </div>
-                  <p className="text-[11px] font-bold text-ink-900 leading-tight">"{ann.contentEn}"</p>
-                  <p className="text-[10px] text-neutral-500 italic" dir="rtl">"{ann.contentAr}"</p>
+                  <p className="text-[11px] font-bold text-brand-900 leading-tight">"{ann.contentEn}"</p>
+                  <p className="text-xs text-neutral-500 italic" dir="rtl">"{ann.contentAr}"</p>
                 </div>
               ))}
               {announcements.length === 0 && (
-                <div className="py-12 text-center text-neutral-400 italic text-xs font-mono">
+                <div className="py-12 text-center text-neutral-400 italic text-xs font-medium">
                   No broadcast history found.
                 </div>
               )}
@@ -181,9 +181,9 @@ export function AdminAnnouncements() {
           <div className="bg-amber-50 border border-amber-200 p-6 rounded-2xl space-y-3">
              <div className="flex items-center gap-2 text-amber-800">
                 <AlertTriangle size={18} />
-                <h4 className="text-[10px] font-black uppercase tracking-widest">Synchronization Protocol</h4>
+                <h4 className="text-xs font-black uppercase tracking-widest">Synchronization Protocol</h4>
              </div>
-             <p className="text-[10px] text-amber-900 leading-relaxed font-medium">
+             <p className="text-xs text-amber-900 leading-relaxed font-medium">
                 Authorizing a new broadcast will automatically archive all other active signals. Only one trilingual broadcast can be live across the sovereign lattice at any given time.
              </p>
           </div>

@@ -88,35 +88,35 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
     switch (status) {
       case 'COMPLETED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
             <CheckCircle2 size={13} />
             <span>{labels.statusCompleted}</span>
           </span>
         );
       case 'PROCESSING':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
             <Clock size={13} className="animate-spin" />
             <span>{labels.statusProcessing}</span>
           </span>
         );
       case 'COMPLIANCE_HOLD':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-800">
             <AlertTriangle size={13} />
             <span>{labels.statusHold}</span>
           </span>
         );
       case 'REJECTED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
             <AlertTriangle size={13} />
             <span>{labels.statusRejected}</span>
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800">
             <Clock size={13} />
             <span>{labels.statusPending}</span>
           </span>
@@ -129,7 +129,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
       
       {/* Header */}
       <div className="bg-neutral-100 dark:bg-neutral-800/80 p-6 border-b border-neutral-200 dark:border-neutral-700 text-start">
-        <h3 className="text-lg sm:text-xl font-serif font-black text-ink-900 dark:text-white">
+        <h3 className="text-lg sm:text-xl font-black text-brand-900 dark:text-white">
           {labels.title}
         </h3>
         <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
@@ -145,7 +145,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
               onChange={(e) => setSearchRef(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleLookup(searchRef)}
               placeholder={labels.inputPlaceholder}
-              className="w-full text-xs font-mono font-bold p-3 pl-9 bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none uppercase"
+              className="w-full text-xs font-bold p-3 pl-9 bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none uppercase"
             />
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
           </div>
@@ -177,10 +177,10 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-black text-brand-800 dark:text-brand-400">
+                <span className="text-xs font-black text-brand-800 dark:text-brand-400">
                   {order.reference}
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
+                <span className="text-xs px-2 py-0.5 rounded font-bold bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
                   {order.orderType === 'BUSINESS' ? 'B2B Enterprise' : 'Retail Consumer'}
                 </span>
               </div>
@@ -195,7 +195,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
                 type="button"
                 onClick={() => handleLookup(order.reference)}
                 title="Refresh Status"
-                className="p-1.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg text-neutral-600 hover:text-ink-900 transition-colors cursor-pointer"
+                className="p-1.5 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg text-neutral-600 hover:text-brand-900 transition-colors cursor-pointer"
               >
                 <RefreshCw size={14} className={isLoading ? 'animate-spin text-brand-800' : ''} />
               </button>
@@ -205,37 +205,37 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
           {/* Amount Overview Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl">
-              <span className="text-[10px] font-mono uppercase text-neutral-500 block mb-1">
+              <span className="text-xs uppercase text-neutral-500 block mb-1">
                 Source Transferred
               </span>
-              <span className="text-xl font-mono font-black text-ink-900 dark:text-white">
+              <span className="text-xl font-black text-brand-900 dark:text-white">
                 {order.sourceAmount.toLocaleString()} {order.sourceCurrency}
               </span>
-              <span className="text-[10px] text-neutral-400 block mt-1">
+              <span className="text-xs text-neutral-400 block mt-1">
                 via {order.settlementMethod}
               </span>
             </div>
 
             <div className="p-4 bg-brand-50/40 dark:bg-brand-950/20 border border-brand-200 dark:border-brand-800 rounded-xl">
-              <span className="text-[10px] font-mono uppercase text-brand-800 dark:text-brand-400 block mb-1">
+              <span className="text-xs uppercase text-brand-800 dark:text-brand-400 block mb-1">
                 Target Beneficiary Receives
               </span>
-              <span className="text-xl font-mono font-black text-brand-800 dark:text-brand-300">
+              <span className="text-xl font-black text-brand-800 dark:text-brand-300">
                 {order.targetAmount.toLocaleString()} {order.targetCurrency}
               </span>
-              <span className="text-[10px] text-brand-600 dark:text-brand-400 block mt-1">
+              <span className="text-xs text-brand-600 dark:text-brand-400 block mt-1">
                 Net after {order.feeAmount.toLocaleString()} fee ({order.feePercent}%)
               </span>
             </div>
 
             <div className="p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl">
-              <span className="text-[10px] font-mono uppercase text-neutral-500 block mb-1">
+              <span className="text-xs uppercase text-neutral-500 block mb-1">
                 Locked Rate
               </span>
-              <span className="text-lg font-mono font-bold text-ink-900 dark:text-white">
+              <span className="text-lg font-bold text-brand-900 dark:text-white">
                 1 e-CNY = {order.exchangeRate.toFixed(2)} IQD
               </span>
-              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block mt-1">
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 block mt-1">
                 PBOC-CBI Wholesale Spread
               </span>
             </div>
@@ -244,28 +244,28 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
           {/* Parties Breakdown */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-1">
-              <span className="font-bold text-neutral-500 block text-[10px] uppercase">
+              <span className="font-bold text-neutral-500 block text-xs uppercase">
                 Sender / Entity
               </span>
-              <div className="font-bold text-ink-900 dark:text-white">
+              <div className="font-bold text-brand-900 dark:text-white">
                 {order.senderCompany ? `${order.senderCompany} (${order.senderName})` : order.senderName}
               </div>
               <div className="text-neutral-500">{order.senderEmail} {order.senderPhone ? `• ${order.senderPhone}` : ''}</div>
               {order.taxRegistrationNumber && (
-                <div className="font-mono text-[11px] text-neutral-600 dark:text-neutral-400">
+                <div className="text-[11px] text-neutral-600 dark:text-neutral-400">
                   TIN: {order.taxRegistrationNumber}
                 </div>
               )}
             </div>
 
             <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-1">
-              <span className="font-bold text-neutral-500 block text-[10px] uppercase">
+              <span className="font-bold text-neutral-500 block text-xs uppercase">
                 Recipient / Destination
               </span>
-              <div className="font-bold text-ink-900 dark:text-white">
+              <div className="font-bold text-brand-900 dark:text-white">
                 {order.recipientName}
               </div>
-              <div className="font-mono text-neutral-600 dark:text-neutral-400">
+              <div className="text-neutral-600 dark:text-neutral-400">
                 ID/Wallet: {order.recipientIdentifier}
               </div>
               <div className="text-neutral-500 text-[11px]">
@@ -276,7 +276,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
 
           {/* Multi-Stage Clearing Timeline */}
           <div className="p-5 bg-neutral-50 dark:bg-neutral-800/30 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-wider text-ink-900 dark:text-white flex items-center gap-2">
+            <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white flex items-center gap-2">
               <ShieldCheck size={14} className="text-brand-800 dark:text-brand-400" />
               <span>Multi-Stage Sovereign Clearing Timeline</span>
             </h4>
@@ -289,15 +289,15 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
                       ? 'bg-emerald-600 text-white' 
                       : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-400'
                   }`}>
-                    {step.completed ? <Check size={12} /> : <span className="text-[9px] font-mono">{idx + 1}</span>}
+                    {step.completed ? <Check size={12} /> : <span className="text-xs font-mono">{idx + 1}</span>}
                   </div>
                   <div className="flex-1 text-xs">
                     <div className="flex items-center justify-between">
-                      <span className={`font-bold ${step.completed ? 'text-ink-900 dark:text-white' : 'text-neutral-400'}`}>
+                      <span className={`font-bold ${step.completed ? 'text-brand-900 dark:text-white' : 'text-neutral-400'}`}>
                         {step.title}
                       </span>
                       {step.timestamp && (
-                        <span className="text-[10px] font-mono text-neutral-400">
+                        <span className="text-xs text-neutral-400">
                           {new Date(step.timestamp).toLocaleTimeString()}
                         </span>
                       )}
@@ -312,15 +312,15 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
           </div>
 
           {/* Cryptographic Hash & e-CNY QR Section */}
-          <div className="p-4 bg-neutral-900 text-white rounded-xl space-y-3 font-mono text-xs">
+          <div className="p-4 bg-neutral-900 text-white rounded-xl space-y-3 text-xs">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase text-neutral-400">
+              <span className="text-xs uppercase text-neutral-400">
                 {labels.txHash}
               </span>
               <button
                 type="button"
                 onClick={() => handleCopyHash(order.settlementTxHash || '0x7f4a8b92819c90')}
-                className="inline-flex items-center gap-1 text-[10px] text-brand-400 hover:text-brand-300 cursor-pointer"
+                className="inline-flex items-center gap-1 text-xs text-brand-400 hover:text-brand-300 cursor-pointer"
               >
                 {copied ? <Check size={12} /> : <Copy size={12} />}
                 <span>{copied ? 'Copied' : 'Copy Hash'}</span>
@@ -329,7 +329,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
             <div className="p-2.5 bg-black/60 rounded border border-white/10 text-[11px] text-amber-300 break-all">
               {order.settlementTxHash || 'PENDING_FINAL_ON_CHAIN_ANCHOR'}
             </div>
-            <div className="text-[10px] text-neutral-400 flex items-center justify-between">
+            <div className="text-xs text-neutral-400 flex items-center justify-between">
               <span>CBI Verification Code: <strong className="text-white">{order.verificationCode}</strong></span>
               <span>Settled At: {order.settledAt ? new Date(order.settledAt).toLocaleDateString() : 'In Clearing Flight'}</span>
             </div>

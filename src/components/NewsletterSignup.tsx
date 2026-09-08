@@ -81,7 +81,7 @@ export function NewsletterSignup({ lang }: NewsletterSignupProps) {
     return (
       <div className="w-full max-w-md mx-auto p-6 bg-paper-50 rounded-lg border border-brand-100 flex flex-col items-center justify-center text-center space-y-3">
         <CheckCircle className="w-10 h-10 text-green-600" />
-        <h4 className="font-serif font-bold text-xl text-ink-900">{text.success}</h4>
+        <h4 className="font-bold text-xl text-brand-900">{text.success}</h4>
       </div>
     );
   }
@@ -89,7 +89,7 @@ export function NewsletterSignup({ lang }: NewsletterSignupProps) {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="mb-4">
-        <h3 className="font-serif font-bold text-xl text-ink-900 mb-2">{text.title}</h3>
+        <h3 className="font-bold text-xl text-brand-900 mb-2">{text.title}</h3>
         <p className="text-sm text-gray-600">{text.description}</p>
       </div>
       

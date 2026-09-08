@@ -150,10 +150,10 @@ export function NewsletterSubscriptionModal({
                 <Mail size={22} />
               </div>
               <div>
-                <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-brand-800 dark:text-brand-400">
+                <span className="text-xs font-bold tracking-widest uppercase text-brand-800 dark:text-brand-400">
                   {lang === 'ar' ? 'خدمة الإحاطة الإخبارية' : lang === 'zh' ? '简报服务' : lang === 'ckb' ? 'خزمەتگوزاری نامەنامە' : 'Executive Dispatch'}
                 </span>
-                <h3 className="font-serif text-xl md:text-2xl font-black text-ink-900 dark:text-neutral-100 tracking-tight">
+                <h3 className="text-xl md:text-2xl font-black text-brand-800 dark:text-neutral-100 tracking-tight">
                   {text.title}
                 </h3>
               </div>
@@ -164,7 +164,7 @@ export function NewsletterSubscriptionModal({
                 <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-950/50 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
                   <CheckCircle size={36} />
                 </div>
-                <h4 className="font-serif text-xl font-bold text-ink-900 dark:text-neutral-100">{text.success}</h4>
+                <h4 className="text-xl font-bold text-ink-900 dark:text-neutral-100">{text.success}</h4>
                 <p className="text-sm text-gray-600 dark:text-neutral-300 max-w-sm mx-auto">{text.successDesc}</p>
                 <button
                   onClick={handleClose}

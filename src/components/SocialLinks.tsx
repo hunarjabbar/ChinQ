@@ -275,7 +275,7 @@ export function WeChatModal({
             <QrCode size={26} />
           </div>
 
-          <h3 className="text-lg font-bold text-gray-900 font-serif mb-1">
+          <h3 className="text-lg font-bold text-gray-900 mb-1">
             {lang === 'zh' ? '关注微信官方公众号' : 
              lang === 'ar' ? 'تابعنا على ويتشات الرسمي' : 
              lang === 'ckb' ? 'لە ویچات هاوڕێمان بە' : 
@@ -328,12 +328,12 @@ export function WeChatModal({
               </svg>
 
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span className="bg-white/95 px-2 py-0.5 rounded text-[9px] font-mono font-bold text-[#07C160] border border-emerald-200 shadow-xs">
+                <span className="bg-white/95 px-2 py-0.5 rounded text-xs font-bold text-[#07C160] border border-emerald-200 shadow-xs">
                   ICD WECHAT
                 </span>
               </div>
             </div>
-            <div className="text-[10px] text-gray-500 font-mono mt-2 font-medium">
+            <div className="text-xs text-gray-500 mt-2 font-medium">
               ID: <span className="font-bold text-gray-800">{wechatId}</span>
             </div>
           </div>
@@ -388,7 +388,7 @@ export function SocialHeaderBar({ lang }: { lang: Locale }) {
   return (
     <>
       <div id="header-social-channels" className="flex items-center gap-1.5 sm:gap-2">
-        <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-gray-400 me-1 hidden sm:inline">
+        <span className="text-xs font-bold uppercase tracking-widest text-gray-400 me-1 hidden sm:inline">
           {lang === 'zh' ? '关注我们:' : lang === 'ar' ? 'تابعنا:' : lang === 'ckb' ? 'هاوڕێمان بە:' : 'Follow:'}
         </span>
         {SOCIAL_PLATFORMS.map((item) => {
@@ -469,21 +469,21 @@ export function SocialFooterShowcase({ lang }: { lang: Locale }) {
     <div id="footer-social-showcase" className="w-full space-y-4 pt-6 border-t border-brand-800/10">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
-          <h4 className="font-serif text-sm sm:text-base font-bold uppercase tracking-wider text-brand-800 flex items-center gap-2">
+          <h4 className="text-sm sm:text-base font-bold uppercase tracking-wider text-brand-800 flex items-center gap-2">
             <Radio size={16} className="text-brand-800 animate-pulse" />
             {lang === 'zh' ? '官方全媒体发布与社群渠道 (8大平台)' : 
              lang === 'ar' ? 'الشبكات والمنصات الرقمية الرسمية (٨ قنوات)' : 
              lang === 'ckb' ? 'کەناڵ و تۆڕە کۆمەڵایەتییە فەرمییەکان (٨ کەناڵ)' : 
              'Official Global Social & Broadcast Networks (8 Platforms)'}
           </h4>
-          <p className="text-xs text-neutral-500 font-mono mt-0.5">
+          <p className="text-xs text-neutral-500 mt-0.5">
             {lang === 'zh' ? '通过官方认证社媒第一时间获取中伊双边经贸、基建与主权研究快讯' : 
              lang === 'ar' ? 'تغطيات حية وشبكات تواصل ثنائية مباشرة لقطاع الأعمال والاستثمار' : 
              lang === 'ckb' ? 'هەواڵ و زانیاری ڕاستەوخۆی پڕۆژە هاوبەشەکان لە ڕێگەی تۆڕە فەرمییەکانەوە' : 
              'Connect with verified correspondents, B2B networks, and live dispatch feeds across all major platforms.'}
           </p>
         </div>
-        <div className="flex items-center gap-1.5 bg-neutral-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase text-brand-800">
+        <div className="flex items-center gap-1.5 bg-neutral-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 px-3 py-1 rounded-full text-xs font-bold uppercase text-brand-800">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
           <span>8 Live Nodes</span>
         </div>
@@ -495,23 +495,23 @@ export function SocialFooterShowcase({ lang }: { lang: Locale }) {
           const isModal = item.isModal;
 
           const CardContent = (
-            <div className="flex flex-col items-center text-center p-3.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:shadow-md transition-all duration-300 group hover:-translate-y-0.5 h-full justify-between">
+            <div className="flex flex-col items-center text-center p-3.5 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-white/95 via-white/70 to-amber-50/30 dark:from-neutral-900/90 dark:via-neutral-900/70 dark:to-neutral-800/50 border border-white/80 dark:border-neutral-700/60 shadow-[0_8px_30px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.8)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_12px_35px_rgba(180,140,60,0.15)] transition-all duration-300 group hover:-translate-y-1 h-full justify-between">
               <div className="flex flex-col items-center">
                 <div 
-                  className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-transform duration-300 group-hover:scale-110 shadow-xs ${item.bgClass}`}
-                  style={{ border: `1px solid ${item.colorHex}30` }}
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-2.5 transition-all duration-300 group-hover:scale-110 shadow-sm backdrop-blur-md ${item.bgClass}`}
+                  style={{ border: `1px solid ${item.colorHex}40` }}
                 >
-                  <PlatformIcon platform={item.key} size={20} className={item.textClass} />
+                  <PlatformIcon platform={item.key} size={21} className={item.textClass} />
                 </div>
-                <div className="font-bold text-xs text-ink-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors">
+                <div className="font-serif font-black text-xs text-brand-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors tracking-tight">
                   {item.name}
                 </div>
-                <div className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 line-clamp-1 mt-0.5">
+                <div className="text-[10px] font-sans font-medium text-neutral-400 dark:text-neutral-500 line-clamp-1 mt-0.5 tracking-wide">
                   {item.handle}
                 </div>
               </div>
-              <div className="mt-2.5 w-full">
-                <span className="inline-block w-full py-0.5 px-1.5 rounded text-[10px] font-mono font-bold tracking-tight bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 group-hover:bg-brand-800 group-hover:text-white transition-colors border border-neutral-200 dark:border-neutral-700">
+              <div className="mt-3 w-full">
+                <span className="inline-block w-full py-1 px-2 rounded-lg text-[10px] font-bold font-sans tracking-wider uppercase bg-brand-50/70 dark:bg-brand-950/50 text-brand-800 dark:text-brand-300 group-hover:bg-brand-800 group-hover:text-white transition-all duration-300 border border-brand-200/50 dark:border-brand-800/50 shadow-2xs">
                   {getBadge(item)}
                 </span>
               </div>
@@ -589,7 +589,7 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
               transition={{ duration: 0.2 }}
               className="bg-white dark:bg-neutral-900/95 backdrop-blur-md p-4 rounded-xl shadow-2xl border border-gray-200 dark:border-neutral-800 flex flex-col gap-2 max-w-xs text-start mb-1"
             >
-              <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-800 border-b border-gray-100 dark:border-neutral-800 pb-1.5 px-1 flex items-center justify-between">
+              <div className="text-xs font-bold uppercase tracking-widest text-brand-800 border-b border-gray-100 dark:border-neutral-800 pb-1.5 px-1 flex items-center justify-between">
                 <span>{lang === 'zh' ? '官方社交平台 (8)' : lang === 'ar' ? 'القنوات الرسمية (٨)' : 'Official Social Hub'}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               </div>
@@ -609,7 +609,7 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
                         title={`${item.name} - ${item.badge}`}
                       >
                         <PlatformIcon platform={item.key} size={17} />
-                        <span className="text-[8px] font-bold font-mono mt-0.5 truncate w-full text-center">{item.name.split(' ')[0]}</span>
+                        <span className="text-[8px] font-bold mt-0.5 truncate w-full text-center">{item.name.split(' ')[0]}</span>
                       </button>
                     );
                   }
@@ -625,7 +625,7 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
                       title={`${item.name} - ${item.badge}`}
                     >
                       <PlatformIcon platform={item.key} size={17} />
-                      <span className="text-[8px] font-bold font-mono mt-0.5 truncate w-full text-center">{item.name.split(' ')[0]}</span>
+                      <span className="text-[8px] font-bold mt-0.5 truncate w-full text-center">{item.name.split(' ')[0]}</span>
                     </a>
                   );
                 })}
@@ -742,7 +742,7 @@ export function ArticleSocialBar({
                 title={`Share via ${item.name}`}
               >
                 {item.icon}
-                <span className="text-[10px] hidden sm:inline">{item.name}</span>
+                <span className="text-xs hidden sm:inline">{item.name}</span>
               </button>
             );
           }
@@ -758,7 +758,7 @@ export function ArticleSocialBar({
               title={`Share via ${item.name}`}
             >
               {item.icon}
-              <span className="text-[10px] hidden sm:inline">{item.name}</span>
+              <span className="text-xs hidden sm:inline">{item.name}</span>
             </a>
           );
         })}
@@ -771,7 +771,7 @@ export function ArticleSocialBar({
           title="Copy direct article URL"
         >
           {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-          <span className="text-[10px]">
+          <span className="text-xs">
             {copied ? (lang === 'zh' ? '已复制' : lang === 'ar' ? 'تم النسخ' : 'Copied!') : (lang === 'zh' ? '复制链接' : lang === 'ar' ? 'نسخ الرابط' : 'Copy Link')}
           </span>
         </button>

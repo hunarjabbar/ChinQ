@@ -60,7 +60,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-brand-800 pb-4 mb-6 gap-3">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase tracking-wider rounded-xs mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-800 text-white text-xs font-black uppercase tracking-wider rounded-xs mb-2">
             <Sparkles className="w-3 h-3" />
             <span>
               {currentLang === 'ar' ? 'الكتب الأكثر تداولاً' :
@@ -69,7 +69,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                'TRENDING BOOKS'}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-serif font-black text-ink-900 dark:text-neutral-100 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-black text-brand-900 dark:text-neutral-100 tracking-tight">
             {currentLang === 'ar' ? 'أبرز 4 كتب متداولة حول الصين والعراق وكردستان' :
              currentLang === 'zh' ? '四部精选热门著作：中国、伊拉克与中东局势' :
              currentLang === 'ckb' ? '٤ کتێبی زۆرترین خوێنراو دەربارەی چین و عێراق و کوردستان' :
@@ -79,7 +79,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
 
         <Link
           to={`/${currentLang}/books`}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-800 dark:text-brand-400 hover:text-black dark:hover:text-white transition-colors shrink-0 uppercase tracking-wider"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-800 dark:text-brand-400 hover:text-black dark:hover:text-white transition-colors shrink-0 uppercase tracking-wider"
         >
           <span>
             {currentLang === 'ar' ? 'تصفح الـ 50 كتاباً بالكامل ←' :
@@ -99,7 +99,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
         </div>
       ) : trendingFour.length === 0 ? (
         <div className="p-8 text-center bg-neutral-50 dark:bg-neutral-800 border border-dashed border-gray-300 dark:border-neutral-700 rounded-xs">
-          <p className="text-xs font-mono text-gray-500 dark:text-neutral-400">No trending books selected yet in admin portal.</p>
+          <p className="text-xs text-gray-500 dark:text-neutral-400">No trending books selected yet in admin portal.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -112,7 +112,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
               className="group bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-500 hover:shadow-md transition-all p-3.5 rounded-xs flex flex-col justify-between cursor-pointer relative"
             >
               {/* Badge for Order */}
-              <div className="absolute top-2 left-2 z-10 w-6 h-6 bg-brand-800 text-white font-mono font-black text-xs flex items-center justify-center rounded-xs shadow-xs">
+              <div className="absolute top-2 left-2 z-10 w-6 h-6 bg-brand-800 text-white font-black text-xs flex items-center justify-center rounded-xs shadow-xs">
                 #{index + 1}
               </div>
 
@@ -129,11 +129,11 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
 
                 {/* Metadata */}
                 <div>
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-gray-500 dark:text-neutral-400 mb-1">
+                  <div className="flex items-center justify-between text-xs font-bold text-gray-500 dark:text-neutral-400 mb-1">
                     <span className="text-brand-800 dark:text-brand-400 uppercase">{book.region.replace('_', ' ')}</span>
                     <span>{book.year}</span>
                   </div>
-                  <h3 className="text-sm font-serif font-bold text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 line-clamp-2 leading-snug transition-colors">
+                  <h3 className="text-sm font-bold text-brand-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 line-clamp-2 leading-snug transition-colors">
                     {getBookTitle(book)}
                   </h3>
                   <p className="text-xs font-sans text-gray-600 dark:text-neutral-400 line-clamp-1 mt-1 font-medium">
@@ -181,7 +181,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] font-mono space-y-1.5 text-gray-700">
+                  <div className="bg-neutral-100 p-3 rounded-xs text-[11px] space-y-1.5 text-gray-700">
                     <div className="flex justify-between">
                       <span className="text-gray-500">Publisher:</span>
                       <span className="font-bold text-gray-900 line-clamp-1">{activeBook.publisher}</span>
@@ -200,15 +200,15 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                 <div className="sm:col-span-2 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 bg-brand-800 text-white text-[10px] font-mono font-black uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-brand-800 text-white text-xs font-black uppercase rounded-xs">
                         {activeBook.region.replace('_', ' ')}
                       </span>
-                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-[10px] font-mono font-bold uppercase rounded-xs">
+                      <span className="px-2 py-0.5 bg-neutral-200 text-gray-800 text-xs font-bold uppercase rounded-xs">
                         {activeBook.category}
                       </span>
                     </div>
 
-                    <h2 className="text-2xl font-serif font-black text-ink-900 leading-tight">
+                    <h2 className="text-2xl font-black text-brand-900 leading-tight">
                       {getBookTitle(activeBook)}
                     </h2>
                     
@@ -218,7 +218,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                   </div>
 
                   <div className="border-t border-b border-gray-100 py-3">
-                    <h4 className="text-xs font-mono font-black uppercase tracking-wider text-gray-500 mb-2">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-gray-500 mb-2">
                       Academic Overview & Synopsis
                     </h4>
                     <p className="text-xs sm:text-sm font-sans text-gray-700 leading-relaxed text-justify">
@@ -229,7 +229,7 @@ export function TrendingBooksSection({ lang = 'en' }: TrendingBooksSectionProps)
                   <div className="flex flex-wrap gap-3 pt-2">
                     <button
                       onClick={() => handleDownload(activeBook.id)}
-                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono font-bold uppercase rounded-xs transition-colors cursor-pointer ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-xs transition-colors cursor-pointer ${
                         downloaded[activeBook.id]
                           ? 'bg-emerald-700 text-white'
                           : 'bg-brand-800 hover:bg-brand-800 text-white'

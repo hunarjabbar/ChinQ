@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../lib/api';
 import { AdminLayout } from '../components/AdminLayout';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 import { useAuthStore } from '../store/useAuthStore';
 import { 
   Radio, 
@@ -116,7 +117,7 @@ export function AdminDashboard() {
         <div className="space-y-6 text-start max-w-5xl mx-auto py-6">
           <div className="bg-amber-50 border border-amber-200 p-6 rounded-xl text-amber-900 text-sm">
             <span className="font-black uppercase tracking-widest block mb-1">Restricted Secretarial Clearance</span>
-            As an editorial contributor (<span className="font-mono font-bold">{user.role}</span>), all administrative governance modules, user management, and executive sections have vanished. You are authorized exclusively for Article Registry and Draft Dispatch.
+            As an editorial contributor (<span className="font-medium font-bold">{user.role}</span>), all administrative governance modules, user management, and executive sections have vanished. You are authorized exclusively for Article Registry and Draft Dispatch.
           </div>
           <AdminArticleEditor />
         </div>
@@ -131,25 +132,25 @@ export function AdminDashboard() {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 border-b-2 border-brand-800 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-3 text-brand-800">
-              <div className="p-1.5 bg-brand-50 rounded-lg">
+              <div className="p-2 bg-brand-50 rounded-lg">
                 <LayoutDashboard size={20} />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-neutral-400">Governance Platform</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-800">Governance Platform</span>
             </div>
-            <h1 className="text-5xl font-serif font-black text-ink-900 leading-[1.1] tracking-tight">Enterprise Command</h1>
-            <p className="text-base text-neutral-500 font-medium max-w-xl font-serif italic opacity-80">
+            <h1 className="text-3xl sm:text-4xl font-black text-brand-800 leading-tight tracking-tight">Enterprise Command</h1>
+            <p className="text-sm sm:text-base text-neutral-500 font-medium max-w-xl">
               Bilateral trilingual governance dashboard facilitating the Iraq-China information corridor with administrative precision.
             </p>
           </div>
           <div className="flex items-center gap-8 bg-white p-4 rounded-xl border border-neutral-100 shadow-sm">
             <div className="flex flex-col items-end">
-              <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-1">Lattice Synchronized</span>
+              <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-1">Lattice Synchronized</span>
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
                   <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping opacity-75"></div>
                 </div>
-                <span className="text-xs font-black text-ink-900 uppercase tracking-tight font-mono">Status: Nominal</span>
+                <span className="text-xs font-bold text-ink-900 uppercase tracking-wider">Status: Nominal</span>
               </div>
             </div>
           </div>
@@ -174,16 +175,16 @@ export function AdminDashboard() {
             <button
               key={tab.id}
               onClick={() => handleTabChange(tab.id as TabType)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all cursor-pointer relative ${
+              className={`flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all cursor-pointer relative ${
                 activeTab === tab.id 
-                  ? 'bg-ink-900 text-white shadow-xl shadow-ink-900/10 -translate-y-0.5 z-10' 
-                  : 'bg-white text-neutral-400 hover:text-ink-900 border border-neutral-200 hover:border-neutral-300'
+                  ? 'bg-brand-800 text-white shadow-md shadow-brand-800/20 z-10' 
+                  : 'bg-white text-neutral-500 hover:text-brand-800 border border-neutral-200 hover:border-brand-300'
               }`}
             >
               <tab.icon size={12} className={activeTab === tab.id ? 'text-brand-500' : ''} />
               {tab.label}
               {tab.badge !== undefined && tab.badge > 0 && (
-                <span className="absolute -top-2 -right-2 bg-brand-700 text-white text-[8px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm font-mono">
+                <span className="absolute -top-2 -right-2 bg-brand-700 text-white text-[8px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm font-medium">
                   {tab.badge}
                 </span>
               )}
@@ -193,34 +194,36 @@ export function AdminDashboard() {
 
         {/* Content Matrix */}
         <div className="min-h-[600px]">
-          {activeTab === 'overview' && <AdminOverview onSelectTab={(tab) => handleTabChange(tab as TabType)} />}
-          {activeTab === 'users' && <AdminUsersContent />}
-          {activeTab === 'article' && <AdminArticleEditor />}
-          {activeTab === 'review' && <AdminReviewQueue />}
-          {activeTab === 'search' && <AdminAIImport categories={categories} />}
-          {activeTab === 'live' && (
-            <div className="space-y-8 animate-in fade-in duration-500">
-               <div className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl space-y-6">
-                <div className="flex items-center gap-3 border-b border-neutral-200 pb-4">
-                  <Radio className="text-brand-800 animate-pulse" size={24} />
-                  <h3 className="text-sm font-black uppercase tracking-widest text-ink-900">Active parent streams</h3>
-                </div>
-                {events.length > 0 ? (
-                  <LivePublishForm events={events} />
-                ) : (
-                  <div className="py-12 text-center text-neutral-400 italic text-sm font-mono bg-white rounded-xl border border-dashed border-neutral-200">
-                    No active parent event streams detected.
+          <ErrorBoundary>
+            {activeTab === 'overview' && <AdminOverview onSelectTab={(tab) => handleTabChange(tab as TabType)} />}
+            {activeTab === 'users' && <AdminUsersContent />}
+            {activeTab === 'article' && <AdminArticleEditor />}
+            {activeTab === 'review' && <AdminReviewQueue />}
+            {activeTab === 'search' && <AdminAIImport categories={categories} />}
+            {activeTab === 'live' && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                 <div className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl space-y-6">
+                  <div className="flex items-center gap-3 border-b border-neutral-200 pb-4">
+                    <Radio className="text-brand-800 animate-pulse" size={24} />
+                    <h3 className="text-sm font-black uppercase tracking-widest text-brand-800">Active parent streams</h3>
                   </div>
-                )}
+                  {events.length > 0 ? (
+                    <LivePublishForm events={events} />
+                  ) : (
+                    <div className="py-12 text-center text-neutral-400 italic text-sm font-medium bg-white rounded-xl border border-dashed border-neutral-200">
+                      No active parent event streams detected.
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-          {activeTab === 'announcements' && <AdminAnnouncements />}
-          {activeTab === 'applications' && <AdminPartnerships />}
-          {activeTab === 'telexes' && <AdminTelex />}
-          {activeTab === 'studies' && <AdminStudies />}
-          {activeTab === 'subscribers' && <AdminSubscribers />}
-          {activeTab === 'audit' && <AdminAuditLogs />}
+            )}
+            {activeTab === 'announcements' && <AdminAnnouncements />}
+            {activeTab === 'applications' && <AdminPartnerships />}
+            {activeTab === 'telexes' && <AdminTelex />}
+            {activeTab === 'studies' && <AdminStudies />}
+            {activeTab === 'subscribers' && <AdminSubscribers />}
+            {activeTab === 'audit' && <AdminAuditLogs />}
+          </ErrorBoundary>
         </div>
       </div>
     </AdminLayout>

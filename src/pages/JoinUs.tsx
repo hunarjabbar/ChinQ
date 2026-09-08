@@ -622,16 +622,16 @@ export function JoinUs() {
       {/* Editorial Header Card */}
       <div className="border-b-4 border-brand-800 pb-4 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-ink-900 dark:text-white uppercase">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-brand-900 dark:text-white uppercase">
             {t.title}
           </h2>
-          <p className="font-mono text-xs md:text-sm text-neutral-500 dark:text-neutral-400 font-bold mt-2 uppercase tracking-widest">
+          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 font-bold mt-2 uppercase tracking-widest">
             {t.subtitle}
           </p>
         </div>
         <button 
           onClick={scrollToForm}
-          className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm self-start md:self-auto flex items-center gap-2 shrink-0 cursor-pointer"
+          className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm self-start md:self-auto flex items-center gap-2 shrink-0 cursor-pointer"
         >
           <Award className="w-4 h-4" />
           {t.applyButton}
@@ -642,11 +642,11 @@ export function JoinUs() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         
         {/* Left Hand: Strategic Essay */}
-        <div className="lg:col-span-7 space-y-8 prose prose-neutral dark:prose-invert max-w-none font-serif text-base md:text-lg leading-relaxed text-neutral-800 dark:text-neutral-200">
+        <div className="lg:col-span-7 space-y-8 prose prose-neutral dark:prose-invert max-w-none text-base md:text-lg leading-relaxed text-neutral-800 dark:text-neutral-200">
           
           {/* Why Collaborate Box */}
           <div className="bg-brand-800 text-white p-6 md:p-8 border-l-4 border-brand-900 shadow-sm rounded-xs">
-            <h3 className="text-xl font-bold font-mono uppercase tracking-widest text-white mb-3 flex items-center gap-2">
+            <h3 className="text-xl font-bold uppercase tracking-widest text-white mb-3 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-white" />
               {t.aboutSecTitle}
             </h3>
@@ -658,7 +658,7 @@ export function JoinUs() {
           {/* Structured Essay Sections */}
           {e.sections.map((section, idx) => (
             <div key={idx} className="border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-0">
-              <h3 className="text-xl md:text-2xl font-serif font-black text-ink-900 dark:text-white mb-4">
+              <h3 className="text-xl md:text-2xl font-black text-brand-900 dark:text-white mb-4">
                 {section.heading}
               </h3>
               <div className="space-y-4">
@@ -685,10 +685,10 @@ export function JoinUs() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="border-b-2 border-double border-brand-800 pb-3 mb-5">
-                  <h3 className="text-lg font-serif font-black uppercase text-ink-900 dark:text-white flex items-center gap-1.5">
+                  <h3 className="text-lg font-black uppercase text-brand-900 dark:text-white flex items-center gap-1.5">
                     {t.formTitle}
                   </h3>
-                  <p className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1 leading-normal">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1 leading-normal">
                     {t.formSubtitle}
                   </p>
                 </div>
@@ -696,7 +696,7 @@ export function JoinUs() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Full Legal Name */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
                       <User className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
                       {t.fullName} <span className="text-brand-800">*</span>
                     </label>
@@ -706,14 +706,14 @@ export function JoinUs() {
                       value={formData.fullName}
                       onChange={handleInputChange}
                       placeholder="e.g. Dr. Ahmed Al-Darraji"
-                      className={`w-full text-xs font-mono border ${errors.fullName ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
+                      className={`w-full text-xs border ${errors.fullName ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
                     />
-                    {errors.fullName && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.fullName}</p>}
+                    {errors.fullName && <p className="text-xs font-bold text-brand-800 mt-1">{errors.fullName}</p>}
                   </div>
 
                   {/* Professional Email */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
                       <Mail className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
                       {t.email} <span className="text-brand-800">*</span>
                     </label>
@@ -723,14 +723,14 @@ export function JoinUs() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="candidate@diplomacy-iq.com"
-                      className={`w-full text-xs font-mono border ${errors.email ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
+                      className={`w-full text-xs border ${errors.email ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
                     />
-                    {errors.email && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.email}</p>}
+                    {errors.email && <p className="text-xs font-bold text-brand-800 mt-1">{errors.email}</p>}
                   </div>
 
                   {/* Company / Affiliation */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
                       <Building className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
                       {t.company} <span className="text-brand-800">*</span>
                     </label>
@@ -740,14 +740,14 @@ export function JoinUs() {
                       value={formData.company}
                       onChange={handleInputChange}
                       placeholder="e.g. Baghdad Diplomatic Bureau"
-                      className={`w-full text-xs font-mono border ${errors.company ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
+                      className={`w-full text-xs border ${errors.company ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors`}
                     />
-                    {errors.company && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.company}</p>}
+                    {errors.company && <p className="text-xs font-bold text-brand-800 mt-1">{errors.company}</p>}
                   </div>
 
                   {/* Track / Role Selector */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1 flex items-center gap-1">
                       <Briefcase className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
                       {t.role}
                     </label>
@@ -755,7 +755,7 @@ export function JoinUs() {
                       name="role"
                       value={formData.role}
                       onChange={handleInputChange}
-                      className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 appearance-none"
+                      className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 appearance-none"
                     >
                       {t.roles.map(r => (
                         <option key={r.id} value={r.id}>{r.label}</option>
@@ -766,24 +766,24 @@ export function JoinUs() {
                   {/* Nationality & Passport / ID */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.nationality}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.nationality}</label>
                       <input 
                         type="text" 
                         name="nationality"
                         value={formData.nationality}
                         onChange={handleInputChange}
-                        className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800"
+                        className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800"
                         placeholder="Iraqi / Chinese"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.passportOrIdNumber}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.passportOrIdNumber}</label>
                       <input 
                         type="text" 
                         name="passportOrIdNumber"
                         value={formData.passportOrIdNumber}
                         onChange={handleInputChange}
-                        className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 uppercase"
+                        className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 uppercase"
                         placeholder="IQ-2026-XXXX"
                       />
                     </div>
@@ -792,7 +792,7 @@ export function JoinUs() {
                   {/* Asaish Code & Iraqi Info Card */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-brand-800 dark:text-brand-400 mb-1">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-brand-400 mb-1">
                         {t.asaishCode} <span className="text-brand-800">*</span>
                       </label>
                       <input 
@@ -800,19 +800,19 @@ export function JoinUs() {
                         name="asaishCode"
                         value={formData.asaishCode}
                         onChange={handleInputChange}
-                        className={`w-full text-xs font-mono border ${errors.asaishCode ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none uppercase font-bold`}
+                        className={`w-full text-xs border ${errors.asaishCode ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none uppercase font-bold`}
                         placeholder="AS-2026-XXXX"
                       />
-                      {errors.asaishCode && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.asaishCode}</p>}
+                      {errors.asaishCode && <p className="text-xs font-bold text-brand-800 mt-1">{errors.asaishCode}</p>}
                     </div>
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.iraqiInfoCard}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.iraqiInfoCard}</label>
                       <input 
                         type="text" 
                         name="iraqiInfoCard"
                         value={formData.iraqiInfoCard}
                         onChange={handleInputChange}
-                        className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
+                        className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
                         placeholder="Card No / Tamween"
                       />
                     </div>
@@ -820,51 +820,51 @@ export function JoinUs() {
 
                   {/* Structured Address Block */}
                   <div className="bg-paper-50 dark:bg-neutral-900/90 p-3.5 border border-neutral-200 dark:border-neutral-700 space-y-2.5">
-                    <span className="block text-[10px] font-mono font-black uppercase tracking-wider text-ink-900 dark:text-white">
+                    <span className="block text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white">
                       Administrative Address Dossier
                     </span>
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-[9px] font-mono text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressHouseNo}</label>
+                        <label className="block text-xs text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressHouseNo}</label>
                         <input 
                           type="text" 
                           name="addressHouseNo"
                           value={formData.addressHouseNo}
                           onChange={handleInputChange}
-                          className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-ink-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
+                          className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-brand-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
                           placeholder="House 14"
                         />
                       </div>
                       <div>
-                        <label className="block text-[9px] font-mono text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressStreetNo}</label>
+                        <label className="block text-xs text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressStreetNo}</label>
                         <input 
                           type="text" 
                           name="addressStreetNo"
                           value={formData.addressStreetNo}
                           onChange={handleInputChange}
-                          className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-ink-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
+                          className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-brand-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
                           placeholder="Street 62"
                         />
                       </div>
                       <div>
-                        <label className="block text-[9px] font-mono text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressDistrictName}</label>
+                        <label className="block text-xs text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressDistrictName}</label>
                         <input 
                           type="text" 
                           name="addressDistrictName"
                           value={formData.addressDistrictName}
                           onChange={handleInputChange}
-                          className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-ink-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
+                          className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-brand-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
                           placeholder="Al-Karrada"
                         />
                       </div>
                       <div>
-                        <label className="block text-[9px] font-mono text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressDistrictNumber}</label>
+                        <label className="block text-xs text-neutral-500 dark:text-neutral-400 uppercase font-bold mb-1">{t.addressDistrictNumber}</label>
                         <input 
                           type="text" 
                           name="addressDistrictNumber"
                           value={formData.addressDistrictNumber}
                           onChange={handleInputChange}
-                          className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-ink-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
+                          className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-brand-900 dark:text-white p-2 focus:outline-none focus:border-brand-800"
                           placeholder="District 902"
                         />
                       </div>
@@ -874,44 +874,44 @@ export function JoinUs() {
                   {/* Phone & Date of Birth */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.phoneNumber}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.phoneNumber}</label>
                       <input 
                         type="text" 
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
-                        className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
+                        className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
                         placeholder="+964 780 000 0000"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.dateOfBirth}</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.dateOfBirth}</label>
                       <input 
                         type="date" 
                         name="dateOfBirth"
                         value={formData.dateOfBirth}
                         onChange={handleInputChange}
-                        className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
+                        className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800 font-mono"
                       />
                     </div>
                   </div>
 
                   {/* Emergency Contact */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.emergencyContact}</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">{t.emergencyContact}</label>
                     <input 
                       type="text" 
                       name="emergencyContact"
                       value={formData.emergencyContact}
                       onChange={handleInputChange}
-                      className="w-full text-xs font-mono border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800"
+                      className="w-full text-xs border border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white p-2.5 focus:outline-none focus:border-brand-800"
                       placeholder="Baghdad Security Bureau HQ"
                     />
                   </div>
 
                   {/* Statement of purpose */}
                   <div>
-                    <label className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">
                       {t.bio} <span className="text-brand-800">*</span>
                     </label>
                     <textarea 
@@ -920,14 +920,14 @@ export function JoinUs() {
                       onChange={handleInputChange}
                       rows={3}
                       placeholder={t.bioPlaceholder}
-                      className={`w-full text-xs font-mono border ${errors.bio ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-ink-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors resize-none`}
+                      className={`w-full text-xs border ${errors.bio ? 'border-brand-800 bg-brand-50/20' : 'border-neutral-300 dark:border-neutral-700 bg-paper-50 dark:bg-neutral-900 text-brand-900 dark:text-white focus:border-brand-800'} p-2.5 focus:outline-none transition-colors resize-none`}
                     />
-                    {errors.bio && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.bio}</p>}
+                    {errors.bio && <p className="text-xs font-bold text-brand-800 mt-1">{errors.bio}</p>}
                   </div>
 
                   {/* File Upload Zone */}
                   <div>
-                    <span className="block text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-1">
                       {t.fileLabel}
                     </span>
                     <div 
@@ -951,7 +951,7 @@ export function JoinUs() {
                       {!file ? (
                         <div className="space-y-1.5 py-1">
                           <Upload className="w-5 h-5 mx-auto text-neutral-400 dark:text-neutral-500" />
-                          <p className="text-[9px] font-mono text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider">
+                          <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider">
                             {t.fileDrag}
                           </p>
                         </div>
@@ -959,24 +959,24 @@ export function JoinUs() {
                         <div className="flex items-center justify-between bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-2 text-start">
                           <div className="flex items-center gap-1.5 overflow-hidden">
                             <FileText className="w-5 h-5 text-brand-800 dark:text-brand-400 shrink-0" />
-                            <span className="text-[9px] font-mono font-bold truncate text-ink-900 dark:text-white">
+                            <span className="text-xs font-bold truncate text-brand-900 dark:text-white">
                               {file.name}
                             </span>
                           </div>
-                          <span className="text-[8px] font-mono uppercase bg-brand-800 text-white px-2 py-0.5 font-bold">
+                          <span className="text-[8px] uppercase bg-brand-800 text-white px-2 py-0.5 font-bold">
                             PDF Ready
                           </span>
                         </div>
                       )}
                     </div>
-                    {errors.file && <p className="text-[10px] font-mono font-bold text-brand-800 mt-1">{errors.file}</p>}
+                    {errors.file && <p className="text-xs font-bold text-brand-800 mt-1">{errors.file}</p>}
                   </div>
 
                   {/* Submit Button */}
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-brand-800 hover:bg-brand-700 text-white text-xs font-mono font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-50"
+                    className="w-full py-3 bg-brand-800 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
@@ -1006,10 +1006,10 @@ export function JoinUs() {
               >
                 <div className="text-center py-2">
                   <CheckCircle className="w-12 h-12 text-brand-800 dark:text-brand-400 mx-auto mb-2.5 animate-bounce" />
-                  <h3 className="text-lg font-serif font-black text-brand-800 dark:text-brand-400 uppercase">
+                  <h3 className="text-lg font-black text-brand-800 dark:text-brand-400 uppercase">
                     {t.successTitle}
                   </h3>
-                  <p className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase tracking-wider mt-1">
                     Iraqi-Chinese Agency Sovereign Registry Ledger & DB Synchronized
                   </p>
                 </div>
@@ -1020,71 +1020,71 @@ export function JoinUs() {
                   
                   <div className="flex justify-between items-start border-b-2 border-brand-800 pb-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 bg-brand-800 text-white flex items-center justify-center font-serif font-black text-lg">
+                      <div className="w-9 h-9 bg-brand-800 text-white flex items-center justify-center font-black text-lg">
                         ICA
                       </div>
                       <div>
-                        <h4 className="font-serif font-black text-sm uppercase text-ink-900 dark:text-white">Iraqi-Chinese Agency</h4>
-                        <p className="text-[9px] font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-widest font-bold">
+                        <h4 className="font-black text-sm uppercase text-brand-900 dark:text-white">Iraqi-Chinese Agency</h4>
+                        <p className="text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest font-bold">
                           Accredited Press & Fellowship Credential
                         </p>
                       </div>
                     </div>
                     <div className="bg-brand-50 dark:bg-brand-950/60 border border-brand-800/30 px-2 py-1 text-right">
-                      <span className="text-[8px] font-mono block text-neutral-400 uppercase">Audit Status</span>
-                      <span className="text-[10px] font-mono font-bold text-brand-800 dark:text-brand-400">VERIFIED / RECORDED</span>
+                      <span className="text-[8px] block text-neutral-400 uppercase">Audit Status</span>
+                      <span className="text-xs font-bold text-brand-800 dark:text-brand-400">VERIFIED / RECORDED</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-y-2.5 gap-x-3 text-[11px] font-mono">
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.fullName}</span>
-                      <span className="font-bold text-ink-900 dark:text-white">{formData.fullName}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.fullName}</span>
+                      <span className="font-bold text-brand-900 dark:text-white">{formData.fullName}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.email}</span>
-                      <span className="font-bold text-ink-900 dark:text-white truncate block">{formData.email}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.email}</span>
+                      <span className="font-bold text-brand-900 dark:text-white truncate block">{formData.email}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.asaishCode}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.asaishCode}</span>
                       <span className="font-bold text-brand-800 dark:text-brand-400 uppercase">{formData.asaishCode}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.iraqiInfoCard}</span>
-                      <span className="font-bold text-ink-900 dark:text-white">{formData.iraqiInfoCard || 'N/A'}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.iraqiInfoCard}</span>
+                      <span className="font-bold text-brand-900 dark:text-white">{formData.iraqiInfoCard || 'N/A'}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.company}</span>
-                      <span className="font-bold text-ink-900 dark:text-white">{formData.company}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.company}</span>
+                      <span className="font-bold text-brand-900 dark:text-white">{formData.company}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">{t.role}</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">{t.role}</span>
                       <span className="font-bold text-brand-800 dark:text-brand-400 capitalize">{formData.role}</span>
                     </div>
                     <div className="col-span-2 pt-1 border-t border-neutral-200 dark:border-neutral-700">
-                      <span className="text-[9px] text-neutral-400 block uppercase font-bold tracking-wider">Administrative Address</span>
-                      <span className="font-bold text-neutral-700 dark:text-neutral-300 text-[10px]">
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">Administrative Address</span>
+                      <span className="font-bold text-neutral-700 dark:text-neutral-300 text-xs">
                         House {formData.addressHouseNo || '—'}, Street {formData.addressStreetNo || '—'}, {formData.addressDistrictName || '—'} (Dist. {formData.addressDistrictNumber || '—'})
                       </span>
                     </div>
                     <div className="col-span-2 pt-1 border-t border-neutral-200 dark:border-neutral-700 flex justify-between items-center">
                       <div>
                         <span className="text-[8px] text-neutral-400 block uppercase">{t.appId}</span>
-                        <span className="text-[10px] font-bold text-neutral-800 dark:text-neutral-200 font-mono">{receiptData?.hash}</span>
+                        <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 font-mono">{receiptData?.hash}</span>
                       </div>
                       <div className="text-right">
                         <span className="text-[8px] text-neutral-400 block uppercase">{t.bureauAssigned}</span>
-                        <span className="text-[10px] font-bold text-brand-800 dark:text-brand-400">{receiptData?.bureau}</span>
+                        <span className="text-xs font-bold text-brand-800 dark:text-brand-400">{receiptData?.bureau}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Security barcode pattern */}
                   <div className="pt-2 border-t border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-between">
-                    <span className="text-[8px] font-mono tracking-widest text-neutral-400 uppercase">
+                    <span className="text-[8px] tracking-widest text-neutral-400 uppercase">
                       SEC-ICA-REG-2026-SHA256
                     </span>
-                    <span className="text-[8px] font-mono font-bold text-neutral-500">
+                    <span className="text-[8px] font-bold text-neutral-500">
                       {receiptData?.timestamp}
                     </span>
                   </div>
@@ -1094,7 +1094,7 @@ export function JoinUs() {
                 <div className="space-y-2 pt-2">
                   <button
                     onClick={handleDownloadPdf}
-                    className="w-full py-2.5 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-mono font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                    className="w-full py-2.5 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                   >
                     <Download className="w-4 h-4" />
                     {t.downloadPdf}
@@ -1102,14 +1102,14 @@ export function JoinUs() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => window.print()}
-                      className="flex-1 py-2 bg-brand-800 hover:bg-brand-700 text-white text-xs font-mono font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                      className="flex-1 py-2 bg-brand-800 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                     >
                       <Printer className="w-3.5 h-3.5" />
                       {t.printReceipt}
                     </button>
                     <button
                       onClick={resetForm}
-                      className="flex-1 py-2 border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-mono font-bold uppercase tracking-widest hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2 border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-bold uppercase tracking-widest hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       {t.resetForm}

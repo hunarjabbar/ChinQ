@@ -13,7 +13,7 @@ export interface IcaLogoProps {
 /**
  * Standardized Official Iraqi-Chinese Agency (ICA) Brand Logo & Emblem
  * Represents the bilateral sovereign corridor between Baghdad & Beijing.
- * Colors: Standardized Diplomatic Crimson (Brand-800 #C91C24), Imperial Silk Road Gold (#F59E0B), Ink (#1A1A1A).
+ * Colors: Standardized Sovereign Red (Brand-800 #cc0000), Imperial Silk Road Gold (#F59E0B), Ink (#1A1A1A).
  */
 export function IcaLogo({
   size = 'md',
@@ -53,9 +53,9 @@ export function IcaLogo({
       <defs>
         {/* Brand Diplomatic Red Gradient */}
         <linearGradient id="icaRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#DC2626" />
-          <stop offset="50%" stopColor="#C91C24" />
-          <stop offset="100%" stopColor="#991B1B" />
+          <stop offset="0%" stopColor="#E60000" />
+          <stop offset="50%" stopColor="#cc0000" />
+          <stop offset="100%" stopColor="#b30000" />
         </linearGradient>
 
         {/* Silk Road Imperial Gold Gradient */}
@@ -67,7 +67,7 @@ export function IcaLogo({
 
         {/* Outer Shadow & Glow Filter */}
         <filter id="icaShadow" x="-10%" y="-10%" width="125%" height="125%" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#7f1d1d" floodOpacity="0.25" />
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#cc0000" floodOpacity="0.25" />
         </filter>
 
         <linearGradient id="icaInnerSheen" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -84,7 +84,7 @@ export function IcaLogo({
         width="108"
         height="108"
         rx="26"
-        fill="#C91C24"
+        fill="#cc0000"
         stroke="none"
         strokeWidth="0"
         style={{ borderStyle: 'none' }}
@@ -126,7 +126,7 @@ export function IcaLogo({
         <div className="flex flex-col items-start text-left rtl:items-start rtl:text-right">
 
           {showSubtitle && (
-            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-800 mt-0.5">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-800 mt-0.5">
               {lang === 'ar' ? 'بغداد • بكين • أربيل' : lang === 'zh' ? '巴格达 • 北京 • 埃尔比勒' : lang === 'ckb' ? 'بەغداد • پەکین • هەولێر' : 'Baghdad • Beijing • Erbil'}
             </span>
           )}
@@ -141,7 +141,7 @@ export function IcaLogo({
       <div className={`inline-flex items-center gap-3.5 ${className}`}>
         <EmblemSvg dimSize={dim} />
         <div className="flex flex-col items-start text-left rtl:items-start rtl:text-right">
-          <div className="font-serif font-black tracking-tight text-ink-900 text-base leading-none">
+          <div className="font-black tracking-tight text-brand-900 text-base leading-none">
             {lang === 'ar'
               ? 'الوكالة العراقية الصينية'
               : lang === 'zh'
@@ -150,7 +150,7 @@ export function IcaLogo({
               ? 'ئاژانسی عێراقی - چینی'
               : 'IRAQI-CHINESE AGENCY'}
           </div>
-          <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-brand-800 mt-1">
+          <div className="text-xs font-bold uppercase tracking-[0.3em] text-brand-800 mt-1">
             ICA MEDIA GROUP • EST. 2026
           </div>
         </div>
@@ -163,7 +163,7 @@ export function IcaLogo({
     <div className={`inline-flex items-center gap-2.5 ${className}`}>
       <EmblemSvg dimSize={dim} />
       <div className="flex flex-col items-start text-left rtl:items-start rtl:text-right">
-        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-800">
+        <span className="text-xs font-black uppercase tracking-[0.25em] text-neutral-800">
           {lang === 'ar' ? 'الجريدة الرسمية' : lang === 'zh' ? '官方权威期刊' : lang === 'ckb' ? 'ڕۆژنامەی فەرمی' : 'Official Journal'}
         </span>
         <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-brand-800">

@@ -65,14 +65,28 @@ export const useSiteStore = create<SiteStore>()(
     }),
     {
       name: 'site-config-storage',
-      merge: (persistedState: any, currentState: SiteStore) => ({
-        ...currentState,
-        ...(persistedState || {}),
-        socialLinks: {
-          ...DEFAULT_SOCIAL_LINKS,
-          ...(persistedState?.socialLinks || {}),
-        },
-      }),
+      merge: (persistedState: any, currentState: SiteStore) => {
+        const merged = {
+          ...currentState,
+          ...(persistedState || {}),
+          socialLinks: {
+            ...DEFAULT_SOCIAL_LINKS,
+            ...(persistedState?.socialLinks || {}),
+          },
+        };
+        // Vanish legacy crimson and dark maroon tones from storage in favor of trending background red #cc0000
+        if (
+          !merged.brandColor ||
+          merged.brandColor === '#8B0000' ||
+          merged.brandColor === '#990000' ||
+          merged.brandColor === '#800000' ||
+          merged.brandColor === '#C91C24' ||
+          merged.brandColor === '#a30000'
+        ) {
+          merged.brandColor = '#cc0000';
+        }
+        return merged;
+      },
     }
   )
 );

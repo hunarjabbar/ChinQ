@@ -115,11 +115,11 @@ export function PaymentsPage() {
           {/* Page Hero Header */}
           <div className="w-full bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 py-10 px-4 sm:px-6 text-center">
             <div className="max-w-4xl mx-auto space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-800 rounded-full text-xs font-mono font-bold text-brand-800 dark:text-brand-300 uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-800 rounded-full text-xs font-bold text-brand-800 dark:text-brand-300 uppercase tracking-wider">
                 <Coins size={14} />
                 <span>Sovereign FinTech Service Provider</span>
               </div>
-              <h1 className="text-2xl sm:text-4xl font-serif font-black tracking-tight text-ink-900 dark:text-white">
+              <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-brand-800 dark:text-white">
                 {labels.pageTitle}
               </h1>
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
@@ -202,7 +202,7 @@ export function PaymentsPage() {
                       <User size={24} />
                     </div>
                     <div>
-                      <h3 className="text-base font-serif font-black text-ink-900 dark:text-white">
+                      <h3 className="text-base font-black text-ink-900 dark:text-white">
                         {labels.retailHero}
                       </h3>
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
@@ -240,7 +240,7 @@ export function PaymentsPage() {
                       <Building2 size={24} />
                     </div>
                     <div>
-                      <h3 className="text-base font-serif font-black text-ink-900 dark:text-white">
+                      <h3 className="text-base font-black text-ink-900 dark:text-white">
                         {labels.corpHero}
                       </h3>
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
@@ -295,7 +295,7 @@ export function PaymentsPage() {
                     <Building2 size={24} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-serif font-black text-ink-900 dark:text-white">
+                    <h3 className="text-xl font-black text-brand-800 dark:text-white">
                       The Sovereign Sino-Iraqi Cross-Border Clearing Infrastructure
                     </h3>
                     <p className="text-xs text-neutral-500">
@@ -306,7 +306,7 @@ export function PaymentsPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
                   <div className="p-5 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-2">
-                    <span className="text-xs font-mono font-bold uppercase text-brand-800 dark:text-brand-400">
+                    <span className="text-xs font-bold uppercase text-brand-800 dark:text-brand-400">
                       01 • Sovereign Reserve Lock
                     </span>
                     <h4 className="text-sm font-bold text-ink-900 dark:text-white">Central Escrow Pools</h4>
@@ -316,7 +316,7 @@ export function PaymentsPage() {
                   </div>
 
                   <div className="p-5 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-2">
-                    <span className="text-xs font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400">
+                    <span className="text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400">
                       02 • Zero Intermediary Risk
                     </span>
                     <h4 className="text-sm font-bold text-ink-900 dark:text-white">Anti-Sanctions Shield</h4>
@@ -326,7 +326,7 @@ export function PaymentsPage() {
                   </div>
 
                   <div className="p-5 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-2">
-                    <span className="text-xs font-mono font-bold uppercase text-amber-600 dark:text-amber-400">
+                    <span className="text-xs font-bold uppercase text-amber-600 dark:text-amber-400">
                       03 • Customs Synchronization
                     </span>
                     <h4 className="text-sm font-bold text-ink-900 dark:text-white">Basra & Port Clearance</h4>
@@ -338,7 +338,7 @@ export function PaymentsPage() {
 
                 <div className="p-6 bg-brand-50/50 dark:bg-brand-950/20 border border-brand-200 dark:border-brand-800 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
-                    <h4 className="text-sm font-black text-brand-900 dark:text-brand-300">
+                    <h4 className="text-sm font-black text-brand-800 dark:text-brand-300">
                       Need a Dedicated Corporate Trade Escrow Account?
                     </h4>
                     <p className="text-xs text-brand-800/80 dark:text-brand-400/80 mt-1">
@@ -347,7 +347,7 @@ export function PaymentsPage() {
                   </div>
                   <button
                     onClick={() => handleInitiatePayment({ orderType: 'BUSINESS', direction: 'IQD_TO_ECNY', sourceAmount: 200000000 })}
-                    className="px-6 py-3 bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shrink-0"
+                    className="px-6 py-3 bg-brand-800 hover:bg-brand-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shrink-0"
                   >
                     Open Institutional Ticket
                   </button>
@@ -358,7 +358,7 @@ export function PaymentsPage() {
             {/* View 4: Compliance & FAQ */}
             {activeTab === 'FAQ' && (
               <div className="bg-white dark:bg-neutral-900 p-8 rounded-2xl border-2 border-neutral-200 dark:border-neutral-700 space-y-6 text-start">
-                <h3 className="text-xl font-serif font-black text-ink-900 dark:text-white">
+                <h3 className="text-xl font-black text-brand-800 dark:text-white">
                   Regulatory Compliance & Common Inquiries
                 </h3>
 

@@ -192,7 +192,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           <div className="flex justify-center mb-6">
             <IcaLogo size={64} variant="mark" />
           </div>
-          <h2 className="text-xl sm:text-2xl font-serif font-black text-center mb-2 text-ink-900 leading-tight">
+          <h2 className="text-xl sm:text-2xl font-bold font-black text-center mb-2 text-brand-900 leading-tight">
             {loginTitle}
           </h2>
           <p className="text-[11px] text-center text-gray-500 mb-8 uppercase tracking-widest font-bold">
@@ -202,15 +202,15 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           {false && isLogin && (
             <div className="mb-6 p-4 bg-gradient-to-br from-brand-50/95 via-white to-brand-50/60 border border-brand-200/90 rounded-xl shadow-xs transition-all duration-200">
               <div className="flex items-center justify-between mb-2.5">
-                <p className="text-[10px] font-black font-mono text-brand-800 uppercase tracking-widest flex items-center gap-1.5">
+                <p className="text-xs font-black font-medium text-brand-800 uppercase tracking-widest flex items-center gap-1.5">
                   <Zap size={13} className="text-brand-800 fill-brand-800" />
                   {isAr ? 'بيانات الاعتماد الرسمية - الوكالة العراقية الصينية' : isZh ? '伊中通讯社官方授权凭据' : isCkb ? 'زانیاری مۆڵەتپێدراوی ئاژانسی عێراقی-چینی' : 'Iraqi-Chinese Agency Official Credentials'}
                 </p>
-                <span className="text-[9px] font-mono font-bold text-brand-700/80 uppercase">
+                <span className="text-xs font-medium font-bold text-brand-700/80 uppercase">
                   {isAr ? 'نقرة للتعبئة' : isZh ? '点击填入' : 'Single Click to Load'}
                 </span>
               </div>
-              <div className="text-xs text-gray-800 font-mono space-y-2">
+              <div className="text-xs text-gray-800 font-medium space-y-2">
                 {/* 1. Editor Credential Card */}
                 <div 
                   onClick={(e) => handleQuickFill('editor', e)}
@@ -218,18 +218,18 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white hover:bg-brand-50/60 border border-brand-200/90 hover:border-brand-500 rounded-lg cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-xs"
                 >
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-brand-800 text-white shadow-2xs border border-brand-900/60">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-medium font-black uppercase tracking-wider bg-brand-800 text-white shadow-2xs border border-brand-900/60">
                       <Key size={11} className="text-brand-200" />
                       ICA Editor
                     </span>
-                    <span className="text-[10px] font-mono font-bold text-brand-900/80 uppercase tracking-wider bg-brand-100/70 px-2 py-0.5 rounded border border-brand-200/80">
+                    <span className="text-xs font-medium font-bold text-brand-900/80 uppercase tracking-wider bg-brand-100/70 px-2 py-0.5 rounded border border-brand-200/80">
                       {isAr ? 'الوكالة العراقية الصينية' : isZh ? '伊中通讯社' : 'Iraqi-Chinese Agency'}
                     </span>
-                    <span className="font-mono font-bold text-xs text-neutral-900 tracking-tight">
+                    <span className="font-medium font-bold text-xs text-neutral-900 tracking-tight">
                       editor@iraqi-chineseagency.com
                     </span>
-                    <span className="text-neutral-300 font-mono text-xs hidden sm:inline">/</span>
-                    <span className="font-mono text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
+                    <span className="text-neutral-300 font-medium text-xs hidden sm:inline">/</span>
+                    <span className="font-medium text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
                       <Lock size={11} className="text-neutral-400" />
                       editor123
                     </span>
@@ -238,7 +238,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                     <button
                       type="button"
                       onClick={(e) => handleQuickFill('editor', e)}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 ${
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium font-bold uppercase tracking-wider transition-all duration-200 ${
                         autoFilledKey === 'editor' 
                           ? 'bg-emerald-700 text-white shadow-xs' 
                           : 'bg-brand-800 hover:bg-brand-700 text-white shadow-xs group-hover:scale-102'
@@ -269,18 +269,18 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white hover:bg-neutral-50/80 border border-neutral-200/90 hover:border-neutral-400 rounded-lg cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-xs"
                 >
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-neutral-800 text-white shadow-2xs border border-neutral-900">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-medium font-black uppercase tracking-wider bg-neutral-800 text-white shadow-2xs border border-neutral-900">
                       <Key size={11} className="text-neutral-300" />
                       ICA Admin
                     </span>
-                    <span className="text-[10px] font-mono font-bold text-neutral-600 uppercase tracking-wider bg-neutral-100 px-2 py-0.5 rounded border border-neutral-200">
+                    <span className="text-xs font-medium font-bold text-neutral-600 uppercase tracking-wider bg-neutral-100 px-2 py-0.5 rounded border border-neutral-200">
                       {isAr ? 'الإدارة المركزية' : isZh ? '中央管理总署' : 'Central Command'}
                     </span>
-                    <span className="font-mono font-bold text-xs text-neutral-900 tracking-tight">
+                    <span className="font-medium font-bold text-xs text-neutral-900 tracking-tight">
                       admin@iraqi-chineseagency.com
                     </span>
-                    <span className="text-neutral-300 font-mono text-xs hidden sm:inline">/</span>
-                    <span className="font-mono text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
+                    <span className="text-neutral-300 font-medium text-xs hidden sm:inline">/</span>
+                    <span className="font-medium text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
                       <Lock size={11} className="text-neutral-400" />
                       admin123
                     </span>
@@ -289,7 +289,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                     <button
                       type="button"
                       onClick={(e) => handleQuickFill('admin', e)}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 ${
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium font-bold uppercase tracking-wider transition-all duration-200 ${
                         autoFilledKey === 'admin' 
                           ? 'bg-emerald-700 text-white shadow-xs' 
                           : 'bg-neutral-800 hover:bg-neutral-700 text-white shadow-xs group-hover:scale-102'
@@ -319,7 +319,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           <form onSubmit={handleAuth} className="space-y-4">
             {!isLogin && (
               <div>
-                <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-mono">{fullNameLabel}</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-medium">{fullNameLabel}</label>
                 <div className="relative">
                   <UserIcon className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none transition-colors" />
                   <input
@@ -334,7 +334,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               </div>
             )}
             <div>
-              <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-mono">{emailLabel}</label>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-medium">{emailLabel}</label>
               <div className="relative">
                 <Mail className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none transition-colors" />
                 <input
@@ -343,14 +343,14 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2.5 sm:py-3 bg-neutral-50/50 hover:bg-white focus:bg-white border border-neutral-300 focus:border-brand-800 rounded-lg text-sm font-mono text-neutral-900 placeholder:text-neutral-400 shadow-xs focus:ring-2 focus:ring-brand-800/20 focus:outline-none transition-all duration-200"
+                  className="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2.5 sm:py-3 bg-neutral-50/50 hover:bg-white focus:bg-white border border-neutral-300 focus:border-brand-800 rounded-lg text-sm font-medium text-neutral-900 placeholder:text-neutral-400 shadow-xs focus:ring-2 focus:ring-brand-800/20 focus:outline-none transition-all duration-200"
                   placeholder="editor@iraqi-chineseagency.com"
                   autoComplete="email"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-mono">{passwordLabel}</label>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5 font-medium">{passwordLabel}</label>
               <div className="relative">
                 <Lock className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none transition-colors" />
                 <input
@@ -359,7 +359,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2.5 sm:py-3 bg-neutral-50/50 hover:bg-white focus:bg-white border border-neutral-300 focus:border-brand-800 rounded-lg text-sm font-mono text-neutral-900 placeholder:text-neutral-400 shadow-xs focus:ring-2 focus:ring-brand-800/20 focus:outline-none transition-all duration-200"
+                  className="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2.5 sm:py-3 bg-neutral-50/50 hover:bg-white focus:bg-white border border-neutral-300 focus:border-brand-800 rounded-lg text-sm font-medium text-neutral-900 placeholder:text-neutral-400 shadow-xs focus:ring-2 focus:ring-brand-800/20 focus:outline-none transition-all duration-200"
                   placeholder="••••••••"
                   autoComplete="current-password"
                 />
@@ -375,7 +375,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-800 hover:bg-brand-700 active:scale-[0.99] text-white font-mono font-bold py-3 rounded-lg transition-all text-xs uppercase tracking-widest mt-6 disabled:opacity-70 flex justify-center items-center gap-2 cursor-pointer shadow-md hover:shadow-lg hover:shadow-brand-900/20"
+              className="w-full bg-brand-800 hover:bg-brand-700 active:scale-[0.99] text-white font-medium font-bold py-3 rounded-lg transition-all text-xs uppercase tracking-widest mt-6 disabled:opacity-70 flex justify-center items-center gap-2 cursor-pointer shadow-md hover:shadow-lg hover:shadow-brand-900/20"
             >
               {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>}
               <span>{submitText}</span>
@@ -391,7 +391,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             </button>
           </div>
           <div className="mt-8 text-center pt-6 border-t border-gray-100">
-             <Link to={`/${lang}`} className="text-[11px] font-bold uppercase tracking-wider text-gray-400 hover:text-ink-900 transition-colors">{backToPublic}</Link>
+             <Link to={`/${lang}`} className="text-[11px] font-bold uppercase tracking-wider text-gray-400 hover:text-brand-900 transition-colors">{backToPublic}</Link>
           </div>
         </div>
       </div>
@@ -407,7 +407,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-brand-600" />
           </div>
-          <h2 className="text-xl font-black text-ink-900 mb-2 uppercase tracking-wide">Access Denied</h2>
+          <h2 className="text-xl font-black text-brand-900 mb-2 uppercase tracking-wide">Access Denied</h2>
           <p className="text-sm text-gray-500 mb-6">You do not have the required permissions to view this section.</p>
           <button onClick={() => navigate(`/${lang}/admin`)} className="px-6 py-2 bg-brand-800 text-white text-xs font-bold uppercase tracking-widest rounded-md hover:bg-brand-800 transition-colors">
             Return to Dashboard
@@ -418,7 +418,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] flex font-sans text-ink-900 text-start">
+    <div className="min-h-screen bg-[#F3F4F6] flex font-sans text-brand-900 text-start">
       {/* Enterprise Sidebar */}
       <aside className="w-72 bg-ink-900 text-white flex-col border-e border-neutral-800 hidden md:flex h-screen sticky top-0 shrink-0">
         <div className="h-20 flex items-center gap-4 px-6 border-b border-white/5 shrink-0">
@@ -426,17 +426,17 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             <IcaLogo size={32} variant="mark" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-serif font-black tracking-tight leading-none text-white">
+            <span className="text-sm font-bold font-black tracking-tight leading-none text-white">
               ICA Secretariat
             </span>
-            <span className="text-[9px] font-mono font-bold tracking-[0.3em] text-brand-500 uppercase mt-1">
+            <span className="text-xs font-medium font-bold tracking-[0.3em] text-brand-500 uppercase mt-1">
               Command Hub
             </span>
           </div>
         </div>
         
         <nav className="flex-1 py-8 px-5 space-y-1.5 overflow-y-auto">
-          <div className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-600 mb-5 px-3">System Navigation</div>
+          <div className="text-xs font-black uppercase tracking-[0.4em] text-neutral-600 mb-5 px-3">System Navigation</div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const targetPath = item.href;
@@ -470,7 +470,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             </div>
             <div className="overflow-hidden space-y-0.5">
               <div className="text-sm font-black text-white truncate">{user.name}</div>
-              <div className="text-[9px] text-neutral-500 font-black uppercase tracking-[0.2em]">{user.role}</div>
+              <div className="text-xs text-neutral-500 font-black uppercase tracking-[0.2em]">{user.role}</div>
             </div>
           </div>
           <button 
@@ -497,10 +497,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   <IcaLogo className="w-7 h-7" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-serif font-black tracking-tight leading-none text-white">
+                  <span className="text-sm font-bold font-black tracking-tight leading-none text-white">
                     ICA Secretariat
                   </span>
-                  <span className="text-[9px] font-mono font-bold tracking-[0.25em] text-brand-500 uppercase mt-1">
+                  <span className="text-xs font-medium font-bold tracking-[0.25em] text-brand-500 uppercase mt-1">
                     Command Hub
                   </span>
                 </div>
@@ -516,7 +516,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             </div>
 
             <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-              <div className="px-3 pb-2 text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-neutral-500">
+              <div className="px-3 pb-2 text-xs font-medium font-bold uppercase tracking-[0.25em] text-neutral-500">
                 Navigation Directory
               </div>
               {navItems.map((item) => {
@@ -535,7 +535,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                     <item.icon size={16} className={isActive ? 'text-brand-300' : 'text-neutral-400'} />
                     <span className="tracking-wide">{item.name}</span>
                     {item.name === 'User Management' && (
-                      <span className="ms-auto text-[9px] bg-brand-700/80 text-white font-mono px-1.5 py-0.5 rounded font-black">
+                      <span className="ms-auto text-xs bg-brand-700/80 text-white font-medium px-1.5 py-0.5 rounded font-black">
                         CORE
                       </span>
                     )}
@@ -551,7 +551,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-bold text-white truncate">{user.name}</div>
-                  <div className="text-[9px] text-neutral-400 font-mono uppercase tracking-widest">{user.role}</div>
+                  <div className="text-xs text-neutral-400 font-medium uppercase tracking-widest">{user.role}</div>
                 </div>
               </div>
               <button 
@@ -559,7 +559,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                 className="flex items-center gap-2 text-xs font-bold text-neutral-400 hover:text-brand-400 transition-all w-full px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="uppercase tracking-widest text-[10px]">Terminate Session</span>
+                <span className="uppercase tracking-widest text-xs">Terminate Session</span>
               </button>
             </div>
           </aside>
@@ -574,7 +574,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               <button 
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden p-2 text-ink-900 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                className="md:hidden p-2 text-brand-900 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
                 aria-label="Open Secretariat Navigation"
                 title="ICA Secretariat Navigation"
               >
@@ -583,17 +583,17 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               <div className="w-1 h-6 bg-brand-800 rounded-full hidden sm:block"></div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
                 <IcaLogo size={24} variant="mark" className="hidden sm:block opacity-80" />
-                <h1 className="text-xs font-black text-ink-900 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+                <h1 className="text-xs font-black text-brand-900 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
                   Authorized Environment
                 </h1>
-                <span className="text-[9px] font-mono font-bold text-brand-700 uppercase bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">ICA Secretariat</span>
+                <span className="text-xs font-medium font-bold text-brand-700 uppercase bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">ICA Secretariat</span>
               </div>
             </div>
           <div className="flex items-center gap-6 relative">
             <div className="relative">
               <button 
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="text-neutral-400 hover:text-ink-900 transition-all relative p-2.5 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-100 flex items-center justify-center cursor-pointer"
+                className="text-neutral-400 hover:text-brand-900 transition-all relative p-2.5 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-100 flex items-center justify-center cursor-pointer"
                 aria-label="Toggle notifications"
               >
                 <Bell className="w-5 h-5" />
@@ -607,12 +607,12 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                   <div className="fixed inset-0 z-40 cursor-default" onClick={() => setShowNotifications(false)} />
                   <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-md shadow-xl py-2 z-50 text-start font-sans divide-y divide-gray-100">
                     <div className="px-4 py-2 flex justify-between items-center bg-gray-50/50">
-                      <span className="text-[11px] font-black uppercase tracking-wider text-gray-700 font-mono flex items-center gap-1.5">
+                      <span className="text-[11px] font-black uppercase tracking-wider text-gray-700 font-medium flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 bg-brand-800 rounded-full animate-pulse"></span>
                         Telex & Registry Alerts
                       </span>
                       {notifications.length > 0 && (
-                        <span className="text-[9px] bg-brand-800/10 text-brand-800 font-mono font-bold px-2 py-0.5 rounded-full">
+                        <span className="text-xs bg-brand-800/10 text-brand-800 font-medium font-bold px-2 py-0.5 rounded-full">
                           {notifications.length} Pending
                         </span>
                       )}
@@ -620,7 +620,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
 
                     <div className="max-h-80 overflow-y-auto divide-y divide-gray-100 bg-white">
                       {notifications.length === 0 ? (
-                        <div className="px-4 py-8 text-center text-xs text-gray-500 font-mono italic">
+                        <div className="px-4 py-8 text-center text-xs text-gray-500 font-medium italic">
                           All systems operational. No pending alerts.
                         </div>
                       ) : (
@@ -642,7 +642,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                             <p className="text-[11px] text-gray-600 mb-1.5 leading-relaxed font-sans">
                               {notif.description}
                             </p>
-                            <div className="flex justify-between items-center text-[9px] text-gray-400 font-mono uppercase tracking-wider font-bold">
+                            <div className="flex justify-between items-center text-xs text-gray-400 font-medium uppercase tracking-wider font-bold">
                               <span>{notif.bureau.split(' ')[0]} Node</span>
                               <span>{new Date(notif.time).toLocaleDateString()}</span>
                             </div>
@@ -657,7 +657,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                           setShowNotifications(false);
                           navigate(`/${lang}/admin?tab=applications`);
                         }}
-                        className="text-[10px] font-bold text-brand-800 hover:underline uppercase tracking-wider font-mono cursor-pointer"
+                        className="text-xs font-bold text-brand-800 hover:underline uppercase tracking-wider font-medium cursor-pointer"
                       >
                         Audit Enterprise Registry
                       </button>
@@ -667,7 +667,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               )}
             </div>
 
-             <Link to={`/${lang}`} className="text-[10px] font-bold uppercase tracking-wider text-gray-500 border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors">
+             <Link to={`/${lang}`} className="text-xs font-bold uppercase tracking-wider text-gray-500 border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors">
               View Live Site
             </Link>
           </div>

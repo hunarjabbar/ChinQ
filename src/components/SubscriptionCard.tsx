@@ -178,10 +178,10 @@ export function SubscriptionCard() {
           <div className="w-14 h-14 bg-brand-500/20 backdrop-blur-md rounded-full flex items-center justify-center mb-5 text-brand-300 border border-brand-400/30 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
             <Check className="w-7 h-7" />
           </div>
-          <div className="text-2xl font-serif font-black tracking-wide mb-2 text-white">
+          <div className="text-2xl font-black tracking-wide mb-2 text-white">
             {l.activeSub} {user.subscriptionPlan}
           </div>
-          <p className="text-xs text-brand-200/80 font-mono font-bold tracking-widest uppercase">
+          <p className="text-xs text-brand-200/80 font-bold tracking-widest uppercase">
             {l.renewsOn} {user.subscriptionEndDate ? new Date(user.subscriptionEndDate).toLocaleDateString() : 'N/A'}
           </p>
         </div>
@@ -191,18 +191,18 @@ export function SubscriptionCard() {
 
   return (
     <>
-      <div className="p-6 sm:p-8 bg-white dark:bg-neutral-900 text-ink-900 dark:text-white text-center relative overflow-hidden group border border-neutral-200 dark:border-neutral-800 shadow-md hover:shadow-xl hover:border-brand-800/40 transition-all duration-300 rounded-xl">
+      <div className="p-6 sm:p-8 bg-white dark:bg-neutral-900 text-brand-900 dark:text-white text-center relative overflow-hidden group border border-neutral-200 dark:border-neutral-800 shadow-md hover:shadow-xl hover:border-brand-800/40 transition-all duration-300 rounded-xl">
         <div className="absolute inset-0 bg-brand-800/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"></div>
         
         <div className="relative z-10 flex flex-col items-center justify-center">
           <div className="flex items-center gap-2 mb-4 bg-brand-50 dark:bg-brand-950/80 px-3 py-1 rounded-full border border-brand-200 dark:border-brand-900/50 shadow-sm">
             <Crown className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
-            <div className="text-[10px] uppercase tracking-[0.25em] font-black text-brand-800 dark:text-brand-400">
+            <div className="text-xs uppercase tracking-[0.25em] font-black text-brand-800 dark:text-brand-400">
               {l.premiumAccess}
             </div>
           </div>
           
-          <div className="text-xl md:text-2xl font-serif font-black mb-5 leading-tight text-ink-900 dark:text-white transition-colors duration-500">
+          <div className="text-xl md:text-2xl font-black mb-5 leading-tight text-brand-900 dark:text-white transition-colors duration-500">
             {l.subscribeFor}
           </div>
           
@@ -214,7 +214,7 @@ export function SubscriptionCard() {
 
           <div className="flex flex-col gap-3 w-full mb-8 text-start">
             {l.features.map((feature, i) => (
-               <div key={i} className="text-xs font-bold text-ink-900/80 dark:text-neutral-300 flex items-center gap-3">
+               <div key={i} className="text-xs font-bold text-brand-900/80 dark:text-neutral-300 flex items-center gap-3">
                  <div className="w-5 h-5 rounded-full bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center shrink-0">
                    <Check className="w-3 h-3 text-brand-800 dark:text-brand-400" />
                  </div>
@@ -226,7 +226,7 @@ export function SubscriptionCard() {
           <button 
             onClick={handleSubscribeClick}
             disabled={showPaymentModal || success}
-            className="relative overflow-hidden block w-full bg-brand-800 text-white text-xs font-black uppercase tracking-widest py-4 px-6 hover:bg-brand-900 transition-all duration-300 shadow-[0_0_20px_rgba(180,140,60,0.4)] hover:shadow-[0_0_30px_rgba(180,140,60,0.6)] cursor-pointer text-center rounded-lg disabled:opacity-50 group/btn"
+            className="relative overflow-hidden block w-full bg-brand-800 text-white text-xs font-black uppercase tracking-widest py-4 px-6 hover:bg-brand-700 transition-all duration-300 shadow-[0_0_20px_rgba(180,140,60,0.4)] hover:shadow-[0_0_30px_rgba(180,140,60,0.6)] cursor-pointer text-center rounded-lg disabled:opacity-50 group/btn"
           >
             {/* Glaring Pulse Animation */}
             <div className="absolute inset-0 w-full h-full">
@@ -276,7 +276,7 @@ export function SubscriptionCard() {
                   </div>
                 )}
                 
-                <h3 className="text-lg font-serif font-black text-ink-900 dark:text-white mb-2 uppercase tracking-wide">
+                <h3 className="text-lg font-black text-ink-900 dark:text-white mb-2 uppercase tracking-wide">
                   {success ? l.subscribed : l.settlementTitle}
                 </h3>
                 

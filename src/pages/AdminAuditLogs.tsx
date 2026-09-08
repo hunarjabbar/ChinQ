@@ -37,11 +37,11 @@ export function AdminAuditLogs() {
     <div className="space-y-6 text-start">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-serif font-black text-ink-900 uppercase tracking-widest flex items-center gap-3">
+          <h1 className="text-2xl font-bold font-black text-brand-800 uppercase tracking-widest flex items-center gap-3">
             <Shield className="w-6 h-6 text-brand-800" />
             System Audit Logs
           </h1>
-          <p className="text-xs text-gray-500 font-mono mt-2 uppercase tracking-wider">
+          <p className="text-xs text-gray-500 font-medium mt-2 uppercase tracking-wider">
             Immutable tracking of CRUD operations
           </p>
         </div>
@@ -56,14 +56,14 @@ export function AdminAuditLogs() {
               placeholder="Search logs by user, resource, or ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-mono"
+              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left font-sans text-sm">
-            <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-mono">
+            <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-medium">
               <tr>
                 <th className="px-6 py-4 font-bold border-b border-neutral-200">Timestamp</th>
                 <th className="px-6 py-4 font-bold border-b border-neutral-200">User</th>
@@ -76,13 +76,13 @@ export function AdminAuditLogs() {
             <tbody className="divide-y divide-gray-100">
               {isLoading ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-gray-400 font-mono text-xs">
+                  <td colSpan={6} className="px-6 py-12 text-center text-gray-400 font-medium text-xs">
                     Scanning secure logs...
                   </td>
                 </tr>
               ) : filteredLogs.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-gray-400 font-mono text-xs">
+                  <td colSpan={6} className="px-6 py-12 text-center text-gray-400 font-medium text-xs">
                     No matching logs found.
                   </td>
                 </tr>
@@ -90,7 +90,7 @@ export function AdminAuditLogs() {
                 filteredLogs.map((log) => (
                   <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2 text-[10px] text-gray-500 font-mono">
+                      <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
                         <Clock className="w-3 h-3" />
                         {new Date(log.createdAt).toLocaleString()}
                       </div>
@@ -102,24 +102,24 @@ export function AdminAuditLogs() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-0.5 border text-[10px] font-black uppercase tracking-widest rounded-sm font-mono ${getActionColor(log.action)}`}>
+                      <span className={`px-2 py-0.5 border text-xs font-black uppercase tracking-widest rounded-sm font-medium ${getActionColor(log.action)}`}>
                         {log.action}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-2 text-xs font-mono text-gray-600">
+                      <div className="flex items-center gap-2 text-xs font-medium text-gray-600">
                         <Database className="w-3.5 h-3.5" />
                         {log.resource}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-[10px] font-mono text-gray-500 truncate max-w-[150px] inline-block" title={log.itemId}>
+                      <span className="text-xs font-medium text-gray-500 truncate max-w-[150px] inline-block" title={log.itemId}>
                         {log.itemId || '-'}
                       </span>
                     </td>
                     <td className="px-6 py-4">
                       {log.details ? (
-                        <div className="text-[9px] font-mono text-gray-500 max-h-12 overflow-hidden truncate max-w-xs p-1.5 bg-gray-50 border border-gray-100 rounded" title={log.details}>
+                        <div className="text-xs font-medium text-gray-500 max-h-12 overflow-hidden truncate max-w-xs p-1.5 bg-gray-50 border border-gray-100 rounded" title={log.details}>
                           {log.details}
                         </div>
                       ) : (
