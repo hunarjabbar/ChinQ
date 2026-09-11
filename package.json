@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/generate-firebase-config.js && tsx server.app.ts",
-    "build": "node scripts/generate-firebase-config.js && prisma generate && vite build && esbuild server.app.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build": "node scripts/generate-firebase-config.js && prisma generate && npx prisma db push --accept-data-loss && vite build && esbuild server.app.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rimraf dist server.js",

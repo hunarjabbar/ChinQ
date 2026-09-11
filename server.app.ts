@@ -74,6 +74,15 @@ async function runStartupSeeders() {
 
 async function startServer() {
   getJwtSecret(); // Crash early if not set
+
+  try {
+    const { execSync } = await import("child_process");
+    console.log("Ensuring database schema is synchronized...");
+    execSync("npx prisma db push --skip-generate --accept-data-loss", { stdio: "inherit" });
+  } catch (e) {
+    console.error("Warning during startup database sync:", e);
+  }
+
   const app = express();
   app.set("trust proxy", 1);
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
@@ -83,8 +92,10 @@ async function startServer() {
     res.json({ status: "ok", uptime: process.uptime(), timestamp: new Date().toISOString() });
   });
 
+  const rawFrameAncestors = process.env.ALLOWED_FRAME_ANCESTORS;
+  const isValidFrameAncestors = rawFrameAncestors && !rawFrameAncestors.includes('@');
   const allowedFrameAncestors = (
-    process.env.ALLOWED_FRAME_ANCESTORS || "'self',https://*.google.com,https://*.run.app"
+    isValidFrameAncestors ? rawFrameAncestors : "'self',*,https://ai.studio,https://*.ai.studio,https://aistudio.google.com,https://*.aistudio.google.com,https://*.google.com,https://*.run.app,https://*.googleusercontent.com"
   )
     .split(",")
     .map((s) => s.trim())
@@ -116,8 +127,18 @@ async function startServer() {
   const allowedOrigins = (process.env.ALLOWED_ORIGINS || "").split(",").filter(Boolean);
   app.use(cors({
     origin: (origin, callback) => {
-      if (!origin || process.env.NODE_ENV !== 'production') return callback(null, true);
+      if (!origin) return callback(null, true);
+      if (process.env.NODE_ENV !== 'production') return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
+      if (
+        origin.endsWith('.run.app') ||
+        origin.includes('ai.studio') ||
+        origin.includes('google.com') ||
+        origin.includes('googleusercontent.com')
+      ) {
+        return callback(null, true);
+      }
+      if (allowedOrigins.length === 0) return callback(null, true);
       callback(new Error('Not allowed by CORS'));
     },
     credentials: true
