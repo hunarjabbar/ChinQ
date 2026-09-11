@@ -1,6 +1,23 @@
 import express from 'express';
 import crypto from 'crypto';
+import rateLimit from 'express-rate-limit';
 import { prisma } from './db.js';
+
+const quoteLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  validate: { xForwardedForHeader: false, default: false },
+});
+
+const ordersLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  validate: { xForwardedForHeader: false, default: false },
+});
 
 export function registerPaymentRoutes(
   app: express.Application,
@@ -69,7 +86,7 @@ export function registerPaymentRoutes(
   });
 
   // 2. Real-time quote calculator
-  app.post('/api/public/payments/quote', async (req, res) => {
+  app.post('/api/public/payments/quote', quoteLimiter, async (req, res) => {
     try {
       const { direction = 'IQD_TO_ECNY', orderType = 'RETAIL' } = req.body;
       const amountVal = req.body.amount ?? req.body.sourceAmount;
@@ -148,7 +165,7 @@ export function registerPaymentRoutes(
   });
 
   // 3. Create conversion / payment order (for Retail or Business)
-  app.post('/api/public/payments/orders', async (req, res) => {
+  app.post('/api/public/payments/orders', ordersLimiter, async (req, res) => {
     try {
       const {
         orderType = 'RETAIL',
@@ -209,9 +226,7 @@ export function registerPaymentRoutes(
       }
 
       // Generate unique reference and cryptographic verification credentials
-      const timestampPart = Date.now().toString().slice(-6);
-      const randomPart = Math.floor(1000 + Math.random() * 9000);
-      const reference = `PAY-CNY-2026-${timestampPart}${randomPart.toString().slice(0, 2)}`;
+      const reference = `PAY-CNY-2026-${crypto.randomBytes(9).toString('base64url').toUpperCase()}`;
       
       const verificationCode = crypto
         .createHash('sha256')
@@ -294,6 +309,28 @@ export function registerPaymentRoutes(
         return res.status(404).json({ error: 'Transaction reference not found' });
       }
 
+      // Check if user is authorized (supplied verificationCode OR valid admin/editor token)
+      let isAuthorized = false;
+      const { verificationCode } = req.query;
+
+      if (verificationCode && verificationCode === order.verificationCode) {
+        isAuthorized = true;
+      } else if (req.headers.authorization) {
+        try {
+          const token = req.headers.authorization.split(' ')[1];
+          const jwt = await import('jsonwebtoken');
+          const JWT_SECRET = process.env.JWT_SECRET;
+          if (JWT_SECRET) {
+            const decoded: any = (jwt.default || jwt).verify(token, JWT_SECRET);
+            if (decoded && (decoded.role === 'ADMIN' || decoded.role === 'EDITOR')) {
+              isAuthorized = true;
+            }
+          }
+        } catch (e) {
+          // ignore auth errors for public route
+        }
+      }
+
       // Construct lifecycle timeline
       const timeline = [
         {
@@ -332,10 +369,49 @@ export function registerPaymentRoutes(
         }
       ];
 
-      res.json({
-        ...order,
-        timeline
-      });
+      let payload;
+      if (isAuthorized) {
+        payload = { ...order, timeline };
+      } else {
+        payload = {
+          id: order.id,
+          reference: order.reference,
+          orderType: order.orderType,
+          status: order.status,
+          createdAt: order.createdAt,
+          updatedAt: order.updatedAt,
+          settledAt: order.settledAt,
+          direction: order.direction,
+          sourceCurrency: order.sourceCurrency,
+          targetCurrency: order.targetCurrency,
+          exchangeRate: order.exchangeRate,
+          settlementMethod: order.settlementMethod,
+          sourceAmount: '***',
+          targetAmount: '***',
+          feeAmount: '***',
+          feePercent: '***',
+          senderName: '***',
+          senderEmail: '***',
+          senderPhone: '***',
+          senderIdNumber: '***',
+          senderCompany: '***',
+          recipientName: '***',
+          recipientIdentifier: '***',
+          recipientBankOrBureau: '***',
+          taxRegistrationNumber: '***',
+          commercialInvoiceRef: '***',
+          billOfLading: '***',
+          customsDeclarationNo: '***',
+          verificationCode: '***',
+          qrPayload: '***',
+          complianceNotes: 'Hidden for public view (Provide verification code)',
+          adminNotes: 'Hidden for public view',
+          settlementTxHash: order.settlementTxHash ? `${order.settlementTxHash.substring(0, 10)}...` : null,
+          timeline
+        };
+      }
+
+      res.json(payload);
     } catch (error: any) {
       console.error('Error tracking payment order:', error);
       res.status(500).json({ error: 'Failed to track payment order' });

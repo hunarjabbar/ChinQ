@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Shield, Clock, Database, Search, User as UserIcon, Activity } from 'lucide-react';
@@ -9,8 +10,7 @@ export function AdminAuditLogs() {
   const { data: logs = [], isLoading } = useQuery<any[]>({
     queryKey: ['admin-audit-logs'],
     queryFn: async () => {
-      const res = await fetch('/api/admin/audit-logs', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
+      const res = await apiFetch('/api/admin/audit-logs', {
       });
       if (!res.ok) throw new Error('Failed to fetch audit logs');
       return res.json();
@@ -28,7 +28,7 @@ export function AdminAuditLogs() {
     switch (action) {
       case 'POST': return 'text-green-600 bg-green-50 border-green-200';
       case 'PUT': return 'text-blue-600 bg-blue-50 border-blue-200';
-      case 'DELETE': return 'text-red-600 bg-red-50 border-red-200';
+      case 'DELETE': return 'text-brand-600 bg-brand-50 border-brand-200';
       default: return 'text-gray-600 bg-gray-50 border-gray-200';
     }
   };

@@ -42,12 +42,11 @@ export function IcaLogo({
   // Vector Emblem Mark
   const EmblemSvg = ({ dimSize = dim }: { dimSize?: number }) => (
     <svg
-      width={dimSize}
-      height={dimSize}
       viewBox="0 0 120 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="shrink-0 transition-transform duration-300 group-hover:scale-105"
+      style={{ width: dimSize, height: dimSize, maxWidth: '100%', maxHeight: '100%' }}
+      className="w-full h-full shrink-0 transition-transform duration-300 group-hover:scale-105"
       aria-label="Iraqi-Chinese Agency Official Emblem"
     >
       <defs>
@@ -84,7 +83,7 @@ export function IcaLogo({
         width="108"
         height="108"
         rx="26"
-        fill="#cc0000"
+        fill="url(#icaRedGrad)" filter="url(#icaShadow)"
         stroke="none"
         strokeWidth="0"
         style={{ borderStyle: 'none' }}
@@ -100,7 +99,7 @@ export function IcaLogo({
           fontFamily="system-ui, -apple-system, sans-serif"
           fontWeight="950"
           fontSize="64"
-          letterSpacing="-1"
+          letterSpacing="-1" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}
         >
           ICA
         </text>

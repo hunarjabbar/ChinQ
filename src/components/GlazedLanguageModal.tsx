@@ -310,13 +310,13 @@ export function GlazedLanguageModal({ lang, className }: GlazedLanguageModalProp
                 "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
                 "w-[240px]",
                 "rounded-xl overflow-hidden",
-                "bg-red-700/95 dark:bg-red-900/95",
-                "backdrop-blur-xl border border-red-500/50",
+                "bg-brand-700/95 dark:bg-brand-900/95",
+                "backdrop-blur-xl border border-brand-500/50",
                 "shadow-2xl"
               )}
             >
               {/* 8-Second Visual Countdown Progress Bar */}
-              <div className="relative w-full h-1 bg-red-900/50 overflow-hidden z-10">
+              <div className="relative w-full h-1 bg-brand-900/50 overflow-hidden z-10">
                 <motion.div
                   className={cn(
                     "h-full transition-all duration-75",
@@ -327,7 +327,7 @@ export function GlazedLanguageModal({ lang, className }: GlazedLanguageModalProp
               </div>
 
               {/* Minimal Header (just for pinning/closing) */}
-              <div className="relative z-10 px-3 pt-2 pb-1.5 flex items-center justify-between border-b border-red-500/20">
+              <div className="relative z-10 px-3 pt-2 pb-1.5 flex items-center justify-between border-b border-brand-500/20">
                 <span className="text-xs font-black uppercase text-white/80 tracking-widest">
                   {isPaused ? t.pausedText : t.autoDismiss}
                 </span>
@@ -367,8 +367,8 @@ export function GlazedLanguageModal({ lang, className }: GlazedLanguageModalProp
                       className={cn(
                         "relative text-center p-2 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5",
                         isActive
-                          ? "bg-white text-red-800 shadow-sm font-black"
-                          : "bg-red-800/50 hover:bg-red-600 text-white border border-red-500/30 hover:border-red-400 font-bold"
+                          ? "bg-white text-brand-800 shadow-sm font-black"
+                          : "bg-brand-800/50 hover:bg-brand-600 text-white border border-brand-500/30 hover:border-brand-400 font-bold"
                       )}
                     >
                       {isActive && <Check className="w-3 h-3 shrink-0" />}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Facebook, 
   Instagram, 
@@ -21,15 +21,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Locale } from '../types';
 import { useSiteStore } from '../store/useSiteStore';
 
-export type SocialPlatformKey = 
-  | 'whatsapp'
-  | 'facebook'
-  | 'instagram'
-  | 'linkedin'
-  | 'weibo'
-  | 'wechat'
-  | 'youtube'
-  | 'x';
+export type SocialPlatformKey = 'whatsapp' | 'facebook' | 'facebookAr' | 'facebookZh' | 'facebookCkb' | 'telegram' | 'telegramAr' | 'telegramZh' | 'telegramCkb' | 'instagram' | 'linkedin' | 'weibo' | 'wechat' | 'youtube' | 'youtubeAr' | 'youtubeZh' | 'youtubeCkb' | 'x' | 'xAr' | 'xZh' | 'xCkb';
 
 export interface SocialItemData {
   key: SocialPlatformKey;
@@ -70,20 +62,88 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
   },
   {
     key: 'facebook',
-    name: 'Facebook',
-    nameZh: '脸书官方主页',
-    nameAr: 'فيسبوك - الصفحة الرسمية',
-    nameCkb: 'فەیسبووک - پەڕەی فەرمی',
-    handle: '@IraqiChineseAgency',
-    badge: '185K Followers',
-    badgeZh: '18.5万 关注者',
-    badgeAr: '١٨٥ ألف متابع',
-    badgeCkb: '١٨٥ هەزار فۆڵۆوەر',
+    name: 'Facebook (EN)',
+    nameZh: '英文脸书官方主页',
+    nameAr: 'فيسبوك - القسم الإنجليزي',
+    nameCkb: 'فەیسبووک - بەشی ئینگلیزی',
+    handle: '@IraqiChineseAgency.EN',
+    badge: 'English Broadcast',
+    badgeZh: '英文官方主页',
+    badgeAr: 'بث القسم الإنجليزي',
+    badgeCkb: 'پەخشی ئینگلیزی',
     colorHex: '#1877F2',
     bgClass: 'bg-blue-50 text-blue-700',
     textClass: 'text-blue-600',
     borderClass: 'border-blue-200',
     hoverBgClass: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+  },
+  {
+    key: 'facebookAr',
+    name: 'Facebook (AR)',
+    nameZh: '阿拉伯语脸书官方频道',
+    nameAr: 'فيسبوك - القسم العربي',
+    nameCkb: 'فەیسبووک - بەشی عەرەبی',
+    handle: '@IraqiChineseAgency.AR',
+    badge: 'Arabic Broadcast',
+    badgeZh: '阿拉伯语资讯网',
+    badgeAr: 'بث القسم العربي',
+    badgeCkb: 'پەخشی عەرەبی',
+    colorHex: '#1877F2',
+    bgClass: 'bg-blue-50 text-blue-700',
+    textClass: 'text-blue-600',
+    borderClass: 'border-blue-200',
+    hoverBgClass: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+  },
+  {
+    key: 'facebookZh',
+    name: 'Facebook (ZH)',
+    nameZh: '中文脸书官方主页',
+    nameAr: 'فيسبوك - القسم الصيني',
+    nameCkb: 'فەیسبووک - بەشی چینی',
+    handle: '@IraqiChineseAgency.ZH',
+    badge: 'Chinese Broadcast',
+    badgeZh: '中文官方播报',
+    badgeAr: 'بث القسم الصيني',
+    badgeCkb: 'پەخشی چینی',
+    colorHex: '#1877F2',
+    bgClass: 'bg-blue-50 text-blue-700',
+    textClass: 'text-blue-600',
+    borderClass: 'border-blue-200',
+    hoverBgClass: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+  },
+  {
+    key: 'facebookCkb',
+    name: 'Facebook (CKB)',
+    nameZh: '库尔德语脸书官方主页',
+    nameAr: 'فيسبوك - القسم الكردي',
+    nameCkb: 'فەیسبووک - بەشی کوردی',
+    handle: '@IraqiChineseAgency.CKB',
+    badge: 'Kurdish Broadcast',
+    badgeZh: '库尔德语专线',
+    badgeAr: 'بث القسم الكردي',
+    badgeCkb: 'پەخشی کوردی',
+    colorHex: '#1877F2',
+    bgClass: 'bg-blue-50 text-blue-700',
+    textClass: 'text-blue-600',
+    borderClass: 'border-blue-200',
+    hoverBgClass: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+  },
+  {
+    key: 'telegram',
+    name: 'Telegram',
+    nameZh: 'Telegram 官方电报',
+    nameAr: 'تيليجرام - القناة الإخبارية',
+    nameCkb: 'تێلیگرام - کەناڵی فەرمی',
+    handle: '@IraqiChineseAgency',
+    badge: 'Instant Telex',
+    badgeZh: '实时电讯终端',
+    badgeAr: 'بث تيليجرام السريع',
+    badgeCkb: 'تێلیگرامی خێرا',
+    colorHex: '#229ED9',
+    bgClass: 'bg-sky-50 text-sky-700',
+    textClass: 'text-sky-600',
+    borderClass: 'border-sky-200',
+    hoverBgClass: 'hover:bg-[#229ED9] hover:text-white hover:border-[#229ED9]',
   },
   {
     key: 'instagram',
@@ -130,11 +190,11 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     badgeZh: '新浪官方蓝V认证',
     badgeAr: 'توثيق مستقل',
     badgeCkb: 'هەژماری باوەڕپێکراو',
-    colorHex: '#E6162D',
+    colorHex: '#cc0000',
     bgClass: 'bg-brand-50 text-brand-700',
     textClass: 'text-brand-600',
     borderClass: 'border-brand-200',
-    hoverBgClass: 'hover:bg-[#E6162D] hover:text-white hover:border-[#E6162D]',
+    hoverBgClass: 'hover:bg-brand-800 hover:text-white hover:border-brand-800',
   },
   {
     key: 'wechat',
@@ -165,11 +225,11 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     badgeZh: '高清专题纪录片',
     badgeAr: 'بث وثائقي فائق الدقة',
     badgeCkb: 'پەخشی کوالێتی بەرز',
-    colorHex: '#FF0000',
+    colorHex: '#cc0000',
     bgClass: 'bg-brand-50 text-brand-800',
     textClass: 'text-brand-600',
     borderClass: 'border-brand-200',
-    hoverBgClass: 'hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000]',
+    hoverBgClass: 'hover:bg-brand-800 hover:text-white hover:border-brand-800',
   },
   {
     key: 'x',
@@ -204,7 +264,12 @@ export function PlatformIcon({
     case 'whatsapp':
       return <MessageCircle size={size} className={className} />;
     case 'facebook':
+    case 'facebookAr':
+    case 'facebookZh':
+    case 'facebookCkb':
       return <Facebook size={size} className={className} />;
+    case 'telegram':
+      return <Send size={size} className={className} />;
     case 'instagram':
       return <Instagram size={size} className={className} />;
     case 'linkedin':
@@ -372,7 +437,11 @@ export function SocialHeaderBar({ lang }: { lang: Locale }) {
   const [activeWechat, setActiveWechat] = useState(false);
   const socialLinks = useSiteStore(state => state.socialLinks || {
     whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
-    facebook: 'https://facebook.com/IraqiChineseAgency',
+    facebook: 'https://facebook.com/IraqiChineseAgency.EN',
+    facebookAr: 'https://facebook.com/IraqiChineseAgency.AR',
+    facebookZh: 'https://facebook.com/IraqiChineseAgency.ZH',
+    facebookCkb: 'https://facebook.com/IraqiChineseAgency.CKB',
+    telegram: 'https://t.me/IraqiChineseAgency',
     instagram: 'https://instagram.com/iraqi-chineseagency',
     linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
     weibo: 'https://weibo.com/iraqi-chineseagency',
@@ -382,46 +451,56 @@ export function SocialHeaderBar({ lang }: { lang: Locale }) {
   });
 
   const getUrl = (key: SocialPlatformKey) => {
+    if (key === 'facebook') {
+      if (lang === 'ar') return socialLinks.facebookAr || socialLinks.facebook;
+      if (lang === 'zh') return socialLinks.facebookZh || socialLinks.facebook;
+      if (lang === 'ckb') return socialLinks.facebookCkb || socialLinks.facebook;
+    }
     return (socialLinks as any)?.[key] || '#';
   };
 
   return (
     <>
-      <div id="header-social-channels" className="flex items-center gap-1.5 sm:gap-2">
-        <span className="text-xs font-bold uppercase tracking-widest text-gray-400 me-1 hidden sm:inline">
-          {lang === 'zh' ? '关注我们:' : lang === 'ar' ? 'تابعنا:' : lang === 'ckb' ? 'هاوڕێمان بە:' : 'Follow:'}
-        </span>
-        {SOCIAL_PLATFORMS.map((item) => {
-          if (item.isModal) {
+      <div id="header-social-channels" className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 rounded-full bg-white/95 dark:bg-neutral-900/95 border border-white/80 dark:border-neutral-700/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+        
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          {SOCIAL_PLATFORMS.map((item) => {
+            const iconButtonClasses = "relative w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center bg-white/95 dark:bg-neutral-900/95 border border-white/80 dark:border-neutral-700/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(204,0,0,0.3)] text-gray-700 dark:text-neutral-200 transition-all duration-300 group hover:-translate-y-0.5 group/icon";
+            const smallRedGlassGlow = <div className="absolute -inset-1 bg-brand-600/20 dark:bg-brand-500/20 rounded-full blur-md opacity-0 group-hover/icon:opacity-100 transition-opacity duration-300 pointer-events-none"></div>;
+
+            if (item.isModal) {
+              return (
+                <button
+                  key={item.key}
+                  id={`header-social-${item.key}`}
+                  onClick={() => setActiveWechat(true)}
+                  className={iconButtonClasses}
+                  title={`${item.name} (${item.handle})`}
+                  aria-label={item.name}
+                >
+                  {smallRedGlassGlow}
+                  <PlatformIcon platform={item.key} size={13} className="relative z-10" />
+                </button>
+              );
+            }
+
             return (
-              <button
+              <a
                 key={item.key}
                 id={`header-social-${item.key}`}
-                onClick={() => setActiveWechat(true)}
-                className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border border-gray-200 dark:border-neutral-800/80 text-gray-600 transition-all duration-200 ${item.hoverBgClass} shadow-2xs hover:scale-110 cursor-pointer`}
+                href={getUrl(item.key)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={iconButtonClasses}
                 title={`${item.name} (${item.handle})`}
                 aria-label={item.name}
               >
-                <PlatformIcon platform={item.key} size={13} />
-              </button>
+                {smallRedGlassGlow}
+                <PlatformIcon platform={item.key} size={13} className="relative z-10" />
+              </a>
             );
-          }
-
-          return (
-            <a
-              key={item.key}
-              id={`header-social-${item.key}`}
-              href={getUrl(item.key)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border border-gray-200 dark:border-neutral-800/80 text-gray-600 transition-all duration-200 ${item.hoverBgClass} shadow-2xs hover:scale-110`}
-              title={`${item.name} (${item.handle})`}
-              aria-label={item.name}
-            >
-              <PlatformIcon platform={item.key} size={13} />
-            </a>
-          );
-        })}
+          })}
+        </div>
       </div>
 
       <WeChatModal 
@@ -436,9 +515,22 @@ export function SocialHeaderBar({ lang }: { lang: Locale }) {
 // 2. Comprehensive Footer Grid Variant (Rich 8-network showcase)
 export function SocialFooterShowcase({ lang }: { lang: Locale }) {
   const [activeWechat, setActiveWechat] = useState(false);
+  const [liveIndex, setLiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLiveIndex(prev => (prev + 1) % SOCIAL_PLATFORMS.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   const socialLinks = useSiteStore(state => state.socialLinks || {
     whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
-    facebook: 'https://facebook.com/IraqiChineseAgency',
+    facebook: 'https://facebook.com/IraqiChineseAgency.EN',
+    facebookAr: 'https://facebook.com/IraqiChineseAgency.AR',
+    facebookZh: 'https://facebook.com/IraqiChineseAgency.ZH',
+    facebookCkb: 'https://facebook.com/IraqiChineseAgency.CKB',
+    telegram: 'https://t.me/IraqiChineseAgency',
     instagram: 'https://instagram.com/iraqi-chineseagency',
     linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
     weibo: 'https://weibo.com/iraqi-chineseagency',
@@ -448,6 +540,11 @@ export function SocialFooterShowcase({ lang }: { lang: Locale }) {
   });
 
   const getUrl = (key: SocialPlatformKey) => {
+    if (key === 'facebook') {
+      if (lang === 'ar') return socialLinks.facebookAr || socialLinks.facebook;
+      if (lang === 'zh') return socialLinks.facebookZh || socialLinks.facebook;
+      if (lang === 'ckb') return socialLinks.facebookCkb || socialLinks.facebook;
+    }
     return (socialLinks as any)?.[key] || '#';
   };
 
@@ -490,30 +587,67 @@ export function SocialFooterShowcase({ lang }: { lang: Locale }) {
       </div>
 
       {/* 8-Grid responsive layout */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
-        {SOCIAL_PLATFORMS.map((item) => {
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+        {SOCIAL_PLATFORMS.map((item, index) => {
           const isModal = item.isModal;
+          const isLive = index === liveIndex;
+
+          const getLangAbbr = (k: SocialPlatformKey) => {
+            if (k === 'facebookAr' || k === 'telegramAr' || k === 'youtubeAr' || k === 'xAr') return 'AR';
+            if (k === 'facebookZh' || k === 'telegramZh' || k === 'youtubeZh' || k === 'xZh') return 'ZH';
+            if (k === 'facebookCkb' || k === 'telegramCkb' || k === 'youtubeCkb' || k === 'xCkb') return 'CKB';
+            if (k === 'facebook' || k === 'telegram' || k === 'youtube' || k === 'x') return 'EN';
+            if (k === 'whatsapp') return 'INT';
+            if (k === 'instagram') return 'INT';
+            if (k === 'linkedin') return 'B2B';
+            if (k === 'weibo') return 'CN';
+            if (k === 'wechat') return 'CN';
+            return '';
+          };
 
           const CardContent = (
-            <div className="flex flex-col items-center text-center p-3.5 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-white/95 via-white/70 to-amber-50/30 dark:from-neutral-900/90 dark:via-neutral-900/70 dark:to-neutral-800/50 border border-white/80 dark:border-neutral-700/60 shadow-[0_8px_30px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.8)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] hover:shadow-[0_12px_35px_rgba(180,140,60,0.15)] transition-all duration-300 group hover:-translate-y-1 h-full justify-between">
-              <div className="flex flex-col items-center">
-                <div 
-                  className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-2.5 transition-all duration-300 group-hover:scale-110 shadow-sm backdrop-blur-md ${item.bgClass}`}
-                  style={{ border: `1px solid ${item.colorHex}40` }}
-                >
-                  <PlatformIcon platform={item.key} size={21} className={item.textClass} />
+            <div className="relative group/card h-full">
+              {/* Red blurry glass effect under the white background */}
+              <div className="absolute -inset-0.5 bg-gradient-to-tr from-brand-600/30 via-brand-500/15 to-transparent rounded-2xl blur-md opacity-80 group-hover/card:opacity-100 transition-all duration-300 pointer-events-none"></div>
+
+              <div className="relative flex flex-col items-center text-center p-2 rounded-2xl bg-white/95 dark:bg-neutral-900/95 border border-white/80 dark:border-neutral-700/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_25px_rgba(204,0,0,0.12)] transition-all duration-300 group hover:-translate-y-0.5 h-full justify-between">
+                <div className="flex flex-col items-center w-full">
+                  <div className="relative mb-1">
+                    <div 
+                      className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 shadow-2xs backdrop-blur-md ${item.bgClass}`}
+                      style={{ border: `1px solid ${item.colorHex}40` }}
+                    >
+                      <PlatformIcon platform={item.key} size={16} className={item.textClass} />
+                    </div>
+                    {isLive ? (
+                      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-600 text-[6px] text-white font-black items-center justify-center">LIVE</span>
+                      </span>
+                    ) : (
+                      <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 animate-pulse"></span>
+                      </span>
+                    )}
+                  </div>
+                  <div className="font-serif font-black text-[11px] text-brand-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors tracking-tight">
+                    {item.name.replace(/ \([A-Z]+\)/, '')}
+                  </div>
+                  <div className="mt-0.5">
+                    <span className="px-1.5 py-0.2 rounded text-[8px] font-mono font-bold bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 border border-brand-200/50">
+                      {getLangAbbr(item.key)}
+                    </span>
+                  </div>
                 </div>
-                <div className="font-serif font-black text-xs text-brand-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors tracking-tight">
-                  {item.name}
+                <div className="mt-1.5 w-full">
+                  <span className={`inline-block w-full py-0.5 px-1 rounded-md text-[8px] font-bold font-sans tracking-wider uppercase transition-all duration-300 border shadow-2xs ${
+                    isLive 
+                      ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 border-brand-200 dark:border-brand-800 animate-pulse' 
+                      : 'bg-brand-50/70 dark:bg-brand-950/50 text-brand-800 dark:text-brand-300 group-hover:bg-brand-800 group-hover:text-white border-brand-200/50 dark:border-brand-800/50'
+                  }`}>
+                    {isLive ? (lang === 'zh' ? '直播' : lang === 'ar' ? 'بث' : lang === 'ckb' ? 'پەخش' : 'Live') : getLangAbbr(item.key)}
+                  </span>
                 </div>
-                <div className="text-[10px] font-sans font-medium text-neutral-400 dark:text-neutral-500 line-clamp-1 mt-0.5 tracking-wide">
-                  {item.handle}
-                </div>
-              </div>
-              <div className="mt-3 w-full">
-                <span className="inline-block w-full py-1 px-2 rounded-lg text-[10px] font-bold font-sans tracking-wider uppercase bg-brand-50/70 dark:bg-brand-950/50 text-brand-800 dark:text-brand-300 group-hover:bg-brand-800 group-hover:text-white transition-all duration-300 border border-brand-200/50 dark:border-brand-800/50 shadow-2xs">
-                  {getBadge(item)}
-                </span>
               </div>
             </div>
           );
@@ -561,7 +695,11 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
   const [activeWechat, setActiveWechat] = useState(false);
   const socialLinks = useSiteStore(state => state.socialLinks || {
     whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
-    facebook: 'https://facebook.com/IraqiChineseAgency',
+    facebook: 'https://facebook.com/IraqiChineseAgency.EN',
+    facebookAr: 'https://facebook.com/IraqiChineseAgency.AR',
+    facebookZh: 'https://facebook.com/IraqiChineseAgency.ZH',
+    facebookCkb: 'https://facebook.com/IraqiChineseAgency.CKB',
+    telegram: 'https://t.me/IraqiChineseAgency',
     instagram: 'https://instagram.com/iraqi-chineseagency',
     linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
     weibo: 'https://weibo.com/iraqi-chineseagency',
@@ -571,6 +709,11 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
   });
 
   const getUrl = (key: SocialPlatformKey) => {
+    if (key === 'facebook') {
+      if (lang === 'ar') return socialLinks.facebookAr || socialLinks.facebook;
+      if (lang === 'zh') return socialLinks.facebookZh || socialLinks.facebook;
+      if (lang === 'ckb') return socialLinks.facebookCkb || socialLinks.facebook;
+    }
     return (socialLinks as any)?.[key] || '#';
   };
 
@@ -711,7 +854,7 @@ export function ArticleSocialBar({
       name: 'Weibo',
       icon: <Globe size={16} />,
       href: `https://service.weibo.com/share/share.php?url=${encodeURIComponent(articleUrl)}&title=${encodeURIComponent(articleTitle)}`,
-      color: 'hover:bg-[#E6162D] hover:text-white',
+      color: 'hover:bg-brand-800 hover:text-white',
       border: 'border-brand-200'
     },
     {

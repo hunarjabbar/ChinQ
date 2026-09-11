@@ -418,6 +418,23 @@ export async function seedMarketData() {
       currency: 'IQD',
       marketCap: '-',
       peRatio: 0,
+    },
+    {
+      symbol: 'IQD_ECNY',
+      name: 'IQD / e-CNY Exchange Rate',
+      nameZh: '伊拉克第纳尔 / 数字人民币 (e-CNY)',
+      nameAr: 'سعر صرف الدينار العراقي / اليوان الرقمي (e-CNY)',
+      category: 'FOREX',
+      price: 188.50,
+      change: 0.42,
+      changePercent: 0.22,
+      volume: '¥ 54.2M / د.ع 10.2B',
+      high: 189.85,
+      low: 187.10,
+      open: 188.08,
+      currency: 'IQD',
+      marketCap: 'PBOC / CBI Clearing Feed',
+      peRatio: 0,
     }
   ];
 

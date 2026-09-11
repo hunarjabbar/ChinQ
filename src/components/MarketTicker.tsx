@@ -6,7 +6,7 @@ import { MarketIndicesSection } from './MarketIndicesSection';
 
 export function MarketTicker({ lang }: { lang: Locale }) {
   const [data, setData] = useState<MarketData[]>([]);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
   const [filterCategory, setFilterCategory] = useState<'ALL' | 'INDEX' | 'STOCKS' | 'COMMODITY'>('ALL');
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
     <div className="w-full bg-brand-800 text-white border-b border-brand-900/60 relative z-10 transition-all duration-300">
       
       {/* Ticker Bar Inner Container - Unified Alignment */}
-      <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
         <div className="h-10 flex items-center justify-between text-[11px] tracking-wider overflow-hidden">
           
           {/* Left Live Indicator & Category Filter Toggles */}
@@ -132,7 +132,7 @@ export function MarketTicker({ lang }: { lang: Locale }) {
       {/* Expandable Charts & Terminal Drawer */}
       {isExpanded && (
         <div className="bg-neutral-950 border-t border-white/10 animate-fadeIn">
-          <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 py-3 sm:py-5">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5">
             <MarketIndicesSection 
               data={data} 
               lang={lang} 

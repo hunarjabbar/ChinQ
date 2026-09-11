@@ -440,30 +440,21 @@ export function AdminPartnerships() {
             <div 
               ref={adminCertRef}
               data-admin-cert="true"
-              className="rounded-xl p-8 space-y-6 shadow-sm"
-              style={{ 
-                backgroundColor: '#ffffff', 
-                color: '#111827', 
-                border: '4px solid #cc0000', 
-                fontFamily: 'Georgia, serif' 
-              }}
+              className="rounded-xl p-8 space-y-6 shadow-sm border-4 border-brand-800 bg-white text-gray-900 font-serif"
             >
               <div 
-                className="pb-4 flex items-center justify-between"
-                style={{ borderBottom: '2px solid #cc0000' }}
+                className="pb-4 flex items-center justify-between border-b-2 border-brand-800"
               >
                 <div className="flex items-center gap-3">
                   <IcaLogo size={48} variant="mark" />
                   <div>
                     <div 
-                      className="text-xs font-medium font-bold uppercase tracking-widest"
-                      style={{ color: '#cc0000' }}
+                      className="text-xs font-medium font-bold uppercase tracking-widest text-brand-800"
                     >
                       Republic of Iraq • People's Republic of China
                     </div>
                     <div 
-                      className="text-lg font-bold font-black"
-                      style={{ color: '#111827' }}
+                      className="text-lg font-bold font-black text-gray-900"
                     >
                       Iraqi-Chinese Agency • Central Administration Registry
                     </div>
@@ -472,14 +463,12 @@ export function AdminPartnerships() {
 
                 <div className="text-end font-medium">
                   <div 
-                    className="text-xs uppercase"
-                    style={{ color: '#9ca3af' }}
+                    className="text-xs uppercase text-gray-400"
                   >
                     Synchronized Ref
                   </div>
                   <div 
-                    className="text-sm font-black"
-                    style={{ color: '#cc0000' }}
+                    className="text-sm font-black text-brand-800"
                   >
                     {selectedAppForCertificate.hash}
                   </div>
@@ -487,8 +476,7 @@ export function AdminPartnerships() {
               </div>
 
               <div 
-                className="p-3 rounded-lg text-center"
-                style={{ backgroundColor: '#cc0000', color: '#ffffff' }}
+                className="p-3 rounded-lg text-center bg-brand-800 text-white"
               >
                 <h4 
                   className="text-base font-bold font-black uppercase tracking-wider"
@@ -538,8 +526,7 @@ export function AdminPartnerships() {
                     Category
                   </span>
                   <span 
-                    className="font-bold text-xs uppercase"
-                    style={{ color: '#cc0000' }}
+                    className="font-bold text-xs uppercase text-brand-800"
                   >
                     {selectedAppForCertificate.role}
                   </span>

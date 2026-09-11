@@ -23,6 +23,7 @@ export function NewsletterSubscriptionModal({
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
 
@@ -120,8 +121,9 @@ export function NewsletterSubscriptionModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) {
-      alert(text.invalid);
+    setValidationError(null);
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      setValidationError(text.invalid);
       return;
     }
     subscribeMutation.mutate(email);
@@ -191,6 +193,13 @@ export function NewsletterSubscriptionModal({
                       className="w-full bg-gray-50 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-md py-3 px-4 text-sm text-ink-900 dark:text-neutral-100 placeholder:text-gray-400 dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-neutral-800 transition-all"
                     />
                   </div>
+
+                  {validationError && (
+                    <div className="flex items-start gap-2 text-brand-700 dark:text-brand-300 text-xs bg-brand-50 dark:bg-brand-950/40 p-3 rounded border border-brand-200 dark:border-brand-800">
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                      <p>{validationError}</p>
+                    </div>
+                  )}
 
                   {subscribeMutation.isError && (
                     <div className="flex items-start gap-2 text-brand-700 dark:text-brand-300 text-xs bg-brand-50 dark:bg-brand-950/40 p-3 rounded border border-brand-200 dark:border-brand-800">

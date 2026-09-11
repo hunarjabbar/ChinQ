@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiFetch } from '../../lib/api';
 import { 
   Mail, 
@@ -12,6 +12,20 @@ import {
 } from 'lucide-react';
 
 export function AdminSubscribers() {
+  const queryClient = useQueryClient();
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const res = await apiFetch(`/api/admin/subscribers/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete subscriber');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-subscribers'] });
+    }
+  });
   const { data: subscribers = [], isLoading } = useQuery<any[]>({
     queryKey: ['admin-subscribers'],
     queryFn: async () => {
@@ -83,7 +97,10 @@ export function AdminSubscribers() {
                     {new Date(sub.createdAt || Date.now()).toLocaleDateString()}
                   </td>
                   <td className="px-8 py-5 text-right">
-                    <button className="text-neutral-300 hover:text-brand-800 transition-colors p-1 cursor-pointer">
+                    <button 
+                      onClick={() => { if(confirm('Are you sure you want to remove this subscriber?')) deleteMutation.mutate(sub.id) }}
+                      className="text-neutral-300 hover:text-brand-800 transition-colors p-1 cursor-pointer"
+                    >
                       <Trash2 size={16} />
                     </button>
                   </td>

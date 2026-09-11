@@ -262,7 +262,7 @@ export function AdminBrics() {
                           </button>
                           <button 
                             onClick={() => { if(window.confirm('Delete topic?')) deleteMutation.mutate(topic.id); }}
-                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-white rounded border border-transparent hover:border-gray-200 transition-all"
+                            className="p-2 text-gray-400 hover:text-brand-600 hover:bg-white rounded border border-transparent hover:border-gray-200 transition-all"
                           >
                             <Trash2 size={16} />
                           </button>

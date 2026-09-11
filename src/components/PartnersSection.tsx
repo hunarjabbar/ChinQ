@@ -96,9 +96,7 @@ export default function PartnersSection({ lang }: { lang: Locale }) {
   return (
     <div className="w-full relative overflow-hidden my-8">
       <div className="absolute inset-0 bg-neutral-900/40 z-10" />
-      <div className="absolute inset-0 z-0">
-        <img src="https://iraqchinainstitute.org/wp-content/uploads/2025/02/16b-1024x731.png" alt="Background" className="w-full h-full object-cover blur-sm opacity-60" />
-      </div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900 via-brand-950 to-neutral-900 opacity-90" />
       <div className="relative z-20 w-full bg-brand-800/80 py-16 backdrop-blur-md shadow-2xl border-y border-white/10">
         <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 mb-12 flex justify-center">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-widest text-white uppercase border-b-2 border-brand-800 pb-3 flex items-center gap-3">

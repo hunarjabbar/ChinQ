@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Locale, PaymentOrder } from '../../types';
 import { 
   X, 
@@ -152,11 +153,13 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
     }
   };
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 font-sans">
       <div 
         dir={isRtl ? 'rtl' : 'ltr'} 
-        className="relative bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden my-8"
+        className="relative bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden my-8 max-h-[95vh] flex flex-col"
       >
         
         {/* Modal Header */}
@@ -534,6 +537,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
         </form>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

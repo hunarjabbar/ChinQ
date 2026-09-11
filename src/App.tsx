@@ -1,3 +1,4 @@
+import { useAuthStore } from './store/useAuthStore';
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -84,8 +85,14 @@ function ThemeApplier() {
       } else {
         root.classList.remove('dark');
         document.body.classList.remove('dark');
-        root.style.setProperty('--color-ink-900', inkColor || '#0f172a');
-        root.style.setProperty('--color-paper-50', paperColor || '#ffffff');
+        const safeInk = (!inkColor || ['#ffffff', '#fff', '#fafafa', '#f4f4f5', '#f8fafc'].includes(inkColor.toLowerCase().trim()))
+          ? '#0f172a'
+          : inkColor;
+        const safePaper = (!paperColor || ['#000000', '#000', '#09090b', '#0f172a'].includes(paperColor.toLowerCase().trim()))
+          ? '#ffffff'
+          : paperColor;
+        root.style.setProperty('--color-ink-900', safeInk);
+        root.style.setProperty('--color-paper-50', safePaper);
       }
       if (brandColor) {
         const bc = (brandColor && brandColor.startsWith('#') && brandColor !== '#8B0000' && brandColor !== '#990000' && brandColor !== '#C91C24' && brandColor !== '#800000' && brandColor !== '#a30000') 
@@ -230,7 +237,7 @@ const router = createBrowserRouter([
   { path: "*", element: <NotFound /> }
 ]);
 
-export default function App() {
+export default function App() { const initializeAuth = useAuthStore(state => state.initialize); useEffect(() => { initializeAuth(); }, [initializeAuth]);
   return (
     <ErrorBoundary lang="en">
       <QueryClientProvider client={queryClient}>

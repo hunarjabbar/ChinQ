@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Plus, Edit2, Trash2, X, Save, Image as ImageIcon } from 'lucide-react';
@@ -27,8 +28,7 @@ export default function AdminPartners() {
 
   const fetchPartners = async () => {
     try {
-      const res = await fetch('/api/admin/partners', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
+      const res = await apiFetch('/api/admin/partners', {
       });
       if (res.ok) {
         setPartners(await res.json());
@@ -46,11 +46,10 @@ export default function AdminPartners() {
       const url = editingId ? `/api/admin/partners/${editingId}` : '/api/admin/partners';
       const method = editingId ? 'PUT' : 'POST';
       
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         },
         body: JSON.stringify(formData)
       });
@@ -68,9 +67,8 @@ export default function AdminPartners() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this partner?')) return;
     try {
-      const res = await fetch(`/api/admin/partners/${id}`, {
+      const res = await apiFetch(`/api/admin/partners/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
       });
       if (res.ok) {
         fetchPartners();
@@ -148,14 +146,14 @@ export default function AdminPartners() {
                 <td className="p-4 font-bold">{p.name}</td>
                 <td className="p-4 text-brand-600">{p.websiteUrl}</td>
                 <td className="p-4">
-                  <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase rounded ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`}>
+                  <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase rounded ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-brand-100 text-brand-800'}`}>
                     {p.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>
                 <td className="p-4">{p.order}</td>
                 <td className="p-4 text-right">
                   <button onClick={() => openModal(p)} className="text-brand-800 hover:text-brand-700 mx-2"><Edit2 size={14} /></button>
-                  <button onClick={() => handleDelete(p.id)} className="text-red-600 hover:text-red-800"><Trash2 size={14} /></button>
+                  <button onClick={() => handleDelete(p.id)} className="text-brand-600 hover:text-brand-800"><Trash2 size={14} /></button>
                 </td>
               </tr>
             ))}

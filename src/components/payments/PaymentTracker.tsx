@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Locale, PaymentOrder } from '../../types';
+import { useAuthStore } from '../../store/useAuthStore';
 import { 
   Search, 
   CheckCircle2, 
@@ -30,6 +31,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
   const isRtl = isAr || isCkb;
 
   const [searchRef, setSearchRef] = useState(initialRef || '');
+  const [verificationCode, setVerificationCode] = useState('');
   const [order, setOrder] = useState<PaymentOrder | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,12 +50,22 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
     setError(null);
 
     try {
-      const res = await fetch(`/api/public/payments/orders/${encodeURIComponent(refToFind.trim())}`);
+      const vCode = verificationCode.trim() ? `?verificationCode=${encodeURIComponent(verificationCode.trim())}` : '';
+      const headers: any = {};
+      const token = useAuthStore.getState().token || localStorage.getItem('token');
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      
+      const res = await fetch(`/api/public/payments/orders/${encodeURIComponent(refToFind.trim())}${vCode}`, {
+        headers,
+        credentials: 'include',
+      });
       const json = await res.json();
       if (!res.ok) {
         throw new Error(json.error || 'Transaction reference not found');
       }
-      setOrder(json.order);
+      setOrder(json.order || json);
     } catch (err: any) {
       setError(err.message || 'Failed to locate order');
       setOrder(null);
@@ -137,20 +149,33 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
         </p>
 
         {/* Search Input Bar */}
-        <div className="mt-4 flex flex-col sm:flex-row gap-2 max-w-xl">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              value={searchRef}
-              onChange={(e) => setSearchRef(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleLookup(searchRef)}
-              placeholder={labels.inputPlaceholder}
-              className="w-full text-xs font-bold p-3 pl-9 bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none uppercase"
-            />
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-          </div>
+        <div className="mt-4 flex flex-col gap-3 max-w-xl">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                value={searchRef}
+                onChange={(e) => setSearchRef(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleLookup(searchRef)}
+                placeholder={labels.inputPlaceholder}
+                className="w-full text-xs font-bold p-3 pl-9 bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none uppercase"
+              />
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            </div>
+            
+            <div className="relative w-full sm:w-48">
+              <input
+                type="text"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value.toUpperCase())}
+                onKeyDown={(e) => e.key === 'Enter' && handleLookup(searchRef)}
+                placeholder="Verification Code (Opt)"
+                className="w-full text-xs font-bold p-3 pl-9 bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 rounded-xl focus:border-brand-800 focus:outline-none uppercase"
+              />
+              <ShieldCheck size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+            </div>
 
-          <button
+            <button
             type="button"
             onClick={() => handleLookup(searchRef)}
             disabled={isLoading || !searchRef.trim()}
@@ -159,6 +184,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
             {isLoading ? <RefreshCw size={14} className="animate-spin" /> : <Search size={14} />}
             <span>{labels.searchBtn}</span>
           </button>
+          </div>
         </div>
 
         {error && (
@@ -209,7 +235,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
                 Source Transferred
               </span>
               <span className="text-xl font-black text-brand-900 dark:text-white">
-                {order.sourceAmount.toLocaleString()} {order.sourceCurrency}
+                {typeof order.sourceAmount === 'number' ? order.sourceAmount.toLocaleString() : order.sourceAmount} {order.sourceCurrency}
               </span>
               <span className="text-xs text-neutral-400 block mt-1">
                 via {order.settlementMethod}
@@ -221,10 +247,10 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
                 Target Beneficiary Receives
               </span>
               <span className="text-xl font-black text-brand-800 dark:text-brand-300">
-                {order.targetAmount.toLocaleString()} {order.targetCurrency}
+                {typeof order.targetAmount === 'number' ? order.targetAmount.toLocaleString() : order.targetAmount} {order.targetCurrency}
               </span>
               <span className="text-xs text-brand-600 dark:text-brand-400 block mt-1">
-                Net after {order.feeAmount.toLocaleString()} fee ({order.feePercent}%)
+                Net after {typeof order.feeAmount === 'number' ? order.feeAmount.toLocaleString() : order.feeAmount} fee ({order.feePercent}%)
               </span>
             </div>
 
@@ -233,7 +259,7 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
                 Locked Rate
               </span>
               <span className="text-lg font-bold text-brand-900 dark:text-white">
-                1 e-CNY = {order.exchangeRate.toFixed(2)} IQD
+                1 e-CNY = {typeof order.exchangeRate === 'number' ? order.exchangeRate.toFixed(2) : order.exchangeRate} IQD
               </span>
               <span className="text-xs text-emerald-600 dark:text-emerald-400 block mt-1">
                 PBOC-CBI Wholesale Spread

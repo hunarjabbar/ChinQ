@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, FormEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   HeartHandshake, 
@@ -322,7 +323,9 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
     window.print();
   };
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 font-sans">
       <div 
         dir={isRtl ? 'rtl' : 'ltr'} 
@@ -846,7 +849,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                 style={{ 
                   backgroundColor: '#ffffff', 
                   color: '#111827', 
-                  border: '4px solid #cc0000', 
+                  border: '4px solid var(--color-brand-800)', 
                   fontFamily: 'Georgia, serif' 
                 }}
               >
@@ -856,8 +859,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                   style={{ opacity: 0.04 }}
                 >
                   <div 
-                    className="text-7xl sm:text-9xl font-black uppercase tracking-widest whitespace-nowrap"
-                    style={{ color: '#cc0000' }}
+                    className="text-7xl sm:text-9xl font-black uppercase tracking-widest whitespace-nowrap text-brand-800"
                   >
                     IRAQI CHINESE AGENCY
                   </div>
@@ -865,33 +867,28 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
                 {/* Top Border Accent Line */}
                 <div 
-                  className="h-1.5 rounded-full"
-                  style={{ background: 'linear-gradient(to right, #cc0000, #ef4444, #cc0000)' }}
+                  className="h-1.5 rounded-full bg-gradient-to-r from-brand-800 via-brand-500 to-brand-800"
                 ></div>
 
                 {/* Official Header with existing ICA Logo & Bilateral Crests */}
                 <div 
-                  className="pb-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start"
-                  style={{ borderBottom: '2px solid #cc0000' }}
+                  className="pb-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start border-b-2 border-brand-800"
                 >
                   <div className="flex items-center gap-4">
                     <IcaLogo size={64} variant="mark" lang={lang} />
                     <div>
                       <div 
-                        className="text-xs font-black uppercase tracking-[0.25em]"
-                        style={{ color: '#cc0000' }}
+                        className="text-xs font-black uppercase tracking-[0.25em] text-brand-800"
                       >
                         {isAr ? 'الجمهورية العراقية • جمهورية الصين الشعبية' : isZh ? '伊拉克共和国 • 中华人民共和国 双边合作网络' : 'Republic of Iraq • People\'s Republic of China'}
                       </div>
                       <h2 
-                        className="text-xl sm:text-2xl font-black tracking-tight"
-                        style={{ color: '#111827' }}
+                        className="text-xl sm:text-2xl font-black tracking-tight text-gray-900"
                       >
                         {isAr ? 'الوكالة العراقية الصينية • مجمع الكفاءات والشباب' : isZh ? '伊拉克-中国通讯社 • 青年英才与志愿服务注册公署' : 'Iraqi-Chinese Agency • Talent & Youth Registry'}
                       </h2>
                       <div 
-                        className="text-xs uppercase tracking-widest"
-                        style={{ color: '#6b7280' }}
+                        className="text-xs uppercase tracking-widest text-gray-500"
                       >
                         Central Command & Sovereign Administration Portal Accredited
                       </div>
@@ -900,24 +897,17 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
                   <div className="text-center sm:text-end font-mono">
                     <div 
-                      className="text-xs font-bold uppercase tracking-wider"
-                      style={{ color: '#9ca3af' }}
+                      className="text-xs font-bold uppercase tracking-wider text-gray-400"
                     >
                       Official Registration ID
                     </div>
                     <div 
-                      className="text-base sm:text-lg font-black tracking-wider px-3 py-1 rounded inline-block mt-1"
-                      style={{ 
-                        color: '#cc0000', 
-                        backgroundColor: '#fff5f5', 
-                        border: '1px solid #fecaca' 
-                      }}
+                      className="text-base sm:text-lg font-black tracking-wider px-3 py-1 rounded inline-block mt-1 text-brand-800 bg-brand-50 border border-brand-200"
                     >
                       {uniqueCode}
                     </div>
                     <div 
-                      className="text-xs uppercase tracking-widest mt-1"
-                      style={{ color: '#9ca3af' }}
+                      className="text-xs uppercase tracking-widest mt-1 text-gray-400"
                     >
                       Hash: {centralHash}
                     </div>
@@ -926,8 +916,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
                 {/* Red Banner Certificate Title */}
                 <div 
-                  className="py-3 px-6 rounded-xl text-center shadow-md"
-                  style={{ backgroundColor: '#cc0000', color: '#ffffff' }}
+                  className="py-3 px-6 rounded-xl text-center shadow-md bg-brand-800 text-white"
                 >
                   <div 
                     className="text-xs uppercase tracking-[0.3em]"
@@ -983,8 +972,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                       Accredited Category
                     </span>
                     <span 
-                      className="text-sm font-black uppercase mt-0.5 block flex items-center gap-1.5"
-                      style={{ color: '#cc0000' }}
+                      className="text-sm font-black uppercase mt-0.5 block flex items-center gap-1.5 text-brand-800"
                     >
                       {type === 'volunteer' ? <HeartHandshake size={14} /> : <GraduationCap size={14} />}
                       {type === 'volunteer' ? 'Accredited Volunteer' : 'Diplomatic Intern'}
@@ -1066,25 +1054,18 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
                 {/* Additional Role Specific Detail Card */}
                 <div 
-                  className="p-4 rounded-xl font-sans space-y-2"
-                  style={{ 
-                    backgroundColor: '#fff5f5', 
-                    border: '1px solid #fecaca' 
-                  }}
+                  className="p-4 rounded-xl font-sans space-y-2 bg-brand-50 border border-brand-200"
                 >
                   <div 
-                    className="flex items-center justify-between pb-2"
-                    style={{ borderBottom: '1px solid #fecaca' }}
+                    className="flex items-center justify-between pb-2 border-b border-brand-200"
                   >
                     <span 
-                      className="text-xs font-bold uppercase tracking-wider"
-                      style={{ color: '#cc0000' }}
+                      className="text-xs font-bold uppercase tracking-wider text-brand-800"
                     >
                       {type === 'volunteer' ? 'Volunteer Service Track & Availability' : 'Academic Institution & Research Track'}
                     </span>
                     <span 
-                      className="text-xs uppercase px-2 py-0.5 rounded font-bold"
-                      style={{ backgroundColor: '#cc0000', color: '#ffffff' }}
+                      className="text-xs uppercase px-2 py-0.5 rounded font-bold bg-brand-800 text-white"
                     >
                       VERIFIED ACCREDITATION
                     </span>
@@ -1176,26 +1157,22 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
                 {/* Bottom Signature & Sovereign Seal Area */}
                 <div 
-                  className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center text-center font-sans"
-                  style={{ borderTop: '2px solid #cc0000' }}
+                  className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 items-center text-center font-sans border-t-2 border-brand-800"
                 >
                   {/* Left: Bureau Officer */}
                   <div className="space-y-1 text-xs">
                     <div 
-                      className="text-xs uppercase tracking-widest"
-                      style={{ color: '#9ca3af' }}
+                      className="text-xs uppercase tracking-widest text-gray-400"
                     >
                       Authorized By
                     </div>
                     <div 
-                      className="font-black text-sm"
-                      style={{ color: '#111827' }}
+                      className="font-black text-sm text-gray-900"
                     >
                       Baghdad Diplomatic Secretariat
                     </div>
                     <div 
-                      className="text-xs"
-                      style={{ color: '#6b7280' }}
+                      className="text-xs text-gray-500"
                     >
                       Directorate of Talent & Bilateral Exchange
                     </div>
@@ -1204,17 +1181,14 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                   {/* Center: Red Circular Sovereign Stamp */}
                   <div className="flex flex-col items-center justify-center">
                     <div 
-                      className="w-20 h-20 rounded-full border-4 border-dashed p-1 flex items-center justify-center text-center font-black text-[8px] uppercase tracking-tighter shadow-sm transform rotate-[-6deg]"
-                      style={{ borderColor: '#cc0000', color: '#cc0000' }}
+                      className="w-20 h-20 rounded-full border-4 border-dashed border-brand-800 text-brand-800 p-1 flex items-center justify-center text-center font-black text-[8px] uppercase tracking-tighter shadow-sm transform rotate-[-6deg]"
                     >
                       <div 
-                        className="w-full h-full rounded-full border flex flex-col items-center justify-center p-1"
-                        style={{ borderColor: '#cc0000', backgroundColor: '#ffffff' }}
+                        className="w-full h-full rounded-full border border-brand-800 bg-white flex flex-col items-center justify-center p-1"
                       >
                         <span>IRAQI-CHINESE</span>
                         <span 
-                          className="text-xs font-black"
-                          style={{ color: '#cc0000' }}
+                          className="text-xs font-black text-brand-800"
                         >
                           ★ 2026 ★
                         </span>
@@ -1222,8 +1196,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                       </div>
                     </div>
                     <span 
-                      className="text-xs uppercase tracking-widest font-bold mt-1"
-                      style={{ color: '#cc0000' }}
+                      className="text-xs uppercase tracking-widest font-bold mt-1 text-brand-800"
                     >
                       DIGITALLY ACCREDITED
                     </span>
@@ -1280,6 +1253,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

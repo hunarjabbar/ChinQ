@@ -31,14 +31,25 @@
   --color-brand-300: #ffa8a8;
   --color-brand-400: #ff8787;
   --color-brand-500: #ff4d4d;
-  --color-brand-600: #ff0000;
-  --color-brand-700: #e60000;
+  --color-brand-600: #e60000;
+  --color-brand-700: #d60000;
   --color-brand-800: #cc0000;
-  --color-brand-900: #cc0000;
-  --color-brand-950: #aa0000;
+  --color-brand-900: #b30000;
+  --color-brand-950: #880000;
+
+  --color-paper-50: #ffffff;
+  --color-paper-100: #fafafa;
+  --color-paper-200: #f5f5f5;
+  --color-paper-300: #eeeeee;
+  --color-paper-400: #e0e0e0;
+  --color-paper-500: #d4d4d4;
+  --color-paper-600: #a3a3a3;
+  --color-paper-700: #737373;
+  --color-paper-800: #525252;
+  --color-paper-900: #262626;
+  --color-paper-950: #171717;
 
   --color-ink-900: #0f172a;
-  --color-paper-50: #ffffff;
 
   --spacing-base: 2rem;
   --container-width: 100%;
@@ -121,10 +132,17 @@ html, body {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-paper-50);
-  color: var(--color-ink-900);
+  background-color: var(--color-paper-50, #ffffff);
+  color: var(--color-ink-900, #0f172a);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .dark body,
@@ -222,4 +240,25 @@ p { font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem); line-height: 1.6; max-widt
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-modal-container, .print-modal-container * {
+    visibility: visible;
+  }
+  .print-modal-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
 }

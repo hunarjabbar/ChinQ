@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { AdminLayout } from '../components/AdminLayout';
 import { useAuthStore } from '../store/useAuthStore';
 import { useState } from 'react';
@@ -45,7 +46,7 @@ export function AdminBooks() {
   const { data: books = [], isLoading } = useQuery<Book[]>({
     queryKey: ['admin-books'],
     queryFn: async () => {
-      const res = await fetch('/api/books');
+      const res = await apiFetch('/api/books');
       if (!res.ok) throw new Error('Failed to fetch books');
       return res.json();
     }
@@ -55,11 +56,10 @@ export function AdminBooks() {
 
   const createMutation = useMutation({
     mutationFn: async (data: any) => {
-      const res = await fetch('/api/books', {
+      const res = await apiFetch('/api/books', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -79,11 +79,10 @@ export function AdminBooks() {
 
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }) => {
-      const res = await fetch(`/api/books/${id}`, {
+      const res = await apiFetch(`/api/books/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -103,10 +102,9 @@ export function AdminBooks() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/books/${id}`, {
+      const res = await apiFetch(`/api/books/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`
         }
       });
       if (!res.ok) throw new Error('Failed to delete book');
@@ -120,7 +118,7 @@ export function AdminBooks() {
 
   const reseedMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/books/seed', {
+      const res = await apiFetch('/api/books/seed', {
         method: 'POST'
       });
       if (!res.ok) throw new Error('Failed to reseed books');
@@ -206,11 +204,10 @@ export function AdminBooks() {
 
   const toggleTrendingMutation = useMutation({
     mutationFn: async ({ id, isTrending }: { id: string; isTrending: boolean }) => {
-      const res = await fetch(`/api/books/${id}`, {
+      const res = await apiFetch(`/api/books/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ isTrending })
       });
@@ -226,11 +223,10 @@ export function AdminBooks() {
 
   const toggleFeaturedMutation = useMutation({
     mutationFn: async ({ id, isFeatured }: { id: string; isFeatured: boolean }) => {
-      const res = await fetch(`/api/books/${id}`, {
+      const res = await apiFetch(`/api/books/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ isFeatured })
       });

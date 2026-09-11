@@ -1,28 +1,14 @@
 export async function apiFetch(url: string, options: RequestInit = {}) {
-  const authStorage = localStorage.getItem('auth-storage');
-  let token = '';
-  if (authStorage) {
-    try {
-      token = JSON.parse(authStorage).state.token;
-    } catch (e) {}
-  }
-
-  const headers = new Headers(options.headers);
-  if (token) {
-    headers.set('Authorization', `Bearer ${token}`);
-  }
-
   const res = await fetch(url, {
     ...options,
-    headers,
+    credentials: 'include',
   });
-
+  
   if (!res.ok) {
     if (res.status === 401 || res.status === 403) {
       // Optional: Handle unauthorized
     }
   }
-
   return res;
 }
 

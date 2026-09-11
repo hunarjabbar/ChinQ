@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { useAuthStore } from '../store/useAuthStore';
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -31,7 +32,7 @@ export function AdminTourism() {
   const { data: spots = [], isLoading } = useQuery<TourismSpot[]>({
     queryKey: ['admin-tourism-spots'],
     queryFn: async () => {
-      const res = await fetch('/api/tourism');
+      const res = await apiFetch('/api/tourism');
       if (!res.ok) throw new Error('Failed to fetch tourism spots');
       return res.json();
     }
@@ -40,11 +41,10 @@ export function AdminTourism() {
   // Create mutation
   const createMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      const res = await fetch('/api/tourism', {
+      const res = await apiFetch('/api/tourism', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -65,11 +65,10 @@ export function AdminTourism() {
   // Update mutation
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Partial<TourismSpot> }) => {
-      const res = await fetch(`/api/tourism/${id}`, {
+      const res = await apiFetch(`/api/tourism/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -90,10 +89,9 @@ export function AdminTourism() {
   // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/tourism/${id}`, {
+      const res = await apiFetch(`/api/tourism/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`
         }
       });
       if (!res.ok) throw new Error('Failed to delete spot');
@@ -109,7 +107,7 @@ export function AdminTourism() {
   // Reseed mutation
   const reseedMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/tourism/seed', { method: 'POST' });
+      const res = await apiFetch('/api/tourism/seed', { method: 'POST' });
       if (!res.ok) throw new Error('Failed to reseed');
       return res.json();
     },

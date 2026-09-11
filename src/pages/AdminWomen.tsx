@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { WomenProfile } from '../types';
@@ -51,7 +52,7 @@ export function AdminWomen() {
   const { data: profiles = [], isLoading } = useQuery<WomenProfile[]>({
     queryKey: ['admin-women-profiles'],
     queryFn: async () => {
-      const res = await fetch('/api/women');
+      const res = await apiFetch('/api/women');
       if (!res.ok) throw new Error('Failed to fetch women records');
       return res.json();
     }
@@ -63,11 +64,10 @@ export function AdminWomen() {
       const url = editingProfile ? `/api/women/${editingProfile.id}` : '/api/women';
       const method = editingProfile ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -95,9 +95,8 @@ export function AdminWomen() {
   // Delete Mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/women/${id}`, {
+      const res = await apiFetch(`/api/women/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to delete women record');
       return res.json();
@@ -114,7 +113,7 @@ export function AdminWomen() {
   // Reseed Mutation
   const reseedMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/women/seed', { method: 'POST' });
+      const res = await apiFetch('/api/women/seed', { method: 'POST' });
       if (!res.ok) throw new Error('Failed to reseed database');
       return res.json();
     },
@@ -130,11 +129,10 @@ export function AdminWomen() {
   // Toggle Featured or Trending
   const toggleStatus = async (profile: WomenProfile, field: 'isFeatured' | 'isTrending') => {
     try {
-      const res = await fetch(`/api/women/${profile.id}`, {
+      const res = await apiFetch(`/api/women/${profile.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ [field]: !profile[field] })
       });

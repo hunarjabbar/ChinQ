@@ -18,14 +18,13 @@ import { seedBricsTopics } from "./server/bricsSeeder.js";
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 
 function getJwtSecret() {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    console.warn(
-      "WARNING: JWT_SECRET is not set in the environment. Using a fallback secret for development ONLY. Do NOT do this in production.",
-    );
-    return "iraqi-chinese-agency_secret_key_888";
+    console.error("FATAL ERROR: JWT_SECRET environment variable is not set.");
+    process.exit(1);
   }
   return secret;
 }
@@ -51,47 +50,6 @@ function getGeminiClient() {
   return aiClient;
 }
 
-async function ensureTestCredentials() {
-  try {
-    console.log("🔒 Ensuring test administrative credentials exist for Iraqi-Chinese Agency...");
-    const bcrypt = await import("bcryptjs");
-
-    const credentialsToEnsure = [
-      {
-        email: "editor@iraqi-chineseagency.com",
-        password: "editor123",
-        name: "ICA Chief Editor",
-        role: "EDITOR",
-      },
-      {
-        email: "admin@iraqi-chineseagency.com",
-        password: "admin123",
-        name: "ICA Sovereign Admin",
-        role: "ADMIN",
-      }
-    ];
-
-    for (const cred of credentialsToEnsure) {
-      const exists = await prisma.user.findUnique({
-        where: { email: cred.email },
-      });
-      if (!exists) {
-        const hash = await (bcrypt.default || bcrypt).hash(cred.password, 10);
-        await prisma.user.create({
-          data: {
-            email: cred.email,
-            password: hash,
-            name: cred.name,
-            role: cred.role,
-          },
-        });
-        console.log(`✅ Created test credential: ${cred.email} (${cred.role})`);
-      }
-    }
-  } catch (err) {
-    console.error("Error ensuring test credentials:", err);
-  }
-}
 
 async function runStartupSeeders() {
   try {
@@ -108,7 +66,6 @@ async function runStartupSeeders() {
     await seedPoliticalNews();
     await seedPaymentData();
     await seedBricsTopics();
-    await ensureTestCredentials();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
     console.error("⚠️ Error running background seeders:", err);
@@ -116,6 +73,7 @@ async function runStartupSeeders() {
 }
 
 async function startServer() {
+  getJwtSecret(); // Crash early if not set
   const app = express();
   app.set("trust proxy", 1);
   const PORT = 3000;
@@ -125,23 +83,47 @@ async function startServer() {
     res.json({ status: "ok", uptime: process.uptime(), timestamp: new Date().toISOString() });
   });
 
+  const allowedFrameAncestors = (
+    process.env.ALLOWED_FRAME_ANCESTORS || "'self',https://*.google.com,https://*.run.app"
+  )
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
   app.use(
     helmet({
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "https://s3.tradingview.com"],
+          frameSrc: ["'self'", "https://s.tradingview.com", "https://www.tradingview.com"],
+          imgSrc: ["'self'", "data:", "blob:", "https:", "https://s3.tradingview.com"],
+          connectSrc: ["'self'", "https://s3.tradingview.com", "wss://data.tradingview.com", "https:", "wss:"],
+          styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+          fontSrc: ["'self'", "data:", "https:"],
+          frameAncestors: allowedFrameAncestors,
+        },
+      },
       frameguard: false, // Ensure iframe embedding in AI Studio is permitted
       crossOriginEmbedderPolicy: false,
       crossOriginOpenerPolicy: false,
       crossOriginResourcePolicy: false,
+      originAgentCluster: false,
+      referrerPolicy: { policy: "no-referrer" },
     }),
   );
-  app.use(cors());
-  app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.removeHeader("X-Frame-Options");
-    next();
-  });
+
+  const allowedOrigins = (process.env.ALLOWED_ORIGINS || "").split(",").filter(Boolean);
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || process.env.NODE_ENV !== 'production') return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true
+  }));
+
+  app.use(cookieParser());
   app.use(express.json());
 
   // Global Audit Log Middleware
@@ -185,7 +167,7 @@ async function startServer() {
           
           prisma.auditLog.create({
             data: {
-              userEmail: user.email,
+              userEmail: user.email || user.id || 'admin@system.local',
               action: req.method,
               resource: resource || 'system',
               itemId: itemId ? String(itemId) : null,
@@ -206,6 +188,13 @@ async function startServer() {
     legacyHeaders: false,
     validate: { xForwardedForHeader: false, default: false },
   });
+  const registerLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    standardHeaders: true,
+    legacyHeaders: false,
+    validate: { xForwardedForHeader: false, default: false },
+  });
   const aiSearchLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 200,
@@ -216,9 +205,14 @@ async function startServer() {
   // Auth Routes
   const authMiddleware = async (req: any, res: any, next: any) => {
     try {
-      const authHeader = req.headers.authorization;
-      if (!authHeader) return res.status(401).json({ error: "Unauthorized" });
-      const token = authHeader.split(" ")[1];
+      let token = req.cookies.token;
+      
+      if (!token && req.headers.authorization) {
+        token = req.headers.authorization.split(" ")[1];
+      }
+      
+      if (!token) return res.status(401).json({ error: "Unauthorized" });
+      
       const jwt = await import("jsonwebtoken");
       const decoded: any = (jwt.default || jwt).verify(token, getJwtSecret());
       req.user = decoded;
@@ -246,7 +240,7 @@ async function startServer() {
 
   // Register IQD & E-CNY Payment Service Provider routes
   registerPaymentRoutes(app, editorOrAdminMiddleware, adminMiddleware);
-  app.post("/api/auth/register", async (req, res) => {
+  app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
       const { email, password, name, role } = req.body;
       const bcrypt = await import("bcryptjs");
@@ -298,42 +292,6 @@ async function startServer() {
         user = await prisma.user.findUnique({ where: { email } });
       }
 
-      // If user not found, auto-provision official Iraqi-Chinese Agency test credentials if matching
-      if (!user) {
-        const bcrypt = await import("bcryptjs");
-        if (
-          (cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com" || cleanEmail === "editor@iraqi-chineseagency.com") &&
-          password === "editor123"
-        ) {
-          const hash = await (bcrypt.default || bcrypt).hash("editor123", 10);
-          user = await prisma.user.upsert({
-            where: { email: cleanEmail },
-            update: { password: hash, role: "EDITOR" },
-            create: {
-              email: cleanEmail,
-              password: hash,
-              name: "ICA Chief Editor",
-              role: "EDITOR",
-            },
-          });
-        } else if (
-          (cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com" || cleanEmail === "admin@iraqi-chineseagency.com") &&
-          password === "admin123"
-        ) {
-          const hash = await (bcrypt.default || bcrypt).hash("admin123", 10);
-          user = await prisma.user.upsert({
-            where: { email: cleanEmail },
-            update: { password: hash, role: "ADMIN" },
-            create: {
-              email: cleanEmail,
-              password: hash,
-              name: "ICA Sovereign Admin",
-              role: "ADMIN",
-            },
-          });
-        }
-      }
-
       if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
       const bcrypt = await import("bcryptjs");
@@ -350,6 +308,13 @@ async function startServer() {
         getJwtSecret(),
         { expiresIn: "1d" },
       );
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
 
       res.json({
         token,
@@ -369,12 +334,16 @@ async function startServer() {
     }
   });
 
+  
+  app.post("/api/auth/logout", (req, res) => {
+    res.clearCookie("token");
+    res.json({ success: true });
+  });
   app.get("/api/auth/me", async (req, res) => {
     try {
-      const authHeader = req.headers.authorization;
-      if (!authHeader)
+      const token = req.cookies.token || (req.headers.authorization ? req.headers.authorization.split(" ")[1] : null);
+      if (!token)
         return res.status(401).json({ error: "No token provided" });
-      const token = authHeader.split(" ")[1];
       const jwt = await import("jsonwebtoken");
       const decoded: any = (jwt.default || jwt).verify(token, getJwtSecret());
       const user = await prisma.user.findUnique({ where: { id: (decoded as any).id } });
@@ -389,8 +358,9 @@ async function startServer() {
           subscriptionPlan: user.subscriptionPlan,
           subscriptionEndDate: user.subscriptionEndDate,
         },
+        token
       });
-    } catch (e: any) {
+    } catch (e) {
       res.status(401).json({ error: "Invalid token" });
     }
   });
@@ -526,8 +496,7 @@ async function startServer() {
           try {
             const token = authHeader.split(" ")[1];
             const jwt = await import("jsonwebtoken");
-            const JWT_SECRET = process.env.JWT_SECRET || "iraq-china-daily-secret-key-2026-development";
-            const decoded = (jwt.default || jwt).verify(token, JWT_SECRET);
+            const decoded = (jwt.default || jwt).verify(token, getJwtSecret());
             const user = await prisma.user.findUnique({ where: { id: (decoded as any).id } });
             if (user && user.subscriptionStatus === "ACTIVE") {
               isSubscribed = true;
@@ -914,18 +883,155 @@ async function startServer() {
     }
   });
 
+  // Helper to generate realistic historical rates for IQD/e-CNY sovereign clearing
+  function generateIqdEcnyHistoricalRates(baseRate: number = 188.50, timeframe: string = '1M') {
+    const points = timeframe === '1D' ? 24 : timeframe === '1W' ? 14 : timeframe === '1M' ? 30 : timeframe === '3M' ? 45 : 52;
+    const history = [];
+    const now = new Date();
+    
+    for (let i = 0; i < points; i++) {
+      let dateObj: Date;
+      let label = '';
+      const stepRatio = (i + 1) / points;
+      const trendDrift = (stepRatio - 1) * 2.4; 
+      const wave = Math.sin(i * 0.65) * 0.45 + Math.cos(i * 0.28) * 0.25;
+      const rateVal = +(baseRate + trendDrift + (i === points - 1 ? 0 : wave)).toFixed(2);
+      const bid = +(rateVal - 0.70).toFixed(2);
+      const ask = +(rateVal + 0.70).toFixed(2);
+      const high = +(rateVal + 0.55).toFixed(2);
+      const low = +(rateVal - 0.45).toFixed(2);
+      const vol = Math.floor(1200000 + Math.sin(i * 0.5) * 400000 + i * 25000);
+      const inverse = +(1 / rateVal).toFixed(6);
+      const inversePer1k = +(1000 / rateVal).toFixed(3);
+
+      if (timeframe === '1D') {
+        const hoursAgo = points - 1 - i;
+        dateObj = new Date(now.getTime() - hoursAgo * 3600 * 1000);
+        const h = dateObj.getHours().toString().padStart(2, '0');
+        label = `${h}:00`;
+      } else if (timeframe === '1W') {
+        const hoursAgo = (points - 1 - i) * 12;
+        dateObj = new Date(now.getTime() - hoursAgo * 3600 * 1000);
+        label = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' });
+      } else if (timeframe === '1M') {
+        const daysAgo = points - 1 - i;
+        dateObj = new Date(now.getTime() - daysAgo * 24 * 3600 * 1000);
+        label = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      } else if (timeframe === '3M') {
+        const daysAgo = (points - 1 - i) * 2;
+        dateObj = new Date(now.getTime() - daysAgo * 24 * 3600 * 1000);
+        label = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      } else {
+        const daysAgo = (points - 1 - i) * 7;
+        dateObj = new Date(now.getTime() - daysAgo * 24 * 3600 * 1000);
+        label = dateObj.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+      }
+
+      history.push({
+        date: dateObj.toISOString().split('T')[0],
+        time: label,
+        timestamp: dateObj.toISOString(),
+        rate: rateVal,
+        bidRate: bid,
+        askRate: ask,
+        high,
+        low,
+        volume: vol,
+        inverseRate: inverse,
+        inversePer1k: inversePer1k,
+        clearingNode: 'PBOC-CBI Direct mBridge Corridor'
+      });
+    }
+    return history;
+  }
+
   // 2. Market Data REST & SSE endpoints
   app.get("/api/market", async (req, res) => {
     try {
+      const { symbol, timeframe = '1M', history: reqHistory } = req.query;
       let marketItems = await prisma.marketData.findMany();
-      if (!marketItems || marketItems.length === 0) {
+      if (!marketItems || marketItems.length === 0 || !marketItems.some(i => i.symbol === 'IQD_ECNY')) {
         await seedMarketData();
         marketItems = await prisma.marketData.findMany();
       }
-      res.json(marketItems);
+
+      let liveBaseRate = 188.50;
+      try {
+        const rateRecord = await prisma.paymentExchangeRate.findUnique({ where: { pair: 'IQD_ECNY' } });
+        if (rateRecord?.baseRate) {
+          liveBaseRate = rateRecord.baseRate;
+        }
+      } catch {}
+
+      const iqdEcnyHistoryByTf = {
+        '1D': generateIqdEcnyHistoricalRates(liveBaseRate, '1D'),
+        '1W': generateIqdEcnyHistoricalRates(liveBaseRate, '1W'),
+        '1M': generateIqdEcnyHistoricalRates(liveBaseRate, '1M'),
+        '3M': generateIqdEcnyHistoricalRates(liveBaseRate, '3M'),
+        '1Y': generateIqdEcnyHistoricalRates(liveBaseRate, '1Y'),
+      };
+
+      const selectedTf = (typeof timeframe === 'string' && ['1D', '1W', '1M', '3M', '1Y'].includes(timeframe)) ? timeframe : '1M';
+      const defaultHistory = iqdEcnyHistoryByTf[selectedTf as keyof typeof iqdEcnyHistoryByTf];
+
+      if (symbol === 'IQD_ECNY' && (reqHistory === 'true' || req.query.format === 'chart')) {
+        return res.json({
+          symbol: 'IQD_ECNY',
+          pair: 'IQD_ECNY',
+          baseRate: liveBaseRate,
+          timeframe: selectedTf,
+          history: defaultHistory,
+          historyByTimeframe: iqdEcnyHistoryByTf
+        });
+      }
+
+      const enriched = marketItems.map(item => {
+        if (item.symbol === 'IQD_ECNY') {
+          return {
+            ...item,
+            price: liveBaseRate,
+            history: defaultHistory,
+            historyByTimeframe: iqdEcnyHistoryByTf
+          };
+        }
+        return item;
+      });
+
+      res.json(enriched);
     } catch (e: any) {
       console.error("Error fetching market items:", e);
       res.status(500).json({ error: "Failed to fetch market data" });
+    }
+  });
+
+  app.get("/api/market/history", async (req, res) => {
+    try {
+      const { symbol = 'IQD_ECNY', timeframe = '1M' } = req.query;
+      let liveBaseRate = 188.50;
+      try {
+        const rateRecord = await prisma.paymentExchangeRate.findUnique({ where: { pair: 'IQD_ECNY' } });
+        if (rateRecord?.baseRate) {
+          liveBaseRate = rateRecord.baseRate;
+        }
+      } catch {}
+      const selectedTf = (typeof timeframe === 'string' && ['1D', '1W', '1M', '3M', '1Y'].includes(timeframe)) ? timeframe : '1M';
+      const history = generateIqdEcnyHistoricalRates(liveBaseRate, selectedTf);
+      res.json({
+        symbol,
+        pair: 'IQD_ECNY',
+        baseRate: liveBaseRate,
+        timeframe: selectedTf,
+        history,
+        historyByTimeframe: {
+          '1D': generateIqdEcnyHistoricalRates(liveBaseRate, '1D'),
+          '1W': generateIqdEcnyHistoricalRates(liveBaseRate, '1W'),
+          '1M': generateIqdEcnyHistoricalRates(liveBaseRate, '1M'),
+          '3M': generateIqdEcnyHistoricalRates(liveBaseRate, '3M'),
+          '1Y': generateIqdEcnyHistoricalRates(liveBaseRate, '1Y'),
+        }
+      });
+    } catch (e) {
+      res.status(500).json({ error: "Failed to fetch market history" });
     }
   });
 
@@ -3308,7 +3414,7 @@ async function startServer() {
     }
   });
 
-  // --- Vite Middleware ---
+  // --- Vite Middleware & Static Production Serving ---
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -3323,15 +3429,35 @@ async function startServer() {
     });
   }
 
-  
-  app.listen(PORT, "0.0.0.0", () => {
+  // Setup robust server startup with timeout and readiness checks
+  const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://0.0.0.0:${PORT}`);
+    console.log(`Server is READY and accepting connections.`);
+    
     // Run background seeders only after HTTP server is actively accepting connections
+    // Using a slight delay to ensure the event loop has processed the listening event fully
     setTimeout(() => {
+      console.log("Initiating background data seeders...");
       runStartupSeeders().catch((e) => console.error("Startup seeders background error:", e));
-    }, 300);
+    }, 1000);
+  });
+  
+  server.on('error', (err: any) => {
+    console.error("Server startup error:", err);
+    if (err.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use. Please check for running processes.`);
+      process.exit(1);
+    }
   });
 }
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
 
 startServer().catch((err) => {
   console.error("Fatal error starting server:", err);

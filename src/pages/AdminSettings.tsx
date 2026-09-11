@@ -14,7 +14,8 @@ import {
   Instagram, 
   Linkedin, 
   Youtube, 
-  QrCode 
+  QrCode,
+  Send
 } from 'lucide-react';
 import { AdminLayout } from '../components/AdminLayout';
 import { useSiteStore } from '../store/useSiteStore';
@@ -33,13 +34,26 @@ export function AdminSettings() {
     paperColor: siteSettings.paperColor || '#FAFAFA',
     socialLinks: siteSettings.socialLinks || {
       whatsapp: 'https://chat.whatsapp.com/IraqiChineseAgencyOfficial',
-      facebook: 'https://facebook.com/IraqiChineseAgency',
+      facebook: 'https://facebook.com/IraqiChineseAgency.EN',
+      facebookAr: 'https://facebook.com/IraqiChineseAgency.AR',
+      facebookZh: 'https://facebook.com/IraqiChineseAgency.ZH',
+      facebookCkb: 'https://facebook.com/IraqiChineseAgency.CKB',
+      telegram: 'https://t.me/IraqiChineseAgency.EN',
+      telegramAr: 'https://t.me/IraqiChineseAgency.AR',
+      telegramZh: 'https://t.me/IraqiChineseAgency.ZH',
+      telegramCkb: 'https://t.me/IraqiChineseAgency.CKB',
       instagram: 'https://instagram.com/iraqi-chineseagency',
       linkedin: 'https://linkedin.com/company/iraqi-chinese-agency',
       weibo: 'https://weibo.com/iraqi-chineseagency',
       wechat: 'IraqiChineseAgency_Official',
-      youtube: 'https://youtube.com/@IraqiChineseAgency',
-      x: 'https://x.com/IraqiChineseAgency',
+      youtube: 'https://youtube.com/@IraqiChineseAgency.EN',
+      youtubeAr: 'https://youtube.com/@IraqiChineseAgency.AR',
+      youtubeZh: 'https://youtube.com/@IraqiChineseAgency.ZH',
+      youtubeCkb: 'https://youtube.com/@IraqiChineseAgency.CKB',
+      x: 'https://x.com/IraqiChineseAgency.EN',
+      xAr: 'https://x.com/IraqiChineseAgency.AR',
+      xZh: 'https://x.com/IraqiChineseAgency.ZH',
+      xCkb: 'https://x.com/IraqiChineseAgency.CKB',
     }
   });
 
@@ -191,11 +205,11 @@ export function AdminSettings() {
                 />
               </div>
 
-              {/* Facebook */}
+              {/* Facebook (English / Global) */}
               <div>
                 <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
                   <Facebook size={14} className="text-blue-600" />
-                  Facebook Page URL
+                  Facebook Page URL (English / Global)
                 </label>
                 <input
                   type="text"
@@ -205,7 +219,133 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, facebook: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
-                  placeholder="https://facebook.com/IraqiChineseAgency"
+                  placeholder="https://facebook.com/IraqiChineseAgency.EN"
+                />
+              </div>
+
+              {/* Facebook (Arabic Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Facebook size={14} className="text-blue-600" />
+                  Facebook Page (Arabic Broadcast / القسم العربي)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.facebookAr}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, facebookAr: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://facebook.com/IraqiChineseAgency.AR"
+                />
+              </div>
+
+              {/* Facebook (Chinese Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Facebook size={14} className="text-blue-600" />
+                  Facebook Page (Chinese Broadcast / 中文频道)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.facebookZh}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, facebookZh: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://facebook.com/IraqiChineseAgency.ZH"
+                />
+              </div>
+
+              {/* Facebook (Kurdish Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Facebook size={14} className="text-blue-600" />
+                  Facebook Page (Kurdish Broadcast / بەشی کوردی)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.facebookCkb}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, facebookCkb: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://facebook.com/IraqiChineseAgency.CKB"
+                />
+              </div>
+
+              {/* Telegram (English / Global) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Send size={14} className="text-sky-500" />
+                  Telegram Channel URL (English / Global)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.telegram}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, telegram: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://t.me/IraqiChineseAgency.EN"
+                />
+              </div>
+
+              {/* Telegram (Arabic Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Send size={14} className="text-sky-500" />
+                  Telegram Channel (Arabic Broadcast / القسم العربي)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.telegramAr}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, telegramAr: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://t.me/IraqiChineseAgency.AR"
+                />
+              </div>
+
+              {/* Telegram (Chinese Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Send size={14} className="text-sky-500" />
+                  Telegram Channel (Chinese Broadcast / 中文频道)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.telegramZh}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, telegramZh: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://t.me/IraqiChineseAgency.ZH"
+                />
+              </div>
+
+              {/* Telegram (Kurdish Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Send size={14} className="text-sky-500" />
+                  Telegram Channel (Kurdish Broadcast / بەشی کوردی)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.telegramCkb}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, telegramCkb: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://t.me/IraqiChineseAgency.CKB"
                 />
               </div>
 
@@ -281,11 +421,11 @@ export function AdminSettings() {
                 />
               </div>
 
-              {/* YouTube */}
+              {/* YouTube (English / Global) */}
               <div>
                 <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
                   <Youtube size={14} className="text-brand-600" />
-                  YouTube Channel URL
+                  YouTube Channel URL (English / Global)
                 </label>
                 <input
                   type="text"
@@ -295,15 +435,69 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, youtube: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
-                  placeholder="https://youtube.com/@IraqiChineseAgency"
+                  placeholder="https://youtube.com/@IraqiChineseAgency.EN"
                 />
               </div>
 
-              {/* X (Twitter) */}
+              {/* YouTube (Arabic Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Youtube size={14} className="text-brand-600" />
+                  YouTube Channel (Arabic Broadcast / القسم العربي)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.youtubeAr}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, youtubeAr: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://youtube.com/@IraqiChineseAgency.AR"
+                />
+              </div>
+
+              {/* YouTube (Chinese Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Youtube size={14} className="text-brand-600" />
+                  YouTube Channel (Chinese Broadcast / 中文频道)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.youtubeZh}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, youtubeZh: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://youtube.com/@IraqiChineseAgency.ZH"
+                />
+              </div>
+
+              {/* YouTube (Kurdish Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Youtube size={14} className="text-brand-600" />
+                  YouTube Channel (Kurdish Broadcast / بەشی کوردی)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.youtubeCkb}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, youtubeCkb: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://youtube.com/@IraqiChineseAgency.CKB"
+                />
+              </div>
+
+              {/* X (Twitter) (English / Global) */}
               <div>
                 <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
                   <Twitter size={14} className="text-neutral-900" />
-                  X (Twitter) Profile URL
+                  X (Twitter) Profile URL (English / Global)
                 </label>
                 <input
                   type="text"
@@ -313,7 +507,61 @@ export function AdminSettings() {
                     socialLinks: { ...settings.socialLinks, x: e.target.value }
                   })}
                   className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
-                  placeholder="https://x.com/IraqiChineseAgency"
+                  placeholder="https://x.com/IraqiChineseAgency.EN"
+                />
+              </div>
+
+              {/* X (Twitter) (Arabic Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Twitter size={14} className="text-neutral-900" />
+                  X (Twitter) (Arabic Broadcast / القسم العربي)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.xAr}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, xAr: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://x.com/IraqiChineseAgency.AR"
+                />
+              </div>
+
+              {/* X (Twitter) (Chinese Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Twitter size={14} className="text-neutral-900" />
+                  X (Twitter) (Chinese Broadcast / 中文频道)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.xZh}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, xZh: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://x.com/IraqiChineseAgency.ZH"
+                />
+              </div>
+
+              {/* X (Twitter) (Kurdish Broadcast) */}
+              <div>
+                <label className="flex items-center gap-2 text-xs font-bold uppercase text-gray-700 mb-1">
+                  <Twitter size={14} className="text-neutral-900" />
+                  X (Twitter) (Kurdish Broadcast / بەشی کوردی)
+                </label>
+                <input
+                  type="text"
+                  value={settings.socialLinks.xCkb}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    socialLinks: { ...settings.socialLinks, xCkb: e.target.value }
+                  })}
+                  className="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-brand-800 outline-none text-sm font-medium"
+                  placeholder="https://x.com/IraqiChineseAgency.CKB"
                 />
               </div>
             </div>

@@ -32,6 +32,19 @@ export function AdminAnnouncements() {
     }
   });
 
+    const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const res = await apiFetch(`/api/admin/announcements/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete announcement');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-announcements'] });
+    }
+  });
+
   const mutation = useMutation({
     mutationFn: async (newAnnouncement: any) => {
       const res = await apiFetch('/api/admin/announcement', {

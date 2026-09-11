@@ -104,12 +104,17 @@ export function Home() {
       if (name === 'Food & Beverage') return 'خۆراک و خواردنەوە';
       if (name === 'Expo') return 'پێشانگا';
       if (name === 'Business Statistics') return 'ئاماری بازرگانی';
+      if (name === 'Politics') return 'سیاسەت';
+      if (name === 'Technology') return 'تەکنەلۆجیا';
+      if (name === 'Opinion') return 'ڕاو بۆچوون';
+      if (name === 'News') return 'هەواڵ';
+      if (name === 'Belt & Road') return 'ڕێگای ئاوریشم';
       return name;
     }
     return category.nameEn || category.name;
   }, [lang]);
 
-  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
+  const dateLocale = useMemo(() => lang === 'ar' || lang === 'ckb' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
 
   if (isLoading) {
     return (
@@ -304,7 +309,7 @@ export function Home() {
             </div>
 
             <div className="space-y-4 px-1 text-base sm:text-lg leading-relaxed text-gray-700 dark:text-neutral-300">
-              <p className="first-letter:text-6xl first-letter:font-black first-letter:first-letter:float-start first-letter:pe-3 first-letter:text-brand-800 dark:first-letter:text-brand-400">
+              <p className="first-letter:text-6xl first-letter:font-black first-letter:float-start first-letter:pe-3 first-letter:text-brand-800 dark:first-letter:text-brand-400">
                 {getTranslation(leadStory)?.excerpt || getTranslation(leadStory)?.content?.substring(0, 300)}
               </p>
               {getTranslation(leadStory)?.content && getTranslation(leadStory)!.content.length > 300 && (
@@ -593,7 +598,7 @@ export function Home() {
                   onClick={() => setSelectedArticle(article)}
                   className="cursor-pointer group hover:bg-black/[0.03] dark:hover:bg-white/[0.05] p-2.5 -mx-2.5 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:brightness-105"
                 >
-                  <h4 className="text-sm font-bold leading-tight group-hover:text-brand-700 text-brand-800 dark:text-neutral-200 transition-colors line-clamp-3">
+                  <h4 className="text-sm font-bold leading-tight group-hover:text-brand-700 text-black dark:text-black transition-colors line-clamp-3">
                     {getTranslation(article)?.title}
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">

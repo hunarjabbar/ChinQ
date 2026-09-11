@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { useAuthStore } from '../store/useAuthStore';
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -20,7 +21,7 @@ export default function AdminLiveEvents() {
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch('/api/events');
+      const res = await apiFetch('/api/events');
       if (res.ok) {
         const data = await res.json();
         setEvents(data);
@@ -40,11 +41,10 @@ export default function AdminLiveEvents() {
       const method = formData.id ? 'PUT' : 'POST';
       const url = formData.id ? `/api/events/${formData.id}` : '/api/events';
       
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
@@ -66,9 +66,8 @@ export default function AdminLiveEvents() {
   const handleDelete = async (id: string) => {
     if (!token || !window.confirm('Are you sure you want to delete this live event?')) return;
     try {
-      const res = await fetch(`/api/events/${id}`, {
+      const res = await apiFetch(`/api/events/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
         fetchEvents();

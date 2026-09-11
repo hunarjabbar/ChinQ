@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Locale, PaymentExchangeRate, PaymentOrder } from '../types';
@@ -79,10 +80,8 @@ export function AdminPayments() {
   }>({
     queryKey: ['adminPaymentOrders'],
     queryFn: async () => {
-      const token = localStorage.getItem('token');
-      const res = await fetch('/api/admin/payments/orders', {
+      const res = await apiFetch('/api/admin/payments/orders', {
         headers: {
-          'Authorization': `Bearer ${token}`
         }
       });
       if (!res.ok) throw new Error('Failed to fetch payment orders');
@@ -97,7 +96,7 @@ export function AdminPayments() {
   } = useQuery<{ success: boolean; data: PaymentExchangeRate }>({
     queryKey: ['adminPaymentRates'],
     queryFn: async () => {
-      const res = await fetch('/api/public/payments/rates');
+      const res = await apiFetch('/api/public/payments/rates');
       if (!res.ok) throw new Error('Failed to fetch rates');
       const json = await res.json();
       if (json.data && !rateForm) {
@@ -127,12 +126,10 @@ export function AdminPayments() {
       complianceNotes?: string;
       rejectionReason?: string;
     }) => {
-      const token = localStorage.getItem('token');
-      const res = await fetch(`/api/admin/payments/orders/${orderId}/status`, {
+      const res = await apiFetch(`/api/admin/payments/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ status, adminNotes, complianceNotes, rejectionReason })
       });
@@ -149,12 +146,10 @@ export function AdminPayments() {
   // Save rates mutation
   const saveRatesMutation = useMutation({
     mutationFn: async (formData: any) => {
-      const token = localStorage.getItem('token');
-      const res = await fetch('/api/admin/payments/rates', {
+      const res = await apiFetch('/api/admin/payments/rates', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
@@ -171,11 +166,9 @@ export function AdminPayments() {
   // Simulate tick mutation
   const simulateTickMutation = useMutation({
     mutationFn: async () => {
-      const token = localStorage.getItem('token');
-      const res = await fetch('/api/admin/payments/rates/tick', {
+      const res = await apiFetch('/api/admin/payments/rates/tick', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`
         }
       });
       if (!res.ok) throw new Error('Failed to tick rates');

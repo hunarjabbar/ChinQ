@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { VisaFlightRecord, VisaFlightInquiry, VisaFlightStats } from '../types';
@@ -95,7 +96,7 @@ export function AdminVisaFlight() {
   const { data: stats, refetch: refetchStats } = useQuery<VisaFlightStats>({
     queryKey: ['admin-visa-flights-stats'],
     queryFn: async () => {
-      const res = await fetch('/api/visa-flights/stats');
+      const res = await apiFetch('/api/visa-flights/stats');
       if (!res.ok) throw new Error('Failed to fetch stats');
       return res.json();
     }
@@ -104,7 +105,7 @@ export function AdminVisaFlight() {
   const { data: records = [], isLoading: isLoadingRecords, refetch: refetchRecords } = useQuery<VisaFlightRecord[]>({
     queryKey: ['admin-visa-flights'],
     queryFn: async () => {
-      const res = await fetch('/api/visa-flights');
+      const res = await apiFetch('/api/visa-flights');
       if (!res.ok) throw new Error('Failed to fetch visa & flight records');
       return res.json();
     }
@@ -113,8 +114,7 @@ export function AdminVisaFlight() {
   const { data: inquiries = [], isLoading: isLoadingInquiries, refetch: refetchInquiries } = useQuery<VisaFlightInquiry[]>({
     queryKey: ['admin-visa-flight-inquiries'],
     queryFn: async () => {
-      const res = await fetch('/api/visa-flights/inquiries', {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const res = await apiFetch('/api/visa-flights/inquiries', {
       });
       if (!res.ok) throw new Error('Failed to fetch concierge inquiries');
       return res.json();
@@ -128,11 +128,10 @@ export function AdminVisaFlight() {
       const url = editingService ? `/api/visa-flights/${editingService.id}` : '/api/visa-flights';
       const method = editingService ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -158,9 +157,8 @@ export function AdminVisaFlight() {
   // Delete Service
   const deleteServiceMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/visa-flights/${id}`, {
+      const res = await apiFetch(`/api/visa-flights/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to delete record');
       return res.json();
@@ -178,9 +176,8 @@ export function AdminVisaFlight() {
   // Clone / Mirror Service
   const cloneServiceMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/visa-flights/clone/${id}`, {
+      const res = await apiFetch(`/api/visa-flights/clone/${id}`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to clone record');
       return res.json();
@@ -198,9 +195,8 @@ export function AdminVisaFlight() {
   // Reseed Database
   const reseedMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/visa-flights/seed', { 
+      const res = await apiFetch('/api/visa-flights/seed', { 
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Reseed failed');
       return res.json();
@@ -215,9 +211,8 @@ export function AdminVisaFlight() {
   // Reseed Inquiries
   const reseedInquiriesMutation = useMutation({
     mutationFn: async () => {
-      const res = await fetch('/api/visa-flights/inquiries/seed', {
+      const res = await apiFetch('/api/visa-flights/inquiries/seed', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Reseed inquiries failed');
       return res.json();
@@ -232,11 +227,10 @@ export function AdminVisaFlight() {
   // Update Inquiry Status / Details
   const updateInquiryMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Partial<VisaFlightInquiry> }) => {
-      const res = await fetch(`/api/visa-flights/inquiries/${id}`, {
+      const res = await apiFetch(`/api/visa-flights/inquiries/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
@@ -260,9 +254,8 @@ export function AdminVisaFlight() {
   // Delete Inquiry
   const deleteInquiryMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/visa-flights/inquiries/${id}`, {
+      const res = await apiFetch(`/api/visa-flights/inquiries/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to delete inquiry');
       return res.json();

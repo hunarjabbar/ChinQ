@@ -39,6 +39,21 @@ export interface Category {
   nameZh: string;
 }
 
+export interface HistoricalRatePoint {
+  date: string;
+  time: string;
+  timestamp?: string;
+  rate: number;
+  bidRate?: number;
+  askRate?: number;
+  high?: number;
+  low?: number;
+  volume?: number;
+  inverseRate?: number;
+  inversePer1k?: number;
+  clearingNode?: string;
+}
+
 export interface MarketData {
   id: string;
   symbol: string;
@@ -57,6 +72,8 @@ export interface MarketData {
   marketCap?: string;
   peRatio?: number;
   updatedAt: string;
+  history?: HistoricalRatePoint[];
+  historyByTimeframe?: Record<string, HistoricalRatePoint[]>;
 }
 
 export interface Study {

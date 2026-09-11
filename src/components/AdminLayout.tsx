@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Copy, Sparkles, Key, Zap, Menu, X, Globe2 } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2 } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -22,35 +22,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
-  const [autoFilledKey, setAutoFilledKey] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleQuickFill = (role: 'editor' | 'admin' = 'editor', e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    if (role === 'admin') {
-      setEmail('admin@iraqi-chineseagency.com');
-      setPassword('admin123');
-    } else {
-      setEmail('editor@iraqi-chineseagency.com');
-      setPassword('editor123');
-    }
-    setError('');
-    setAutoFilledKey(role);
-    setTimeout(() => setAutoFilledKey(null), 2000);
-  };
-
-  const handleCopyCredentials = (role: 'editor' | 'admin', e: React.MouseEvent) => {
-    e.stopPropagation();
-    const text = role === 'admin'
-      ? 'admin@iraqi-chineseagency.com\nadmin123'
-      : 'editor@iraqi-chineseagency.com\neditor123';
-    try {
-      navigator.clipboard?.writeText(text);
-    } catch {}
-    setCopiedKey(role);
-    setTimeout(() => setCopiedKey(null), 2000);
-  };
   
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -198,123 +170,6 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           <p className="text-[11px] text-center text-gray-500 mb-8 uppercase tracking-widest font-bold">
             {restrictedText}
           </p>
-
-          {false && isLogin && (
-            <div className="mb-6 p-4 bg-gradient-to-br from-brand-50/95 via-white to-brand-50/60 border border-brand-200/90 rounded-xl shadow-xs transition-all duration-200">
-              <div className="flex items-center justify-between mb-2.5">
-                <p className="text-xs font-black font-medium text-brand-800 uppercase tracking-widest flex items-center gap-1.5">
-                  <Zap size={13} className="text-brand-800 fill-brand-800" />
-                  {isAr ? 'بيانات الاعتماد الرسمية - الوكالة العراقية الصينية' : isZh ? '伊中通讯社官方授权凭据' : isCkb ? 'زانیاری مۆڵەتپێدراوی ئاژانسی عێراقی-چینی' : 'Iraqi-Chinese Agency Official Credentials'}
-                </p>
-                <span className="text-xs font-medium font-bold text-brand-700/80 uppercase">
-                  {isAr ? 'نقرة للتعبئة' : isZh ? '点击填入' : 'Single Click to Load'}
-                </span>
-              </div>
-              <div className="text-xs text-gray-800 font-medium space-y-2">
-                {/* 1. Editor Credential Card */}
-                <div 
-                  onClick={(e) => handleQuickFill('editor', e)}
-                  title={isAr ? 'انقر لتعبئة بيانات رئيس التحرير' : isZh ? '点击一键填入伊中社编辑凭证' : 'Click to auto-fill Editor credentials'}
-                  className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white hover:bg-brand-50/60 border border-brand-200/90 hover:border-brand-500 rounded-lg cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-xs"
-                >
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-medium font-black uppercase tracking-wider bg-brand-800 text-white shadow-2xs border border-brand-900/60">
-                      <Key size={11} className="text-brand-200" />
-                      ICA Editor
-                    </span>
-                    <span className="text-xs font-medium font-bold text-brand-900/80 uppercase tracking-wider bg-brand-100/70 px-2 py-0.5 rounded border border-brand-200/80">
-                      {isAr ? 'الوكالة العراقية الصينية' : isZh ? '伊中通讯社' : 'Iraqi-Chinese Agency'}
-                    </span>
-                    <span className="font-medium font-bold text-xs text-neutral-900 tracking-tight">
-                      editor@iraqi-chineseagency.com
-                    </span>
-                    <span className="text-neutral-300 font-medium text-xs hidden sm:inline">/</span>
-                    <span className="font-medium text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
-                      <Lock size={11} className="text-neutral-400" />
-                      editor123
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 self-end sm:self-auto shrink-0">
-                    <button
-                      type="button"
-                      onClick={(e) => handleQuickFill('editor', e)}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium font-bold uppercase tracking-wider transition-all duration-200 ${
-                        autoFilledKey === 'editor' 
-                          ? 'bg-emerald-700 text-white shadow-xs' 
-                          : 'bg-brand-800 hover:bg-brand-700 text-white shadow-xs group-hover:scale-102'
-                      }`}
-                    >
-                      {autoFilledKey === 'editor' ? <Check size={12} /> : <Sparkles size={12} />}
-                      <span>
-                        {autoFilledKey === 'editor' 
-                          ? (isAr ? 'تمت التعبئة' : isZh ? '已填入' : 'Filled!') 
-                          : (isAr ? 'تعبئة سريعة' : isZh ? '一键填入' : 'Auto-Fill')}
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => handleCopyCredentials('editor', e)}
-                      title={isAr ? 'نسخ البيانات' : isZh ? '复制凭据' : 'Copy credentials'}
-                      className="p-1 text-neutral-400 hover:text-brand-800 rounded hover:bg-brand-100/50 transition-colors"
-                    >
-                      {copiedKey === 'editor' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* 2. Admin Credential Card */}
-                <div 
-                  onClick={(e) => handleQuickFill('admin', e)}
-                  title={isAr ? 'انقر لتعبئة بيانات مدير النظام' : isZh ? '点击一键填入伊中社管理凭证' : 'Click to auto-fill Admin credentials'}
-                  className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white hover:bg-neutral-50/80 border border-neutral-200/90 hover:border-neutral-400 rounded-lg cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-xs"
-                >
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-medium font-black uppercase tracking-wider bg-neutral-800 text-white shadow-2xs border border-neutral-900">
-                      <Key size={11} className="text-neutral-300" />
-                      ICA Admin
-                    </span>
-                    <span className="text-xs font-medium font-bold text-neutral-600 uppercase tracking-wider bg-neutral-100 px-2 py-0.5 rounded border border-neutral-200">
-                      {isAr ? 'الإدارة المركزية' : isZh ? '中央管理总署' : 'Central Command'}
-                    </span>
-                    <span className="font-medium font-bold text-xs text-neutral-900 tracking-tight">
-                      admin@iraqi-chineseagency.com
-                    </span>
-                    <span className="text-neutral-300 font-medium text-xs hidden sm:inline">/</span>
-                    <span className="font-medium text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-0.5 rounded border border-neutral-200 flex items-center gap-1">
-                      <Lock size={11} className="text-neutral-400" />
-                      admin123
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 self-end sm:self-auto shrink-0">
-                    <button
-                      type="button"
-                      onClick={(e) => handleQuickFill('admin', e)}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium font-bold uppercase tracking-wider transition-all duration-200 ${
-                        autoFilledKey === 'admin' 
-                          ? 'bg-emerald-700 text-white shadow-xs' 
-                          : 'bg-neutral-800 hover:bg-neutral-700 text-white shadow-xs group-hover:scale-102'
-                      }`}
-                    >
-                      {autoFilledKey === 'admin' ? <Check size={12} /> : <Sparkles size={12} />}
-                      <span>
-                        {autoFilledKey === 'admin' 
-                          ? (isAr ? 'تمت التعبئة' : isZh ? '已填入' : 'Filled!') 
-                          : (isAr ? 'تعبئة سريعة' : isZh ? '一键填入' : 'Auto-Fill')}
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => handleCopyCredentials('admin', e)}
-                      title={isAr ? 'نسخ البيانات' : isZh ? '复制凭据' : 'Copy credentials'}
-                      className="p-1 text-neutral-400 hover:text-neutral-800 rounded hover:bg-neutral-200/50 transition-colors"
-                    >
-                      {copiedKey === 'admin' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           <form onSubmit={handleAuth} className="space-y-4">
             {!isLogin && (

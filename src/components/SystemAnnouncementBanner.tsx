@@ -25,7 +25,7 @@ export function SystemAnnouncementBanner({ lang }: { lang: Locale }) {
                  lang === 'ckb' ? announcement.contentCkb : 
                  announcement.contentEn;
 
-  const bgColor = announcement.type === 'URGENT' ? 'bg-red-600' : 
+  const bgColor = announcement.type === 'URGENT' ? 'bg-brand-600' : 
                   announcement.type === 'EVENT' ? 'bg-brand-600' : 
                   'bg-neutral-900';
 
@@ -37,7 +37,7 @@ export function SystemAnnouncementBanner({ lang }: { lang: Locale }) {
         exit={{ height: 0, opacity: 0 }}
         className={`w-full ${bgColor} text-white relative z-[100] border-b border-white/10`}
       >
-        <div className="w-full max-w-(--container-width) mx-auto flex items-center h-10 px-4 sm:px-6">
+        <div className="w-full max-w-7xl mx-auto flex items-center h-10 px-4 sm:px-6">
           <div className="flex items-center gap-4 flex-1 overflow-hidden">
             <span className="flex-shrink-0 text-xs font-black uppercase tracking-[0.3em] bg-white/15 px-2 py-0.5 rounded-sm">
               {announcement.type} SIGNAL

@@ -49,14 +49,32 @@ export function TourismPage() {
     return s.descriptionEn;
   };
 
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setInquirySent(true);
-    setTimeout(() => {
-      setInquirySent(false);
-      setActiveSpot(null);
-      setInquiryForm({ name: '', email: '', travelDate: '', travelers: '2', notes: '' });
-    }, 2500);
+    try {
+      await fetch('/api/public/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: inquiryForm.name,
+          email: inquiryForm.email,
+          company: 'Tourism Inquiry',
+          proposal: `Destination: ${activeSpot?.titleEn}
+Travel Date: ${inquiryForm.travelDate}
+Travelers: ${inquiryForm.travelers}
+Notes: ${inquiryForm.notes}`,
+          partnershipType: 'TOURISM'
+        })
+      });
+      setInquirySent(true);
+      setTimeout(() => {
+        setInquirySent(false);
+        setActiveSpot(null);
+        setInquiryForm({ name: '', email: '', travelDate: '', travelers: '2', notes: '' });
+      }, 2500);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

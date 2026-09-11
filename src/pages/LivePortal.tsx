@@ -42,7 +42,7 @@ export function LivePortal() {
     <div className="w-full bg-[#0a0a0a] min-h-screen text-white font-sans text-start" dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Live Header */}
       <div className="border-b border-gray-800 bg-black sticky top-0 z-50">
-        <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-10 h-10 rounded-xs bg-brand-800">
               <Radio size={20} className="text-white animate-pulse" />
@@ -91,7 +91,7 @@ export function LivePortal() {
 
       {/* Breaking News Marquee */}
       <div className="bg-brand-800 text-white border-y border-brand-500/30 overflow-hidden relative z-40">
-        <div className="w-full max-w-(--container-width) mx-auto flex items-center h-12 px-4 sm:px-6">
+        <div className="w-full max-w-7xl mx-auto flex items-center h-12 px-4 sm:px-6">
           <div className="flex items-center gap-2 font-black uppercase tracking-widest text-[11px] shrink-0 border-e border-brand-500/30 pe-6 me-6 bg-brand-800 z-10 relative">
             <TrendingUp size={16} className="text-white" />
             {lang === 'ar' ? 'عاجل' : lang === 'ckb' ? 'بەپەلە' : lang === 'zh' ? '突发新闻' : 'BREAKING NEWS'}
@@ -114,7 +114,7 @@ export function LivePortal() {
       </div>
 
       {/* Main Full-Scale Broadcast Layout */}
-      <div className="w-full max-w-(--container-width) mx-auto p-4 sm:p-6 md:p-8">
+      <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 md:p-8">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8">
           
           {/* Main Video/Stream Area (Takes up 3 columns on extra large screens) */}

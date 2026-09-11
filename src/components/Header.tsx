@@ -2,7 +2,7 @@ import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Search, Sun, Moon, Coins, X, Clock, ChevronRight } from 'lucide-react';
+import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { SocialHeaderBar } from './SocialLinks';
@@ -59,11 +59,10 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
       <Link 
         to={`/${lang}/payments`} 
         onClick={() => { setIsOpen(false); setIsHovered(false); }}
-        className="relative flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white rounded text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-brand-900 transition-all shadow-[0_0_15px_rgba(185,28,28,0.5)] group z-10"
+        className="relative flex items-center gap-1.5 px-3 py-1.5 bg-white/95 dark:bg-neutral-900/95 text-brand-900 dark:text-neutral-100 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/80 dark:border-neutral-700/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(204,0,0,0.3)] transition-all duration-300 group hover:-translate-y-0.5 z-10"
       >
-        <span className="absolute inset-0 rounded ring-2 ring-brand-400 animate-pulse opacity-80"></span>
-        <span className="absolute -inset-1 rounded bg-brand-500/30 animate-ping blur-[1px] opacity-70"></span>
-        <Coins size={14} className="text-white relative z-10" />
+        <span className="absolute -inset-1 bg-brand-600/20 dark:bg-brand-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
+        <Coins size={14} className="text-brand-800 dark:text-brand-400 relative z-10" />
         <span className="relative z-10">{lang === 'ar' ? 'تسوية المدفوعات' : lang === 'zh' ? '支付结算' : lang === 'ckb' ? 'خزمەتگوزاری پارەدان' : 'Payment Settlement'}</span>
       </Link>
       
@@ -79,10 +78,10 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
               transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] } 
             }}
             style={{ transformOrigin: isRtl ? 'top left' : 'top right' }}
-            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-2 w-[290px] sm:w-[340px] bg-white dark:bg-neutral-900 border-2 border-brand-800 dark:border-brand-600 rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-[100] p-4 text-brand-900 dark:text-neutral-100`}
+            className={`absolute top-full ${isRtl ? '-left-2 sm:left-0' : '-right-2 sm:right-0'} mt-2 w-[300px] max-w-[calc(100vw-1rem)] sm:w-[340px] bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border border-white/80 dark:border-neutral-700/60 rounded-2xl shadow-[0_12px_40px_rgba(204,0,0,0.15)] z-[100] p-4 text-brand-900 dark:text-neutral-100`}
           >
             {/* Arrow pointer */}
-            <div className={`absolute -top-2 ${isRtl ? 'left-6' : 'right-6'} w-4 h-4 bg-white dark:bg-neutral-900 border-t-2 border-l-2 border-brand-800 dark:border-brand-600 transform rotate-45 z-10`}></div>
+            <div className={`absolute -top-2 ${isRtl ? 'left-6' : 'right-6'} w-4 h-4 bg-white/95 dark:bg-neutral-900/95 border-t border-l border-white/80 dark:border-neutral-700/60 transform rotate-45 z-10`}></div>
             
             <div className="relative z-20 flex flex-col gap-2.5 text-left rtl:text-right">
               <div className="flex items-center justify-between">
@@ -146,11 +145,78 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
   );
 }
 
+
+function PortalDropdown({ lang }: { lang: Locale }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useI18n(lang);
+  const isRtl = lang === 'ar' || lang === 'ckb';
+
+  return (
+    <div 
+      className="relative flex items-center h-full"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <button 
+        className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 bg-ink-900 dark:bg-neutral-800 text-white text-xs font-black uppercase tracking-widest hover:bg-brand-800 transition-all rounded-sm shadow-sm"
+      >
+        <span>{t('portal')}</span>
+        <ChevronRight size={14} className={`transition-transform duration-300 ${isOpen ? (isRtl ? '-rotate-90' : 'rotate-90') : (isRtl ? 'rotate-180' : '')}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.95, transition: { duration: 0.2 } }}
+            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-1 w-56 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md overflow-hidden z-50`}
+          >
+            <div className="flex flex-col py-1">
+              <Link 
+                to={`/${lang}/live`} 
+                className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group border-b border-neutral-100 dark:border-neutral-800"
+                onClick={() => setIsOpen(false)}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
+                </span>
+                <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 transition-colors">
+                  {t('liveDispatch')}
+                </span>
+              </Link>
+              
+              <Link 
+                to={`/${lang}/admin`} 
+                className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+                onClick={() => setIsOpen(false)}
+              >
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-ink-900 dark:bg-neutral-700 text-white">
+                  <Shield size={12} />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 transition-colors">
+                    {t('commandHub')}
+                  </span>
+                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
+                    {t('signIn')}
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+
 export function Header({ lang }: { lang: Locale }) {
   const siteName = useSiteStore(state => state.siteName);
   const darkMode = useSiteStore(state => state.darkMode);
   const toggleDarkMode = useSiteStore(state => state.toggleDarkMode);
-  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { t } = useI18n(lang);
   
@@ -172,13 +238,10 @@ export function Header({ lang }: { lang: Locale }) {
   };
 
   return (
-    <div className="w-full relative z-50 bg-white dark:bg-neutral-900 border-b-[3px] border-ink-900 dark:border-neutral-700 shadow-xs transition-colors duration-300">
+    <div className="w-full sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b-[3px] border-ink-900 dark:border-neutral-700 shadow-md transition-colors duration-300">
       {/* Main Masthead Wrapper */}
-      <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6">
-        <motion.header 
-          initial={{ y: -20, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
+        <header 
           className="relative flex flex-col items-center pt-5 pb-3 md:pt-6 md:pb-4 z-50"
         >
           <div className="relative z-10 flex flex-col items-center w-full">
@@ -211,23 +274,23 @@ export function Header({ lang }: { lang: Locale }) {
                   <div className="flex flex-col items-start justify-center text-start">
                     {lang === 'ar' ? (
                       <>
-                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">الوكالة العراقية الصينية</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">الوكالة العراقية الصينية</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : lang === 'ckb' ? (
                       <>
-                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">ئاژانسی عێراقی - چینی</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">ئاژانسی عێراقی - چینی</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : lang === 'zh' ? (
                       <>
-                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-wider text-2xl sm:text-4xl lg:text-5xl">伊中通讯社</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-black tracking-wider text-2xl sm:text-4xl lg:text-5xl">伊中通讯社</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     ) : (
                       <>
-                        <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">IRAQI-CHINESE</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase text-brand-800 dark:text-brand-400 tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
+                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">IRAQI-CHINESE</span>
+                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
                       </>
                     )}
                   </div>
@@ -263,60 +326,27 @@ export function Header({ lang }: { lang: Locale }) {
               </div>
             </div>
 
-            {/* Functional Row: Search & Social */}
-            <div className="w-full flex flex-row items-center justify-between border-t border-b border-neutral-100 dark:border-neutral-800 py-3 gap-6">
-              <div className="w-full max-w-sm relative shrink-0 flex flex-col gap-2">
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  if (searchQuery.trim()) {
-                    navigate(`/${lang}/search?q=${encodeURIComponent(searchQuery)}`);
-                  }
-                }}>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder={lang === 'zh' ? "搜索企业和基建项目..." : "Search enterprise directory..."}
-                      className="w-full pl-9 pr-4 py-2 text-xs font-bold border-none bg-neutral-50 dark:bg-neutral-800 text-brand-900 dark:text-neutral-100 focus:bg-white dark:focus:bg-neutral-900 focus:outline-none focus:ring-1 focus:ring-brand-800/20 rounded-sm transition-all placeholder:text-neutral-400"
-                    />
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
-                  </div>
-                </form>
-                
-                {/* Category Tags */}
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-                  {['Energy', 'Economy', 'Diplomacy', 'Infrastructure'].map(tag => (
-                    <button
-                      key={tag}
-                      onClick={() => navigate(`/${lang}/search?category=${encodeURIComponent(tag.toLowerCase())}`)}
-                      className="text-xs font-bold uppercase tracking-wider px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-brand-50 hover:text-brand-800 dark:hover:bg-brand-900/30 dark:hover:text-brand-400 transition-colors rounded whitespace-nowrap cursor-pointer"
-                    >
-                      {lang === 'ar' && tag === 'Energy' ? 'الطاقة' 
-                        : lang === 'ar' && tag === 'Economy' ? 'الاقتصاد'
-                        : lang === 'ar' && tag === 'Diplomacy' ? 'الدبلوماسية'
-                        : lang === 'ar' && tag === 'Infrastructure' ? 'البنية التحتية'
-                        : lang === 'zh' && tag === 'Energy' ? '能源'
-                        : lang === 'zh' && tag === 'Economy' ? '经济'
-                        : lang === 'zh' && tag === 'Diplomacy' ? '外交'
-                        : lang === 'zh' && tag === 'Infrastructure' ? '基建'
-                        : lang === 'ckb' && tag === 'Energy' ? 'وزە'
-                        : lang === 'ckb' && tag === 'Economy' ? 'ئابووری'
-                        : lang === 'ckb' && tag === 'Diplomacy' ? 'دیپلۆماسی'
-                        : lang === 'ckb' && tag === 'Infrastructure' ? 'ژێرخان'
-                        : tag}
-                    </button>
-                  ))}
-                </div>
+            {/* Functional Row: Social Channels, Join Us, and Search */}
+            <div className="w-full flex flex-col md:flex-row items-center justify-between border-t border-b border-neutral-100 dark:border-neutral-800 py-2.5 px-4 md:px-0 gap-3 md:gap-0">
+              <div className="flex-1 flex justify-start">
+                 <div className="relative group w-full max-w-[200px] lg:max-w-[280px]">
+                   <input type="text" placeholder={lang === 'ar' ? 'بحث...' : lang === 'zh' ? '搜索...' : lang === 'ckb' ? 'گەڕان...' : 'Search...'} className="w-full bg-neutral-100 dark:bg-neutral-800 border-none rounded-full px-4 py-2 text-xs focus:ring-2 focus:ring-brand-500/50 outline-none text-neutral-800 dark:text-neutral-200 shadow-inner" />
+                   <Search className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
+                 </div>
               </div>
-
-              <SocialHeaderBar lang={lang} />
+              <div className="flex-1 flex justify-center items-center gap-4">
+                <SocialHeaderBar lang={lang} />
+                <Link to={`/${lang}/join`} className="flex items-center text-[11px] font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full shadow-2xs hover:shadow-md hover:-translate-y-0.5 duration-300">
+                  {lang === 'ar' ? 'انضم إلينا' : lang === 'zh' ? '加入我们' : lang === 'ckb' ? 'بەشداربە لەگەڵمان' : 'Join Us'}
+                </Link>
+              </div>
+              <div className="flex-1 flex justify-end"></div>
             </div>
           </div>
-        </motion.header>
+        </header>
 
         {/* Navigation / Breaking News Ticker */}
-        <nav className="h-11 border-t border-neutral-200 dark:border-neutral-800 flex items-center bg-white dark:bg-neutral-900 relative z-30">
+        <nav className="h-11 border-t border-neutral-200 dark:border-neutral-800 flex items-center bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md relative z-30">
           <div className="absolute left-0 rtl:left-auto rtl:right-0 top-0 bottom-0 z-10 flex items-center px-6 bg-ink-900 dark:bg-neutral-800 text-white text-xs font-black uppercase tracking-[0.2em]">
             {lang === 'ar' ? 'عاجل' : lang === 'zh' ? '突发新闻' : lang === 'ckb' ? 'هەواڵی بەپەلە' : 'DISPATCH'}
           </div>
@@ -347,16 +377,7 @@ export function Header({ lang }: { lang: Locale }) {
                {lang === 'ar' ? 'انضم للتحرير' : lang === 'zh' ? '加入编辑部' : lang === 'ckb' ? 'بەشداری بکە' : 'Join Editorial'}
              </Link>
              <PaymentSettlementButton lang={lang} />
-             <Link to={`/${lang}/live`} className="flex items-center gap-2 group">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
-                </span>
-                <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 group-hover:text-brand-900 transition-colors">{t('live')}</span>
-             </Link>
-             <Link to={`/${lang}/admin`} className="bg-ink-900 dark:bg-neutral-800 text-white px-4 py-1.5 text-xs font-black uppercase tracking-widest hover:bg-brand-800 transition-all">
-               {t('signIn')}
-             </Link>
+             <PortalDropdown lang={lang} />
           </div>
         </nav>
       </div>

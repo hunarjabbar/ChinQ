@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
-import { MarketTicker } from './MarketTicker';
 import { Locale } from '../types';
 import { EnterpriseSidebar } from './EnterpriseSidebar';
 import { SocialFooterShowcase, FloatingSocialDock } from './SocialLinks';
@@ -13,6 +12,7 @@ import { AlertTriangle, HeartHandshake, GraduationCap } from 'lucide-react';
 import { SystemAnnouncementBanner } from './SystemAnnouncementBanner';
 import { IcaLogo } from './IcaLogo';
 import { LegalModal } from './LegalModal';
+import { FooterVisionMission } from './FooterVisionMission';
 import { TalentRegistrationModal, TalentRegistrationType } from './TalentRegistrationModal';
 
 export function Layout({ lang, children }: { lang: Locale; children: ReactNode }) {
@@ -56,18 +56,13 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
       )}
 
       <Header lang={lang} />
-      <MarketTicker lang={lang} />
-      <motion.main
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="w-full max-w-(--container-width) mx-auto flex flex-col items-center flex-grow"
-      >
+      <main className="w-full max-w-7xl mx-auto flex flex-col items-center flex-grow">
         {children}
-      </motion.main>
+      </main>
       <EnterpriseSidebar lang={lang} />
       <footer id="legal" className="w-full bg-white dark:bg-neutral-900 border-t-2 border-ink-900 dark:border-neutral-700 mt-8 transition-colors duration-300">
-        <div className="w-full max-w-(--container-width) mx-auto px-4 sm:px-6 py-10 md:py-14 text-xs text-neutral-700 dark:text-neutral-300 flex flex-col gap-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 text-xs text-neutral-700 dark:text-neutral-300 flex flex-col gap-8">
+          <FooterVisionMission lang={lang} />
           {/* Top Section: Grid layout for columns */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-neutral-100 dark:border-neutral-800">
 

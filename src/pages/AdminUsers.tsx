@@ -534,7 +534,7 @@ export function AdminUsersContent() {
                             <div>
                               <span className={`px-2 py-0.5 inline-flex text-[8px] font-bold uppercase tracking-wider rounded-sm ${
                                 user.badgeStatus === 'ACTIVE' && !isExpired ? 'bg-green-100 text-green-800' : 
-                                isExpired ? 'bg-red-100 text-red-800 font-black' : 
+                                isExpired ? 'bg-brand-100 text-brand-800 font-black' : 
                                 'bg-yellow-100 text-yellow-800'
                               }`}>
                                 {isExpired ? 'EXPIRED' : (user.badgeStatus || 'ACTIVE')}

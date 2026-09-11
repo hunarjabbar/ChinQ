@@ -61,7 +61,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
   };
 
   return (
-    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-brand-800 p-4 sm:p-6 md:p-8 shadow-xs rounded-xs relative">
+    <section className="w-full bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950 border border-brand-800/20 p-4 sm:p-6 md:p-8 shadow-lg rounded-3xl relative overflow-hidden">
       {/* Top Banner & Title */}
       <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-brand-800 pb-6 mb-6 gap-4">
         <div>
@@ -153,11 +153,11 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
               whileHover={{ y: -4 }}
               transition={{ duration: 0.2 }}
               onClick={() => setActiveSpot(spot)}
-              className="group bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-400 hover:shadow-md transition-all p-3.5 rounded-xs flex flex-col justify-between cursor-pointer relative"
+              className="group bg-gray-50/70 dark:bg-white/5 backdrop-blur-xl backdrop-saturate-150 border border-white/60 dark:border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:bg-white/90 dark:hover:bg-white/10 hover:border-brand-800/40 dark:hover:border-brand-400/40 transition-all duration-300 p-3.5 flex flex-col justify-between cursor-pointer relative rounded-2xl"
             >
               <div className="space-y-3">
                 {/* Image */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-700 rounded-xs border border-gray-200 dark:border-neutral-700">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 rounded-xl border border-white/20 dark:border-white/5 shadow-inner">
                   <img
                     src={spot.imageUrl}
                     alt={getSpotTitle(spot)}

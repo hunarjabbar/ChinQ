@@ -53,7 +53,7 @@ export function CategoryPage() {
   const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
 
   if (isLoading) {
-    return <div className="animate-pulse space-y-8 w-full max-w-(--container-width) mx-auto px-4 sm:px-6 py-20">
+    return <div className="animate-pulse space-y-8 w-full max-w-7xl mx-auto px-4 sm:px-6 py-20">
       <div className="h-64 bg-neutral-200 rounded"></div>
     </div>;
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { Locale, PaymentOrder } from '../../types';
 import { 
   X, 
@@ -32,11 +33,13 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
     window.print();
   };
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 font-sans">
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
+    <div className="print-modal-container fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 font-sans">
       <div 
         dir={isRtl ? 'rtl' : 'ltr'} 
-        className="relative bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden my-8"
+        className="relative bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden my-8 max-h-[95vh] flex flex-col"
       >
         
         {/* Top Control Bar */}
@@ -248,6 +251,7 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
         </div>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

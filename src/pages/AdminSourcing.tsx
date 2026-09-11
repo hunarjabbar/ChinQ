@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import React, { useState, useEffect } from 'react';
 import { Mail, Search, CheckCircle, Clock, XCircle, MoreVertical, Eye, Calendar, Building2, Ticket } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -13,8 +14,7 @@ export default function AdminSourcing() {
 
   const fetchInquiries = async () => {
     try {
-      const res = await fetch('/api/admin/sourcing', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
+      const res = await apiFetch('/api/admin/sourcing', {
       });
       if (res.ok) {
         setInquiries(await res.json());
@@ -28,11 +28,10 @@ export default function AdminSourcing() {
 
   const updateStatus = async (id: string, status: string) => {
     try {
-      const res = await fetch(`/api/admin/sourcing/${id}`, {
+      const res = await apiFetch(`/api/admin/sourcing/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         },
         body: JSON.stringify({ status })
       });
@@ -49,11 +48,10 @@ export default function AdminSourcing() {
 
   const updateAdminNotes = async (id: string, notes: string) => {
     try {
-      const res = await fetch(`/api/admin/sourcing/${id}`, {
+      const res = await apiFetch(`/api/admin/sourcing/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         },
         body: JSON.stringify({ adminNotes: notes })
       });

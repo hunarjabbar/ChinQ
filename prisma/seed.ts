@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { PrismaClient } from '@prisma/client';
 import { ADDITIONAL_TOPICS } from '../src/data/topics.js';
 import { seedOpinions } from '../server/opinionSeeder.js';
@@ -31,8 +32,10 @@ async function main() {
 
   // 2. Seed Users
   console.log('👥 Creating users...');
-  const adminHash = await bcrypt.hash('admin123', 10);
-  const editorHash = await bcrypt.hash('editor123', 10);
+  const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || crypto.randomBytes(16).toString('hex');
+  const editorPassword = process.env.EDITOR_INITIAL_PASSWORD || crypto.randomBytes(16).toString('hex');
+  const adminHash = await bcrypt.hash(adminPassword, 10);
+  const editorHash = await bcrypt.hash(editorPassword, 10);
 
   const admin = await prisma.user.create({
     data: {
@@ -353,6 +356,46 @@ async function main() {
 
   // Seed opinions
   await seedOpinions();
+
+
+  // 8. Seed Admin Credentials (Development Only)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('🔒 Seeding admin credentials for development...');
+    
+    const credentialsToEnsure = [
+      {
+        email: "editor@iraqi-chineseagency.com",
+        name: "ICA Chief Editor",
+        role: "EDITOR",
+      },
+      {
+        email: "admin@iraqi-chineseagency.com",
+        name: "ICA Sovereign Admin",
+        role: "ADMIN",
+      }
+    ];
+
+    for (const cred of credentialsToEnsure) {
+      const exists = await prisma.user.findUnique({
+        where: { email: cred.email },
+      });
+      if (!exists) {
+        const generatedPassword = crypto.randomBytes(8).toString('hex');
+        const hash = await bcrypt.hash(generatedPassword, 10);
+        await prisma.user.create({
+          data: {
+            email: cred.email,
+            password: hash,
+            name: cred.name,
+            role: cred.role,
+          },
+        });
+        console.log(`✅ Created test credential: ${cred.email} (${cred.role})`);
+        console.log(`   Password: ${generatedPassword}`);
+        console.log(`   !!! Please save this password securely !!!`);
+      }
+    }
+  }
 
   console.log('✅ Seeding completed successfully!');
 }

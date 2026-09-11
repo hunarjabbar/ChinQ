@@ -1,3 +1,4 @@
+import { apiFetch } from "../lib/api";
 import { useAuthStore } from '../store/useAuthStore';
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -19,7 +20,7 @@ export default function AdminPodcasts() {
 
   const fetchPodcasts = async () => {
     try {
-      const res = await fetch('/api/podcasts');
+      const res = await apiFetch('/api/podcasts');
       if (res.ok) {
         const data = await res.json();
         setPodcasts(data);
@@ -39,11 +40,10 @@ export default function AdminPodcasts() {
       const method = formData.id ? 'PUT' : 'POST';
       const url = formData.id ? `/api/podcasts/${formData.id}` : '/api/podcasts';
       
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
@@ -65,9 +65,8 @@ export default function AdminPodcasts() {
   const handleDelete = async (id: string) => {
     if (!token || !window.confirm('Are you sure you want to delete this podcast?')) return;
     try {
-      const res = await fetch(`/api/podcasts/${id}`, {
+      const res = await apiFetch(`/api/podcasts/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
         fetchPodcasts();
