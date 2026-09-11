@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Catch-all default deny: No direct client-side read or write is permitted.
+    // All persistent application operations are executed server-side via authenticated API endpoints.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

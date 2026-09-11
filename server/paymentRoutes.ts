@@ -9,6 +9,7 @@ const quoteLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   validate: { xForwardedForHeader: false, default: false },
+  message: { error: 'Too many conversion quote requests. Please try again after 15 minutes.' },
 });
 
 const ordersLimiter = rateLimit({
@@ -17,6 +18,16 @@ const ordersLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   validate: { xForwardedForHeader: false, default: false },
+  message: { error: 'Too many payment order submissions. Please try again after 15 minutes.' },
+});
+
+const orderLookupLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  validate: { xForwardedForHeader: false, default: false },
+  message: { error: 'Too many order reference lookup attempts. Please try again after 15 minutes.' },
 });
 
 export function registerPaymentRoutes(
@@ -293,7 +304,7 @@ export function registerPaymentRoutes(
   });
 
   // 4. Track payment order by reference code
-  app.get('/api/public/payments/orders/:ref', async (req, res) => {
+  app.get('/api/public/payments/orders/:ref', orderLookupLimiter, async (req, res) => {
     try {
       const { ref } = req.params;
       const order = await prisma.paymentOrder.findFirst({

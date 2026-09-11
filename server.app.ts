@@ -76,7 +76,7 @@ async function startServer() {
   getJwtSecret(); // Crash early if not set
   const app = express();
   app.set("trust proxy", 1);
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
   // Platform and infrastructure health check route (first priority)
   app.get("/api/health", (req, res) => {
@@ -187,6 +187,7 @@ async function startServer() {
     standardHeaders: true,
     legacyHeaders: false,
     validate: { xForwardedForHeader: false, default: false },
+    message: { error: "Too many login attempts. Please try again after 15 minutes." },
   });
   const registerLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -194,6 +195,7 @@ async function startServer() {
     standardHeaders: true,
     legacyHeaders: false,
     validate: { xForwardedForHeader: false, default: false },
+    message: { error: "Too many registration attempts. Please try again after 15 minutes." },
   });
   const aiSearchLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -274,7 +276,7 @@ async function startServer() {
     try {
       const logs = await prisma.auditLog.findMany({
         orderBy: { createdAt: 'desc' },
-        take: 100
+        take: 200
       });
       res.json(logs);
     } catch (e: any) {
@@ -3396,22 +3398,6 @@ async function startServer() {
     res.status(err.status || 500).json({
       error: err.message || "Internal Server Error",
     });
-  });
-
-  // Audit Logs API
-  app.get("/api/admin/audit-logs", authMiddleware, async (req: any, res) => {
-    if (req.user.role !== 'ADMIN') {
-      return res.status(403).json({ error: "Forbidden: Admin role required" });
-    }
-    try {
-      const logs = await prisma.auditLog.findMany({
-        orderBy: { createdAt: 'desc' },
-        take: 200
-      });
-      res.json(logs);
-    } catch (e) {
-      res.status(500).json({ error: "Failed to fetch audit logs" });
-    }
   });
 
   // --- Vite Middleware & Static Production Serving ---
