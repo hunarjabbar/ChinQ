@@ -24,14 +24,15 @@ import {
   Hash,
   MapPin,
   Clock,
-  BookOpen
+  BookOpen,
+  Briefcase
 } from 'lucide-react';
 import html2canvas from 'html2canvas-pro';
 import jsPDF from 'jspdf';
 import { IcaLogo } from './IcaLogo';
 import { Locale } from '../types';
 
-export type TalentRegistrationType = 'volunteer' | 'intern';
+export type TalentRegistrationType = 'volunteer' | 'intern' | 'career';
 
 interface Props {
   isOpen: boolean;
@@ -74,6 +75,24 @@ interface InternFormData {
   bio: string;
 }
 
+interface CareerFormData {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  nationality: string;
+  passportOrIdNumber: string;
+  asaishCode: string;
+  city: string;
+  addressDistrict?: string;
+  positionApplied: string;
+  yearsOfExperience: string;
+  currentEmployer: string;
+  expectedSalaryOrContract: string;
+  dateOfBirth: string;
+  emergencyContact: string;
+  bio: string;
+}
+
 export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunteer', lang }: Props) {
   const [type, setType] = useState<TalentRegistrationType>(initialType);
   const [uniqueCode, setUniqueCode] = useState<string>('');
@@ -91,7 +110,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
   // Generate unique synchronized codes whenever type changes or modal opens
   const generateNewCodes = (selectedType: TalentRegistrationType) => {
     const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const prefix = selectedType === 'volunteer' ? 'ICA-VOL-2026' : 'ICA-INT-2026';
+    const prefix = selectedType === 'volunteer' ? 'ICA-VOL-2026' : selectedType === 'intern' ? 'ICA-INT-2026' : 'ICA-CAR-2026';
     const code = `${prefix}-${randomNum}`;
     const hashHex = Array.from({ length: 8 }, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
     const hash = `CQ-${selectedType.toUpperCase().substring(0, 3)}-${randomNum.toString().substring(0, 4)}-${hashHex}`;
@@ -150,6 +169,25 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
     bio: ''
   });
 
+  // Career state
+  const [careerForm, setCareerForm] = useState<CareerFormData>({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    nationality: 'Iraqi',
+    passportOrIdNumber: '',
+    asaishCode: '',
+    city: 'Baghdad',
+    addressDistrict: '',
+    positionApplied: 'Senior Bilateral Trade & Energy Analyst',
+    yearsOfExperience: '3-5 Years Professional Experience',
+    currentEmployer: '',
+    expectedSalaryOrContract: 'Full-Time Executive Staff Contract',
+    dateOfBirth: '',
+    emergencyContact: '',
+    bio: ''
+  });
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const pdfTemplateRef = useRef<HTMLDivElement>(null);
 
@@ -157,7 +195,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
-    const activeForm = type === 'volunteer' ? volunteerForm : internForm;
+    const activeForm = type === 'volunteer' ? volunteerForm : type === 'intern' ? internForm : careerForm;
 
     if (!activeForm.fullName.trim()) errs.fullName = isAr ? 'الاسم مطلوب' : isZh ? '请填写姓名' : 'Full legal name is required';
     if (!activeForm.email.trim()) {
@@ -184,20 +222,24 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
 
     setIsSubmitting(true);
     try {
-      const activeForm = type === 'volunteer' ? volunteerForm : internForm;
+      const activeForm = type === 'volunteer' ? volunteerForm : type === 'intern' ? internForm : careerForm;
       const bureauName = type === 'volunteer' 
         ? `Volunteer Corps • ${volunteerForm.volunteerDomain}`
-        : `Academic Residency • ${internForm.internshipTrack}`;
+        : type === 'intern'
+        ? `Academic Residency • ${internForm.internshipTrack}`
+        : `Career Announcement • ${careerForm.positionApplied}`;
 
       const companyName = type === 'volunteer' 
         ? `Accredited Volunteer (${volunteerForm.hoursPerWeek})` 
-        : `${internForm.university} • ${internForm.academicMajor}`;
+        : type === 'intern'
+        ? `${internForm.university} • ${internForm.academicMajor}`
+        : `Career Applicant • ${careerForm.currentEmployer || 'Independent Professional'} (${careerForm.yearsOfExperience})`;
 
       const payload = {
         fullName: activeForm.fullName,
         email: activeForm.email,
         company: companyName,
-        role: type, // 'volunteer' or 'intern'
+        role: type, // 'volunteer', 'intern', or 'career'
         bio: activeForm.bio,
         hash: uniqueCode,
         bureau: bureauName,
@@ -234,7 +276,9 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
         university: type === 'intern' ? internForm.university : undefined,
         academicMajor: type === 'intern' ? internForm.academicMajor : undefined,
         internshipTrack: type === 'intern' ? internForm.internshipTrack : undefined,
-        internshipDuration: type === 'intern' ? internForm.internshipDuration : undefined
+        internshipDuration: type === 'intern' ? internForm.internshipDuration : undefined,
+        positionApplied: type === 'career' ? careerForm.positionApplied : undefined,
+        yearsOfExperience: type === 'career' ? careerForm.yearsOfExperience : undefined,
       });
 
       setIsSuccess(true);
@@ -376,6 +420,25 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
         {/* Dynamic Mode Switcher (Pulsing Tabs) */}
         {!isSuccess && (
           <div className="bg-neutral-50 dark:bg-neutral-800/80 border-b border-neutral-200 dark:border-neutral-700 p-2 sm:p-3 flex gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => handleTypeSwitch('career')}
+              className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 cursor-pointer relative ${
+                type === 'career'
+                  ? 'bg-brand-800 text-white shadow-md shadow-brand-800/20'
+                  : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 border border-neutral-200 dark:border-neutral-700'
+              }`}
+            >
+              <Briefcase size={16} />
+              <span>{isAr ? 'إعلانات الوظائف' : isZh ? '职业公告 (Career)' : isCkb ? 'ئاگاداری کار' : 'Career Announcement'}</span>
+              {type === 'career' && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+              )}
+            </button>
+
             <button
               type="button"
               onClick={() => handleTypeSwitch('volunteer')}

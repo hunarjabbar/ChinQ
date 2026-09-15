@@ -370,7 +370,7 @@ export const initialBooks = [
     descriptionAr: "دراسة أثرية غنية توثق قلعة أربيل المدرجة في قائمة التراث العالمي لليونسكو وطبقاتها المعمارية وأرشيفاتها وترميمها.",
     descriptionZh: "记录联合国教科文组织世界遗产埃尔比勒城堡建筑层、地下档案与修复工程的严谨考古专著。",
     descriptionCkb: "توێژینەوەیەکی شوێنەواری دەگمەن لەسەر قەڵای هەولێر و مێژووی ٥٠٠٠ ساڵەی نیشتەجێبوون.",
-    coverUrl: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+    coverUrl: "/src/assets/images/regenerated_image_1789397964068.jpg",
     category: "CULTURE",
     region: "KURDISTAN",
     rating: 4.91,

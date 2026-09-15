@@ -491,5 +491,17 @@ export const ADDITIONAL_TOPICS: Topic[] = [
     descAr: 'تمويل الشركات الناشئة وحاضنات التكنولوجيا',
     descZh: '初创科技企业融资与双边孵化器',
     descCkb: 'دابینکردنی سەرمایە بۆ کۆمپانیا نوێیەکان'
+  },
+  {
+    slug: 'historical-figures',
+    name: 'Historical Figures',
+    nameEn: 'Historical Figures',
+    nameAr: 'شخصيات تاريخية',
+    nameZh: '历史风云人物',
+    nameCkb: 'کەسایەتییە مێژووییەکان',
+    descEn: 'Pioneering statesmen, thinkers, and historical leaders shaping national destiny',
+    descAr: 'قادة الفكر والسياسة والتاريخ الذين صاغوا مسار الأمم',
+    descZh: '深刻改变国家命运的伟大革命家、战略家与历史巨擘',
+    descCkb: 'ڕابەران، بیرمەندان و کەسایەتییە مێژووییەکانی نەخشێنەری چارەنووسی گەلان'
   }
 ];

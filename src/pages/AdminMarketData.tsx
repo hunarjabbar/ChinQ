@@ -44,7 +44,7 @@ export function AdminMarketData() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-start">
       <div className="flex items-center justify-between border-b border-gray-200 pb-5">
         <div>
           <h2 className="text-2xl font-bold font-black text-brand-800 uppercase tracking-wide flex items-center gap-2">
@@ -62,24 +62,24 @@ export function AdminMarketData() {
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-start text-sm">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Symbol</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Category</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Price</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Change</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Change %</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase">Volume</th>
-                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-right">Actions</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Symbol</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Category</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Price</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Change</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Change %</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-start">Volume</th>
+                <th className="px-6 py-3 font-bold text-gray-700 uppercase text-end">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {marketData.map((item: any) => (
                 <tr key={item.id} className="hover:bg-gray-50/50">
-                  <td className="px-6 py-4 font-medium font-bold text-gray-900">{item.symbol}</td>
-                  <td className="px-6 py-4 text-xs font-bold tracking-wider text-gray-500 uppercase">{item.category}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 font-medium font-bold text-gray-900 text-start">{item.symbol}</td>
+                  <td className="px-6 py-4 text-xs font-bold tracking-wider text-gray-500 uppercase text-start">{item.category}</td>
+                  <td className="px-6 py-4 text-start">
                     {editingId === item.id ? (
                       <input 
                         type="number" 
@@ -92,7 +92,7 @@ export function AdminMarketData() {
                       <span className="font-bold">{item.price.toLocaleString()}</span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-start">
                     {editingId === item.id ? (
                       <input 
                         type="number" 
@@ -107,7 +107,7 @@ export function AdminMarketData() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-start">
                     {editingId === item.id ? (
                       <input 
                         type="number" 
@@ -122,7 +122,7 @@ export function AdminMarketData() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-start">
                     {editingId === item.id ? (
                       <input 
                         type="text" 
@@ -134,7 +134,7 @@ export function AdminMarketData() {
                       <span className="font-medium text-gray-600">{item.volume}</span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-6 py-4 text-end">
                     {editingId === item.id ? (
                       <div className="flex items-center justify-end gap-2">
                         <button onClick={handleSave} className="p-1.5 bg-green-100 text-green-700 rounded hover:bg-green-200">

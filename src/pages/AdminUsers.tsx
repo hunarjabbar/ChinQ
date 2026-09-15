@@ -3,7 +3,6 @@ import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { Plus, Search, Shield, User, Mail, Trash2, Edit, Activity, Award, Key, RefreshCw, QrCode, Phone, Calendar, Globe, AlertCircle, CheckCircle2, Download } from 'lucide-react';
-import { AdminLayout } from '../components/AdminLayout';
 import html2canvas from 'html2canvas-pro';
 
 export function AdminUsersContent() {
@@ -375,13 +374,13 @@ export function AdminUsersContent() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="md:col-span-2">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Search className="absolute start-3 top-3 h-4 w-4 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search by name, email, digital ID, passport/ID, or code..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
+                className="w-full ps-10 pe-4 py-2 bg-white border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
               />
             </div>
           </div>
@@ -453,12 +452,12 @@ export function AdminUsersContent() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-paper-50">
                 <tr>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Member Identity & ID</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Personal & Passport Info</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Department & Title</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Clearance & Status</th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Renewal Status</th>
-                  <th scope="col" className="px-6 py-4 text-right text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Actions & Renewal</th>
+                  <th scope="col" className="px-6 py-4 text-start text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Member Identity & ID</th>
+                  <th scope="col" className="px-6 py-4 text-start text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Personal & Passport Info</th>
+                  <th scope="col" className="px-6 py-4 text-start text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Department & Title</th>
+                  <th scope="col" className="px-6 py-4 text-start text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Clearance & Status</th>
+                  <th scope="col" className="px-6 py-4 text-start text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Renewal Status</th>
+                  <th scope="col" className="px-6 py-4 text-end text-xs font-black text-gray-500 uppercase tracking-widest border-b border-brand-800">Actions & Renewal</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -486,7 +485,7 @@ export function AdminUsersContent() {
                             <div className="h-10 w-10 rounded-sm bg-brand-800 flex items-center justify-center text-white font-black text-sm uppercase shadow-xs flex-shrink-0">
                               {user.name.charAt(0)}
                             </div>
-                            <div className="ml-4">
+                            <div className="ms-4">
                               <div className="text-sm font-bold text-gray-900 flex items-center gap-2">
                                 {user.name}
                                 <button 
@@ -554,7 +553,7 @@ export function AdminUsersContent() {
                             )}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => renewMutation.mutate(user.id)}
@@ -607,7 +606,7 @@ export function AdminUsersContent() {
               </div>
               <div className="p-8 space-y-6 bg-paper-50 flex-1 overflow-y-auto">
                 <div ref={badgeRef} className="bg-white p-6 rounded-sm shadow-sm border border-gray-200 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-800/5 rounded-full -mr-16 -mt-16 pointer-events-none" />
+                  <div className="absolute top-0 end-0 w-32 h-32 bg-brand-800/5 rounded-full -me-16 -mt-16 pointer-events-none" />
                   
                   <div className="flex justify-between items-start border-b border-gray-200 pb-4 mb-4">
                     <div>
@@ -726,13 +725,13 @@ export function AdminUsersContent() {
                     <div>
                       <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Full Legal Name *</label>
                       <div className="relative">
-                        <User className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                        <User className="absolute start-3 top-2.5 h-4 w-4 text-gray-400" />
                         <input
                           type="text"
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
+                          className="w-full ps-10 pe-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
                           placeholder="Dr. Tariq Al-Hashimi"
                         />
                       </div>
@@ -741,13 +740,13 @@ export function AdminUsersContent() {
                     <div>
                       <label className="block text-xs font-black text-gray-700 uppercase tracking-widest mb-1">Corporate Email *</label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                        <Mail className="absolute start-3 top-2.5 h-4 w-4 text-gray-400" />
                         <input
                           type="email"
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
+                          className="w-full ps-10 pe-3 py-2 border border-gray-300 rounded-sm focus:ring-brand-800 focus:border-brand-800 text-sm"
                           placeholder="tariq@iraqi-chineseagency.com"
                         />
                       </div>
@@ -1035,8 +1034,8 @@ export function AdminUsersContent() {
 
 export function AdminUsers() {
   return (
-    <AdminLayout>
+    <>
       <AdminUsersContent />
-    </AdminLayout>
+    </>
   );
 }

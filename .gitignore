@@ -6,3 +6,9 @@ coverage/
 !.env.example
 firebase-applet-config.json
 
+# Database
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+prisma/*.db*

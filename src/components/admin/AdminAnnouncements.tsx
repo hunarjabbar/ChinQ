@@ -78,7 +78,7 @@ export function AdminAnnouncements() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 text-start">
       <div className="bg-brand-800 rounded-2xl p-8 border border-brand-700 shadow-2xl relative overflow-hidden text-white">
-        <div className="absolute top-0 right-0 p-8 opacity-10">
+        <div className="absolute top-0 end-0 p-8 opacity-10">
           <Megaphone size={120} />
         </div>
         <div className="relative z-10 max-w-2xl space-y-4">
@@ -168,7 +168,7 @@ export function AdminAnnouncements() {
               <History size={16} className="text-brand-800" />
               Broadcast History
             </h3>
-            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pe-2 custom-scrollbar">
               {announcements.map((ann) => (
                 <div key={ann.id} className="p-4 bg-neutral-50 rounded-xl border border-neutral-100 space-y-2 relative group">
                   <div className="flex justify-between items-center">

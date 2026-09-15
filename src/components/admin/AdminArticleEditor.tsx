@@ -99,12 +99,12 @@ export function AdminArticleEditor() {
             <div className="md:col-span-2">
               <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Asset Slug (URL Identity)</label>
               <div className="relative">
-                <Globe className="absolute left-3 top-3 text-neutral-400" size={14} />
+                <Globe className="absolute start-3 top-3 text-neutral-400" size={14} />
                 <input 
                   type="text" 
                   required 
                   placeholder="e.g. basra-digital-economy-expansion"
-                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 pl-9 pr-4 text-sm font-medium focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
+                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 ps-9 pe-4 text-sm font-medium focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
                   value={formData.slug} 
                   onChange={e => setFormData({...formData, slug: e.target.value})} 
                 />
@@ -130,11 +130,11 @@ export function AdminArticleEditor() {
             <div className="md:col-span-2">
               <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">Hero Visualization (Unsplash/Static URL)</label>
               <div className="relative">
-                <ImageIcon className="absolute left-3 top-3 text-neutral-400" size={14} />
+                <ImageIcon className="absolute start-3 top-3 text-neutral-400" size={14} />
                 <input 
                   type="url" 
                   placeholder="https://images.unsplash.com/photo-..."
-                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 pl-9 pr-4 text-sm focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
+                  className="w-full border border-neutral-200 bg-neutral-50 py-2.5 ps-9 pe-4 text-sm focus:outline-none focus:bg-white focus:border-brand-800 transition-all rounded-lg" 
                   value={formData.imageUrl} 
                   onChange={e => setFormData({...formData, imageUrl: e.target.value})} 
                 />

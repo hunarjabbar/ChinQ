@@ -124,9 +124,9 @@ export function AdminVisaFlight() {
   // ================= MUTATIONS =================
   // Save Service (Create / Update)
   const saveServiceMutation = useMutation({
-    mutationFn: async (data: typeof serviceFormData) => {
-      const url = editingService ? `/api/visa-flights/${editingService.id}` : '/api/visa-flights';
-      const method = editingService ? 'PUT' : 'POST';
+    mutationFn: async ({ id, data }: { id?: string | null; data: typeof serviceFormData }) => {
+      const url = id ? `/api/visa-flights/${id}` : '/api/visa-flights';
+      const method = id ? 'PUT' : 'POST';
 
       const res = await apiFetch(url, {
         method,
@@ -142,12 +142,14 @@ export function AdminVisaFlight() {
       }
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights'] });
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['visa-flights'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-visa-flights-home'] });
       setIsServiceModalOpen(false);
       resetServiceForm();
-      showStatus('success', editingService ? 'Service updated successfully!' : 'New Visa/Flight service cataloged!');
+      showStatus('success', variables.id ? 'Service updated successfully!' : 'New Visa/Flight service cataloged!');
     },
     onError: (err: any) => {
       showStatus('error', err.message || 'Operation failed');
@@ -166,6 +168,8 @@ export function AdminVisaFlight() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights'] });
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['visa-flights'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-visa-flights-home'] });
       showStatus('success', 'Visa & Flight record removed successfully');
     },
     onError: (err: any) => {
@@ -185,6 +189,8 @@ export function AdminVisaFlight() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights'] });
       queryClient.invalidateQueries({ queryKey: ['admin-visa-flights-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['visa-flights'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-visa-flights-home'] });
       showStatus('success', 'Route cloned & mirrored successfully! You can now adjust specifics.');
     },
     onError: (err: any) => {
@@ -297,11 +303,21 @@ export function AdminVisaFlight() {
       airlineOrAuthority: 'Consular & Civil Aviation Authority',
       processingTime: '24 - 48 Hours',
       feeOrCost: 'Consular Standard Tariff',
-      imageUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1000',
+      imageUrl: '',
       officialLink: '',
       isFeatured: true,
       isTrending: true
     });
+  };
+
+  const closeServiceModal = () => {
+    setIsServiceModalOpen(false);
+    resetServiceForm();
+  };
+
+  const closeInquiryModal = () => {
+    setIsInquiryModalOpen(false);
+    setEditingInquiry(null);
   };
 
   const openCreateServiceModal = () => {
@@ -455,11 +471,11 @@ export function AdminVisaFlight() {
   };
 
   return (
-    <div className="w-full space-y-8 text-ink-900">
+    <div className="w-full space-y-8 text-ink-900 text-start">
       {/* Top Banner Header */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/70 to-slate-900 border border-gray-200 p-6 sm:p-8 shadow-2xl">
-        <div className="absolute -right-12 -top-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute right-1/3 -bottom-12 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -end-12 -top-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute end-1/3 -bottom-12 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div>
@@ -637,7 +653,7 @@ export function AdminVisaFlight() {
             <Ticket className="w-4 h-4" />
             <span>Concierge Inquiries & Dossiers</span>
             {stats?.pendingInquiries && stats.pendingInquiries > 0 ? (
-              <span className="ml-1 px-1.5 py-0.5 rounded-full text-xs font-black bg-amber-400 text-slate-950">
+              <span className="ms-1 px-1.5 py-0.5 rounded-full text-xs font-black bg-amber-400 text-slate-950">
                 {stats.pendingInquiries}
               </span>
             ) : (
@@ -708,13 +724,13 @@ export function AdminVisaFlight() {
           {/* Filter Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-gray-200">
             <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search className="w-4 h-4 absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search routes, authority, titles..."
                 value={serviceSearch}
                 onChange={(e) => setServiceSearch(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full bg-gray-50 border border-gray-200 rounded-lg ps-9 pe-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
             </div>
 
@@ -800,15 +816,15 @@ export function AdminVisaFlight() {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs text-gray-600">
+                  <table className="w-full text-start text-xs text-gray-600">
                     <thead className="bg-gray-50 text-gray-500 uppercase font-medium tracking-wider text-[11px] border-b border-gray-200">
                       <tr>
-                        <th className="p-4">Service & Multilingual Titles</th>
-                        <th className="p-4">Corridor (Origin → Dest)</th>
-                        <th className="p-4">Authority / Operator</th>
-                        <th className="p-4">SLA & Tariff</th>
+                        <th className="p-4 text-start">Service & Multilingual Titles</th>
+                        <th className="p-4 text-start">Corridor (Origin → Dest)</th>
+                        <th className="p-4 text-start">Authority / Operator</th>
+                        <th className="p-4 text-start">SLA & Tariff</th>
                         <th className="p-4 text-center">Status Badges</th>
-                        <th className="p-4 text-right">Actions</th>
+                        <th className="p-4 text-end">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/60">
@@ -838,7 +854,7 @@ export function AdminVisaFlight() {
                           <td className="p-4 whitespace-nowrap">
                             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-50 border border-gray-200 text-xs font-medium font-bold text-gray-700">
                               <span>{item.originRegion}</span>
-                              <ArrowRight className="w-3 h-3 text-amber-400" />
+                              <ArrowRight className="w-3 h-3 text-amber-400 rtl:-scale-x-100" />
                               <span>{item.destinationRegion}</span>
                             </div>
                           </td>
@@ -887,7 +903,7 @@ export function AdminVisaFlight() {
                           </td>
 
                           {/* Actions */}
-                          <td className="p-4 text-right whitespace-nowrap">
+                          <td className="p-4 text-end whitespace-nowrap">
                             <div className="flex items-center justify-end gap-1.5">
                               {/* Preview */}
                               <button
@@ -958,12 +974,12 @@ export function AdminVisaFlight() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                      <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                      <div className="absolute top-3 start-3 flex flex-wrap gap-1.5">
                         <span className="px-2.5 py-1 rounded-md text-xs font-black uppercase tracking-wider bg-gray-50/80 backdrop-blur text-amber-400 border border-amber-400/30">
                           {item.serviceType.replace('_', ' ')}
                         </span>
                       </div>
-                      <div className="absolute top-3 right-3 flex gap-1">
+                      <div className="absolute top-3 end-3 flex gap-1">
                         {item.isFeatured && (
                           <span className="p-1.5 rounded-md bg-amber-500 text-slate-950 shadow">
                             <Star className="w-3.5 h-3.5 fill-current" />
@@ -975,7 +991,7 @@ export function AdminVisaFlight() {
                           </span>
                         )}
                       </div>
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
+                      <div className="absolute bottom-3 inset-x-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
                         <span className="px-2 py-0.5 rounded bg-gray-50/80 backdrop-blur border border-gray-200">
                           {item.originRegion} → {item.destinationRegion}
                         </span>
@@ -990,7 +1006,7 @@ export function AdminVisaFlight() {
                         {item.titleEn}
                       </h3>
                       {item.titleAr && (
-                        <p className="text-xs text-gray-500 line-clamp-1 text-right font-arabic" dir="rtl">
+                        <p className="text-xs text-gray-500 line-clamp-1 text-start font-arabic" dir="rtl">
                           {item.titleAr}
                         </p>
                       )}
@@ -1049,13 +1065,13 @@ export function AdminVisaFlight() {
           {/* Filter Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-white p-4 rounded-xl border border-gray-200">
             <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search className="w-4 h-4 absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search ticket ID, traveler name, email, passport..."
                 value={inquirySearch}
                 onChange={(e) => setInquirySearch(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full bg-gray-50 border border-gray-200 rounded-lg ps-9 pe-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
             </div>
 
@@ -1125,15 +1141,15 @@ export function AdminVisaFlight() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-gray-600">
+                <table className="w-full text-start text-xs text-gray-600">
                   <thead className="bg-gray-50 text-gray-500 uppercase font-medium tracking-wider text-[11px] border-b border-gray-200">
                     <tr>
-                      <th className="p-4">Ticket & Priority</th>
-                      <th className="p-4">Applicant & Passport</th>
-                      <th className="p-4">Route & Service</th>
-                      <th className="p-4">Travel Date</th>
+                      <th className="p-4 text-start">Ticket & Priority</th>
+                      <th className="p-4 text-start">Applicant & Passport</th>
+                      <th className="p-4 text-start">Route & Service</th>
+                      <th className="p-4 text-start">Travel Date</th>
                       <th className="p-4 text-center">Status Transition</th>
-                      <th className="p-4 text-right">Actions</th>
+                      <th className="p-4 text-end">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60">
@@ -1178,7 +1194,7 @@ export function AdminVisaFlight() {
                           </div>
                           <div className="text-gray-700 font-medium text-[11px] mt-0.5 flex items-center gap-1">
                             <span>{inq.origin}</span>
-                            <ArrowRight className="w-3 h-3 text-gray-400" />
+                            <ArrowRight className="w-3 h-3 text-gray-400 rtl:-scale-x-100" />
                             <span>{inq.destination}</span>
                           </div>
                           {inq.notes && (
@@ -1230,7 +1246,7 @@ export function AdminVisaFlight() {
                         </td>
 
                         {/* Actions */}
-                        <td className="p-4 text-right whitespace-nowrap">
+                        <td className="p-4 text-end whitespace-nowrap">
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => setSelectedInquiryDetail(inq)}
@@ -1356,7 +1372,7 @@ export function AdminVisaFlight() {
       {/* ======================================================== */}
       <AnimatePresence>
         {isServiceModalOpen && (
-          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div key={editingService?.id || 'new'} className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -1364,8 +1380,8 @@ export function AdminVisaFlight() {
               className="bg-white border border-gray-200 rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
             >
               <button
-                onClick={() => setIsServiceModalOpen(false)}
-                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900 transition-colors"
+                onClick={closeServiceModal}
+                className="absolute top-6 end-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1382,7 +1398,7 @@ export function AdminVisaFlight() {
 
               <form onSubmit={(e) => {
                 e.preventDefault();
-                saveServiceMutation.mutate(serviceFormData);
+                saveServiceMutation.mutate({ id: editingService?.id, data: serviceFormData });
               }} className="space-y-6 text-xs">
                 
                 {/* Category & Regions */}
@@ -1500,7 +1516,7 @@ export function AdminVisaFlight() {
                   {activeLangTab === 'AR' && (
                     <div className="space-y-3" dir="rtl">
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">العنوان (العربية)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">العنوان (العربية)</label>
                         <input
                           type="text"
                           value={serviceFormData.titleAr}
@@ -1510,7 +1526,7 @@ export function AdminVisaFlight() {
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">الملخص (العربية)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">الملخص (العربية)</label>
                         <textarea
                           rows={2}
                           value={serviceFormData.summaryAr}
@@ -1519,7 +1535,7 @@ export function AdminVisaFlight() {
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">التفاصيل والتعليمات الرسمية (العربية)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">التفاصيل والتعليمات الرسمية (العربية)</label>
                         <textarea
                           rows={3}
                           value={serviceFormData.detailsAr}
@@ -1568,7 +1584,7 @@ export function AdminVisaFlight() {
                   {activeLangTab === 'CKB' && (
                     <div className="space-y-3" dir="rtl">
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">ناونیشان (کوردی سۆرانی)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">ناونیشان (کوردی سۆرانی)</label>
                         <input
                           type="text"
                           value={serviceFormData.titleCkb}
@@ -1577,7 +1593,7 @@ export function AdminVisaFlight() {
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">پوختە (کوردی سۆرانی)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">پوختە (کوردی سۆرانی)</label>
                         <textarea
                           rows={2}
                           value={serviceFormData.summaryCkb}
@@ -1586,7 +1602,7 @@ export function AdminVisaFlight() {
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-500 mb-1 font-bold text-right">ڕێنمایی و وردەکاری (کوردی سۆرانی)</label>
+                        <label className="block text-gray-500 mb-1 font-bold text-start">ڕێنمایی و وردەکاری (کوردی سۆرانی)</label>
                         <textarea
                           rows={3}
                           value={serviceFormData.detailsCkb}
@@ -1685,7 +1701,7 @@ export function AdminVisaFlight() {
                 <div className="pt-4 flex gap-3 border-t border-gray-200">
                   <button
                     type="button"
-                    onClick={() => setIsServiceModalOpen(false)}
+                    onClick={closeServiceModal}
                     className="flex-1 py-3 rounded-xl bg-gray-100 hover:bg-gray-100 text-gray-600 font-bold transition-all"
                   >
                     Cancel
@@ -1716,11 +1732,11 @@ export function AdminVisaFlight() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
+              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
             >
               <button
                 onClick={() => setSelectedInquiryDetail(null)}
-                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
+                className="absolute top-6 end-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1842,16 +1858,16 @@ export function AdminVisaFlight() {
       {/* ======================================================== */}
       <AnimatePresence>
         {isInquiryModalOpen && editingInquiry && (
-          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div key={editingInquiry?.id || 'new'} className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
+              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
             >
               <button
-                onClick={() => setIsInquiryModalOpen(false)}
-                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
+                onClick={closeInquiryModal}
+                className="absolute top-6 end-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1938,7 +1954,7 @@ export function AdminVisaFlight() {
                 <div className="pt-3 flex gap-3">
                   <button
                     type="button"
-                    onClick={() => setIsInquiryModalOpen(false)}
+                    onClick={closeInquiryModal}
                     className="flex-1 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-100 text-gray-600 font-bold"
                   >
                     Cancel
@@ -1968,11 +1984,11 @@ export function AdminVisaFlight() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
+              className="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative text-ink-900 shadow-2xl space-y-6"
             >
               <button
                 onClick={() => setPreviewService(null)}
-                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
+                className="absolute top-6 end-6 p-2 rounded-xl bg-gray-100 text-gray-500 hover:text-gray-900"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1986,12 +2002,12 @@ export function AdminVisaFlight() {
                 <div className="relative h-48 bg-white">
                   <img src={previewService.imageUrl} alt="" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 start-3">
                     <span className="px-2.5 py-1 rounded-md text-xs font-black uppercase tracking-wider bg-gray-50/80 text-amber-400 border border-amber-400/30">
                       {previewService.serviceType.replace('_', ' ')}
                     </span>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
+                  <div className="absolute bottom-3 inset-x-3 flex items-center justify-between text-xs font-medium font-bold text-gray-700">
                     <span className="px-2 py-0.5 rounded bg-gray-50/80 border border-gray-200">
                       {previewService.originRegion} → {previewService.destinationRegion}
                     </span>
@@ -2004,7 +2020,7 @@ export function AdminVisaFlight() {
                 <div className="p-6 space-y-4">
                   <h3 className="text-lg font-black text-gray-900">{previewService.titleEn}</h3>
                   {previewService.titleAr && (
-                    <p className="text-xs text-gray-500 font-arabic text-right" dir="rtl">{previewService.titleAr}</p>
+                    <p className="text-xs text-gray-500 font-arabic text-start" dir="rtl">{previewService.titleAr}</p>
                   )}
                   <p className="text-xs text-gray-600 leading-relaxed">{previewService.summaryEn}</p>
                   

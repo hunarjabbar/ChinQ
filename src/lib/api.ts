@@ -14,21 +14,40 @@ export async function apiFetch(url: string, options: RequestInit = {}) {
 
 export async function publishLiveUpdate(data: any) {
   try {
+    const payload = {
+      ...data,
+      contentCk: data.contentCk || data.contentCkb || '',
+      contentCkb: data.contentCkb || data.contentCk || '',
+    };
     const res = await apiFetch(`/api/admin/live/${data.eventId}/updates`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
     
     if (!res.ok) {
-      let errorMsg = 'Failed to publish';
-      try {
-        const errorData = await res.json();
-        errorMsg = errorData.error || errorMsg;
-      } catch {}
-      return { success: false, error: errorMsg };
+      // Fallback to /api/updates if event route fails
+      const fallbackRes = await apiFetch('/api/updates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!fallbackRes.ok) {
+        let errorMsg = 'Failed to publish';
+        try {
+          const errorData = await fallbackRes.json();
+          errorMsg = errorData.error || errorMsg;
+        } catch {}
+        return { success: false, error: errorMsg };
+      }
+
+      const result = await fallbackRes.json();
+      return { success: true, data: result };
     }
     
     const result = await res.json();

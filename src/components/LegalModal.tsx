@@ -157,7 +157,7 @@ export function LegalModal({ isOpen, onClose, initialTab = 'privacy', lang }: Le
                     <li>{isAr ? 'التحقق من الهوية السيادية مطلوب قبل أي إفصاح عن البيانات الحساسة.' : isZh ? '在任何敏感数据披露前需进行严格的主权身份验证。' : 'Sovereign identity verification is mandated prior to any sensitive data disclosure.'}</li>
                     <li>{isAr ? 'تتم معالجة الطلبات الرسمية في غضون ١٠ إلى ١٥ يوم عمل.' : isZh ? '官方请求将在 10 至 15 个工作日内完成审核。' : 'Official requests are processed within 10 to 15 standard business days.'}</li>
                     <li>{isAr ? 'يتم أرشفة جميع سجلات التدقيق لطلبات البيانات بشكل آمن لمدة سنتين كاملتين.' : isZh ? '所有数据请求的审计日志将安全保留两个完整日历年。' : 'All audit logs for data requests are securely retained for two full calendar years.'}</li>
-                    <li>{isAr ? 'للاستفسارات القانونية، تواصل مع: desk@iraqi-chineseagency.com' : isZh ? '法律咨询请联系：desk@iraqi-chineseagency.com' : 'For formal legal inquiries: desk@iraqi-chineseagency.com'}</li>
+                    <li>{isAr ? 'للاستفسارات القانونية، تواصل مع: admin@iraqi-chineseagency.com' : isZh ? '法律咨询请联系：admin@iraqi-chineseagency.com' : 'For formal legal inquiries: admin@iraqi-chineseagency.com'}</li>
                   </ul>
                 </div>
               </div>

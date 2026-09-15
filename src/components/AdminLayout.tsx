@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../lib/api';
 import { IcaLogo } from './IcaLogo';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function AdminLayout({ children, userRole }: { children: React.ReactNode, userRole?: string }) {
   const { lang = 'en' } = useParams<{ lang: Locale }>();
@@ -72,24 +73,24 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
   ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
   const navItems = [
-    { name: 'Articles Registry', href: `/${lang}/admin/articles`, icon: FileText, adminOnly: false },
-    { name: 'Dashboard', href: `/${lang}/admin`, icon: LayoutDashboard, adminOnly: true },
-    { name: 'BRICS Observatory', href: `/${lang}/admin/brics`, icon: Globe2, adminOnly: true },
-    { name: 'Women Leadership', href: `/${lang}/admin/women`, icon: UserIcon, adminOnly: true },
-    { name: 'Tourism Portal', href: `/${lang}/admin/tourism`, icon: Compass, adminOnly: true },
-    { name: 'Books Library', href: `/${lang}/admin/books`, icon: BookOpen, adminOnly: true },
-    { name: 'Podcasts', href: `/${lang}/admin/podcasts`, icon: Mic, adminOnly: true },
-    { name: 'Visa & Flights', href: `/${lang}/admin/visa-flights`, icon: Plane, adminOnly: true },
-    { name: 'Market Data', href: `/${lang}/admin/market`, icon: Activity, adminOnly: true },
-    { name: 'IQD & e-CNY Payments', href: `/${lang}/admin/payments`, icon: Coins, adminOnly: true },
-    { name: 'Live Command', href: `/${lang}/admin?tab=live`, icon: Radio, adminOnly: true },
-    { name: 'Sourcing Desk', href: `/${lang}/admin/sourcing`, icon: Ship, adminOnly: true },
-    { name: 'Partners', href: `/${lang}/admin/partners`, icon: Briefcase, adminOnly: true },
-    { name: 'Live Streams', href: `/${lang}/admin/live-events`, icon: Video, adminOnly: true },
-    { name: 'Media Library', href: `/${lang}/admin/media`, icon: ImageIcon, adminOnly: true },
-    { name: 'User Management', href: `/${lang}/admin/users`, icon: Users, adminOnly: true },
-    { name: 'Audit Logs', href: `/${lang}/admin/audit-logs`, icon: ClipboardList, adminOnly: true },
-    { name: 'System Settings', href: `/${lang}/admin/settings`, icon: Settings, adminOnly: true },
+    { name: t('articlesRegistry'), href: `/${lang}/admin/articles`, icon: FileText, adminOnly: false },
+    { name: t('dashboard'), href: `/${lang}/admin`, icon: LayoutDashboard, adminOnly: true },
+    { name: t('bricsObservatory'), href: `/${lang}/admin/brics`, icon: Globe2, adminOnly: true },
+    { name: t('womenLeadership'), href: `/${lang}/admin/women`, icon: UserIcon, adminOnly: true },
+    { name: t('tourismPortal'), href: `/${lang}/admin/tourism`, icon: Compass, adminOnly: true },
+    { name: t('booksLibrary'), href: `/${lang}/admin/books`, icon: BookOpen, adminOnly: true },
+    { name: t('podcastsStudio'), href: `/${lang}/admin/podcasts`, icon: Mic, adminOnly: true },
+    { name: t('visaFlights'), href: `/${lang}/admin/visa-flights`, icon: Plane, adminOnly: true },
+    { name: t('marketData'), href: `/${lang}/admin/market`, icon: Activity, adminOnly: true },
+    { name: t('paymentsSettlement'), href: `/${lang}/admin/payments`, icon: Coins, adminOnly: true },
+    { name: t('liveCommand'), href: `/${lang}/admin?tab=live`, icon: Radio, adminOnly: true },
+    { name: t('sourcingDesk'), href: `/${lang}/admin/sourcing`, icon: Ship, adminOnly: true },
+    { name: t('partners'), href: `/${lang}/admin/partners`, icon: Briefcase, adminOnly: true },
+    { name: t('liveStreams'), href: `/${lang}/admin/live-events`, icon: Video, adminOnly: true },
+    { name: t('mediaLibrary'), href: `/${lang}/admin/media`, icon: ImageIcon, adminOnly: true },
+    { name: t('userManagement'), href: `/${lang}/admin/users`, icon: Users, adminOnly: true },
+    { name: t('auditLogs'), href: `/${lang}/admin/audit-logs`, icon: ClipboardList, adminOnly: true },
+    { name: t('systemSettings'), href: `/${lang}/admin/settings`, icon: Settings, adminOnly: true },
   ].filter(item => !item.adminOnly || user?.role === 'ADMIN');
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -282,16 +283,16 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-bold font-black tracking-tight leading-none text-white">
-              ICA Secretariat
+              {t('secretariat')}
             </span>
             <span className="text-xs font-medium font-bold tracking-[0.3em] text-brand-500 uppercase mt-1">
-              Command Hub
+              {t('commandHub')}
             </span>
           </div>
         </div>
         
         <nav className="flex-1 py-8 px-5 space-y-1.5 overflow-y-auto">
-          <div className="text-xs font-black uppercase tracking-[0.4em] text-neutral-600 mb-5 px-3">System Navigation</div>
+          <div className="text-xs font-black uppercase tracking-[0.4em] text-neutral-600 mb-5 px-3">{t('systemNavigation')}</div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const targetPath = item.href;
@@ -308,10 +309,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                     : 'text-neutral-500 hover:bg-white/5 hover:text-white'
                 }`}
               >
-                <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-white' : 'text-neutral-600 group-hover:text-neutral-300'}`} />
-                <span className="tracking-wide">{item.name}</span>
+                <Icon className={`w-4 h-4 transition-colors shrink-0 ${isActive ? 'text-white' : 'text-neutral-600 group-hover:text-neutral-300'}`} />
+                <span className="tracking-wide truncate">{item.name}</span>
                 {isActive && (
-                  <div className="absolute right-3 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
+                  <div className="absolute end-3 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
                 )}
               </Link>
             );
@@ -320,7 +321,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
 
         <div className="p-6 border-t border-white/5 shrink-0 bg-black/20">
           <div className="flex items-center gap-4 mb-5 px-1">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-700 to-brand-900 flex items-center justify-center font-black text-sm uppercase text-white shadow-inner">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-700 to-brand-900 flex items-center justify-center font-black text-sm uppercase text-white shadow-inner shrink-0">
               {user.name.charAt(0)}
             </div>
             <div className="overflow-hidden space-y-0.5">
@@ -332,8 +333,8 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
             onClick={handleLogout}
             className="flex items-center gap-2.5 text-xs font-bold text-neutral-500 hover:text-brand-400 transition-all w-full px-2 cursor-pointer group"
           >
-            <LogOut className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-            <span className="uppercase tracking-widest">Terminate Session</span>
+            <LogOut className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 shrink-0" />
+            <span className="uppercase tracking-widest">{t('terminateSession')}</span>
           </button>
         </div>
       </aside>
@@ -353,10 +354,10 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                 </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-bold font-black tracking-tight leading-none text-white">
-                    ICA Secretariat
+                    {t('secretariat')}
                   </span>
                   <span className="text-xs font-medium font-bold tracking-[0.25em] text-brand-500 uppercase mt-1">
-                    Command Hub
+                    {t('commandHub')}
                   </span>
                 </div>
               </div>
@@ -372,7 +373,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
 
             <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
               <div className="px-3 pb-2 text-xs font-medium font-bold uppercase tracking-[0.25em] text-neutral-500">
-                Navigation Directory
+                {t('navigationDirectory')}
               </div>
               {navItems.map((item) => {
                 const isActive = location.pathname === item.href || (item.href.includes('?') && location.pathname + location.search === item.href);
@@ -387,9 +388,9 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                         : 'text-neutral-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <item.icon size={16} className={isActive ? 'text-brand-300' : 'text-neutral-400'} />
-                    <span className="tracking-wide">{item.name}</span>
-                    {item.name === 'User Management' && (
+                    <item.icon size={16} className={isActive ? 'text-brand-300 shrink-0' : 'text-neutral-400 shrink-0'} />
+                    <span className="tracking-wide truncate">{item.name}</span>
+                    {item.name === t('userManagement') && (
                       <span className="ms-auto text-xs bg-brand-700/80 text-white font-medium px-1.5 py-0.5 rounded font-black">
                         CORE
                       </span>
@@ -401,7 +402,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
 
             <div className="p-4 border-t border-white/10 shrink-0 bg-ink-950/60 space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-brand-800 text-white flex items-center justify-center font-bold text-xs">
+                <div className="w-8 h-8 rounded-full bg-brand-800 text-white flex items-center justify-center font-bold text-xs shrink-0">
                   {user.name.charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -413,8 +414,8 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                 onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
                 className="flex items-center gap-2 text-xs font-bold text-neutral-400 hover:text-brand-400 transition-all w-full px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer"
               >
-                <LogOut className="w-3.5 h-3.5" />
-                <span className="uppercase tracking-widest text-xs">Terminate Session</span>
+                <LogOut className="w-3.5 h-3.5 rtl:rotate-180 shrink-0" />
+                <span className="uppercase tracking-widest text-xs">{t('terminateSession')}</span>
               </button>
             </div>
           </aside>
@@ -439,12 +440,14 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
                 <IcaLogo size={24} variant="mark" className="hidden sm:block opacity-80" />
                 <h1 className="text-xs font-black text-brand-900 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
-                  Authorized Environment
+                  {t('authorizedEnvironment')}
                 </h1>
-                <span className="text-xs font-medium font-bold text-brand-700 uppercase bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">ICA Secretariat</span>
+                <span className="text-xs font-medium font-bold text-brand-700 uppercase bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">{t('secretariat')}</span>
               </div>
             </div>
-          <div className="flex items-center gap-6 relative">
+          <div className="flex items-center gap-3 sm:gap-4 relative">
+            <LanguageSwitcher lang={lang as Locale} />
+
             <div className="relative">
               <button 
                 onClick={() => setShowNotifications(!showNotifications)}
@@ -453,22 +456,22 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               >
                 <Bell className="w-5 h-5" />
                 {notifications.length > 0 && (
-                  <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-brand-600 rounded-full border-2 border-white"></span>
+                  <span className="absolute top-2 end-2 w-2.5 h-2.5 bg-brand-600 rounded-full border-2 border-white"></span>
                 )}
               </button>
 
               {showNotifications && (
                 <>
                   <div className="fixed inset-0 z-40 cursor-default" onClick={() => setShowNotifications(false)} />
-                  <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-md shadow-xl py-2 z-50 text-start font-sans divide-y divide-gray-100">
+                  <div className="absolute end-0 mt-2 w-80 bg-white border border-gray-200 rounded-md shadow-xl py-2 z-50 text-start font-sans divide-y divide-gray-100">
                     <div className="px-4 py-2 flex justify-between items-center bg-gray-50/50">
                       <span className="text-[11px] font-black uppercase tracking-wider text-gray-700 font-medium flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 bg-brand-800 rounded-full animate-pulse"></span>
-                        Telex & Registry Alerts
+                        <span className="w-1.5 h-1.5 bg-brand-800 rounded-full animate-pulse shrink-0"></span>
+                        {t('notificationsAlerts')}
                       </span>
                       {notifications.length > 0 && (
                         <span className="text-xs bg-brand-800/10 text-brand-800 font-medium font-bold px-2 py-0.5 rounded-full">
-                          {notifications.length} Pending
+                          {notifications.length} {t('pendingAlerts')}
                         </span>
                       )}
                     </div>
@@ -476,7 +479,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                     <div className="max-h-80 overflow-y-auto divide-y divide-gray-100 bg-white">
                       {notifications.length === 0 ? (
                         <div className="px-4 py-8 text-center text-xs text-gray-500 font-medium italic">
-                          All systems operational. No pending alerts.
+                          {t('allSystemsNominal')}
                         </div>
                       ) : (
                         notifications.map((notif) => (
@@ -490,7 +493,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                           >
                             <div className="flex justify-between items-start mb-1">
                               <span className="text-xs font-bold text-gray-900 font-sans flex items-center gap-1.5">
-                                <span className={`w-1.5 h-1.5 rounded-full ${notif.type === 'application' ? 'bg-brand-800' : 'bg-green-600'}`}></span>
+                                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${notif.type === 'application' ? 'bg-brand-800' : 'bg-green-600'}`}></span>
                                 {notif.title}
                               </span>
                             </div>
@@ -514,7 +517,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
                         }}
                         className="text-xs font-bold text-brand-800 hover:underline uppercase tracking-wider font-medium cursor-pointer"
                       >
-                        Audit Enterprise Registry
+                        {t('auditEnterpriseRegistry')}
                       </button>
                     </div>
                   </div>
@@ -522,8 +525,8 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
               )}
             </div>
 
-             <Link to={`/${lang}`} className="text-xs font-bold uppercase tracking-wider text-gray-500 border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors">
-              View Live Site
+            <Link to={`/${lang}`} className="text-xs font-bold uppercase tracking-wider text-gray-500 border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors shrink-0">
+              {t('viewLiveSite')}
             </Link>
           </div>
           </div>

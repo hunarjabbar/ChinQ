@@ -3,14 +3,21 @@ import { useAuthStore } from '../store/useAuthStore';
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Plus, Edit2, Trash2, Radio, Video, MapPin, Tag } from 'lucide-react';
-import { AdminLayout } from '../components/AdminLayout';
 
 export default function AdminLiveEvents() {
   const queryClient = useQueryClient();
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState<any>({});
+  const [editingEvent, setEditingEvent] = useState<any | null>(null);
+  const [formData, setFormData] = useState<any>({
+    isActive: true,
+    titleEn: '',
+    videoUrl: '',
+    category: 'NEWS',
+    region: 'BILATERAL',
+    summaryEn: ''
+  });
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -18,6 +25,41 @@ export default function AdminLiveEvents() {
     setToken(t);
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    if (editingEvent) {
+      setFormData({
+        isActive: editingEvent.isActive ?? true,
+        titleEn: editingEvent.titleEn || '',
+        videoUrl: editingEvent.videoUrl || '',
+        category: editingEvent.category || 'NEWS',
+        region: editingEvent.region || 'BILATERAL',
+        summaryEn: editingEvent.summaryEn || ''
+      });
+    } else {
+      setFormData({
+        isActive: true,
+        titleEn: '',
+        videoUrl: '',
+        category: 'NEWS',
+        region: 'BILATERAL',
+        summaryEn: ''
+      });
+    }
+  }, [editingEvent]);
+
+  const closeForm = () => {
+    setIsEditing(false);
+    setEditingEvent(null);
+    setFormData({
+      isActive: true,
+      titleEn: '',
+      videoUrl: '',
+      category: 'NEWS',
+      region: 'BILATERAL',
+      summaryEn: ''
+    });
+  };
 
   const fetchEvents = async () => {
     try {
@@ -38,8 +80,8 @@ export default function AdminLiveEvents() {
     if (!token) return;
 
     try {
-      const method = formData.id ? 'PUT' : 'POST';
-      const url = formData.id ? `/api/events/${formData.id}` : '/api/events';
+      const method = editingEvent?.id ? 'PUT' : 'POST';
+      const url = editingEvent?.id ? `/api/events/${editingEvent.id}` : '/api/events';
       
       const res = await apiFetch(url, {
         method,
@@ -50,8 +92,7 @@ export default function AdminLiveEvents() {
       });
 
       if (res.ok) {
-        setIsEditing(false);
-        setFormData({});
+        closeForm();
         fetchEvents();
         queryClient.invalidateQueries({ queryKey: ['events'] });
       } else {
@@ -81,31 +122,31 @@ export default function AdminLiveEvents() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <AdminLayout>
+    <>
       <div className="w-full space-y-6">
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
           <div>
             <h2 className="text-2xl font-bold font-semibold text-neutral-900 flex items-center">
-              <Video className="h-6 w-6 mr-2 text-brand-800" />
+              <Video className="h-6 w-6 me-2 text-brand-800" />
               Live Streams & Broadcasts
             </h2>
             <p className="text-sm text-gray-500 mt-1">Manage video streams, breaking news banners, and live event definitions.</p>
           </div>
           <button
             onClick={() => {
-              setFormData({ isActive: true });
+              setEditingEvent(null);
               setIsEditing(true);
             }}
             className="bg-brand-800 text-white px-4 py-2 rounded-lg hover:bg-brand-800 flex items-center text-sm font-bold tracking-wider uppercase"
           >
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="h-4 w-4 me-2" />
             New Broadcast
           </button>
         </div>
 
         {isEditing ? (
-          <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm text-left">
-            <h3 className="text-lg font-medium mb-4">{formData.id ? 'Edit Broadcast' : 'New Broadcast'}</h3>
+          <div key={editingEvent?.id || 'new'} className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm text-start">
+            <h3 className="text-lg font-medium mb-4">{editingEvent?.id ? 'Edit Broadcast' : 'New Broadcast'}</h3>
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
@@ -153,21 +194,22 @@ export default function AdminLiveEvents() {
               
               {/* Optional translations could be added here similar to other forms */}
               
-              <div className="flex justify-end space-x-2 pt-4 mt-6 border-t border-gray-200">
-                <button type="button" onClick={() => setIsEditing(false)} className="px-4 py-2 text-neutral-600 font-bold uppercase tracking-wider text-xs hover:bg-neutral-100 rounded-lg">Cancel</button>
+              <div className="flex justify-end gap-2 pt-4 mt-6 border-t border-gray-200">
+                <button type="button" onClick={closeForm} className="px-4 py-2 text-neutral-600 font-bold uppercase tracking-wider text-xs hover:bg-neutral-100 rounded-lg">Cancel</button>
                 <button type="submit" className="px-6 py-2 bg-brand-800 font-bold uppercase tracking-wider text-xs text-white rounded-lg hover:bg-brand-800 shadow-sm">Save Broadcast</button>
               </div>
             </form>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden text-left">
+          <div className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden text-start">
+            <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-neutral-50 text-neutral-500 text-xs uppercase tracking-wider">
                 <tr>
-                  <th className="px-6 py-4 font-bold">Status</th>
-                  <th className="px-6 py-4 font-bold">Broadcast Title</th>
-                  <th className="px-6 py-4 font-bold">Details</th>
-                  <th className="px-6 py-4 font-bold text-right">Actions</th>
+                  <th className="px-6 py-4 font-bold text-start">Status</th>
+                  <th className="px-6 py-4 font-bold text-start">Broadcast Title</th>
+                  <th className="px-6 py-4 font-bold text-start">Details</th>
+                  <th className="px-6 py-4 font-bold text-end">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-200">
@@ -195,9 +237,9 @@ export default function AdminLiveEvents() {
                         <span className="flex items-center gap-1"><MapPin size={12}/> {ev.region}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex items-center justify-end space-x-2">
-                        <button onClick={() => { setFormData(ev); setIsEditing(true); }} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded">
+                    <td className="px-6 py-4 text-end">
+                      <div className="flex items-center justify-end gap-2">
+                        <button onClick={() => { setEditingEvent(ev); setIsEditing(true); }} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded">
                           <Edit2 className="h-4 w-4" />
                         </button>
                         <button onClick={() => handleDelete(ev.id)} className="p-1.5 text-brand-600 hover:bg-brand-50 rounded">
@@ -213,8 +255,9 @@ export default function AdminLiveEvents() {
               </tbody>
             </table>
           </div>
+          </div>
         )}
       </div>
-    </AdminLayout>
+    </>
   );
 }

@@ -6,48 +6,71 @@ import { useAuthStore } from './store/useAuthStore';
 
 import { createBrowserRouter, RouterProvider, Navigate, useParams, Outlet, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { Layout } from './components/Layout';
 import { AdminLayout } from './components/AdminLayout';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { useSiteStore } from './store/useSiteStore';
+
 import { Home } from './pages/Home';
 import { ArticlePage } from './pages/ArticlePage';
 import { CategoryPage } from './pages/CategoryPage';
-import { AdminDashboard } from './pages/AdminDashboard';
 import { NotFound } from './pages/NotFound';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { LiveEventPage } from './pages/LiveEventPage';
-import { LivePortal } from './pages/LivePortal';
-import SearchPage from './pages/SearchPage';
-
-import { AdminArticles } from './pages/AdminArticles';
-import { AdminArticleNew } from './pages/AdminArticleNew';
-import { AdminAuditLogs } from './pages/AdminAuditLogs';
-import { AdminBrics } from './pages/AdminBrics';
-import { AdminUsers } from './pages/AdminUsers';
-import { AdminMedia } from './pages/AdminMedia';
-import { AdminSettings } from './pages/AdminSettings';
-
-import { About } from './pages/About';
-import { JoinUs } from './pages/JoinUs';
-import { BooksPage } from './pages/BooksPage';
-import { AdminBooks } from './pages/AdminBooks';
-import { TourismPage } from './pages/TourismPage';
-import { AdminTourism } from './pages/AdminTourism';
-import { WomenPage } from './pages/WomenPage';
-import { AdminWomen } from './pages/AdminWomen';
-import { VisaFlightPage } from './pages/VisaFlightPage';
-import { AdminVisaFlight } from './pages/AdminVisaFlight';
-import PodcastsPage from './pages/PodcastsPage';
-import AdminPodcasts from './pages/AdminPodcasts';
-import AdminLiveEvents from './pages/AdminLiveEvents';
-import AdminPartners from "./pages/AdminPartners";
-import AdminSourcing from "./pages/AdminSourcing";
-import { AdminMarketData } from './pages/AdminMarketData';
-import { PaymentsPage } from './pages/PaymentsPage';
-import { AdminPayments } from './pages/AdminPayments';
-import { useSiteStore } from './store/useSiteStore';
 
 const queryClient = new QueryClient();
+
+// Resilient lazy loading that retries on temporary network drops or dynamic chunk rebuilds
+function lazyWithRetry<T extends React.ComponentType<any>>(
+  factory: () => Promise<{ default: T } | any>
+) {
+  return lazy(async () => {
+    try {
+      const mod = await factory();
+      return mod.default ? mod : { default: mod };
+    } catch (error) {
+      console.warn('Chunk load error, attempting immediate retry...', error);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        const mod = await factory();
+        return mod.default ? mod : { default: mod };
+      } catch (retryError) {
+        console.error('Persistent chunk load failure:', retryError);
+        throw retryError;
+      }
+    }
+  });
+}
+
+const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const LiveEventPage = lazyWithRetry(() => import('./pages/LiveEventPage').then(m => ({ default: m.LiveEventPage })));
+const LivePortal = lazyWithRetry(() => import('./pages/LivePortal').then(m => ({ default: m.LivePortal })));
+const SearchPage = lazyWithRetry(() => import('./pages/SearchPage'));
+const AdminArticles = lazyWithRetry(() => import('./pages/AdminArticles').then(m => ({ default: m.AdminArticles })));
+const AdminArticleNew = lazyWithRetry(() => import('./pages/AdminArticleNew').then(m => ({ default: m.AdminArticleNew })));
+const AdminAuditLogs = lazyWithRetry(() => import('./pages/AdminAuditLogs').then(m => ({ default: m.AdminAuditLogs })));
+const AdminBrics = lazyWithRetry(() => import('./pages/AdminBrics').then(m => ({ default: m.AdminBrics })));
+const AdminUsers = lazyWithRetry(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })));
+const AdminMedia = lazyWithRetry(() => import('./pages/AdminMedia').then(m => ({ default: m.AdminMedia })));
+const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings').then(m => ({ default: m.AdminSettings })));
+const About = lazyWithRetry(() => import('./pages/About').then(m => ({ default: m.About })));
+const JoinUs = lazyWithRetry(() => import('./pages/JoinUs').then(m => ({ default: m.JoinUs })));
+const BooksPage = lazyWithRetry(() => import('./pages/BooksPage').then(m => ({ default: m.BooksPage })));
+const AdminBooks = lazyWithRetry(() => import('./pages/AdminBooks').then(m => ({ default: m.AdminBooks })));
+const TourismPage = lazyWithRetry(() => import('./pages/TourismPage').then(m => ({ default: m.TourismPage })));
+const AdminTourism = lazyWithRetry(() => import('./pages/AdminTourism').then(m => ({ default: m.AdminTourism })));
+const WomenPage = lazyWithRetry(() => import('./pages/WomenPage').then(m => ({ default: m.WomenPage })));
+const AdminWomen = lazyWithRetry(() => import('./pages/AdminWomen').then(m => ({ default: m.AdminWomen })));
+const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
+const AdminVisaFlight = lazyWithRetry(() => import('./pages/AdminVisaFlight').then(m => ({ default: m.AdminVisaFlight })));
+const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
+const AdminPodcasts = lazyWithRetry(() => import('./pages/AdminPodcasts'));
+const AdminLiveEvents = lazyWithRetry(() => import('./pages/AdminLiveEvents'));
+const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
+const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
+const AdminMarketData = lazyWithRetry(() => import('./pages/AdminMarketData').then(m => ({ default: m.AdminMarketData })));
+const PaymentsPage = lazyWithRetry(() => import('./pages/PaymentsPage').then(m => ({ default: m.PaymentsPage })));
+const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
+
 
 function mixColor(hex: string, targetHex: string, weight: number): string {
   try {
@@ -125,10 +148,8 @@ function SearchWrapper() {
   return <SearchPage lang={(lang as any) || 'en'} />;
 }
 
-function LangWrapper() {
-  const { lang } = useParams<{ lang: string }>();
-  const location = useLocation();
-  
+
+function useLanguageSetup(lang?: string) {
   useEffect(() => {
     try {
       document.documentElement.lang = lang || 'en';
@@ -140,17 +161,27 @@ function LangWrapper() {
     } catch {}
   }, [lang]);
 
-  if (!['en', 'ar', 'zh', 'ckb'].includes(lang || '')) {
+  const isValidLang = ['en', 'ar', 'zh', 'ckb'].includes(lang || '');
+  const safeLang = (isValidLang ? lang : 'en') as 'en' | 'ar' | 'zh' | 'ckb';
+  
+  return { isValidLang, safeLang };
+}
+
+function LangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang } = useLanguageSetup(lang);
+
+  if (!isValidLang) {
     return <Navigate to="/en" replace />;
   }
-
-  const safeLang = (lang as 'en' | 'ar' | 'zh' | 'ckb') || 'en';
 
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
       <Layout lang={safeLang}>
         <Outlet />
       </Layout>
+      <DownloadAppModal lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -158,27 +189,18 @@ function LangWrapper() {
 function AdminLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
-  
-  useEffect(() => {
-    try {
-      document.documentElement.lang = lang || 'en';
-      if (lang === 'ar' || lang === 'ckb') {
-        document.documentElement.dir = 'rtl';
-      } else {
-        document.documentElement.dir = 'ltr';
-      }
-    } catch {}
-  }, [lang]);
+  const { isValidLang, safeLang } = useLanguageSetup(lang);
 
-  if (!['en', 'ar', 'zh', 'ckb'].includes(lang || '')) {
+  if (!isValidLang) {
     return <Navigate to="/en/admin" replace />;
   }
 
-  const safeLang = (lang as 'en' | 'ar' | 'zh' | 'ckb') || 'en';
-
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
-      <Outlet />
+      <AdminLayout>
+        <Outlet />
+      </AdminLayout>
+      <DownloadAppModal lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -217,16 +239,16 @@ const router = createBrowserRouter([
       { path: "articles", element: <AdminArticles /> },
       { path: "articles/new", element: <AdminArticleNew /> },
       { path: "articles/:id", element: <AdminArticleNew /> },
-      { path: "women", element: <AdminLayout><AdminWomen /></AdminLayout> },
-      { path: "tourism", element: <AdminLayout><AdminTourism /></AdminLayout> },
-      { path: "visa-flights", element: <AdminLayout><AdminVisaFlight /></AdminLayout> },
-      { path: "podcasts", element: <AdminLayout><AdminPodcasts /></AdminLayout> },
+      { path: "women", element: <AdminWomen /> },
+      { path: "tourism", element: <AdminTourism /> },
+      { path: "visa-flights", element: <AdminVisaFlight /> },
+      { path: "podcasts", element: <AdminPodcasts /> },
       { path: "live-events", element: <AdminLiveEvents /> },
       { path: "books", element: <AdminBooks /> },
-      { path: "market", element: <AdminLayout><AdminMarketData /></AdminLayout> },
-      { path: "payments", element: <AdminLayout><AdminPayments /></AdminLayout> },
-      { path: "partners", element: <AdminLayout><AdminPartners /></AdminLayout> },
-      { path: "sourcing", element: <AdminLayout><AdminSourcing /></AdminLayout> },
+      { path: "market", element: <AdminMarketData /> },
+      { path: "payments", element: <AdminPayments /> },
+      { path: "partners", element: <AdminPartners /> },
+      { path: "sourcing", element: <AdminSourcing /> },
                 { path: "audit-logs", element: <AdminAuditLogs /> },
           { path: "brics", element: <AdminBrics /> },
           { path: "users", element: <AdminUsers /> },
@@ -237,12 +259,22 @@ const router = createBrowserRouter([
   { path: "*", element: <NotFound /> }
 ]);
 
-export default function App() { const initializeAuth = useAuthStore(state => state.initialize); useEffect(() => { initializeAuth(); }, [initializeAuth]);
+import { DownloadAppModal } from './components/DownloadAppModal';
+
+export default function App() { 
+  const initializeAuth = useAuthStore(state => state.initialize); 
+  
+  useEffect(() => { 
+    initializeAuth(); 
+  }, [initializeAuth]);
+  
   return (
     <ErrorBoundary lang="en">
       <QueryClientProvider client={queryClient}>
         <ThemeApplier />
-        <RouterProvider router={router} />
+        <Suspense fallback={<div className="flex h-screen items-center justify-center"><div className="w-12 h-12 border-4 border-brand-800 border-t-transparent rounded-full animate-spin"></div></div>}>
+          <RouterProvider router={router} />
+        </Suspense>
       </QueryClientProvider>
     </ErrorBoundary>
   );

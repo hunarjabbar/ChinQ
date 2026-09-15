@@ -17,7 +17,6 @@ import {
   QrCode,
   Send
 } from 'lucide-react';
-import { AdminLayout } from '../components/AdminLayout';
 import { useSiteStore } from '../store/useSiteStore';
 
 export function AdminSettings() {
@@ -67,7 +66,7 @@ export function AdminSettings() {
   };
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6 text-start max-w-4xl">
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -660,6 +659,6 @@ export function AdminSettings() {
           </div>
         </form>
       </div>
-    </AdminLayout>
+    </>
   );
 }

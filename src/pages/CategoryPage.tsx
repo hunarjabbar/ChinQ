@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Article, Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { formatDistanceToNow } from 'date-fns';
-import { ar, zhCN, enUS } from 'date-fns/locale';
+import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { useState, useCallback, useMemo } from 'react';
 import { ADDITIONAL_TOPICS } from '../data/topics';
 import { ArticleModal } from '../components/ArticleModal';
@@ -13,7 +13,7 @@ export function CategoryPage() {
   const { t } = useI18n(lang!);
 
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
-  const { data: articles = [], isLoading } = useQuery<Article[]>({
+  const { data: rawArticles = [], isLoading } = useQuery<Article[]>({
     queryKey: ['articles', slug],
     queryFn: async () => {
       const res = await fetch(`/api/articles?category=${slug}`);
@@ -21,6 +21,21 @@ export function CategoryPage() {
       return res.json();
     }
   });
+
+  const articles = useMemo(() => {
+    const seenIds = new Set<string>();
+    const seenSlugs = new Set<string>();
+    return rawArticles.filter(article => {
+      if (!article?.id || seenIds.has(article.id)) return false;
+      seenIds.add(article.id);
+
+      const normalizedSlug = article.slug ? article.slug.replace(/-(malik-mahmud|duplicate)$/, '') : article.id;
+      if (seenSlugs.has(normalizedSlug)) return false;
+      seenSlugs.add(normalizedSlug);
+
+      return true;
+    });
+  }, [rawArticles]);
 
   const getTranslation = useCallback((article: Article) => {
     return article.translations.find(tr => tr.lang === lang) || 
@@ -33,6 +48,8 @@ export function CategoryPage() {
     if (lang === 'ar') return category.nameAr || category.name;
     if (lang === 'zh') return category.nameZh || category.name;
     if (lang === 'ckb') {
+      const topic = ADDITIONAL_TOPICS.find(t => t.slug === category.slug || t.nameEn === (category.nameEn || category.name) || t.name === category.name);
+      if (topic && topic.nameCkb) return topic.nameCkb;
       const name = category.nameEn || category.name;
       if (name === 'Energy') return 'وزە';
       if (name === 'Economy') return 'ئابووری';
@@ -45,12 +62,37 @@ export function CategoryPage() {
       if (name === 'Politics') return 'سیاسەت';
       if (name === 'Technology') return 'تەکنەلۆژیا';
       if (name === 'Belt & Road') return 'پشتوێن و ڕێگا';
+      if (name === 'Historical Figures') return 'کەسایەتییە مێژووییەکان';
       return name;
     }
     return category.nameEn || category.name;
   }, [lang]);
 
-  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
+  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'ckb' ? ckb : lang === 'zh' ? zhCN : enUS, [lang]);
+
+  const formatTimeAgo = useCallback((dateInput: string | Date | number) => {
+    const d = new Date(dateInput);
+    if (lang === 'ckb') {
+      const now = Date.now();
+      const diffMs = Math.max(0, now - d.getTime());
+      const diffSec = Math.floor(diffMs / 1000);
+      const diffMin = Math.floor(diffSec / 60);
+      const diffHr = Math.floor(diffMin / 60);
+      const diffDays = Math.floor(diffHr / 24);
+
+      if (diffMin < 1) return 'ئێستا';
+      if (diffMin === 1) return '١ خولەک پێش ئێستا';
+      if (diffMin < 60) return `${diffMin} خولەک پێش ئێستا`;
+      if (diffHr === 1) return '١ کاتژمێر پێش ئێستا';
+      if (diffHr < 24) return `${diffHr} کاتژمێر پێش ئێستا`;
+      if (diffDays === 1) return 'دوێنێ';
+      if (diffDays < 30) return `${diffDays} ڕۆژ پێش ئێستا`;
+      const diffMonths = Math.floor(diffDays / 30);
+      if (diffMonths < 12) return `${diffMonths} مانگ پێش ئێستا`;
+      return `${Math.floor(diffDays / 365)} ساڵ پێش ئێستا`;
+    }
+    return formatDistanceToNow(d, { addSuffix: true, locale: dateLocale });
+  }, [lang, dateLocale]);
 
   if (isLoading) {
     return <div className="animate-pulse space-y-8 w-full max-w-7xl mx-auto px-4 sm:px-6 py-20">
@@ -116,7 +158,7 @@ export function CategoryPage() {
                 <div className="flex items-center space-x-2 rtl:space-x-reverse text-xs text-neutral-500 dark:text-neutral-400 font-bold uppercase">
                   <span>{(article as any).author?.name || 'Staff Writer'}</span>
                   <span>•</span>
-                  <span>{formatDistanceToNow(new Date(article.createdAt), { addSuffix: true, locale: dateLocale })}</span>
+                  <span>{formatTimeAgo(article.createdAt)}</span>
                 </div>
               </div>
             );

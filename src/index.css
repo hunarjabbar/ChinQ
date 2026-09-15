@@ -125,7 +125,7 @@ html[lang="zh"] {
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: auto;
+  overflow-x: hidden;
   width: 100%;
   /* min-width: 1024px; */ /* Force desktop view on mobile as requested */
 }
@@ -152,6 +152,11 @@ html.dark body {
 }
 
 /* Force clean, high-contrast dark mode inversion for body components */
+:root:not(.dark) .bg-neutral-50,
+:root:not(.dark) .bg-gray-50 {
+  background-color: #ffffff !important;
+}
+
 .dark .bg-paper-50 {
   background-color: #09090b !important;
 }

@@ -94,7 +94,7 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
                 <stat.icon size={18} />
               </div>
               <span className="text-xs font-bold text-brand-600 flex items-center gap-1 opacity-80 hover:opacity-100 transition-opacity">
-                View <ArrowUpRight size={12} />
+                View <ArrowUpRight size={12} className="rtl:-scale-x-100" />
               </span>
             </div>
             <div className="space-y-1">
@@ -165,11 +165,11 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-neutral-900 text-white p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+              <div className="absolute top-0 end-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
                 <Radio size={160} />
               </div>
               <div className="relative z-10 space-y-6">
-                <h3 className="text-xl font-bold text-brand-900 leading-tight">Authorize Global Broadcast</h3>
+                <h3 className="text-xl font-black text-white leading-tight">Authorize Global Broadcast</h3>
                 <p className="text-neutral-400 text-xs leading-relaxed max-w-md font-medium uppercase tracking-wider">
                   Instantly synchronize a trilingual signal across all public headers. Used for high-priority bilateral dispatches.
                 </p>
@@ -243,12 +243,12 @@ export function AdminOverview({ onSelectTab }: { onSelectTab?: (tab: string) => 
           </div>
 
           <div className="bg-brand-800 text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
-            <div className="absolute -right-4 -bottom-4 opacity-10">
+            <div className="absolute -end-4 -bottom-4 opacity-10">
               <Globe size={120} />
             </div>
             <div className="relative z-10 space-y-4">
               <h4 className="text-xs font-black uppercase tracking-widest text-white/80">Sovereign Intel Brief</h4>
-              <p className="text-lg font-bold text-brand-900 leading-tight">
+              <p className="text-lg font-bold text-white leading-tight">
                 "Bilateral trade clearing mechanism finalized for Basra-Beijing energy corridor."
               </p>
               <div className="flex items-center gap-2 pt-2">

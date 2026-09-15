@@ -1,8 +1,7 @@
 
-import { AdminLayout } from '../components/AdminLayout';
 import { useAuthStore } from '../store/useAuthStore';
 import { apiFetch } from '../lib/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { BricsTopic } from '../types';
 import { 
@@ -60,8 +59,7 @@ export function AdminBrics() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-brics-topics'] });
       queryClient.invalidateQueries({ queryKey: ['brics-topics'] });
-      setIsModalOpen(false);
-      resetForm();
+      closeModal();
     }
   });
 
@@ -80,8 +78,7 @@ export function AdminBrics() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-brics-topics'] });
       queryClient.invalidateQueries({ queryKey: ['brics-topics'] });
-      setIsModalOpen(false);
-      resetForm();
+      closeModal();
     }
   });
 
@@ -122,27 +119,57 @@ export function AdminBrics() {
     });
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (editingTopic) {
+      setFormData({
+        slug: editingTopic.slug || '',
+        titleEn: editingTopic.titleEn || '',
+        titleAr: editingTopic.titleAr || '',
+        titleZh: editingTopic.titleZh || '',
+        titleCkb: editingTopic.titleCkb || '',
+        summaryEn: editingTopic.summaryEn || '',
+        summaryAr: editingTopic.summaryAr || '',
+        summaryZh: editingTopic.summaryZh || '',
+        summaryCkb: editingTopic.summaryCkb || '',
+        contentEn: editingTopic.contentEn || '',
+        contentAr: editingTopic.contentAr || '',
+        contentZh: editingTopic.contentZh || '',
+        contentCkb: editingTopic.contentCkb || '',
+        imageUrl: editingTopic.imageUrl || '',
+        category: editingTopic.category || 'GEOPOLITICS',
+        isFeatured: editingTopic.isFeatured ?? true,
+        order: editingTopic.order || 0
+      });
+    } else {
+      setFormData({
+        slug: '',
+        titleEn: '',
+        titleAr: '',
+        titleZh: '',
+        titleCkb: '',
+        summaryEn: '',
+        summaryAr: '',
+        summaryZh: '',
+        summaryCkb: '',
+        contentEn: '',
+        contentAr: '',
+        contentZh: '',
+        contentCkb: '',
+        imageUrl: '',
+        category: 'GEOPOLITICS',
+        isFeatured: true,
+        order: 0
+      });
+    }
+  }, [editingTopic]);
+
   const handleEdit = (topic: BricsTopic) => {
     setEditingTopic(topic);
-    setFormData({
-      slug: topic.slug || '',
-      titleEn: topic.titleEn || '',
-      titleAr: topic.titleAr || '',
-      titleZh: topic.titleZh || '',
-      titleCkb: topic.titleCkb || '',
-      summaryEn: topic.summaryEn || '',
-      summaryAr: topic.summaryAr || '',
-      summaryZh: topic.summaryZh || '',
-      summaryCkb: topic.summaryCkb || '',
-      contentEn: topic.contentEn || '',
-      contentAr: topic.contentAr || '',
-      contentZh: topic.contentZh || '',
-      contentCkb: topic.contentCkb || '',
-      imageUrl: topic.imageUrl || '',
-      category: topic.category || 'GEOPOLITICS',
-      isFeatured: topic.isFeatured ?? true,
-      order: topic.order || 0
-    });
     setIsModalOpen(true);
   };
 
@@ -161,7 +188,7 @@ export function AdminBrics() {
   );
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6 text-start">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
@@ -184,26 +211,26 @@ export function AdminBrics() {
         <div className="bg-white border-2 border-brand-800 rounded-xs shadow-sm overflow-hidden">
           <div className="p-4 border-b border-gray-100 bg-paper-50 flex items-center gap-4">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
                 placeholder="Search topics by title or category..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
+                className="w-full ps-9 pe-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
               />
             </div>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left font-sans text-sm">
+            <table className="w-full text-start font-sans text-sm">
               <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-medium">
                 <tr>
-                  <th className="px-6 py-4 font-bold border-b border-neutral-200">Topic</th>
-                  <th className="px-6 py-4 font-bold border-b border-neutral-200">Category</th>
-                  <th className="px-6 py-4 font-bold border-b border-neutral-200">Status</th>
-                  <th className="px-6 py-4 font-bold border-b border-neutral-200">Order</th>
-                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-right">Actions</th>
+                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Topic</th>
+                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Category</th>
+                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Status</th>
+                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Order</th>
+                  <th className="px-6 py-4 font-bold border-b border-neutral-200 text-end">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -252,7 +279,7 @@ export function AdminBrics() {
                       <td className="px-6 py-4 font-medium text-xs text-gray-500">
                         {topic.order}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-6 py-4 text-end">
                         <div className="flex items-center justify-end gap-2">
                           <button 
                             onClick={() => handleEdit(topic)}
@@ -278,7 +305,7 @@ export function AdminBrics() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/60 backdrop-blur-sm">
+        <div key={editingTopic?.id || 'new'} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink-900/60 backdrop-blur-sm">
           <div className="bg-white border-2 border-brand-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xs shadow-2xl animate-in fade-in zoom-in duration-200 text-start">
             <div className="sticky top-0 bg-paper-50 p-6 border-b border-gray-100 flex justify-between items-center z-10">
               <div>
@@ -288,7 +315,7 @@ export function AdminBrics() {
                 <p className="text-xs text-gray-500 font-medium mt-1 uppercase tracking-widest">Observe. Analyze. Publish.</p>
               </div>
               <button 
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <X size={20} />
@@ -341,8 +368,8 @@ export function AdminBrics() {
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-right w-full block">العنوان بالعربية</label>
+                  <div className="space-y-2" dir="rtl">
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-start w-full block">العنوان بالعربية</label>
                     <input
                       required
                       dir="rtl"
@@ -362,8 +389,8 @@ export function AdminBrics() {
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-sans"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-right w-full block">ناونیشان بە کوردی</label>
+                  <div className="space-y-2" dir="rtl">
+                    <label className="text-xs font-black uppercase tracking-widest text-gray-500 text-start w-full block">ناونیشان بە کوردی</label>
                     <input
                       required
                       dir="rtl"
@@ -423,12 +450,12 @@ export function AdminBrics() {
                   <label className="text-xs font-black uppercase tracking-widest text-gray-500">Cover Image URL</label>
                   <div className="flex gap-2">
                     <div className="flex-1 relative">
-                      <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                      <ImageIcon className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                       <input
                         type="text"
                         value={formData.imageUrl}
                         onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-                        className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium"
+                        className="w-full ps-9 pe-4 py-2.5 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 font-medium"
                       />
                     </div>
                   </div>
@@ -459,7 +486,7 @@ export function AdminBrics() {
               <div className="pt-6 border-t border-gray-100 flex justify-end gap-3">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={closeModal}
                   className="px-6 py-2.5 border border-gray-200 text-gray-500 rounded-sm text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all"
                 >
                   Cancel
@@ -480,6 +507,6 @@ export function AdminBrics() {
           </div>
         </div>
       )}
-    </AdminLayout>
+    </>
   );
 }

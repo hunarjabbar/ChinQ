@@ -101,9 +101,9 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500 text-start">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 text-start">
       <div className="bg-neutral-900 rounded-xl p-8 border border-neutral-800 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-8 opacity-10">
+        <div className="absolute top-0 end-0 p-8 opacity-10">
           <Cpu size={120} className="text-brand-500" />
         </div>
         <div className="relative z-10 max-w-2xl space-y-6">
@@ -120,12 +120,12 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
             <div className="space-y-1.5">
               <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Global Lattice Nodes</label>
               <div className="relative">
-                <Globe className="absolute left-3 top-3 text-neutral-500" size={14} />
+                <Globe className="absolute start-3 top-3 text-neutral-500" size={14} />
                 <input 
                   type="text"
                   value={searchCountry}
                   onChange={e => setSearchCountry(e.target.value)}
-                  className="w-full bg-neutral-800/50 border border-neutral-700 text-white py-2.5 pl-9 pr-4 text-xs font-bold rounded focus:outline-none focus:border-brand-500 transition-all"
+                  className="w-full bg-neutral-800/50 border border-neutral-700 text-white py-2.5 ps-9 pe-4 text-xs font-bold rounded focus:outline-none focus:border-brand-500 transition-all"
                   placeholder="e.g. Iraq-China Corridor"
                 />
               </div>
@@ -133,12 +133,12 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
             <div className="space-y-1.5">
               <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Intel Theme</label>
               <div className="relative">
-                <Search className="absolute left-3 top-3 text-neutral-500" size={14} />
+                <Search className="absolute start-3 top-3 text-neutral-500" size={14} />
                 <input 
                   type="text"
                   value={searchTopic}
                   onChange={e => setSearchTopic(e.target.value)}
-                  className="w-full bg-neutral-800/50 border border-neutral-700 text-white py-2.5 pl-9 pr-4 text-xs font-bold rounded focus:outline-none focus:border-brand-500 transition-all"
+                  className="w-full bg-neutral-800/50 border border-neutral-700 text-white py-2.5 ps-9 pe-4 text-xs font-bold rounded focus:outline-none focus:border-brand-500 transition-all"
                   placeholder="e.g. Belt and Road Initiative"
                 />
               </div>
@@ -232,7 +232,7 @@ export function AdminAIImport({ categories }: { categories: Category[] }) {
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute top-4 left-4 flex gap-2">
+                    <div className="absolute top-4 start-4 flex gap-2">
                       <span className="bg-brand-800 text-white text-xs font-black uppercase tracking-[0.2em] px-3 py-1 rounded shadow-lg">
                         {art.categorySlug}
                       </span>

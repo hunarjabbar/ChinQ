@@ -79,7 +79,7 @@ export default function AdminSourcing() {
   };
 
   return (
-    <div className="p-6 h-full flex flex-col">
+    <div className="p-6 h-full flex flex-col text-start">
       <div className="mb-6">
         <h1 className="text-2xl font-black tracking-tight text-brand-800 uppercase">Sourcing Inquiries</h1>
         <p className="text-gray-500 font-medium text-xs mt-1">Manage global sourcing requests, factory audits, and logistics support tickets.</p>
@@ -87,37 +87,37 @@ export default function AdminSourcing() {
 
       <div className="bg-white border border-gray-200 flex-1 overflow-hidden shadow-sm flex flex-col">
         <div className="overflow-x-auto flex-1">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead className="sticky top-0 bg-gray-50 z-10">
               <tr className="border-b border-gray-200 text-xs uppercase font-black text-gray-500 tracking-wider">
-                <th className="p-4">Ticket ID</th>
-                <th className="p-4">Client</th>
-                <th className="p-4">Company</th>
-                <th className="p-4">Inquiry Type</th>
-                <th className="p-4">Date</th>
-                <th className="p-4">Status</th>
-                <th className="p-4 text-right">Actions</th>
+                <th className="p-4 text-start">Ticket ID</th>
+                <th className="p-4 text-start">Client</th>
+                <th className="p-4 text-start">Company</th>
+                <th className="p-4 text-start">Inquiry Type</th>
+                <th className="p-4 text-start">Date</th>
+                <th className="p-4 text-start">Status</th>
+                <th className="p-4 text-end">Actions</th>
               </tr>
             </thead>
             <tbody className="text-xs font-medium text-gray-700">
               {inquiries.map(inquiry => (
                 <tr key={inquiry.id} className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer" onClick={() => setSelectedInquiry(inquiry)}>
-                  <td className="p-4 font-bold text-brand-800">{inquiry.ticketId}</td>
-                  <td className="p-4">
+                  <td className="p-4 font-bold text-brand-800 text-start">{inquiry.ticketId}</td>
+                  <td className="p-4 text-start">
                     <div className="font-bold text-ink-900">{inquiry.fullName}</div>
                     <div className="text-xs text-gray-500 mt-0.5">{inquiry.email}</div>
                   </td>
-                  <td className="p-4">{inquiry.company}</td>
-                  <td className="p-4">
+                  <td className="p-4 text-start">{inquiry.company}</td>
+                  <td className="p-4 text-start">
                     <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold uppercase tracking-widest">{getTypeLabel(inquiry.inquiryType)}</span>
                   </td>
-                  <td className="p-4 text-gray-500">{new Date(inquiry.createdAt).toLocaleDateString()}</td>
-                  <td className="p-4">
+                  <td className="p-4 text-gray-500 text-start">{new Date(inquiry.createdAt).toLocaleDateString()}</td>
+                  <td className="p-4 text-start">
                     <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase border ${getStatusColor(inquiry.status)}`}>
                       {inquiry.status}
                     </span>
                   </td>
-                  <td className="p-4 text-right">
+                  <td className="p-4 text-end">
                     <button className="text-gray-400 hover:text-brand-800 p-1"><Eye size={16} /></button>
                   </td>
                 </tr>
@@ -137,11 +137,12 @@ export default function AdminSourcing() {
         {selectedInquiry && (
           <div className="fixed inset-0 z-50 flex items-center justify-end bg-black/30 backdrop-blur-sm" onClick={() => setSelectedInquiry(null)}>
             <motion.div 
+              key={selectedInquiry.id}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="bg-white w-full max-w-xl h-full shadow-2xl flex flex-col border-l border-gray-200"
+              className="bg-white w-full max-w-xl h-full shadow-2xl flex flex-col border-s border-gray-200"
               onClick={e => e.stopPropagation()}
             >
               <div className="bg-gray-50 p-6 border-b border-gray-200 flex justify-between items-start">

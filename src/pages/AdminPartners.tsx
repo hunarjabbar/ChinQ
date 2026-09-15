@@ -40,11 +40,28 @@ export default function AdminPartners() {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingId(null);
+    setFormData({
+      name: '',
+      logoUrl: '',
+      websiteUrl: '',
+      descriptionEn: '',
+      descriptionAr: '',
+      descriptionZh: '',
+      descriptionCkb: '',
+      isActive: true,
+      order: 0
+    });
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const url = editingId ? `/api/admin/partners/${editingId}` : '/api/admin/partners';
-      const method = editingId ? 'PUT' : 'POST';
+      const currentId = editingId;
+      const url = currentId ? `/api/admin/partners/${currentId}` : '/api/admin/partners';
+      const method = currentId ? 'PUT' : 'POST';
       
       const res = await apiFetch(url, {
         method,
@@ -55,9 +72,10 @@ export default function AdminPartners() {
       });
 
       if (res.ok) {
-        setIsModalOpen(false);
+        closeModal();
         fetchPartners();
         queryClient.invalidateQueries({ queryKey: ['partners-home'] });
+        queryClient.invalidateQueries({ queryKey: ['partners'] });
       }
     } catch (e) {
       console.error(e);
@@ -73,6 +91,7 @@ export default function AdminPartners() {
       if (res.ok) {
         fetchPartners();
         queryClient.invalidateQueries({ queryKey: ['partners-home'] });
+        queryClient.invalidateQueries({ queryKey: ['partners'] });
       }
     } catch (e) {
       console.error(e);
@@ -111,7 +130,7 @@ export default function AdminPartners() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 text-start">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-brand-800 uppercase">Partners Management</h1>
@@ -126,32 +145,33 @@ export default function AdminPartners() {
       </div>
 
       <div className="bg-white border border-gray-200 overflow-hidden shadow-sm">
-        <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto">
+            <table className="w-full text-start border-collapse">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-200 text-xs uppercase font-black text-gray-500 tracking-wider">
-              <th className="p-4">Logo</th>
-              <th className="p-4">Name</th>
-              <th className="p-4">Website</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Order</th>
-              <th className="p-4 text-right">Actions</th>
+              <th className="p-4 text-start">Logo</th>
+              <th className="p-4 text-start">Name</th>
+              <th className="p-4 text-start">Website</th>
+              <th className="p-4 text-start">Status</th>
+              <th className="p-4 text-start">Order</th>
+              <th className="p-4 text-end">Actions</th>
             </tr>
           </thead>
           <tbody className="text-xs font-medium text-gray-700">
             {partners.map(p => (
               <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50">
-                <td className="p-4">
+                <td className="p-4 text-start">
                   <img src={p.logoUrl} alt={p.name} className="h-10 w-20 object-contain" />
                 </td>
-                <td className="p-4 font-bold">{p.name}</td>
-                <td className="p-4 text-brand-600">{p.websiteUrl}</td>
-                <td className="p-4">
+                <td className="p-4 font-bold text-start">{p.name}</td>
+                <td className="p-4 text-brand-600 text-start">{p.websiteUrl}</td>
+                <td className="p-4 text-start">
                   <span className={`px-2 py-1 text-xs font-black tracking-widest uppercase rounded ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-brand-100 text-brand-800'}`}>
                     {p.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>
-                <td className="p-4">{p.order}</td>
-                <td className="p-4 text-right">
+                <td className="p-4 text-start">{p.order}</td>
+                <td className="p-4 text-end">
                   <button onClick={() => openModal(p)} className="text-brand-800 hover:text-brand-700 mx-2"><Edit2 size={14} /></button>
                   <button onClick={() => handleDelete(p.id)} className="text-brand-600 hover:text-brand-800"><Trash2 size={14} /></button>
                 </td>
@@ -164,11 +184,12 @@ export default function AdminPartners() {
             )}
           </tbody>
         </table>
+          </div>
       </div>
 
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div key={editingId || 'new'} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -177,7 +198,7 @@ export default function AdminPartners() {
             >
               <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
                 <h2 className="text-lg font-black uppercase text-brand-800">{editingId ? 'Edit Partner' : 'Add Partner'}</h2>
-                <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-800"><X size={20} /></button>
+                <button onClick={closeModal} className="text-gray-400 hover:text-gray-800"><X size={20} /></button>
               </div>
 
               <form onSubmit={handleSave} className="space-y-4">
@@ -244,22 +265,25 @@ export default function AdminPartners() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">English</label>
                       <textarea required value={formData.descriptionEn} onChange={e => setFormData({...formData, descriptionEn: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1 text-right">Arabic (عربي)</label>
-                      <textarea value={formData.descriptionAr} onChange={e => setFormData({...formData, descriptionAr: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none text-right" dir="rtl" />
+                    <div dir="rtl">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1 text-start">Arabic (عربي)</label>
+                      <textarea value={formData.descriptionAr} onChange={e => setFormData({...formData, descriptionAr: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none text-start" dir="rtl" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Chinese (中文)</label>
                       <textarea value={formData.descriptionZh} onChange={e => setFormData({...formData, descriptionZh: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1 text-right">Kurdish (کوردی)</label>
-                      <textarea value={formData.descriptionCkb} onChange={e => setFormData({...formData, descriptionCkb: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none text-right" dir="rtl" />
+                    <div dir="rtl">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1 text-start">Kurdish (کوردی)</label>
+                      <textarea value={formData.descriptionCkb} onChange={e => setFormData({...formData, descriptionCkb: e.target.value})} className="w-full text-xs border border-gray-300 p-2 h-20 focus:border-brand-800 focus:outline-none text-start" dir="rtl" />
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-end pt-4 border-t border-gray-100">
+                <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                  <button type="button" onClick={closeModal} className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors">
+                    Cancel
+                  </button>
                   <button type="submit" className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-2 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2">
                     <Save size={14} /> Save Partner
                   </button>

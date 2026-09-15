@@ -15,6 +15,7 @@ import { seedPodcasts } from "./server/podcastSeeder.js";
 import { seedPoliticalNews } from "./server/politicalNewsSeeder.js";
 import { seedPaymentData } from "./server/paymentSeeder.js";
 import { seedBricsTopics } from "./server/bricsSeeder.js";
+import { seedHistoricalFigures } from "./server/historicalFiguresSeeder.js";
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -66,6 +67,7 @@ async function runStartupSeeders() {
     await seedPoliticalNews();
     await seedPaymentData();
     await seedBricsTopics();
+    await seedHistoricalFigures();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
     console.error("⚠️ Error running background seeders:", err);
@@ -75,31 +77,16 @@ async function runStartupSeeders() {
 async function startServer() {
   getJwtSecret(); // Crash early if not set
 
-  try {
-    const { execSync } = await import("child_process");
-    console.log("Ensuring database schema is synchronized...");
-    execSync("npx prisma db push --skip-generate --accept-data-loss", { stdio: "inherit" });
-  } catch (e) {
-    console.error("Warning during startup database sync:", e);
-  }
-
   const app = express();
   app.set("trust proxy", 1);
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
-  // Platform and infrastructure health check route (first priority)
+  // Platform and infrastructure health check route (first priority - instantly ready)
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", uptime: process.uptime(), timestamp: new Date().toISOString() });
   });
 
-  const rawFrameAncestors = process.env.ALLOWED_FRAME_ANCESTORS;
-  const isValidFrameAncestors = rawFrameAncestors && !rawFrameAncestors.includes('@');
-  const allowedFrameAncestors = (
-    isValidFrameAncestors ? rawFrameAncestors : "'self',*,https://ai.studio,https://*.ai.studio,https://aistudio.google.com,https://*.aistudio.google.com,https://*.google.com,https://*.run.app,https://*.googleusercontent.com"
-  )
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const allowedFrameAncestors = ["*", "'self'", "https://ai.studio", "https://*.ai.studio", "https://aistudio.google.com", "https://*.aistudio.google.com", "https://*.google.com", "https://*.run.app", "https://*.googleusercontent.com"];
 
   app.use(
     helmet({
@@ -334,8 +321,8 @@ async function startServer() {
 
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       });
 
@@ -359,7 +346,7 @@ async function startServer() {
 
   
   app.post("/api/auth/logout", (req, res) => {
-    res.clearCookie("token");
+    res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none" });
     res.json({ success: true });
   });
   app.get("/api/auth/me", async (req, res) => {
@@ -698,6 +685,12 @@ async function startServer() {
 
       let events = await prisma.liveEvent.findMany({
         where,
+        include: {
+          updates: {
+            orderBy: { createdAt: "desc" },
+            take: 10
+          }
+        },
         orderBy: { createdAt: "desc" },
       });
 
@@ -714,6 +707,9 @@ async function startServer() {
             videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Placeholder
             region: "BILATERAL",
             category: "BROADCAST",
+          },
+          include: {
+            updates: true,
           },
         });
         events = [defaultEvent];
@@ -821,15 +817,17 @@ async function startServer() {
     }
   });
 
-  app.post("/api/updates", async (req, res) => {
+  const handleLiveUpdate = async (req: express.Request, res: express.Response) => {
     try {
       const data = req.body;
+      const eventId = req.params.eventId || data.eventId;
+      const contentCkb = data.contentCk || data.contentCkb;
       if (
-        !data.eventId ||
+        !eventId ||
         !data.contentEn ||
         !data.contentAr ||
         !data.contentZh ||
-        !data.contentCk
+        !contentCkb
       ) {
         return res
           .status(400)
@@ -841,12 +839,12 @@ async function startServer() {
 
       const newUpdate = await prisma.liveUpdate.create({
         data: {
-          eventId: data.eventId,
+          eventId: eventId,
           contentEn: data.contentEn.trim(),
           contentAr: data.contentAr.trim(),
           contentZh: data.contentZh.trim(),
-          contentCkb: data.contentCk.trim(),
-          isImportant: data.isImportant,
+          contentCkb: contentCkb.trim(),
+          isImportant: Boolean(data.isImportant),
           authorName: data.authorName?.trim() || "Iraq-China Daily Live Desk",
         },
         include: {
@@ -865,7 +863,7 @@ async function startServer() {
 
       // Simulate Next-style revalidateTag() for cache-busting live updates
       console.log(
-        `\n--- [ISR] PURGING CACHE TAG: "live-event-${data.eventId}" ---`,
+        `\n--- [ISR] PURGING CACHE TAG: "live-event-${eventId}" ---`,
       );
       console.log(`[ISR] Purged memory cache matching tag.`);
       console.log(
@@ -880,7 +878,10 @@ async function startServer() {
         .status(500)
         .json({ success: false, error: "Database write operation failed." });
     }
-  });
+  };
+
+  app.post("/api/updates", handleLiveUpdate);
+  app.post("/api/admin/live/:eventId/updates", handleLiveUpdate);
 
   // Purge/Revalidate specific cache tags
   app.post("/api/cache/revalidate", async (req, res) => {
@@ -1170,9 +1171,14 @@ async function startServer() {
 
   app.put("/api/admin/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
       const topic = await prisma.bricsTopic.update({
-        where: { id: req.params.id },
-        data: req.body
+        where: { id },
+        data
       });
       res.json(topic);
     } catch (e: any) {
@@ -2629,9 +2635,14 @@ async function startServer() {
 
   app.put("/api/admin/partners/:id", authMiddleware, async (req, res) => {
     try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
       const partner = await prisma.partner.update({
-        where: { id: req.params.id },
-        data: req.body,
+        where: { id },
+        data,
       });
       res.json(partner);
     } catch (error) {
@@ -3424,12 +3435,15 @@ async function startServer() {
   // --- Vite Middleware & Static Production Serving ---
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, allowedHosts: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    // Serve src/assets/images statically in production to allow database-seeded local image URLs to resolve
+    app.use('/src/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
+    
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
@@ -3441,12 +3455,22 @@ async function startServer() {
     console.log(`Server running on http://0.0.0.0:${PORT}`);
     console.log(`Server is READY and accepting connections.`);
     
-    // Run background seeders only after HTTP server is actively accepting connections
-    // Using a slight delay to ensure the event loop has processed the listening event fully
-    setTimeout(() => {
+    // Run database sync and background seeders asynchronously after HTTP server is actively accepting connections
+    setTimeout(async () => {
+      try {
+        const { exec } = await import("child_process");
+        const util = await import("util");
+        const execPromise = util.promisify(exec);
+        console.log("Ensuring database schema is synchronized in background...");
+        await execPromise("npx prisma db push --skip-generate --accept-data-loss");
+        console.log("Database schema synchronized successfully.");
+      } catch (e) {
+        console.error("Warning during background database sync:", e);
+      }
+
       console.log("Initiating background data seeders...");
       runStartupSeeders().catch((e) => console.error("Startup seeders background error:", e));
-    }, 1000);
+    }, 500);
   });
   
   server.on('error', (err: any) => {

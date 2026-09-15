@@ -44,7 +44,7 @@ export function AdminAuditLogs() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-start">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-brand-50 rounded-lg text-brand-800">
@@ -62,34 +62,34 @@ export function AdminAuditLogs() {
 
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead>
               <tr className="bg-neutral-50 border-b border-gray-200">
-                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500">
+                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500 text-start">
                   <div className="flex items-center gap-2">
                     <Clock size={14} />
                     Timestamp
                   </div>
                 </th>
-                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500">
+                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500 text-start">
                   <div className="flex items-center gap-2">
                     <User size={14} />
                     User
                   </div>
                 </th>
-                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500">
+                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500 text-start">
                   <div className="flex items-center gap-2">
                     <Activity size={14} />
                     Action
                   </div>
                 </th>
-                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500">
+                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500 text-start">
                   <div className="flex items-center gap-2">
                     <Database size={14} />
                     Resource
                   </div>
                 </th>
-                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500">
+                <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gray-500 text-start">
                   <div className="flex items-center gap-2">
                     <Info size={14} />
                     Details

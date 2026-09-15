@@ -7,9 +7,10 @@ import {
   Lock, Unlock, Mail, Check, Copy, Activity, FileCheck, 
   BarChart2, ArrowUpRight, ArrowDownRight, Compass, Building, Calendar,
   Sparkles, Radio, Search, Loader2, AlertCircle, BookOpen,
-  Coins, Scale, Handshake
+  Coins, Scale, Handshake, QrCode, Smartphone
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { AppQrModal } from './AppQrModal';
 
 interface Project {
   id: string;
@@ -406,7 +407,8 @@ Practical Advice:
 
 export function EnterpriseSidebar({ lang }: { lang: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'topics' | 'market' | 'projects' | 'b2b' | 'briefs' | ''>('');
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'agency' | 'topics' | 'market' | 'projects' | 'b2b' | 'briefs' | ''>('');
   
   // Market Ticker Rates State
   const [rates, setRates] = useState({
@@ -545,7 +547,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
         {isOpen ? (
           <X className="w-6 h-6 text-white transition-transform duration-300 group-hover:rotate-90" />
         ) : (
-          <Menu className="w-6 h-6 text-white transition-transform duration-300" />
+          <Menu className="w-6 h-6 text-white transition-transform duration-300 [&>path:nth-child(2)]:-translate-x-[3px] rtl:[&>path:nth-child(2)]:translate-x-[3px] [&>path]:transition-transform" />
         )}
       </motion.div>
 
@@ -585,41 +587,116 @@ ${preset.letterZh(companyName, businessField, representative)}`;
               )}
             >
               {/* Header */}
-              <div className="px-6 py-5 bg-ink-900 dark:bg-neutral-950 border-b border-brand-800 flex items-center justify-between shrink-0 shadow-sm">
-                <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                  <div className="w-8 h-8 rounded-sm bg-brand-800 flex items-center justify-center text-white font-black text-sm shadow-sm">
+              <div className="px-6 py-6 bg-ink-900 dark:bg-neutral-950 border-b border-brand-800 flex items-center justify-between shrink-0 shadow-md relative overflow-hidden">
+                {/* Subtle background glow effect */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-800/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+                <div className="flex items-center space-x-3 rtl:space-x-reverse relative z-10">
+                  <div className="w-9 h-9 rounded-md bg-brand-800 flex items-center justify-center text-white font-black text-base shadow-sm border border-brand-700/50">
                     Q
                   </div>
                   <div>
-                    <h2 className="text-sm font-black uppercase tracking-widest text-white">
+                    <h2 className="text-base sm:text-lg font-black uppercase tracking-widest text-white drop-shadow-sm leading-tight">
                       {lang === 'ar' ? 'بوابة الوكالة للمؤسسات' : lang === 'zh' ? '伊拉克-中国通讯社 企业套件' : lang === 'ckb' ? 'دەروازەی دامەزراوەیی ئاژانس' : 'Iraqi-Chinese Agency Enterprise Suite'}
                     </h2>
-                    <p className="text-xs text-brand-400 font-bold uppercase tracking-widest mt-0.5">
+                    <p className="text-[10px] sm:text-xs text-brand-400 font-bold uppercase tracking-widest mt-1 opacity-90">
                       Bilateral Trade & Information Portal
                     </p>
                   </div>
                 </div>
                 <button 
                   onClick={toggleSidebar}
-                  className="p-1.5 rounded-md border border-neutral-700 bg-neutral-800 hover:bg-brand-800 hover:border-brand-700 hover:text-white text-neutral-400 transition-all cursor-pointer shadow-sm"
+                  className="relative z-10 p-2 rounded-md border border-neutral-700 bg-neutral-800 hover:bg-brand-800 hover:border-brand-700 hover:text-white text-neutral-400 transition-all cursor-pointer shadow-sm"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Dynamic Scrolling Body Content */}
-              <div className="flex-grow overflow-y-auto p-6 space-y-6 text-start bg-neutral-50 dark:bg-neutral-900/50">
+              <div className="flex-grow overflow-y-auto p-6 space-y-6 text-start bg-paper-100 dark:bg-neutral-900 custom-scrollbar">
                 
-                
-                {/* 0. TOPICS (NEW) */}
-                <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                {/* 0. AGENCY INFO (NEW) */}
+                <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
                   <button 
-                    onClick={() => setActiveTab(activeTab === 'topics' ? '' : 'topics')}
-                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                    onClick={() => setActiveTab(activeTab === 'agency' ? '' : 'agency')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
                   >
                     <div className="flex items-center gap-3">
-                      <Menu className="w-4 h-4 text-brand-800" />
-                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900">
+                      <div className="w-6 h-6 rounded bg-brand-50 flex items-center justify-center">
+                        <Menu className="w-3.5 h-3.5 text-brand-800" />
+                      </div>
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900 dark:text-neutral-100">
+                        {lang === 'ar' ? 'معلومات الوكالة' : lang === 'zh' ? '机构信息' : lang === 'ckb' ? 'زانیاری ئاژانس' : 'Agency Information'}
+                      </span>
+                    </div>
+                    <ArrowDownRight className={cn("w-4 h-4 text-gray-400 transition-transform duration-300", activeTab === 'agency' ? "rotate-180" : "rotate-0")} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {activeTab === 'agency' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden bg-white dark:bg-neutral-950"
+                      >
+                        <div className="p-4 space-y-2">
+                          <a href={`/${lang}/about`} className="block p-4 border border-gray-100 dark:border-neutral-800 rounded-lg hover:border-brand-300 hover:bg-brand-50/50 dark:hover:bg-neutral-900 transition-colors group cursor-pointer">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-bold text-sm uppercase tracking-wider text-ink-900 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
+                                {lang === 'ar' ? 'عن الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارەی ئێمە' : 'About Us'}
+                              </span>
+                              <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors" />
+                            </div>
+                            <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                              {lang === 'ar' ? 'رؤيتنا ورسالتنا وفريق العمل' : lang === 'zh' ? '我们的愿景、使命与团队' : lang === 'ckb' ? 'دید، ئامانج و تیمەکەمان' : 'Our vision, mission, and leadership team'}
+                            </p>
+                          </a>
+                          
+                          <a href={`/${lang}/join`} className="block p-4 border border-gray-100 dark:border-neutral-800 rounded-lg hover:border-brand-300 hover:bg-brand-50/50 dark:hover:bg-neutral-900 transition-colors group cursor-pointer">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-bold text-sm uppercase tracking-wider text-ink-900 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
+                                {lang === 'ar' ? 'انضم إلينا' : lang === 'zh' ? '加入我们' : lang === 'ckb' ? 'پەیوەندیمان پێوە بکە' : 'Join Us'}
+                              </span>
+                              <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors" />
+                            </div>
+                            <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                              {lang === 'ar' ? 'الفرص الوظيفية والانضمام لشبكة التحرير' : lang === 'zh' ? '职业机会与编辑网络加入' : lang === 'ckb' ? 'دەرفەتی کارکردن و پەیوەندیکردن بە دەستەی سەرنووسەران' : 'Career opportunities & editorial network applications'}
+                            </p>
+                          </a>
+
+                          {/* ICA App Mobile PWA QR Download */}
+                          <button 
+                            type="button"
+                            onClick={() => setIsQrModalOpen(true)} 
+                            className="w-full text-start block p-4 border border-brand-200 dark:border-brand-900/60 bg-brand-50/60 dark:bg-brand-950/40 rounded-lg hover:border-brand-400 hover:bg-brand-100/70 dark:hover:bg-brand-900/50 transition-all group cursor-pointer"
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-bold text-sm uppercase tracking-wider text-brand-900 dark:text-brand-300 flex items-center gap-1.5">
+                                <QrCode className="w-4 h-4 text-brand-800 dark:text-brand-400" />
+                                {lang === 'ar' ? 'تحميل تطبيق الوكالة (QR)' : lang === 'zh' ? '扫码安装移动应用 (PWA)' : lang === 'ckb' ? 'دابەزاندنی ئەپی مۆبایل (QR)' : 'Download ICA Mobile App (QR)'}
+                              </span>
+                              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-800 text-white">PWA</span>
+                            </div>
+                            <p className="text-xs text-brand-800/80 dark:text-brand-300/80 leading-relaxed">
+                              {lang === 'ar' ? 'امسح رمز الاستجابة السريعة لتثبيت التطبيق مباشرة على هاتفك دون متجر' : lang === 'zh' ? '在手机上扫码即装，免应用商店高速体验' : lang === 'ckb' ? 'سکان بکە بۆ دابەزاندنی ڕاستەوخۆ لەسەر مۆبایلەکەت' : 'Scan QR to install directly on iOS & Android without app store'}
+                            </p>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                
+                {/* 1. TOPICS (NEW) */}
+                <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden shadow-sm">
+                  <button 
+                    onClick={() => setActiveTab(activeTab === 'topics' ? '' : 'topics')}
+                    className="w-full flex items-center justify-between p-4 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors border-b border-gray-100 dark:border-neutral-800"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded bg-brand-50 flex items-center justify-center">
+                        <Menu className="w-3.5 h-3.5 text-brand-800" />
+                      </div>
+                      <span className="font-bold text-xs uppercase tracking-wider text-brand-900 dark:text-neutral-100">
                         {lang === 'ar' ? 'الأقسام' : lang === 'zh' ? '分类' : lang === 'ckb' ? 'بەشەکان' : 'Topics & Sections'}
                       </span>
                     </div>
@@ -1200,6 +1277,12 @@ ${preset.letterZh(companyName, businessField, representative)}`;
           </>
         )}
       </AnimatePresence>
+
+      <AppQrModal 
+        isOpen={isQrModalOpen} 
+        onClose={() => setIsQrModalOpen(false)} 
+        lang={lang} 
+      />
     </>
   );
 }

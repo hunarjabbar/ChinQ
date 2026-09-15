@@ -1,13 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, FileText } from 'lucide-react';
-import { AdminLayout } from '../components/AdminLayout';
 import { TrilingualEditor } from '../components/TrilingualEditor';
 
 export function AdminArticleNew() {
   const { lang } = useParams<{ lang: string }>();
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6 text-start">
         {/* Global Navigation Linkages */}
         <div className="flex items-center gap-2">
@@ -15,7 +14,7 @@ export function AdminArticleNew() {
             to={`/${lang}/admin/articles`} 
             className="text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-brand-800 flex items-center gap-1 transition-colors"
           >
-            <ArrowLeft size={14} /> Back to Article Registry
+            <ArrowLeft size={14} className="rtl:-scale-x-100" /> Back to Article Registry
           </Link>
         </div>
 
@@ -35,6 +34,6 @@ export function AdminArticleNew() {
         {/* Editor component */}
         <TrilingualEditor />
       </div>
-    </AdminLayout>
+    </>
   );
 }

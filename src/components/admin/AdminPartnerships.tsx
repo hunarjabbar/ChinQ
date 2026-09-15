@@ -143,7 +143,7 @@ export function AdminPartnerships() {
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-500 text-start">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 text-start">
       {/* Header Bar */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-200 pb-6">
         <div>
@@ -220,13 +220,13 @@ export function AdminPartnerships() {
 
         {/* Search */}
         <div className="relative w-full md:w-64">
-          <Search size={14} className="absolute left-3 top-2.5 text-neutral-400" />
+          <Search size={14} className="absolute start-3 top-2.5 text-neutral-400" />
           <input
             type="text"
             placeholder="Search candidate or Ref..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs bg-neutral-50 border border-neutral-200 rounded-lg focus:outline-none focus:border-brand-800"
+            className="w-full ps-9 pe-3 py-1.5 text-xs bg-neutral-50 border border-neutral-200 rounded-lg focus:outline-none focus:border-brand-800"
           />
         </div>
       </div>
@@ -250,7 +250,7 @@ export function AdminPartnerships() {
               <div key={app.id} className="group bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all">
                 <div className="flex flex-col lg:flex-row">
                   {/* Left Column: Candidate Overview */}
-                  <div className="lg:w-80 bg-neutral-50 border-r border-neutral-100 p-6 flex flex-col justify-between">
+                  <div className="lg:w-80 bg-neutral-50 border-e border-neutral-100 p-6 flex flex-col justify-between">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className={`w-12 h-12 rounded-xl shadow-sm flex items-center justify-center font-black text-xl border ${

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../lib/api';
-import { AdminLayout } from '../components/AdminLayout';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { useAuthStore } from '../store/useAuthStore';
+import { Locale } from '../types';
+import { useI18n } from '../hooks/useI18n';
 import { 
   Radio, 
   Sparkles, 
@@ -35,9 +36,11 @@ import { Clock } from 'lucide-react';
 type TabType = 'overview' | 'users' | 'article' | 'review' | 'live' | 'search' | 'applications' | 'telexes' | 'studies' | 'subscribers' | 'announcements' | 'audit';
 
 export function AdminDashboard() {
+  const { lang = 'en' } = useParams<{ lang: Locale }>();
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuthStore();
+  const { t } = useI18n(lang as Locale);
   const [activeTab, setActiveTab] = useState<TabType>('overview');
 
   // Synchronize activeTab with URL tab parameters
@@ -113,7 +116,7 @@ export function AdminDashboard() {
 
   if (user && user.role !== 'ADMIN') {
     return (
-      <AdminLayout>
+      <>
         <div className="space-y-6 text-start max-w-5xl mx-auto py-6">
           <div className="bg-amber-50 border border-amber-200 p-6 rounded-xl text-amber-900 text-sm">
             <span className="font-black uppercase tracking-widest block mb-1">Restricted Secretarial Clearance</span>
@@ -121,12 +124,12 @@ export function AdminDashboard() {
           </div>
           <AdminArticleEditor />
         </div>
-      </AdminLayout>
+      </>
     );
   }
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-10 text-start animate-in fade-in duration-700">
         {/* Sovereign Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 border-b-2 border-brand-800 pb-8">
@@ -135,22 +138,22 @@ export function AdminDashboard() {
               <div className="p-2 bg-brand-50 rounded-lg">
                 <LayoutDashboard size={20} />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-800">Governance Platform</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-800">{t('governancePlatform')}</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-brand-800 leading-tight tracking-tight">Enterprise Command</h1>
+            <h1 className="text-3xl sm:text-4xl font-black text-brand-800 leading-tight tracking-tight">{t('enterpriseCommand')}</h1>
             <p className="text-sm sm:text-base text-neutral-500 font-medium max-w-xl">
-              Bilateral trilingual governance dashboard facilitating the Iraq-China information corridor with administrative precision.
+              {t('enterpriseCommandSubtitle')}
             </p>
           </div>
           <div className="flex items-center gap-8 bg-white p-4 rounded-xl border border-neutral-100 shadow-sm">
-            <div className="flex flex-col items-end">
-              <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-1">Lattice Synchronized</span>
+            <div className="flex flex-col items-end rtl:items-start">
+              <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-1">{t('latticeSynchronized')}</span>
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
                   <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping opacity-75"></div>
                 </div>
-                <span className="text-xs font-bold text-ink-900 uppercase tracking-wider">Status: Nominal</span>
+                <span className="text-xs font-bold text-ink-900 uppercase tracking-wider">{t('statusNominal')}</span>
               </div>
             </div>
           </div>
@@ -159,18 +162,18 @@ export function AdminDashboard() {
         {/* Executive Navigation */}
         <div className="flex flex-wrap gap-2.5 p-1.5 bg-neutral-50 rounded-xl border border-neutral-100 shadow-inner">
           {[
-            { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-            { id: 'users', label: 'User Management', icon: Users, badge: adminUsers.length },
-            { id: 'article', label: 'Draft Dispatch', icon: FileText },
-            { id: 'review', label: 'Review Queue', icon: Clock, badge: pendingArticlesCount },
-            { id: 'search', label: 'AI Information', icon: Sparkles },
-            { id: 'live', label: 'Live Signals', icon: Radio },
-            { id: 'announcements', label: 'Global Broadcast', icon: Megaphone },
-            { id: 'applications', label: 'Partnerships', icon: Users, badge: pendingDossiers },
-            { id: 'telexes', label: 'Telex Ledger', icon: Terminal, badge: unreadTelex },
-            { id: 'studies', label: 'Sovereign Studies', icon: BookOpen },
-            { id: 'subscribers', label: 'Subscriber List', icon: Mail },
-            { id: 'audit', label: 'Audit Logs', icon: Terminal },
+            { id: 'overview', label: t('overview'), icon: LayoutDashboard },
+            { id: 'users', label: t('userManagement'), icon: Users, badge: adminUsers.length },
+            { id: 'article', label: t('draftDispatch'), icon: FileText },
+            { id: 'review', label: t('reviewQueue'), icon: Clock, badge: pendingArticlesCount },
+            { id: 'search', label: t('aiInformation'), icon: Sparkles },
+            { id: 'live', label: t('liveSignals'), icon: Radio },
+            { id: 'announcements', label: t('globalBroadcast'), icon: Megaphone },
+            { id: 'applications', label: t('partnerships'), icon: Users, badge: pendingDossiers },
+            { id: 'telexes', label: t('telexLedger'), icon: Terminal, badge: unreadTelex },
+            { id: 'studies', label: t('sovereignStudies'), icon: BookOpen },
+            { id: 'subscribers', label: t('subscriberList'), icon: Mail },
+            { id: 'audit', label: t('auditLogs'), icon: Terminal },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -184,7 +187,7 @@ export function AdminDashboard() {
               <tab.icon size={12} className={activeTab === tab.id ? 'text-brand-500' : ''} />
               {tab.label}
               {tab.badge !== undefined && tab.badge > 0 && (
-                <span className="absolute -top-2 -right-2 bg-brand-700 text-white text-[8px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm font-medium">
+                <span className="absolute -top-2 end-0 bg-brand-700 text-white text-[8px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm font-medium">
                   {tab.badge}
                 </span>
               )}
@@ -226,6 +229,6 @@ export function AdminDashboard() {
           </ErrorBoundary>
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 }

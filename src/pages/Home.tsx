@@ -9,8 +9,9 @@ import { useI18n } from '../hooks/useI18n';
 import { useAuthStore } from '../store/useAuthStore';
 import { BookOpen, Lock, ChevronRight, ChevronLeft, Sparkles, AlertCircle, Activity, Flame, Clock } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import { ar, zhCN, enUS } from 'date-fns/locale';
+import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { cn } from '../lib/utils';
+import { ADDITIONAL_TOPICS } from '../data/topics';
 import { InvestIraq } from '../components/InvestIraq';
 import { ContactUs } from '../components/ContactUs';
 import { MarketIndicesSection } from '../components/MarketIndicesSection';
@@ -46,7 +47,7 @@ export function Home() {
   const { user } = useAuthStore();
   const isSubscribed = user?.subscriptionStatus === 'ACTIVE';
 
-  const { data: articles = [], isLoading } = useQuery<Article[]>({
+  const { data: rawArticles = [], isLoading } = useQuery<Article[]>({
     queryKey: ['articles'],
     queryFn: async () => {
       const res = await fetch('/api/articles');
@@ -54,6 +55,21 @@ export function Home() {
       return res.json();
     }
   });
+
+  const articles = useMemo(() => {
+    const seenIds = new Set<string>();
+    const seenSlugs = new Set<string>();
+    return rawArticles.filter(article => {
+      if (!article?.id || seenIds.has(article.id)) return false;
+      seenIds.add(article.id);
+
+      const normalizedSlug = article.slug ? article.slug.replace(/-(malik-mahmud|duplicate)$/, '') : article.id;
+      if (seenSlugs.has(normalizedSlug)) return false;
+      seenSlugs.add(normalizedSlug);
+
+      return true;
+    });
+  }, [rawArticles]);
 
   const { data: studies = [] } = useQuery<Study[]>({
     queryKey: ['studies'],
@@ -96,6 +112,8 @@ export function Home() {
     if (lang === 'ar') return category.nameAr || category.name;
     if (lang === 'zh') return category.nameZh || category.name;
     if (lang === 'ckb') {
+      const topic = ADDITIONAL_TOPICS.find(t => t.slug === category.slug || t.nameEn === (category.nameEn || category.name) || t.name === category.name);
+      if (topic && topic.nameCkb) return topic.nameCkb;
       const name = category.nameEn || category.name;
       if (name === 'Energy') return 'وزە';
       if (name === 'Economy') return 'ئابووری';
@@ -108,13 +126,38 @@ export function Home() {
       if (name === 'Technology') return 'تەکنەلۆجیا';
       if (name === 'Opinion') return 'ڕاو بۆچوون';
       if (name === 'News') return 'هەواڵ';
-      if (name === 'Belt & Road') return 'ڕێگای ئاوریشم';
+      if (name === 'Belt & Road') return 'پشتوێن و ڕێگا';
+      if (name === 'Historical Figures') return 'کەسایەتییە مێژووییەکان';
       return name;
     }
     return category.nameEn || category.name;
   }, [lang]);
 
-  const dateLocale = useMemo(() => lang === 'ar' || lang === 'ckb' ? ar : lang === 'zh' ? zhCN : enUS, [lang]);
+  const dateLocale = useMemo(() => lang === 'ar' ? ar : lang === 'ckb' ? ckb : lang === 'zh' ? zhCN : enUS, [lang]);
+
+  const formatTimeAgo = useCallback((dateInput: string | Date | number) => {
+    const d = new Date(dateInput);
+    if (lang === 'ckb') {
+      const now = Date.now();
+      const diffMs = Math.max(0, now - d.getTime());
+      const diffSec = Math.floor(diffMs / 1000);
+      const diffMin = Math.floor(diffSec / 60);
+      const diffHr = Math.floor(diffMin / 60);
+      const diffDays = Math.floor(diffHr / 24);
+
+      if (diffMin < 1) return 'ئێستا';
+      if (diffMin === 1) return '١ خولەک پێش ئێستا';
+      if (diffMin < 60) return `${diffMin} خولەک پێش ئێستا`;
+      if (diffHr === 1) return '١ کاتژمێر پێش ئێستا';
+      if (diffHr < 24) return `${diffHr} کاتژمێر پێش ئێستا`;
+      if (diffDays === 1) return 'دوێنێ';
+      if (diffDays < 30) return `${diffDays} ڕۆژ پێش ئێستا`;
+      const diffMonths = Math.floor(diffDays / 30);
+      if (diffMonths < 12) return `${diffMonths} مانگ پێش ئێستا`;
+      return `${Math.floor(diffDays / 365)} ساڵ پێش ئێستا`;
+    }
+    return formatDistanceToNow(d, { addSuffix: true, locale: dateLocale });
+  }, [lang, dateLocale]);
 
   if (isLoading) {
     return (
@@ -208,7 +251,7 @@ export function Home() {
         {/* Scrollable Topic Covers Track */}
         <div 
           ref={trendingScrollRef}
-          className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth py-3 px-1.5 -mx-1.5"
+          className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth py-5 px-3 -mx-3"
         >
           {articles.map((article) => {
             const tr = getTranslation(article);
@@ -216,45 +259,60 @@ export function Home() {
               <div 
                 key={`trending-cover-${article.id}`} 
                 onClick={() => setSelectedArticle(article)}
-                className="group shrink-0 w-[250px] sm:w-[290px] bg-black/25 hover:bg-black/35 backdrop-blur-md border border-white/20 hover:border-white/40 rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.025] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.35)] shadow-[0_8px_24px_rgba(0,0,0,0.25)] cursor-pointer flex flex-col justify-between"
+                className="group shrink-0 w-[250px] sm:w-[290px] relative rounded-2xl p-[1px] transition-all duration-300 hover:scale-[1.04] active:scale-95 cursor-pointer"
               >
-                {/* Topic Cover Image */}
-                <div className="relative w-full h-[155px] sm:h-[165px] bg-black/30 overflow-hidden border-b border-white/15">
-                  {article.imageUrl ? (
-                    <img 
-                      src={article.imageUrl} 
-                      alt={tr?.title || 'Topic Cover'}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-black/30 backdrop-blur-xs text-white font-bold">
-                      <span className="italic text-xs text-white/90">
-                        {lang === 'ar' ? 'موضوع الوكالة' : lang === 'zh' ? '伊拉克-中国通讯社专题' : lang === 'ckb' ? 'بابەتی ئاژانس' : 'Iraqi-Chinese Agency Topic'}
-                      </span>
-                    </div>
-                  )}
-                  {/* Category Badge - Clean Glass Pill */}
-                  <div className="absolute top-2.5 start-2.5 bg-black/50 backdrop-blur-md text-white text-xs font-black uppercase px-2.5 py-1 rounded-sm shadow-xs tracking-wider border border-white/25">
-                    {getCategoryName(article.category)}
-                  </div>
-                </div>
+                {/* Underneath blurry glassy halo glow: refined cherry red & white reflection */}
+                <div 
+                  className="absolute -inset-1 rounded-[22px] bg-gradient-to-b from-white/40 via-[#e60026]/35 to-[#8a0014]/45 blur-md opacity-80 group-hover:opacity-100 group-hover:blur-lg transition-all duration-300 pointer-events-none" 
+                  aria-hidden="true" 
+                />
 
-                {/* Topic Info */}
-                <div className="p-4 flex flex-col justify-between flex-grow space-y-3 bg-white/5 backdrop-blur-xs">
-                  <h4 className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-white/95 transition-colors line-clamp-2 leading-snug antialiased relative z-10">
-                    {tr?.title}
-                  </h4>
-                  <p className="text-xs text-white/85 group-hover:text-white font-normal leading-relaxed line-clamp-2 antialiased tracking-normal relative z-10 transition-colors">
-                    {tr?.excerpt}
-                  </p>
-                  {/* Footer */}
-                  <div className="flex items-center justify-between text-xs font-bold text-white/85 pt-3 border-t border-white/15 relative z-10">
-                    <span className="flex items-center gap-1.5 tracking-wide antialiased text-white/90">
-                      <Clock size={13} className="text-white shrink-0 stroke-[2.5]" />
-                      {formatDistanceToNow(new Date(article.createdAt), { addSuffix: true, locale: dateLocale })}
-                    </span>
-                    <span className="text-white font-black group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
+                {/* Smooth blurry glassy sub-layer under the border */}
+                <div 
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/30 via-red-100/15 to-[#6b000f]/50 backdrop-blur-2xl shadow-[0_14px_36px_rgba(0,0,0,0.24),0_2px_12px_rgba(255,255,255,0.22)] transition-all duration-300" 
+                  aria-hidden="true" 
+                />
+
+                {/* Main Card Body */}
+                <div className="relative z-10 w-full h-full bg-[#b3001e]/92 dark:bg-[#990018]/95 backdrop-blur-xl border border-white/40 group-hover:border-white/70 rounded-2xl overflow-hidden flex flex-col justify-between text-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.45)]">
+                  {/* Topic Cover Image */}
+                  <div className="relative w-full h-[155px] sm:h-[165px] bg-[#7d0013] overflow-hidden border-b border-red-300/40">
+                    {article.imageUrl ? (
+                      <img 
+                        src={article.imageUrl} 
+                        alt={tr?.title || 'Topic Cover'}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-95 group-hover:opacity-100 brightness-[1.03] contrast-[1.04]"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#7d0013] text-red-100 font-bold">
+                        <span className="italic text-xs">
+                          {lang === 'ar' ? 'موضوع الوكالة' : lang === 'zh' ? '伊拉克-中国通讯社专题' : lang === 'ckb' ? 'بابەتی ئاژانس' : 'Iraqi-Chinese Agency Topic'}
+                        </span>
+                      </div>
+                    )}
+                    {/* Category Badge - Clean Pill */}
+                    <div className="absolute top-2.5 start-2.5 bg-black/60 backdrop-blur-md text-white border border-white/30 text-xs font-black uppercase px-2.5 py-1 rounded-sm shadow-xs tracking-wider">
+                      {getCategoryName(article.category)}
+                    </div>
+                  </div>
+
+                  {/* Topic Info */}
+                  <div className="p-4 flex flex-col justify-between flex-grow space-y-3 bg-gradient-to-b from-[#a30018]/90 via-[#8a0014]/92 to-[#6e0010]/98 backdrop-blur-md">
+                    <h4 className="text-sm sm:text-base font-black uppercase tracking-widest text-white transition-colors line-clamp-2 leading-snug relative z-10">
+                      {tr?.title}
+                    </h4>
+                    <p className="text-xs font-bold uppercase tracking-widest text-white/95 leading-relaxed line-clamp-2 relative z-10 transition-colors">
+                      {tr?.excerpt}
+                    </p>
+                    {/* Footer */}
+                    <div className="flex items-center justify-between text-xs font-bold text-white pt-3 border-t border-red-300/35 relative z-10">
+                      <span className="flex items-center gap-1.5 font-bold uppercase tracking-widest text-white/95">
+                        <Clock size={13} className="text-white shrink-0 stroke-[2.5]" />
+                        {formatTimeAgo(article.createdAt)}
+                      </span>
+                      <span className="text-white font-black group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -304,7 +362,7 @@ export function Home() {
               <span>By {(leadStory as any).author?.name || 'Staff Reporter'}</span>
               <span>•</span>
               <span className="text-brand-800 dark:text-brand-400">
-                {formatDistanceToNow(new Date(leadStory.createdAt), { addSuffix: true, locale: dateLocale })}
+                {formatTimeAgo(leadStory.createdAt)}
               </span>
             </div>
 
@@ -327,7 +385,7 @@ export function Home() {
       </section>
 
       {/* Column 3: Most Popular & Widget */}
-      <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-neutral-50 dark:bg-neutral-900/50">
+      <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-white dark:bg-neutral-900">
         <BricsSection lang={lang as Locale} />
         <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-sm p-6 flex-grow">
           <h3 className="text-base sm:text-lg uppercase font-black tracking-widest mb-6 flex items-center text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-3">
@@ -335,7 +393,7 @@ export function Home() {
             {t('beltRoad')}
           </h3>
           <div className="space-y-5">
-            <div className="border-s-4 border-brand-800 ps-4 bg-gray-50 dark:bg-neutral-800/80 p-3.5 rounded-e-md shadow-xs">
+            <div className="border-s-4 border-brand-800 ps-4 bg-white dark:bg-neutral-800/80 p-3.5 rounded-e-md shadow-xs">
               <div className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest mb-1">Maysan Province</div>
               <div className="text-sm font-bold text-ink-900 dark:text-neutral-100">Solar Farm Stage 2</div>
               <div className="w-full bg-gray-200 dark:bg-neutral-700 h-2 mt-3 rounded-full overflow-hidden">
@@ -514,7 +572,7 @@ export function Home() {
                 <div 
                   key={study.id}
                   onClick={() => setSelectedStudy(study)}
-                  className="group cursor-pointer flex flex-col justify-between bg-neutral-50/50 dark:bg-neutral-800/50 hover:bg-white dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800/60 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 rounded-xl overflow-hidden shadow-sm hover:shadow-lg"
+                  className="group cursor-pointer flex flex-col justify-between bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800/60 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 rounded-xl overflow-hidden shadow-sm hover:shadow-lg"
                 >
                   <div className="space-y-4">
                     {study.imageUrl && (
@@ -696,7 +754,7 @@ export function Home() {
                       <h4 className="text-xs uppercase font-black text-brand-800 tracking-wider">
                         {lang === 'ar' ? 'الملخص التنفيذي المتاح' : lang === 'ckb' ? 'کورتەی سەرەکی بەردەست' : lang === 'zh' ? '公开摘要' : 'Abstract Overview'}
                       </h4>
-                      <p className="text-sm text-gray-700 italic bg-neutral-50 p-4 border-l-4 border-amber-500 leading-relaxed ">
+                      <p className="text-sm text-gray-700 dark:text-neutral-300 italic bg-white dark:bg-neutral-800 p-4 border-l-4 border-amber-500 leading-relaxed ">
                         {getStudyExcerpt(selectedStudy)}
                       </p>
                     </div>
@@ -800,7 +858,7 @@ export function Home() {
                 <div 
                   key={article.id}
                   onClick={() => setSelectedArticle(article)}
-                  className="cursor-pointer group flex flex-col h-full bg-neutral-50/50 dark:bg-neutral-800/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
+                  className="cursor-pointer group flex flex-col h-full bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
                 >
                   {article.imageUrl ? (
                     <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-neutral-200 dark:border-neutral-700 shrink-0">
@@ -894,3 +952,5 @@ export function Home() {
     </div>
   );
 }
+
+export default Home;

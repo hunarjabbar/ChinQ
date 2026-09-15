@@ -1,5 +1,5 @@
 import { apiFetch } from "../lib/api";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { WomenProfile } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
@@ -58,11 +58,75 @@ export function AdminWomen() {
     }
   });
 
+  const resetForm = () => {
+    setEditingProfile(null);
+    setFormData({
+      nameEn: '',
+      nameAr: '',
+      nameZh: '',
+      nameCkb: '',
+      titleEn: '',
+      titleAr: '',
+      titleZh: '',
+      titleCkb: '',
+      region: 'CHINA',
+      category: 'PROMINENT_FIGURE',
+      summaryEn: '',
+      summaryAr: '',
+      summaryZh: '',
+      summaryCkb: '',
+      bioEn: '',
+      bioAr: '',
+      bioZh: '',
+      bioCkb: '',
+      imageUrl: '',
+      organization: 'Sino-Iraqi Women Empowerment Initiative',
+      publicationUrl: '',
+      isFeatured: true,
+      isTrending: true
+    });
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (editingProfile) {
+      setFormData({
+        nameEn: editingProfile.nameEn || '',
+        nameAr: editingProfile.nameAr || '',
+        nameZh: editingProfile.nameZh || '',
+        nameCkb: editingProfile.nameCkb || '',
+        titleEn: editingProfile.titleEn || '',
+        titleAr: editingProfile.titleAr || '',
+        titleZh: editingProfile.titleZh || '',
+        titleCkb: editingProfile.titleCkb || '',
+        region: editingProfile.region || 'CHINA',
+        category: editingProfile.category || 'PROMINENT_FIGURE',
+        summaryEn: editingProfile.summaryEn || '',
+        summaryAr: editingProfile.summaryAr || '',
+        summaryZh: editingProfile.summaryZh || '',
+        summaryCkb: editingProfile.summaryCkb || '',
+        bioEn: editingProfile.bioEn || '',
+        bioAr: editingProfile.bioAr || '',
+        bioZh: editingProfile.bioZh || '',
+        bioCkb: editingProfile.bioCkb || '',
+        imageUrl: editingProfile.imageUrl || '',
+        organization: editingProfile.organization || 'Sino-Iraqi Women Empowerment Initiative',
+        publicationUrl: editingProfile.publicationUrl || '',
+        isFeatured: editingProfile.isFeatured ?? true,
+        isTrending: editingProfile.isTrending ?? true
+      });
+    }
+  }, [editingProfile]);
+
   // Save (Create/Update) Mutation
   const saveMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const url = editingProfile ? `/api/women/${editingProfile.id}` : '/api/women';
-      const method = editingProfile ? 'PUT' : 'POST';
+    mutationFn: async ({ id, data }: { id?: string | null; data: typeof formData }) => {
+      const url = id ? `/api/women/${id}` : '/api/women';
+      const method = id ? 'PUT' : 'POST';
 
       const res = await apiFetch(url, {
         method,
@@ -78,13 +142,12 @@ export function AdminWomen() {
       }
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['admin-women-profiles'] });
       queryClient.invalidateQueries({ queryKey: ['women-profiles-home'] });
       queryClient.invalidateQueries({ queryKey: ['women-profiles-page'] });
-      setIsModalOpen(false);
-      resetForm();
-      setStatusMessage({ type: 'success', text: editingProfile ? 'Women record updated successfully!' : 'New women record created!' });
+      closeModal();
+      setStatusMessage({ type: 'success', text: variables.id ? 'Women record updated successfully!' : 'New women record created!' });
       setTimeout(() => setStatusMessage(null), 3500);
     },
     onError: (err: any) => {
@@ -146,62 +209,8 @@ export function AdminWomen() {
     }
   };
 
-  const resetForm = () => {
-    setEditingProfile(null);
-    setFormData({
-      nameEn: '',
-      nameAr: '',
-      nameZh: '',
-      nameCkb: '',
-      titleEn: '',
-      titleAr: '',
-      titleZh: '',
-      titleCkb: '',
-      region: 'CHINA',
-      category: 'PROMINENT_FIGURE',
-      summaryEn: '',
-      summaryAr: '',
-      summaryZh: '',
-      summaryCkb: '',
-      bioEn: '',
-      bioAr: '',
-      bioZh: '',
-      bioCkb: '',
-      imageUrl: '',
-      organization: 'Sino-Iraqi Women Empowerment Initiative',
-      publicationUrl: '',
-      isFeatured: true,
-      isTrending: true
-    });
-  };
-
   const handleEdit = (profile: WomenProfile) => {
     setEditingProfile(profile);
-    setFormData({
-      nameEn: profile.nameEn || '',
-      nameAr: profile.nameAr || '',
-      nameZh: profile.nameZh || '',
-      nameCkb: profile.nameCkb || '',
-      titleEn: profile.titleEn || '',
-      titleAr: profile.titleAr || '',
-      titleZh: profile.titleZh || '',
-      titleCkb: profile.titleCkb || '',
-      region: profile.region || 'CHINA',
-      category: profile.category || 'PROMINENT_FIGURE',
-      summaryEn: profile.summaryEn || '',
-      summaryAr: profile.summaryAr || '',
-      summaryZh: profile.summaryZh || '',
-      summaryCkb: profile.summaryCkb || '',
-      bioEn: profile.bioEn || '',
-      bioAr: profile.bioAr || '',
-      bioZh: profile.bioZh || '',
-      bioCkb: profile.bioCkb || '',
-      imageUrl: profile.imageUrl || '',
-      organization: profile.organization || 'Sino-Iraqi Women Empowerment Initiative',
-      publicationUrl: profile.publicationUrl || '',
-      isFeatured: profile.isFeatured,
-      isTrending: profile.isTrending
-    });
     setIsModalOpen(true);
   };
 
@@ -214,7 +223,7 @@ export function AdminWomen() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-start">
       {/* Top Banner */}
       <div className="bg-white border-2 border-brand-800 p-6 rounded-xs shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
@@ -267,13 +276,13 @@ export function AdminWomen() {
       <div className="bg-white border-2 border-brand-800 p-4 rounded-xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3 justify-between items-stretch md:items-center">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search className="w-4 h-4 absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Search by name, title, or organization..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-medium text-ink-900 focus:outline-none focus:border-brand-800"
+              className="w-full ps-9 pe-4 py-2 bg-[#F4F4F0] border border-gray-300 text-xs font-medium text-ink-900 focus:outline-none focus:border-brand-800"
             />
           </div>
 
@@ -284,7 +293,7 @@ export function AdminWomen() {
 
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-200">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-medium font-bold text-gray-500 mr-1">Region:</span>
+            <span className="text-[11px] font-medium font-bold text-gray-500 me-1">Region:</span>
             {['ALL', 'CHINA', 'IRAQ', 'KURDISTAN', 'BILATERAL'].map(r => (
               <button
                 key={r}
@@ -299,7 +308,7 @@ export function AdminWomen() {
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-medium font-bold text-gray-500 mr-1">Category:</span>
+            <span className="text-[11px] font-medium font-bold text-gray-500 me-1">Category:</span>
             {['ALL', 'PROMINENT_FIGURE', 'POLICY_RIGHTS', 'ACHIEVEMENTS', 'PUBLICATIONS'].map(c => (
               <button
                 key={c}
@@ -317,15 +326,15 @@ export function AdminWomen() {
 
       {/* Data Table */}
       <div className="bg-white border-2 border-brand-800 rounded-xs overflow-x-auto">
-        <table className="w-full text-left text-xs font-medium">
+        <table className="w-full text-start text-xs font-medium">
           <thead className="bg-brand-800 text-white uppercase text-xs tracking-wider border-b border-brand-800">
             <tr>
-              <th className="p-3">Record / Name</th>
-              <th className="p-3">Region</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Organization</th>
+              <th className="p-3 text-start">Record / Name</th>
+              <th className="p-3 text-start">Region</th>
+              <th className="p-3 text-start">Category</th>
+              <th className="p-3 text-start">Organization</th>
               <th className="p-3 text-center">Toggles</th>
-              <th className="p-3 text-right">Actions</th>
+              <th className="p-3 text-end">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -366,7 +375,7 @@ export function AdminWomen() {
                   <td className="p-3 text-gray-600 truncate max-w-xs">
                     {p.organization}
                   </td>
-                  <td className="p-3 text-center space-x-2">
+                  <td className="p-3 text-center space-x-2 rtl:space-x-reverse">
                     <button
                       onClick={() => toggleStatus(p, 'isFeatured')}
                       title="Toggle Featured"
@@ -382,7 +391,7 @@ export function AdminWomen() {
                       <TrendingUp className="w-3.5 h-3.5" />
                     </button>
                   </td>
-                  <td className="p-3 text-right space-x-1">
+                  <td className="p-3 text-end space-x-1 rtl:space-x-reverse">
                     <button
                       onClick={() => handleEdit(p)}
                       className="p-1.5 bg-gray-100 hover:bg-brand-800 hover:text-white transition-colors border border-gray-300"
@@ -412,7 +421,7 @@ export function AdminWomen() {
       {/* Modal Form for Create / Edit */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs">
+          <div key={editingProfile?.id || 'new'} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -420,8 +429,8 @@ export function AdminWomen() {
               className="bg-white border-2 border-brand-800 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-5 rounded-xs shadow-2xl relative"
             >
               <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 bg-gray-100 hover:bg-brand-800 hover:text-white p-1.5 transition-colors"
+                onClick={closeModal}
+                className="absolute top-4 end-4 bg-gray-100 hover:bg-brand-800 hover:text-white p-1.5 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -438,7 +447,7 @@ export function AdminWomen() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  saveMutation.mutate(formData);
+                  saveMutation.mutate({ id: editingProfile?.id, data: formData });
                 }}
                 className="space-y-4"
               >
@@ -487,10 +496,11 @@ export function AdminWomen() {
                     />
                     <input
                       type="text"
+                      dir="rtl"
                       placeholder="الاسم (العربية)"
                       value={formData.nameAr}
                       onChange={e => setFormData({ ...formData, nameAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-start"
                     />
                     <input
                       type="text"
@@ -501,10 +511,11 @@ export function AdminWomen() {
                     />
                     <input
                       type="text"
+                      dir="rtl"
                       placeholder="ناو (کوردی سۆرانی)"
                       value={formData.nameCkb}
                       onChange={e => setFormData({ ...formData, nameCkb: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-start"
                     />
                   </div>
                 </div>
@@ -523,10 +534,11 @@ export function AdminWomen() {
                     />
                     <input
                       type="text"
+                      dir="rtl"
                       placeholder="اللقب / المنصب (العربية)"
                       value={formData.titleAr}
                       onChange={e => setFormData({ ...formData, titleAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-start"
                     />
                     <input
                       type="text"
@@ -537,10 +549,11 @@ export function AdminWomen() {
                     />
                     <input
                       type="text"
+                      dir="rtl"
                       placeholder="ناونیشان / پلە (کوردی)"
                       value={formData.titleCkb}
                       onChange={e => setFormData({ ...formData, titleCkb: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-start"
                     />
                   </div>
                 </div>
@@ -559,10 +572,11 @@ export function AdminWomen() {
                     />
                     <textarea
                       rows={2}
+                      dir="rtl"
                       placeholder="ملخص قصير (العربية)"
                       value={formData.summaryAr}
                       onChange={e => setFormData({ ...formData, summaryAr: e.target.value })}
-                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-right"
+                      className="bg-[#F4F4F0] border border-gray-300 p-2 text-xs font-medium text-start"
                     />
                   </div>
                 </div>
@@ -643,7 +657,7 @@ export function AdminWomen() {
                 <div className="pt-3 border-t border-gray-200 flex items-center justify-end gap-3">
                   <button
                     type="button"
-                    onClick={() => setIsModalOpen(false)}
+                    onClick={closeModal}
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs font-bold uppercase"
                   >
                     Cancel

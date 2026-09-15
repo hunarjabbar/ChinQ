@@ -175,7 +175,7 @@ export async function seedTourism() {
         descriptionAr: "تقع قلعة العمادية بمهابة على هضبة جبلية مسطحة تعلو 1400 متر عن سطح البحر، وتعود للحضارة الآشورية. وتوفر مدينة السليمانية المجاورة المهرجانات الأدبية والفنية.",
         descriptionZh: "高耸于海拔1400米山顶平原之上的阿马迪亚古城，可追溯至古亚述时期。邻近的“文化之都”苏莱曼尼亚则汇聚了联合国教科文组织创意文学节与现代艺术展。",
         descriptionCkb: "قەڵای ئامێدی لەسەر ڕووبەرێکی تەختی چیایی ١٤٠٠ مەتر بەرز لە ئاستی دەریاوە وەستاوە کە مێژووەکەی دەگەڕێتەوە بۆ سەردەمی ئاشووری. سلێمانیش پایتەختی ڕۆشنبیری و ئەدەبە.",
-        imageUrl: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=1200",
+        imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200",
         bestTimeToVisit: "April - October",
         visaPolicy: "Kurdistan Entry Permit / E-Visa System",
         flightInfo: "Sulaymaniyah International Airport (ISU) with daily flights to Erbil & Baghdad",

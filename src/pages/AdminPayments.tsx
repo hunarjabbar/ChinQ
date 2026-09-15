@@ -358,9 +358,9 @@ export function AdminPayments() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search reference, company, or payer..."
-                  className="w-full text-xs font-medium p-2.5 pl-8 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:border-brand-800 focus:outline-none"
+                  className="w-full text-xs font-medium p-2.5 ps-8 pe-3 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:border-brand-800 focus:outline-none"
                 />
-                <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400" />
+                <Search size={14} className="absolute start-2.5 top-1/2 -translate-y-1/2 text-neutral-400" />
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto">
@@ -395,10 +395,10 @@ export function AdminPayments() {
                 <table className="w-full text-xs text-start">
                   <thead className="bg-neutral-50 dark:bg-neutral-800/60 border-b border-neutral-200 dark:border-neutral-700 font-medium text-xs uppercase text-neutral-500">
                     <tr>
-                      <th className="p-3.5">Reference</th>
-                      <th className="p-3.5">Type & Channel</th>
-                      <th className="p-3.5">Payer / Remitter</th>
-                      <th className="p-3.5">Beneficiary (China/IQ)</th>
+                      <th className="p-3.5 text-start">Reference</th>
+                      <th className="p-3.5 text-start">Type & Channel</th>
+                      <th className="p-3.5 text-start">Payer / Remitter</th>
+                      <th className="p-3.5 text-start">Beneficiary (China/IQ)</th>
                       <th className="p-3.5 text-end">Sent</th>
                       <th className="p-3.5 text-end">Rate</th>
                       <th className="p-3.5 text-end">Net Credited</th>

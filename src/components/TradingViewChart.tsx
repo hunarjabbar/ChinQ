@@ -118,7 +118,7 @@ export const TradingViewChart: React.FC<TradingViewChartProps> = React.memo(func
           locale,
           timezone,
           style: '1', // Candle style
-          toolbar_bg: theme === 'dark' ? '#0f0f10' : '#f8f8f8',
+          toolbar_bg: theme === 'dark' ? '#0f172a' : '#f8f8f8',
           hide_side_toolbar: false,
           allow_symbol_change: false, // Curated list only
           save_image: false,
@@ -129,19 +129,19 @@ export const TradingViewChart: React.FC<TradingViewChartProps> = React.memo(func
           container_id: containerId,
           enable_publishing: false,
           overrides: {
-            'paneProperties.background': theme === 'dark' ? '#0a0a0c' : '#ffffff',
-            'paneProperties.vertGridProperties.color': theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-            'paneProperties.horzGridProperties.color': theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-            'scalesProperties.textColor': theme === 'dark' ? '#a3a3a3' : '#525252',
-            'mainSeriesProperties.candleStyle.upColor': '#cc0000',
-            'mainSeriesProperties.candleStyle.downColor': '#10b981',
+            'paneProperties.background': theme === 'dark' ? '#0f172a' : '#ffffff',
+            'paneProperties.vertGridProperties.color': theme === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)',
+            'paneProperties.horzGridProperties.color': theme === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)',
+            'scalesProperties.textColor': theme === 'dark' ? '#9ca3af' : '#525252',
+            'mainSeriesProperties.candleStyle.upColor': '#10b981',
+            'mainSeriesProperties.candleStyle.downColor': '#cc0000',
             'mainSeriesProperties.candleStyle.drawWick': true,
             'mainSeriesProperties.candleStyle.drawBorder': true,
             'mainSeriesProperties.candleStyle.borderColor': '#cc0000',
-            'mainSeriesProperties.candleStyle.borderUpColor': '#cc0000',
-            'mainSeriesProperties.candleStyle.borderDownColor': '#10b981',
-            'mainSeriesProperties.candleStyle.wickUpColor': '#cc0000',
-            'mainSeriesProperties.candleStyle.wickDownColor': '#10b981',
+            'mainSeriesProperties.candleStyle.borderUpColor': '#10b981',
+            'mainSeriesProperties.candleStyle.borderDownColor': '#cc0000',
+            'mainSeriesProperties.candleStyle.wickUpColor': '#10b981',
+            'mainSeriesProperties.candleStyle.wickDownColor': '#cc0000',
           },
           onChartReady: () => {
             if (!isCancelled) {

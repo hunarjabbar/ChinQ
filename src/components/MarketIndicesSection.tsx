@@ -555,6 +555,7 @@ export function MarketIndicesSection({ data, lang, onClose, isModal = false }: M
                             formatter={(value: any) => [`${value} ${activeStock.currency}`, 'Price']}
                           />
                           <Area 
+                            isAnimationActive={false}
                             type="monotone" 
                             dataKey="price" 
                             stroke={isUp ? "#ffffff" : "var(--color-brand-500)"} 

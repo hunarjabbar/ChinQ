@@ -8,7 +8,7 @@ import { SocialFooterShowcase, FloatingSocialDock } from './SocialLinks';
 import { NewsletterSignup } from './NewsletterSignup';
 import { useI18n } from '../hooks/useI18n';
 import { useSiteStore } from '../store/useSiteStore';
-import { AlertTriangle, HeartHandshake, GraduationCap } from 'lucide-react';
+import { AlertTriangle, HeartHandshake, GraduationCap, Briefcase } from 'lucide-react';
 import { SystemAnnouncementBanner } from './SystemAnnouncementBanner';
 import { IcaLogo } from './IcaLogo';
 import { LegalModal } from './LegalModal';
@@ -67,7 +67,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-neutral-100 dark:border-neutral-800">
 
             {/* Bilateral Talent & Fellowship Gateway: Two Pulsing Component Red Buttons */}
-            <div className="col-span-1 md:col-span-12 bg-neutral-50 dark:bg-neutral-800/80 rounded-2xl p-6 sm:p-8 border border-neutral-200 dark:border-neutral-700 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-xs">
+            <div className="col-span-1 md:col-span-12 bg-white dark:bg-neutral-800/80 rounded-2xl p-6 sm:p-8 border border-neutral-200 dark:border-neutral-700 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-xs">
               <div className="space-y-1.5 max-w-2xl text-left rtl:text-right">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2.5 w-2.5">
@@ -94,6 +94,29 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto">
+                {/* Pulsing Red Button 0: Career Announcement / Talent Acquisition */}
+                <button
+                  id="btn-career-announcement"
+                  type="button"
+                  onClick={() => openTalentModal('career')}
+                  className="relative group flex items-center justify-center gap-3 px-6 py-3.5 bg-brand-800 hover:bg-brand-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-brand-800/25 active:scale-98 cursor-pointer border border-brand-700 overflow-hidden shrink-0"
+                >
+                  {/* Outer Pulsing Glow */}
+                  <span className="absolute -inset-0.5 rounded-xl bg-brand-800 opacity-40 group-hover:opacity-75 blur-sm animate-pulse transition duration-1000"></span>
+                  
+                  {/* Ping Indicator */}
+                  <span className="relative flex h-2.5 w-2.5 z-10">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-200 opacity-90"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                  </span>
+
+                  <Briefcase className="w-4 h-4 text-white relative z-10 group-hover:scale-110 transition-transform shrink-0" />
+                  
+                  <span className="relative z-10 whitespace-nowrap">
+                    {lang === 'ar' ? 'إعلانات الوظائف والتوظيف' : lang === 'zh' ? '职业公告与招贤纳士' : lang === 'ckb' ? 'ئاگاداری کار و دامەزراندن' : 'Career Announcement & Talent'}
+                  </span>
+                </button>
+
                 {/* Pulsing Red Button 1: Become A Volunteer */}
                 <button
                   id="btn-volunteer-register"

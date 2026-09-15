@@ -50,27 +50,27 @@ export function AdminAuditLogs() {
       <div className="bg-white border-2 border-brand-800 rounded-xs shadow-sm overflow-hidden">
         <div className="p-4 border-b border-gray-100 bg-paper-50 flex items-center gap-4">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
               type="text"
               placeholder="Search logs by user, resource, or ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
+              className="w-full ps-9 pe-4 py-2 border border-gray-200 rounded-xs text-sm focus:outline-none focus:border-brand-800 focus:ring-1 focus:ring-brand-800 font-medium"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left font-sans text-sm">
+          <table className="w-full text-start font-sans text-sm">
             <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 font-medium">
               <tr>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">Timestamp</th>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">User</th>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">Action</th>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">Resource</th>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">Item ID</th>
-                <th className="px-6 py-4 font-bold border-b border-neutral-200">Details</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Timestamp</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">User</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Action</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Resource</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Item ID</th>
+                <th className="px-6 py-4 font-bold border-b border-neutral-200 text-start">Details</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

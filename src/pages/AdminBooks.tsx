@@ -1,7 +1,6 @@
 import { apiFetch } from "../lib/api";
-import { AdminLayout } from '../components/AdminLayout';
 import { useAuthStore } from '../store/useAuthStore';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Book } from '../types';
 import { 
@@ -72,8 +71,7 @@ export function AdminBooks() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-books'] });
       queryClient.invalidateQueries({ queryKey: ['books'] });
-      setIsModalOpen(false);
-      resetForm();
+      closeModal();
     }
   });
 
@@ -95,8 +93,7 @@ export function AdminBooks() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-books'] });
       queryClient.invalidateQueries({ queryKey: ['books'] });
-      setIsModalOpen(false);
-      resetForm();
+      closeModal();
     }
   });
 
@@ -161,33 +158,69 @@ export function AdminBooks() {
     });
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    resetForm();
+  };
+
+  useEffect(() => {
+    if (editingBook) {
+      setFormData({
+        titleEn: editingBook.titleEn || '',
+        titleAr: editingBook.titleAr || '',
+        titleZh: editingBook.titleZh || '',
+        titleCkb: editingBook.titleCkb || '',
+        authorEn: editingBook.authorEn || '',
+        authorAr: editingBook.authorAr || '',
+        authorZh: editingBook.authorZh || '',
+        authorCkb: editingBook.authorCkb || '',
+        descriptionEn: editingBook.descriptionEn || '',
+        descriptionAr: editingBook.descriptionAr || '',
+        descriptionZh: editingBook.descriptionZh || '',
+        descriptionCkb: editingBook.descriptionCkb || '',
+        coverUrl: editingBook.coverUrl || '',
+        category: editingBook.category || 'GEOPOLITICS',
+        region: editingBook.region || 'CHINA',
+        rating: editingBook.rating || 4.8,
+        pages: editingBook.pages || 320,
+        year: editingBook.year || 2024,
+        publisher: editingBook.publisher || 'Iraqi-Chinese Agency Academic Press',
+        isbn: editingBook.isbn || '',
+        purchaseUrl: editingBook.purchaseUrl || '',
+        isTrending: editingBook.isTrending ?? true,
+        isFeatured: editingBook.isFeatured ?? false
+      });
+    } else {
+      setFormData({
+        titleEn: '',
+        titleAr: '',
+        titleZh: '',
+        titleCkb: '',
+        authorEn: '',
+        authorAr: '',
+        authorZh: '',
+        authorCkb: '',
+        descriptionEn: '',
+        descriptionAr: '',
+        descriptionZh: '',
+        descriptionCkb: '',
+        coverUrl: '',
+        category: 'GEOPOLITICS',
+        region: 'CHINA',
+        rating: 4.8,
+        pages: 320,
+        year: 2024,
+        publisher: 'Iraqi-Chinese Agency Academic Press',
+        isbn: '',
+        purchaseUrl: '',
+        isTrending: true,
+        isFeatured: false
+      });
+    }
+  }, [editingBook]);
+
   const handleEdit = (book: Book) => {
     setEditingBook(book);
-    setFormData({
-      titleEn: book.titleEn || '',
-      titleAr: book.titleAr || '',
-      titleZh: book.titleZh || '',
-      titleCkb: book.titleCkb || '',
-      authorEn: book.authorEn || '',
-      authorAr: book.authorAr || '',
-      authorZh: book.authorZh || '',
-      authorCkb: book.authorCkb || '',
-      descriptionEn: book.descriptionEn || '',
-      descriptionAr: book.descriptionAr || '',
-      descriptionZh: book.descriptionZh || '',
-      descriptionCkb: book.descriptionCkb || '',
-      coverUrl: book.coverUrl || '',
-      category: book.category || 'GEOPOLITICS',
-      region: book.region || 'CHINA',
-      rating: book.rating || 4.8,
-      pages: book.pages || 320,
-      year: book.year || 2024,
-      publisher: book.publisher || 'Iraqi-Chinese Agency Academic Press',
-      isbn: book.isbn || '',
-      purchaseUrl: book.purchaseUrl || '',
-      isTrending: book.isTrending ?? true,
-      isFeatured: book.isFeatured ?? false
-    });
     setIsModalOpen(true);
   };
 
@@ -255,7 +288,7 @@ export function AdminBooks() {
   });
 
   return (
-    <AdminLayout><div className="w-full space-y-8">
+    <><div className="w-full space-y-8 text-start">
       
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border-2 border-brand-800 p-6 shadow-sm rounded-xs">
@@ -336,13 +369,13 @@ export function AdminBooks() {
       <div className="bg-white border border-gray-200 p-4 rounded-xs shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div className="relative flex-1 w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Filter books by title, author, or category..."
-              className="w-full pl-9 pr-4 py-2 text-xs font-bold border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800 bg-neutral-50"
+              className="w-full ps-9 pe-4 py-2 text-xs font-bold border border-gray-300 rounded-xs focus:outline-none focus:border-brand-800 bg-neutral-50"
             />
           </div>
 
@@ -415,17 +448,17 @@ export function AdminBooks() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs font-sans">
+            <table className="w-full text-start text-xs font-sans">
               <thead className="bg-neutral-100 font-medium text-[11px] font-black uppercase text-gray-700 border-b border-gray-200">
                 <tr>
-                  <th className="py-3 px-4">Cover</th>
-                  <th className="py-3 px-4">Title & Author</th>
-                  <th className="py-3 px-4">Region</th>
-                  <th className="py-3 px-4">Subject</th>
-                  <th className="py-3 px-4">Year/Pages</th>
-                  <th className="py-3 px-4">Rating</th>
-                  <th className="py-3 px-4">Status</th>
-                  <th className="py-3 px-4 text-right">Actions</th>
+                  <th className="py-3 px-4 text-start">Cover</th>
+                  <th className="py-3 px-4 text-start">Title & Author</th>
+                  <th className="py-3 px-4 text-start">Region</th>
+                  <th className="py-3 px-4 text-start">Subject</th>
+                  <th className="py-3 px-4 text-start">Year/Pages</th>
+                  <th className="py-3 px-4 text-start">Rating</th>
+                  <th className="py-3 px-4 text-start">Status</th>
+                  <th className="py-3 px-4 text-end">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -486,7 +519,7 @@ export function AdminBooks() {
                         </button>
                       </div>
                     </td>
-                    <td className="py-2.5 px-4 text-right">
+                    <td className="py-2.5 px-4 text-end">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleEdit(book)}
@@ -518,14 +551,14 @@ export function AdminBooks() {
 
       {/* Create / Edit Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div key={editingBook?.id || 'new'} className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <div className="bg-white border-2 border-brand-800 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-6">
             <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <h2 className="text-lg font-bold font-black text-brand-800 flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-brand-800" />
                 <span>{editingBook ? 'Edit Publication' : 'Add New Publication'}</span>
               </h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-black">
+              <button onClick={closeModal} className="text-gray-500 hover:text-black">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -713,7 +746,7 @@ export function AdminBooks() {
               <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={closeModal}
                   className="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-gray-700 font-medium font-bold rounded-xs cursor-pointer"
                 >
                   Cancel
@@ -733,6 +766,6 @@ export function AdminBooks() {
       )}
 
     </div>
-    </AdminLayout>
+    </>
   );
 }

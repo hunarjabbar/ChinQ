@@ -104,12 +104,12 @@ export function AdminStudies() {
             <div className="space-y-1.5">
               <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest">Asset Identity (Slug)</label>
               <div className="relative">
-                <Globe className="absolute left-3 top-3 text-neutral-400" size={14} />
+                <Globe className="absolute start-3 top-3 text-neutral-400" size={14} />
                 <input 
                   type="text" 
                   required 
                   placeholder="e.g. 2026-iraq-china-trade-analysis"
-                  className="w-full border border-neutral-200 bg-white py-2.5 pl-9 pr-4 text-xs font-bold rounded-lg focus:outline-none focus:border-brand-800 transition-all" 
+                  className="w-full border border-neutral-200 bg-white py-2.5 ps-9 pe-4 text-xs font-bold rounded-lg focus:outline-none focus:border-brand-800 transition-all" 
                   value={formData.slug} 
                   onChange={e => setFormData({...formData, slug: e.target.value})} 
                 />
@@ -212,7 +212,7 @@ export function AdminStudies() {
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
                   referrerPolicy="no-referrer"
                 />
-                 <div className="absolute top-4 right-4">
+                 <div className="absolute top-4 end-4">
                     {study.isPrivate ? (
                       <div className="bg-brand-800 text-white p-2 rounded-lg shadow-lg">
                         <Lock size={14} />

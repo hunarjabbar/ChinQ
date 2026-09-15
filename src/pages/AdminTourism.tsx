@@ -1,6 +1,6 @@
 import { apiFetch } from "../lib/api";
 import { useAuthStore } from '../store/useAuthStore';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { TourismSpot } from '../types';
 import { 
@@ -118,45 +118,51 @@ export function AdminTourism() {
     }
   });
 
+  useEffect(() => {
+    if (editingSpot) {
+      setFormData({
+        titleEn: editingSpot.titleEn || '',
+        titleAr: editingSpot.titleAr || '',
+        titleZh: editingSpot.titleZh || '',
+        titleCkb: editingSpot.titleCkb || '',
+        city: editingSpot.city || 'Erbil',
+        region: editingSpot.region || 'KURDISTAN',
+        category: editingSpot.category || 'UNESCO_HERITAGE',
+        descriptionEn: editingSpot.descriptionEn || '',
+        descriptionAr: editingSpot.descriptionAr || '',
+        descriptionZh: editingSpot.descriptionZh || '',
+        descriptionCkb: editingSpot.descriptionCkb || '',
+        imageUrl: editingSpot.imageUrl || '',
+        bestTimeToVisit: editingSpot.bestTimeToVisit || 'Spring & Autumn',
+        visaPolicy: editingSpot.visaPolicy || '30-Day Visa on Arrival / E-Visa available',
+        flightInfo: editingSpot.flightInfo || 'Direct and transfer flights connecting China, Baghdad, and Erbil',
+        rating: editingSpot.rating ?? 4.9,
+        estimatedCost: editingSpot.estimatedCost || '$800 - $1,500',
+        isFeatured: editingSpot.isFeatured ?? true,
+        isTrending: editingSpot.isTrending ?? true
+      });
+    } else {
+      setFormData({
+        titleEn: '', titleAr: '', titleZh: '', titleCkb: '',
+        city: 'Erbil', region: 'KURDISTAN', category: 'UNESCO_HERITAGE',
+        descriptionEn: '', descriptionAr: '', descriptionZh: '', descriptionCkb: '',
+        imageUrl: '',
+        bestTimeToVisit: 'Spring & Autumn',
+        visaPolicy: '30-Day Visa on Arrival / E-Visa available',
+        flightInfo: 'Direct and transfer flights connecting China, Baghdad, and Erbil',
+        rating: 4.9, estimatedCost: '$800 - $1,500',
+        isFeatured: true, isTrending: true
+      });
+    }
+  }, [editingSpot]);
+
   const openFormForNew = () => {
     setEditingSpot(null);
-    setFormData({
-      titleEn: '', titleAr: '', titleZh: '', titleCkb: '',
-      city: 'Erbil', region: 'KURDISTAN', category: 'UNESCO_HERITAGE',
-      descriptionEn: '', descriptionAr: '', descriptionZh: '', descriptionCkb: '',
-      imageUrl: 'https://images.unsplash.com/photo-1548625361-185341398c8c?auto=format&fit=crop&q=80&w=1000',
-      bestTimeToVisit: 'Spring & Autumn',
-      visaPolicy: '30-Day Visa on Arrival / E-Visa available',
-      flightInfo: 'Direct and transfer flights connecting China, Baghdad, and Erbil',
-      rating: 4.9, estimatedCost: '$800 - $1,500',
-      isFeatured: true, isTrending: true
-    });
     setIsFormOpen(true);
   };
 
   const openFormForEdit = (spot: TourismSpot) => {
     setEditingSpot(spot);
-    setFormData({
-      titleEn: spot.titleEn,
-      titleAr: spot.titleAr || '',
-      titleZh: spot.titleZh || '',
-      titleCkb: spot.titleCkb || '',
-      city: spot.city,
-      region: spot.region,
-      category: spot.category,
-      descriptionEn: spot.descriptionEn,
-      descriptionAr: spot.descriptionAr || '',
-      descriptionZh: spot.descriptionZh || '',
-      descriptionCkb: spot.descriptionCkb || '',
-      imageUrl: spot.imageUrl,
-      bestTimeToVisit: spot.bestTimeToVisit,
-      visaPolicy: spot.visaPolicy,
-      flightInfo: spot.flightInfo,
-      rating: spot.rating,
-      estimatedCost: spot.estimatedCost,
-      isFeatured: spot.isFeatured,
-      isTrending: spot.isTrending
-    });
     setIsFormOpen(true);
   };
 
@@ -185,7 +191,7 @@ export function AdminTourism() {
   });
 
   return (
-    <div className="space-y-6 font-sans">
+    <div className="space-y-6 font-sans text-start">
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-4">
         <div>
@@ -224,13 +230,13 @@ export function AdminTourism() {
       <div className="bg-white border border-gray-200 p-4 rounded-xs shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-gray-400 absolute start-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search destination title, city, or category..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-xs text-xs font-medium focus:outline-none focus:border-brand-800"
+              className="w-full ps-9 pe-4 py-2 border border-gray-300 rounded-xs text-xs font-medium focus:outline-none focus:border-brand-800"
             />
           </div>
 
@@ -266,15 +272,15 @@ export function AdminTourism() {
         </div>
       ) : (
         <div className="bg-white border border-gray-200 rounded-xs shadow-xs overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead>
               <tr className="bg-neutral-50 border-b border-gray-200 text-[11px] font-medium font-black uppercase text-gray-600">
-                <th className="py-3 px-4">Destination</th>
-                <th className="py-3 px-4">Location</th>
-                <th className="py-3 px-4">Category</th>
-                <th className="py-3 px-4">Rating</th>
-                <th className="py-3 px-4">Showcase Options</th>
-                <th className="py-3 px-4 text-right">Actions</th>
+                <th className="py-3 px-4 text-start">Destination</th>
+                <th className="py-3 px-4 text-start">Location</th>
+                <th className="py-3 px-4 text-start">Category</th>
+                <th className="py-3 px-4 text-start">Rating</th>
+                <th className="py-3 px-4 text-start">Showcase Options</th>
+                <th className="py-3 px-4 text-end">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-xs font-sans">
@@ -334,7 +340,7 @@ export function AdminTourism() {
                       </button>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-right">
+                  <td className="py-3 px-4 text-end">
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => openFormForEdit(spot)}
@@ -365,11 +371,11 @@ export function AdminTourism() {
 
       {/* Destination Form Modal */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
+        <div key={editingSpot?.id || 'new'} className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
           <div className="bg-white border-2 border-brand-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-xs shadow-2xl space-y-4 relative">
             <button
               onClick={closeForm}
-              className="absolute top-4 right-4 text-gray-500 hover:text-black p-1 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer"
+              className="absolute top-4 end-4 text-gray-500 hover:text-black p-1 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer"
             >
               <X className="w-6 h-6" />
             </button>

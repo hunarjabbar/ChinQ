@@ -88,7 +88,7 @@ const DEFAULT_SOCIAL_LINKS: SocialLinksConfig = {
 
 const DEFAULT_STATE: SiteConfig = {
   siteName: 'Iraqi-Chinese Agency',
-  contactEmail: 'desk@iraqi-chineseagency.com',
+  contactEmail: 'admin@iraqi-chineseagency.com',
   cachingEnabled: true,
   autoTranslate: true,
   geoLatencyRoute: 'baghdad-beijing',

@@ -63,7 +63,7 @@ export function AdminTelex() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 text-start">
       <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-8 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-8 opacity-5">
+        <div className="absolute top-0 end-0 p-8 opacity-5">
           <Terminal size={120} className="text-[#00FF00]" />
         </div>
         <div className="relative z-10 space-y-4">
@@ -86,7 +86,7 @@ export function AdminTelex() {
         <div className="grid grid-cols-1 gap-6">
           {telexes.map((tlx) => (
             <div key={tlx.id} className="bg-neutral-950 border border-neutral-900 rounded-xl overflow-hidden shadow-xl font-medium flex flex-col md:flex-row group">
-              <div className="md:w-64 bg-neutral-900/50 p-6 border-r border-neutral-900 flex flex-col justify-between">
+              <div className="md:w-64 bg-neutral-900/50 p-6 border-e border-neutral-900 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-[#00FF00] text-xs font-black uppercase tracking-widest border-b border-[#00FF00]/10 pb-2">
                     <Activity size={12} className="animate-pulse" />
@@ -115,14 +115,14 @@ export function AdminTelex() {
                     <p className="text-sm font-bold text-white">{tlx.name} <span className="text-neutral-500 font-normal">({tlx.company})</span></p>
                     <p className="text-xs text-brand-500 uppercase">{tlx.email}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-start md:text-end">
                      <p className="text-xs font-black text-neutral-500 uppercase tracking-widest">Transmit Time</p>
                      <p className="text-xs text-neutral-300 font-bold">{new Date(tlx.createdAt).toLocaleString()}</p>
                   </div>
                 </div>
 
                 <div className="relative">
-                  <div className="absolute top-2 right-2 flex items-center gap-2 opacity-30">
+                  <div className="absolute top-2 end-2 flex items-center gap-2 opacity-30">
                     <Shield size={12} className="text-[#00FF00]" />
                     <span className="text-[8px] text-[#00FF00] uppercase tracking-widest">Encrypted Tier 1</span>
                   </div>

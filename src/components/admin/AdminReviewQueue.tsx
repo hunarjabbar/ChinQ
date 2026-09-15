@@ -51,7 +51,7 @@ export function AdminReviewQueue() {
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500 text-start">
       <div className="flex items-center justify-between border-b border-neutral-200 pb-6">
         <div>
           <h2 className="text-2xl font-bold font-black text-brand-900 tracking-tight">Editorial Review Queue</h2>

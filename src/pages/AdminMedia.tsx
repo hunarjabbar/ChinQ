@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Image as ImageIcon, Upload, Search, Trash2, Calendar, FileText, Check, Copy } from 'lucide-react';
-import { AdminLayout } from '../components/AdminLayout';
 
 interface MediaItem {
   id: string;
@@ -117,7 +116,7 @@ export function AdminMedia() {
   );
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6 text-start">
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -161,13 +160,13 @@ export function AdminMedia() {
         {/* Toolbar */}
         <div className="bg-white border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row gap-4 justify-between items-center shadow-sm">
           <div className="relative w-full sm:w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
               placeholder="Filter assets by filename or category..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-brand-800 focus:border-transparent outline-none"
+              className="w-full ps-10 pe-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-brand-800 focus:border-transparent outline-none"
             />
           </div>
         </div>
@@ -184,7 +183,7 @@ export function AdminMedia() {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
                 />
-                <span className="absolute top-2 left-2 bg-brand-800/85 text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                <span className="absolute top-2 start-2 bg-brand-800/85 text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                   {media.category}
                 </span>
               </div>
@@ -239,6 +238,6 @@ export function AdminMedia() {
           )}
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 }

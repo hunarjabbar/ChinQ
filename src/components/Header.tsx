@@ -2,19 +2,21 @@ import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield } from 'lucide-react';
+import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield, QrCode, Smartphone } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { SocialHeaderBar } from './SocialLinks';
 import { motion, AnimatePresence } from 'motion/react';
 import { useSiteStore } from '../store/useSiteStore';
 import { IcaLogo } from './IcaLogo';
+import { LiveDispatch } from './LiveDispatch';
+import { AppQrModal } from './AppQrModal';
 
-function LiveDateTime({ lang }: { lang: Locale }) {
+const LiveDateTime = React.memo(function LiveDateTime({ lang }: { lang: Locale }) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
+    const timer = setInterval(() => setTime(new Date()), 10000);
     return () => clearInterval(timer);
   }, []);
 
@@ -33,7 +35,7 @@ function LiveDateTime({ lang }: { lang: Locale }) {
       </div>
     </div>
   );
-}
+});
 
 function PaymentSettlementButton({ lang }: { lang: Locale }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -174,35 +176,22 @@ function PortalDropdown({ lang }: { lang: Locale }) {
           >
             <div className="flex flex-col py-1">
               <Link 
-                to={`/${lang}/live`} 
-                className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group border-b border-neutral-100 dark:border-neutral-800"
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
-                </span>
-                <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 transition-colors">
-                  {t('liveDispatch')}
-                </span>
-              </Link>
-              
-              <Link 
                 to={`/${lang}/admin`} 
                 className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
                 onClick={() => setIsOpen(false)}
               >
-                <div className="w-5 h-5 flex items-center justify-center rounded bg-ink-900 dark:bg-neutral-700 text-white">
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-ink-900 dark:bg-neutral-700 text-white group-hover:bg-brand-800 transition-colors shrink-0">
                   <Shield size={12} />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 transition-colors">
+                <div className="flex flex-col flex-1">
+                  <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
                     {t('commandHub')}
                   </span>
                   <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
                     {t('signIn')}
                   </span>
                 </div>
+                <ChevronRight size={14} className="text-neutral-400 group-hover:text-brand-800 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
               </Link>
             </div>
           </motion.div>
@@ -214,6 +203,7 @@ function PortalDropdown({ lang }: { lang: Locale }) {
 
 
 export function Header({ lang }: { lang: Locale }) {
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const siteName = useSiteStore(state => state.siteName);
   const darkMode = useSiteStore(state => state.darkMode);
   const toggleDarkMode = useSiteStore(state => state.toggleDarkMode);
@@ -300,7 +290,21 @@ export function Header({ lang }: { lang: Locale }) {
 
               {/* Right Controls Column */}
               <div className="flex flex-col items-end gap-2 w-auto lg:w-1/4 shrink-0">
-                 <div className="flex items-center gap-2 sm:gap-3 bg-neutral-100/90 dark:bg-neutral-800/90 p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-xs transition-colors">
+                 <div className="flex items-center gap-2 sm:gap-2.5 bg-neutral-100/90 dark:bg-neutral-800/90 p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-xs transition-colors">
+                    {/* QR Code App Download Trigger */}
+                    <button
+                      id="header-qr-download-btn"
+                      onClick={() => setIsQrModalOpen(true)}
+                      title={lang === 'ar' ? "تحميل تطبيق الوكالة (QR)" : lang === 'zh' ? "扫码下载客户端应用" : lang === 'ckb' ? "دابەزاندنی ئەپ (QR)" : "Download ICA App (QR Code)"}
+                      aria-label="Download ICA App"
+                      className="px-2.5 py-1.5 rounded-md flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/60 dark:hover:bg-brand-900/60 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800/60 transition-all duration-200 shadow-xs cursor-pointer active:scale-95 group"
+                    >
+                      <QrCode size={15} className="group-hover:rotate-12 transition-transform text-brand-700 dark:text-brand-400" />
+                      <span className="hidden sm:inline text-[11px] font-black uppercase tracking-wider">
+                        {lang === 'ar' ? 'تطبيق QR' : lang === 'zh' ? '应用二维码' : lang === 'ckb' ? 'ئەپ QR' : 'App QR'}
+                      </span>
+                    </button>
+                    <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
                     <button
                       id="dark-mode-toggle-btn"
                       onClick={toggleDarkMode}
@@ -346,30 +350,34 @@ export function Header({ lang }: { lang: Locale }) {
         </header>
 
         {/* Navigation / Breaking News Ticker */}
-        <nav className="h-11 border-t border-neutral-200 dark:border-neutral-800 flex items-center bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md relative z-30">
-          <div className="absolute left-0 rtl:left-auto rtl:right-0 top-0 bottom-0 z-10 flex items-center px-6 bg-ink-900 dark:bg-neutral-800 text-white text-xs font-black uppercase tracking-[0.2em]">
-            {lang === 'ar' ? 'عاجل' : lang === 'zh' ? '突发新闻' : lang === 'ckb' ? 'هەواڵی بەپەلە' : 'DISPATCH'}
+        <nav className="min-h-[48px] sm:min-h-[52px] border-t border-neutral-200 dark:border-neutral-800 flex justify-between items-stretch bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md relative z-30">
+          <div className="flex-shrink-0 z-10 flex items-stretch relative">
+            <LiveDispatch lang={lang} />
           </div>
-          <div className="flex-1 overflow-hidden ml-32 rtl:ml-0 rtl:mr-32">
-            <div className="flex whitespace-nowrap animate-marquee rtl:animate-marquee-rtl items-center h-full">
-              {breakingNews.length > 0 ? breakingNews.map((article, i) => {
+          <div className="flex-1 overflow-hidden relative group">
+            {/* Subtle edge fade masks for smooth transition from LiveDispatch */}
+            <div className="pointer-events-none absolute inset-y-0 start-0 w-8 bg-gradient-to-r rtl:bg-gradient-to-l from-white dark:from-neutral-900 to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 end-0 w-8 bg-gradient-to-l rtl:bg-gradient-to-r from-white dark:from-neutral-900 to-transparent z-10" />
+
+            <div className="absolute inset-0 flex whitespace-nowrap animate-marquee rtl:animate-marquee-rtl items-center group-hover:[animation-play-state:paused]">
+              {breakingNews.length > 0 ? breakingNews.map((article) => {
                 const translation = getTranslation(article);
                 return (
-                  <span key={article.id} className="inline-flex items-center mx-6 text-xs sm:text-sm font-black uppercase tracking-wider text-neutral-800 dark:text-neutral-100">
-                    <span className="w-1.5 h-1.5 bg-brand-800 rounded-full mx-4"></span>
-                    <Link to={`/${lang}`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors cursor-pointer">
+                  <span key={article.id} className="inline-flex items-center mx-5 text-xs sm:text-sm font-medium tracking-normal text-neutral-800 dark:text-neutral-200">
+                    <span className="w-1.5 h-1.5 bg-neutral-400 dark:bg-neutral-600 rounded-full me-3 shrink-0" />
+                    <span className="text-neutral-800 dark:text-neutral-200 hover:text-brand-800 dark:hover:text-brand-400 transition-colors">
                       {translation?.title || 'NEWS UPDATE'}
-                    </Link>
+                    </span>
                   </span>
                 );
               }) : (
-                <span className="inline-flex items-center mx-6 text-xs font-bold uppercase tracking-widest text-neutral-500">
+                <span className="inline-flex items-center mx-6 text-xs sm:text-sm font-bold uppercase tracking-widest text-neutral-500">
                   LOADING LATEST INTELLIGENCE DISPATCHES...
                 </span>
               )}
             </div>
           </div>
-          <div className="absolute right-0 rtl:right-auto rtl:left-0 top-0 bottom-0 z-40 flex items-center px-4 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-3 sm:gap-4">
+          <div className="flex-shrink-0 z-40 flex items-center px-4 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-3 sm:gap-4">
              <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
                {lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارە' : 'About'}
              </Link>
@@ -381,6 +389,13 @@ export function Header({ lang }: { lang: Locale }) {
           </div>
         </nav>
       </div>
+
+      {/* App PWA Download QR Code Modal */}
+      <AppQrModal 
+        isOpen={isQrModalOpen} 
+        onClose={() => setIsQrModalOpen(false)} 
+        lang={lang} 
+      />
     </div>
   );
 }

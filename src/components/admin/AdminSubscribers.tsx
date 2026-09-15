@@ -58,45 +58,45 @@ export function AdminSubscribers() {
 
       <div className="bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
-                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500">Contact Node</th>
-                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500">Subscription Protocol</th>
-                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500">Status</th>
-                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500">Authorized Date</th>
-                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-right">Actions</th>
+                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-start">Contact Node</th>
+                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-start">Subscription Protocol</th>
+                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-start">Status</th>
+                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-start">Authorized Date</th>
+                <th className="px-8 py-5 text-xs font-black uppercase tracking-widest text-neutral-500 text-end">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {subscribers.map((sub) => (
                 <tr key={sub.id} className="hover:bg-neutral-50/50 transition-colors">
-                  <td className="px-8 py-5">
+                  <td className="px-8 py-5 text-start">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-400 font-black text-xs uppercase">
                         {sub.email[0]}
                       </div>
-                      <div className="space-y-0.5">
+                      <div className="space-y-0.5 text-start">
                         <p className="text-sm font-bold text-brand-900">{sub.email}</p>
                         <p className="text-xs font-medium text-neutral-400 uppercase">UID: {sub.id.substring(0, 8)}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-8 py-5">
+                  <td className="px-8 py-5 text-start">
                     <span className="text-xs font-black uppercase tracking-widest text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded">
                       {sub.subscriptionPlan || 'STANDARD'}
                     </span>
                   </td>
-                  <td className="px-8 py-5">
+                  <td className="px-8 py-5 text-start">
                     <div className="flex items-center gap-2">
                        <div className={`w-2 h-2 rounded-full ${sub.subscriptionStatus === 'ACTIVE' ? 'bg-green-500' : 'bg-neutral-300'}`}></div>
                        <span className="text-xs font-black uppercase tracking-widest text-brand-900">{sub.subscriptionStatus}</span>
                     </div>
                   </td>
-                  <td className="px-8 py-5 text-xs text-neutral-500 font-medium">
+                  <td className="px-8 py-5 text-xs text-neutral-500 font-medium text-start">
                     {new Date(sub.createdAt || Date.now()).toLocaleDateString()}
                   </td>
-                  <td className="px-8 py-5 text-right">
+                  <td className="px-8 py-5 text-end">
                     <button 
                       onClick={() => { if(confirm('Are you sure you want to remove this subscriber?')) deleteMutation.mutate(sub.id) }}
                       className="text-neutral-300 hover:text-brand-800 transition-colors p-1 cursor-pointer"
