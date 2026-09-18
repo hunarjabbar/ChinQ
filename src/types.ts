@@ -350,6 +350,25 @@ export interface PaymentQuote {
   };
 }
 
+export interface ChineseProduct {
+  id: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  imageUrl: string;
+  link?: string;
+  category: string;
+  isFeatured: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface BricsTopic {
   id: string;
   slug: string;
@@ -377,4 +396,108 @@ export interface BricsTopic {
 
 
 
+
+
+export interface Podcast {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  audioUrl: string;
+  coverUrl: string;
+  host: string;
+  guestName: string | null;
+  guestRole: string | null;
+  publicationUrl: string | null;
+  category: string;
+  region: string;
+  duration: string;
+  isFeatured: boolean;
+  isTrending: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Video {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  videoUrl: string;
+  coverUrl: string;
+  category: string;
+  region: string;
+  duration: string;
+  isFeatured: boolean;
+  isTrending: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Documentary {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  synopsisEn: string;
+  synopsisAr: string;
+  synopsisZh: string;
+  synopsisCkb: string;
+  videoUrl: string;
+  coverUrl: string;
+  director: string | null;
+  category: string;
+  region: string;
+  duration: string;
+  isFeatured: boolean;
+  isTrending: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FinanceInsight {
+  id: string;
+  slug: string;
+  category: string;
+  coverImage: string;
+  author: string;
+  featured: boolean;
+  order: number;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  summaryEn: string;
+  summaryAr: string;
+  summaryZh: string;
+  summaryCkb: string;
+  bodyEn: string;
+  bodyAr: string;
+  bodyZh: string;
+  bodyCkb: string;
+}
 

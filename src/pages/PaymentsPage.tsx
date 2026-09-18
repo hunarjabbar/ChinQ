@@ -49,7 +49,7 @@ export function PaymentsPage() {
     data: ratesData, 
     refetch: refetchRates, 
     isFetching: isFetchingRates 
-  } = useQuery<{ success: boolean; data: PaymentExchangeRate }>({
+  } = useQuery<{ success?: boolean; data?: PaymentExchangeRate } & Partial<PaymentExchangeRate>>({
     queryKey: ['paymentRates'],
     queryFn: async () => {
       const res = await fetch('/api/public/payments/rates');
@@ -59,7 +59,7 @@ export function PaymentsPage() {
     refetchInterval: 30000 // Polled every 30s
   });
 
-  const rates = ratesData?.data || null;
+  const rates = (ratesData?.data ?? (ratesData?.baseRate ? ratesData : null)) as PaymentExchangeRate | null;
 
   const isAr = lang === 'ar';
   const isZh = lang === 'zh';

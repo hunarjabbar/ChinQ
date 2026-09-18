@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2 } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -79,13 +79,14 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
     { name: t('womenLeadership'), href: `/${lang}/admin/women`, icon: UserIcon, adminOnly: true },
     { name: t('tourismPortal'), href: `/${lang}/admin/tourism`, icon: Compass, adminOnly: true },
     { name: t('booksLibrary'), href: `/${lang}/admin/books`, icon: BookOpen, adminOnly: true },
-    { name: t('podcastsStudio'), href: `/${lang}/admin/podcasts`, icon: Mic, adminOnly: true },
+    { name: 'ICA+ Media', href: `/${lang}/admin/icaplus`, icon: Mic, adminOnly: true },
     { name: t('visaFlights'), href: `/${lang}/admin/visa-flights`, icon: Plane, adminOnly: true },
-    { name: t('marketData'), href: `/${lang}/admin/market`, icon: Activity, adminOnly: true },
+    { name: lang === 'ar' ? 'المالية والاقتصاد' : lang === 'zh' ? '财经与宏观经济' : lang === 'ckb' ? 'دارایی و ئابووری' : 'Finance & Economics', href: `/${lang}/admin/finance-economics`, icon: TrendingUp, adminOnly: false },
     { name: t('paymentsSettlement'), href: `/${lang}/admin/payments`, icon: Coins, adminOnly: true },
     { name: t('liveCommand'), href: `/${lang}/admin?tab=live`, icon: Radio, adminOnly: true },
     { name: t('sourcingDesk'), href: `/${lang}/admin/sourcing`, icon: Ship, adminOnly: true },
     { name: t('partners'), href: `/${lang}/admin/partners`, icon: Briefcase, adminOnly: true },
+    { name: 'Chinese Products', href: `/${lang}/admin/chinese-products`, icon: Briefcase, adminOnly: true },
     { name: t('liveStreams'), href: `/${lang}/admin/live-events`, icon: Video, adminOnly: true },
     { name: t('mediaLibrary'), href: `/${lang}/admin/media`, icon: ImageIcon, adminOnly: true },
     { name: t('userManagement'), href: `/${lang}/admin/users`, icon: Users, adminOnly: true },

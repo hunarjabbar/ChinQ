@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LiveTimeline } from '../components/LiveTimeline';
+import { ComingSoonLivePortal } from '../components/ComingSoonLivePortal';
 import { Video, Radio } from 'lucide-react';
 
 export function LiveEventPage() {
@@ -15,6 +16,19 @@ export function LiveEventPage() {
         const timestamp = new Date().getTime();
         const res = await fetch(`/api/events/${slug}?t=${timestamp}`, { cache: 'no-store' });
         if (!res.ok) {
+          if (slug === 'iraq-china-summit-2026') {
+            // Provide dedicated fallback for upcoming summit
+            setEvent({
+              slug: 'iraq-china-summit-2026',
+              titleEn: 'Iraq-China Economic Summit 2026',
+              titleAr: 'القمة الاقتصادية العراقية الصينية 2026',
+              titleZh: '2026年伊拉克-中国经济峰会',
+              titleCkb: 'لووتکەی ئابووری عێراق-چین ٢٠٢٦',
+              isActive: false,
+              isComingSoon: true
+            });
+            return;
+          }
           if (res.status === 404) {
             navigate(`/${lang}/not-found`);
             return;
@@ -25,6 +39,17 @@ export function LiveEventPage() {
         setEvent(data);
       } catch (err) {
         console.error(err);
+        if (slug === 'iraq-china-summit-2026') {
+          setEvent({
+            slug: 'iraq-china-summit-2026',
+            titleEn: 'Iraq-China Economic Summit 2026',
+            titleAr: 'القمة الاقتصادية العراقية الصينية 2026',
+            titleZh: '2026年伊拉克-中国经济峰会',
+            titleCkb: 'لووتکەی ئابووری عێراق-چین ٢٠٢٦',
+            isActive: false,
+            isComingSoon: true
+          });
+        }
       } finally {
         setLoading(false);
       }
@@ -33,7 +58,25 @@ export function LiveEventPage() {
   }, [slug, lang, navigate]);
 
   if (loading) {
-    return <div className="min-h-[50vh] flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-[50vh] flex flex-col items-center justify-center gap-3">
+        <Radio size={24} className="text-red-600 animate-pulse" />
+        <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">Connecting to Broadcast Portal...</span>
+      </div>
+    );
+  }
+
+  // If this is the Iraq-China Summit 2026 or an upcoming summit event, render the smooth Coming Soon portal component!
+  if (slug === 'iraq-china-summit-2026' || event?.isComingSoon || !event?.videoUrl) {
+    return (
+      <div className="w-full bg-[#0a0a0a] min-h-[80vh] py-6 sm:py-10">
+        <ComingSoonLivePortal 
+          lang={lang || 'en'} 
+          slug={slug} 
+          title={event ? (lang === 'ar' ? event.titleAr : lang === 'zh' ? event.titleZh : lang === 'ckb' ? event.titleCkb : event.titleEn) : undefined} 
+        />
+      </div>
+    );
   }
 
   if (!event) {

@@ -6,7 +6,7 @@ const updates = {
   'qubad-talabani-digital-transformation': 'https://upload.wikimedia.org/wikipedia/commons/1/10/Qubad_Talabani_Image.jpg',
   'masoud-barzani-regional-security-talks': 'https://upload.wikimedia.org/wikipedia/commons/8/85/Masud_Barzani_20230913.jpg',
   'masrour-barzani-infrastructure-projects': 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Masrour_Masoud_2025_%28cropped%29.jpg',
-  'xi-jinping-belt-and-road-expansion': 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Xi_Jinping_meets_Putin_May_2026.jpg',
+  'xi-jinping-belt-and-road-expansion': '/src/assets/images/regenerated_image_1789501428788.jpg',
   'chinese-government-iraq-energy-pact': 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Li_Qiang_meets_Keir_Starmer_Jan_2026.jpg',
   'kurdistan-government-investment-forum': 'https://upload.wikimedia.org/wikipedia/commons/9/93/Nechirvan_Barzani_2025_%28cropped%29.jpg',
   'ali-al-zaidi-trade-relations': 'https://upload.wikimedia.org/wikipedia/commons/4/4b/5628442718_b10fc2c47f_o.jpg',

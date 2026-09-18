@@ -123,7 +123,7 @@ const mockArticles = [
   },
   {
     slug: 'xi-jinping-belt-and-road-expansion',
-    imageUrl: 'https://images.unsplash.com/photo-1547154495-99a0d63b88a8?auto=format&fit=crop&q=80&w=1200',
+    imageUrl: '/src/assets/images/regenerated_image_1789501428788.jpg',
     translations: [
       {
         lang: 'en',

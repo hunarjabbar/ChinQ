@@ -49,6 +49,7 @@ const AdminArticles = lazyWithRetry(() => import('./pages/AdminArticles').then(m
 const AdminArticleNew = lazyWithRetry(() => import('./pages/AdminArticleNew').then(m => ({ default: m.AdminArticleNew })));
 const AdminAuditLogs = lazyWithRetry(() => import('./pages/AdminAuditLogs').then(m => ({ default: m.AdminAuditLogs })));
 const AdminBrics = lazyWithRetry(() => import('./pages/AdminBrics').then(m => ({ default: m.AdminBrics })));
+const AdminChineseProducts = lazyWithRetry(() => import('./pages/AdminChineseProducts').then(m => ({ default: m.AdminChineseProducts })));
 const AdminUsers = lazyWithRetry(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })));
 const AdminMedia = lazyWithRetry(() => import('./pages/AdminMedia').then(m => ({ default: m.AdminMedia })));
 const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings').then(m => ({ default: m.AdminSettings })));
@@ -63,11 +64,13 @@ const AdminWomen = lazyWithRetry(() => import('./pages/AdminWomen').then(m => ({
 const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
 const AdminVisaFlight = lazyWithRetry(() => import('./pages/AdminVisaFlight').then(m => ({ default: m.AdminVisaFlight })));
 const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
+const IcaPlusPage = lazyWithRetry(() => import('./pages/IcaPlusPage').then(m => ({ default: m.IcaPlusPage })));
+const AdminIcaPlus = lazyWithRetry(() => import('./pages/AdminIcaPlus'));
 const AdminPodcasts = lazyWithRetry(() => import('./pages/AdminPodcasts'));
 const AdminLiveEvents = lazyWithRetry(() => import('./pages/AdminLiveEvents'));
 const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
 const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
-const AdminMarketData = lazyWithRetry(() => import('./pages/AdminMarketData').then(m => ({ default: m.AdminMarketData })));
+const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEconomics').then(m => ({ default: m.AdminFinanceEconomics })));
 const PaymentsPage = lazyWithRetry(() => import('./pages/PaymentsPage').then(m => ({ default: m.PaymentsPage })));
 const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
 
@@ -181,7 +184,6 @@ function LangWrapper() {
       <Layout lang={safeLang}>
         <Outlet />
       </Layout>
-      <DownloadAppModal lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -200,7 +202,6 @@ function AdminLangWrapper() {
       <AdminLayout>
         <Outlet />
       </AdminLayout>
-      <DownloadAppModal lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -221,6 +222,7 @@ const router = createBrowserRouter([
       { path: "tourism", element: <TourismPage /> },
       { path: "books", element: <BooksPage /> },
       { path: "podcasts", element: <PodcastsPage /> },
+      { path: "ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
       { path: "payments", element: <PaymentsPage /> },
       { path: "payments/:ref", element: <PaymentsPage /> },
@@ -242,15 +244,18 @@ const router = createBrowserRouter([
       { path: "women", element: <AdminWomen /> },
       { path: "tourism", element: <AdminTourism /> },
       { path: "visa-flights", element: <AdminVisaFlight /> },
-      { path: "podcasts", element: <AdminPodcasts /> },
+      { path: "podcasts", element: <AdminIcaPlus /> },
+      { path: "icaplus", element: <AdminIcaPlus /> },
       { path: "live-events", element: <AdminLiveEvents /> },
       { path: "books", element: <AdminBooks /> },
-      { path: "market", element: <AdminMarketData /> },
+      { path: "finance-economics", element: <AdminFinanceEconomics /> },
+      { path: "market", element: <AdminFinanceEconomics /> },
       { path: "payments", element: <AdminPayments /> },
       { path: "partners", element: <AdminPartners /> },
       { path: "sourcing", element: <AdminSourcing /> },
                 { path: "audit-logs", element: <AdminAuditLogs /> },
           { path: "brics", element: <AdminBrics /> },
+          { path: "chinese-products", element: <AdminChineseProducts /> },
           { path: "users", element: <AdminUsers /> },
       { path: "media", element: <AdminMedia /> },
       { path: "settings", element: <AdminSettings /> }
@@ -259,7 +264,6 @@ const router = createBrowserRouter([
   { path: "*", element: <NotFound /> }
 ]);
 
-import { DownloadAppModal } from './components/DownloadAppModal';
 
 export default function App() { 
   const initializeAuth = useAuthStore(state => state.initialize); 

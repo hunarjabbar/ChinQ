@@ -16,6 +16,7 @@ import { seedPoliticalNews } from "./server/politicalNewsSeeder.js";
 import { seedPaymentData } from "./server/paymentSeeder.js";
 import { seedBricsTopics } from "./server/bricsSeeder.js";
 import { seedHistoricalFigures } from "./server/historicalFiguresSeeder.js";
+import { seedChineseProducts } from "./server/chineseProductSeeder.js";
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -68,6 +69,7 @@ async function runStartupSeeders() {
     await seedPaymentData();
     await seedBricsTopics();
     await seedHistoricalFigures();
+    await seedChineseProducts();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
     console.error("⚠️ Error running background seeders:", err);
@@ -93,10 +95,10 @@ async function startServer() {
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", "https://s3.tradingview.com"],
-          frameSrc: ["'self'", "https://s.tradingview.com", "https://www.tradingview.com"],
-          imgSrc: ["'self'", "data:", "blob:", "https:", "https://s3.tradingview.com"],
-          connectSrc: ["'self'", "https://s3.tradingview.com", "wss://data.tradingview.com", "https:", "wss:"],
+          scriptSrc: ["'self'"],
+          frameSrc: ["'self'"],
+          imgSrc: ["'self'", "data:", "blob:", "https:"],
+          connectSrc: ["'self'", "https:", "wss:"],
           styleSrc: ["'self'", "'unsafe-inline'", "https:"],
           fontSrc: ["'self'", "data:", "https:"],
           frameAncestors: allowedFrameAncestors,
@@ -440,6 +442,63 @@ async function startServer() {
     } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to fetch BRICS topics" });
+    }
+  });
+
+  app.get("/api/chinese-products", async (req, res) => {
+    try {
+      let products = await prisma.chineseProduct.findMany({
+        orderBy: { order: 'asc' }
+      });
+      if (products.length < 25) {
+        await seedChineseProducts();
+        products = await prisma.chineseProduct.findMany({
+          orderBy: { order: 'asc' }
+        });
+      }
+      res.json(products);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch Chinese products" });
+    }
+  });
+
+  app.get("/api/finance-insights", async (req, res) => {
+    try {
+      const { category, featured } = req.query;
+      const where: any = {};
+      if (category && typeof category === 'string' && category !== 'ALL') {
+        where.category = category;
+      }
+      if (featured === 'true') {
+        where.featured = true;
+      }
+      const insights = await prisma.financeInsight.findMany({
+        where,
+        orderBy: [
+          { order: 'asc' },
+          { publishedAt: 'desc' }
+        ]
+      });
+      res.json(insights);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch finance insights" });
+    }
+  });
+
+  app.get("/api/finance-insights/:slug", async (req, res) => {
+    try {
+      const insight = await prisma.financeInsight.findUnique({
+        where: { slug: req.params.slug }
+      });
+      if (!insight) {
+        return res.status(404).json({ error: "Insight not found" });
+      }
+      res.json(insight);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch insight" });
     }
   });
 
@@ -1196,6 +1255,154 @@ async function startServer() {
     } catch (e: any) {
       console.error(e);
       res.status(500).json({ error: "Failed to delete BRICS topic" });
+    }
+  });
+
+  app.get("/api/admin/chinese-products", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const products = await prisma.chineseProduct.findMany({
+        orderBy: { order: 'asc' }
+      });
+      res.json(products);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch Chinese products" });
+    }
+  });
+
+  app.post("/api/admin/chinese-products", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const product = await prisma.chineseProduct.create({
+        data: req.body
+      });
+      res.json(product);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to create Chinese product" });
+    }
+  });
+
+  app.put("/api/admin/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
+      const product = await prisma.chineseProduct.update({
+        where: { id },
+        data
+      });
+      res.json(product);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to update Chinese product" });
+    }
+  });
+
+  app.delete("/api/admin/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      await prisma.chineseProduct.delete({
+        where: { id: req.params.id }
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to delete Chinese product" });
+    }
+  });
+
+  app.get("/api/admin/finance-insights", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const insights = await prisma.financeInsight.findMany({
+        orderBy: [
+          { order: 'asc' },
+          { createdAt: 'desc' }
+        ]
+      });
+      res.json(insights);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to fetch finance insights" });
+    }
+  });
+
+  app.post("/api/admin/finance-insights", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const {
+        titleEn, titleAr, titleZh, titleCkb,
+        summaryEn, summaryAr, summaryZh, summaryCkb,
+        bodyEn, bodyAr, bodyZh, bodyCkb,
+        slug, category, coverImage, author,
+        featured, order, publishedAt
+      } = req.body;
+
+      const insight = await prisma.financeInsight.create({
+        data: {
+          slug: slug || `insight-${Date.now()}`,
+          category: category || "Currency Markets",
+          coverImage: coverImage || "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+          author: author || "ICA Economic Research Desk",
+          featured: Boolean(featured),
+          order: Number(order) || 0,
+          publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
+          titleEn: titleEn || "",
+          titleAr: titleAr || "",
+          titleZh: titleZh || "",
+          titleCkb: titleCkb || "",
+          summaryEn: summaryEn || "",
+          summaryAr: summaryAr || "",
+          summaryZh: summaryZh || "",
+          summaryCkb: summaryCkb || "",
+          bodyEn: bodyEn || "",
+          bodyAr: bodyAr || "",
+          bodyZh: bodyZh || "",
+          bodyCkb: bodyCkb || ""
+        }
+      });
+      res.json(insight);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to create finance insight" });
+    }
+  });
+
+  app.put("/api/admin/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
+      if (data.publishedAt) {
+        data.publishedAt = new Date(data.publishedAt);
+      }
+      if (typeof data.order !== 'undefined') {
+        data.order = Number(data.order);
+      }
+      if (typeof data.featured !== 'undefined') {
+        data.featured = Boolean(data.featured);
+      }
+      const insight = await prisma.financeInsight.update({
+        where: { id },
+        data
+      });
+      res.json(insight);
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to update finance insight" });
+    }
+  });
+
+  app.delete("/api/admin/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
+    try {
+      await prisma.financeInsight.delete({
+        where: { id: req.params.id }
+      });
+      res.json({ success: true });
+    } catch (e: any) {
+      console.error(e);
+      res.status(500).json({ error: "Failed to delete finance insight" });
     }
   });
 
@@ -2386,6 +2593,170 @@ async function startServer() {
     }
   });
 
+  // --- Videos CRUD ---
+  app.get("/api/videos", async (req, res) => {
+    try {
+      const { q, region, category, trending, featured } = req.query;
+      const where: any = {};
+
+      if (region && typeof region === "string" && region !== "ALL") where.region = region;
+      if (category && typeof category === "string" && category !== "ALL") where.category = category;
+      if (trending === "true") where.isTrending = true;
+      if (featured === "true") where.isFeatured = true;
+
+      if (q && typeof q === "string") {
+        where.OR = [
+          { titleEn: { contains: q } },
+          { descriptionEn: { contains: q } },
+        ];
+      }
+
+      const items = await prisma.video.findMany({
+        where,
+        orderBy: { publishedAt: "desc" },
+      });
+      res.json(items);
+    } catch (e: any) {
+      console.error("Error fetching videos:", e);
+      res.status(500).json({ error: "Failed to fetch videos" });
+    }
+  });
+
+  app.get("/api/videos/:idOrSlug", async (req, res) => {
+    try {
+      const { idOrSlug } = req.params;
+      const item = await prisma.video.findFirst({
+        where: { OR: [{ id: idOrSlug }, { slug: idOrSlug }] },
+      });
+      if (!item) return res.status(404).json({ error: "Not found" });
+      res.json(item);
+    } catch (e: any) {
+      res.status(500).json({ error: "Failed to fetch video" });
+    }
+  });
+
+  app.post("/api/videos", authMiddleware, async (req, res) => {
+    try {
+      const body = req.body;
+      const slug = body.slug || `video-${Date.now()}-${(body.titleEn||"").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30)}`;
+      const newItem = await prisma.video.create({
+        data: {
+          ...body,
+          slug,
+          publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
+        },
+      });
+      res.json(newItem);
+    } catch (e: any) {
+      console.error("Error creating video:", e);
+      res.status(500).json({ error: "Failed to create video" });
+    }
+  });
+
+  app.put("/api/videos/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id; delete data.createdAt; delete data.updatedAt;
+      if (data.publishedAt) data.publishedAt = new Date(data.publishedAt);
+      const updated = await prisma.video.update({ where: { id }, data });
+      res.json(updated);
+    } catch (e: any) {
+      console.error("Error updating video:", e);
+      res.status(500).json({ error: "Failed to update video" });
+    }
+  });
+
+  app.delete("/api/videos/:id", authMiddleware, async (req, res) => {
+    try {
+      await prisma.video.delete({ where: { id: req.params.id } });
+      res.json({ success: true });
+    } catch (e: any) {
+      res.status(500).json({ error: "Failed to delete video" });
+    }
+  });
+
+  // --- Documentaries CRUD ---
+  app.get("/api/documentaries", async (req, res) => {
+    try {
+      const { q, region, category, trending, featured } = req.query;
+      const where: any = {};
+      if (region && typeof region === "string" && region !== "ALL") where.region = region;
+      if (category && typeof category === "string" && category !== "ALL") where.category = category;
+      if (trending === "true") where.isTrending = true;
+      if (featured === "true") where.isFeatured = true;
+
+      if (q && typeof q === "string") {
+        where.OR = [
+          { titleEn: { contains: q } },
+          { synopsisEn: { contains: q } },
+        ];
+      }
+
+      const items = await prisma.documentary.findMany({
+        where,
+        orderBy: { publishedAt: "desc" },
+      });
+      res.json(items);
+    } catch (e: any) {
+      console.error("Error fetching documentaries:", e);
+      res.status(500).json({ error: "Failed to fetch documentaries" });
+    }
+  });
+
+  app.get("/api/documentaries/:idOrSlug", async (req, res) => {
+    try {
+      const { idOrSlug } = req.params;
+      const item = await prisma.documentary.findFirst({
+        where: { OR: [{ id: idOrSlug }, { slug: idOrSlug }] },
+      });
+      if (!item) return res.status(404).json({ error: "Not found" });
+      res.json(item);
+    } catch (e: any) {
+      res.status(500).json({ error: "Failed to fetch documentary" });
+    }
+  });
+
+  app.post("/api/documentaries", authMiddleware, async (req, res) => {
+    try {
+      const body = req.body;
+      const slug = body.slug || `doc-${Date.now()}-${(body.titleEn||"").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30)}`;
+      const newItem = await prisma.documentary.create({
+        data: {
+          ...body,
+          slug,
+          publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
+        },
+      });
+      res.json(newItem);
+    } catch (e: any) {
+      console.error("Error creating documentary:", e);
+      res.status(500).json({ error: "Failed to create documentary" });
+    }
+  });
+
+  app.put("/api/documentaries/:id", authMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = { ...req.body };
+      delete data.id; delete data.createdAt; delete data.updatedAt;
+      if (data.publishedAt) data.publishedAt = new Date(data.publishedAt);
+      const updated = await prisma.documentary.update({ where: { id }, data });
+      res.json(updated);
+    } catch (e: any) {
+      console.error("Error updating documentary:", e);
+      res.status(500).json({ error: "Failed to update documentary" });
+    }
+  });
+
+  app.delete("/api/documentaries/:id", authMiddleware, async (req, res) => {
+    try {
+      await prisma.documentary.delete({ where: { id: req.params.id } });
+      res.json({ success: true });
+    } catch (e: any) {
+      res.status(500).json({ error: "Failed to delete documentary" });
+    }
+  });
   // Public submissions for Partnership Applications & Telexes
   app.post("/api/public/applications", async (req, res) => {
     try {
@@ -3432,6 +3803,10 @@ async function startServer() {
     });
   });
 
+  // --- Static Asset Serving for Seeded & Uploaded Images ---
+  app.use('/src/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
+  app.use('/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
+
   // --- Vite Middleware & Static Production Serving ---
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -3441,8 +3816,6 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    // Serve src/assets/images statically in production to allow database-seeded local image URLs to resolve
-    app.use('/src/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
     
     app.use(express.static(distPath));
     app.get("*", (req, res) => {

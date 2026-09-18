@@ -1,18 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Article, Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { useState, useCallback, useMemo } from 'react';
 import { ADDITIONAL_TOPICS } from '../data/topics';
-import { ArticleModal } from '../components/ArticleModal';
+
 
 export function CategoryPage() {
   const { lang, slug } = useParams<{ lang: Locale; slug: string }>();
   const { t } = useI18n(lang!);
+  const navigate = useNavigate();
 
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  
   const { data: rawArticles = [], isLoading } = useQuery<Article[]>({
     queryKey: ['articles', slug],
     queryFn: async () => {
@@ -131,7 +132,7 @@ export function CategoryPage() {
             const tr = getTranslation(article);
             return (
               <div key={article.id} className="group cursor-pointer"
-                onClick={() => setSelectedArticle(article)}>
+                onClick={() => navigate(`/${lang}/article/${article.slug}`)}>
                 {article.imageUrl ? (
                   <div className="w-full aspect-video bg-gray-200 dark:bg-neutral-800 overflow-hidden mb-4 rounded-xs">
                     <img 
@@ -166,14 +167,7 @@ export function CategoryPage() {
         </div>
       )}
 
-      {/* GORGEOUS IMMERSIVE NEWSPAPER DETAIL OVERLAY MODAL */}
-      {selectedArticle && (
-        <ArticleModal 
-          article={selectedArticle} 
-          lang={lang!} 
-          onClose={() => setSelectedArticle(null)} 
-        />
-      )}
+
     </div>
 
   );

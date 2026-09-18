@@ -512,6 +512,25 @@ model BricsTopic {
   updatedAt      DateTime @updatedAt
 }
 
+model ChineseProduct {
+  id             String   @id @default(cuid())
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+  descriptionEn  String
+  descriptionAr  String   @default("")
+  descriptionZh  String   @default("")
+  descriptionCkb String   @default("")
+  imageUrl       String
+  category       String
+  link           String?
+  isFeatured     Boolean  @default(false)
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
 model AuditLog {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -521,3 +540,83 @@ model AuditLog {
   itemId    String?
   details   String?  
 }
+
+model Video {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+  descriptionEn  String
+  descriptionAr  String   @default("")
+  descriptionZh  String   @default("")
+  descriptionCkb String   @default("")
+  videoUrl       String
+  coverUrl       String
+  category       String
+  region         String
+  duration       String   @default("00:00")
+  isFeatured     Boolean  @default(false)
+  isTrending     Boolean  @default(false)
+  publishedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Documentary {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+  descriptionEn  String
+  descriptionAr  String   @default("")
+  descriptionZh  String   @default("")
+  descriptionCkb String   @default("")
+  synopsisEn     String   @default("")
+  synopsisAr     String   @default("")
+  synopsisZh     String   @default("")
+  synopsisCkb    String   @default("")
+  videoUrl       String
+  coverUrl       String
+  director       String?
+  category       String
+  region         String
+  duration       String   @default("00:00")
+  isFeatured     Boolean  @default(false)
+  isTrending     Boolean  @default(false)
+  publishedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model FinanceInsight {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  category       String
+  coverImage     String
+  author         String   @default("ICA Economic Research Desk")
+  featured       Boolean  @default(false)
+  order          Int      @default(0)
+  publishedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  titleEn        String
+  titleAr        String   @default("")
+  titleZh        String   @default("")
+  titleCkb       String   @default("")
+
+  summaryEn      String
+  summaryAr      String   @default("")
+  summaryZh      String   @default("")
+  summaryCkb     String   @default("")
+
+  bodyEn         String   @default("")
+  bodyAr         String   @default("")
+  bodyZh         String   @default("")
+  bodyCkb        String   @default("")
+}
+

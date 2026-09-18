@@ -28,7 +28,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
   const [calcType, setCalcType] = useState<'RETAIL' | 'BUSINESS'>('RETAIL');
   const [quickAmount, setQuickAmount] = useState<string>('1000000');
 
-  const { data: ratesData } = useQuery<{ success: boolean; data: PaymentExchangeRate }>({
+  const { data: ratesData } = useQuery<{ success?: boolean; data?: PaymentExchangeRate } & Partial<PaymentExchangeRate>>({
     queryKey: ['paymentRates'],
     queryFn: async () => {
       const res = await fetch('/api/public/payments/rates');
@@ -38,7 +38,7 @@ export function PaymentGatewayShowcase({ lang }: Props) {
     refetchInterval: 30000
   });
 
-  const rates = ratesData?.data;
+  const rates = (ratesData?.data ?? (ratesData?.baseRate ? ratesData : null)) as PaymentExchangeRate | null;
   const baseRate = rates?.baseRate ?? 188.50;
   const askRate = rates?.askRate ?? 189.20;
   const feePercent = calcType === 'BUSINESS' ? 0.35 : 0.75;
@@ -60,26 +60,26 @@ export function PaymentGatewayShowcase({ lang }: Props) {
 
   return (
     <ErrorBoundary inline lang={lang} title="Payment Gateway Showcase">
-      <div className="w-full my-8 bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-xl rounded-2xl overflow-hidden font-sans">
+      <div className="w-full my-8 bg-white dark:bg-neutral-900 border-2 border-brand-800 dark:border-brand-800 shadow-xl rounded-2xl overflow-hidden font-sans">
         
         {/* Banner Strip */}
-        <div className="bg-ink-900 text-white px-6 py-3 border-b-2 border-brand-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="bg-brand-800 text-white px-6 py-3 border-b-2 border-brand-900 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </span>
-            <span className="uppercase tracking-widest text-xs text-neutral-300">
+            <span className="uppercase tracking-widest text-xs text-white/90 font-bold">
               {labels.eyebrow}
             </span>
           </div>
 
           <div className="flex items-center gap-4 text-[11px] font-mono">
-            <span className="text-amber-400 font-black">
+            <span className="text-white font-black">
               1 e-CNY = {baseRate.toFixed(2)} IQD
             </span>
-            <span className="hidden sm:inline text-neutral-400">
-              mBridge CBDC: <strong className="text-emerald-400">ACTIVE</strong>
+            <span className="hidden sm:inline text-white/70">
+              mBridge CBDC: <strong className="text-white">ACTIVE</strong>
             </span>
           </div>
         </div>

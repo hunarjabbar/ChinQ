@@ -96,7 +96,7 @@ export const KURDISH_FIGURES_PART2: HistoricalFigureData[] = [
   // 5. NAWSHIRWAN MUSTAFA
   {
     slug: 'history-nawshirwan-mustafa',
-    imageUrl: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: '/src/assets/images/regenerated_image_1789500863942.png',
     lifespan: '1944 - 2017',
     categorySlug: 'historical-figures',
     region: 'kurdish',

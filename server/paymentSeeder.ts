@@ -4,35 +4,40 @@ export async function seedPaymentData() {
   try {
     console.log('💳 Seeding/Verifying IQD & E-CNY Payment Service Provider data...');
 
-    // 1. Ensure exchange rate record exists
-    const existingRate = await prisma.paymentExchangeRate.findUnique({
-      where: { pair: 'IQD_ECNY' }
-    });
-
-    if (!existingRate) {
-      await prisma.paymentExchangeRate.create({
-        data: {
-          pair: 'IQD_ECNY',
-          baseRate: 188.50, // 1 E-CNY = 188.50 IQD
-          bidRate: 187.80,
-          askRate: 189.20,
-          retailFeePercent: 0.75, // 0.75%
-          businessFeePercent: 0.35, // 0.35% for wholesale/corporate
-          minimumRetailIqd: 25000.0,
-          minimumBusinessIqd: 1000000.0,
-          change24h: 0.45,
-          high24h: 189.80,
-          low24h: 187.20,
-          volume24h: '¥ 54.2M / د.ع 10.21B',
-          ecnyReservePool: 150000000.0, // 150 Million e-CNY
-          iqdReservePool: 28275000000.0, // 28.275 Billion IQD
-          mbridgeStatus: 'ACTIVE',
-          cipsGatewayStatus: 'ONLINE',
-          cbiClearingStatus: 'SYNCHRONIZED',
-          lastUpdatedBy: 'PBOC / CBI Clearing Interbank Feed'
-        }
+    // 1. Ensure exchange rate record exists safely without race conditions
+    try {
+      const existingRate = await prisma.paymentExchangeRate.findUnique({
+        where: { pair: 'IQD_ECNY' }
       });
-      console.log('✅ Created default IQD_ECNY exchange rate & liquidity parameters.');
+
+      if (!existingRate) {
+        await prisma.paymentExchangeRate.create({
+          data: {
+            pair: 'IQD_ECNY',
+            baseRate: 188.50, // 1 E-CNY = 188.50 IQD
+            bidRate: 187.80,
+            askRate: 189.20,
+            retailFeePercent: 0.75, // 0.75%
+            businessFeePercent: 0.35, // 0.35% for wholesale/corporate
+            minimumRetailIqd: 25000.0,
+            minimumBusinessIqd: 1000000.0,
+            change24h: 0.45,
+            high24h: 189.80,
+            low24h: 187.20,
+            volume24h: '¥ 54.2M / د.ع 10.21B',
+            ecnyReservePool: 150000000.0, // 150 Million e-CNY
+            iqdReservePool: 28275000000.0, // 28.275 Billion IQD
+            mbridgeStatus: 'ACTIVE',
+            cipsGatewayStatus: 'ONLINE',
+            cbiClearingStatus: 'SYNCHRONIZED',
+            lastUpdatedBy: 'PBOC / CBI Clearing Interbank Feed'
+          }
+        });
+        console.log('✅ Created default IQD_ECNY exchange rate & liquidity parameters.');
+      }
+    } catch (rateInitErr: any) {
+      // Safely ignore unique constraint violation if created concurrently
+      console.log('ℹ️ Default IQD_ECNY rate already initialized or concurrently handled.');
     }
 
     // 2. Ensure initial realistic orders exist for demonstration & audit

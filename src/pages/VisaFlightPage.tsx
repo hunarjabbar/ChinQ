@@ -20,7 +20,6 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeModal, setActiveModal] = useState<VisaFlightRecord | null>(null);
 
   // Eligibility Checker State
   const [origin, setOrigin] = useState('CHINA');
@@ -656,7 +655,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
 
                       <div className="pt-2 flex gap-2">
                         <button
-                          onClick={() => setActiveModal(item)}
+                          onClick={() => setFormOpen(true)}
                           className="flex-1 py-2 px-3 rounded-lg bg-brand-600/80 dark:bg-brand-500/80 hover:bg-brand-600 dark:bg-brand-500 text-white font-bold text-xs transition-colors text-center"
                         >
                           {t.viewDetails}
@@ -683,89 +682,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
         )}
       </div>
 
-      {/* Modal for viewing detailed record */}
-      {activeModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative text-brand-900 dark:text-neutral-100 shadow-2xl">
-            <button
-              onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-gray-50 dark:bg-neutral-800 text-gray-500 dark:text-neutral-400 hover:text-brand-900 dark:text-neutral-100"
-            >
-              <X className="w-5 h-5" />
-            </button>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">
-              <Plane className="w-4 h-4" />
-              <span>{activeModal.serviceType} | {activeModal.originRegion} → {activeModal.destinationRegion}</span>
-            </div>
-
-            <h2 className="text-2xl font-black text-brand-900 dark:text-white mb-4">
-              {getLocalizedTitle(activeModal)}
-            </h2>
-
-            <img
-              src={activeModal.imageUrl}
-              alt="Preview"
-              className="w-full h-56 object-cover rounded-xl mb-4 border border-gray-200 dark:border-neutral-800"
-            />
-
-            <div className="grid grid-cols-2 gap-3 mb-4 bg-gray-50 dark:bg-neutral-900 p-3 rounded-xl border border-gray-200 dark:border-neutral-800 text-xs">
-              <div>
-                <span className="text-gray-400 dark:text-neutral-500 block">Authority / Airline:</span>
-                <span className="font-bold text-gray-700 dark:text-neutral-200">{activeModal.airlineOrAuthority}</span>
-              </div>
-              <div>
-                <span className="text-gray-400 dark:text-neutral-500 block">Processing / Speed:</span>
-                <span className="font-bold text-brand-600 dark:text-brand-400">{activeModal.processingTime}</span>
-              </div>
-              <div>
-                <span className="text-gray-400 dark:text-neutral-500 block">Fee / Cost Tariff:</span>
-                <span className="font-bold text-emerald-600 dark:text-emerald-400">{activeModal.feeOrCost}</span>
-              </div>
-              <div>
-                <span className="text-gray-400 dark:text-neutral-500 block">Updated Status:</span>
-                <span className="font-bold text-amber-600 dark:text-amber-400">Active Consular Green Channel</span>
-              </div>
-            </div>
-
-            <div className="space-y-4 mb-6 text-sm text-gray-600 dark:text-neutral-300 leading-relaxed">
-              <div>
-                <h4 className="font-bold text-brand-900 dark:text-white text-base mb-1">Executive Summary</h4>
-                <p>{getLocalizedSummary(activeModal)}</p>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-brand-900 dark:text-white text-base mb-1">Detailed Operational Rules & Guidance</h4>
-                <p className="whitespace-pre-line">{getLocalizedDetails(activeModal)}</p>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              {activeModal.officialLink && (
-                <a
-                  href={activeModal.officialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-center text-sm flex items-center justify-center gap-2"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>{t.officialPortal}</span>
-                </a>
-              )}
-              <button
-                onClick={() => {
-                  setActiveModal(null);
-                  setFormOpen(true);
-                }}
-                className="flex-1 py-3 px-4 rounded-xl bg-brand-600 dark:bg-brand-500 hover:bg-brand-700 dark:hover:bg-brand-400 text-white font-bold text-center text-sm flex items-center justify-center gap-2"
-              >
-                <Send className="w-4 h-4" />
-                <span>{t.requestConcierge}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Concierge Inquiry Modal Form */}
       {formOpen && (

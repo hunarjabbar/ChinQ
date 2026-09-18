@@ -25,7 +25,7 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 mt-12 mb-8 items-stretch">
         {/* Vision */}
         <div className="lg:col-span-4 flex flex-col gap-3 text-start rtl:text-right">
-          <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-black uppercase tracking-widest text-sm">
+          <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-bold uppercase tracking-wider text-sm">
             <Eye size={18} />
             <span>{isAr ? 'رؤيتنا' : isZh ? '我们的愿景' : isCkb ? 'دیدگامان' : 'Our Vision'}</span>
           </div>
@@ -42,7 +42,7 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
 
         {/* Mission */}
         <div className="lg:col-span-4 flex flex-col gap-3 text-start rtl:text-right border-t lg:border-t-0 lg:border-s border-neutral-200 dark:border-neutral-700 pt-6 lg:pt-0 lg:ps-6">
-          <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-black uppercase tracking-widest text-sm">
+          <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-bold uppercase tracking-wider text-sm">
             <Target size={18} />
             <span>{isAr ? 'رسالتنا' : isZh ? '我们的使命' : isCkb ? 'ئامانجمان' : 'Our Mission'}</span>
           </div>

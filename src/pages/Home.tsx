@@ -2,37 +2,39 @@ import DOMPurify from 'dompurify';
 import { SubscriptionCard } from '../components/SubscriptionCard';
 import { motion } from 'motion/react';
 import { useQuery } from '@tanstack/react-query';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Article, Locale, Study, MarketData } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { useAuthStore } from '../store/useAuthStore';
-import { BookOpen, Lock, ChevronRight, ChevronLeft, Sparkles, AlertCircle, Activity, Flame, Clock } from 'lucide-react';
+import { BookOpen, Lock, ChevronRight, ChevronLeft, Sparkles, AlertCircle, Activity, Flame, Clock, Radio } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { cn } from '../lib/utils';
 import { ADDITIONAL_TOPICS } from '../data/topics';
 import { InvestIraq } from '../components/InvestIraq';
 import { ContactUs } from '../components/ContactUs';
-import { MarketIndicesSection } from '../components/MarketIndicesSection';
+import { IcaFinanceEconomicsSection } from '../components/IcaFinanceEconomicsSection';
 import { TrendingBooksSection } from '../components/TrendingBooksSection';
 import PartnersSection from "../components/PartnersSection";
-import SourcingSection from "../components/SourcingSection";
+import { PaymentAndSourcingSection } from "../components/PaymentAndSourcingSection";
 import { RecommendedBooksSection } from '../components/RecommendedBooksSection';
 import { TourismSection } from '../components/TourismSection';
 import { WomenSection } from '../components/WomenSection';
 import { VisaFlightSection } from '../components/VisaFlightSection';
-import { PaymentGatewayShowcase } from '../components/payments/PaymentGatewayShowcase';
-import { ArticleModal } from '../components/ArticleModal';
-import { NewsletterSubscriptionModal } from '../components/NewsletterSubscriptionModal';
+
+
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
 import { BricsSection } from '../components/BricsSection';
+import { ChineseProductsShowcase } from '../components/ChineseProductsShowcase';
+import { IcaPlusSection } from '../components/IcaPlusSection';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 
 export function Home() {
   const { lang } = useParams<{ lang: Locale }>();
   const { t } = useI18n(lang!);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const navigate = useNavigate();
+  
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
   const { data: marketData = [] } = useQuery<MarketData[]>({
     queryKey: ['marketData'],
@@ -191,7 +193,7 @@ export function Home() {
   const popularStories = articles.slice(0, 5); // Popular stories list
 
   return (
-    <div className="flex flex-col w-full bg-paper-50 dark:bg-neutral-900 transition-colors">
+    <div className="flex flex-col w-full bg-white dark:bg-neutral-900 transition-colors">
       
       {/* IRAQ-CHINA INTELLIGENCE WIRE - VERTICAL TICKER */}
       <div className="w-full bg-white dark:bg-neutral-900 text-ink-900 dark:text-white border-b border-gray-200 dark:border-neutral-800 flex overflow-hidden h-12 relative items-center shadow-xs">
@@ -204,7 +206,7 @@ export function Home() {
             {[...articles.slice(0, 8), ...articles.slice(0, 8)].map((article, i) => {
               const tr = getTranslation(article);
               return (
-                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => setSelectedArticle(article)}>
+                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => navigate(`/${lang}/article/${article.slug}`)}>
                    <span className="text-xs text-brand-800 dark:text-brand-400 me-4 shrink-0 uppercase font-bold">{new Date(article.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})}</span>
                    <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors truncate">{tr?.title}</span>
                  </div>
@@ -215,16 +217,16 @@ export function Home() {
       </div>
 
       {/* Section 1: Full-Scale Upper Trending Carousel with Covers & Navigation Arrows */}
-      <section className="w-full p-4 sm:p-6 bg-brand-800 text-white border-y-4 border-brand-800 relative overflow-hidden shadow-2xl">
+      <section className="w-full p-4 sm:p-6 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 relative overflow-hidden shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 bg-white/10 text-white rounded-md shadow-xs border border-white/20 backdrop-blur-sm">
-              <Flame size={18} className="animate-pulse text-white" />
+            <span className="flex items-center justify-center w-8 h-8 bg-brand-50 dark:bg-brand-900/30 text-brand-800 dark:text-brand-400 rounded-md shadow-xs border border-brand-100 dark:border-brand-800/50">
+              <Flame size={18} className="animate-pulse" />
             </span>
-            <h3 className="text-lg sm:text-xl font-black uppercase tracking-widest text-white ">
+            <h3 className="text-lg sm:text-xl font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100">
               {t('trending')}
             </h3>
-            <span className="hidden sm:inline-block text-xs text-white ms-2 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/20 font-bold backdrop-blur-sm">
+            <span className="hidden sm:inline-block text-xs text-gray-600 dark:text-neutral-400 ms-2 bg-gray-100 dark:bg-neutral-800 px-2.5 py-0.5 rounded-full border border-gray-200 dark:border-neutral-700 font-bold">
               • {articles.length} {lang === 'ar' ? 'موضوعات شائعة' : lang === 'zh' ? '热门主题' : lang === 'ckb' ? 'بابەتە گەرمەکان' : 'Featured Topics'}
             </span>
           </div>
@@ -233,14 +235,14 @@ export function Home() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => handleTrendingScroll('left')}
-              className="p-1.5 sm:p-2 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 shadow-sm cursor-pointer active:scale-95 backdrop-blur-sm"
+              className="p-1.5 sm:p-2 rounded-md bg-gray-50 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 shadow-sm cursor-pointer active:scale-95"
               aria-label="Scroll Left"
             >
               <ChevronLeft size={18} className="rtl:rotate-180" />
             </button>
             <button
               onClick={() => handleTrendingScroll('right')}
-              className="p-1.5 sm:p-2 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 shadow-sm cursor-pointer active:scale-95 backdrop-blur-sm"
+              className="p-1.5 sm:p-2 rounded-md bg-gray-50 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 shadow-sm cursor-pointer active:scale-95"
               aria-label="Scroll Right"
             >
               <ChevronRight size={18} className="rtl:rotate-180" />
@@ -258,63 +260,48 @@ export function Home() {
             return (
               <div 
                 key={`trending-cover-${article.id}`} 
-                onClick={() => setSelectedArticle(article)}
-                className="group shrink-0 w-[250px] sm:w-[290px] relative rounded-2xl p-[1px] transition-all duration-300 hover:scale-[1.04] active:scale-95 cursor-pointer"
+                onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                className="group shrink-0 w-[250px] sm:w-[290px] relative rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-sm hover:shadow-md overflow-hidden flex flex-col justify-between"
               >
-                {/* Underneath blurry glassy halo glow: refined cherry red & white reflection */}
-                <div 
-                  className="absolute -inset-1 rounded-[22px] bg-gradient-to-b from-white/40 via-[#e60026]/35 to-[#8a0014]/45 blur-md opacity-80 group-hover:opacity-100 group-hover:blur-lg transition-all duration-300 pointer-events-none" 
-                  aria-hidden="true" 
-                />
-
-                {/* Smooth blurry glassy sub-layer under the border */}
-                <div 
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/30 via-red-100/15 to-[#6b000f]/50 backdrop-blur-2xl shadow-[0_14px_36px_rgba(0,0,0,0.24),0_2px_12px_rgba(255,255,255,0.22)] transition-all duration-300" 
-                  aria-hidden="true" 
-                />
-
-                {/* Main Card Body */}
-                <div className="relative z-10 w-full h-full bg-[#b3001e]/92 dark:bg-[#990018]/95 backdrop-blur-xl border border-white/40 group-hover:border-white/70 rounded-2xl overflow-hidden flex flex-col justify-between text-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.45)]">
                   {/* Topic Cover Image */}
-                  <div className="relative w-full h-[155px] sm:h-[165px] bg-[#7d0013] overflow-hidden border-b border-red-300/40">
+                  <div className="relative w-full h-[155px] sm:h-[165px] bg-gray-100 dark:bg-neutral-700 overflow-hidden border-b border-gray-100 dark:border-neutral-700">
                     {article.imageUrl ? (
                       <img 
                         src={article.imageUrl} 
                         alt={tr?.title || 'Topic Cover'}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-95 group-hover:opacity-100 brightness-[1.03] contrast-[1.04]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#7d0013] text-red-100 font-bold">
-                        <span className="italic text-xs">
+                      <div className="w-full h-full flex items-center justify-center text-gray-400">
+                        <span className="italic text-xs font-bold">
                           {lang === 'ar' ? 'موضوع الوكالة' : lang === 'zh' ? '伊拉克-中国通讯社专题' : lang === 'ckb' ? 'بابەتی ئاژانس' : 'Iraqi-Chinese Agency Topic'}
                         </span>
                       </div>
                     )}
                     {/* Category Badge - Clean Pill */}
-                    <div className="absolute top-2.5 start-2.5 bg-black/60 backdrop-blur-md text-white border border-white/30 text-xs font-black uppercase px-2.5 py-1 rounded-sm shadow-xs tracking-wider">
+                    <div className="absolute top-2.5 start-2.5 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-ink-900 dark:text-white border border-gray-200 dark:border-neutral-700 text-[10px] font-black uppercase px-2 py-1 rounded-sm shadow-xs tracking-wider">
                       {getCategoryName(article.category)}
                     </div>
                   </div>
 
                   {/* Topic Info */}
-                  <div className="p-4 flex flex-col justify-between flex-grow space-y-3 bg-gradient-to-b from-[#a30018]/90 via-[#8a0014]/92 to-[#6e0010]/98 backdrop-blur-md">
-                    <h4 className="text-sm sm:text-base font-black uppercase tracking-widest text-white transition-colors line-clamp-2 leading-snug relative z-10">
+                  <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
+                    <h4 className="text-sm sm:text-base font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100 transition-colors line-clamp-2 leading-snug group-hover:text-brand-800 dark:group-hover:text-brand-400">
                       {tr?.title}
                     </h4>
-                    <p className="text-xs font-bold uppercase tracking-widest text-white/95 leading-relaxed line-clamp-2 relative z-10 transition-colors">
+                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-neutral-400 leading-relaxed line-clamp-2 transition-colors">
                       {tr?.excerpt}
                     </p>
                     {/* Footer */}
-                    <div className="flex items-center justify-between text-xs font-bold text-white pt-3 border-t border-red-300/35 relative z-10">
-                      <span className="flex items-center gap-1.5 font-bold uppercase tracking-widest text-white/95">
-                        <Clock size={13} className="text-white shrink-0 stroke-[2.5]" />
+                    <div className="flex items-center justify-between text-xs font-bold text-gray-500 dark:text-neutral-400 pt-3 border-t border-gray-100 dark:border-neutral-800">
+                      <span className="flex items-center gap-1.5 font-bold uppercase tracking-widest">
+                        <Clock size={13} className="shrink-0 stroke-[2.5]" />
                         {formatTimeAgo(article.createdAt)}
                       </span>
-                      <span className="text-white font-black group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
+                      <span className="text-brand-800 dark:text-brand-400 font-black group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
                     </div>
                   </div>
-                </div>
               </div>
             );
           })}
@@ -331,7 +318,7 @@ export function Home() {
         </div>
         {leadStory && (
           <div 
-            onClick={() => setSelectedArticle(leadStory)}
+            onClick={() => navigate(`/${lang}/article/${leadStory.slug}`)}
             className="cursor-pointer group transition-all duration-300"
           >
             <div className="relative mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-neutral-800 shadow-sm bg-gray-100 dark:bg-neutral-800">
@@ -386,7 +373,11 @@ export function Home() {
 
       {/* Column 3: Most Popular & Widget */}
       <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-white dark:bg-neutral-900">
+        <IcaPlusSection />
         <BricsSection lang={lang as Locale} />
+        
+        <ChineseProductsShowcase lang={lang as Locale} />
+
         <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-sm p-6 flex-grow">
           <h3 className="text-base sm:text-lg uppercase font-black tracking-widest mb-6 flex items-center text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-3">
             <span className="w-2.5 h-2.5 bg-brand-800 rounded-sm me-3 animate-pulse"></span>
@@ -417,7 +408,7 @@ export function Home() {
               {popularStories.map((article) => (
                 <li 
                   key={`pop-${article.id}`} 
-                  onClick={() => setSelectedArticle(article)}
+                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
                   className="font-bold leading-snug cursor-pointer hover:text-brand-800 dark:hover:text-brand-400 transition-colors border-b border-gray-100 dark:border-neutral-800/50 pb-3 last:border-0 last:pb-0"
                 >
                   <span className="inline-block align-top max-w-[92%] ms-2 hover:underline">
@@ -430,35 +421,67 @@ export function Home() {
         </div>
         
         {/* LIVE COVERAGE HIGHLIGHT */}
-        <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 p-6 rounded-lg shadow-sm hover:border-brand-800/40 transition-all duration-300">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 dark:bg-brand-950/80 text-brand-800 dark:text-brand-400 border border-brand-200 dark:border-brand-800/50 rounded-sm font-black uppercase text-xs tracking-widest mb-4">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-800 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-800"></span>
-            </span>
-            {lang === 'ar' ? 'تغطية مباشرة' : lang === 'ckb' ? 'رووماڵی ڕاستەوخۆ' : lang === 'zh' ? '现场直播' : 'Live Coverage'}
+        <div className="bg-red-700 dark:bg-red-800 text-white border-2 border-red-600/90 p-8 sm:p-10 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 min-h-[460px] sm:min-h-[500px] flex flex-col justify-between relative overflow-hidden group">
+          {/* Subtle background glow effect */}
+          <div className="pointer-events-none absolute -top-24 -end-24 w-64 h-64 bg-red-500/20 rounded-full blur-2xl"></div>
+          <div className="pointer-events-none absolute -bottom-24 -start-24 w-64 h-64 bg-red-900/40 rounded-full blur-2xl"></div>
+
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white text-red-700 rounded-full font-black uppercase text-xs tracking-widest shadow-sm mb-5">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-80"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-700"></span>
+              </span>
+              <span>{lang === 'ar' ? 'تغطية مباشرة خاصة' : lang === 'ckb' ? 'رووماڵی ڕاستەوخۆی تایبەت' : lang === 'zh' ? '特别直播报道' : 'Special Live Coverage'}</span>
+            </div>
+
+            <h3 className="font-black text-2xl sm:text-3xl leading-snug text-white mb-4 tracking-tight">
+              <Link to={`/${lang}/live/iraq-china-summit-2026`} className="hover:text-red-100 transition-colors">
+                {lang === 'ar' ? 'القمة الاقتصادية العراقية الصينية 2026' : lang === 'ckb' ? 'لووتکەی ئابووری عێراق-چین ٢٠٢٦' : lang === 'zh' ? '2026年伊拉克-中国经济峰会' : 'Iraq-China Economic Summit 2026'}
+              </Link>
+            </h3>
+
+            <p className="text-sm sm:text-base text-white/95 mb-6 leading-relaxed font-normal">
+              {lang === 'ar' 
+                ? 'تغطية وبث مباشر على مدار الساعة لاتفاقيات التجارة الاستراتيجية ومشاريع الطاقة وممر التنمية الإقليمي بين بغداد وبكين.' 
+                : lang === 'ckb' 
+                ? 'ڕووماڵ و پەخشی ڕاستەوخۆ بۆ ڕێککەوتننامە ستراتیژییە بازرگانییەکان، پڕۆژەکانی وزە و ڕێگەی گەشەپێدان.' 
+                : lang === 'zh' 
+                ? '全天候实时报道巴格达与北京之间的战略贸易协定、能源基建项目以及区域发展走廊规划。' 
+                : '24/7 continuous broadcast and live updates on strategic trade treaties, clean energy infrastructure, and bilateral development corridors.'}
+            </p>
+
+            <div className="bg-red-800/85 border border-red-500/40 rounded-lg p-4 mb-6 text-xs text-white/95 space-y-1.5 backdrop-blur-xs shadow-inner">
+              <div className="font-black uppercase tracking-wider text-red-200 flex items-center justify-between">
+                <span>{lang === 'ar' ? 'موجز القمة المباشر' : lang === 'zh' ? '峰会实时简报' : lang === 'ckb' ? 'کورتەی لووتکە' : 'Summit Briefing'}</span>
+                <span className="bg-red-950/70 border border-red-400/30 px-2 py-0.5 rounded text-[10px] text-white font-bold tracking-widest uppercase">
+                  {lang === 'ar' ? 'قريباً' : lang === 'zh' ? '即将上线' : lang === 'ckb' ? 'بەم زووانە' : 'Coming Soon'}
+                </span>
+              </div>
+              <div className="text-white/90 leading-normal font-medium">
+                {lang === 'ar' 
+                  ? 'مفاوضات استثمارية كبرى تشمل 14 قطاعاً حيوياً ومذكرات تفاهم صناعية مشتركة.' 
+                  : lang === 'zh' 
+                  ? '涵盖14个关键领域的重大投资协议与双边联合工业合作备忘录。' 
+                  : lang === 'ckb' 
+                  ? 'ڕێککەوتنی گەورەی وەبەرهێنان لە ١٤ کەرتی جیاوازدا.' 
+                  : 'High-level multilateral pacts spanning 14 strategic economic and energy sectors.'}
+              </div>
+            </div>
           </div>
-          <h3 className="font-black text-xl mb-2.5 leading-snug text-brand-800 dark:text-white">
-            <Link to={`/${lang}/live/iraq-china-summit-2026`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">
-              {lang === 'ar' ? 'القمة الاقتصادية العراقية الصينية 2026' : lang === 'ckb' ? 'لووتکەی ئابووری عێراق-چین ٢٠٢٦' : lang === 'zh' ? '2026年伊拉克-中国经济峰会' : 'Iraq-China Economic Summit 2026'}
+
+          <div className="relative z-10 pt-2">
+            <Link 
+              to={`/${lang}/live/iraq-china-summit-2026`} 
+              className="inline-flex items-center justify-between w-full px-6 py-4 bg-white hover:bg-neutral-100 text-red-700 rounded-lg text-sm font-black uppercase tracking-wider transition-all shadow-lg hover:shadow-xl group cursor-pointer"
+            >
+              <span className="flex items-center gap-2">
+                <Radio size={16} className="text-red-700 animate-pulse" />
+                <span>{lang === 'ar' ? 'متابعة التحديثات' : lang === 'ckb' ? 'سەیرکردنی نوێکارییەکان' : lang === 'zh' ? '关注更新' : 'Follow Updates'}</span>
+              </span>
+              <span className="group-hover:translate-x-1.5 transition-transform rtl:group-hover:-translate-x-1.5 text-base font-black">→</span>
             </Link>
-          </h3>
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 mb-5 leading-relaxed font-normal">
-            {lang === 'ar' 
-              ? 'تحديثات في الوقت الفعلي من قمة الشراكة الاستراتيجية في بكين.' 
-              : lang === 'ckb' 
-              ? 'تایبەتمەندی و نوێکاری ڕاستەوخۆ لە لوتکەی پەکین بۆ هاوبەشی ستراتیژی.' 
-              : lang === 'zh' 
-              ? '北京战略合作伙伴关系峰会实时更新。' 
-              : 'Real-time updates from the strategic partnership summit in Beijing.'}
-          </p>
-          <Link 
-            to={`/${lang}/live/iraq-china-summit-2026`} 
-            className="inline-flex items-center justify-between w-full px-4 py-3 bg-brand-800 hover:bg-brand-700 text-white rounded-md text-xs font-black uppercase tracking-wider transition-all shadow-sm group"
-          >
-            <span>{lang === 'ar' ? 'متابعة التحديثات' : lang === 'ckb' ? 'سەیرکردنی نوێکارییەکان' : lang === 'zh' ? '关注更新' : 'Follow Updates'}</span>
-            <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
-          </Link>
+          </div>
         </div>
 
         {/* ENTERPRISE CALL TO ACTION */}
@@ -470,9 +493,9 @@ export function Home() {
         <PartnersSection lang={lang as Locale} />
       </ErrorBoundary>
 
-      {/* CHINA & HONG KONG STOCK CHARTS & INDICES TERMINAL SECTION */}
-      <div id="market" className="w-full my-6">
-        <MarketIndicesSection data={marketData} lang={lang!} />
+      {/* ICA FINANCE & ECONOMICS SECTION */}
+      <div id="finance-economics" className="w-full my-6">
+        <IcaFinanceEconomicsSection lang={lang as Locale} />
       </div>
 
       {/* OPINION & ANALYSIS BOARD */}
@@ -503,7 +526,7 @@ export function Home() {
               return (
                 <div 
                   key={article.id}
-                  onClick={() => setSelectedArticle(article)}
+                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
                   className="cursor-pointer group flex flex-col justify-between p-3.5 rounded-xl border border-transparent hover:border-brand-800/20 hover:bg-brand-50/40 dark:hover:bg-neutral-800/50 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 shadow-none hover:shadow-md"
                 >
                   <div className="space-y-3">
@@ -634,7 +657,7 @@ export function Home() {
       )}
 
       {/* ADDITIONAL SECTIONS */}
-      <section className="w-full bg-paper-50 dark:bg-neutral-900 border-t border-brand-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x rtl:divide-x-reverse divide-ink-900/10 dark:divide-neutral-800 my-6 shadow-xs">
+      <section className="w-full bg-white dark:bg-neutral-900 border-t border-brand-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x rtl:divide-x-reverse divide-ink-900/10 dark:divide-neutral-800 my-6 shadow-xs">
         {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
           const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
           if (sectionArticles.length === 0) return null;
@@ -653,7 +676,7 @@ export function Home() {
               {sectionArticles.map((article, i) => (
                 <div 
                   key={article.id}
-                  onClick={() => setSelectedArticle(article)}
+                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
                   className="cursor-pointer group hover:bg-black/[0.03] dark:hover:bg-white/[0.05] p-2.5 -mx-2.5 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:brightness-105"
                 >
                   <h4 className="text-sm font-bold leading-tight group-hover:text-brand-700 text-black dark:text-black transition-colors line-clamp-3">
@@ -669,14 +692,7 @@ export function Home() {
         })}
       </section>
 
-      {/* GORGEOUS IMMERSIVE NEWSPAPER DETAIL OVERLAY MODAL */}
-      {selectedArticle && (
-        <ArticleModal 
-          article={selectedArticle} 
-          lang={lang!} 
-          onClose={() => setSelectedArticle(null)} 
-        />
-      )}
+
 
       {/* DEEP INTEL STUDY DETAIL OVERLAY MODAL */}
       {selectedStudy && (
@@ -685,7 +701,7 @@ export function Home() {
           onClick={() => setSelectedStudy(null)}
         >
           <div 
-            className="bg-paper-50 border-x border-brand-800 max-w-3xl w-full h-[90vh] overflow-y-auto shadow-2xl flex flex-col relative text-start transition-all duration-300"
+            className="bg-white border-x border-brand-800 max-w-3xl w-full h-[90vh] overflow-y-auto shadow-2xl flex flex-col relative text-start transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header toolbar */}
@@ -857,7 +873,7 @@ export function Home() {
               return (
                 <div 
                   key={article.id}
-                  onClick={() => setSelectedArticle(article)}
+                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
                   className="cursor-pointer group flex flex-col h-full bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
                 >
                   {article.imageUrl ? (
@@ -916,9 +932,9 @@ export function Home() {
         <InvestIraq lang={lang as Locale} />
       </div>
 
-      {/* Real-Time IQD & E-CNY Bilateral Payment Gateway & Currency Conversion Service */}
-      <div className="w-full my-6">
-        <PaymentGatewayShowcase lang={lang as Locale} />
+      {/* Unified Bilateral Settlement & Sourcing Services */}
+      <div id="settlement-sourcing" className="w-full my-6">
+        <PaymentAndSourcingSection lang={lang as Locale} />
       </div>
 
       <div id="directory" className="h-0 invisible" />
@@ -928,11 +944,6 @@ export function Home() {
           <VisaFlightSection lang={lang} />
         </ErrorBoundary>
       </div>
-
-      {/* Contact Us Section */}
-      {/* Partners Section */}
-      {/* Sourcing Section */}
-      <SourcingSection lang={lang as Locale} />
 
       {/* Sovereign Editorial & Fellowship Showcase */}
       <div className="w-full my-6">
@@ -947,7 +958,6 @@ export function Home() {
         <ContactUs lang={lang as Locale} />
       </div>
 
-      <NewsletterSubscriptionModal lang={lang as Locale} />
 
     </div>
   );

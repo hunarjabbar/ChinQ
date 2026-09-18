@@ -630,7 +630,7 @@ export function SocialFooterShowcase({ lang }: { lang: Locale }) {
                       </span>
                     )}
                   </div>
-                  <div className="font-serif font-black text-[11px] text-brand-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors tracking-tight">
+                  <div className="font-sans font-bold text-[11px] text-brand-900 dark:text-neutral-100 line-clamp-1 group-hover:text-brand-800 transition-colors tracking-tight">
                     {item.name.replace(/ \([A-Z]+\)/, '')}
                   </div>
                   <div className="mt-0.5">

@@ -88,7 +88,7 @@ This paper evaluates the performance, funding mechanisms, and construction veloc
 
 - دامەزراندنی لیژنەی هاوبەشی چاودێری ئەندازیاری کە لە پلاندانەرانی شارەوانی ناوخۆیی و ئەندازیارانی شارستانی نێودەوڵەتی پێکبێت.
 - خێراکردنی گرێدانی هێڵەکانی کارەبای پەستانی بەرز بۆ دابینکردنی وزە بۆ ناوچە قوتابخانەییە نوێیەکان و شارۆچکە پیشەسازییەکان.`,
-        imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+        imageUrl: '/src/assets/images/regenerated_image_1789503021434.jpg',
         isPrivate: false,
         authorId: u1.id
       },

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700;1,900&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -54,8 +54,8 @@
   --spacing-base: 2rem;
   --container-width: 100%;
 
-  --font-sans: "Sarkar Masmak", "Instrument Sans", "Vazirmatn", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-  --font-serif: "Sarkar Masmak", "Playfair Display", "Noto Serif SC", "Vazirmatn", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", "Instrument Sans", "Vazirmatn", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", "Noto Serif SC", "Vazirmatn", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
   --animate-marquee: marquee 30s linear infinite;
@@ -102,20 +102,14 @@
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-html[lang="ar"] {
-  font-family: "Sarkar Masmak", "Instrument Sans", system-ui, sans-serif;
-  --font-sans: "Sarkar Masmak", "Instrument Sans", "Vazirmatn", system-ui, sans-serif;
-  --font-serif: "Sarkar Masmak", "Playfair Display", "Noto Serif SC", "Vazirmatn", Georgia, serif;
-}
-
-html[lang="ckb"] {
-  font-family: "Sarkar Masmak", "Instrument Sans", system-ui, sans-serif;
-  --font-sans: "Sarkar Masmak", "Instrument Sans", "Vazirmatn", system-ui, sans-serif;
-  --font-serif: "Sarkar Masmak", "Playfair Display", "Noto Serif SC", "Vazirmatn", Georgia, serif;
+html[lang="ar"], html[lang="ckb"] {
+  font-family: "Readex Pro", "Vazirmatn", system-ui, sans-serif;
+  --font-sans: "Readex Pro", "Vazirmatn", system-ui, sans-serif;
+  --font-serif: "Playfair Display", "Noto Serif SC", "Readex Pro", Georgia, serif;
 }
 
 html[lang="ar"] body, html[lang="ckb"] body {
-  font-family: "Sarkar Masmak", "Instrument Sans", system-ui, sans-serif;
+  font-family: "Readex Pro", "Vazirmatn", system-ui, sans-serif;
 }
 
 html[lang="zh"] {
