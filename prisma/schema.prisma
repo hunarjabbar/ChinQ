@@ -402,6 +402,34 @@ model Partner {
   updatedAt      DateTime @updatedAt
 }
 
+model BusinessOpportunity {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  titleEn         String
+  titleAr         String   @default("")
+  titleZh         String   @default("")
+  titleCkb        String   @default("")
+  summaryEn       String   @default("")
+  summaryAr       String   @default("")
+  summaryZh       String   @default("")
+  summaryCkb      String   @default("")
+  contentEn       String   @default("")
+  contentAr       String   @default("")
+  contentZh       String   @default("")
+  contentCkb      String   @default("")
+  category        String   @default("INVESTMENT")
+  sector          String   @default("")
+  investmentValue String   @default("")
+  location        String   @default("")
+  coverImage      String   @default("")
+  featured        Boolean  @default(false)
+  order           Int      @default(0)
+  status          String   @default("OPEN")
+  contactEmail    String?  @default("business@iraqi-chineseagency.com")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model SourcingInquiry {
   id              String   @id @default(cuid())
   ticketId        String   @unique

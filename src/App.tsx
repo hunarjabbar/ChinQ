@@ -50,6 +50,7 @@ const AdminArticleNew = lazyWithRetry(() => import('./pages/AdminArticleNew').th
 const AdminAuditLogs = lazyWithRetry(() => import('./pages/AdminAuditLogs').then(m => ({ default: m.AdminAuditLogs })));
 const AdminBrics = lazyWithRetry(() => import('./pages/AdminBrics').then(m => ({ default: m.AdminBrics })));
 const AdminChineseProducts = lazyWithRetry(() => import('./pages/AdminChineseProducts').then(m => ({ default: m.AdminChineseProducts })));
+const AdminBusiness = lazyWithRetry(() => import('./pages/AdminBusiness'));
 const AdminUsers = lazyWithRetry(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })));
 const AdminMedia = lazyWithRetry(() => import('./pages/AdminMedia').then(m => ({ default: m.AdminMedia })));
 const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings').then(m => ({ default: m.AdminSettings })));
@@ -71,8 +72,15 @@ const AdminLiveEvents = lazyWithRetry(() => import('./pages/AdminLiveEvents'));
 const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
 const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
 const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEconomics').then(m => ({ default: m.AdminFinanceEconomics })));
-const PaymentsPage = lazyWithRetry(() => import('./pages/PaymentsPage').then(m => ({ default: m.PaymentsPage })));
 const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
+
+function PaymentsRedirect() {
+  const { lang = 'en', ref } = useParams<{ lang: string; ref?: string }>();
+  const destination = ref 
+    ? `/${lang}?tab=settlement&ref=${encodeURIComponent(ref)}#settlement-sourcing`
+    : `/${lang}?tab=settlement#settlement-sourcing`;
+  return <Navigate to={destination} replace />;
+}
 
 
 function mixColor(hex: string, targetHex: string, weight: number): string {
@@ -224,8 +232,8 @@ const router = createBrowserRouter([
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
-      { path: "payments", element: <PaymentsPage /> },
-      { path: "payments/:ref", element: <PaymentsPage /> },
+      { path: "payments", element: <PaymentsRedirect /> },
+      { path: "payments/:ref", element: <PaymentsRedirect /> },
       { path: "article/:slug", element: <ArticlePage /> },
       { path: "category/:slug", element: <CategoryPage /> },
       { path: "search", element: <SearchWrapper /> },
@@ -252,6 +260,7 @@ const router = createBrowserRouter([
       { path: "market", element: <AdminFinanceEconomics /> },
       { path: "payments", element: <AdminPayments /> },
       { path: "partners", element: <AdminPartners /> },
+      { path: "business", element: <AdminBusiness /> },
       { path: "sourcing", element: <AdminSourcing /> },
                 { path: "audit-logs", element: <AdminAuditLogs /> },
           { path: "brics", element: <AdminBrics /> },

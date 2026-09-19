@@ -61,7 +61,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950 border border-brand-800/20 p-4 sm:p-6 md:p-8 shadow-lg rounded-3xl relative overflow-hidden">
+    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300 relative overflow-hidden">
       {/* Top Banner & Title */}
       <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-brand-800 pb-6 mb-6 gap-4">
         <div>

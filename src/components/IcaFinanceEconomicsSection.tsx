@@ -115,7 +115,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
     <ErrorBoundary inline lang={lang} title="ICA Finance & Economics">
       <section 
         id="finance-economics" 
-        className="w-full bg-white dark:bg-neutral-900 border-t-4 border-b-2 border-brand-800 p-4 sm:p-6 md:p-8 my-6 animate-fadeIn shadow-xs"
+        className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
         dir={isRtl ? 'rtl' : 'ltr'}
       >
         {/* Section Header */}

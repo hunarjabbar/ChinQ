@@ -178,7 +178,7 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
   if (isLoading && items.length === 0) return null;
 
   return (
-    <section className="w-full bg-gray-50 dark:bg-neutral-800/80 p-6 sm:p-8 border-l-4 border-brand-800 relative overflow-hidden rounded-xs shadow-sm">
+    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_var(--tw-gradient-stops))] from-brand-100/30 dark:from-brand-900/20 via-transparent to-transparent"></div>
 
       <div className="w-full relative z-10">

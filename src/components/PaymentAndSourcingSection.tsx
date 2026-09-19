@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Locale, PaymentExchangeRate } from '../types';
+import { Locale, PaymentExchangeRate, PaymentOrder } from '../types';
 import { 
   Coins, ArrowRightLeft, ShieldCheck, Zap, Building2, User, 
   ArrowRight, ArrowLeft, TrendingUp, TrendingDown, CheckCircle2, 
   Factory, Search, Ship, Send, X, ExternalLink, Layers, Check,
-  Sparkles, FileText, ChevronRight
+  Sparkles, FileText, ChevronRight, Clock
 } from 'lucide-react';
 import { ErrorBoundary } from './ErrorBoundary';
 import { cn } from '../lib/utils';
+import { PaymentOrderModal } from './payments/PaymentOrderModal';
+import { PaymentTracker } from './payments/PaymentTracker';
+import { PaymentReceiptModal } from './payments/PaymentReceiptModal';
 
 interface Props {
   lang: Locale;
@@ -22,8 +25,52 @@ export function PaymentAndSourcingSection({ lang }: Props) {
   const isCkb = lang === 'ckb';
   const isRtl = isAr || isCkb;
 
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
   // Active View Tab: 'all' | 'settlement' | 'sourcing'
   const [activeTab, setActiveTab] = useState<'all' | 'settlement' | 'sourcing'>('all');
+
+  // Interactive Modals State
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
+  const [selectedReceiptOrder, setSelectedReceiptOrder] = useState<PaymentOrder | null>(null);
+  const [isTrackerOpen, setIsTrackerOpen] = useState(false);
+  const [trackerInitialRef, setTrackerInitialRef] = useState('');
+
+  // Handle URL deep-linking via query parameter or hash
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    const hash = location.hash;
+
+    if (tabParam === 'settlement' || hash === '#settlement' || hash === '#currency-settlement') {
+      setActiveTab('settlement');
+    } else if (tabParam === 'sourcing' || hash === '#sourcing') {
+      setActiveTab('sourcing');
+    } else if (tabParam === 'all') {
+      setActiveTab('all');
+    } else if (tabParam === 'tracker') {
+      setActiveTab('settlement');
+      setIsTrackerOpen(true);
+    }
+
+    const refParam = searchParams.get('ref');
+    if (refParam) {
+      setActiveTab('settlement');
+      setTrackerInitialRef(refParam);
+      setIsTrackerOpen(true);
+    }
+
+    if (hash === '#settlement-sourcing' || hash === '#settlement' || hash === '#currency-settlement') {
+      const timer = setTimeout(() => {
+        const el = document.getElementById('settlement-sourcing');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash, location.search, searchParams]);
 
   // --- Payment State ---
   const [calcType, setCalcType] = useState<'RETAIL' | 'BUSINESS'>('RETAIL');
@@ -195,7 +242,7 @@ export function PaymentAndSourcingSection({ lang }: Props) {
     <ErrorBoundary inline lang={lang} title="Payment & Sourcing Services">
       <section 
         id="settlement-sourcing" 
-        className="w-full bg-white dark:bg-neutral-900 border-t-4 border-brand-800 p-4 sm:p-6 md:p-10 my-8 animate-fadeIn shadow-xs"
+        className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-8 transition-colors duration-300"
         dir={isRtl ? 'rtl' : 'ltr'}
       >
         {/* Unified Section Header */}
@@ -377,8 +424,9 @@ export function PaymentAndSourcingSection({ lang }: Props) {
 
                 {/* Interactive Action Buttons with Polished Hover Effects */}
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Link
-                    to={`/${lang}/payments`}
+                  <button
+                    type="button"
+                    onClick={() => setIsOrderModalOpen(true)}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-xs hover:shadow-md hover:-translate-y-0.5 cursor-pointer group"
                   >
                     <Coins size={15} />
@@ -388,14 +436,15 @@ export function PaymentAndSourcingSection({ lang }: Props) {
                     ) : (
                       <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                     )}
-                  </Link>
+                  </button>
 
-                  <Link
-                    to={`/${lang}/payments?tab=tracker`}
+                  <button
+                    type="button"
+                    onClick={() => setIsTrackerOpen(true)}
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-brand-900 dark:text-neutral-100 font-bold text-xs uppercase tracking-wider transition-all duration-200 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800/40 hover:-translate-y-0.5 cursor-pointer"
                   >
                     <span>{t.payment.trackOrderBtn}</span>
-                  </Link>
+                  </button>
                 </div>
 
                 {/* Settlement Highlights Badges */}
@@ -673,6 +722,85 @@ export function PaymentAndSourcingSection({ lang }: Props) {
                     Close
                   </button>
                 </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Bilateral Order Creation Modal */}
+        <PaymentOrderModal
+          isOpen={isOrderModalOpen}
+          onClose={() => setIsOrderModalOpen(false)}
+          initialData={{
+            orderType: calcType,
+            direction: 'IQD_TO_ECNY',
+            sourceAmount: num > 0 ? num : 1000000,
+            targetAmount: netCny > 0 ? netCny : 0,
+            exchangeRate: askRate || 189.20,
+            feeAmount: fee || 0,
+            feePercent: feePercent || 0.75,
+          }}
+          lang={lang}
+          onOrderCreated={(order) => {
+            setIsOrderModalOpen(false);
+            setSelectedReceiptOrder(order);
+            setIsReceiptOpen(true);
+          }}
+        />
+
+        {/* Bilateral Payment Receipt Modal */}
+        <PaymentReceiptModal
+          isOpen={isReceiptOpen}
+          onClose={() => setIsReceiptOpen(false)}
+          order={selectedReceiptOrder}
+          lang={lang}
+        />
+
+        {/* Real-time Sovereign Payment Tracker Modal */}
+        <AnimatePresence>
+          {isTrackerOpen && (
+            <div 
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+              onClick={() => setIsTrackerOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 15 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 15 }}
+                onClick={e => e.stopPropagation()}
+                className="bg-white dark:bg-neutral-900 border-t-4 border-brand-800 p-6 sm:p-8 max-w-2xl w-full relative shadow-2xl max-h-[90vh] overflow-y-auto"
+                dir={isRtl ? 'rtl' : 'ltr'}
+              >
+                <button
+                  onClick={() => setIsTrackerOpen(false)}
+                  className="absolute top-4 right-4 rtl:right-auto rtl:left-4 text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-100 p-1 cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
+
+                <div className="flex items-center gap-3 pb-4 mb-4 border-b border-neutral-200 dark:border-neutral-800">
+                  <div className="w-10 h-10 bg-brand-800 text-white flex items-center justify-center rounded-sm shrink-0">
+                    <Clock size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-black text-brand-900 dark:text-neutral-100 uppercase">
+                      {t.payment.trackOrderBtn}
+                    </h4>
+                    <span className="text-3xs font-mono uppercase tracking-widest text-brand-800 dark:text-brand-400 font-bold">
+                      mBridge & CIPS Sovereign Tracking System
+                    </span>
+                  </div>
+                </div>
+
+                <PaymentTracker
+                  initialRef={trackerInitialRef}
+                  lang={lang}
+                  onOpenReceipt={(order) => {
+                    setSelectedReceiptOrder(order);
+                    setIsReceiptOpen(true);
+                  }}
+                />
               </motion.div>
             </div>
           )}

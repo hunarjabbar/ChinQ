@@ -75,7 +75,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
   };
 
   return (
-    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-brand-800 p-4 sm:p-6 md:p-8 rounded-xs shadow-xs space-y-6 relative overflow-hidden">
+    <section className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300 space-y-6 relative overflow-hidden">
       {/* Visual Header Badge */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-brand-800 pb-6">
         <div className="space-y-2">

@@ -12,7 +12,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { cn } from '../lib/utils';
 import { ADDITIONAL_TOPICS } from '../data/topics';
-import { InvestIraq } from '../components/InvestIraq';
+import IcaBusinessSection from '../components/IcaBusinessSection';
 import { ContactUs } from '../components/ContactUs';
 import { IcaFinanceEconomicsSection } from '../components/IcaFinanceEconomicsSection';
 import { TrendingBooksSection } from '../components/TrendingBooksSection';
@@ -196,7 +196,7 @@ export function Home() {
     <div className="flex flex-col w-full bg-white dark:bg-neutral-900 transition-colors">
       
       {/* IRAQ-CHINA INTELLIGENCE WIRE - VERTICAL TICKER */}
-      <div className="w-full bg-white dark:bg-neutral-900 text-ink-900 dark:text-white border-b border-gray-200 dark:border-neutral-800 flex overflow-hidden h-12 relative items-center shadow-xs">
+      <div className="w-full bg-white dark:bg-neutral-900 text-ink-900 dark:text-white border-b border-gray-200 dark:border-neutral-800 flex overflow-hidden h-12 relative items-center">
         <div className="flex-shrink-0 font-black text-brand-800 dark:text-brand-400 pe-6 border-e border-gray-200 dark:border-neutral-800 uppercase tracking-[0.2em] text-xs sm:text-sm z-10 bg-white dark:bg-neutral-900 h-full flex items-center px-4">
           <Activity size={14} className="me-2 animate-pulse text-brand-800 dark:text-brand-400" />
           {lang === 'ar' ? 'سلك المعلومات' : lang === 'zh' ? '信息简报' : lang === 'ckb' ? 'تێلیگرافی هەواڵ' : 'INTELLIGENCE WIRE'}
@@ -208,7 +208,7 @@ export function Home() {
               return (
                  <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => navigate(`/${lang}/article/${article.slug}`)}>
                    <span className="text-xs text-brand-800 dark:text-brand-400 me-4 shrink-0 uppercase font-bold">{new Date(article.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})}</span>
-                   <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors truncate">{tr?.title}</span>
+                   <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors truncate">{tr?.title}</span>
                  </div>
               )
             })}
@@ -217,16 +217,16 @@ export function Home() {
       </div>
 
       {/* Section 1: Full-Scale Upper Trending Carousel with Covers & Navigation Arrows */}
-      <section className="w-full p-4 sm:p-6 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 relative overflow-hidden shadow-xs">
+      <section className="w-full p-4 sm:p-6 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 relative overflow-hidden">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 bg-brand-50 dark:bg-brand-900/30 text-brand-800 dark:text-brand-400 rounded-md shadow-xs border border-brand-100 dark:border-brand-800/50">
-              <Flame size={18} className="animate-pulse" />
+            <span className="flex items-center justify-center w-7 h-7 bg-brand-800 text-white rounded-sm">
+              <Flame size={16} className="animate-pulse" />
             </span>
-            <h3 className="text-lg sm:text-xl font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100">
+            <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-ink-900 dark:text-neutral-100">
               {t('trending')}
             </h3>
-            <span className="hidden sm:inline-block text-xs text-gray-600 dark:text-neutral-400 ms-2 bg-gray-100 dark:bg-neutral-800 px-2.5 py-0.5 rounded-full border border-gray-200 dark:border-neutral-700 font-bold">
+            <span className="hidden sm:inline-block text-xs text-gray-500 dark:text-neutral-400 ms-2 bg-gray-50 dark:bg-neutral-800 px-2.5 py-0.5 rounded border border-gray-200 dark:border-neutral-700 font-medium">
               • {articles.length} {lang === 'ar' ? 'موضوعات شائعة' : lang === 'zh' ? '热门主题' : lang === 'ckb' ? 'بابەتە گەرمەکان' : 'Featured Topics'}
             </span>
           </div>
@@ -235,17 +235,17 @@ export function Home() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => handleTrendingScroll('left')}
-              className="p-1.5 sm:p-2 rounded-md bg-gray-50 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 shadow-sm cursor-pointer active:scale-95"
+              className="p-1.5 sm:p-2 rounded bg-white hover:bg-gray-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 cursor-pointer active:scale-95"
               aria-label="Scroll Left"
             >
-              <ChevronLeft size={18} className="rtl:rotate-180" />
+              <ChevronLeft size={16} className="rtl:rotate-180" />
             </button>
             <button
               onClick={() => handleTrendingScroll('right')}
-              className="p-1.5 sm:p-2 rounded-md bg-gray-50 hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 shadow-sm cursor-pointer active:scale-95"
+              className="p-1.5 sm:p-2 rounded bg-white hover:bg-gray-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 cursor-pointer active:scale-95"
               aria-label="Scroll Right"
             >
-              <ChevronRight size={18} className="rtl:rotate-180" />
+              <ChevronRight size={16} className="rtl:rotate-180" />
             </button>
           </div>
         </div>
@@ -253,7 +253,7 @@ export function Home() {
         {/* Scrollable Topic Covers Track */}
         <div 
           ref={trendingScrollRef}
-          className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth py-5 px-3 -mx-3"
+          className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1"
         >
           {articles.map((article) => {
             const tr = getTranslation(article);
@@ -261,10 +261,10 @@ export function Home() {
               <div 
                 key={`trending-cover-${article.id}`} 
                 onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                className="group shrink-0 w-[250px] sm:w-[290px] relative rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-sm hover:shadow-md overflow-hidden flex flex-col justify-between"
+                className="group shrink-0 w-[250px] sm:w-[280px] relative rounded-lg transition-all duration-300 hover:border-brand-800 cursor-pointer bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 overflow-hidden flex flex-col justify-between"
               >
                   {/* Topic Cover Image */}
-                  <div className="relative w-full h-[155px] sm:h-[165px] bg-gray-100 dark:bg-neutral-700 overflow-hidden border-b border-gray-100 dark:border-neutral-700">
+                  <div className="relative w-full h-[150px] sm:h-[160px] bg-gray-100 dark:bg-neutral-700 overflow-hidden border-b border-gray-100 dark:border-neutral-700">
                     {article.imageUrl ? (
                       <img 
                         src={article.imageUrl} 
@@ -274,32 +274,32 @@ export function Home() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">
-                        <span className="italic text-xs font-bold">
+                        <span className="italic text-xs font-semibold">
                           {lang === 'ar' ? 'موضوع الوكالة' : lang === 'zh' ? '伊拉克-中国通讯社专题' : lang === 'ckb' ? 'بابەتی ئاژانس' : 'Iraqi-Chinese Agency Topic'}
                         </span>
                       </div>
                     )}
                     {/* Category Badge - Clean Pill */}
-                    <div className="absolute top-2.5 start-2.5 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-ink-900 dark:text-white border border-gray-200 dark:border-neutral-700 text-[10px] font-black uppercase px-2 py-1 rounded-sm shadow-xs tracking-wider">
+                    <div className="absolute top-2 start-2 bg-brand-800 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded tracking-wider shadow-xs">
                       {getCategoryName(article.category)}
                     </div>
                   </div>
 
                   {/* Topic Info */}
-                  <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
-                    <h4 className="text-sm sm:text-base font-black uppercase tracking-widest text-ink-900 dark:text-neutral-100 transition-colors line-clamp-2 leading-snug group-hover:text-brand-800 dark:group-hover:text-brand-400">
+                  <div className="p-3.5 flex flex-col justify-between flex-grow space-y-2.5">
+                    <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-900 dark:text-neutral-100 transition-colors line-clamp-2 leading-snug group-hover:text-brand-800 dark:group-hover:text-brand-400">
                       {tr?.title}
                     </h4>
-                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-neutral-400 leading-relaxed line-clamp-2 transition-colors">
+                    <p className="text-[11px] font-normal uppercase tracking-wider text-gray-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
                       {tr?.excerpt}
                     </p>
                     {/* Footer */}
-                    <div className="flex items-center justify-between text-xs font-bold text-gray-500 dark:text-neutral-400 pt-3 border-t border-gray-100 dark:border-neutral-800">
-                      <span className="flex items-center gap-1.5 font-bold uppercase tracking-widest">
-                        <Clock size={13} className="shrink-0 stroke-[2.5]" />
+                    <div className="flex items-center justify-between text-[11px] font-medium text-gray-500 dark:text-neutral-400 pt-2.5 border-t border-gray-100 dark:border-neutral-800">
+                      <span className="flex items-center gap-1 uppercase tracking-wider">
+                        <Clock size={12} className="shrink-0" />
                         {formatTimeAgo(article.createdAt)}
                       </span>
-                      <span className="text-brand-800 dark:text-brand-400 font-black group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-sm">→</span>
+                      <span className="text-brand-800 dark:text-brand-400 font-bold group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
                     </div>
                   </div>
               </div>
@@ -494,8 +494,10 @@ export function Home() {
       </ErrorBoundary>
 
       {/* ICA FINANCE & ECONOMICS SECTION */}
-      <div id="finance-economics" className="w-full my-6">
-        <IcaFinanceEconomicsSection lang={lang as Locale} />
+      <div id="finance-economics" className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="ICA Finance & Economics">
+          <IcaFinanceEconomicsSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
       {/* OPINION & ANALYSIS BOARD */}
@@ -657,39 +659,44 @@ export function Home() {
       )}
 
       {/* ADDITIONAL SECTIONS */}
-      <section className="w-full bg-white dark:bg-neutral-900 border-t border-brand-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x rtl:divide-x-reverse divide-ink-900/10 dark:divide-neutral-800 my-6 shadow-xs">
-        {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
-          const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
-          if (sectionArticles.length === 0) return null;
-          
-          let title = '';
-          if (catSlug === 'ai') title = t('ai');
-          if (catSlug === 'food-beverage') title = t('foodBeverage');
-          if (catSlug === 'expo') title = t('expo');
-          if (catSlug === 'business-statistics') title = t('businessStats');
-          
-          return (
-            <div key={catSlug} className="p-4 sm:p-6 flex flex-col space-y-4">
-              <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
-                {title}
-              </h3>
-              {sectionArticles.map((article, i) => (
-                <div 
-                  key={article.id}
-                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                  className="cursor-pointer group hover:bg-black/[0.03] dark:hover:bg-white/[0.05] p-2.5 -mx-2.5 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:brightness-105"
-                >
-                  <h4 className="text-sm font-bold leading-tight group-hover:text-brand-700 text-black dark:text-black transition-colors line-clamp-3">
-                    {getTranslation(article)?.title}
-                  </h4>
-                  <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">
-                    {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          );
-        })}
+      <section className="w-full bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-0 relative my-6 shadow-sm rounded-2xl p-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/80 dark:from-neutral-800/20 dark:to-neutral-900/80 pointer-events-none" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
+            const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
+            if (sectionArticles.length === 0) return null;
+            
+            let title = '';
+            if (catSlug === 'ai') title = t('ai');
+            if (catSlug === 'food-beverage') title = t('foodBeverage');
+            if (catSlug === 'expo') title = t('expo');
+            if (catSlug === 'business-statistics') title = t('businessStats');
+            
+            return (
+              <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-white/40 dark:bg-neutral-800/40 backdrop-blur-md border-0 relative group shadow-xs overflow-hidden">
+                <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
+                  {title}
+                </h3>
+                {sectionArticles.map((article, i) => (
+                  <div 
+                    key={article.id}
+                    onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                    className="cursor-pointer group/item hover:bg-white/60 dark:hover:bg-white/[0.08] p-3 -mx-2 rounded-lg transition-all duration-300 hover:scale-[1.01]"
+                  >
+                    <h4 className="text-sm font-bold leading-tight group-hover/item:text-brand-700 text-ink-900 dark:text-neutral-100 transition-colors line-clamp-3">
+                      {getTranslation(article)?.title}
+                    </h4>
+                    <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">
+                      {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
+                    </p>
+                  </div>
+                ))}
+                {/* Fading white smooth blurry effect underneath */}
+                <div className="absolute -bottom-4 left-4 right-4 h-6 bg-white/90 dark:bg-neutral-900/90 blur-xl pointer-events-none" />
+              </div>
+            );
+          })}
+        </div>
       </section>
 
 
@@ -907,55 +914,84 @@ export function Home() {
         </section>
       )}
 
-      {/* Trending Books Section (Space for 4 trending books on web) */}
-      <div className="w-full my-6">
-        <TrendingBooksSection lang={lang as Locale} />
+      {/* Strategic Partners (Before Bilateral Commercial Gateway) */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Strategic Partners">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
-      {/* Recommended Books Spotlight Section */}
-      <div className="w-full my-6">
-        <RecommendedBooksSection lang={lang as Locale} />
-      </div>
-
-      {/* Bilateral Tourism Showcase Section */}
-      <div className="w-full my-6">
-        <TourismSection lang={lang as Locale} />
-      </div>
-
-      {/* Women Leadership, Rights & Policy Forum */}
-      <div className="w-full my-6">
-        <WomenSection lang={lang as Locale} />
-      </div>
-
-      {/* Invest Iraq Section */}
-      <div id="projects" className="w-full my-6">
-        <InvestIraq lang={lang as Locale} />
+      {/* ICA Sovereign Business & Investment Hub */}
+      <div id="business" className="w-full my-8">
+        <div id="projects" className="h-0 invisible" />
+        <ErrorBoundary inline lang={lang} title="ICA Sovereign Business & Investment Hub">
+          <IcaBusinessSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
       {/* Unified Bilateral Settlement & Sourcing Services */}
-      <div id="settlement-sourcing" className="w-full my-6">
-        <PaymentAndSourcingSection lang={lang as Locale} />
+      <div id="settlement-sourcing" className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Bilateral Settlement & Sourcing Services">
+          <PaymentAndSourcingSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
       <div id="directory" className="h-0 invisible" />
 
-      <div className="w-full my-6">
+      {/* Sino-Iraqi Aviation & E-Visa Hub */}
+      <div className="w-full my-8">
         <ErrorBoundary inline lang={lang} title="Sino-Iraqi Aviation & E-Visa Hub">
           <VisaFlightSection lang={lang} />
         </ErrorBoundary>
       </div>
 
-      {/* Sovereign Editorial & Fellowship Showcase */}
-      <div className="w-full my-6">
-        <EditorialShowcaseSection lang={lang as Locale} />
+      {/* Bilateral Tourism Showcase Section */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Bilateral Tourism Showcase">
+          <TourismSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
-      <ErrorBoundary inline lang={lang} title="Strategic Partners">
-        <PartnersSection lang={lang as Locale} />
-      </ErrorBoundary>
+      {/* Women Leadership, Rights & Policy Forum */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Women Leadership & Policy Forum">
+          <WomenSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
 
-      <div id="contact" className="w-full my-6">
-        <ContactUs lang={lang as Locale} />
+      {/* Trending Books Section */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Trending Books">
+          <TrendingBooksSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Recommended Books Spotlight Section */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Recommended Books Spotlight">
+          <RecommendedBooksSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Sovereign Editorial & Fellowship Showcase */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Sovereign Editorial & Fellowship Showcase">
+          <EditorialShowcaseSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Institutional Contact */}
+      <div id="contact" className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Institutional Contact">
+          <ContactUs lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Strategic Partners (Deliberate Second Placement: Immediately Before Footer) */}
+      <div className="w-full my-8">
+        <ErrorBoundary inline lang={lang} title="Strategic Partners">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
       </div>
 
 

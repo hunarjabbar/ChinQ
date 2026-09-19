@@ -173,6 +173,15 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
               </span>
             </div>
 
+            {order.taxRegistrationNumber && (
+              <div className="p-3 flex justify-between items-center">
+                <span className="text-neutral-500 font-bold">Tax Registration (TIN):</span>
+                <span className="font-bold text-neutral-800 dark:text-neutral-200 font-mono">
+                  {order.taxRegistrationNumber}
+                </span>
+              </div>
+            )}
+
             {order.commercialInvoiceRef && (
               <div className="p-3 flex justify-between items-center">
                 <span className="text-neutral-500 font-bold">Commercial Invoice Ref:</span>
@@ -199,6 +208,15 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
                 </span>
               </div>
             )}
+
+            {order.contractValueUsd ? (
+              <div className="p-3 flex justify-between items-center">
+                <span className="text-neutral-500 font-bold">Contract Trade Value:</span>
+                <span className="font-bold text-neutral-800 dark:text-neutral-200 font-mono">
+                  ${order.contractValueUsd.toLocaleString()} USD
+                </span>
+              </div>
+            ) : null}
           </div>
 
           {/* Cryptographic Proof & QR Section */}

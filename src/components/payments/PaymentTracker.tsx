@@ -300,6 +300,41 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
             </div>
           </div>
 
+          {/* Commercial Trade & Customs Documentation (if provided) */}
+          {(order.commercialInvoiceRef || order.billOfLading || order.customsDeclarationNo || order.contractValueUsd) && (
+            <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-2 text-xs">
+              <span className="font-bold text-neutral-500 block uppercase text-[11px] tracking-wider">
+                Commercial Trade & Shipping Dossier
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {order.commercialInvoiceRef && (
+                  <div>
+                    <span className="text-[10px] text-neutral-400 block uppercase">Invoice Ref</span>
+                    <span className="font-mono font-bold text-brand-900 dark:text-neutral-200">{order.commercialInvoiceRef}</span>
+                  </div>
+                )}
+                {order.billOfLading && (
+                  <div>
+                    <span className="text-[10px] text-neutral-400 block uppercase">Bill of Lading</span>
+                    <span className="font-mono font-bold text-brand-900 dark:text-neutral-200">{order.billOfLading}</span>
+                  </div>
+                )}
+                {order.customsDeclarationNo && (
+                  <div>
+                    <span className="text-[10px] text-neutral-400 block uppercase">Customs Code</span>
+                    <span className="font-mono font-bold text-brand-900 dark:text-neutral-200">{order.customsDeclarationNo}</span>
+                  </div>
+                )}
+                {order.contractValueUsd ? (
+                  <div>
+                    <span className="text-[10px] text-neutral-400 block uppercase">Contract Value</span>
+                    <span className="font-mono font-bold text-brand-900 dark:text-neutral-200">${order.contractValueUsd.toLocaleString()} USD</span>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
           {/* Multi-Stage Clearing Timeline */}
           <div className="p-5 bg-neutral-50 dark:bg-neutral-800/30 rounded-xl border border-neutral-200 dark:border-neutral-700 space-y-4">
             <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white flex items-center gap-2">

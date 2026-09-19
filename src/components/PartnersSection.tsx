@@ -23,10 +23,10 @@ const FALLBACK_PARTNERS: PartnerItem[] = [
     name: 'Asiacell',
     logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Asiacell_logo.svg',
     websiteUrl: 'https://www.asiacell.com',
-    descriptionEn: 'Asiacell is a leading provider of quality mobile telecommunications and data services in Iraq.',
-    descriptionAr: 'آسيا سيل هي المزود الرائد لخدمات الاتصالات المتنقلة والبيانات عالية الجودة في العراق.',
-    descriptionZh: 'Asiacell 是伊拉克领先的优质移动通信和数据服务提供商。',
-    descriptionCkb: 'ئاسیاسێڵ پێشەنگە لە دابینکردنی خزمەتگوزارییەکانی پەیوەندی مۆبایل و داتا لە عێراق.',
+    descriptionEn: 'Asiacell is a leading provider of quality mobile telecommunications and data services in Iraq, pioneering 4G/5G digital infrastructure across all eighteen governorates.',
+    descriptionAr: 'آسيا سيل هي المزود الرائد لخدمات الاتصالات المتنقلة والبيانات الرقمية عالية الجودة في العراق، والرائدة في البنية التحتية لشبكات الجيلين الرابع والخامس.',
+    descriptionZh: 'Asiacell 是伊拉克领先的综合移动通信和高速数字数据服务提供商，在伊拉克全部十八省开创性铺设4G/5G关键骨干通信网络。',
+    descriptionCkb: 'ئاسیاسێڵ پێشەنگە لە دابینکردنی خزمەتگوزارییەکانی پەیوەندی مۆبایل و داتای دیجیتاڵی لە عێراق و تۆڕی مۆدێرنی نیشتمانی.',
     isActive: true,
     order: 1
   },
@@ -35,10 +35,10 @@ const FALLBACK_PARTNERS: PartnerItem[] = [
     name: 'PetroChina Iraq',
     logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/PetroChina_logo.svg/1200px-PetroChina_logo.svg.png',
     websiteUrl: 'http://www.petrochina.com.cn',
-    descriptionEn: 'Major energy infrastructure developer participating in Halfaya and Rumaila energy projects.',
-    descriptionAr: 'مطور رئيسي للبنية التحتية للطاقة يشارك في مشاريع حقل الحلفاية والرميلة.',
-    descriptionZh: '参与哈法亚与鲁迈拉能源项目的大型能源基础设施建设企业。',
-    descriptionCkb: 'گەورە پەرەپێدەری ژێرخانی وزە لە پرۆژەکانی نەوتی حەلفایە و ڕومێلە.',
+    descriptionEn: 'Major energy infrastructure developer participating in Halfaya and Rumaila energy projects, pioneering associated gas capture and technological engineering transfer.',
+    descriptionAr: 'مطور رئيسي للبنية التحتية للطاقة يشارك في مشاريع حقل الحلفاية والرميلة الاستراتيجية، ورائد في استثمار الغاز المصاحب ونقل التكنولوجيا الهندسية.',
+    descriptionZh: '深度参与伊拉克哈法亚与鲁迈拉等超大型国家级能源建设项目的旗舰央企，致力于油田伴生气深度回收与尖端工程技术转移。',
+    descriptionCkb: 'گەورە پەرەپێدەری ژێرخانی وزە لە پرۆژەکانی نەوتی حەلفایە و ڕومێلە، پێشەنگ لە بەکارهێنانەوەی گازی هاوپێچ و گواستنەوەی تەکنەلۆجیا.',
     isActive: true,
     order: 2
   },
@@ -47,12 +47,36 @@ const FALLBACK_PARTNERS: PartnerItem[] = [
     name: 'COSCO Shipping',
     logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/COSCO_Shipping_logo.svg/1280px-COSCO_Shipping_logo.svg.png',
     websiteUrl: 'https://lines.coscoshipping.com',
-    descriptionEn: 'Global container shipping giant securing bilateral maritime logistics between China and Umm Qasr port.',
-    descriptionAr: 'عملاق الشحن البحري العالمي لتأمين الخدمات اللوجستية البحرية بين الصين وميناء أم قصر.',
-    descriptionZh: '保障中国至伊拉克乌姆盖斯尔港双向海运物流的全球航运巨擘。',
-    descriptionCkb: 'کۆمپانیای گەورەی گواستنەوەی دەریایی نێوان چین و بەندەری ئوم قەسر.',
+    descriptionEn: 'Global container shipping giant securing bilateral maritime logistics, direct container lanes, and cold-chain corridors between Chinese industrial ports and Umm Qasr.',
+    descriptionAr: 'عملاق الشحن البحري العالمي لتأمين الخدمات اللوجستية البحرية المباشرة، وخطوط الحاويات وسلاسل التبريد بين الموانئ الصناعية الصينية وميناء أم قصر.',
+    descriptionZh: '全球航运集装箱物流巨擘，全面打通并稳定运营连接中国主要工业港口与伊拉克乌姆盖斯尔港的直航海运与冷链干线走廊。',
+    descriptionCkb: 'کۆمپانیای گەورەی جیهانی بۆ گواستنەوەی دەریایی بۆ مسۆگەرکردنی هێڵە دەریاییەکان و کاروانە بازرگانییەکان بۆ بەندەری ئوم قەسر.',
     isActive: true,
     order: 3
+  },
+  {
+    id: 'p-icbc',
+    name: 'Industrial and Commercial Bank of China (ICBC)',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Industrial_and_Commercial_Bank_of_China_logo.svg/1280px-Industrial_and_Commercial_Bank_of_China_logo.svg.png',
+    websiteUrl: 'http://www.icbc.com.cn',
+    descriptionEn: 'World\'s largest banking group providing cross-border bilateral trade settlement, sovereign liquidity channels, and digital currency clearing between China and Iraq.',
+    descriptionAr: 'أكبر مجموعة مصرفية في العالم تقدم خدمات تسوية التجارة الثنائية عبر الحدود، وقنوات السيولة السيادية، ومقاصة العملات الرقمية واليوان بين الصين والعراق.',
+    descriptionZh: '全球一级资产规模最大的商业银行机构，为中伊双边经贸通道提供跨境主权本币结算、外汇流动性支持与多层次数字货币清算服务。',
+    descriptionCkb: 'گەورەترین گرووپی بانکی لە جیهاندا بۆ دابینکردنی خزمەتگوزارییەکانی یەکلاکردنەوەی بازرگانی دوولایەنە، کەناڵی دراو و پاکتاوی دارایی نێوان چین و عێراق.',
+    isActive: true,
+    order: 4
+  },
+  {
+    id: 'p-cscec',
+    name: 'China State Construction Engineering Corp (CSCEC)',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/China_State_Construction_Engineering_Corporation_logo.svg/1280px-China_State_Construction_Engineering_Corporation_logo.svg.png',
+    websiteUrl: 'http://www.cscec.com',
+    descriptionEn: 'Premier global infrastructure contractor delivering turnkey deepwater civil facilities, nationwide transportation corridors, and sovereign industrial parks across Iraq.',
+    descriptionAr: 'المقاول العالمي الرائد في تطوير مشاريع البنية التحتية الكبرى، والمجمعات الصناعية والمدنية وممرات النقل السريع الاستراتيجية في عموم العراق.',
+    descriptionZh: '全球顶级综合建设投资集团，在伊拉克全境承担深水港区配套设施、国家级跨省交通走廊及现代化主权工业园区的总承包建设。',
+    descriptionCkb: 'گەورەترین کۆمپانیای ئەندازیاری و بیناسازی جیهانی بۆ جێبەجێکردنی پرۆژە گرنگەکانی ژێرخان، شارۆچکە پیشەسازییەکان و ڕێگاوبان لە عێراق.',
+    isActive: true,
+    order: 5
   }
 ];
 
@@ -122,15 +146,15 @@ export default function PartnersSection({ lang }: { lang: Locale }) {
             <div 
               key={`${p.id}-${idx}`} 
               onClick={() => setSelectedPartner(p)}
-              className="cursor-pointer group/card flex-shrink-0 w-[280px] sm:w-[320px] bg-black/50 backdrop-blur-sm border border-neutral-800 rounded-lg p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-brand-800 hover:bg-black/70 hover:shadow-lg hover:-translate-y-1"
+              className="cursor-pointer group/card flex-shrink-0 w-[280px] sm:w-[320px] bg-neutral-900/90 hover:bg-neutral-900 backdrop-blur-md border border-neutral-700/60 hover:border-brand-500 rounded-xl p-5 flex flex-col items-center justify-between gap-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5"
             >
-              <div className="h-16 w-full flex items-center justify-center">
-                <img src={p.logoUrl} alt={p.name} className="h-full object-contain max-w-[180px] grayscale opacity-70 group-hover/card:grayscale-0 group-hover/card:opacity-100 transition-all duration-500" referrerPolicy="no-referrer" />
+              <div className="h-20 w-full flex items-center justify-center p-3 rounded-lg bg-white/95 shadow-inner">
+                <img src={p.logoUrl} alt={p.name} className="max-h-14 max-w-[190px] w-auto object-contain transition-transform duration-300 group-hover/card:scale-105" referrerPolicy="no-referrer" />
               </div>
-              <div className="w-full h-px bg-neutral-800 my-2" />
-              <div className="text-center">
-                <h4 className="font-bold text-white text-lg group-hover/card:text-brand-400 transition-colors truncate w-full">{p.name}</h4>
-                <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest mt-1">{t.type}</p>
+              <div className="w-full h-px bg-neutral-800" />
+              <div className="text-center w-full">
+                <h4 className="font-bold text-white text-base group-hover/card:text-brand-300 transition-colors truncate w-full">{p.name}</h4>
+                <p className="text-[11px] font-semibold text-brand-400/90 uppercase tracking-wider mt-1">{t.type}</p>
               </div>
             </div>
           ))}

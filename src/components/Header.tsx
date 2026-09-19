@@ -1,6 +1,6 @@
 import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield, QrCode, Smartphone } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -41,6 +41,7 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
   const [isOpen, setIsOpen] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const isRtl = lang === 'ar' || lang === 'ckb';
+  const location = useLocation();
 
   // Automatically close after exactly 8 seconds
   useEffect(() => {
@@ -52,6 +53,20 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
 
   const showPopup = isOpen || isHovered;
 
+  const settlementTarget = `/${lang}?tab=settlement#settlement-sourcing`;
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    setIsHovered(false);
+    // If already on homepage, scroll smoothly to the unified section
+    if (location.pathname === `/${lang}` || location.pathname === `/${lang}/`) {
+      const el = document.getElementById('settlement-sourcing');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   return (
     <div 
       className="relative flex items-center"
@@ -59,12 +74,11 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link 
-        to={`/${lang}/payments`} 
-        onClick={() => { setIsOpen(false); setIsHovered(false); }}
-        className="relative flex items-center gap-1.5 px-3 py-1.5 bg-white/95 dark:bg-neutral-900/95 text-brand-900 dark:text-neutral-100 rounded-full text-[11px] font-bold uppercase tracking-widest border border-white/80 dark:border-neutral-700/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(204,0,0,0.3)] transition-all duration-300 group hover:-translate-y-0.5 z-10"
+        to={settlementTarget} 
+        onClick={handleLinkClick}
+        className="relative flex items-center gap-2.5 px-4 sm:px-6 md:px-8 py-3 bg-brand-800 hover:bg-brand-900 text-white rounded-xl text-sm sm:text-base md:text-lg font-black uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group hover:-translate-y-0.5 z-10"
       >
-        <span className="absolute -inset-1 bg-brand-600/20 dark:bg-brand-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
-        <Coins size={14} className="text-brand-800 dark:text-brand-400 relative z-10" />
+        <Coins size={18} className="text-white relative z-10 shrink-0" />
         <span className="relative z-10">{lang === 'ar' ? 'تسوية المدفوعات' : lang === 'zh' ? '支付结算' : lang === 'ckb' ? 'خزمەتگوزاری پارەدان' : 'Payment Settlement'}</span>
       </Link>
       
@@ -122,8 +136,8 @@ function PaymentSettlementButton({ lang }: { lang: Locale }) {
 
               {/* Action Button */}
               <Link
-                to={`/${lang}/payments`}
-                onClick={() => { setIsOpen(false); setIsHovered(false); }}
+                to={settlementTarget}
+                onClick={handleLinkClick}
                 className="mt-1 w-full flex items-center justify-center gap-2 py-2 px-3 bg-brand-800 hover:bg-brand-900 text-white rounded-md text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-98"
               >
                 <span>{lang === 'ar' ? 'دخول بوابة المدفوعات' : lang === 'zh' ? '进入结算网关' : lang === 'ckb' ? 'چوونە ناو دەروازەی پارەدان' : 'Open Settlement Gateway'}</span>
@@ -236,13 +250,13 @@ export function Header({ lang }: { lang: Locale }) {
         >
           <div className="relative z-10 flex flex-col items-center w-full">
             {/* Eyebrow Label */}
-            <div className="text-xs sm:text-xs font-black uppercase tracking-[0.25em] sm:tracking-[0.35em] text-neutral-600 dark:text-neutral-300 text-center mb-2 sm:mb-3">
+            <div className={`text-xs font-bold uppercase text-neutral-600 dark:text-neutral-300 text-center mb-2 sm:mb-3 ${lang === 'ar' || lang === 'ckb' ? 'tracking-normal' : 'tracking-[0.25em] sm:tracking-[0.35em]'}`}>
               {lang === 'ar' 
                 ? 'الممر المعلوماتي والمستقل • جمهورية العراق — جمهورية الصين الشعبية'
                 : lang === 'zh' 
                 ? '主权信息与经贸走廊 • 中国 — 伊拉克'
                 : lang === 'ckb' 
-                ? 'ڕێڕەوی زانیاری و سەربەخۆ • عێراق — چین'
+                ? 'سەرچاوەی زانیاری سەربەخۆی عێراق- چین'
                 : 'The Sovereign Information Corridor • China — Iraq'}
             </div>
 
@@ -255,78 +269,64 @@ export function Header({ lang }: { lang: Locale }) {
                 <LiveDateTime lang={lang} />
               </div>
 
-              {/* Centered Logo & Title Lockup */}
-              <div className="flex flex-col items-center group flex-1 shrink-0 px-2">
-                <Link to={`/${lang}`} className="relative block w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-8">
+              {/* Centered Logo & Title Lockup with Controls Placed Underneath */}
+              <div className="flex flex-col items-center group flex-1 shrink-0 px-2 gap-3">
+                <Link to={`/${lang}`} className="relative w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-8">
                   <div className="flex items-center justify-center shrink-0">
                     <IcaLogo size={110} variant="mark" lang={lang} className="w-14 h-14 sm:w-20 sm:h-20 lg:w-26 lg:h-26 drop-shadow-xl group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="flex flex-col items-start justify-center text-start">
                     {lang === 'ar' ? (
-                      <>
-                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">الوكالة العراقية الصينية</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
-                      </>
+                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-normal text-3xl sm:text-5xl lg:text-6xl select-none leading-tight">الوكالة العراقية - الصينية</span>
                     ) : lang === 'ckb' ? (
-                      <>
-                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-sans font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">ئاژانسی عێراقی - چینی</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
-                      </>
+                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-normal text-3xl sm:text-5xl lg:text-6xl select-none leading-tight">ئاژانسی عێراقی - چینی</span>
                     ) : lang === 'zh' ? (
-                      <>
-                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-black tracking-wider text-2xl sm:text-4xl lg:text-5xl">伊中通讯社</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
-                      </>
+                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-wider text-3xl sm:text-5xl lg:text-6xl select-none leading-tight">伊拉克-中国通讯社</span>
                     ) : (
-                      <>
-                        <span className="whitespace-nowrap bg-gradient-to-br from-brand-900 to-brand-700 dark:from-brand-300 dark:to-brand-500 bg-clip-text text-transparent font-black tracking-tight text-2xl sm:text-4xl lg:text-5xl">IRAQI-CHINESE</span>
-                        <span className="text-sm sm:text-xl lg:text-2xl uppercase bg-gradient-to-r from-brand-800 to-brand-600 dark:from-brand-400 dark:to-brand-600 bg-clip-text text-transparent tracking-[0.35em] mt-1 font-sans font-black whitespace-nowrap">AGENCY</span>
-                      </>
+                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-tight text-3xl sm:text-5xl lg:text-6xl select-none leading-tight">Iraqi-Chinese Agency</span>
                     )}
                   </div>
                   <div className="absolute -bottom-4 left-0 right-0 h-1 bg-brand-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center hidden md:block" />
                 </Link>
-              </div>
 
-              {/* Right Controls Column */}
-              <div className="flex flex-col items-end gap-2 w-auto lg:w-1/4 shrink-0">
-                 <div className="flex items-center gap-2 sm:gap-2.5 bg-neutral-100/90 dark:bg-neutral-800/90 p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-xs transition-colors">
-                    {/* QR Code App Download Trigger */}
-                    <button
-                      id="header-qr-download-btn"
-                      onClick={() => setIsQrModalOpen(true)}
-                      title={lang === 'ar' ? "تحميل تطبيق الوكالة (QR)" : lang === 'zh' ? "扫码下载客户端应用" : lang === 'ckb' ? "دابەزاندنی ئەپ (QR)" : "Download ICA App (QR Code)"}
-                      aria-label="Download ICA App"
-                      className="px-2.5 py-1.5 rounded-md flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/60 dark:hover:bg-brand-900/60 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800/60 transition-all duration-200 shadow-xs cursor-pointer active:scale-95 group"
-                    >
-                      <QrCode size={15} className="group-hover:rotate-12 transition-transform text-brand-700 dark:text-brand-400" />
-                      <span className="hidden sm:inline text-[11px] font-black uppercase tracking-wider">
-                        {lang === 'ar' ? 'تطبيق QR' : lang === 'zh' ? '应用二维码' : lang === 'ckb' ? 'ئەپ QR' : 'App QR'}
-                      </span>
-                    </button>
-                    <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
-                    <button
-                      id="dark-mode-toggle-btn"
-                      onClick={toggleDarkMode}
-                      title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                      aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                      className="px-2.5 py-1.5 rounded-md flex items-center gap-1.5 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-600 border border-neutral-200/80 dark:border-neutral-600 transition-all duration-200 shadow-xs cursor-pointer active:scale-95"
-                    >
-                      {darkMode ? (
-                        <>
-                          <Sun size={15} className="text-amber-400 fill-amber-400" />
-                          <span className="hidden xl:inline text-[11px] font-black uppercase tracking-wider text-neutral-200">Light</span>
-                        </>
-                      ) : (
-                        <>
-                          <Moon size={15} className="text-slate-800 fill-slate-800" />
-                          <span className="hidden xl:inline text-[11px] font-black uppercase tracking-wider text-neutral-700">Dark</span>
-                        </>
-                      )}
-                    </button>
-                    <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
-                    <LanguageSwitcher lang={lang} />
-                 </div>
+                {/* Right Controls Placed Underneath the Header Title */}
+                <div className="flex items-center gap-2 sm:gap-2.5 bg-neutral-100/90 dark:bg-neutral-800/90 p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-xs transition-colors mt-2">
+                   {/* QR Code App Download Trigger */}
+                   <button
+                     id="header-qr-download-btn"
+                     onClick={() => setIsQrModalOpen(true)}
+                     title={lang === 'ar' ? "تحميل تطبيق الوكالة (QR)" : lang === 'zh' ? "扫码下载客户端应用" : lang === 'ckb' ? "دابەزاندنی ئەپ (QR)" : "Download ICA App (QR Code)"}
+                     aria-label="Download ICA App"
+                     className="px-2.5 py-1.5 rounded-md flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/60 dark:hover:bg-brand-900/60 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800/60 transition-all duration-200 shadow-xs cursor-pointer active:scale-95 group"
+                   >
+                     <QrCode size={15} className="group-hover:rotate-12 transition-transform text-brand-700 dark:text-brand-400" />
+                     <span className="hidden sm:inline text-[11px] font-black uppercase tracking-wider">
+                       {lang === 'ar' ? 'تطبيق QR' : lang === 'zh' ? '应用二维码' : lang === 'ckb' ? 'ئەپ QR' : 'App QR'}
+                     </span>
+                   </button>
+                   <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
+                   <button
+                     id="dark-mode-toggle-btn"
+                     onClick={toggleDarkMode}
+                     title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                     aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                     className="px-2.5 py-1.5 rounded-md flex items-center gap-1.5 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-600 border border-neutral-200/80 dark:border-neutral-600 transition-all duration-200 shadow-xs cursor-pointer active:scale-95"
+                   >
+                     {darkMode ? (
+                       <>
+                         <Sun size={15} className="text-amber-400 fill-amber-400" />
+                         <span className="hidden xl:inline text-[11px] font-black uppercase tracking-wider text-neutral-200">Light</span>
+                       </>
+                     ) : (
+                       <>
+                         <Moon size={15} className="text-slate-800 fill-slate-800" />
+                         <span className="hidden xl:inline text-[11px] font-black uppercase tracking-wider text-neutral-800">Dark</span>
+                       </>
+                     )}
+                   </button>
+                   <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
+                   <LanguageSwitcher lang={lang} />
+                </div>
               </div>
             </div>
 
@@ -354,30 +354,7 @@ export function Header({ lang }: { lang: Locale }) {
           <div className="flex-shrink-0 z-10 flex items-stretch relative">
             <LiveDispatch lang={lang} />
           </div>
-          <div className="flex-1 overflow-hidden relative group">
-            {/* Subtle edge fade masks for smooth transition from LiveDispatch */}
-            <div className="pointer-events-none absolute inset-y-0 start-0 w-8 bg-gradient-to-r rtl:bg-gradient-to-l from-white dark:from-neutral-900 to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 end-0 w-8 bg-gradient-to-l rtl:bg-gradient-to-r from-white dark:from-neutral-900 to-transparent z-10" />
-
-            <div className="absolute inset-0 flex whitespace-nowrap animate-marquee rtl:animate-marquee-rtl items-center group-hover:[animation-play-state:paused]">
-              {breakingNews.length > 0 ? breakingNews.map((article) => {
-                const translation = getTranslation(article);
-                return (
-                  <span key={article.id} className="inline-flex items-center mx-5 text-xs sm:text-sm font-medium tracking-normal text-neutral-800 dark:text-neutral-200">
-                    <span className="w-1.5 h-1.5 bg-neutral-400 dark:bg-neutral-600 rounded-full me-3 shrink-0" />
-                    <span className="text-neutral-800 dark:text-neutral-200 hover:text-brand-800 dark:hover:text-brand-400 transition-colors">
-                      {translation?.title || 'NEWS UPDATE'}
-                    </span>
-                  </span>
-                );
-              }) : (
-                <span className="inline-flex items-center mx-6 text-xs sm:text-sm font-bold uppercase tracking-widest text-neutral-500">
-                  LOADING LATEST INTELLIGENCE DISPATCHES...
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="flex-shrink-0 z-40 flex items-center px-4 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-3 sm:gap-4">
+          <div className="flex-shrink-0 z-40 flex items-center px-4 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-3 sm:gap-4 ml-auto">
              <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
                {lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارە' : 'About'}
              </Link>

@@ -45,11 +45,14 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
   React.useEffect(() => {
     if (isOpen) {
-      if (initialData) {
-        setOrderType(initialData.orderType);
-        setDirection(initialData.direction);
-        setSourceAmount(initialData.sourceAmount);
-      }
+      const type = initialData?.orderType || 'RETAIL';
+      const dir = initialData?.direction || 'IQD_TO_ECNY';
+      const amt = initialData?.sourceAmount || 1000000;
+      
+      setOrderType(type);
+      setDirection(dir);
+      setSourceAmount(amt);
+
       setSenderName('');
       setSenderEmail('');
       setSenderPhone('');
@@ -57,9 +60,9 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
       setSenderCompany('');
       setRecipientName('');
       setRecipientIdentifier('');
-      setRecipientBankOrBureau('PBOC mBridge Clearing Node');
-      setPurpose('COMMERCIAL_TRADE');
-      setSettlementMethod('MBRIDGE_CBDC');
+      setRecipientBankOrBureau('PBOC Official e-CNY Digital Wallet App');
+      setPurpose(type === 'BUSINESS' ? 'Commercial Trade Goods & Invoices' : 'University Tuition & Educational Remittance');
+      setSettlementMethod(type === 'BUSINESS' ? 'mBridge CBDC Direct' : 'Zain Cash');
       setCommercialInvoiceRef('');
       setBillOfLading('');
       setCustomsDeclarationNo('');
@@ -77,7 +80,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
   const [senderIdNumber, setSenderIdNumber] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [recipientIdentifier, setRecipientIdentifier] = useState('');
-  const [recipientBankOrBureau, setRecipientBankOrBureau] = useState('PBOC Digital Wallet App');
+  const [recipientBankOrBureau, setRecipientBankOrBureau] = useState('PBOC Official e-CNY Digital Wallet App');
   const [settlementMethod, setSettlementMethod] = useState('Zain Cash');
   const [purpose, setPurpose] = useState('University Tuition & Educational Remittance');
 
@@ -98,13 +101,60 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!senderName || !senderEmail || !recipientName || !recipientIdentifier) {
-      setErrorMessage(isAr ? 'يرجى استكمال الحقول الإلزامية لبيانات المرسل والمستلم' : 'Please fill in all required sender and recipient fields.');
+    // Client-side validation: positive numeric amount
+    const numAmount = typeof sourceAmount === 'number' ? sourceAmount : parseFloat(String(sourceAmount));
+    if (!numAmount || isNaN(numAmount) || numAmount <= 0) {
+      setErrorMessage(
+        isAr 
+          ? 'يرجى تحديد مبلغ تسوية صحيح وأكبر من الصفر' 
+          : isZh 
+          ? '请输入大于零的有效清算结算金额' 
+          : isCkb 
+          ? 'تکایە بڕە پارەیەکی دروست و زیاتر لە صفر دیاری بکە' 
+          : 'Please specify a valid transfer amount greater than zero.'
+      );
       return;
     }
 
-    if (orderType === 'BUSINESS' && !senderCompany) {
-      setErrorMessage(isAr ? 'يرجى إدخال اسم الشركة العراقية المسجلة' : 'Please enter registered company name.');
+    // Client-side validation: required sender & recipient identification
+    if (!senderName.trim() || !senderEmail.trim() || !recipientName.trim() || !recipientIdentifier.trim()) {
+      setErrorMessage(
+        isAr 
+          ? 'يرجى استكمال الحقول الإلزامية لبيانات المرسل والمستلم' 
+          : isZh 
+          ? '请填写所有必填的汇款人和收款人信息' 
+          : isCkb 
+          ? 'تکایە هەموو خانە پێویستەکانی نێرەر و وەرگر پڕبکەرەوە' 
+          : 'Please fill in all required sender and recipient fields.'
+      );
+      return;
+    }
+
+    // Client-side validation: valid email format
+    if (!senderEmail.includes('@') || !senderEmail.includes('.')) {
+      setErrorMessage(
+        isAr 
+          ? 'يرجى إدخال بريد إلكتروني صالح لاستلام كود التحقق وإشعار التسوية' 
+          : isZh 
+          ? '请输入有效的电子邮箱地址以接收清算凭据和验证码' 
+          : isCkb 
+          ? 'تکایە ئیمەیڵێکی دروست بنووسە بۆ وەرگرتنی کۆدی پشتڕاستکردنەوە' 
+          : 'Please enter a valid email address to receive your audit certificate and verification code.'
+      );
+      return;
+    }
+
+    // Client-side validation: registered company name for business accounts
+    if (orderType === 'BUSINESS' && !senderCompany.trim()) {
+      setErrorMessage(
+        isAr 
+          ? 'يرجى إدخال اسم الشركة العراقية المسجلة' 
+          : isZh 
+          ? '请输入注册的企业名称' 
+          : isCkb 
+          ? 'تکایە ناوی کۆمپانیای تۆمارکراو بنووسە' 
+          : 'Please enter registered company name.'
+      );
       return;
     }
 
@@ -115,22 +165,22 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
         direction,
         sourceCurrency: direction === 'IQD_TO_ECNY' ? 'IQD' : 'E_CNY',
         targetCurrency: direction === 'IQD_TO_ECNY' ? 'E_CNY' : 'IQD',
-        sourceAmount,
-        senderName,
-        senderEmail,
-        senderPhone,
-        senderIdNumber,
-        senderCompany: orderType === 'BUSINESS' ? senderCompany : undefined,
-        recipientName,
-        recipientIdentifier,
+        sourceAmount: numAmount,
+        senderName: senderName.trim(),
+        senderEmail: senderEmail.trim(),
+        senderPhone: senderPhone.trim(),
+        senderIdNumber: senderIdNumber.trim(),
+        senderCompany: orderType === 'BUSINESS' ? senderCompany.trim() : undefined,
+        recipientName: recipientName.trim(),
+        recipientIdentifier: recipientIdentifier.trim(),
         recipientBankOrBureau,
         purpose,
         settlementMethod,
-        commercialInvoiceRef: orderType === 'BUSINESS' ? commercialInvoiceRef : undefined,
-        billOfLading: orderType === 'BUSINESS' ? billOfLading : undefined,
-        customsDeclarationNo: orderType === 'BUSINESS' ? customsDeclarationNo : undefined,
+        commercialInvoiceRef: orderType === 'BUSINESS' ? commercialInvoiceRef.trim() : undefined,
+        billOfLading: orderType === 'BUSINESS' ? billOfLading.trim() : undefined,
+        customsDeclarationNo: orderType === 'BUSINESS' ? customsDeclarationNo.trim() : undefined,
         contractValueUsd: orderType === 'BUSINESS' && contractValueUsd ? parseFloat(contractValueUsd) : undefined,
-        taxRegistrationNumber: orderType === 'BUSINESS' ? taxRegistrationNumber : undefined
+        taxRegistrationNumber: orderType === 'BUSINESS' ? taxRegistrationNumber.trim() : undefined
       };
 
       const res = await fetch('/api/public/payments/orders', {
@@ -144,7 +194,9 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
         throw new Error(json.error || 'Failed to submit payment order');
       }
 
-      onOrderCreated(json.order);
+      // Backend returns the created order object flat: res.status(201).json(order)
+      const createdOrder: PaymentOrder = json.order || json;
+      onOrderCreated(createdOrder);
       onClose();
     } catch (err: any) {
       setErrorMessage(err.message || 'An error occurred during submission');
@@ -200,7 +252,11 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
           <div className="grid grid-cols-2 gap-3 p-1.5 bg-neutral-100 dark:bg-neutral-800 rounded-xl">
             <button
               type="button"
-              onClick={() => setOrderType('RETAIL')}
+              onClick={() => {
+                setOrderType('RETAIL');
+                if (settlementMethod === 'mBridge CBDC Direct') setSettlementMethod('Zain Cash');
+                if (purpose === 'Commercial Trade Goods & Invoices') setPurpose('University Tuition & Educational Remittance');
+              }}
               className={`py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'RETAIL'
                   ? 'bg-white dark:bg-neutral-900 text-brand-800 dark:text-brand-400 shadow-xs'
@@ -212,7 +268,11 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
             </button>
             <button
               type="button"
-              onClick={() => setOrderType('BUSINESS')}
+              onClick={() => {
+                setOrderType('BUSINESS');
+                if (settlementMethod === 'Zain Cash') setSettlementMethod('mBridge CBDC Direct');
+                if (purpose === 'University Tuition & Educational Remittance') setPurpose('Commercial Trade Goods & Invoices');
+              }}
               className={`py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'BUSINESS'
                   ? 'bg-white dark:bg-neutral-900 text-brand-800 dark:text-brand-400 shadow-xs'
@@ -224,23 +284,40 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
             </button>
           </div>
 
-          {/* Transfer Summary Badge */}
-          <div className="p-4 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl flex items-center justify-between text-xs font-mono">
-            <div>
-              <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase">
-                {direction === 'IQD_TO_ECNY' ? 'Sending Currency' : 'Receiving Currency'}
-              </span>
-              <span className="text-sm font-black text-brand-900 dark:text-white">
-                {sourceAmount.toLocaleString()} {direction === 'IQD_TO_ECNY' ? 'IQD' : 'e-CNY (¥)'}
-              </span>
-            </div>
-            <div className="text-end">
-              <span className="text-neutral-500 dark:text-neutral-400 block text-xs uppercase">
-                Corridor Protocol
-              </span>
-              <span className="text-sm font-bold text-brand-800 dark:text-brand-400">
-                {orderType === 'BUSINESS' ? 'mBridge CBDC Node' : 'Direct Clearing Desk'}
-              </span>
+          {/* Transfer Amount & Corridor Configuration */}
+          <div className="p-4 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl space-y-3 font-mono">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex-1">
+                <label className="text-[11px] uppercase tracking-wider text-neutral-600 dark:text-neutral-400 font-bold block mb-1">
+                  {direction === 'IQD_TO_ECNY' ? (isAr ? 'مبلغ التحويل بالدينار العراقي (IQD) *' : 'Transfer Amount (IQD) *') : (isAr ? 'مبلغ التحويل باليوان الرقمي *' : 'Transfer Amount (e-CNY) *')}
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    min="1"
+                    step="any"
+                    value={sourceAmount || ''}
+                    onChange={(e) => setSourceAmount(parseFloat(e.target.value) || 0)}
+                    className="w-full text-base font-black text-brand-900 dark:text-white p-2.5 bg-white dark:bg-neutral-900 border border-amber-300 dark:border-amber-700 rounded-lg focus:outline-none focus:border-brand-800 font-mono"
+                    placeholder="1000000"
+                  />
+                  <span className="absolute right-3 top-2.5 rtl:right-auto rtl:left-3 text-xs font-black text-neutral-400">
+                    {direction === 'IQD_TO_ECNY' ? 'IQD' : 'e-CNY'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-left rtl:text-right sm:text-right rtl:sm:text-left pt-1">
+                <span className="text-[10px] uppercase text-neutral-500 dark:text-neutral-400 block">
+                  Corridor Protocol
+                </span>
+                <span className="text-xs font-bold text-brand-800 dark:text-brand-400">
+                  {orderType === 'BUSINESS' ? 'mBridge Wholesale CBDC' : 'Direct Clearing Desk'}
+                </span>
+                <span className="text-[10px] text-neutral-400 block mt-0.5">
+                  PBOC & CBI Direct Nodes
+                </span>
+              </div>
             </div>
           </div>
 
@@ -387,7 +464,8 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                   onChange={(e) => setRecipientBankOrBureau(e.target.value)}
                   className="w-full text-xs p-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:border-brand-800 focus:outline-none"
                 >
-                  <option value="PBOC Digital Wallet App">PBOC Official e-CNY Digital Wallet App</option>
+                  <option value="PBOC Official e-CNY Digital Wallet App">PBOC Official e-CNY Digital Wallet App</option>
+                  <option value="PBOC mBridge Clearing Node">PBOC mBridge Wholesale Clearing Node</option>
                   <option value="Bank of China (BOC)">Bank of China (BOC) - e-CNY Interbank Node</option>
                   <option value="Industrial and Commercial Bank of China (ICBC)">ICBC - Cross-Border Settlement</option>
                   <option value="China Construction Bank (CCB)">China Construction Bank (CCB)</option>
@@ -401,12 +479,12 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
               <div>
                 <label className="block text-[11px] font-bold text-neutral-600 dark:text-neutral-300 mb-1">
-                  {isAr ? 'طريقة السداد المحلية' : 'Local Payment Method'}
+                  {isAr ? 'طريقة السداد والتمويل المحلية *' : isZh ? '本地资金付款与结算通道 *' : isCkb ? 'شێوازی پارەدانی ناوخۆیی *' : 'Local Payment & Funding Rail *'}
                 </label>
                 <select
                   value={settlementMethod}
                   onChange={(e) => setSettlementMethod(e.target.value)}
-                  className="w-full text-xs p-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:border-brand-800 focus:outline-none"
+                  className="w-full text-xs p-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:border-brand-800 focus:outline-none font-medium"
                 >
                   <option value="Zain Cash">Zain Cash (Iraq Direct API)</option>
                   <option value="Qi Card">Qi Card (National Switch)</option>
@@ -415,6 +493,9 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                   <option value="CBI Direct RTGS">Central Bank of Iraq RTGS Wire</option>
                   <option value="mBridge CBDC Direct">mBridge CBDC Protocol (Corporate Wholesale)</option>
                 </select>
+                <span className="text-[10px] text-neutral-400 block mt-1">
+                  {isAr ? 'القناة المحلية لتمويل الرصيد بالعراق قبل المقاصة الثنائية' : 'Source funding rail in Iraq, converted & cleared via sovereign bilateral corridors'}
+                </span>
               </div>
             </div>
 
@@ -443,13 +524,13 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
             <div className="space-y-3 bg-neutral-50 dark:bg-neutral-800/40 p-4 rounded-xl border border-neutral-200 dark:border-neutral-700">
               <h4 className="text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white flex items-center gap-2">
                 <FileText size={14} className="text-emerald-600 dark:text-emerald-400" />
-                <span>{isAr ? 'الوثائق التجارية والاستيرادية (اختياري / لتسريع التخليص)' : 'Commercial Documentation (For Customs Acceleration)'}</span>
+                <span>{isAr ? 'الوثائق التجارية والاستيرادية (لتسريع التخليص الجمركي وميناء الفاو)' : 'Commercial Documentation (For Port & Customs Acceleration)'}</span>
               </h4>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-1">
-                    Invoice Reference
+                    {isAr ? 'مرجع الفاتورة التجارية' : 'Invoice Reference'}
                   </label>
                   <input
                     type="text"
@@ -462,7 +543,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-1">
-                    Bill of Lading (B/L)
+                    {isAr ? 'بوليصة الشحن (B/L)' : 'Bill of Lading (B/L)'}
                   </label>
                   <input
                     type="text"
@@ -475,7 +556,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
 
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-1">
-                    Customs Code (Basra/Safwan)
+                    {isAr ? 'رمز التخليص الجمركي' : 'Customs Code (Basra/Safwan)'}
                   </label>
                   <input
                     type="text"
@@ -483,6 +564,21 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                     onChange={(e) => setCustomsDeclarationNo(e.target.value)}
                     placeholder="CUST-IQ-01994"
                     className="w-full text-xs p-2 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-neutral-500 mb-1">
+                    {isAr ? 'قيمة العقد التجارية ($ USD)' : 'Contract Value (USD)'}
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="any"
+                    value={contractValueUsd}
+                    onChange={(e) => setContractValueUsd(e.target.value)}
+                    placeholder="e.g. 250000"
+                    className="w-full text-xs p-2 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded font-mono"
                   />
                 </div>
               </div>

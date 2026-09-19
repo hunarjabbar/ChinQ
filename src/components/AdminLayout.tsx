@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp, Building2 } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -85,6 +85,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
     { name: t('paymentsSettlement'), href: `/${lang}/admin/payments`, icon: Coins, adminOnly: true },
     { name: t('liveCommand'), href: `/${lang}/admin?tab=live`, icon: Radio, adminOnly: true },
     { name: t('sourcingDesk'), href: `/${lang}/admin/sourcing`, icon: Ship, adminOnly: true },
+    { name: lang === 'ar' ? 'أعمال ICA والفرص السيادية' : lang === 'zh' ? 'ICA 商业与主权商机' : lang === 'ckb' ? 'بازرگانی ICA و دەرفەتەکان' : 'ICA Business Hub', href: `/${lang}/admin/business`, icon: Building2, adminOnly: false },
     { name: t('partners'), href: `/${lang}/admin/partners`, icon: Briefcase, adminOnly: true },
     { name: 'Chinese Products', href: `/${lang}/admin/chinese-products`, icon: Briefcase, adminOnly: true },
     { name: t('liveStreams'), href: `/${lang}/admin/live-events`, icon: Video, adminOnly: true },
