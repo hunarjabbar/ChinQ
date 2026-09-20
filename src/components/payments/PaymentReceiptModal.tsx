@@ -166,9 +166,16 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
               </span>
             </div>
 
-            <div className="p-3 flex justify-between items-center">
-              <span className="text-neutral-500 font-bold">Payment Rail / Method:</span>
-              <span className="text-neutral-700 dark:text-neutral-300">
+            <div className="p-3 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
+              <div>
+                <span className="text-neutral-500 font-bold block">
+                  {lang === 'ar' ? 'طريقة السداد والتمويل المحلية:' : lang === 'zh' ? '本地资金付款与结算通道:' : 'Local Payment & Funding Rail:'}
+                </span>
+                <span className="text-[10px] text-neutral-400 block">
+                  {lang === 'ar' ? 'القناة المحلية لتمويل الرصيد بالعراق قبل المقاصة الثنائية' : 'Source funding rail in Iraq, converted & cleared via sovereign bilateral corridors'}
+                </span>
+              </div>
+              <span className="font-bold text-neutral-800 dark:text-neutral-200">
                 {order.settlementMethod}
               </span>
             </div>

@@ -7,6 +7,8 @@ import { ExternalLink, X, ArrowUpRight, CheckCircle, ShieldCheck, Mail, Sparkles
 import { ErrorBoundary } from './ErrorBoundary';
 import { useNavigate } from 'react-router-dom';
 
+import { useI18n } from '../hooks/useI18n';
+
 interface Props {
   lang: Locale;
 }
@@ -52,6 +54,7 @@ const CATEGORY_NAMES: Record<string, Record<Locale, string>> = {
 
 function ChineseProductsShowcaseContent({ lang }: Props) {
   const navigate = useNavigate();
+  const { t } = useI18n(lang);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [activeModalProduct, setActiveModalProduct] = useState<ChineseProduct | null>(null);
 
@@ -189,12 +192,12 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
         <div className="flex items-center gap-3">
           <span className="w-2.5 h-2.5 bg-brand-800 rounded-sm animate-pulse"></span>
           <h3 className="text-base sm:text-lg font-black uppercase tracking-widest text-brand-800 dark:text-neutral-100">
-            {lang === 'ar' ? 'أحدث الابتكارات الصينية!' : lang === 'zh' ? '最新中国前沿创新！' : lang === 'ckb' ? 'نوێترین داهێنانەکانی چین!' : 'Latest Chinese Innovation!'}
+            {t('latestInnovation')}
           </h3>
         </div>
         <span className="text-[11px] font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest flex items-center gap-1">
           <Sparkles size={12} className="text-brand-800 dark:text-brand-400" />
-          {lang === 'ar' ? 'الأكثر طلباً في السوق العراقي' : lang === 'zh' ? '伊拉克热搜' : lang === 'ckb' ? 'پڕخواستترین لە عێراق' : 'Trending in Iraq'}
+          {t('trendingInIraq')}
         </span>
       </div>
 
@@ -211,7 +214,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
           >
             <SlidersHorizontal size={14} className="text-white/80" />
             <span>
-              {lang === 'ar' ? `القطاع: ${getCategoryLabel(selectedCategory)}` : lang === 'zh' ? `产品领域: ${getCategoryLabel(selectedCategory)}` : lang === 'ckb' ? `کەرت: ${getCategoryLabel(selectedCategory)}` : `Sector: ${getCategoryLabel(selectedCategory)}`}
+              {t('sector')}: {getCategoryLabel(selectedCategory)}
             </span>
             <ChevronDown size={14} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
@@ -222,7 +225,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
               role="listbox"
             >
               <div className="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-wider text-gray-400 dark:text-neutral-500 border-b border-gray-100 dark:border-neutral-800 mb-1">
-                {lang === 'ar' ? 'اختر قطاع المنتجات' : lang === 'zh' ? '选择创新领域' : lang === 'ckb' ? 'کەرتی بەرهەم هەڵبژێرە' : 'Select Product Sector'}
+                {t('selectProductSector')}
               </div>
               {categories.map((cat) => {
                 const isSelected = selectedCategory === cat;
@@ -255,7 +258,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
           <div className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 dark:text-neutral-400">
             <span className={`w-1.5 h-1.5 rounded-full ${!isHovered ? 'bg-emerald-500 animate-ping' : 'bg-amber-500'}`}></span>
             <span>
-              {lang === 'ar' ? 'عرض 3 بطاقات • تمرير صاعد' : lang === 'zh' ? '视窗3张 • 向上浮动滚动' : lang === 'ckb' ? '3 بەرهەم • جوڵەی سەرکەوتوو' : '3 In View • Elevating Stream'}
+              {t('inViewElevating')}
             </span>
           </div>
         )}
@@ -264,7 +267,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
       {/* Empty State */}
       {filteredProducts.length === 0 && (
         <div className="p-8 text-center border-s-2 border-brand-800 bg-neutral-50 dark:bg-neutral-800/40 text-sm text-gray-500 dark:text-neutral-400">
-          {lang === 'ar' ? 'لا توجد منتجات مسجلة في هذا القسم حالياً.' : lang === 'zh' ? '该分类下暂无已发布产品。' : lang === 'ckb' ? 'لە ئێستادا هیچ بەرهەمێک لەم بەشەدا بەردەست نییە.' : 'No products listed in this category.'}
+          {t('noProductsFound')}
         </div>
       )}
 
@@ -337,7 +340,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
                   </p>
                   <div className="mt-2.5 flex items-center gap-2 text-xs font-bold text-brand-800 dark:text-brand-400">
                     <span>
-                      {lang === 'ar' ? 'عرض المواصفات وفرص التوريد ←' : lang === 'zh' ? '查看技术规格与采购对接 →' : lang === 'ckb' ? 'بینینی تایبەتمەندی و داواکردن ←' : 'View Specifications & Sourcing Details →'}
+                      {t('viewSpecsSourcing')}
                     </span>
                   </div>
                 </div>
@@ -398,14 +401,14 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
                   <div className="flex items-center gap-2 mt-2 text-xs font-semibold text-brand-800 dark:text-brand-400">
                     <ShieldCheck size={16} />
                     <span>
-                      {lang === 'ar' ? 'منتج ومصنّع صيني موثوق ومعتمد للتبادل التجاري العراقي' : lang === 'zh' ? '经由伊中商贸促进机制认证的重点进出口品类' : lang === 'ckb' ? 'بەرهەمی پەسەندکراوی فەرمی بۆ بازاڕی عێراق' : 'Certified for Sino-Iraqi Bilateral Commerce & Procurement'}
+                      {t('certifiedCommerce')}
                     </span>
                   </div>
                 </div>
 
                 <div className="border-t border-gray-100 dark:border-neutral-800 pt-4">
                   <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 dark:text-neutral-500 mb-2">
-                    {lang === 'ar' ? 'المواصفات والتحليل' : lang === 'zh' ? '产品概述与市场适用性' : lang === 'ckb' ? 'تایبەتمەندی و شیکاری' : 'Product Overview & Specifications'}
+                    {t('productSpecs')}
                   </h4>
                   <p className="text-sm text-gray-700 dark:text-neutral-300 leading-relaxed">
                     {getLocalizedDesc(activeModalProduct)}
@@ -417,13 +420,13 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
                   <div className="flex items-center gap-2 font-bold text-ink-900 dark:text-neutral-100">
                     <CheckCircle size={14} className="text-brand-800 dark:text-brand-400" />
                     <span>
-                      {lang === 'ar' ? 'دعم الإجراءات الجمركية والترخيص العراقي' : lang === 'zh' ? '伊拉克清关、合规与物流对接支持' : lang === 'ckb' ? 'پشتیوانی گومرگی و مۆڵەت لە عێراق' : 'Iraqi Customs, Tariff & Regulatory Clearance Support'}
+                      {t('customsSupport')}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 font-bold text-ink-900 dark:text-neutral-100">
                     <CheckCircle size={14} className="text-brand-800 dark:text-brand-400" />
                     <span>
-                      {lang === 'ar' ? 'تواصل مباشر مع وكلاء التوزيع المعتمدين والمصانع' : lang === 'zh' ? '直通中国品牌制造商与伊拉克授权渠道' : lang === 'ckb' ? 'پەیوەندی ڕاستەوخۆ لەگەڵ بریکار و کۆمپانیاکان' : 'Direct Manufacturer Quotation & Authorized Dealer Channels'}
+                      {t('directManufacturer')}
                     </span>
                   </div>
                 </div>
@@ -440,7 +443,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
                   >
                     <Mail size={16} />
                     <span>
-                      {lang === 'ar' ? 'طلب عرض أسعار وتوريد رسمي' : lang === 'zh' ? '申请采购报价与商贸接洽' : lang === 'ckb' ? 'داواکردنی نرخی کۆ و هاوردەکردن' : 'Request Commercial Quotation'}
+                      {t('requestQuotation')}
                     </span>
                   </button>
 
@@ -459,7 +462,7 @@ function ChineseProductsShowcaseContent({ lang }: Props) {
                     >
                       <ExternalLink size={16} />
                       <span>
-                        {lang === 'ar' ? 'الملف التعريفي' : lang === 'zh' ? '官方档案' : lang === 'ckb' ? 'زانیاری زیاتر' : 'Official Portal'}
+                        {t('officialPortal')}
                       </span>
                     </button>
                   )}

@@ -237,8 +237,11 @@ export function PaymentTracker({ initialRef, lang, onOpenReceipt }: Props) {
               <span className="text-xl font-black text-brand-900 dark:text-white">
                 {typeof order.sourceAmount === 'number' ? order.sourceAmount.toLocaleString() : order.sourceAmount} {order.sourceCurrency}
               </span>
-              <span className="text-xs text-neutral-400 block mt-1">
-                via {order.settlementMethod}
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 block mt-1 font-medium">
+                via Local Funding Rail: <span className="font-bold text-brand-900 dark:text-neutral-200">{order.settlementMethod}</span>
+              </span>
+              <span className="text-[10px] text-neutral-400 block mt-0.5 leading-tight">
+                Source funding rail in Iraq, converted & cleared via sovereign bilateral corridors
               </span>
             </div>
 

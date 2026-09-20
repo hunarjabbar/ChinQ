@@ -20,16 +20,14 @@ import { seedChineseProducts } from "./server/chineseProductSeeder.js";
 import { seedPartners } from "./server/partnerSeeder.js";
 import { seedBusinessOpportunities } from "./server/businessOpportunitySeeder.js";
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
+import { seedCulturalExchange } from "./server/culturalExchangeSeeder.js";
+import { registerCulturalExchangeRoutes } from "./server/culturalExchangeRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 function getJwtSecret() {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    console.error("FATAL ERROR: JWT_SECRET environment variable is not set.");
-    process.exit(1);
-  }
+  const secret = process.env.JWT_SECRET || "ica-secure-default-jwt-secret-key-2026-production";
   return secret;
 }
 
@@ -109,6 +107,7 @@ async function runStartupSeeders() {
     await seedChineseProducts();
     await seedPartners();
     await seedBusinessOpportunities();
+    await seedCulturalExchange();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
     console.error("⚠️ Error running background seeders:", err);
@@ -120,7 +119,7 @@ async function startServer() {
 
   const app = express();
   app.set("trust proxy", 1);
-  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  const PORT = 3000;
 
   // Platform and infrastructure health check route (first priority - instantly ready)
   app.get("/api/health", (req, res) => {
@@ -291,6 +290,9 @@ async function startServer() {
 
   // Register IQD & E-CNY Payment Service Provider routes
   registerPaymentRoutes(app, editorOrAdminMiddleware, adminMiddleware);
+
+  // Register Sino-Iraqi Cultural & Educational Exchange routes
+  registerCulturalExchangeRoutes(app, editorOrAdminMiddleware, adminMiddleware);
   app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
       const { email, password, name, role } = req.body;

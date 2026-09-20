@@ -19,6 +19,7 @@ import { TrendingBooksSection } from '../components/TrendingBooksSection';
 import PartnersSection from "../components/PartnersSection";
 import { PaymentAndSourcingSection } from "../components/PaymentAndSourcingSection";
 import { RecommendedBooksSection } from '../components/RecommendedBooksSection';
+import { CulturalExchangeSection } from '../components/CulturalExchangeSection';
 import { TourismSection } from '../components/TourismSection';
 import { WomenSection } from '../components/WomenSection';
 import { VisaFlightSection } from '../components/VisaFlightSection';
@@ -26,6 +27,7 @@ import { VisaFlightSection } from '../components/VisaFlightSection';
 
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
 import { BricsSection } from '../components/BricsSection';
+import { BeltRoadTrackingSection } from '../components/BeltRoadTrackingSection';
 import { ChineseProductsShowcase } from '../components/ChineseProductsShowcase';
 import { IcaPlusSection } from '../components/IcaPlusSection';
 import { ErrorBoundary } from '../components/ErrorBoundary';
@@ -373,34 +375,9 @@ export function Home() {
 
       {/* Column 3: Most Popular & Widget */}
       <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-white dark:bg-neutral-900">
-        <IcaPlusSection />
         <BricsSection lang={lang as Locale} />
         
-        <ChineseProductsShowcase lang={lang as Locale} />
-
-        <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-sm p-6 flex-grow">
-          <h3 className="text-base sm:text-lg uppercase font-black tracking-widest mb-6 flex items-center text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-3">
-            <span className="w-2.5 h-2.5 bg-brand-800 rounded-sm me-3 animate-pulse"></span>
-            {t('beltRoad')}
-          </h3>
-          <div className="space-y-5">
-            <div className="border-s-4 border-brand-800 ps-4 bg-white dark:bg-neutral-800/80 p-3.5 rounded-e-md shadow-xs">
-              <div className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest mb-1">Maysan Province</div>
-              <div className="text-sm font-bold text-ink-900 dark:text-neutral-100">Solar Farm Stage 2</div>
-              <div className="w-full bg-gray-200 dark:bg-neutral-700 h-2 mt-3 rounded-full overflow-hidden">
-                <div className="bg-brand-800 h-2 w-[85%] transition-all duration-500 rounded-full"></div>
-              </div>
-            </div>
-            <div className="border-s-4 border-gray-300 dark:border-neutral-600 ps-4 bg-white dark:bg-neutral-800/40 border border-y-gray-100 border-r-gray-100 dark:border-y-neutral-800 dark:border-r-neutral-800 p-3.5 rounded-e-md">
-              <div className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase tracking-widest mb-1">Anbar Refinery</div>
-              <div className="text-sm font-bold text-ink-900 dark:text-neutral-100">Technical Feasibility</div>
-              <div className="w-full bg-gray-200 dark:bg-neutral-700 h-2 mt-3 rounded-full overflow-hidden">
-                <div className="bg-gray-400 dark:bg-neutral-500 h-2 w-[32%] transition-all duration-500 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10">
+        <div className="mt-10">
             <h3 className="text-base sm:text-lg uppercase font-black border-b border-gray-200 dark:border-neutral-800 pb-3 mb-6 text-brand-800 dark:text-neutral-100 tracking-wider">
               {t('popular')}
             </h3>
@@ -418,7 +395,6 @@ export function Home() {
               ))}
             </ol>
           </div>
-        </div>
         
         {/* LIVE COVERAGE HIGHLIGHT */}
         <div className="bg-red-700 dark:bg-red-800 text-white border-2 border-red-600/90 p-8 sm:p-10 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 min-h-[460px] sm:min-h-[500px] flex flex-col justify-between relative overflow-hidden group">
@@ -436,7 +412,7 @@ export function Home() {
             </div>
 
             <h3 className="font-black text-2xl sm:text-3xl leading-snug text-white mb-4 tracking-tight">
-              <Link to={`/${lang}/live/iraq-china-summit-2026`} className="hover:text-red-100 transition-colors">
+              <Link to={`/${lang}/live`} className="hover:text-red-100 transition-colors">
                 {lang === 'ar' ? 'القمة الاقتصادية العراقية الصينية 2026' : lang === 'ckb' ? 'لووتکەی ئابووری عێراق-چین ٢٠٢٦' : lang === 'zh' ? '2026年伊拉克-中国经济峰会' : 'Iraq-China Economic Summit 2026'}
               </Link>
             </h3>
@@ -488,220 +464,413 @@ export function Home() {
         <SubscriptionCard />
       </section>
       </div>
+      
+      {/* Strategic Partnership Reinforcement (Full Width) */}
+      <div className="w-full bg-white dark:bg-neutral-900 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
+            <div className="flex items-center gap-4">
+              <div className="w-1.5 h-8 bg-brand-800"></div>
+              <h2 className="text-3xl font-black uppercase tracking-tight text-brand-800 dark:text-neutral-100">
+                {lang === 'ar' ? 'الشركاء الاستراتيجيون' : lang === 'zh' ? '战略合作伙伴' : lang === 'ckb' ? 'هاوبەشە ستراتیژییەکان' : 'Strategic Partnership Network'}
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 max-w-sm font-bold uppercase tracking-widest text-center md:text-start">
+              {lang === 'ar' 
+                ? 'تحالف مؤسسي يضم نخبة من الهيئات والشركات لتعزيز التعاون الثنائي.' 
+                : lang === 'zh'
+                ? '连接伊拉克与中国精英机构的双边主权联盟。'
+                : lang === 'ckb'
+                ? 'هاوپەیمانییەکی دامەزراوەیی کە دامەزراوە باڵاکانی عێراق و چین بەیەکەوە دەبەستێتەوە.'
+                : 'Sovereign institutional alliance connecting elite Iraqi and Chinese entities.'}
+            </p>
+          </div>
+        </div>
+        <ErrorBoundary inline lang={lang} title="Strategic Partners - High Level">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary inline lang={lang} title="Strategic Partners">
-        <PartnersSection lang={lang as Locale} />
-      </ErrorBoundary>
+      {/* Premium Media Hub - Full Screen Adaptive Layout */}
+      <div className="w-full bg-neutral-50 dark:bg-neutral-950 py-12 md:py-20 border-y border-neutral-200 dark:border-neutral-800">
+        <div className="w-full max-w-full mx-auto px-4 sm:px-6 md:px-8">
+          <IcaPlusSection />
+        </div>
+      </div>
 
-      {/* ICA FINANCE & ECONOMICS SECTION */}
-      <div id="finance-economics" className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="ICA Finance & Economics">
+      {/* --- Main Page Journey Starts Here --- */}
+
+      {/* 1. News & Editorial Hub */}
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Sovereign Editorial & Fellowship Showcase">
+          <EditorialShowcaseSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* 2. Deep Research & Intelligence Studies */}
+      {studies.length > 0 && (
+        <div className="w-full my-6">
+          <ErrorBoundary inline lang={lang} title="Deep Research & Intelligence Studies">
+            <section className="bg-white dark:bg-neutral-900 border-t-4 border-double border-brand-800 p-4 sm:p-6 md:p-8 space-y-6 shadow-xs rounded-lg">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-neutral-200 dark:border-neutral-800 pb-4 gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-brand-50 dark:bg-brand-950/40 rounded-lg text-brand-800 dark:text-brand-400">
+                    <BookOpen size={20} />
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-brand-800 dark:text-white tracking-tight">
+                    {t('studies')}
+                  </h2>
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 px-3 py-1 border border-neutral-200 dark:border-neutral-700 rounded-md">
+                  {lang === 'ar' ? 'معلومات الوكالة العراقية الصينية' : lang === 'zh' ? '伊中通讯社智库信息' : lang === 'ckb' ? 'زانیاری ئاژانسی عێراقی - چینی' : 'Iraqi-Chinese Agency Information'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {studies.map((study) => {
+                  const isLocked = study.isPrivate && !isSubscribed;
+                  return (
+                    <div 
+                      key={study.id}
+                      onClick={() => setSelectedStudy(study)}
+                      className="group cursor-pointer flex flex-col justify-between bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800/60 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 rounded-xl overflow-hidden shadow-sm hover:shadow-lg"
+                    >
+                      <div className="space-y-4">
+                        {study.imageUrl && (
+                          <div className="relative w-full aspect-video overflow-hidden border-b border-neutral-200 dark:border-neutral-700">
+                            <img 
+                              src={study.imageUrl} 
+                              alt={getStudyTitle(study)} 
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              referrerPolicy="no-referrer"
+                            />
+                            {isLocked && (
+                              <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center">
+                                <div className="bg-black/80 text-amber-400 text-xs px-3.5 py-1.5 rounded-full flex items-center gap-1.5 font-bold uppercase tracking-wider shadow-sm border border-amber-500/30">
+                                  <Lock size={12} className="animate-pulse" />
+                                  <span>{lang === 'ar' ? 'مغلق' : lang === 'ckb' ? 'داخراو' : lang === 'zh' ? '加锁专享' : 'Premium Lock'}</span>
+                                </div>
+                              </div>
+                            )}
+                            <div className="absolute top-3 start-3 flex gap-1.5">
+                              {study.isPrivate ? (
+                                <span className="bg-amber-600 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
+                                  PREMIUM
+                                </span>
+                              ) : (
+                                <span className="bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
+                                  OPEN ACCESS
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="p-5 space-y-3">
+                          <div className="flex items-center gap-2 text-xs uppercase text-neutral-500 dark:text-neutral-400 font-bold tracking-wider">
+                            <span>{study.author?.name || 'Research Desk'}</span>
+                            <span>•</span>
+                            <span>{new Date(study.createdAt).toLocaleDateString(dateLocale.code)}</span>
+                          </div>
+                          <h3 className="text-base sm:text-lg font-bold leading-snug group-hover:text-brand-700 dark:group-hover:text-brand-400 text-brand-800 dark:text-white transition-colors line-clamp-3">
+                            {getStudyTitle(study)}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
+                            {getStudyExcerpt(study)}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-5 pt-0">
+                        <div className="w-full py-2.5 px-4 text-center text-xs font-bold uppercase tracking-wider bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 text-neutral-800 dark:text-neutral-100 hover:text-white hover:bg-brand-800 dark:hover:bg-brand-700 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
+                          <span>{study.isPrivate ? t('premiumStudy') : 'Read Access'}</span>
+                          <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </ErrorBoundary>
+        </div>
+      )}
+
+      {/* 3. Political News Newsboard */}
+      {articles.filter(a => a.category?.slug === 'politics').length > 0 && (
+        <div className="w-full my-6">
+          <ErrorBoundary inline lang={lang} title="Political News & Geostrategy">
+            <section className="bg-white dark:bg-neutral-900 border-t-4 border-brand-800 p-4 sm:p-6 md:p-8 shadow-xs rounded-lg">
+              <div className="flex justify-between items-baseline border-b border-brand-800/15 pb-3 mb-6">
+                <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-800 dark:text-neutral-100 uppercase flex items-center gap-2">
+                  <span className="w-3.5 h-3.5 bg-brand-800"></span>
+                  {lang === 'ar' ? 'الأخبار السياسية' : lang === 'zh' ? '政治新闻' : lang === 'ckb' ? 'هەواڵە سیاسییەکان' : 'Political News'}
+                </h2>
+                <Link 
+                  to={`/${lang}/category/politics`} 
+                  className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline"
+                >
+                  {lang === 'ar' ? 'عرض المزيد ←' : lang === 'zh' ? '查看更多 →' : lang === 'ckb' ? 'بینینی زیاتر ←' : 'View More →'}
+                </Link>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {articles.filter(a => a.category?.slug === 'politics').slice(0, 10).map((article) => {
+                  const tr = getTranslation(article);
+                  return (
+                    <div 
+                      key={article.id}
+                      onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                      className="cursor-pointer group flex flex-col h-full bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
+                    >
+                      {article.imageUrl ? (
+                        <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-neutral-200 dark:border-neutral-700 shrink-0">
+                          <img 
+                            src={article.imageUrl} 
+                            alt={tr?.title || 'Political News'} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            fetchPriority="low"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full aspect-[4/3] bg-brand-800/10 flex items-center justify-center shrink-0">
+                          <span className="text-gray-400 italic text-xs">No Image</span>
+                        </div>
+                      )}
+                      
+                      <div className="p-3 flex flex-col flex-grow">
+                        <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">
+                          {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
+                        </span>
+                        <h3 className="font-bold text-sm leading-snug text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 transition-colors line-clamp-3">
+                          {tr?.title}
+                        </h3>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </ErrorBoundary>
+        </div>
+      )}
+
+      {/* 4. Opinion & Analysis Board */}
+      {articles.filter(a => a.category?.slug === 'opinion').length > 0 && (
+        <div className="w-full my-6">
+          <ErrorBoundary inline lang={lang} title="Sovereign Opinion & Analysis">
+            <section className="bg-white dark:bg-neutral-900 border-t-4 border-b-2 border-brand-800 p-4 sm:p-6 md:p-8 animate-fadeIn shadow-xs rounded-lg">
+              <div className="flex justify-between items-baseline border-b border-brand-800/15 pb-3 mb-6">
+                <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-800 dark:text-neutral-100 uppercase flex items-center gap-2">
+                  <span className="w-3.5 h-3.5 bg-brand-800 rounded-2xs"></span>
+                  {lang === 'ar' ? 'آراء وتحليلات' : lang === 'zh' ? '观点与深度分析' : lang === 'ckb' ? 'ڕاو بۆچوون و شیکردنەوە' : 'Opinion & Analysis'}
+                </h2>
+                <Link 
+                  to={`/${lang}/category/opinion`} 
+                  className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline flex items-center gap-1 group"
+                >
+                  <span>{lang === 'ar' ? 'عرض جميع الآراء' : lang === 'zh' ? '查看所有观点' : lang === 'ckb' ? 'بینینی هەموو ڕاکان' : 'View All Opinions'}</span>
+                  <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
+                </Link>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x rtl:divide-x-reverse divide-ink-900/10 dark:divide-neutral-800">
+                {articles.filter(a => a.category?.slug === 'opinion').slice(0, 4).map((article, idx) => {
+                  const tr = getTranslation(article);
+                  const authorName = (article as any).author?.name || 'Staff Writer';
+                  const initial = authorName.replace(/^(Dr\.|Amb\.|Prof\.)\s+/i, '').charAt(0);
+                  const avatarBg = ['bg-brand-50 dark:bg-brand-800/30', 'bg-amber-50 dark:bg-amber-900/30', 'bg-emerald-50 dark:bg-emerald-900/30', 'bg-stone-100 dark:bg-neutral-800'][idx % 4];
+                  const textAccent = ['text-brand-800 dark:text-brand-400', 'text-amber-800 dark:text-amber-400', 'text-emerald-800 dark:text-emerald-400', 'text-brand-800 dark:text-neutral-200'][idx % 4];
+                  
+                  return (
+                    <div 
+                      key={article.id}
+                      onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                      className="cursor-pointer group flex flex-col justify-between p-3.5 rounded-xl border border-transparent hover:border-brand-800/20 hover:bg-brand-50/40 dark:hover:bg-neutral-800/50 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 shadow-none hover:shadow-md"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-base font-black border border-brand-800/10 shrink-0 shadow-xs", avatarBg, textAccent)}>
+                            {initial}
+                          </div>
+                          <div className="leading-tight">
+                            <h4 className="text-xs font-black uppercase tracking-wider text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 transition-colors">
+                              {authorName}
+                            </h4>
+                            <span className="text-xs uppercase font-bold text-gray-500 dark:text-neutral-400 block tracking-wider">
+                              {idx < 2 ? (lang === 'zh' ? '特约撰稿人' : 'Contributor') : (lang === 'zh' ? '智库学者' : 'Guest Analyst')}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="font-bold text-base sm:text-lg leading-snug text-brand-800 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors line-clamp-3 italic pt-2 border-t border-brand-800/10">
+                          “{tr?.title}”
+                        </h3>
+                        
+                        <div className="space-y-2">
+                          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
+                            {tr?.excerpt || tr?.content?.substring(0, 160)}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                        <span>{new Date(article.createdAt).toLocaleDateString(dateLocale.code)}</span>
+                        <span className="text-brand-800 dark:text-brand-400 group-hover:underline uppercase tracking-wider">Read Column →</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </ErrorBoundary>
+        </div>
+      )}
+
+      {/* 5. Finance & Economics Cluster */}
+      <div id="finance-economics" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="ICA Finance & Economics Journal">
           <IcaFinanceEconomicsSection lang={lang as Locale} />
         </ErrorBoundary>
       </div>
 
-      {/* OPINION & ANALYSIS BOARD */}
-      {articles.filter(a => a.category?.slug === 'opinion').length > 0 && (
-        <section className="w-full bg-white dark:bg-neutral-900 border-t-4 border-b-2 border-brand-800 p-4 sm:p-6 md:p-8 my-6 animate-fadeIn shadow-xs">
-          <div className="flex justify-between items-baseline border-b border-brand-800/15 pb-3 mb-6">
-            <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-800 dark:text-neutral-100 uppercase flex items-center gap-2">
-              <span className="w-3.5 h-3.5 bg-brand-800 rounded-2xs"></span>
-              {lang === 'ar' ? 'آراء وتحليلات' : lang === 'zh' ? '观点与深度分析' : lang === 'ckb' ? 'ڕاو بۆچوون و شیکردنەوە' : 'Opinion & Analysis'}
-            </h2>
-            <Link 
-              to={`/${lang}/category/opinion`} 
-              className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline flex items-center gap-1 group"
-            >
-              <span>{lang === 'ar' ? 'عرض جميع الآراء' : lang === 'zh' ? '查看所有观点' : lang === 'ckb' ? 'بینینی هەموو ڕاکان' : 'View All Opinions'}</span>
-              <span className="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x rtl:divide-x-reverse divide-ink-900/10 dark:divide-neutral-800">
-            {articles.filter(a => a.category?.slug === 'opinion').slice(0, 4).map((article, idx) => {
-              const tr = getTranslation(article);
-              const authorName = (article as any).author?.name || 'Staff Writer';
-              const initial = authorName.replace(/^(Dr\.|Amb\.|Prof\.)\s+/i, '').charAt(0);
-              const avatarBg = ['bg-brand-50 dark:bg-brand-800/30', 'bg-amber-50 dark:bg-amber-900/30', 'bg-emerald-50 dark:bg-emerald-900/30', 'bg-stone-100 dark:bg-neutral-800'][idx % 4];
-              const textAccent = ['text-brand-800 dark:text-brand-400', 'text-amber-800 dark:text-amber-400', 'text-emerald-800 dark:text-emerald-400', 'text-brand-800 dark:text-neutral-200'][idx % 4];
-              
-              return (
-                <div 
-                  key={article.id}
-                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                  className="cursor-pointer group flex flex-col justify-between p-3.5 rounded-xl border border-transparent hover:border-brand-800/20 hover:bg-brand-50/40 dark:hover:bg-neutral-800/50 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 shadow-none hover:shadow-md"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-base font-black border border-brand-800/10 shrink-0 shadow-xs", avatarBg, textAccent)}>
-                        {initial}
-                      </div>
-                      <div className="leading-tight">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 transition-colors">
-                          {authorName}
-                        </h4>
-                        <span className="text-xs uppercase font-bold text-gray-500 dark:text-neutral-400 block tracking-wider">
-                          {idx < 2 ? (lang === 'zh' ? '特约撰稿人' : 'Contributor') : (lang === 'zh' ? '智库学者' : 'Guest Analyst')}
-                        </span>
-                      </div>
-                    </div>
+      <div id="business" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="ICA Sovereign Business & Investment Hub">
+          <IcaBusinessSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
 
-                    <h3 className="font-bold text-base sm:text-lg leading-snug text-brand-800 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors line-clamp-3 italic pt-2 border-t border-brand-800/10">
-                      “{tr?.title}”
+      <div id="settlement-sourcing" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Bilateral Settlement & Sourcing Services">
+          <PaymentAndSourcingSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      <div id="products-showcase" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Chinese Institutional Products Showcase">
+          <ChineseProductsShowcase lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Strategic Partners Placement (User Requested) */}
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Strategic Partners - Institutional Network">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* Belt & Road Tracking Section (Extracted to Full View) */}
+      <div id="belt-road-tracking" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Belt & Road Tracking Observatory">
+          <BeltRoadTrackingSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* 6. Credibility Reinforcement (Placement #1) */}
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Strategic Partners & Institutional Affiliates">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* 7. Culture & Society Cluster */}
+      <div id="cultural-exchange" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Sino-Iraqi Cultural & Educational Exchange">
+          <CulturalExchangeSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Women Leadership & Policy Forum">
+          <WomenSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Trending Bilateral Publications">
+          <TrendingBooksSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Recommended Academic Spotlight">
+          <RecommendedBooksSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* 8. Travel & Mobility Cluster */}
+      <div id="mobility" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Sino-Iraqi Aviation & E-Visa Hub">
+          <VisaFlightSection lang={lang} />
+        </ErrorBoundary>
+      </div>
+
+      <div id="tourism" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Bilateral Tourism & Heritage Showcase">
+          <TourismSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
+
+      {/* 9. Specialized Industry Tracks */}
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Specialized Bilateral Industry Tracks">
+          <section className="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-0 relative shadow-sm rounded-2xl p-6 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/80 dark:from-neutral-800/20 dark:to-neutral-900/80 pointer-events-none" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+              {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
+                const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
+                if (sectionArticles.length === 0) return null;
+                
+                let title = '';
+                if (catSlug === 'ai') title = t('ai');
+                if (catSlug === 'food-beverage') title = t('foodBeverage');
+                if (catSlug === 'expo') title = t('expo');
+                if (catSlug === 'business-statistics') title = t('businessStats');
+                
+                return (
+                  <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-white/40 dark:bg-neutral-800/40 backdrop-blur-md border-0 relative group shadow-xs overflow-hidden">
+                    <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
+                      {title}
                     </h3>
-                    
-                    <div className="space-y-2">
-                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
-                        {tr?.excerpt || tr?.content?.substring(0, 160)}
-                      </p>
-                      {tr?.content && tr.content.length > 160 && (
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2 leading-relaxed opacity-85">
-                          {tr.content.substring(160, 320)}...
+                    {sectionArticles.map((article) => (
+                      <div 
+                        key={article.id}
+                        onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                        className="cursor-pointer group/item hover:bg-white/60 dark:hover:bg-white/[0.08] p-3 -mx-2 rounded-lg transition-all duration-300 hover:scale-[1.01]"
+                      >
+                        <h4 className="text-sm font-bold leading-tight group-hover/item:text-brand-700 text-ink-900 dark:text-neutral-100 transition-colors line-clamp-3">
+                          {getTranslation(article)?.title}
+                        </h4>
+                        <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">
+                          {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
                         </p>
-                      )}
-                    </div>
+                      </div>
+                    ))}
+                    <div className="absolute -bottom-4 left-4 right-4 h-6 bg-white/90 dark:bg-neutral-900/90 blur-xl pointer-events-none" />
                   </div>
-                  
-                  <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
-                    <span>{new Date(article.createdAt).toLocaleDateString(dateLocale.code)}</span>
-                    <span className="text-brand-800 dark:text-brand-400 group-hover:underline uppercase tracking-wider">Read Column →</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* IRAQ-CHINA DAILY SPECIAL STUDIES & DEEP RESEARCH (SECTION 5) */}
-      {studies.length > 0 && (
-        <section className="w-full bg-white dark:bg-neutral-900 border-t-4 border-double border-brand-800 p-4 sm:p-6 md:p-8 space-y-6 shadow-xs my-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-neutral-200 dark:border-neutral-800 pb-4 gap-3">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-brand-50 dark:bg-brand-950/40 rounded-lg text-brand-800 dark:text-brand-400">
-                <BookOpen size={20} />
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-brand-800 dark:text-white tracking-tight">
-                {t('studies')}
-              </h2>
+                );
+              })}
             </div>
-            <span className="text-xs font-bold uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 px-3 py-1 border border-neutral-200 dark:border-neutral-700 rounded-md">
-              {lang === 'ar' ? 'معلومات الوكالة العراقية الصينية' : lang === 'zh' ? '伊中通讯社智库信息' : lang === 'ckb' ? 'زانیاری ئاژانسی عێراقی - چینی' : 'Iraqi-Chinese Agency Information'}
-            </span>
-          </div>
+          </section>
+        </ErrorBoundary>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {studies.map((study) => {
-              const isLocked = study.isPrivate && !isSubscribed;
-              return (
-                <div 
-                  key={study.id}
-                  onClick={() => setSelectedStudy(study)}
-                  className="group cursor-pointer flex flex-col justify-between bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800/60 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 rounded-xl overflow-hidden shadow-sm hover:shadow-lg"
-                >
-                  <div className="space-y-4">
-                    {study.imageUrl && (
-                      <div className="relative w-full aspect-video overflow-hidden border-b border-neutral-200 dark:border-neutral-700">
-                        <img 
-                          src={study.imageUrl} 
-                          alt={getStudyTitle(study)} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          referrerPolicy="no-referrer"
-                        />
-                        {isLocked && (
-                          <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center">
-                            <div className="bg-black/80 text-amber-400 text-xs px-3.5 py-1.5 rounded-full flex items-center gap-1.5 font-bold uppercase tracking-wider shadow-sm border border-amber-500/30">
-                              <Lock size={12} className="animate-pulse" />
-                              <span>{lang === 'ar' ? 'مغلق' : lang === 'ckb' ? 'داخراو' : lang === 'zh' ? '加锁专享' : 'Premium Lock'}</span>
-                            </div>
-                          </div>
-                        )}
-                        <div className="absolute top-3 start-3 flex gap-1.5">
-                          {study.isPrivate ? (
-                            <span className="bg-amber-600 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-                              PREMIUM
-                            </span>
-                          ) : (
-                            <span className="bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-                              OPEN ACCESS
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )}
+      {/* 10. Credibility Closing (Placement #2) */}
+      <div className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Strategic Partners">
+          <PartnersSection lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
 
-                    <div className="p-5 space-y-3">
-                      <div className="flex items-center gap-2 text-xs uppercase text-neutral-500 dark:text-neutral-400 font-bold tracking-wider">
-                        <span>{study.author?.name || 'Research Desk'}</span>
-                        <span>•</span>
-                        <span>{new Date(study.createdAt).toLocaleDateString(dateLocale.code)}</span>
-                      </div>
-                      <h3 className="text-base sm:text-lg font-bold leading-snug group-hover:text-brand-700 dark:group-hover:text-brand-400 text-brand-800 dark:text-white transition-colors line-clamp-3">
-                        {getStudyTitle(study)}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
-                        {getStudyExcerpt(study)}
-                      </p>
-                    </div>
-                  </div>
+      {/* 11. Institutional Contact */}
+      <div id="contact" className="w-full my-6">
+        <ErrorBoundary inline lang={lang} title="Institutional Contact & Support">
+          <ContactUs lang={lang as Locale} />
+        </ErrorBoundary>
+      </div>
 
-                  <div className="p-5 pt-0">
-                    <button className="w-full py-2.5 px-4 text-center text-xs font-bold uppercase tracking-wider bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 text-neutral-800 dark:text-neutral-100 hover:text-white hover:bg-brand-800 dark:hover:bg-brand-700 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
-                      <span>{study.isPrivate ? t('premiumStudy') : 'Read Access'}</span>
-                      <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* ADDITIONAL SECTIONS */}
-      <section className="w-full bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-0 relative my-6 shadow-sm rounded-2xl p-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/80 dark:from-neutral-800/20 dark:to-neutral-900/80 pointer-events-none" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-          {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
-            const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
-            if (sectionArticles.length === 0) return null;
-            
-            let title = '';
-            if (catSlug === 'ai') title = t('ai');
-            if (catSlug === 'food-beverage') title = t('foodBeverage');
-            if (catSlug === 'expo') title = t('expo');
-            if (catSlug === 'business-statistics') title = t('businessStats');
-            
-            return (
-              <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-white/40 dark:bg-neutral-800/40 backdrop-blur-md border-0 relative group shadow-xs overflow-hidden">
-                <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
-                  {title}
-                </h3>
-                {sectionArticles.map((article, i) => (
-                  <div 
-                    key={article.id}
-                    onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                    className="cursor-pointer group/item hover:bg-white/60 dark:hover:bg-white/[0.08] p-3 -mx-2 rounded-lg transition-all duration-300 hover:scale-[1.01]"
-                  >
-                    <h4 className="text-sm font-bold leading-tight group-hover/item:text-brand-700 text-ink-900 dark:text-neutral-100 transition-colors line-clamp-3">
-                      {getTranslation(article)?.title}
-                    </h4>
-                    <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">
-                      {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
-                    </p>
-                  </div>
-                ))}
-                {/* Fading white smooth blurry effect underneath */}
-                <div className="absolute -bottom-4 left-4 right-4 h-6 bg-white/90 dark:bg-neutral-900/90 blur-xl pointer-events-none" />
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-
-
-      {/* DEEP INTEL STUDY DETAIL OVERLAY MODAL */}
+      {/* 12. Deep Intel Study Detail Modal (Hidden until triggered) */}
       {selectedStudy && (
         <div 
           className="fixed inset-0 bg-brand-800/85 backdrop-blur-md flex items-center justify-center z-50 p-4 sm:p-6 md:p-8"
@@ -798,7 +967,7 @@ export function Home() {
                     className="prose prose-neutral max-w-none text-lg leading-relaxed text-gray-800 space-y-6 whitespace-pre-wrap md:px-4"
                     dir={lang === 'ar' || lang === 'ckb' ? 'rtl' : 'ltr'}
                   >
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(getStudyContent(selectedStudy).replace(/\n/g, '<br/>')) }} />
+                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(selectedStudy.isPrivate ? getStudyContent(selectedStudy).replace(/\n/g, '<br/>') : getStudyContent(selectedStudy).replace(/\n/g, '<br/>')) }} />
                   </div>
                 )}
 
@@ -858,141 +1027,6 @@ export function Home() {
         </div>
       )}
 
-      {/* POLITICAL NEWS SECTION */}
-      {articles.filter(a => a.category?.slug === 'politics').length > 0 && (
-        <section className="w-full bg-white dark:bg-neutral-900 border-t-4 border-brand-800 p-4 sm:p-6 md:p-8 my-6 shadow-xs">
-          <div className="flex justify-between items-baseline border-b border-brand-800/15 pb-3 mb-6">
-            <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-800 dark:text-neutral-100 uppercase flex items-center gap-2">
-              <span className="w-3.5 h-3.5 bg-brand-800"></span>
-              {lang === 'ar' ? 'الأخبار السياسية' : lang === 'zh' ? '政治新闻' : lang === 'ckb' ? 'هەواڵە سیاسییەکان' : 'Political News'}
-            </h2>
-            <Link 
-              to={`/${lang}/category/politics`} 
-              className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline"
-            >
-              {lang === 'ar' ? 'عرض المزيد ←' : lang === 'zh' ? '查看更多 →' : lang === 'ckb' ? 'بینینی زیاتر ←' : 'View More →'}
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {articles.filter(a => a.category?.slug === 'politics').slice(0, 10).map((article) => {
-              const tr = getTranslation(article);
-              return (
-                <div 
-                  key={article.id}
-                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                  className="cursor-pointer group flex flex-col h-full bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
-                >
-                  {article.imageUrl ? (
-                    <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-neutral-200 dark:border-neutral-700 shrink-0">
-                      <img 
-                        src={article.imageUrl} 
-                        alt={tr?.title || 'Political News'} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        fetchPriority="low"
-                        loading="lazy"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-full aspect-[4/3] bg-brand-800/10 flex items-center justify-center shrink-0">
-                      <span className="text-gray-400 italic text-xs">No Image</span>
-                    </div>
-                  )}
-                  
-                  <div className="p-3 flex flex-col flex-grow">
-                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">
-                      {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
-                    </span>
-                    <h3 className="font-bold text-sm leading-snug text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 transition-colors line-clamp-3">
-                      {tr?.title}
-                    </h3>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* Strategic Partners (Before Bilateral Commercial Gateway) */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Strategic Partners">
-          <PartnersSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* ICA Sovereign Business & Investment Hub */}
-      <div id="business" className="w-full my-8">
-        <div id="projects" className="h-0 invisible" />
-        <ErrorBoundary inline lang={lang} title="ICA Sovereign Business & Investment Hub">
-          <IcaBusinessSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Unified Bilateral Settlement & Sourcing Services */}
-      <div id="settlement-sourcing" className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Bilateral Settlement & Sourcing Services">
-          <PaymentAndSourcingSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      <div id="directory" className="h-0 invisible" />
-
-      {/* Sino-Iraqi Aviation & E-Visa Hub */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Sino-Iraqi Aviation & E-Visa Hub">
-          <VisaFlightSection lang={lang} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Bilateral Tourism Showcase Section */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Bilateral Tourism Showcase">
-          <TourismSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Women Leadership, Rights & Policy Forum */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Women Leadership & Policy Forum">
-          <WomenSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Trending Books Section */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Trending Books">
-          <TrendingBooksSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Recommended Books Spotlight Section */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Recommended Books Spotlight">
-          <RecommendedBooksSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Sovereign Editorial & Fellowship Showcase */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Sovereign Editorial & Fellowship Showcase">
-          <EditorialShowcaseSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Institutional Contact */}
-      <div id="contact" className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Institutional Contact">
-          <ContactUs lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* Strategic Partners (Deliberate Second Placement: Immediately Before Footer) */}
-      <div className="w-full my-8">
-        <ErrorBoundary inline lang={lang} title="Strategic Partners">
-          <PartnersSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
 
 
     </div>

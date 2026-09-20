@@ -112,9 +112,9 @@ const translations: Record<Locale, AboutContent> = {
   en: {
     title: 'About Iraqi-Chinese Agency Media Group',
     subtitle: 'The Sovereign Gateway Bridging East Asia and the Middle East',
-    intro: "Iraqi-Chinese Agency Media Group represents a strategic, sovereign, and cultural bridge between the People's Republic of China and the Republic of Iraq. Built upon the profound historical connections of the ancient Silk Road, this project serves as an institutional digital conduit for diplomatic journalism, macroeconomic analysis, and cross-border enterprise intelligence.",
+    intro: "Iraqi-Chinese Agency Media Group represents a strategic, sovereign, and cultural bridge between the People's Republic of China and the Republic of Iraq. Now evolved into a multi-modal intelligence ecosystem, the agency integrates real-time broadcast telemetry (Live Broadcast), premium media archives (ICA+), and the Sovereign Settlement Gateway to facilitate diplomatic journalism, macroeconomic analysis, and cross-border enterprise intelligence.",
     importanceTitle: 'Strategic Importance & Economic Corridors',
-    importanceDesc: 'The significance of the Iraqi-Chinese Agency lies in its ability to synthesize trilingual reporting—English, Arabic, Kurdish (Sorani), and Mandarin Chinese—into a cohesive editorial voice. As bilateral trade and infrastructure investments (such as the Belt and Road Initiative and the Al Faw Grand Port) continue to expand, there is a critical need for an authoritative, real-time platform that provides accurate market data, geopolitical analysis, and enterprise-level logistics information.',
+    importanceDesc: 'The significance of the Iraqi-Chinese Agency lies in its ability to synthesize trilingual reporting—English, Arabic, Kurdish (Sorani), and Mandarin Chinese—into a cohesive editorial voice. As bilateral trade and infrastructure investments (such as the Belt and Road Initiative, the Al Faw Grand Port, and the Sovereign Settlement System) continue to expand, there is a critical need for an authoritative, real-time platform that provides accurate market data, geopolitical analysis, and enterprise-level logistics information.',
     futureTitle: 'Future Potential, Vision & Sovereign Corridors',
     futureDesc: 'Looking forward, the Iraqi-Chinese Agency is evolving beyond a news publisher into a comprehensive sovereign information and diplomatic intelligence syndicate. From an institutional perspective, it facilitates tighter academic partnerships, think-tank symposia, and ministerial dialogues. Economically, our real-time market data pipelines, verified enterprise directories, and energy indices streamline cross-border investments, joint ventures, and supply chain logistics along the modern Silk Road.',
     corridorTitle: 'Sino-Iraqi Economic Corridors & The Al Faw Grand Port',
@@ -129,7 +129,7 @@ const translations: Record<Locale, AboutContent> = {
       { city: 'Basra Maritime Hub', region: 'Iraq', status: 'Active / Al Faw Port', latency: '22ms', focus: 'Container Logistics & Customs' },
       { city: 'Erbil Bureau', region: 'Kurdistan Region', status: 'Active / Synchronized', latency: '31ms', focus: 'Regional Commerce & Academia' }
     ],
-    pillarsTitle: 'Five Institutional Pillars of the Sovereign Agency',
+    pillarsTitle: 'Six Institutional Pillars of the Sovereign Agency',
     pillarsSubtitle: 'Strategic architecture underwriting our trilingual intelligence and journalistic mandate.',
     pillars: [
       { 
@@ -139,6 +139,10 @@ const translations: Record<Locale, AboutContent> = {
       { 
         title: 'Al Faw Grand Port & Development Road Telemetry', 
         desc: 'Dedicated monitoring of container throughput, maritime berths, and railway infrastructure connecting Iraq to Europe.' 
+      },
+      { 
+        title: 'Bilateral Settlement & Sovereign Payments', 
+        desc: 'A integrated trilingual payment gateway facilitating IQD and e-CNY transactions for enterprise trade and personal mobility.' 
       },
       { 
         title: 'Trilingual Contextual Localization Matrix', 
@@ -160,7 +164,7 @@ const translations: Record<Locale, AboutContent> = {
       { year: '2021', title: 'Diplomatic Foundation', desc: 'Bilateral protocols signed between educational and media councils in Beijing and Baghdad for real-time intellectual exchange.' },
       { year: '2023', title: 'Basra Logistics Accord', desc: 'Basra Hub activated to provide real-time custom tariffs and shipping statistics for Gulf of Faw container fleets.' },
       { year: '2025', title: 'Trilingual AI Translation Engine', desc: 'Launch of the sovereign translation matrix contextually localizing reports into Kurdish, Arabic, Chinese, and English.' },
-      { year: '2026', title: 'Enterprise Information Syndicate', desc: 'Fully integrating live market tickers, premium security indices, and custom corporate directories.' }
+      { year: '2026', title: 'Live Broadcast & Settlement Gateway', desc: 'Launch of the immersive Live Broadcast Portal and Sovereign Settlement Gateway for IQD and e-CNY transactions.' }
     ],
     councilTitle: 'Executive Council & Regional Bureau Directors',
     council: [
@@ -221,9 +225,9 @@ const translations: Record<Locale, AboutContent> = {
   ar: {
     title: 'حول مجموعة الوكالة العراقية الصينية (ICA)',
     subtitle: 'البوابة السيادية المستقلة التي تجسر الفجوة بين شرق آسيا والشرق الأوسط',
-    intro: "تمثل مجموعة الوكالة العراقية الصينية (ICA) جسراً استراتيجياً، سيادياً وثقافياً بين جمهورية الصين الشعبية وجمهورية العراق. بُني هذا المشروع على الروابط التاريخية العميقة لطريق الحرير القديم، ليكون قناة رقمية مؤسسية للصحافة الدبلوماسية، والتحليلات الاقتصادية الكلية، واستخبارات الأعمال التجارية عبر الحدود.",
+    intro: "تمثل مجموعة الوكالة العراقية الصينية (ICA) جسراً استراتيجياً، سيادياً وثقافياً بين جمهورية الصين الشعبية وجمهورية العراق. تطورت الوكالة اليوم إلى منظومة استخباراتية متعددة الوسائط، تدمج قياسات البث الحي، وأرشيفات الوسائط المميزة (ICA+)، وبوابة التسوية السيادية لتسهيل الصحافة الدبلوماسية، والتحليل الاقتصادي الكلي، واستخبارات الأعمال العابرة للحدود.",
     importanceTitle: 'الأهمية الاستراتيجية والممرات الاقتصادية',
-    importanceDesc: 'تكمن أهمية الوكالة العراقية الصينية في قدرتها على دمج التقارير بأربع لغات — الإنجليزية، العربية، الكردية (السورانية)، والصينية الماندرين — في صوت تحريري متماسك. مع استمرار توسع التجارة الثنائية واستثمارات البنية التحتية (مثل مبادرة الحزام والطريق وميناء الفاو الكبير)، هناك حاجة ماسة إلى منصة موثوقة في الوقت الفعلي توفر بيانات دقيقة للسوق، وتحليلات جيوسياسية، ومعلومات لوجستية مؤسسية.',
+    importanceDesc: 'تكمن أهمية الوكالة العراقية الصينية في قدرتها على دمج التقارير بأربع لغات — الإنجليزية، العربية، الكردية (السورانية)، والصينية الماندرين — في صوت تحريري متماسك. مع استمرار توسع التجارة الثنائية واستثمارات البنية التحتية (مثل مبادرة الحزام والطريق، وميناء الفاو الكبير، ومنظومة التسوية السيادية)، هناك حاجة ماسة إلى منصة موثوقة في الوقت الفعلي توفر بيانات دقيقة للسوق، وتحليلات جيوسياسية، ومعلومات لوجستية مؤسسية.',
     futureTitle: 'الآفاق المستقبلية والرؤية والممرات السيادية',
     futureDesc: 'بالنظر إلى المستقبل، تتطور الوكالة لتتجاوز كونها منصة صحفية إلى مجمع استخباراتي ومعلوماتي سيادي شامل. من منظور مؤسسي، تسهل الوكالة التحالفات الأكاديمية الأوثق، وندوات مراكز الفكر، والحوارات الوزارية. واقتصادياً، تعمل خطوط بيانات السوق الفورية وأدلة المؤسسات الموثقة ومؤشرات الطاقة على تبسيط الاستثمارات والمشاريع المشتركة عبر طريق الحرير الحديث.',
     corridorTitle: 'الممرات الاقتصادية الصينية العراقية وميناء الفاو الكبير',
@@ -238,7 +242,7 @@ const translations: Record<Locale, AboutContent> = {
       { city: 'مركز البصرة البحري', region: 'العراق', status: 'نشط / ميناء الفاو', latency: '22ms', focus: 'لوجستيات الحاويات والجمارك' },
       { city: 'مكتب أربيل', region: 'إقليم كردستان', status: 'نشط / متزامن', latency: '31ms', focus: 'التجارة الإقليمية والأكاديميا' }
     ],
-    pillarsTitle: 'الركائز المؤسسية الخمس للوكالة السيادية',
+    pillarsTitle: 'الركائز المؤسسية الست للوكالة السيادية',
     pillarsSubtitle: 'الهندسة الاستراتيجية الضامنة للمعلوماتية ثلاثية اللغات والتكليف الصحفي المعتمد.',
     pillars: [
       { 
@@ -248,6 +252,10 @@ const translations: Record<Locale, AboutContent> = {
       { 
         title: 'رصد ميناء الفاو الكبير ومشروع طريق التنمية', 
         desc: 'متابعة حية مستمرة لتدفق الحاويات وأرصفة الموانئ والبنى التحتية لشبكات السكك الحديدية الرابطة بين العراق وأوروبا.' 
+      },
+      { 
+        title: 'التسوية الثنائية والمدفوعات السيادية', 
+        desc: 'بوابة دفع ثلاثية اللغة متكاملة تسهل معاملات الدينار واليوان الرقمي للتجارة المؤسسية والتنقل الشخصي.' 
       },
       { 
         title: 'مصفوفة التعريب والترجمة السياقية الثلاثية', 
@@ -269,7 +277,7 @@ const translations: Record<Locale, AboutContent> = {
       { year: '٢٠٢١', title: 'التأسيس الدبلوماسي', desc: 'توقيع البروتوكولات الثنائية بين المجالس الأكاديمية والإعلامية في بكين وبغداد للتبادل المعرفي الفوري.' },
       { year: '٢٠٢٣', title: 'اتفاقية البصرة اللوجستية', desc: 'تفعيل مركز البصرة لتقديم التعريفات الجمركية وإحصاءات الشحن الفورية لأساطيل الحاويات في ميناء الفاو.' },
       { year: '٢٠٢٥', title: 'محرك الترجمة الآلي الثلاثي', desc: 'إطلاق مصفوفة الترجمة الخاصة لتعريب التقارير وسياقها في الكردية والعربية والصينية والإنجليزية.' },
-      { year: '٢٠٢٦', title: 'مجمع معلومات المؤسسات', desc: 'دمج مؤشرات السوق المباشرة، ومؤشرات الأمان المتقدمة، وأدلة الشركات المخصصة بالكامل.' }
+      { year: '٢٠٢٦', title: 'البث المباشر وبوابة التسوية', desc: 'إطلاق بوابة البث المباشر وبوابة التسوية السيادية لمعاملات الدينار واليوان الرقمي.' }
     ],
     councilTitle: 'المجلس التنفيذي ومدراء المكاتب الإقليمية',
     council: [
@@ -330,9 +338,9 @@ const translations: Record<Locale, AboutContent> = {
   zh: {
     title: '关于伊中通讯社传媒集团 (ICA)',
     subtitle: '连接东亚与中东的主权级战略枢纽与信息走廊',
-    intro: "伊中通讯社传媒集团（ICA）是连接中华人民共和国与伊拉克共和国的战略、主权与文化桥梁。建立在古代丝绸之路深厚的历史渊源之上，该项目成为了现代制度化数字管道，专注于外交采编报道、宏观经济分析与跨境企业商业情报。",
+    intro: "伊中通讯社传媒集团（ICA）是连接中华人民共和国与伊拉克共和国的战略、主权与文化桥梁。目前，本机构已演进为多模态情报生态系统，整合了实时广播遥测、高端媒体档案（ICA+）以及主权结算网关，赋能外交采编报道、宏观经济分析与跨境企业商业情报。",
     importanceTitle: '战略重要性与经济走廊',
-    importanceDesc: '伊中通讯社的核心价值在于将英语、阿拉伯语、索拉尼库尔德语及普通话报道融汇为高度统一的主权采编声音。随着双边经贸往来及重大基础设施投资（如“一带一路”倡议与法奥大港项目）的持续深化，迫切需要一个权威的实时平台，提供精确的市场指标、地缘战略评估和企业级物流通量遥测。',
+    importanceDesc: '伊中通讯社的核心价值在于将英语、阿拉伯语、索拉尼库尔德语及普通话报道融汇为高度统一的主权采编声音。随着双边经贸往来及重大基础设施投资（如“一带一路”倡议、法奥大港项目以及主权结算系统）的持续深化，迫切需要一个权威的实时平台，提供精确的市场指标、地缘战略评估和企业级物流通量遥测。',
     futureTitle: '未来愿景、战略走廊与主权情报',
     futureDesc: '展望未来，伊中通讯社正由双边新闻出版机构全面演进为跨国企业情报与外交智库联合体。在制度层面，本机构深化双边高校学术联盟、智库研讨及部委级别对话；在经济层面，依托实时金融数据流、已核验企业名录与能源指标，赋能现代丝绸之路沿线跨境投资与供应链协同。',
     corridorTitle: '中伊经济走廊与法奥大港超级工程',
@@ -347,7 +355,7 @@ const translations: Record<Locale, AboutContent> = {
       { city: '巴士拉海洋枢纽', region: '伊拉克', status: '运行中 / 法奥港观察室', latency: '22ms', focus: '集装箱航运与海关监管' },
       { city: '埃尔比勒分社', region: '库尔德斯坦地区', status: '运行中 / 实时同步', latency: '31ms', focus: '区域商贸与高校学术交流' }
     ],
-    pillarsTitle: '主权通讯社五大制度支柱',
+    pillarsTitle: '主权通讯社六大制度支柱',
     pillarsSubtitle: '支撑本机构三语情报网络与官方采编准则的底层战略架构。',
     pillars: [
       { 
@@ -357,6 +365,10 @@ const translations: Record<Locale, AboutContent> = {
       { 
         title: '法奥大港与发展之路全时遥测', 
         desc: '对港口泊位、集装箱通量及贯通伊拉克至欧洲的铁路走廊进行专属数据跟踪。' 
+      },
+      { 
+        title: '双边结算与主权支付体系', 
+        desc: '集成三语支付网关，支持第纳尔与数字人民币跨境结算，赋能双边贸易与流动性。' 
       },
       { 
         title: '三语语境本地化转译矩阵', 
@@ -378,7 +390,7 @@ const translations: Record<Locale, AboutContent> = {
       { year: '2021', title: '外交合作奠基', desc: '北京与巴格达学术及媒体委员会签署双边协议，启动实时智力成果与学术互通。' },
       { year: '2023', title: '巴士拉物流协定', desc: '巴士拉枢纽正式激活，向法奥港集装箱船队提供实时海关费率与航运宏观统计。' },
       { year: '2025', title: '三语本地化转译引擎', desc: '通讯社自主研发转译矩阵上线，实现报道在库尔德语、阿拉伯语、中文及英语的高保真语境转化。' },
-      { year: '2026', title: '综合企业情报联合体', desc: '全面整合实时金融数据行情、高级别安全指数与定制化跨国企业黄页系统。' }
+      { year: '2026', title: '直播门户与结算网关', desc: '上线沉浸式直播门户与主权结算网关，支持第纳尔与数字人民币双边交易。' }
     ],
     councilTitle: '执行委员会与各分社理事长',
     council: [
@@ -439,9 +451,9 @@ const translations: Record<Locale, AboutContent> = {
   ckb: {
     title: 'دەربارەی گرووپی ئاژانسی عێراقی - چینی (ICA)',
     subtitle: 'دەروازەی سەربەخۆ بۆ بەستنەوەی ڕۆژهەڵاتی ئاسیا و ڕۆژهەڵاتی ناوەڕاست',
-    intro: "گرووپی ئاژانسی عێراقی - چینی (ICA) پردێکی ستراتیژی، سەربەخۆ و کولتوورییە لە نێوان کۆماری گەلی چین و کۆماری عێراق. ئەم پڕۆژەیە لەسەر بنەمای پەیوەندییە مێژووییە قووڵەکانی ڕێگای ئاوریشمی کۆن دامەزراوە و وەک کەناڵێکی دیجیتاڵی فەرمی بۆ ڕۆژنامەگەری دیپلۆماسی، شیکاری ئابووری گەورە و زانیاری بازرگانی نێودەوڵەتی خزمەت دەکات.",
+    intro: "گرووپی ئاژانسی عێراقی - چینی (ICA) پردێکی ستراتیژی، سەربەخۆ و کولتوورییە لە نێوان کۆماری گەلی چین و کۆماری عێراق. ئێستا گەشەی کردووە بۆ سیستمێکی هەواڵگری فرە-ڕەهەند، کە پێکدێت لە داتای پەخشی ڕاستەوخۆ، ئەرشیفی میدیایی نایاب (ICA+)، و دەروازەی یەکلاییکردنەوەی دارایی بۆ ئاسانکاری لە ڕۆژنامەگەری دیپلۆماسي و شیکاری ئابووری گەورە.",
     importanceTitle: 'گرنگی ستراتیژی و دەروازە ئابوورییەکان',
-    importanceDesc: 'گرنگی ئاژانسی عێراقی - چینی لە توانایدا بۆ یەکخستنی ڕاپۆرتەکان بە چوار زمان - ئینگلیزی، عەرەبی، کوردی (سۆرانی)، و چینی مەندارین - بۆ دەنگێکی یەکگرتووی سەرنووسەرایەتی دەردەکەوێت. لەگەڵ بەردەوامی فراوانبوونی بازرگانی دووقۆڵی و وەبەرهێنانەکانی ژێرخان (وەک دەستپێشخەری پشتوێن و ڕێگا و بەندەری گەورەی فاو)، پێویستییەکی حەتمی هەیە بە پلاتفۆرمێکی باوەڕپێکراوی کاتی ڕاستەقینە.',
+    importanceDesc: 'گرنگی ئاژانسی عێراقی - چینی لە توانایدا بۆ یەکخستنی ڕاپۆرتەکان بە چوار زمان - ئینگلیزی، عەرەبی، کوردی (سۆرانی)، و چینی مەندارین - بۆ دەنگێکی یەکگرتووی سەرنووسەرایەتی دەردەکەوێت. لەگەڵ بەردەوامی فراوانبوونی بازرگانی دووقۆڵی و وەبەرهێنانەکانی ژێرخان (وەک دەستپێشخەری پشتوێن و ڕێگا، بەندەری گەورەی فاو، و سیستەمی یەکلاییکردنەوەی دارایی)، پێویستییەکی حەتمی هەیە بە پلاتفۆرمێکی باوەڕپێکراوی کاتی ڕاستەقینە.',
     futureTitle: 'تواناکانی داهاتوو، دیدگا و دەروازە سەربەخۆیەکان',
     futureDesc: 'لە داهاتوودا، ئاژانسی عێراقی - چینی پەرەدەسێنێت لە بڵاوکراوەیەکی هەواڵییەوە بۆ سەنتەرێکی گشتگیری زانیاری دامەزراوەیی و هەواڵگری دیپلۆماسی. لە ڕووی دامەزراوەییەوە، هاوپەیمانییە ئەکادیمییەکان، کۆڕبەندی لێکۆڵینەوە و دیالۆگی وەزاری ئاسانتر دەکات. لە ڕووی ئابوورییەوە، داتاکانی بازاڕ و پێڕستی بازرگانییەکان وەبەرهێنانی سنووربەزێن بە درێژایی ڕێگای ئاوریشم خێراتر دەکەن.',
     corridorTitle: 'دەروازە ئابوورییە چین و عێراقییەکان و بەندەری فاو',
@@ -456,7 +468,7 @@ const translations: Record<Locale, AboutContent> = {
       { city: 'سەنتەری دەریایی بەسرە', region: 'عێراق', status: 'چالاک / بەندەری فاو', latency: '22ms', focus: 'لۆجیستی کۆنتێنەر و گومرگ' },
       { city: 'نووسینگەی هەولێر', region: 'هەرێمی کوردستان', status: 'چالاک / هاوکاتکراو', latency: '31ms', focus: 'بازرگانی هەرێمی و ئەکادیمیا' }
     ],
-    pillarsTitle: 'پێنج کۆڵەکەی دامەزراوەیی ئاژانسی سەربەخۆ',
+    pillarsTitle: 'شەش کۆڵەکەی دامەزراوەیی ئاژانسی سەربەخۆ',
     pillarsSubtitle: 'نەخشەسازی ستراتیژی بۆ پاڵپشتیکردنی زانیاری سێزمانە و بەڵگەنامەی فەرمی ڕۆژنامەوانی.',
     pillars: [
       { 
@@ -466,6 +478,10 @@ const translations: Record<Locale, AboutContent> = {
       { 
         title: 'چاودێری بەندەری فاو و پڕۆژەی ڕێگای گەشەپێدان', 
         desc: 'چاودێری کاتی ڕاستەقینەی جووڵەی کۆنتێنەرەکان، وێستگەکانی کەشتیوانی و هێڵی ئاسنی بەستنەوەی عێراق بە ئەوروپا.' 
+      },
+      { 
+        title: 'یەکلاییکردنەوەی دوولایەنە و پارەدانی دارایی', 
+        desc: 'دەروازەیەکی پارەدانی سێزمانە بۆ ئاسانکاری لە مامەڵەکانی دینار و یوان بۆ بازرگانی و گەشتوگوزار.' 
       },
       { 
         title: 'ماتریکسی خۆماڵیکردنی زمانی سێزمانە', 
@@ -487,7 +503,7 @@ const translations: Record<Locale, AboutContent> = {
       { year: '٢٠٢١', title: 'بناغەی دیپلۆماسی', desc: 'پڕۆتۆکۆڵە دوولایەنەکان لە نێوان ئەنجومەنە ئەکادیمییەکان لە پەکین و بەغداد واژۆ کران بۆ ئاڵوگۆڕی فیکری کاتی ڕاستەقینە.' },
       { year: '٢٠٢٣', title: 'ڕێککەوتنی لۆجیستی بەسرە', desc: 'سەنتەری بەسرە چالاککرا بۆ دابینکردنی گومرگی بازرگانی کاتی ڕاستەقینە و ئامارەکانی گواستنەوەی دەریایی لە بەندەری فاو.' },
       { year: '٢٠٢٥', title: 'ماتڕیکسی وەرگێڕانی سێزمانە', desc: 'دەستپێکردنی ماتریکسی وەرگێڕانی سەربەخۆ بۆ خۆماڵیکردنی ڕاپۆرتەکان لە نێوان کوردی، عەرەبی، چینی و ئینگلیزی.' },
-      { year: '٢٠٢٦', title: 'پلاتفۆرمی زانیاری دەزگاکان', desc: 'یەکخستنی تەواوی پیشاندەرانی کاتی ڕاستەقینەی بازاڕ، نیشاندەرەکانی ئاسایش، و پێڕستەکانی کۆمپانیاکان.' }
+      { year: '٢٠٢٦', title: 'پەخشی ڕاستەوخۆ و دەروازەی یەکلاییکردنەوە', desc: 'دەستپێکردنی دەروازەی پەخشی ڕاستەوخۆ و دەروازەی یەکلاییکردنەوەی دارایی بۆ مامەڵەکانی دینار و یوان.' }
     ],
     councilTitle: 'ئەنجومەنی جێبەجێکردن و بەڕێوبەرانی نووسینگە هەرێمییەکان',
     council: [

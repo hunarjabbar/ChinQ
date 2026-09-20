@@ -69,11 +69,11 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
   return (
     <>
       <Link
-        to={`/${lang}/live${currentEvent ? `/${currentEvent.slug}` : ''}`}
+        to={`/${lang}/live`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="h-full flex items-center px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-neutral-950 dark:bg-neutral-950 hover:bg-neutral-900 dark:hover:bg-neutral-900 text-white transition-colors duration-200 cursor-pointer gap-2.5 sm:gap-3.5 group border-e border-neutral-800 dark:border-neutral-800 relative overflow-visible select-none shrink-0 z-20"
-        title={hasActiveEvent ? "Live Intelligence Broadcast Active" : "Sovereign Intelligence Live Dispatch"}
+        title={hasActiveEvent ? "Live Intelligence Broadcast Active" : "Sovereign Intelligence Live Broadcast"}
       >
         {/* Dynamic Radar Pulse Beacon */}
         <span className="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5 items-center justify-center shrink-0">
@@ -91,7 +91,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
         </span>
 
         {/* Main Label with prominent typography and unified minimalistic styling */}
-        <span className="whitespace-nowrap font-black text-sm sm:text-base md:text-lg tracking-wider rtl:tracking-normal text-white group-hover:text-neutral-200 inline-block font-sans transition-colors duration-200 leading-none">
+        <span className="whitespace-nowrap font-black text-sm sm:text-base md:text-lg tracking-widest uppercase text-white group-hover:text-neutral-200 inline-block font-sans transition-colors duration-200 leading-none">
           {t('liveDispatch')}
         </span>
 
@@ -109,7 +109,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
         )}
       </Link>
 
-      {/* Live Dispatch Script Preview Popover */}
+      {/* Live Broadcast Script Preview Popover */}
       <AnimatePresence>
         {showPreview && (
           <motion.div
@@ -132,8 +132,8 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
                   </span>
-                  <span className="text-[11px] font-black uppercase tracking-wider text-red-700 dark:text-red-400">
-                    {lang === 'ar' ? 'برقية البث المباشر • التردد السيادي' : lang === 'zh' ? '实时电传调度 • 主权频段' : lang === 'ckb' ? 'بروسکەی پەخشی ڕاستەوخۆ • شەپۆلی فەرمی' : 'LIVE DISPATCH SCRIPT • SOVEREIGN WIRE'}
+                  <span className="text-[11px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">
+                    {lang === 'ar' ? 'البث المباشر • التردد السيادي' : lang === 'zh' ? '现场直播 • 主权频段' : lang === 'ckb' ? 'پەخشی ڕاستەوخۆ • شەپۆلی فەرمی' : 'LIVE BROADCAST • SOVEREIGN WIRE'}
                   </span>
                 </div>
                 <button
@@ -144,7 +144,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
                     setIsOpen(false);
                   }}
                   className="p-1 rounded-md text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-                  aria-label="Close live dispatch preview"
+                  aria-label="Close live broadcast preview"
                 >
                   <X size={15} />
                 </button>
@@ -169,7 +169,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
                 </h4>
               </div>
 
-              {/* Live Dispatch Script Box */}
+              {/* Live Broadcast Script Box */}
               <div className="bg-neutral-50 dark:bg-neutral-950/80 border border-neutral-200 dark:border-neutral-800/80 rounded-xl p-3 sm:p-3.5 space-y-2">
                 <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-neutral-500 dark:text-neutral-400 border-b border-neutral-200/60 dark:border-neutral-800 pb-1.5">
                   <span className="flex items-center gap-1.5 text-red-700 dark:text-red-400">
@@ -208,7 +208,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
               {/* Action Buttons */}
               <div className="pt-1 flex items-center gap-2">
                 <Link
-                  to={`/${lang}/live${currentEvent ? `/${currentEvent.slug}` : ''}`}
+                  to={`/${lang}/live`}
                   onClick={() => {
                     setIsHovered(false);
                     setIsOpen(false);

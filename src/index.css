@@ -115,33 +115,64 @@
 }
 
 html[lang="ar"] {
-  font-family: "Noto Naskh Arabic", "Cairo", "Readex Pro", "Vazirmatn", system-ui, sans-serif;
-  --font-sans: "Noto Naskh Arabic", "Cairo", "Readex Pro", "Vazirmatn", system-ui, sans-serif;
-  --font-serif: "Playfair Display", "Noto Serif SC", "Noto Naskh Arabic", Georgia, serif;
-  font-size: 97%;
+  font-family: "Vazirmatn", system-ui, sans-serif;
+  --font-sans: "Vazirmatn", system-ui, sans-serif;
+  --font-serif: "Vazirmatn", system-ui, serif;
+  font-size: 100%;
 }
 
 html[lang="ckb"] {
-  font-family: "Shasenem Hemin", "Shasenem Kurd", system-ui, sans-serif;
-  --font-sans: "Shasenem Hemin", "Shasenem Kurd", system-ui, sans-serif;
-  --font-serif: "Shasenem Hemin", Georgia, serif;
-  font-size: 97%;
+  font-family: "Vazirmatn", system-ui, sans-serif;
+  --font-sans: "Vazirmatn", system-ui, sans-serif;
+  --font-serif: "Vazirmatn", system-ui, serif;
+  font-size: 100%;
 }
 
 html[lang="ar"] body, html[lang="ckb"] body {
-  font-family: var(--font-sans);
+  font-family: "Vazirmatn", system-ui, sans-serif;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.65;
 }
 
-h1, h2, h3, h4, h5, h6,
-html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4, html[lang="ar"] h5, html[lang="ar"] h6,
-html[lang="ckb"] h1, html[lang="ckb"] h2, html[lang="ckb"] h3, html[lang="ckb"] h4, html[lang="ckb"] h5, html[lang="ckb"] h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Harmonized Arabic and Kurdish Sorani heading styles */
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4, html[lang="ar"] h5, html[lang="ar"] h6,
+html[lang="ckb"] h1, html[lang="ckb"] h2, html[lang="ckb"] h3, html[lang="ckb"] h4, html[lang="ckb"] h5, html[lang="ckb"] h6 {
+  font-family: "Vazirmatn", system-ui, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: 0 !important;
+  line-height: 1.45 !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Neutralize Latin tracking/letter-spacing in Arabic and Kurdish to preserve cursive ligature connections */
+html[lang="ar"],
+html[lang="ckb"],
+html[lang="ar"] [class*="tracking-"],
+html[lang="ckb"] [class*="tracking-"] {
+  letter-spacing: 0 !important;
+}
+
+/* Unified font-family enforcement across utility classes */
+html[lang="ar"] .font-sans,
+html[lang="ckb"] .font-sans,
+html[lang="ar"] .font-serif,
+html[lang="ckb"] .font-serif {
+  font-family: "Vazirmatn", system-ui, sans-serif !important;
+}
+
+/* Optical reading comfort for paragraphs and descriptive body copy */
+html[lang="ar"] p,
+html[lang="ckb"] p {
+  line-height: 1.8 !important;
 }
 
 html[lang="zh"] {

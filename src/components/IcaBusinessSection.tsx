@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Locale } from '../types';
+import { useI18n } from '../hooks/useI18n';
 import { 
   Building2, ShieldCheck, FileText, Download, ExternalLink, 
   MapPin, DollarSign, Tag, ArrowRight, ArrowLeft, CheckCircle2, 
@@ -44,7 +46,7 @@ const FALLBACK_OPPORTUNITIES: BusinessOpportunity[] = [
     summaryEn: 'A tier-one downstream refining and polymer production facility designed to capture flaring gas across southern fields, providing 10-year fiscal immunity under Investment Law No. 13.',
     summaryAr: 'منشأة تحويلية وتكريرية لإنتاج البوليمرات مصممة لاستثمار الغاز المحروق في حقول الجنوب، مع إعفاء ضريبي لمدة ١٠ سنوات بموجب قانون الاستثمار رقم ١٣.',
     summaryZh: '伊拉克南部特大型下游精细化工与聚合物生产基地，深度回收油田放空气，享受第13号投资法全额10年免税。',
-    summaryCkb: 'پرۆژەیەکی گەورەی پاڵاوتن و بەرهەمهێنانی پۆلیمەر بۆ سوودوەرگرتن لە گازی کێڵگەکانی باشوور، بە بەخشینی باج بۆ ١٠ ساڵ بەپێی یاسای وەبەرهێنان.',
+    summaryCkb: 'پرۆژەیەکی گەورەی پاڵاوتن و بەرهەمهێنانی پۆلیمەر بۆ سوودوەرگرتن لە گازی کێڵگەکانی باشوور، بە بەخشینی باج بۆ ١٠ ساڵ بەپێی یاسای وەبەرهێنانی.',
     contentEn: 'The Iraqi Ministry of Oil, in bilateral coordination with Chinese petrochemical consortiums, invites EPC partners for Phase II equity participation. Sovereign guarantees include free allocation of 450 hectares in Khor Al-Zubair, zero customs tariff on imported plant machinery, and full constitutional freedom to repatriate capital in RMB or USD.',
     contentAr: 'تدعو وزارة النفط العراقية بالتنسيق مع التحالفات الصينية الشركاء للمشاركة في المرحلة الثانية. تتضمن الضمانات تخصيص ٤٥٠ هكتاراً في خور الزبير مع إعفاء جمركي كامل وحرية دستورية لتحويل الأرباح.',
     contentZh: '伊拉克石油部在中伊合作框架下诚邀国际工程财团参与第二阶段股权合作。提供450公顷工业用地、工程设备零关税及受宪法保护的投资收益自由汇出保障。',
@@ -137,6 +139,7 @@ const FALLBACK_OPPORTUNITIES: BusinessOpportunity[] = [
 ];
 
 export default function IcaBusinessSection({ lang }: { lang: Locale }) {
+  const { t: translate } = useI18n(lang);
   const [opportunities, setOpportunities] = useState<BusinessOpportunity[]>(FALLBACK_OPPORTUNITIES);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedOpportunity, setSelectedOpportunity] = useState<BusinessOpportunity | null>(null);
@@ -165,24 +168,9 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
   }, []);
 
   const t = {
-    badge: {
-      en: 'ICA Sovereign Business & Investment Hub',
-      ar: 'مركز آي سي إيه للأعمال والاستثمار السيادي',
-      zh: 'ICA 中伊主权商业与战略招商总枢纽',
-      ckb: 'مەڵبەندی بازرگانی و وەبەرهێنانی سیادی ICA'
-    }[lang],
-    title: {
-      en: 'Bilateral Projects, Trade Corridors & Sovereign Guarantees',
-      ar: 'المشاريع الثنائية، الممرات التجارية والضمانات السيادية',
-      zh: '双边重点合作项目、跨境经贸走廊与主权投资保障',
-      ckb: 'پڕۆژە دوولایەنەکان، کۆریدۆرە بازرگانییەکان و گەرەنتییە سیادییەکان'
-    }[lang],
-    desc: {
-      en: 'Direct gateway for Chinese state consortiums, regional conglomerates, and accredited private investors accessing Iraq\'s sovereign investment licenses, legal immunities, and major infrastructure tenders.',
-      ar: 'البوابة المباشرة للشركات والتحالفات الصينية والمستثمرين المعتمدين للوصول إلى إجازات الاستثمار السيادية، والإعفاءات القانونية، ومناقصات البنية التحتية الكبرى في العراق.',
-      zh: '面向大型中企财团、区域龙头与合格战略投资者的主权直通门户，权威发布伊拉克国家级投资许可、特许税收豁免及大型基础设施总包契机。',
-      ckb: 'دەروازەی ڕاستەوخۆ بۆ کۆمپانیا چینییەکان و وەبەرهێنەران بۆ بەدەستهێنانی مۆڵەتی وەبەرهێنانی سیادی، لێخۆشبوونی یاسایی و تەندەرە گەورەکانی عێراق.'
-    }[lang],
+    badge: translate('iraqChinaBusinessHub'),
+    title: translate('iraqChinaBusinessHub'),
+    desc: translate('businessHubSubtitle'),
     guaranteesTitle: {
       en: 'Constitutional & Sovereign Investor Guarantees',
       ar: 'الضمانات الاستثمارية الدستورية والسيادية',
@@ -569,12 +557,12 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
               </p>
             </div>
           </div>
-          <a
-            href="#settlement-sourcing"
+          <Link
+            to={`/${lang}/settlement`}
             className="px-6 py-3.5 bg-white hover:bg-brand-50 text-brand-900 text-xs sm:text-sm font-black rounded-xl transition-all shadow-md hover:shadow-lg shrink-0 tracking-wider uppercase"
           >
             {lang === 'ar' ? 'الانتقال إلى مكتب التسوية ←' : lang === 'zh' ? '前往双边结算与集采台 →' : lang === 'ckb' ? 'بڕۆ بۆ دەفتەری دارایی ←' : 'Go to Settlement & Sourcing →'}
-          </a>
+          </Link>
         </div>
       </div>
 

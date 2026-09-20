@@ -648,3 +648,48 @@ model FinanceInsight {
   bodyCkb        String   @default("")
 }
 
+model CulturalExchangeCategory {
+  id        String                    @id @default(cuid())
+  slug      String                    @unique
+  nameEn    String
+  nameAr    String                    @default("")
+  nameZh    String                    @default("")
+  nameCkb   String                    @default("")
+  order     Int                       @default(0)
+  programs  CulturalExchangeProgram[]
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+}
+
+model CulturalExchangeProgram {
+  id                  String                   @id @default(cuid())
+  slug                String                   @unique
+  titleEn             String
+  titleAr             String                   @default("")
+  titleZh             String                   @default("")
+  titleCkb            String                   @default("")
+  descriptionEn       String
+  descriptionAr       String                   @default("")
+  descriptionZh       String                   @default("")
+  descriptionCkb      String                   @default("")
+  detailsEn           String                   @default("")
+  detailsAr           String                   @default("")
+  detailsZh           String                   @default("")
+  detailsCkb          String                   @default("")
+  categoryId          String
+  category            CulturalExchangeCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  institutionName     String
+  coverImage          String
+  eventDate           String?
+  programStartDate    String?
+  programEndDate      String?
+  applicationDeadline String?
+  eligibility         String?
+  contactUrl          String?
+  applicationUrl      String?
+  featured            Boolean                  @default(false)
+  order               Int                      @default(0)
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+}
+

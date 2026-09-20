@@ -501,3 +501,51 @@ export interface FinanceInsight {
   bodyCkb: string;
 }
 
+export interface CulturalExchangeCategory {
+  id: string;
+  slug: string;
+  nameEn: string;
+  nameAr: string;
+  nameZh: string;
+  nameCkb: string;
+  order: number;
+  programs?: CulturalExchangeProgram[];
+  _count?: {
+    programs: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CulturalExchangeProgram {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  detailsEn: string;
+  detailsAr: string;
+  detailsZh: string;
+  detailsCkb: string;
+  categoryId: string;
+  category?: CulturalExchangeCategory;
+  institutionName: string;
+  coverImage: string;
+  eventDate?: string | null;
+  programStartDate?: string | null;
+  programEndDate?: string | null;
+  applicationDeadline?: string | null;
+  eligibility?: string | null;
+  contactUrl?: string | null;
+  applicationUrl?: string | null;
+  featured: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+

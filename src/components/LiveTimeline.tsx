@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Clock, AlertCircle } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { Clock, AlertCircle, Radio } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface LiveUpdate {
   id: string;
@@ -15,6 +16,8 @@ interface LiveUpdate {
 export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; darkTheme?: boolean; lang: 'en' | 'ar' | 'zh' | 'ckb' }) {
   const [updates, setUpdates] = useState<LiveUpdate[]>([]);
   const [isActive, setIsActive] = useState(true);
+  const seenUpdateIds = useRef<Set<string>>(new Set());
+  const isFirstLoad = useRef(true);
 
   // Fallback content mapping based on language
   const getContent = (update: LiveUpdate) => {
@@ -26,12 +29,54 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
 
   useEffect(() => {
     const fetchUpdates = async () => {
-      const timestamp = new Date().getTime();
-      const res = await fetch(`/api/events/${slug}?t=${timestamp}`, { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        setUpdates(data.updates);
-        setIsActive(data.isActive);
+      try {
+        const timestamp = new Date().getTime();
+        const res = await fetch(`/api/events/${slug}?t=${timestamp}`, { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          const newUpdates: LiveUpdate[] = data.updates || [];
+          
+          setUpdates(newUpdates);
+          setIsActive(data.isActive);
+
+          // Notification Logic
+          if (newUpdates.length > 0) {
+            if (isFirstLoad.current) {
+              // On first load, just track existing IDs
+              newUpdates.forEach(u => seenUpdateIds.current.add(u.id));
+              isFirstLoad.current = false;
+            } else {
+              // On subsequent polls, alert for new IDs
+              // We check from the start of the array (most recent)
+              const freshUpdates = newUpdates.filter(u => !seenUpdateIds.current.has(u.id));
+              
+              if (freshUpdates.length > 0) {
+                freshUpdates.forEach((update) => {
+                  const content = getContent(update);
+                  const title = lang === 'ar' ? 'تحديث جديد' : lang === 'zh' ? '新动态' : lang === 'ckb' ? 'نوێکاری نوێ' : 'New Stream Update';
+                  
+                  if (update.isImportant) {
+                    toast.error(title, {
+                      description: content,
+                      icon: <AlertCircle className="w-5 h-5 text-red-500" />,
+                      duration: 8000,
+                    });
+                  } else {
+                    toast.info(title, {
+                      description: content,
+                      icon: <Radio className="w-5 h-5 text-brand-500 animate-pulse" />,
+                      duration: 5000,
+                    });
+                  }
+                  
+                  seenUpdateIds.current.add(update.id);
+                });
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error("LiveTimeline fetch error:", error);
       }
     };
 
@@ -39,7 +84,7 @@ export function LiveTimeline({ slug, lang, darkTheme = false }: { slug: string; 
     // Poll every 10 seconds
     const interval = setInterval(fetchUpdates, 10000);
     return () => clearInterval(interval);
-  }, [slug]);
+  }, [slug, lang]); // Re-run if language changes to ensure correct toast content
 
   return (
     <div className="w-full max-w-3xl mx-auto text-start">

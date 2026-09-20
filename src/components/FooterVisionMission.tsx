@@ -31,12 +31,12 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
             {isAr 
-              ? 'بناء جسر استراتيجي مستدام بين العراق والصين، يعزز التنمية الاقتصادية، ويقود الابتكار في مشاريع البنية التحتية، ويدعم الشراكات الثنائية طويلة الأمد في إطار مبادرة الحزام والطريق.' 
+              ? 'بناء جسر استراتيجي مستدام بين العراق والصين، يعزز التنمية الاقتصادية من خلال بوابات استخباراتية فورية، ويقود الابتكار في مشاريع البنية التحتية، ويدعم الشراكات الثنائية طويلة الأمد في إطار مبادرة الحزام والطريق.' 
               : isZh 
-              ? '在伊拉克与中国之间建立一座可持续的战略桥梁，促进经济发展，引领基础设施项目创新，并在“一带一路”倡议框架下支持长期的双边伙伴关系。'
+              ? '在伊拉克与中国之间建立一座可持续的战略桥梁，通过实时情报门户促进经济发展，引领基础设施项目创新，并在“一带一路”倡议框架下支持长期的双边伙伴关系。'
               : isCkb
-              ? 'دروستکردنی پردێکی ستراتیژی بەردەوام لە نێوان عێراق و چین، بۆ پێشخستنی گەشەی ئابووری و داهێنان لە پڕۆژەکانی ژێرخان و پشتیوانیکردنی هاوبەشی دوولایەنەی درێژخایەن.'
-              : 'To build a sustainable strategic bridge between Iraq and China, fostering economic development, pioneering infrastructure innovation, and supporting long-term bilateral partnerships within the Belt and Road Initiative.'}
+              ? 'دروستکردنی پردێکی ستراتیژی بەردەوام لە نێوان عێراق و چین، بۆ پێشخستنی گەشەی ئابووری لە ڕێگەی دەروازە هەواڵگرییە ڕاستەوخۆکان و داهێنان لە پڕۆژەکانی ژێرخان و پشتیوانیکردنی هاوبەشی دوولایەنەی درێژخایەن.'
+              : 'To build a sustainable strategic bridge between Iraq and China, fostering economic development through real-time intelligence portals, pioneering infrastructure innovation, and supporting long-term bilateral partnerships within the Belt and Road Initiative.'}
           </p>
         </div>
 
@@ -48,12 +48,12 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
             {isAr
-              ? 'تقديم تغطية إعلامية موثوقة، وتسهيل الاستثمارات المشتركة، وتوفير منصات رقمية آمنة للتبادل التجاري والأكاديمي والثقافي، لضمان نمو مزدهر لكلا البلدين.'
+              ? 'تقديم تغطية إعلامية موثوقة عبر قياسات البث الحي، وتسهيل الاستثمارات المشتركة من خلال أرشيفات المؤسسات الموثقة، وتوفير مراكز رقمية غامرة (ICA+) للتبادل التجاري والأكاديمي والثقافي، لضمان نمو مزدهر لكلا البلدين.'
               : isZh
-              ? '提供可靠的媒体报道，促进共同投资，并为商业、学术和文化交流提供安全的数字平台，以确保两国实现繁荣增长。'
+              ? '通过实时广播遥测提供可靠的媒体报道，通过已核验的企业档案促进共同投资，并提供沉浸式数字中心 (ICA+) 以进行商业、学术和文化交流，以确保两国实现繁荣增长。'
               : isCkb
-              ? 'پێشکەشکردنی ڕوماڵی میدیایی باوەڕپێکراو، ئاسانکاری بۆ وەبەرهێنانی هاوبەش، و دابینکردنی پلاتفۆرمی دیجیتاڵی ئارام بۆ ئاڵوگۆڕی بازرگانی، ئەکادیمی و کلتوری.'
-              : 'Delivering reliable media coverage, facilitating joint investments, and providing secure digital platforms for commercial, academic, and cultural exchange to ensure prosperous growth for both nations.'}
+              ? 'پێشکەشکردنی ڕوماڵی میدیایی باوەڕپێکراو لە ڕێگەی داتای پەخشی ڕاستەوخۆ، ئاسانکاری بۆ وەبەرهێنانی هاوبەش لە ڕێگەی ئەرشیفی دامەزراوەکان، و دابینکردنی ناوەندی دیجیتاڵی گشتگیر (ICA+) بۆ ئاڵوگۆڕی بازرگانی، ئەکادیمی و کلتوری.'
+              : 'Delivering reliable media coverage through real-time broadcast telemetry, facilitating joint investments via verified enterprise archives, and providing immersive digital hubs (ICA+) for commercial, academic, and cultural exchange to ensure prosperous growth for both nations.'}
           </p>
         </div>
 

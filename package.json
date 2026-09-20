@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/generate-firebase-config.js && tsx server.ts",
-    "build": "node scripts/generate-firebase-config.js && node scripts/generate-pwa-icons.cjs && npx prisma generate && vite build && npx esbuild server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.js",
-    "start": "node dist/server.js",
+    "dev": "tsx server.ts",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "postinstall": "prisma generate",
     "preview": "vite preview",
-    "clean": "rimraf dist server.js",
+    "clean": "rimraf dist",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "react-router-dom": "^7.18.1",
     "recharts": "^3.10.0",
     "sharp": "^0.35.4",
+    "sonner": "^2.0.8",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",

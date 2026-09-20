@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { TourismSpot, Locale } from '../types';
+import { useI18n } from '../hooks/useI18n';
 import { 
   Compass, MapPin, Plane, Calendar, ShieldCheck, 
   ChevronRight, X, Send, CheckCircle2, Sparkles, Globe2, Info
@@ -13,6 +14,7 @@ interface TourismSectionProps {
 }
 
 export function TourismSection({ lang = 'en' }: TourismSectionProps) {
+  const { t: translate } = useI18n(lang);
   const currentLang = lang as Locale;
   const [selectedRegion, setSelectedRegion] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -68,23 +70,14 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-800 text-white text-xs font-bold uppercase tracking-wider rounded-sm mb-3">
             <Compass className="w-3.5 h-3.5" />
             <span>
-              {currentLang === 'ar' ? 'جسر السياحة والثقافة الثنائي' :
-               currentLang === 'zh' ? '中伊库文旅与遗产深度融合' :
-               currentLang === 'ckb' ? 'گەشتوگوزار و کەلەپووری هاوبەش' :
-               'CHINA - IRAQ - KURDISTAN TOURISM HUB'}
+              {translate('culturalTourism')}
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-900 dark:text-white tracking-tight">
-            {currentLang === 'ar' ? 'استكشف وجهات التراث والجمال بين الصين والعراق وكردستان' :
-             currentLang === 'zh' ? '探索中国、伊拉克与库尔德斯坦的千年文明与绝美风光' :
-             currentLang === 'ckb' ? 'گەشت بکە بۆ شوێنەوار و دیمەنە سەرنجڕاکێشەکانی چین و عێراق و کوردستان' :
-             'Bilateral Heritage & Silk Road Travel Destinations'}
+            {translate('bilateralHeritageTravel')}
           </h2>
           <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 max-w-2xl leading-relaxed">
-            {currentLang === 'ar' ? 'دليل شامل للرحلات والتأشيرات والوجهات الأثرية المدرجة على قائمة اليونسكو والطيران المباشر بين بكين وبغداد وأربيل.' :
-             currentLang === 'zh' ? '涵盖双边免签/落地签指引、直飞航线信息、世界遗产遗址与特色民俗定制游。' :
-             currentLang === 'ckb' ? 'ڕێنمایی گشتگیر بۆ گەشت و ڤیزا و شوێنەوارەکانی یونسکۆ و هێڵە ئاسمانییەکانی نێوان چین و بەغدا و هەولێر.' :
-             'Comprehensive travel itineraries, visa policies, UNESCO sites, and direct airline routing connecting China, Baghdad, and Kurdistan.'}
+            {translate('exploreHeritageDesc')}
           </p>
         </div>
 
@@ -93,10 +86,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bg-brand-800 text-white hover:bg-brand-900 px-5 py-2.5 rounded-lg transition-all shadow-sm shrink-0 uppercase tracking-wider"
         >
           <span>
-            {currentLang === 'ar' ? 'بوابة السياحة الكاملة ←' :
-             currentLang === 'zh' ? '进入完整文旅门户 →' :
-             currentLang === 'ckb' ? 'چوونە ناو ناوەندی گەشتوگوزار →' :
-             'Explore Tourism Portal →'}
+            {translate('tourismPortal')}
           </span>
         </Link>
       </div>
@@ -105,13 +95,13 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-neutral-50 dark:bg-neutral-800/60 p-3 border border-gray-200 dark:border-neutral-700 rounded-xs">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold text-gray-500 dark:text-neutral-400 uppercase mr-1 flex items-center gap-1">
-            <Globe2 className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" /> Region:
+            <Globe2 className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" /> {translate('region')}:
           </span>
           {[
-            { id: 'ALL', labelEn: 'All Regions', labelAr: 'جميع المناطق', labelZh: '全部区域', labelCkb: 'جميع ناوچەکان' },
-            { id: 'CHINA', labelEn: 'China 🇨🇳', labelAr: 'الصين 🇨🇳', labelZh: '中国 🇨🇳', labelCkb: 'چین 🇨🇳' },
-            { id: 'IRAQ', labelEn: 'Iraq 🇮🇶', labelAr: 'العراق 🇮🇶', labelZh: '伊拉克 🇮🇶', labelCkb: 'عێراق 🇮🇶' },
-            { id: 'KURDISTAN', labelEn: 'Kurdistan ☀️', labelAr: 'كردستان ☀️', labelZh: '库尔德斯坦 ☀️', labelCkb: 'کوردستان ☀️' },
+            { id: 'ALL', label: translate('allRegions') },
+            { id: 'CHINA', label: translate('china') + ' 🇨🇳' },
+            { id: 'IRAQ', label: translate('iraq') + ' 🇮🇶' },
+            { id: 'KURDISTAN', label: translate('kurdistan') + ' ☀️' },
           ].map((r) => (
             <button
               key={r.id}
@@ -122,7 +112,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                   : 'bg-white dark:bg-neutral-700 text-gray-700 dark:text-neutral-200 border border-gray-300 dark:border-neutral-600 hover:border-black dark:hover:border-white'
               }`}
             >
-              {currentLang === 'ar' ? r.labelAr : currentLang === 'zh' ? r.labelZh : currentLang === 'ckb' ? r.labelCkb : r.labelEn}
+              {r.label}
             </button>
           ))}
         </div>
@@ -130,7 +120,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
         {/* Quick Travel Advisory Notice */}
         <div className="flex items-center gap-2 text-[11px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-xs border border-emerald-200 dark:border-emerald-800">
           <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-          <span>Visa on Arrival & E-Visa Enabled</span>
+          <span>{translate('visaOnArrivalEnabled')}</span>
         </div>
       </div>
 
@@ -143,7 +133,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
         </div>
       ) : filteredSpots.length === 0 ? (
         <div className="p-10 text-center bg-neutral-50 dark:bg-neutral-800 border border-dashed border-gray-300 dark:border-neutral-700 rounded-xs">
-          <p className="text-xs text-gray-500 dark:text-neutral-400">No tourism destinations found for selected filter.</p>
+          <p className="text-xs text-gray-500 dark:text-neutral-400">{translate('noTourismFound')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -188,15 +178,15 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
               <div className="pt-3 mt-3 border-t border-gray-100 dark:border-neutral-700 space-y-1.5 text-[11px] font-mono">
                 <div className="flex items-center justify-between text-gray-500 dark:text-neutral-400">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-brand-800 dark:text-brand-400" /> Best Season:
+                    <Calendar className="w-3 h-3 text-brand-800 dark:text-brand-400" /> {translate('bestSeason')}:
                   </span>
                   <span className="font-bold text-gray-800 dark:text-neutral-200 line-clamp-1">{spot.bestTimeToVisit}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-500 dark:text-neutral-400">
                   <span className="flex items-center gap-1">
-                    <Plane className="w-3 h-3 text-blue-600" /> Flights:
+                    <Plane className="w-3 h-3 text-blue-600" /> {translate('flights')}:
                   </span>
-                  <span className="font-bold text-emerald-700">Direct / Connected</span>
+                  <span className="font-bold text-emerald-700">{translate('directConnected')}</span>
                 </div>
               </div>
             </motion.div>
@@ -223,13 +213,13 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
               <div className="px-6 py-4 bg-brand-900 text-white border-b border-brand-800 flex justify-between items-center shrink-0 sticky top-0 z-20 shadow-md">
                 <div className="text-xs font-bold uppercase tracking-widest text-brand-200 flex items-center gap-2">
                   <Compass className="w-4 h-4" />
-                  {currentLang === 'ar' ? 'بوابة السياحة الثنائية' : currentLang === 'zh' ? '双边旅游门户' : currentLang === 'ckb' ? 'دەروازەی گەشتیاری دووقۆڵی' : 'Bilateral Tourism Portal'}
+                  {translate('bilateralTourismPortal')}
                 </div>
                 <button 
                   onClick={() => setActiveSpot(null)}
                   className="text-white hover:text-brand-200 font-bold text-xs uppercase tracking-widest bg-brand-800 hover:bg-brand-950 px-4 py-2 rounded-lg transition-colors cursor-pointer border border-brand-700 shadow-sm"
                 >
-                  {currentLang === 'ar' ? '✕ إغلاق النافذة' : currentLang === 'ckb' ? '✕ داخستن' : currentLang === 'zh' ? '✕ 关闭窗口' : '✕ Close Portal'}
+                  {translate('closePortal')}
                 </button>
               </div>
 
@@ -284,27 +274,27 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                   <div>
                     <div className="flex items-center gap-1.5 text-xs font-black uppercase text-brand-800 dark:text-brand-400 mb-2">
                       <Sparkles className="w-4 h-4" />
-                      <span>Bilateral Tour & Visa Advisory</span>
+                      <span>{translate('bilateralTourAdvisory') || 'Bilateral Tour & Visa Advisory'}</span>
                     </div>
                     <h3 className="text-xl font-bold text-brand-900 dark:text-neutral-100 mb-2">
-                      Plan Your Trip to {activeSpot.city}
+                      {translate('planTripTo')} {activeSpot.city}
                     </h3>
                     <p className="text-xs font-sans text-gray-600 dark:text-neutral-400 mb-6 leading-relaxed">
-                      Submit an inquiry to our Iraqi-Chinese Agency Tourism Desk for official delegation, business travel, or cultural exchange tour itineraries.
+                      {translate('tourismInquiryDesc')}
                     </p>
 
                     {inquirySent ? (
                       <div className="p-6 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xs text-center space-y-2">
                         <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                        <h4 className="font-bold text-sm">Inquiry Received!</h4>
+                        <h4 className="font-bold text-sm">{translate('inquiryReceived')}</h4>
                         <p className="text-xs font-sans">
-                          Our bilateral travel officer will contact you shortly with custom itinerary details and visa procedures.
+                          {translate('inquiryReceivedDesc')}
                         </p>
                       </div>
                     ) : (
                       <form onSubmit={handleInquirySubmit} className="space-y-3 text-xs">
                         <div>
-                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Full Name</label>
+                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">{translate('fullName')}</label>
                           <input
                             type="text"
                             required
@@ -316,7 +306,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                         </div>
 
                         <div>
-                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Email / Phone</label>
+                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">{translate('emailPhone')}</label>
                           <input
                             type="email"
                             required
@@ -329,7 +319,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
 
                         <div className="grid grid-cols-2 gap-2">
                           <div>
-                            <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Expected Date</label>
+                            <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">{translate('expectedDate')}</label>
                             <input
                               type="date"
                               required
@@ -339,7 +329,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                             />
                           </div>
                           <div>
-                            <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Travelers</label>
+                            <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">{translate('travelers')}</label>
                             <select
                               value={inquiryForm.travelers}
                               onChange={e => setInquiryForm({ ...inquiryForm, travelers: e.target.value })}
@@ -354,7 +344,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                         </div>
 
                         <div>
-                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">Notes / Preferences</label>
+                          <label className="block font-bold text-gray-700 dark:text-neutral-300 mb-1">{translate('notesPreferences')}</label>
                           <textarea
                             rows={2}
                             placeholder="Specific requests (translator, visa assistance, hotel rating)..."
@@ -369,7 +359,7 @@ export function TourismSection({ lang = 'en' }: TourismSectionProps) {
                           className="w-full flex items-center justify-center gap-2 py-2.5 bg-brand-800 hover:bg-brand-900 text-white font-bold uppercase rounded-xs transition-colors cursor-pointer shadow-xs mt-2"
                         >
                           <Send className="w-4 h-4" />
-                          <span>Submit Travel Request</span>
+                          <span>{translate('submitTravelRequest')}</span>
                         </button>
                       </form>
                     )}

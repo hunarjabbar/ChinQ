@@ -2,7 +2,7 @@ import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield, QrCode, Smartphone } from 'lucide-react';
+import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield, QrCode, Smartphone, GraduationCap } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { SocialHeaderBar } from './SocialLinks';
@@ -38,33 +38,36 @@ const LiveDateTime = React.memo(function LiveDateTime({ lang }: { lang: Locale }
 });
 
 function PaymentSettlementButton({ lang }: { lang: Locale }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isRtl = lang === 'ar' || lang === 'ckb';
   const location = useLocation();
 
-  // Automatically close after exactly 8 seconds
+  // Automatically open for 8 seconds ONLY on the homepage
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // Strictly match the root path for each language
+    const isHomepage = location.pathname === `/${lang}` || 
+                       location.pathname === `/${lang}/`;
+    
+    if (isHomepage) {
+      setIsOpen(true);
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+      }, 8000);
+      return () => clearTimeout(timer);
+    } else {
+      // Ensure it's closed if we navigate away
       setIsOpen(false);
-    }, 8000);
-    return () => clearTimeout(timer);
-  }, []);
+    }
+  }, [location.pathname, lang]);
 
   const showPopup = isOpen || isHovered;
 
-  const settlementTarget = `/${lang}?tab=settlement#settlement-sourcing`;
+  const settlementTarget = `/${lang}/settlement?tab=currency-settlement`;
 
   const handleLinkClick = () => {
     setIsOpen(false);
     setIsHovered(false);
-    // If already on homepage, scroll smoothly to the unified section
-    if (location.pathname === `/${lang}` || location.pathname === `/${lang}/`) {
-      const el = document.getElementById('settlement-sourcing');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
   };
 
   return (
@@ -189,6 +192,24 @@ function PortalDropdown({ lang }: { lang: Locale }) {
             className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-1 w-56 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md overflow-hidden z-50`}
           >
             <div className="flex flex-col py-1">
+              <Link 
+                to={`/${lang}/cultural-exchange`} 
+                className="flex items-center gap-3 px-4 py-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
+                onClick={() => setIsOpen(false)}
+              >
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-red-600 text-white group-hover:bg-red-700 transition-colors shrink-0">
+                  <GraduationCap size={12} />
+                </div>
+                <div className="flex flex-col flex-1">
+                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
+                    {lang === 'ar' ? 'التبادل الثقافي' : lang === 'zh' ? '人文交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری' : 'Cultural Exchange'}
+                  </span>
+                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
+                    {lang === 'ar' ? 'منح وشراكات أكاديمية' : lang === 'zh' ? '高校同盟与研学' : lang === 'ckb' ? 'بەرنامە و زانکۆکان' : 'Academic & Residencies'}
+                  </span>
+                </div>
+                <ChevronRight size={14} className="text-neutral-400 group-hover:text-brand-800 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+              </Link>
               <Link 
                 to={`/${lang}/admin`} 
                 className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"

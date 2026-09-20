@@ -2,7 +2,8 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { Plane, ArrowRight } from 'lucide-react';
-import { VisaFlightRecord } from '../types';
+import { VisaFlightRecord, Locale } from '../types';
+import { useI18n } from '../hooks/useI18n';
 
 interface VisaFlightSectionProps {
   lang?: string;
@@ -96,6 +97,7 @@ const FALLBACK_VISA_FLIGHTS: VisaFlightRecord[] = [
 ];
 
 export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en' }) => {
+  const { t: translate } = useI18n(lang as Locale);
   const { data: items = FALLBACK_VISA_FLIGHTS, isLoading } = useQuery<VisaFlightRecord[]>({
     queryKey: ['featured-visa-flights-home'],
     queryFn: async () => {
@@ -134,45 +136,12 @@ export const VisaFlightSection: React.FC<VisaFlightSectionProps> = ({ lang = 'en
   };
 
   const t = {
-    en: {
-      badge: "SINO-IRAQI & KURDISTAN AVIATION & VISA HUB",
-      title: "Direct Flight Routes & E-Visa Green Channels",
-      subtitle: "Streamlined visa assistance, fast-track consular clearance, and direct air passenger and freight charters connecting China, Baghdad, and Erbil.",
-      viewPortal: "Explore Full Visa & Flight Portal",
-      processing: "Processing / Flight Time",
-      tariff: "Tariff / Price"
-    },
-    ar: {
-      badge: "مركز الطيران والتأشيرات بين الصين والعراق وكردستان",
-      title: "الرحلات الجوية المباشرة والقنوات الخضراء للتأشيرة",
-      subtitle: "تسهيلات التأشيرة الإلكترونية، التخليص القنصلي السريع، وخطوط الطيران المباشرة بين الصين وبغداد وأربيل.",
-      viewPortal: "استكشاف بوابة الفيزا والطيران الكاملة",
-      processing: "وقت المعالجة / الطيران",
-      tariff: "الرسوم / السعر"
-    },
-    zh: {
-      badge: "中伊与库尔德斯坦民航与领事通道",
-      title: "直飞航线与电子签证绿色通道",
-      subtitle: "提供便利电子签证协助、机场领事快速通关及广州/北京直飞巴格达与埃尔比勒定期航班与特快货运服务。",
-      viewPortal: "进入完整签证与航班门户",
-      processing: "办理 / 飞行时长",
-      tariff: "领事资费 / 票价"
-    },
-    ckb: {
-      badge: "سەنتەری فڕین و ڤیزای چین، عێراق و کوردستان",
-      title: "گەشتە ئاسمانییە ڕاستەوخۆکان و کەناڵی سەوزی ڤیزا",
-      subtitle: "ئاسانکاری ڤیزای ئەلیکترۆنی و گەشتی ڕاستەوخۆی ئاسمانی بۆ چین، بەغدا و هەولێر.",
-      viewPortal: "پۆرتالی تەواوی ڤیزا و گەشتەکان",
-      processing: "ماوەی ڕاپەڕاندن / فڕین",
-      tariff: "کرێ / تێچوو"
-    }
-  }[lang as 'en' | 'ar' | 'zh' | 'ckb'] || {
-    badge: "SINO-IRAQI & KURDISTAN AVIATION & VISA HUB",
-    title: "Direct Flight Routes & E-Visa Green Channels",
-    subtitle: "Streamlined visa assistance, fast-track consular clearance, and direct air passenger and freight charters connecting China, Baghdad, and Erbil.",
-    viewPortal: "Explore Full Visa & Flight Portal",
-    processing: "Processing / Flight Time",
-    tariff: "Tariff / Price"
+    badge: translate('mobilityPortal'),
+    title: translate('visaFlights'),
+    subtitle: translate('visaAssistance') + ' & ' + translate('flightBooking'),
+    viewPortal: translate('exploreFullVisaPortal') || "Explore Full Visa & Flight Portal",
+    processing: translate('processingFlightTime') || "Processing / Flight Time",
+    tariff: translate('tariffPrice') || "Tariff / Price"
   };
 
   if (isLoading && items.length === 0) return null;

@@ -37,8 +37,8 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
       ],
       metrics: [
         { num: '4', label: 'Sovereign Newsrooms', sub: 'Beijing • Baghdad • Basra • Erbil' },
-        { num: '4', label: 'Working Languages', sub: 'Mandarin • Arabic • Kurdish • English' },
-        { num: '100%', label: 'Fact-Checked Integrity', sub: 'Primary Diplomatic & Enterprise Sources' }
+        { num: '4', label: 'Sovereign Working Languages', sub: 'Mandarin • Arabic • Kurdish • English' },
+        { num: '100%', label: 'Verified Institutional Integrity', sub: 'Primary Diplomatic & Enterprise Intelligence Sources' }
       ]
     },
     ar: {
@@ -55,9 +55,9 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         { name: 'مكتب أربيل الإقليمي', role: 'تجارة الشمال والمصفوفة الثلاثية', status: 'تشغيلي' }
       ],
       metrics: [
-        { num: '٤', label: 'مكاتب سيادية', sub: 'بكين • بغداد • البصرة • أربيل' },
-        { num: '٤', label: 'لغات عمل رسمية', sub: 'الماندرين • العربية • الكردية • الإنجليزية' },
-        { num: '١٠٠٪', label: 'نزاهة التحقق والتدقيق', sub: 'مصادر أولية دبلوماسية ومؤسسية' }
+        { num: '٤', label: 'مكاتب إقليمية سيادية', sub: 'بكين • بغداد • البصرة • أربيل' },
+        { num: '٤', label: 'لغات عمل مؤسسية', sub: 'الصينية • العربية • الكردية • الإنجليزية' },
+        { num: '١٠٠٪', label: 'نزاهة التحقق المهني', sub: 'اعتماد كلي على المصادر الدبلوماسية والمؤسسية الموثقة' }
       ]
     },
     zh: {
@@ -74,14 +74,14 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         { name: '埃尔比勒分社', role: '北部经贸与三语转译矩阵', status: '运行中' }
       ],
       metrics: [
-        { num: '4', label: '大主权分社', sub: '北京 • 巴格达 • 巴士拉 • 埃尔比勒' },
-        { num: '4', label: '种官方工作语言', sub: '中文普通话 • 阿拉伯语 • 库尔德语 • 英语' },
-        { num: '100%', label: '事实核验保真', sub: '严控一手外交与权威部委信源' }
+        { num: '4', label: '主权采编中心', sub: '北京总部 • 巴格达总社 • 巴士拉枢纽 • 埃尔比勒分社' },
+        { num: '4', label: '官方工作语言', sub: '中文(普通话) • 阿拉伯语 • 库尔德语 • 英语' },
+        { num: '100%', label: '全流程事实核验', sub: '源自外交部、商贸部及权威机构的一手信源' }
       ]
     },
     ckb: {
       eyebrow: 'تۆڕی سەرنووسەرایەتی سەربەخۆ و ڕێڕەوی دوولایەنە',
-      title: 'بەستنەوەی ڕۆژهەڵاتی ئاسیا و ڕۆژهەڵاتی ناوەڕاست لە ڕێگەی ڕۆژنامەگەری دیپلۆماسی',
+      title: 'بەستنەوەی ڕۆژهەڵاتی ئاسیا و ڕۆژهەڵاتی ناوەڕاست لە ڕێگەی ڕۆژنامەگەری دیپلۆماسي',
       desc: 'ئاژانسی عێراقی - چینی نووسینگەی فەرمی لە پەکین، بەغداد، بەسرە و هەولێر بەڕێوەدەبات. ئێمە زانیاری ئابووری سێزمانە، چاودێری بەندەری فاو و توێژینەوەی ئەکادیمی بێ وەرگێڕانی هەڵە پێشکەش دەکەین.',
       exploreAboutBtn: 'ئاشنابوون بە ئەرک و نووسینگەکان',
       joinEditorialBtn: 'پێشکەشکردنی داواکاری ئەندامێتی و باجی ڕۆژنامەوانی',
@@ -93,9 +93,9 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         { name: 'نووسینگەی هەولێر', role: 'بازرگانی باکوور و ماتریکسی سێزمانە', status: 'کارایە' }
       ],
       metrics: [
-        { num: '٤', label: 'نووسینگەی سەربەخۆ', sub: 'پەکین • بەغداد • بەسرە • هەولێر' },
-        { num: '٤', label: 'زمانی فەرمی کارپێکراو', sub: 'مەندارین • عەرەبی • کوردی • ئینگلیزی' },
-        { num: '١٠٠٪', label: 'باوەڕپێکراوی زانیاری', sub: 'سەرچاوەی سەرەتایی دیپلۆماسی و بازرگانی' }
+        { num: '٤', label: 'نووسینگەی هەرێمی سەربەخۆ', sub: 'پەکین • بەغداد • بەسرە • هەولێر' },
+        { num: '٤', label: 'زمانە فەرمییەکانی کار', sub: 'چینی • عەرەبی • کوردی • ئینگلیزی' },
+        { num: '١٠٠٪', label: 'نزاهەتی زانیاری و وردبینی', sub: 'پشتبەستن بە سەرچاوە فەرمییە دیپلۆماسی و بازرگانییەکان' }
       ]
     }
   }[lang] || {
@@ -113,8 +113,8 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
     ],
     metrics: [
       { num: '4', label: 'Sovereign Newsrooms', sub: 'Beijing • Baghdad • Basra • Erbil' },
-      { num: '4', label: 'Working Languages', sub: 'Mandarin • Arabic • Kurdish • English' },
-      { num: '100%', label: 'Fact-Checked Integrity', sub: 'Primary Diplomatic & Enterprise Sources' }
+      { num: '4', label: 'Sovereign Working Languages', sub: 'Mandarin • Arabic • Kurdish • English' },
+      { num: '100%', label: 'Verified Institutional Integrity', sub: 'Primary Diplomatic & Enterprise Intelligence Sources' }
     ]
   };
 

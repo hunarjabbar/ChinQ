@@ -64,6 +64,7 @@ const WomenPage = lazyWithRetry(() => import('./pages/WomenPage').then(m => ({ d
 const AdminWomen = lazyWithRetry(() => import('./pages/AdminWomen').then(m => ({ default: m.AdminWomen })));
 const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
 const AdminVisaFlight = lazyWithRetry(() => import('./pages/AdminVisaFlight').then(m => ({ default: m.AdminVisaFlight })));
+const SettlementPage = lazyWithRetry(() => import('./pages/SettlementPage').then(m => ({ default: m.SettlementPage })));
 const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
 const IcaPlusPage = lazyWithRetry(() => import('./pages/IcaPlusPage').then(m => ({ default: m.IcaPlusPage })));
 const AdminIcaPlus = lazyWithRetry(() => import('./pages/AdminIcaPlus'));
@@ -73,12 +74,14 @@ const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
 const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
 const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEconomics').then(m => ({ default: m.AdminFinanceEconomics })));
 const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
+const CulturalExchangePage = lazyWithRetry(() => import('./pages/CulturalExchangePage'));
+const AdminCulturalExchange = lazyWithRetry(() => import('./pages/AdminCulturalExchange'));
 
 function PaymentsRedirect() {
   const { lang = 'en', ref } = useParams<{ lang: string; ref?: string }>();
   const destination = ref 
-    ? `/${lang}?tab=settlement&ref=${encodeURIComponent(ref)}#settlement-sourcing`
-    : `/${lang}?tab=settlement#settlement-sourcing`;
+    ? `/${lang}/settlement?tab=currency-settlement&ref=${encodeURIComponent(ref)}`
+    : `/${lang}/settlement?tab=currency-settlement`;
   return <Navigate to={destination} replace />;
 }
 
@@ -196,6 +199,24 @@ function LangWrapper() {
   );
 }
 
+function ImmersiveLangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang } = useLanguageSetup(lang);
+
+  if (!isValidLang) {
+    return <Navigate to="/en" replace />;
+  }
+
+  return (
+    <ErrorBoundary key={location.key} lang={safeLang}>
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans transition-colors duration-300">
+        <Outlet />
+      </div>
+    </ErrorBoundary>
+  );
+}
+
 function AdminLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
@@ -219,6 +240,9 @@ const router = createBrowserRouter([
   { path: "/admin", element: <Navigate to="/en/admin" replace /> },
   { path: "/admin/*", element: <Navigate to="/en/admin" replace /> },
   { path: "/live/*", element: <Navigate to="/en" replace /> },
+  { path: "/settlement", element: <Navigate to="/en/settlement" replace /> },
+  { path: "/settlement-sourcing", element: <Navigate to="/en/settlement" replace /> },
+  { path: "/cultural-exchange", element: <Navigate to="/en/cultural-exchange" replace /> },
   {
     path: "/:lang",
     element: <LangWrapper />,
@@ -228,15 +252,24 @@ const router = createBrowserRouter([
       { path: "join", element: <JoinUs /> },
       { path: "women", element: <WomenPage /> },
       { path: "tourism", element: <TourismPage /> },
+      { path: "cultural-exchange", element: <CulturalExchangePage /> },
       { path: "books", element: <BooksPage /> },
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
+      { path: "settlement", element: <SettlementPage /> },
+      { path: "settlement-sourcing", element: <SettlementPage /> },
       { path: "payments", element: <PaymentsRedirect /> },
       { path: "payments/:ref", element: <PaymentsRedirect /> },
       { path: "article/:slug", element: <ArticlePage /> },
       { path: "category/:slug", element: <CategoryPage /> },
-      { path: "search", element: <SearchWrapper /> },
+      { path: "search", element: <SearchWrapper /> }
+    ]
+  },
+  {
+    path: "/:lang",
+    element: <ImmersiveLangWrapper />,
+    children: [
       { path: "live", element: <LivePortal /> },
       { path: "live/:slug", element: <LiveEventPage /> }
     ]
@@ -251,6 +284,7 @@ const router = createBrowserRouter([
       { path: "articles/:id", element: <AdminArticleNew /> },
       { path: "women", element: <AdminWomen /> },
       { path: "tourism", element: <AdminTourism /> },
+      { path: "cultural-exchange", element: <AdminCulturalExchange /> },
       { path: "visa-flights", element: <AdminVisaFlight /> },
       { path: "podcasts", element: <AdminIcaPlus /> },
       { path: "icaplus", element: <AdminIcaPlus /> },
@@ -274,6 +308,8 @@ const router = createBrowserRouter([
 ]);
 
 
+import { Toaster } from 'sonner';
+
 export default function App() { 
   const initializeAuth = useAuthStore(state => state.initialize); 
   
@@ -285,6 +321,19 @@ export default function App() {
     <ErrorBoundary lang="en">
       <QueryClientProvider client={queryClient}>
         <ThemeApplier />
+        <Toaster 
+          position="top-right" 
+          richColors 
+          closeButton 
+          theme="system"
+          toastOptions={{
+            style: {
+              borderRadius: '12px',
+              fontFamily: 'inherit',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            },
+          }}
+        />
         <Suspense fallback={<div className="flex h-screen items-center justify-center"><div className="w-12 h-12 border-4 border-brand-800 border-t-transparent rounded-full animate-spin"></div></div>}>
           <RouterProvider router={router} />
         </Suspense>

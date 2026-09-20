@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp, Building2 } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp, Building2, GraduationCap } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -79,6 +79,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
     { name: t('womenLeadership'), href: `/${lang}/admin/women`, icon: UserIcon, adminOnly: true },
     { name: t('tourismPortal'), href: `/${lang}/admin/tourism`, icon: Compass, adminOnly: true },
     { name: t('booksLibrary'), href: `/${lang}/admin/books`, icon: BookOpen, adminOnly: true },
+    { name: lang === 'ar' ? 'التبادل الثقافي والتعليمي' : lang === 'zh' ? '人文与教育交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری و زانستی' : 'Cultural & Educational Exchange', href: `/${lang}/admin/cultural-exchange`, icon: GraduationCap, adminOnly: true },
     { name: 'ICA+ Media', href: `/${lang}/admin/icaplus`, icon: Mic, adminOnly: true },
     { name: t('visaFlights'), href: `/${lang}/admin/visa-flights`, icon: Plane, adminOnly: true },
     { name: lang === 'ar' ? 'المالية والاقتصاد' : lang === 'zh' ? '财经与宏观经济' : lang === 'ckb' ? 'دارایی و ئابووری' : 'Finance & Economics', href: `/${lang}/admin/finance-economics`, icon: TrendingUp, adminOnly: false },

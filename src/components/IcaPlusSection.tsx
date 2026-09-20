@@ -2,13 +2,16 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
 import { PlayCircle, ArrowRight, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { apiFetch } from '../lib/api';
-import { useParams } from 'react-router-dom';
+import { useI18n } from '../hooks/useI18n';
+import { Locale } from '../types';
 import { ErrorBoundary } from './ErrorBoundary';
 
 function IcaPlusSectionContent() {
   const { lang: language = 'en' } = useParams<{lang: string}>();
+  const lang = language as Locale;
+  const { t } = useI18n(lang);
 
   // Fetch only featured items
   const { data: podcasts = [] } = useQuery({ queryKey: ['ica-plus-featured-podcasts'], queryFn: async () => (await apiFetch('/api/podcasts?featured=true')).json() });
@@ -22,72 +25,81 @@ function IcaPlusSectionContent() {
   if (allFeatured.length === 0) return null;
 
   const getLocalized = (item: any, field: string) => {
-    if (language === 'ar' && item[`${field}Ar`]) return item[`${field}Ar`];
-    if (language === 'zh' && item[`${field}Zh`]) return item[`${field}Zh`];
-    if (language === 'ckb' && item[`${field}Ckb`]) return item[`${field}Ckb`];
+    if (lang === 'ar' && item[`${field}Ar`]) return item[`${field}Ar`];
+    if (lang === 'zh' && item[`${field}Zh`]) return item[`${field}Zh`];
+    if (lang === 'ckb' && item[`${field}Ckb`]) return item[`${field}Ckb`];
     return item[`${field}En`];
   };
 
-  const isRtl = language === 'ar' || language === 'ckb';
+  const isRtl = lang === 'ar' || lang === 'ckb';
 
   return (
-    <div className="my-12">
-      <div className="bg-brand-900 rounded-2xl overflow-hidden shadow-2xl relative">
+    <div className="my-8 sm:my-12">
+      <div className="bg-brand-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/5">
         {/* Abstract background elements to give it a premium feel */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-800/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-800/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-black/60 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
 
-        <div className="relative p-6 sm:p-10 flex flex-col md:flex-row gap-8 items-stretch">
+        <div className="relative p-8 sm:p-12 md:p-16 flex flex-col lg:flex-row gap-12 items-center">
           
           {/* Header Column */}
-          <div className="md:w-1/3 flex flex-col justify-center text-white">
-            <div className="flex items-center gap-2 mb-4">
-              <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
-              <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-300">ICA+ Exclusive</span>
+          <div className="lg:w-[35%] flex flex-col justify-center text-white text-center lg:text-start">
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+              <div className="p-2 bg-amber-400/10 rounded-lg border border-amber-400/20">
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400 animate-pulse" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-brand-300">{t('icaPlusNetwork')}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black mb-4 leading-tight">
-              Premium Media Hub
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-[1.1] tracking-tighter">
+              {t('premiumMediaHub')}
             </h2>
-            <p className="text-brand-100 text-sm leading-relaxed mb-8 opacity-90 max-w-sm">
-              Dive deep into the Sino-Iraqi relationship with our premium documentaries, exclusive video reports, and flagship podcast network.
+            <p className="text-brand-100 text-base sm:text-lg leading-relaxed mb-10 opacity-80 max-w-xl mx-auto lg:mx-0">
+              {t('mediaHubDesc')}
             </p>
             <Link 
-              to={`/${language}/ica-plus`}
-              className="inline-flex items-center gap-2 w-max px-6 py-3 bg-white text-brand-900 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-neutral-100 transition-colors shadow-lg group"
+              to={`/${lang}/ica-plus`}
+              className="inline-flex items-center justify-center gap-3 w-full sm:w-max px-8 py-4 bg-white text-brand-900 rounded-xl text-sm font-black uppercase tracking-widest hover:bg-neutral-100 transition-all shadow-2xl group active:scale-95"
             >
-              Enter ICA+ Hub
-              <ArrowRight size={16} className={`group-hover:translate-x-1 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+              {t('enterArchive')}
+              <ArrowRight size={20} className={`group-hover:translate-x-1.5 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1.5' : ''}`} />
             </Link>
           </div>
 
           {/* Cards Column */}
-          <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="lg:w-[65%] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
             {allFeatured.map((item, idx) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: idx * 0.15, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="group relative bg-black/40 backdrop-blur-sm border border-brand-800/50 rounded-xl overflow-hidden cursor-pointer hover:border-brand-500 transition-colors flex flex-col h-full"
+                className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-brand-500/50 transition-all duration-500 flex flex-col h-full shadow-2xl"
               >
-                <div className="relative aspect-square sm:aspect-auto sm:h-48 overflow-hidden bg-neutral-900 shrink-0">
+                <div className="relative aspect-video xl:aspect-square overflow-hidden bg-neutral-900 shrink-0">
                   <img 
                     src={item.coverUrl} 
                     alt={getLocalized(item, 'title')}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-60 group-hover:opacity-90"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-transparent to-transparent opacity-60"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <PlayCircle className="w-12 h-12 text-white/80 group-hover:text-white group-hover:scale-110 transition-all shadow-xl rounded-full bg-black/20 backdrop-blur-xs" />
+                    <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 group-hover:bg-brand-800/40 transition-all duration-500">
+                      <PlayCircle className="w-8 h-8 text-white" />
+                    </div>
                   </div>
-                  <div className="absolute top-3 left-3 bg-brand-800 text-white text-[9px] px-2 py-1 rounded-sm font-bold uppercase tracking-widest shadow-lg">
+                  <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] px-3 py-1.5 rounded font-black uppercase tracking-[0.2em] shadow-xl border border-white/10">
                     {item.type}
                   </div>
                 </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <h3 className="text-white font-bold text-sm leading-snug line-clamp-3 group-hover:text-brand-300 transition-colors">
+                <div className="p-6 flex flex-col flex-1 bg-gradient-to-b from-transparent to-black/20">
+                  <h3 className="text-white font-black text-base leading-snug line-clamp-3 group-hover:text-brand-300 transition-colors uppercase tracking-tight">
                     {getLocalized(item, 'title')}
                   </h3>
+                  <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-bold text-brand-400 uppercase tracking-widest">
+                    <span>{t('exploreFeed')}</span>
+                    <ArrowRight size={12} className={isRtl ? 'rotate-180' : ''} />
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -43,9 +43,9 @@ export function PaymentAndSourcingSection({ lang }: Props) {
     const tabParam = searchParams.get('tab');
     const hash = location.hash;
 
-    if (tabParam === 'settlement' || hash === '#settlement' || hash === '#currency-settlement') {
+    if (tabParam === 'settlement' || tabParam === 'currency-settlement' || hash === '#settlement' || hash === '#currency-settlement') {
       setActiveTab('settlement');
-    } else if (tabParam === 'sourcing' || hash === '#sourcing') {
+    } else if (tabParam === 'sourcing' || tabParam === 'sourcing-catalog' || hash === '#sourcing' || hash === '#sourcing-catalog') {
       setActiveTab('sourcing');
     } else if (tabParam === 'all') {
       setActiveTab('all');
