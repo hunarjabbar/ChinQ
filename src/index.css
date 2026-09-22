@@ -1,42 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&family=Cairo:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: 'Shasenem Hemin';
-  src: url('/fonts/shasenem-hemin.woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Shasenem Kurd';
-  src: url('/fonts/shasenem-kurd.woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sarkar Masmak';
-  src: url('/fonts/sarkar-masmak/SarkarMasmak-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Sarkar Masmak';
-  src: url('/fonts/sarkar-masmak/SarkarMasmak-Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Sarkar Masmak';
-  src: url('/fonts/sarkar-masmak/SarkarMasmak-Heavy.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-}
-
 @theme {
+  --color-navy: #0F172A;
+  --color-royal: #0284C7;
+  --color-gold: #D97706;
+  --color-gold-text: #B45309;
+  --color-surface: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-border: #E2E8F0;
+  --color-sage: #047857;
+
   --color-brand-50: #fff5f5;
   --color-brand-100: #ffe3e3;
   --color-brand-200: #ffc9c9;
@@ -66,8 +42,8 @@
   --spacing-base: 2rem;
   --container-width: 100%;
 
-  --font-sans: "Plus Jakarta Sans", "Inter", "Instrument Sans", "Vazirmatn", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-  --font-serif: "Playfair Display", "Noto Serif SC", "Vazirmatn", Georgia, serif;
+  --font-sans: "Inter", "Noto Sans", "Noto Sans Arabic", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --font-serif: "Merriweather", "Playfair Display", "Noto Naskh Arabic", "Noto Serif SC", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
   --animate-marquee: marquee 30s linear infinite;
@@ -93,13 +69,13 @@
 
   @keyframes liquid-glass-pulse {
     0%, 100% {
-      box-shadow: 0 0 12px rgba(204, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
-      background-color: rgba(204, 0, 0, 0.85);
+      box-shadow: 0 0 12px rgba(2, 132, 199, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+      background-color: rgba(2, 132, 199, 0.85);
       border-color: rgba(255, 255, 255, 0.2);
     }
     50% {
-      box-shadow: 0 0 24px rgba(204, 0, 0, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.65);
-      background-color: rgba(220, 20, 20, 0.95);
+      box-shadow: 0 0 24px rgba(2, 132, 199, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.65);
+      background-color: rgba(2, 150, 220, 0.95);
       border-color: rgba(255, 255, 255, 0.5);
     }
   }
@@ -114,92 +90,41 @@
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-html[lang="ar"] {
-  font-family: "Vazirmatn", system-ui, sans-serif;
-  --font-sans: "Vazirmatn", system-ui, sans-serif;
-  --font-serif: "Vazirmatn", system-ui, serif;
-  font-size: 100%;
-}
-
-html[lang="ckb"] {
-  font-family: "Vazirmatn", system-ui, sans-serif;
-  --font-sans: "Vazirmatn", system-ui, sans-serif;
-  --font-serif: "Vazirmatn", system-ui, serif;
-  font-size: 100%;
-}
-
-html[lang="ar"] body, html[lang="ckb"] body {
-  font-family: "Vazirmatn", system-ui, sans-serif;
-  font-weight: 400;
-  line-height: 1.65;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Harmonized Arabic and Kurdish Sorani heading styles */
-html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4, html[lang="ar"] h5, html[lang="ar"] h6,
-html[lang="ckb"] h1, html[lang="ckb"] h2, html[lang="ckb"] h3, html[lang="ckb"] h4, html[lang="ckb"] h5, html[lang="ckb"] h6 {
-  font-family: "Vazirmatn", system-ui, sans-serif !important;
-  font-weight: 700;
-  letter-spacing: 0 !important;
-  line-height: 1.45 !important;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Neutralize Latin tracking/letter-spacing in Arabic and Kurdish to preserve cursive ligature connections */
-html[lang="ar"],
-html[lang="ckb"],
-html[lang="ar"] [class*="tracking-"],
-html[lang="ckb"] [class*="tracking-"] {
-  letter-spacing: 0 !important;
-}
-
-/* Unified font-family enforcement across utility classes */
-html[lang="ar"] .font-sans,
-html[lang="ckb"] .font-sans,
-html[lang="ar"] .font-serif,
-html[lang="ckb"] .font-serif {
-  font-family: "Vazirmatn", system-ui, sans-serif !important;
-}
-
-/* Optical reading comfort for paragraphs and descriptive body copy */
-html[lang="ar"] p,
-html[lang="ckb"] p {
-  line-height: 1.8 !important;
+html[lang="ar"], html[lang="ckb"] {
+  --font-sans: "Noto Sans Arabic", "Inter", system-ui, sans-serif;
+  --font-serif: "Noto Naskh Arabic", "Merriweather", serif;
 }
 
 html[lang="zh"] {
-  font-family: "Noto Sans SC", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: "Noto Sans SC", "Inter", system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Merriweather", serif;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   width: 100%;
-  /* min-width: 1024px; */ /* Force desktop view on mobile as requested */
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-paper-50, #ffffff);
-  color: var(--color-ink-900, #0f172a);
+  background-color: var(--color-surface);
+  color: var(--color-navy);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   width: 100%;
+  flex: 1 0 auto;
 }
 
 .dark body,
@@ -281,18 +206,290 @@ html.dark body {
   border-color: #3f3f46;
 }
 
-/* Fluid typography scales for better screen orientation handling */
-h1 { font-size: clamp(2rem, 8vw, 3.5rem); line-height: 1.15; margin-bottom: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.5rem, 6vw, 2.75rem); line-height: 1.2; margin-bottom: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
-h3 { font-size: clamp(1.25rem, 4vw, 2.25rem); line-height: 1.25; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.02em; }
-h4 { font-size: clamp(1.1rem, 3vw, 1.75rem); line-height: 1.3; margin-bottom: 0.75rem; font-weight: 700; letter-spacing: -0.02em; }
-h5 { font-size: clamp(1rem, 2vw, 1.25rem);  line-height: 1.4; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: -0.02em; }
-p { font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem); line-height: 1.6; max-width: 75ch; }
+/* --- Research Pillar & CTA Components --- */
+.research-pillar-card {
+  background: var(--color-card, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 320px;
+  min-width: 0;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+.research-pillar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
 
-@media (orientation: landscape) and (max-height: 500px) {
-  h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
-  h2 { font-size: clamp(1.25rem, 4vw, 2rem); }
-  .h-screen { min-height: 140vh; } /* Handle mobile landscape overflow */
+.research-pillar-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--color-navy, #0F172A);
+  color: var(--color-gold, #D97706);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.research-pillar-card__title {
+  font-family: Merriweather, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-navy, #0F172A);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.research-pillar-card__description {
+  font-family: Inter, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-navy, #0F172A);
+  opacity: 0.75;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.research-pillar-card__sparkline {
+  width: 100%;
+  height: 72px;
+  display: block;
+  margin-block: 8px;
+  overflow: visible;
+}
+
+.research-pillar-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border, #E2E8F0);
+}
+
+.research-pillar-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-navy, #0F172A);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+.research-pillar-card__cta:hover {
+  color: var(--color-royal, #0284C7);
+}
+.research-pillar-card__cta:focus-visible {
+  outline: 2px solid var(--color-royal, #0284C7);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.research-pillar-card__metric {
+  text-align: end;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy, #0F172A);
+  opacity: 0.6;
+}
+
+.research-pillar-card__metric-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-navy, #0F172A);
+  opacity: 1;
+  margin-top: 4px;
+}
+
+.data-provenance-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: 8px;
+  background: var(--color-surface, #F8FAFC);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy, #0F172A);
+  opacity: 0.85;
+  flex-wrap: wrap;
+}
+.data-provenance-strip__label {
+  font-weight: 600;
+  opacity: 1;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  min-height: 44px;
+  border-radius: 6px;
+  background: var(--color-navy, #0F172A);
+  color: var(--color-surface, #F8FAFC);
+  font-family: Inter, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-navy, #0F172A);
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.btn-primary:hover { background: #1E293B; }
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-royal, #0284C7);
+  outline-offset: 3px;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  min-height: 44px;
+  border-radius: 6px;
+  background: var(--color-card, #FFFFFF);
+  color: var(--color-navy, #0F172A);
+  font-family: Inter, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-border, #E2E8F0);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.btn-outline:hover {
+  border-color: var(--color-navy, #0F172A);
+  background: var(--color-surface, #F8FAFC);
+}
+.btn-outline:focus-visible {
+  outline: 2px solid var(--color-royal, #0284C7);
+  outline-offset: 3px;
+}
+
+.section-heading {
+  font-family: Merriweather, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-navy, #0F172A);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.section-eyebrow {
+  font-family: Inter, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold-text, #B45309);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+}
+.section-header__text {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.section-header__action {
+  flex: 0 0 auto;
+}
+
+.cta-arrow {
+  display: inline-block;
+  transition: transform 160ms ease;
+}
+[dir="rtl"] .cta-arrow {
+  transform: scaleX(-1);
+}
+
+/* Dark mode theme token overrides for Institute components */
+.dark .research-pillar-card {
+  background: var(--color-card-dark, #121215);
+  border-color: var(--color-border-dark, #27272a);
+}
+.dark .research-pillar-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+.dark .research-pillar-card__title,
+.dark .research-pillar-card__cta,
+.dark .research-pillar-card__metric-value,
+.dark .section-heading {
+  color: #f4f4f5;
+}
+.dark .research-pillar-card__description,
+.dark .research-pillar-card__metric {
+  color: #a1a1aa;
+}
+.dark .research-pillar-card__footer {
+  border-color: #27272a;
+}
+.dark .data-provenance-strip {
+  background: #18181b;
+  border-color: #27272a;
+  color: #f4f4f5;
+}
+.dark .btn-outline {
+  background: #121215;
+  color: #f4f4f5;
+  border-color: #27272a;
+}
+.dark .btn-outline:hover {
+  background: #18181b;
+  border-color: #3f3f46;
+}
+
+/* Typography font stack rules for Chinese locale (Part 5.7) */
+[lang="zh"] .section-heading,
+[lang="zh"] .research-pillar-card__title,
+:lang(zh) .section-heading,
+:lang(zh) .research-pillar-card__title {
+  font-family: 'Noto Serif SC', Merriweather, serif;
+}
+[lang="zh"] body,
+[lang="zh"] .research-pillar-card__description,
+[lang="zh"] .btn-primary,
+[lang="zh"] .btn-outline,
+:lang(zh) body,
+:lang(zh) .research-pillar-card__description {
+  font-family: 'Noto Sans SC', Inter, sans-serif;
 }
 
 
@@ -313,8 +510,8 @@ p { font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem); line-height: 1.6; max-widt
   }
   .print-modal-container {
     position: absolute;
-    left: 0;
-    top: 0;
+    inset-inline-start: 0;
+    inset-block-start: 0;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -323,4 +520,21 @@ p { font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem); line-height: 1.6; max-widt
   .print\:hidden {
     display: none !important;
   }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(229, 231, 235, 0.6) 0%, rgba(243, 244, 246, 0.95) 50%, rgba(229, 231, 235, 0.6) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(90deg, rgba(39, 39, 42, 0.6) 0%, rgba(63, 63, 70, 0.9) 50%, rgba(39, 39, 42, 0.6) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
 }

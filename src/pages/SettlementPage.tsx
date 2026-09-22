@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { Locale } from '../types';
 import { PaymentAndSourcingSection } from '../components/PaymentAndSourcingSection';
-import { Home, ChevronRight, ChevronLeft, ShieldCheck, Coins } from 'lucide-react';
+import { Home, ChevronRight, ChevronLeft, Coins } from 'lucide-react';
 
 export function SettlementPage() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

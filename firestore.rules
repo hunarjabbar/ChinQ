@@ -1,10 +1,59 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Catch-all default deny: No direct client-side read or write is permitted.
-    // All persistent application operations are executed server-side via authenticated API endpoints.
+    // Default deny catch-all
     match /{document=**} {
       allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Newsletter Validation (Pillar 2: Validation Blueprints)
+    function isValidNewsletterSubscriber(data) {
+      return data.keys().hasAll(['email', 'timestamp'])
+        && data.keys().hasOnly(['email', 'timestamp'])
+        && data.email is string && data.email.size() <= 256
+        && data.timestamp == request.time;
+    }
+
+    // Contact Submission Validation (Pillar 2: Validation Blueprints)
+    function isValidContactSubmission(data) {
+      return data.keys().hasAll(['name', 'email', 'message', 'timestamp'])
+        && data.keys().hasOnly(['name', 'email', 'company', 'bureau', 'message', 'timestamp'])
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 100
+        && data.email is string && data.email.size() <= 256
+        && data.message is string && data.message.size() >= 10 && data.message.size() <= 2000
+        && (!data.keys().contains('company') || (data.company is string && data.company.size() <= 200))
+        && (!data.keys().contains('bureau') || (data.bureau in ['general', 'baghdad', 'beijing', 'investment']))
+        && data.timestamp == request.time;
+    }
+
+    // Public Collections (Pillar 8: Secure List Queries - not applicable for single creation)
+    match /newsletter_subscribers/{subscriberId} {
+      allow create: if isValidId(subscriberId) && isValidNewsletterSubscriber(request.resource.data);
+      allow read: if isAdmin();
+    }
+
+    match /contact_submissions/{submissionId} {
+      allow create: if isValidId(submissionId) && isValidContactSubmission(request.resource.data);
+      allow read: if isAdmin();
+    }
+
+    // Admin Access Control
+    match /admins/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false; // Only manageable via Firebase Console or Admin SDK
     }
   }
 }

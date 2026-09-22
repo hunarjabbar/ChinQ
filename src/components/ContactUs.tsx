@@ -3,6 +3,9 @@ import { Locale } from '../types';
 import { useSiteStore } from '../store/useSiteStore';
 import { Send, Loader2 } from 'lucide-react';
 
+import { db, handleFirestoreError, OperationType } from '../lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
 export function ContactUs({ lang }: { lang: Locale }) {
   const { contactEmail } = useSiteStore();
   const [formData, setFormData] = useState({
@@ -18,23 +21,18 @@ export function ContactUs({ lang }: { lang: Locale }) {
     e.preventDefault();
     setStatus('loading');
     
+    const path = 'contact_submissions';
     try {
-      const response = await fetch('/api/public/telexes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          telexRef: `MSG-${Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}`
-        })
+      await addDoc(collection(db, path), {
+        ...formData,
+        timestamp: serverTimestamp()
       });
-
-      if (!response.ok) throw new Error('Failed to send message');
       
       setStatus('success');
       setFormData({ name: '', email: '', company: '', bureau: 'general', message: '' });
       setTimeout(() => setStatus('idle'), 3000);
     } catch (error) {
-      console.error(error);
+      handleFirestoreError(error, OperationType.CREATE, path);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
     }

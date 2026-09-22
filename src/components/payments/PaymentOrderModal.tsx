@@ -89,7 +89,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
       setRecipientIdentifier('');
       setRecipientBankOrBureau('PBOC Official e-CNY Digital Wallet App');
       setPurpose(type === 'BUSINESS' ? 'Commercial Trade Goods & Invoices' : 'University Tuition & Educational Remittance');
-      setSettlementMethod(type === 'BUSINESS' ? 'mBridge CBDC Direct' : 'Zain Cash');
+      setSettlementMethod(type === 'BUSINESS' ? 'mBridge CBDC Protocol (Corporate Wholesale)' : 'Zain Cash');
       setCommercialInvoiceRef('');
       setBillOfLading('');
       setCustomsDeclarationNo('');
@@ -347,7 +347,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
               type="button"
               onClick={() => {
                 setOrderType('RETAIL');
-                if (settlementMethod === 'mBridge CBDC Direct') setSettlementMethod('Zain Cash');
+                if (settlementMethod === 'mBridge CBDC Protocol (Corporate Wholesale)' || settlementMethod === 'mBridge CBDC Direct') setSettlementMethod('Zain Cash');
                 if (purpose === 'Commercial Trade Goods & Invoices') setPurpose('University Tuition & Educational Remittance');
                 clearFieldError('senderCompany');
               }}
@@ -364,7 +364,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
               type="button"
               onClick={() => {
                 setOrderType('BUSINESS');
-                if (settlementMethod === 'Zain Cash') setSettlementMethod('mBridge CBDC Direct');
+                if (settlementMethod === 'Zain Cash') setSettlementMethod('mBridge CBDC Protocol (Corporate Wholesale)');
                 if (purpose === 'University Tuition & Educational Remittance') setPurpose('Commercial Trade Goods & Invoices');
               }}
               className={`py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
@@ -421,7 +421,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                   Corridor Protocol
                 </span>
                 <span className="text-xs font-bold text-brand-800 dark:text-brand-400 block">
-                  {orderType === 'BUSINESS' ? 'mBridge Wholesale CBDC' : 'Direct Clearing Desk'}
+                  {orderType === 'BUSINESS' ? 'mBridge CBDC Protocol (Corporate Wholesale)' : 'Direct Clearing Desk'}
                 </span>
                 <span className="text-[10px] text-neutral-400 block mt-0.5">
                   PBOC & CBI Direct Nodes
@@ -673,7 +673,7 @@ export function PaymentOrderModal({ isOpen, onClose, initialData, lang, onOrderC
                   <option value="First Iraqi Bank (FIB)">First Iraqi Bank (FIB QR/Wire)</option>
                   <option value="Bureau Cash Deposit">Authorized Exchange Bureau Cash Deposit</option>
                   <option value="CBI Direct RTGS">Central Bank of Iraq RTGS Wire</option>
-                  <option value="mBridge CBDC Direct">mBridge CBDC Protocol (Corporate Wholesale)</option>
+                  <option value="mBridge CBDC Protocol (Corporate Wholesale)">mBridge CBDC Protocol (Corporate Wholesale)</option>
                 </select>
                 <span className="text-[10px] text-neutral-400 block mt-1">
                   {isAr ? 'القناة المحلية لتمويل الرصيد بالعراق قبل المقاصة الثنائية' : isZh ? '在伊拉克的源头付款与充值通道，通过双边主权走廊转换与清算' : 'Source funding rail in Iraq, converted & cleared via sovereign bilateral corridors'}

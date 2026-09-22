@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    "./scripts/stylelint-no-root-overflow.cjs"
+  ],
+  "rules": {
+    "custom/no-root-overflow-hidden": true,
+    "rule-selector-property-disallowed-list": {
+      "/(^|[\\s,>+~])(#root|:root|html|body)\\b/": [
+        "overflow",
+        "overflow-x",
+        "overflow-y"
+      ]
+    },
+    "property-disallowed-list": [
+      "margin-left",
+      "margin-right",
+      "padding-left",
+      "padding-right",
+      "border-left",
+      "border-right",
+      "left",
+      "right"
+    ],
+    "declaration-property-value-disallowed-list": {
+      "/^.*$/": ["/\\b100vh\\b/"]
+    }
+  }
+}

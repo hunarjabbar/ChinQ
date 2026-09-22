@@ -1615,7 +1615,7 @@ export function AdminVisaFlight() {
                 </div>
 
                 {/* Operations & SLA */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-w-0">
                   <div>
                     <label className="block text-gray-500 mb-1 font-bold">Authority / Airline Operator</label>
                     <input
@@ -1650,7 +1650,7 @@ export function AdminVisaFlight() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-w-0">
                   <div>
                     <label className="block text-gray-500 mb-1 font-bold">Image URL *</label>
                     <input
@@ -1757,7 +1757,7 @@ export function AdminVisaFlight() {
               </div>
 
               <div className="space-y-4 bg-gray-50 p-5 rounded-xl border border-gray-200 text-xs">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 min-w-0">
                   <div>
                     <div className="text-gray-400 font-bold uppercase text-xs">Email Address</div>
                     <div className="font-semibold text-gray-700 mt-0.5">{selectedInquiryDetail.email}</div>
@@ -1887,7 +1887,7 @@ export function AdminVisaFlight() {
                 });
               }} className="space-y-4 text-xs">
                 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 mb-1 font-bold">Status *</label>
                     <select
@@ -1917,7 +1917,7 @@ export function AdminVisaFlight() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 mb-1 font-bold">Assigned Desk Officer</label>
                     <input

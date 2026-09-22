@@ -1,6 +1,6 @@
 {
   "name": "Iraqi-Chinese Agency",
-  "description": "Iraqi-Chinese Agency News Portal. Covering Bilateral Projects, Legal & Regulatory Intelligence, Executive & Diplomatic Voices, Verified Enterprise Directory, and Morning Briefings.",
+  "description": "Iraqi-Chinese Agency (ICA) Umbrella: ICA Newsroom & Media Analysis, Chinese Institute for Strategic and Economic Studies, and the Iraq-China Economic Summit & Bilateral Expo.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

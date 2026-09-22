@@ -31,6 +31,7 @@ import { BeltRoadTrackingSection } from '../components/BeltRoadTrackingSection';
 import { ChineseProductsShowcase } from '../components/ChineseProductsShowcase';
 import { IcaPlusSection } from '../components/IcaPlusSection';
 import { ErrorBoundary } from '../components/ErrorBoundary';
+import { InstitutePortalCTA } from '../components/InstitutePortalCTA';
 
 export function Home() {
   const { lang } = useParams<{ lang: Locale }>();
@@ -462,6 +463,11 @@ export function Home() {
 
         {/* ENTERPRISE CALL TO ACTION */}
         <SubscriptionCard />
+
+        {/* INSTITUTE PORTAL ACCESS */}
+        <div className="mt-8">
+          <InstitutePortalCTA lang={lang!} variant="card" />
+        </div>
       </section>
       </div>
       
@@ -526,7 +532,7 @@ export function Home() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 min-w-0">
                 {studies.map((study) => {
                   const isLocked = study.isPrivate && !isSubscribed;
                   return (
@@ -614,7 +620,7 @@ export function Home() {
                 </Link>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 min-w-0">
                 {articles.filter(a => a.category?.slug === 'politics').slice(0, 10).map((article) => {
                   const tr = getTranslation(article);
                   return (

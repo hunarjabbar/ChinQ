@@ -693,7 +693,7 @@ export function About() {
         <p className="font-bold text-lg sm:text-xl leading-relaxed text-justify">{t.intro}</p>
         
         {/* Two Columns Grid for Project Importance & Future */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 border-y border-neutral-200 dark:border-neutral-800 py-6">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 sm:gap-8 mt-6 border-y border-neutral-200 dark:border-neutral-800 py-6 min-w-0">
           <div className="space-y-3">
             <h3 className="text-lg sm:text-xl font-black text-brand-800 dark:text-white uppercase flex items-center gap-2">
               <Building2 className="w-5 h-5 text-brand-800 dark:text-brand-400" />
@@ -797,7 +797,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5 min-w-0">
           {t.pillars.map((pillar, idx) => (
             <div 
               key={idx} 

@@ -76,9 +76,10 @@ export interface MarketData {
   historyByTimeframe?: Record<string, HistoricalRatePoint[]>;
 }
 
-export interface Study {
+export interface Publication {
   id: string;
   slug: string;
+  type: 'POLICY_BRIEF' | 'WORKING_PAPER' | 'WHITE_PAPER' | 'ANNUAL_REPORT' | 'DATA_NOTE';
   titleEn: string;
   titleAr: string;
   titleZh: string;
@@ -92,16 +93,76 @@ export interface Study {
   contentZh: string;
   contentCkb: string;
   imageUrl: string | null;
-  isPrivate: boolean;
-  authorId: string;
-  author?: {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-  };
+  pdfUrl?: string | null;
+  authors: string[]; // expert IDs
+  topics: string[];
+  region: 'CHINA' | 'IRAQ' | 'KURDISTAN' | 'BILATERAL' | string;
+  isPrivate?: boolean;
+  author?: { name: string };
+  dataCitationEligible: boolean;
+  publishedAt: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export type Study = Publication;
+
+export interface Expert {
+  id: string;
+  slug: string;
+  nameEn: string;
+  nameAr: string;
+  nameZh: string;
+  nameCkb: string;
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  bioEn: string;
+  bioAr: string;
+  bioZh: string;
+  bioCkb: string;
+  imageUrl: string;
+  pillars: string[];
+  languages: string[];
+  mediaBookingUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BriProject {
+  id: string;
+  nameEn: string;
+  nameAr: string;
+  nameZh: string;
+  nameCkb: string;
+  sector: string;
+  status: 'PROPOSED' | 'ONGOING' | 'COMPLETED' | 'SUSPENDED';
+  value: string;
+  contractor: string;
+  verificationSources: string[];
+  lastReviewedDate: string;
+  location: string;
+  lat?: number;
+  lng?: number;
+}
+
+export interface InstituteEvent {
+  id: string;
+  slug: string;
+  type: 'ROUNDTABLE' | 'POLICY_DIALOGUE' | 'SUMMIT_SESSION' | 'CLOSED_DOOR';
+  titleEn: string;
+  titleAr: string;
+  titleZh: string;
+  titleCkb: string;
+  descriptionEn: string;
+  descriptionAr: string;
+  descriptionZh: string;
+  descriptionCkb: string;
+  date: string;
+  location: string;
+  isRegistered: boolean;
+  mediaAccreditation: boolean;
 }
 
 export interface Book {
@@ -548,4 +609,6 @@ export interface CulturalExchangeProgram {
   createdAt: string;
   updatedAt: string;
 }
+
+export * from './types/visaCentre';
 

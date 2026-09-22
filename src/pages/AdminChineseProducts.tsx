@@ -308,7 +308,7 @@ export function AdminChineseProducts() {
 
             <form onSubmit={handleSubmit} className="p-8 space-y-8">
               {/* Basic Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 min-w-0">
                 <div className="space-y-2">
                   <label className="text-xs font-black uppercase tracking-widest text-gray-500">External Link / CTA URL</label>
                   <input
@@ -341,7 +341,7 @@ export function AdminChineseProducts() {
                 <h3 className="text-xs font-black uppercase tracking-[0.2em] text-brand-800 border-b border-brand-800/20 pb-2 flex items-center gap-2">
                   <div className="w-2 h-2 bg-brand-800" /> Trilingual Titles
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 min-w-0">
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-gray-500">English Title</label>
                     <input
@@ -423,7 +423,7 @@ export function AdminChineseProducts() {
               </div>
 
               {/* Visuals & Order */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 min-w-0">
                 <div className="md:col-span-2 space-y-2">
                   <label className="text-xs font-black uppercase tracking-widest text-gray-500">Cover Image URL</label>
                   <div className="flex gap-2">

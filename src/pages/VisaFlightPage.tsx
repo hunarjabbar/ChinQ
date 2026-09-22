@@ -403,7 +403,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
             </div>
 
             {/* Metric Highlights */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-4xl pt-8 border-t border-gray-200 dark:border-neutral-800 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full max-w-4xl pt-8 border-t border-gray-200 dark:border-neutral-800 mt-6 min-w-0">
               <div className="p-4 rounded-xl bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-sm">
                 <div className="text-2xl font-black text-brand-800 dark:text-brand-400">24-48 Hours</div>
                 <div className="text-xs text-gray-500 dark:text-neutral-400 mt-1">E-Visa Expedited Clearance</div>
@@ -438,7 +438,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 min-w-0">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-neutral-400 mb-2">
                 {t.selectOrigin}
@@ -471,7 +471,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
           </div>
 
           {/* Results card */}
-          <div className="bg-gray-50 dark:bg-neutral-900 rounded-xl p-5 border border-gray-200 dark:border-neutral-700 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+          <div className="bg-gray-50 dark:bg-neutral-900 rounded-xl p-5 border border-gray-200 dark:border-neutral-700 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm min-w-0">
             <div>
               <div className="text-xs text-brand-600 dark:text-brand-400 font-semibold mb-1">Visa Category & Status</div>
               <div className="font-bold text-brand-900 dark:text-white text-base">{currentEligibility.visaType}</div>
@@ -584,7 +584,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
             <p className="text-gray-600 dark:text-neutral-300 font-medium">{t.noRecords}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
             {records.map((item) => {
               const title = getLocalizedTitle(item);
               const summary = getLocalizedSummary(item);
@@ -732,7 +732,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 dark:text-neutral-400 mb-1 font-semibold">{t.email} *</label>
                     <input
@@ -756,7 +756,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 dark:text-neutral-400 mb-1 font-semibold">{t.passportNum} *</label>
                     <input
@@ -779,7 +779,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 dark:text-neutral-400 mb-1 font-semibold">Origin City/Country</label>
                     <input
@@ -800,7 +800,7 @@ export const VisaFlightPage: React.FC<VisaFlightPageProps> = ({ lang: propLang }
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 min-w-0">
                   <div>
                     <label className="block text-gray-500 dark:text-neutral-400 mb-1 font-semibold">{t.travelDate}</label>
                     <input

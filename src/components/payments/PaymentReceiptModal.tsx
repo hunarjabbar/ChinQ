@@ -176,7 +176,7 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
                 </span>
               </div>
               <span className="font-bold text-neutral-800 dark:text-neutral-200">
-                {order.settlementMethod}
+                {order.settlementMethod === 'mBridge CBDC Direct' ? 'mBridge CBDC Protocol (Corporate Wholesale)' : order.settlementMethod}
               </span>
             </div>
 

@@ -447,6 +447,56 @@ model SourcingInquiry {
   updatedAt       DateTime @updatedAt
 }
 
+model SourcingPillar {
+  id                            String   @id @default(cuid())
+  slug                          String   @unique
+  serviceCode                   String   @default("PRODUCT_SOURCING")
+  iconName                      String   @default("Factory")
+  order                         Int      @default(0)
+  isActive                      Boolean  @default(true)
+  titleEn                       String
+  titleAr                       String   @default("")
+  titleZh                       String   @default("")
+  titleCkb                      String   @default("")
+  tagEn                         String   @default("")
+  tagAr                         String   @default("")
+  tagZh                         String   @default("")
+  tagCkb                        String   @default("")
+  updateBadgeEn                 String   @default("")
+  updateBadgeAr                 String   @default("")
+  updateBadgeZh                 String   @default("")
+  updateBadgeCkb                String   @default("")
+  descEn                        String   @default("")
+  descAr                        String   @default("")
+  descZh                        String   @default("")
+  descCkb                       String   @default("")
+  leadSummaryEn                 String   @default("")
+  leadSummaryAr                 String   @default("")
+  leadSummaryZh                 String   @default("")
+  leadSummaryCkb                String   @default("")
+  wordCount                     Int      @default(320)
+  readTimeEn                    String   @default("2 Min Read")
+  readTimeAr                    String   @default("قراءة في دقيقتين")
+  readTimeZh                    String   @default("2 分钟精读")
+  readTimeCkb                   String   @default("٢ خولەک خوێندنەوە")
+  metricsJson                   String   @default("[]")
+  comprehensiveSpecificationEn   String   @default("[]")
+  comprehensiveSpecificationAr   String   @default("[]")
+  comprehensiveSpecificationZh   String   @default("[]")
+  comprehensiveSpecificationCkb  String   @default("[]")
+  updates2026En                 String   @default("[]")
+  updates2026Ar                 String   @default("[]")
+  updates2026Zh                 String   @default("[]")
+  updates2026Ckb                String   @default("[]")
+  deliverablesEn                String   @default("[]")
+  deliverablesAr                String   @default("[]")
+  deliverablesZh                String   @default("[]")
+  deliverablesCkb               String   @default("[]")
+  standardsJson                 String   @default("[]")
+  createdAt                     DateTime @default(now())
+  updatedAt                     DateTime @updatedAt
+}
+
 model PaymentOrder {
   id                    String    @id @default(cuid())
   reference             String    @unique

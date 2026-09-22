@@ -175,7 +175,7 @@ export default function CulturalExchangePage() {
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 mt-6 border-t border-paper-200 dark:border-paper-800">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 pt-8 mt-6 border-t border-paper-200 dark:border-paper-800 min-w-0">
             <div className="p-4 rounded-xl bg-paper-100 dark:bg-paper-900 border border-paper-200 dark:border-paper-800">
               <span className="text-2xl font-bold font-serif text-brand-800 dark:text-brand-400">{programs.length}+</span>
               <span className="block text-xs text-paper-600 dark:text-paper-400 mt-1">{t.totalPrograms}</span>
@@ -259,7 +259,7 @@ export default function CulturalExchangePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         <AnimatePresence mode="wait">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 min-w-0">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="h-96 rounded-2xl bg-paper-200 dark:bg-paper-800 animate-pulse" />
               ))}
@@ -290,7 +290,7 @@ export default function CulturalExchangePage() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: isRtl ? -15 : 15 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 min-w-0"
             >
               {programs.map((prog, idx) => {
                 const theme = getCategoryTheme(prog.category?.slug);
@@ -452,7 +452,7 @@ export default function CulturalExchangePage() {
               </div>
 
               <div className="p-6 overflow-y-auto space-y-5 text-paper-800 dark:text-paper-200 text-sm leading-relaxed">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-xl bg-paper-100 dark:bg-paper-850 border border-paper-200 dark:border-paper-800 text-xs">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-4 rounded-xl bg-paper-100 dark:bg-paper-850 border border-paper-200 dark:border-paper-800 text-xs min-w-0">
                   {activeModalProgram.eventDate && (
                     <div>
                       <span className="text-paper-500 block mb-0.5">Program Intake / Cycle:</span>

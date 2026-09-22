@@ -115,7 +115,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
     <ErrorBoundary inline lang={lang} title="ICA Finance & Economics">
       <section 
         id="finance-economics" 
-        className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
+        className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-4 sm:p-8 md:p-10 my-6 transition-colors duration-300 overflow-hidden"
         dir={isRtl ? 'rtl' : 'ltr'}
       >
         {/* Section Header */}
@@ -136,7 +136,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
           </div>
 
           {/* Real-Time Live Settlement Rate Card Tie-In */}
-          <div className="w-full md:w-auto md:min-w-[340px] bg-red-700 dark:bg-red-800 text-white rounded-xl p-5 sm:p-6 shadow-md border border-red-600/80 transition-all hover:shadow-lg shrink-0">
+          <div className="w-full md:w-auto md:min-w-[340px] bg-red-700 dark:bg-red-800 text-white rounded-xl p-4 sm:p-6 shadow-md border border-red-600/80 transition-all hover:shadow-lg shrink-0 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between gap-2 border-b border-red-600/60 pb-3 mb-3.5">
               <div className="flex items-center gap-2">

@@ -1,26 +1,119 @@
-import { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Locale } from '../types';
+import { Globe, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Globe, ChevronDown, Check, Sparkles } from 'lucide-react';
-import { GlazedLanguageModal } from './GlazedLanguageModal';
-import { useI18n } from '../hooks/useI18n';
 
-const languages = [
-  { code: 'en' as Locale, label: 'English', native: 'English' },
-  { code: 'ar' as Locale, label: 'العربية', native: 'Arabic' },
-  { code: 'ckb' as Locale, label: 'کوردی', native: 'Kurdish' },
-  { code: 'zh' as Locale, label: '中文', native: 'Chinese' },
-];
+interface LanguageSwitcherProps {
+  lang?: Locale;
+}
 
-export function LanguageSwitcher({ lang }: { lang: Locale }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
+  const { lang: urlLang = 'en' } = useParams<{ lang: string }>();
+  const lang = propLang || (urlLang as Locale);
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useI18n(lang);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  useEffect(() => {
+  const languages: { code: Locale; label: string; native: string }[] = [
+    { code: 'en', label: 'English', native: 'English' },
+    { code: 'ar', label: 'Arabic', native: 'العربية' },
+    { code: 'zh', label: 'Chinese', native: '中文' },
+    { code: 'ckb', label: 'Kurdish', native: 'کوردی' },
+  ];
+
+  const handleLanguageChange = (newLang: Locale) => {
+    try {
+      document.cookie = `ica_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+      localStorage.setItem('ica_lang', newLang);
+      document.documentElement.lang = newLang;
+      document.documentElement.dir = (newLang === 'ar' || newLang === 'ckb') ? 'rtl' : 'ltr';
+    } catch {}
+
+    const currentPath = location.pathname;
+    const pathParts = currentPath.split('/');
+    pathParts[1] = newLang; // Replace the language part
+    const newPath = pathParts.join('/');
+    
+    // Preserve scroll position
+    const scrollPos = window.scrollY;
+    navigate(newPath + location.search + location.hash);
+    
+    setTimeout(() => {
+      window.scrollTo(0, scrollPos);
+    }, 0);
+    
+    setIsOpen(false);
+  };
+
+  const currentLang = languages.find(l => l.code === lang) || languages[0];
+
+  return (
+    <div className="relative">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Switch language"
+        className="h-9 sm:h-10 flex items-center gap-2 px-3 sm:px-3.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-neutral-300 hover:text-white transition-all group focus-visible:ring-2 focus-visible:ring-[#D97706]"
+      >
+        <Globe size={15} className="text-[#D97706] shrink-0" />
+        <span className="text-[10px] font-black uppercase tracking-widest text-white">{currentLang.code}</span>
+        <ChevronDown size={13} className={cn("text-neutral-400 transition-transform duration-200", isOpen && "rotate-180")} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+            <motion.div 
+              initial={{ opacity: 0, y: 8, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.15 }}
+              className="absolute right-0 rtl:right-auto rtl:left-0 top-full mt-2 w-48 bg-[#0F172A] border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
+            >
+              <div className="p-2 space-y-1">
+                {languages.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => handleLanguageChange(l.code)}
+                    className={cn(
+                      "w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all group",
+                      lang === l.code ? "bg-[#0284C7] text-white" : "hover:bg-white/5 text-neutral-400 hover:text-white"
+                    )}
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="text-[10px] font-black uppercase tracking-widest">{l.label}</span>
+                      <span className="text-[9px] font-bold opacity-60">{l.native}</span>
+                    </div>
+                    {lang === l.code && <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+export function FloatingLanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
+  const { lang: urlLang = 'en' } = useParams<{ lang: string }>();
+  const lang = (propLang || urlLang) as Locale;
+  const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const languages = [
+    { code: 'en' as Locale, label: 'English', native: 'English', flag: '🇬🇧' },
+    { code: 'ar' as Locale, label: 'العربية', native: 'Arabic', flag: '🇮🇶' },
+    { code: 'ckb' as Locale, label: 'کوردی', native: 'Kurdish', flag: '🇹🇯' },
+    { code: 'zh' as Locale, label: '中文', native: 'Chinese', flag: '🇨🇳' },
+  ];
+
+  React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -31,13 +124,23 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
   }, []);
 
   const handleLangChange = (newLang: string) => {
-    const currentPath = location.pathname;
-    const match = currentPath.match(/^\/(en|ar|zh|ckb)(\/.*)?$/);
-    let targetPath = `/${newLang}`;
-    if (match && match[2]) {
-      targetPath = `/${newLang}${match[2]}`;
+    if (newLang === lang) {
+      setIsOpen(false);
+      return;
     }
-    navigate(targetPath);
+    try {
+      document.cookie = `ica_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+      localStorage.setItem('ica_lang', newLang);
+      document.documentElement.lang = newLang;
+      document.documentElement.dir = (newLang === 'ar' || newLang === 'ckb') ? 'rtl' : 'ltr';
+    } catch {}
+
+    const currentPath = location.pathname;
+    const pathParts = currentPath.split('/');
+    pathParts[1] = newLang;
+    const targetPath = pathParts.join('/');
+    
+    navigate(targetPath + location.search + location.hash);
     setIsOpen(false);
   };
 
@@ -45,52 +148,57 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
 
   return (
     <div className="relative inline-block text-start z-50" ref={dropdownRef}>
-      {/* Single Trigger Button */}
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2.5 bg-neutral-50 dark:bg-neutral-800 hover:bg-white dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-ink-900 dark:hover:border-neutral-500 px-3 py-1.5 transition-all cursor-pointer focus:outline-none group rounded-md"
-        title="Select Language"
-      >
-        <Globe className="w-3.5 h-3.5 text-brand-900 dark:text-neutral-200 shrink-0 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors" />
-        <span className="text-xs font-black text-brand-900 dark:text-neutral-200 tracking-[0.1em] uppercase">
-          {currentLangObj.label}
-        </span>
-        <ChevronDown className={cn("w-3 h-3 text-neutral-400 transition-transform duration-300 shrink-0", isOpen && "rotate-180")} />
-        
-        {/* Red Dot Trigger Inside the Button */}
-        <GlazedLanguageModal lang={lang} className="ms-1" />
-      </button>
+      <div className="relative group">
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-800 to-rose-600 rounded-xl blur-xs opacity-40 group-hover:opacity-80 transition duration-300"></div>
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="relative flex items-center gap-2 bg-white/95 dark:bg-neutral-900/95 hover:bg-white dark:hover:bg-neutral-900 border border-brand-800/40 dark:border-brand-500/40 px-3 py-1.5 transition-all cursor-pointer rounded-xl shadow-md text-brand-900 dark:text-neutral-100"
+        >
+          <span className="text-sm">{currentLangObj.flag}</span>
+          <Globe className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400 shrink-0" />
+          <span className="text-[10px] font-black tracking-wider uppercase">
+            {currentLangObj.code}
+          </span>
+          <ChevronDown className={cn("w-3 h-3 text-neutral-400 transition-transform duration-300 shrink-0", isOpen && "rotate-180")} />
+        </button>
+      </div>
 
-      {/* Vertical Flow Menu */}
-      {isOpen && (
-        <div className="absolute end-0 rtl:start-auto top-full mt-2 w-48 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-xl rounded-md p-1.5 z-[100] flex flex-col gap-1 animate-in fade-in slide-in-from-top-2 duration-200 text-start">
-          <div className="px-3 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-neutral-400 border-b border-neutral-100 dark:border-neutral-700/60 mb-1 flex items-center justify-between">
-            <span>{t('regionalNode')}</span>
-            <span className="text-[8px] text-brand-700 dark:text-brand-400">{t('dialects')}</span>
-          </div>
-          {languages.map((item) => {
-            const isActive = lang === item.code;
-            return (
-              <button
-                key={item.code}
-                onClick={() => handleLangChange(item.code)}
-                className={cn(
-                  "w-full text-start px-3 py-2 text-[11px] font-bold transition-all flex items-center justify-between cursor-pointer rounded group",
-                  isActive
-                    ? "bg-ink-900 dark:bg-brand-700 text-white"
-                    : "text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:text-brand-900 dark:hover:text-white"
-                )}
-              >
-                <span>{item.label}</span>
-                {isActive && <Check className="w-3 h-3 text-white shrink-0" />}
-              </button>
-            );
-          })}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            className="absolute end-0 rtl:start-auto top-full mt-2 w-52 max-w-[calc(100vw-2rem)] bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border border-neutral-200 dark:border-neutral-700 shadow-2xl rounded-xl p-2 z-[120] flex flex-col gap-1 text-start"
+          >
+            {languages.map((item) => {
+              const isActive = lang === item.code;
+              return (
+                <button
+                  key={item.code}
+                  onClick={() => handleLangChange(item.code)}
+                  className={cn(
+                    "w-full text-start px-3.5 py-2.5 text-xs font-bold transition-all flex items-center justify-between cursor-pointer rounded-lg group",
+                    isActive
+                      ? "bg-brand-800 text-white shadow-sm"
+                      : "text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-brand-900 dark:hover:text-white"
+                  )}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-sm">{item.flag}</span>
+                    <div className="flex flex-col">
+                      <span className="font-black tracking-wide">{item.label}</span>
+                      <span className="text-[9px] opacity-75">{item.native}</span>
+                    </div>
+                  </div>
+                  {isActive && <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />}
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-
-

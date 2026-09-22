@@ -3,13 +3,12 @@ import { Locale } from '../types';
 import { Target, Eye, QrCode, Smartphone, Download, Check, Copy } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { AppQrModal } from './AppQrModal';
+import { useI18n } from '../hooks/useI18n';
 
 export function FooterVisionMission({ lang }: { lang: Locale }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const isAr = lang === 'ar';
-  const isZh = lang === 'zh';
-  const isCkb = lang === 'ckb';
+  const { t } = useI18n(lang);
 
   const downloadUrl = typeof window !== 'undefined' ? `${window.location.origin}/${lang}` : `https://ica.iq/${lang}`;
 
@@ -22,21 +21,18 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
   
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 mt-12 mb-8 items-stretch">
+      <div 
+        id="footer-vision-mission-root"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 mt-12 mb-8 items-stretch w-full max-w-7xl mx-auto box-border"
+      >
         {/* Vision */}
         <div className="lg:col-span-4 flex flex-col gap-3 text-start rtl:text-right">
           <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-bold uppercase tracking-wider text-sm">
             <Eye size={18} />
-            <span>{isAr ? 'رؤيتنا' : isZh ? '我们的愿景' : isCkb ? 'دیدگامان' : 'Our Vision'}</span>
+            <span>{t('footerPillarEnergyBri')}</span>
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
-            {isAr 
-              ? 'بناء جسر استراتيجي مستدام بين العراق والصين، يعزز التنمية الاقتصادية من خلال بوابات استخباراتية فورية، ويقود الابتكار في مشاريع البنية التحتية، ويدعم الشراكات الثنائية طويلة الأمد في إطار مبادرة الحزام والطريق.' 
-              : isZh 
-              ? '在伊拉克与中国之间建立一座可持续的战略桥梁，通过实时情报门户促进经济发展，引领基础设施项目创新，并在“一带一路”倡议框架下支持长期的双边伙伴关系。'
-              : isCkb
-              ? 'دروستکردنی پردێکی ستراتیژی بەردەوام لە نێوان عێراق و چین، بۆ پێشخستنی گەشەی ئابووری لە ڕێگەی دەروازە هەواڵگرییە ڕاستەوخۆکان و داهێنان لە پڕۆژەکانی ژێرخان و پشتیوانیکردنی هاوبەشی دوولایەنەی درێژخایەن.'
-              : 'To build a sustainable strategic bridge between Iraq and China, fostering economic development through real-time intelligence portals, pioneering infrastructure innovation, and supporting long-term bilateral partnerships within the Belt and Road Initiative.'}
+            {t('footerVisionText')}
           </p>
         </div>
 
@@ -44,16 +40,10 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
         <div className="lg:col-span-4 flex flex-col gap-3 text-start rtl:text-right border-t lg:border-t-0 lg:border-s border-neutral-200 dark:border-neutral-700 pt-6 lg:pt-0 lg:ps-6">
           <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-bold uppercase tracking-wider text-sm">
             <Target size={18} />
-            <span>{isAr ? 'رسالتنا' : isZh ? '我们的使命' : isCkb ? 'ئامانجمان' : 'Our Mission'}</span>
+            <span>{t('footerResourcesDataHeading')}</span>
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
-            {isAr
-              ? 'تقديم تغطية إعلامية موثوقة عبر قياسات البث الحي، وتسهيل الاستثمارات المشتركة من خلال أرشيفات المؤسسات الموثقة، وتوفير مراكز رقمية غامرة (ICA+) للتبادل التجاري والأكاديمي والثقافي، لضمان نمو مزدهر لكلا البلدين.'
-              : isZh
-              ? '通过实时广播遥测提供可靠的媒体报道，通过已核验的企业档案促进共同投资，并提供沉浸式数字中心 (ICA+) 以进行商业、学术和文化交流，以确保两国实现繁荣增长。'
-              : isCkb
-              ? 'پێشکەشکردنی ڕوماڵی میدیایی باوەڕپێکراو لە ڕێگەی داتای پەخشی ڕاستەوخۆ، ئاسانکاری بۆ وەبەرهێنانی هاوبەش لە ڕێگەی ئەرشیفی دامەزراوەکان، و دابینکردنی ناوەندی دیجیتاڵی گشتگیر (ICA+) بۆ ئاڵوگۆڕی بازرگانی، ئەکادیمی و کلتوری.'
-              : 'Delivering reliable media coverage through real-time broadcast telemetry, facilitating joint investments via verified enterprise archives, and providing immersive digital hubs (ICA+) for commercial, academic, and cultural exchange to ensure prosperous growth for both nations.'}
+            {t('footerMissionText')}
           </p>
         </div>
 
@@ -81,19 +71,13 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
             <div className="flex flex-col text-start rtl:text-right flex-1 min-w-0">
               <div className="flex items-center gap-1.5 text-brand-800 dark:text-brand-400 font-black uppercase tracking-wider text-[11px]">
                 <Smartphone size={14} className="text-brand-800 animate-pulse" />
-                <span>{isAr ? 'تطبيق الوكالة للأجهزة' : isZh ? 'ICA 移动端应用' : isCkb ? 'ئەپڵیکەیشنی ئاژانس' : 'ICA Mobile PWA'}</span>
+                <span>{t('footerIcaMobileApp')}</span>
               </div>
               <h5 className="font-bold text-xs sm:text-sm text-neutral-900 dark:text-white mt-0.5 leading-snug">
-                {isAr ? 'امسح لتحميل وتثبيت التطبيق' : isZh ? '扫码快速安装移动应用' : isCkb ? 'کۆدەکە سکان بکە بۆ دابەزاندن' : 'Scan to Install App'}
+                {t('footerScanToInstall')}
               </h5>
               <p className="text-[10px] sm:text-[11px] text-neutral-500 dark:text-neutral-400 font-medium leading-tight mt-1 line-clamp-2">
-                {isAr 
-                  ? 'وصول فوري وخفيف دون متجر تطبيقات على هواتف أندرويد وآيفون.' 
-                  : isZh 
-                  ? '即时扫码安装渐进式Web应用，支持离线与即时双语推送。' 
-                  : isCkb 
-                  ? 'بەردەستە بۆ ئایفۆن و ئەندرۆید بەبێ پێویستی بە فرۆشگا.' 
-                  : 'Instant fast install for iOS & Android without app store download.'}
+                {t('footerInstantFastInstall')}
               </p>
             </div>
           </div>
@@ -102,7 +86,7 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
           <div className="mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-800 w-full flex items-center justify-between gap-2 text-[10px] font-bold">
             <span className="text-brand-800 dark:text-brand-400 uppercase tracking-widest flex items-center gap-1">
               <QrCode size={12} />
-              <span>{isAr ? 'انقر لتكبير الرمز' : isZh ? '点击放大二维码' : isCkb ? 'کرتە بکە بۆ گەورەکردن' : 'Click to Enlarge'}</span>
+              <span>{t('footerEnlarge')}</span>
             </span>
             <button
               type="button"
@@ -111,7 +95,7 @@ export function FooterVisionMission({ lang }: { lang: Locale }) {
               title="Copy direct link"
             >
               {copied ? <Check size={11} className="text-emerald-600" /> : <Copy size={11} />}
-              <span>{copied ? (isAr ? 'تم النسخ' : isZh ? '已复制' : 'Copied') : (isAr ? 'نسخ الرابط' : isZh ? '复制链接' : 'Copy')}</span>
+              <span>{copied ? t('footerCopied') : t('footerCopy')}</span>
             </button>
           </div>
         </div>

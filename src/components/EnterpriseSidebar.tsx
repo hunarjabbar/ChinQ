@@ -537,19 +537,17 @@ ${preset.letterZh(companyName, businessField, representative)}`;
       <motion.div 
         onClick={toggleSidebar}
         animate={{ 
-          x: isOpen ? (isRtl ? sidebarWidth : -sidebarWidth) : 0,
+          opacity: isOpen ? 0 : 1,
+          scale: isOpen ? 0.8 : 1,
         }}
         transition={transitionConfig}
+        style={{ pointerEvents: isOpen ? 'none' : 'auto' }}
         className={cn(
-          "fixed top-4 z-50 bg-brand-800 hover:bg-[#770000] text-white p-3 rounded-md shadow-sm hover:shadow-md flex items-center justify-center cursor-pointer border border-brand-800/20 group select-none hover:scale-105 active:scale-95",
-          isRtl ? "left-4" : "right-4"
+          "fixed top-3 sm:top-4 z-50 bg-brand-800 hover:bg-[#770000] text-white p-2.5 sm:p-3 rounded-md shadow-md flex items-center justify-center cursor-pointer border border-brand-800/20 group select-none hover:scale-105 active:scale-95 transition-shadow",
+          isRtl ? "left-3 sm:left-4" : "right-3 sm:right-4"
         )}
       >
-        {isOpen ? (
-          <X className="w-6 h-6 text-white transition-transform duration-300 group-hover:rotate-90" />
-        ) : (
-          <Menu className="w-6 h-6 text-white transition-transform duration-300 [&>path:nth-child(2)]:-translate-x-[3px] rtl:[&>path:nth-child(2)]:translate-x-[3px] [&>path]:transition-transform" />
-        )}
+        <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white transition-transform duration-300 [&>path:nth-child(2)]:-translate-x-[3px] rtl:[&>path:nth-child(2)]:translate-x-[3px] [&>path]:transition-transform" />
       </motion.div>
 
       <AnimatePresence>
@@ -580,7 +578,8 @@ ${preset.letterZh(companyName, businessField, representative)}`;
               }}
               transition={transitionConfig}
               style={{ 
-                width: sidebarWidth
+                width: typeof window !== 'undefined' ? Math.min(sidebarWidth, window.innerWidth) : sidebarWidth,
+                maxWidth: '100vw'
               }}
               className={cn(
                 "fixed top-0 bottom-0 max-w-full bg-neutral-50 dark:bg-neutral-950 border-neutral-200 dark:border-neutral-800 shadow-2xl z-50 flex flex-col h-screen overflow-hidden",

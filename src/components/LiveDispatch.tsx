@@ -72,7 +72,7 @@ export function LiveDispatch({ lang }: LiveDispatchProps) {
         to={`/${lang}/live`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="h-full flex items-center px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-neutral-950 dark:bg-neutral-950 hover:bg-neutral-900 dark:hover:bg-neutral-900 text-white transition-colors duration-200 cursor-pointer gap-2.5 sm:gap-3.5 group border-e border-neutral-800 dark:border-neutral-800 relative overflow-visible select-none shrink-0 z-20"
+        className="h-full flex items-center px-3 sm:px-6 md:px-8 py-2 sm:py-3 bg-neutral-950 dark:bg-neutral-950 hover:bg-neutral-900 dark:hover:bg-neutral-900 text-white transition-colors duration-200 cursor-pointer gap-2 sm:gap-3.5 group border-e border-neutral-800 dark:border-neutral-800 relative overflow-visible select-none shrink-0 z-20"
         title={hasActiveEvent ? "Live Intelligence Broadcast Active" : "Sovereign Intelligence Live Broadcast"}
       >
         {/* Dynamic Radar Pulse Beacon */}

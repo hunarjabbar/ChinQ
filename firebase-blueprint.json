@@ -1,4 +1,66 @@
 {
-  "entities": {},
-  "firestore": {}
+  "entities": {
+    "newsletterSubscriber": {
+      "title": "Newsletter Subscriber",
+      "description": "User subscription for the newsletter",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User's email address"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of subscription"
+        }
+      },
+      "required": ["email", "timestamp"]
+    },
+    "contactSubmission": {
+      "title": "Contact Submission",
+      "description": "Message from the contact us form",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "company": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "bureau": {
+          "type": "string",
+          "enum": ["general", "baghdad", "beijing", "investment"]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 2000
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["name", "email", "message", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/newsletter_subscribers/{subscriberId}": {
+      "schema": "newsletterSubscriber",
+      "description": "Collection of newsletter subscribers"
+    },
+    "/contact_submissions/{submissionId}": {
+      "schema": "contactSubmission",
+      "description": "Collection of contact form submissions"
+    }
+  }
 }

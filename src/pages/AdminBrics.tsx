@@ -324,7 +324,7 @@ export function AdminBrics() {
 
             <form onSubmit={handleSubmit} className="p-8 space-y-8">
               {/* Basic Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 min-w-0">
                 <div className="space-y-2">
                   <label className="text-xs font-black uppercase tracking-widest text-gray-500">Slug (Unique ID)</label>
                   <input

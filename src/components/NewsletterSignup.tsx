@@ -8,6 +8,9 @@ interface NewsletterSignupProps {
   lang: Locale;
 }
 
+import { db, handleFirestoreError, OperationType } from '../lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
 export function NewsletterSignup({ lang }: NewsletterSignupProps) {
   const { t } = useI18n(lang);
   const [email, setEmail] = useState('');
@@ -29,7 +32,7 @@ export function NewsletterSignup({ lang }: NewsletterSignupProps) {
       button: 'اشتراك',
       success: 'شكرا لاشتراكك!',
       error: 'فشل الاشتراك. يرجى المحاولة مرة أخرى.',
-      invalid: 'يرجى إدخال عنوان بريد إلكتروني صالح.'
+      invalid: 'يرجى إدخل عنوان بريد إلكتروني صالح.'
     },
     zh: {
       title: '订阅我们的通讯',
@@ -55,16 +58,16 @@ export function NewsletterSignup({ lang }: NewsletterSignupProps) {
 
   const subscribeMutation = useMutation({
     mutationFn: async (email: string) => {
-      const res = await fetch('/api/public/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to subscribe');
+      const path = 'newsletter_subscribers';
+      try {
+        const docRef = await addDoc(collection(db, path), {
+          email,
+          timestamp: serverTimestamp()
+        });
+        return { id: docRef.id };
+      } catch (error) {
+        handleFirestoreError(error, OperationType.CREATE, path);
       }
-      return res.json();
     }
   });
 

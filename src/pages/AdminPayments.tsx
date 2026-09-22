@@ -766,7 +766,9 @@ export function AdminPayments() {
                   <div className="p-3">
                     <div className="flex justify-between items-center">
                       <span className="text-neutral-500 font-bold text-xs uppercase">Local Payment & Funding Rail:</span>
-                      <span className="font-bold text-ink-900 dark:text-white">{selectedOrder.settlementMethod}</span>
+                      <span className="font-bold text-ink-900 dark:text-white">
+                        {selectedOrder.settlementMethod === 'mBridge CBDC Direct' ? 'mBridge CBDC Protocol (Corporate Wholesale)' : selectedOrder.settlementMethod}
+                      </span>
                     </div>
                     <span className="text-[10px] text-neutral-400 block mt-0.5">
                       Source funding rail in Iraq, converted & cleared via sovereign bilateral corridors

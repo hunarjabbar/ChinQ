@@ -1,4 +1,5 @@
 import { useAuthStore } from './store/useAuthStore';
+import { Toaster } from 'sonner';
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -8,9 +9,12 @@ import { createBrowserRouter, RouterProvider, Navigate, useParams, Outlet, useLo
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, Suspense, lazy } from 'react';
 import { Layout } from './components/Layout';
+import { InstituteLayout } from './components/institute/InstituteLayout';
 import { AdminLayout } from './components/AdminLayout';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { useSiteStore } from './store/useSiteStore';
+import { DevBuildInfoBadge } from './components/DevBuildInfoBadge';
+import { PageSkeleton } from './components/PageSkeleton';
 
 import { Home } from './pages/Home';
 import { ArticlePage } from './pages/ArticlePage';
@@ -24,17 +28,35 @@ function lazyWithRetry<T extends React.ComponentType<any>>(
   factory: () => Promise<{ default: T } | any>
 ) {
   return lazy(async () => {
+    const chunkReloadLockKey = 'app_chunk_reload_lock';
     try {
       const mod = await factory();
+      try {
+        window.sessionStorage.removeItem(chunkReloadLockKey);
+      } catch {}
       return mod.default ? mod : { default: mod };
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Chunk load error, attempting immediate retry...', error);
       try {
         await new Promise((resolve) => setTimeout(resolve, 800));
         const mod = await factory();
+        try {
+          window.sessionStorage.removeItem(chunkReloadLockKey);
+        } catch {}
         return mod.default ? mod : { default: mod };
-      } catch (retryError) {
+      } catch (retryError: any) {
         console.error('Persistent chunk load failure:', retryError);
+        // If a dynamic import fails due to server restart/new bundle hashes, refresh once to retrieve latest manifest
+        if (typeof window !== 'undefined') {
+          try {
+            const hasReloaded = window.sessionStorage.getItem(chunkReloadLockKey);
+            if (!hasReloaded) {
+              window.sessionStorage.setItem(chunkReloadLockKey, 'true');
+              window.location.reload();
+              return new Promise<{ default: T }>(() => {});
+            }
+          } catch {}
+        }
         throw retryError;
       }
     }
@@ -76,6 +98,67 @@ const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEc
 const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
 const CulturalExchangePage = lazyWithRetry(() => import('./pages/CulturalExchangePage'));
 const AdminCulturalExchange = lazyWithRetry(() => import('./pages/AdminCulturalExchange'));
+const NewsroomPage = lazyWithRetry(() => import('./pages/NewsroomPage').then(m => ({ default: m.NewsroomPage })));
+const InstituteHub = lazyWithRetry(() => import('./pages/InstituteHub').then(m => ({ default: m.InstituteHub })));
+const SummitPage = lazyWithRetry(() => import('./pages/SummitPage').then(m => ({ default: m.SummitPage })));
+
+// Summit Pages
+const SummitLandingPage = lazyWithRetry(() => import('./pages/summit/SummitLandingPage').then(m => ({ default: m.SummitLandingPage })));
+const SummitAboutSulaymaniyah = lazyWithRetry(() => import('./pages/summit/SummitAboutSulaymaniyah').then(m => ({ default: m.SummitAboutSulaymaniyah })));
+const SummitAgendaPage = lazyWithRetry(() => import('./pages/summit/SummitAgendaPage').then(m => ({ default: m.SummitAgendaPage })));
+const SummitSpeakersPage = lazyWithRetry(() => import('./pages/summit/SummitSpeakersPage').then(m => ({ default: m.SummitSpeakersPage })));
+const SummitExpoPage = lazyWithRetry(() => import('./pages/summit/SummitExpoPage').then(m => ({ default: m.SummitExpoPage })));
+const SummitSectorPavilionPage = lazyWithRetry(() => import('./pages/summit/SummitSectorPavilionPage').then(m => ({ default: m.SummitSectorPavilionPage })));
+const SummitFloorPlanPage = lazyWithRetry(() => import('./pages/summit/SummitFloorPlanPage').then(m => ({ default: m.SummitFloorPlanPage })));
+const SummitExhibitorRegisterPage = lazyWithRetry(() => import('./pages/summit/SummitExhibitorRegisterPage').then(m => ({ default: m.SummitExhibitorRegisterPage })));
+const SummitVisitorRegisterPage = lazyWithRetry(() => import('./pages/summit/SummitVisitorRegisterPage').then(m => ({ default: m.SummitVisitorRegisterPage })));
+const SummitVipRegisterPage = lazyWithRetry(() => import('./pages/summit/SummitVipRegisterPage').then(m => ({ default: m.SummitVipRegisterPage })));
+const SummitServicesPage = lazyWithRetry(() => import('./pages/summit/SummitServicesPage').then(m => ({ default: m.SummitServicesPage })));
+const SummitServiceDetailPage = lazyWithRetry(() => import('./pages/summit/SummitServiceDetailPage').then(m => ({ default: m.SummitServiceDetailPage })));
+const SummitServiceRequestPage = lazyWithRetry(() => import('./pages/summit/SummitServiceRequestPage').then(m => ({ default: m.SummitServiceRequestPage })));
+const SummitB2BMatchmakingPage = lazyWithRetry(() => import('./pages/summit/SummitB2BMatchmakingPage').then(m => ({ default: m.SummitB2BMatchmakingPage })));
+const SummitSponsorsPage = lazyWithRetry(() => import('./pages/summit/SummitSponsorsPage').then(m => ({ default: m.SummitSponsorsPage })));
+const SummitMediaPage = lazyWithRetry(() => import('./pages/summit/SummitMediaPage').then(m => ({ default: m.SummitMediaPage })));
+const SummitFaqPage = lazyWithRetry(() => import('./pages/summit/SummitFaqPage').then(m => ({ default: m.SummitFaqPage })));
+const SummitContactPage = lazyWithRetry(() => import('./pages/summit/SummitContactPage').then(m => ({ default: m.SummitContactPage })));
+
+// Institute Specific Pages
+const InstituteHome = lazyWithRetry(() => import('./pages/institute/InstituteHome').then(m => ({ default: m.InstituteHome })));
+const DataHub = lazyWithRetry(() => import('./pages/institute/DataHub').then(m => ({ default: m.DataHub })));
+const PublicationsArchive = lazyWithRetry(() => import('./pages/institute/PublicationsArchive').then(m => ({ default: m.PublicationsArchive })));
+const PublicationDetail = lazyWithRetry(() => import('./pages/institute/PublicationDetail').then(m => ({ default: m.PublicationDetail })));
+const ExpertsDirectory = lazyWithRetry(() => import('./pages/institute/ExpertsDirectory').then(m => ({ default: m.ExpertsDirectory })));
+const ExpertProfile = lazyWithRetry(() => import('./pages/institute/ExpertProfile'));
+const Partnerships = lazyWithRetry(() => import('./pages/institute/Partnerships').then(m => ({ default: m.Partnerships })));
+const AboutInstitute = lazyWithRetry(() => import('./pages/institute/AboutInstitute').then(m => ({ default: m.AboutInstitute })));
+const ResearchPillars = lazyWithRetry(() => import('./pages/institute/ResearchPillars').then(m => ({ default: m.ResearchPillars })));
+const ResearchPillarDetail = lazyWithRetry(() => import('./pages/institute/ResearchPillarDetail'));
+const EventsCalendar = lazyWithRetry(() => import('./pages/institute/EventsCalendar').then(m => ({ default: m.EventsCalendar })));
+
+// Data Hub Sub-Pages
+const DataHubTradeExplorer = lazyWithRetry(() => import('./pages/institute/DataHubTradeExplorer'));
+const DataHubCorridorTracker = lazyWithRetry(() => import('./pages/institute/DataHubCorridorTracker'));
+const DataHubBRIProjects = lazyWithRetry(() => import('./pages/institute/DataHubBRIProjects'));
+const DataHubMethodology = lazyWithRetry(() => import('./pages/institute/DataHubMethodology'));
+
+// Bilateral Visa Centre Pages
+const VisaCentreLanding = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreLanding').then(m => ({ default: m.VisaCentreLanding })));
+const VisaCentreAbout = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreAbout').then(m => ({ default: m.VisaCentreAbout })));
+const VisaCentreServices = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreServices').then(m => ({ default: m.VisaCentreServices })));
+const VisaCentreServiceDetail = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreServiceDetail').then(m => ({ default: m.VisaCentreServiceDetail })));
+const VisaCentreTypes = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreTypes').then(m => ({ default: m.VisaCentreTypes })));
+const VisaCentreCategoryDetail = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreCategoryDetail').then(m => ({ default: m.VisaCentreCategoryDetail })));
+const VisaCentreRequirements = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreRequirements').then(m => ({ default: m.VisaCentreRequirements })));
+const VisaCentreFees = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreFees').then(m => ({ default: m.VisaCentreFees })));
+const VisaCentreProcess = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreProcess').then(m => ({ default: m.VisaCentreProcess })));
+const VisaCentreAppointments = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreAppointments').then(m => ({ default: m.VisaCentreAppointments })));
+const VisaCentreApply = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreApply').then(m => ({ default: m.VisaCentreApply })));
+const VisaCentreTrack = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreTrack').then(m => ({ default: m.VisaCentreTrack })));
+const VisaCentreNews = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreNews').then(m => ({ default: m.VisaCentreNews })));
+const VisaCentreFaq = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreFaq').then(m => ({ default: m.VisaCentreFaq })));
+const VisaCentreContact = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreContact').then(m => ({ default: m.VisaCentreContact })));
+const VisaCentreDisclaimer = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreDisclaimer').then(m => ({ default: m.VisaCentreDisclaimer })));
+const AdminVisaCentre = lazyWithRetry(() => import('./pages/AdminVisaCentre').then(m => ({ default: m.AdminVisaCentre })));
 
 function PaymentsRedirect() {
   const { lang = 'en', ref } = useParams<{ lang: string; ref?: string }>();
@@ -157,34 +240,132 @@ function ThemeApplier() {
 
 
 
+export function resolveLocaleFromEnvironment(): 'en' | 'ar' | 'zh' | 'ckb' {
+  if (typeof window === 'undefined') return 'en';
+  try {
+    // 1. Query parameter ?lang= or ?locale=
+    const params = new URLSearchParams(window.location.search);
+    const qLang = params.get('lang') || params.get('locale');
+    if (qLang) {
+      const clean = qLang.toLowerCase().trim();
+      if (clean === 'ck' || clean === 'ckb' || clean === 'ku' || clean === 'kurdish') return 'ckb';
+      if (['en', 'ar', 'zh'].includes(clean)) return clean as any;
+    }
+
+    // 2. Cookie `ica_lang`
+    const cookieMatch = document.cookie.match(/(?:^|;\s*)ica_lang=([^;]+)/);
+    if (cookieMatch && cookieMatch[1]) {
+      const cLang = decodeURIComponent(cookieMatch[1]).toLowerCase().trim();
+      if (cLang === 'ck' || cLang === 'ckb' || cLang === 'ku') return 'ckb';
+      if (['en', 'ar', 'zh'].includes(cLang)) return cLang as any;
+    }
+
+    // 3. LocalStorage `ica_lang`
+    const stored = localStorage.getItem('ica_lang');
+    if (stored) {
+      const sLang = stored.toLowerCase().trim();
+      if (sLang === 'ck' || sLang === 'ckb' || sLang === 'ku') return 'ckb';
+      if (['en', 'ar', 'zh'].includes(sLang)) return sLang as any;
+    }
+
+    // 4. Referrer detection
+    if (document.referrer) {
+      try {
+        const refUrl = new URL(document.referrer);
+        const refPath = refUrl.pathname;
+        if (refPath.startsWith('/ckb') || refPath.startsWith('/ck')) return 'ckb';
+        if (refPath.startsWith('/ar')) return 'ar';
+        if (refPath.startsWith('/zh')) return 'zh';
+        if (refPath.startsWith('/en')) return 'en';
+      } catch {}
+    }
+
+    // 5. Browser navigator.language
+    const browserLang = (navigator.language || '').toLowerCase();
+    if (browserLang.startsWith('ar')) return 'ar';
+    if (browserLang.startsWith('zh')) return 'zh';
+    if (browserLang.startsWith('ckb') || browserLang.startsWith('ku')) return 'ckb';
+  } catch {}
+
+  return 'en';
+}
+
+function RootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  return <Navigate to={`/${loc}${location.search}${location.hash}`} replace />;
+}
+
+function InstituteRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const instituteSubPath = location.pathname.replace(/^\/institute/, '');
+  return <Navigate to={`/${loc}/institute${instituteSubPath}${location.search}${location.hash}`} replace />;
+}
+
+function SummitRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const summitSubPath = location.pathname.replace(/^\/summit/, '');
+  return <Navigate to={`/${loc}/summit${summitSubPath}${location.search}${location.hash}`} replace />;
+}
+
+function AdminRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const adminSubPath = location.pathname.replace(/^\/admin/, '');
+  return <Navigate to={`/${loc}/admin${adminSubPath}${location.search}${location.hash}`} replace />;
+}
+
+function SettlementRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  return <Navigate to={`/${loc}/settlement${location.search}${location.hash}`} replace />;
+}
+
+function KurdishAliasRedirect() {
+  const location = useLocation();
+  const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+  return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+}
+
 function SearchWrapper() {
   const { lang } = useParams<{ lang: string }>();
   return <SearchPage lang={(lang as any) || 'en'} />;
 }
 
-
 function useLanguageSetup(lang?: string) {
+  const cleanLang = (lang || '').toLowerCase().trim();
+  const isCkbAlias = cleanLang === 'ck' || cleanLang === 'ku';
+  const normalizedLang = isCkbAlias ? 'ckb' : cleanLang;
+  const isValidLang = ['en', 'ar', 'zh', 'ckb'].includes(normalizedLang);
+  const safeLang = (isValidLang ? normalizedLang : 'en') as 'en' | 'ar' | 'zh' | 'ckb';
+
   useEffect(() => {
     try {
-      document.documentElement.lang = lang || 'en';
-      if (lang === 'ar' || lang === 'ckb') {
+      document.documentElement.lang = safeLang;
+      if (safeLang === 'ar' || safeLang === 'ckb') {
         document.documentElement.dir = 'rtl';
       } else {
         document.documentElement.dir = 'ltr';
       }
+      document.cookie = `ica_lang=${safeLang}; path=/; max-age=31536000; SameSite=Lax`;
+      localStorage.setItem('ica_lang', safeLang);
     } catch {}
-  }, [lang]);
+  }, [safeLang]);
 
-  const isValidLang = ['en', 'ar', 'zh', 'ckb'].includes(lang || '');
-  const safeLang = (isValidLang ? lang : 'en') as 'en' | 'ar' | 'zh' | 'ckb';
-  
-  return { isValidLang, safeLang };
+  return { isValidLang, safeLang, isCkbAlias };
 }
 
 function LangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
-  const { isValidLang, safeLang } = useLanguageSetup(lang);
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
 
   if (!isValidLang) {
     return <Navigate to="/en" replace />;
@@ -202,7 +383,12 @@ function LangWrapper() {
 function ImmersiveLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
-  const { isValidLang, safeLang } = useLanguageSetup(lang);
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
 
   if (!isValidLang) {
     return <Navigate to="/en" replace />;
@@ -220,7 +406,12 @@ function ImmersiveLangWrapper() {
 function AdminLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
-  const { isValidLang, safeLang } = useLanguageSetup(lang);
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
 
   if (!isValidLang) {
     return <Navigate to="/en/admin" replace />;
@@ -235,20 +426,100 @@ function AdminLangWrapper() {
   );
 }
 
+function InstituteLangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
+
+  if (!isValidLang) {
+    return <Navigate to="/en/institute" replace />;
+  }
+
+  return (
+    <ErrorBoundary key={location.key} lang={safeLang}>
+      <InstituteLayout lang={safeLang}>
+        <Suspense fallback={<PageSkeleton />}>
+          <Outlet />
+        </Suspense>
+      </InstituteLayout>
+    </ErrorBoundary>
+  );
+}
+
+function SummitLangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
+
+  if (!isValidLang) {
+    return <Navigate to="/en/summit" replace />;
+  }
+
+  return (
+    <ErrorBoundary key={location.key} lang={safeLang}>
+      <Suspense fallback={<PageSkeleton />}>
+        <Outlet />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/en" replace /> },
-  { path: "/admin", element: <Navigate to="/en/admin" replace /> },
-  { path: "/admin/*", element: <Navigate to="/en/admin" replace /> },
+  { path: "/", element: <RootRedirect /> },
+  { path: "/institute", element: <InstituteRootRedirect /> },
+  { path: "/institute/*", element: <InstituteRootRedirect /> },
+  { path: "/summit", element: <SummitRootRedirect /> },
+  { path: "/summit/*", element: <SummitRootRedirect /> },
+  { path: "/admin", element: <AdminRootRedirect /> },
+  { path: "/admin/*", element: <AdminRootRedirect /> },
+  { path: "/ck", element: <KurdishAliasRedirect /> },
+  { path: "/ck/*", element: <KurdishAliasRedirect /> },
   { path: "/live/*", element: <Navigate to="/en" replace /> },
-  { path: "/settlement", element: <Navigate to="/en/settlement" replace /> },
-  { path: "/settlement-sourcing", element: <Navigate to="/en/settlement" replace /> },
-  { path: "/cultural-exchange", element: <Navigate to="/en/cultural-exchange" replace /> },
+  { path: "/settlement", element: <SettlementRootRedirect /> },
+  { path: "/settlement-sourcing", element: <SettlementRootRedirect /> },
+  { path: "/cultural-exchange", element: <RootRedirect /> },
+  {
+    path: "/:lang/summit",
+    element: <SummitLangWrapper />,
+    children: [
+      { index: true, element: <SummitLandingPage /> },
+      { path: "about-sulaymaniyah", element: <SummitAboutSulaymaniyah /> },
+      { path: "agenda", element: <SummitAgendaPage /> },
+      { path: "speakers", element: <SummitSpeakersPage /> },
+      { path: "expo", element: <SummitExpoPage /> },
+      { path: "expo/sectors/:slug", element: <SummitSectorPavilionPage /> },
+      { path: "floor-plan", element: <SummitFloorPlanPage /> },
+      { path: "register/exhibitor", element: <SummitExhibitorRegisterPage /> },
+      { path: "register/visitor", element: <SummitVisitorRegisterPage /> },
+      { path: "register/vip", element: <SummitVipRegisterPage /> },
+      { path: "services", element: <SummitServicesPage /> },
+      { path: "services/request", element: <SummitServiceRequestPage /> },
+      { path: "services/:slug", element: <SummitServiceDetailPage /> },
+      { path: "b2b", element: <SummitB2BMatchmakingPage /> },
+      { path: "sponsors", element: <SummitSponsorsPage /> },
+      { path: "media", element: <SummitMediaPage /> },
+      { path: "faq", element: <SummitFaqPage /> },
+      { path: "contact", element: <SummitContactPage /> },
+    ]
+  },
   {
     path: "/:lang",
     element: <LangWrapper />,
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
+      { path: "newsroom", element: <NewsroomPage /> },
+      { path: "summit", element: <SummitPage /> },
       { path: "join", element: <JoinUs /> },
       { path: "women", element: <WomenPage /> },
       { path: "tourism", element: <TourismPage /> },
@@ -264,6 +535,47 @@ const router = createBrowserRouter([
       { path: "article/:slug", element: <ArticlePage /> },
       { path: "category/:slug", element: <CategoryPage /> },
       { path: "search", element: <SearchWrapper /> }
+    ]
+  },
+  {
+    path: "/:lang/institute",
+    element: <InstituteLangWrapper />,
+    children: [
+      { index: true, element: <InstituteHome /> },
+      { path: "about", element: <AboutInstitute /> },
+      { path: "research", element: <ResearchPillars /> },
+      { path: "research/:pillar", element: <ResearchPillarDetail /> },
+      { path: "publications", element: <PublicationsArchive /> },
+      { path: "publications/:slug", element: <PublicationDetail /> },
+      { path: "data-hub", element: <DataHub /> },
+      { path: "data-hub/trade", element: <DataHubTradeExplorer /> },
+      { path: "data-hub/trade-explorer", element: <DataHubTradeExplorer /> },
+      { path: "data-hub/corridor", element: <DataHubCorridorTracker /> },
+      { path: "data-hub/corridor-tracker", element: <DataHubCorridorTracker /> },
+      { path: "data-hub/projects", element: <DataHubBRIProjects /> },
+      { path: "data-hub/bri-projects", element: <DataHubBRIProjects /> },
+      { path: "data-hub/methodology", element: <DataHubMethodology /> },
+      { path: "experts", element: <ExpertsDirectory /> },
+      { path: "experts/:id", element: <ExpertProfile /> },
+      { path: "partnerships", element: <Partnerships /> },
+      { path: "events", element: <EventsCalendar /> },
+      // Bilateral Visa Centre
+      { path: "visa-centre", element: <VisaCentreLanding /> },
+      { path: "visa-centre/about", element: <VisaCentreAbout /> },
+      { path: "visa-centre/services", element: <VisaCentreServices /> },
+      { path: "visa-centre/services/:slug", element: <VisaCentreServiceDetail /> },
+      { path: "visa-centre/visa-types", element: <VisaCentreTypes /> },
+      { path: "visa-centre/visa-types/:direction/:category", element: <VisaCentreCategoryDetail /> },
+      { path: "visa-centre/requirements", element: <VisaCentreRequirements /> },
+      { path: "visa-centre/fees", element: <VisaCentreFees /> },
+      { path: "visa-centre/process", element: <VisaCentreProcess /> },
+      { path: "visa-centre/appointments", element: <VisaCentreAppointments /> },
+      { path: "visa-centre/apply", element: <VisaCentreApply /> },
+      { path: "visa-centre/track", element: <VisaCentreTrack /> },
+      { path: "visa-centre/news", element: <VisaCentreNews /> },
+      { path: "visa-centre/faq", element: <VisaCentreFaq /> },
+      { path: "visa-centre/contact", element: <VisaCentreContact /> },
+      { path: "visa-centre/disclaimer", element: <VisaCentreDisclaimer /> },
     ]
   },
   {
@@ -299,6 +611,7 @@ const router = createBrowserRouter([
                 { path: "audit-logs", element: <AdminAuditLogs /> },
           { path: "brics", element: <AdminBrics /> },
           { path: "chinese-products", element: <AdminChineseProducts /> },
+          { path: "visa-centre", element: <AdminVisaCentre /> },
           { path: "users", element: <AdminUsers /> },
       { path: "media", element: <AdminMedia /> },
       { path: "settings", element: <AdminSettings /> }
@@ -306,9 +619,6 @@ const router = createBrowserRouter([
   },
   { path: "*", element: <NotFound /> }
 ]);
-
-
-import { Toaster } from 'sonner';
 
 export default function App() { 
   const initializeAuth = useAuthStore(state => state.initialize); 
@@ -321,6 +631,7 @@ export default function App() {
     <ErrorBoundary lang="en">
       <QueryClientProvider client={queryClient}>
         <ThemeApplier />
+        <DevBuildInfoBadge />
         <Toaster 
           position="top-right" 
           richColors 
