@@ -19,6 +19,7 @@ import { generateInstitutionalPdf } from '../../utils/pdfGenerator';
 import { MediaRequestForm } from '../../components/institute/MediaRequestForm';
 import { toast } from 'sonner';
 import { useI18n } from '../../hooks/useI18n';
+import { aboutInstituteData } from '../../data/aboutInstituteData';
 
 export function AboutInstitute() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();
@@ -27,6 +28,7 @@ export function AboutInstitute() {
   const [showInquiryModal, setShowInquiryModal] = useState(false);
 
   const handleDownloadReport = (year: string) => {
+    // ... (existing code remains same)
     const success = generateInstitutionalPdf({
       title: `CISE ${year} Annual Institutional Governance & Audit Report`,
       category: 'Annual Governance Report',
@@ -94,15 +96,10 @@ export function AboutInstitute() {
 
           {/* Advisory Board */}
           <section className="space-y-8">
-            <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">Advisory Board</h3>
+            <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">{aboutInstituteData.advisoryBoard.title}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                { name: 'Dr. Li Xiang', role: 'Chairman, Board of Governors', org: 'Tsinghua University' },
-                { name: 'Ahmed Al-Jaber', role: 'Strategic Advisor', org: 'Iraq Council of Ministers' },
-                { name: 'Dr. Sarah Chen', role: 'Macroeconomic Fellow', org: 'Suli University' },
-                { name: 'Zhao Wei', role: 'Diplomatic Liaison', org: 'BRI Policy Group' },
-              ].map(member => (
-                <div key={member.name} className="flex items-center gap-4 p-5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+              {aboutInstituteData.advisoryBoard.members.map(member => (
+                <div key={member.id} className="flex items-center gap-4 p-5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
                    <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center text-neutral-400 font-black text-xs">
                      {member.name.split(' ').map(n => n[0]).join('')}
                    </div>
@@ -123,26 +120,21 @@ export function AboutInstitute() {
                 <FileCheck size={18} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Reports</span>
              </div>
-             <h3 className="text-xl font-black uppercase tracking-tight">Annual Reports</h3>
+             <h3 className="text-xl font-black uppercase tracking-tight">{aboutInstituteData.annualReports.title}</h3>
              <p className="text-xs text-neutral-400 leading-relaxed font-medium">
-               Transparency is a core tenet of our charter. Access our annual 
-               institutional audit and research performance reports.
+               {aboutInstituteData.annualReports.description}
              </p>
              <div className="space-y-3">
-                <button 
-                  onClick={() => handleDownloadReport('2025')}
-                  className="w-full flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all text-xs font-black uppercase tracking-widest text-left"
-                >
-                   <span>2025 Annual Report</span>
-                   <Download size={14} className="shrink-0" />
-                </button>
-                <button 
-                  onClick={() => handleDownloadReport('2024')}
-                  className="w-full flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all text-xs font-black uppercase tracking-widest text-left"
-                >
-                   <span>2024 Audit Statement</span>
-                   <Download size={14} className="shrink-0" />
-                </button>
+                {aboutInstituteData.annualReports.reports.map(report => (
+                  <button 
+                    key={report.year}
+                    onClick={() => handleDownloadReport(report.year)}
+                    className="w-full flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all text-xs font-black uppercase tracking-widest text-left"
+                  >
+                     <span>{report.label}</span>
+                     <Download size={14} className="shrink-0" />
+                  </button>
+                ))}
              </div>
           </div>
 
@@ -151,26 +143,26 @@ export function AboutInstitute() {
                 <Globe size={18} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Contact</span>
              </div>
-             <h3 className="text-xl font-black text-[#0F172A] dark:text-white uppercase tracking-tight">Institute HQ</h3>
+             <h3 className="text-xl font-black text-[#0F172A] dark:text-white uppercase tracking-tight">{aboutInstituteData.contact.title}</h3>
              <div className="space-y-4 text-xs font-medium text-neutral-600 dark:text-neutral-400">
                 <div className="flex items-start gap-3">
                    <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
-                   <p>Salim Street, CISE Building, Sulaymaniyah, Kurdistan Region, Iraq</p>
+                   <p>{aboutInstituteData.contact.address}</p>
                 </div>
                 <div className="flex items-start gap-3">
                    <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
-                   <p>institute@iraq-china-agency.com</p>
+                   <p>{aboutInstituteData.contact.email}</p>
                 </div>
                 <div className="flex items-start gap-3">
                    <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
-                   <p>+964 (0) 770 123 4567</p>
+                   <p>{aboutInstituteData.contact.phone}</p>
                 </div>
              </div>
              <button 
                onClick={() => setShowInquiryModal(true)}
                className="w-full py-3 mt-4 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-white hover:border-[#0284C7] transition-all"
              >
-                Send Direct Inquiry
+                {aboutInstituteData.contact.cta}
              </button>
           </div>
         </aside>
@@ -201,3 +193,4 @@ export function AboutInstitute() {
     </div>
   );
 }
+

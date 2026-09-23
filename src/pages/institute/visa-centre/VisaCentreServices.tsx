@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Briefcase, Clock, CheckCircle2, ArrowRight, Filter, Search } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -12,7 +12,8 @@ export const VisaCentreServices: React.FC = () => {
   const validLang = (lang as Locale) || 'en';
   const { vt } = useVisaCentreI18n(validLang);
 
-  const services = useVisaCentreStore((s) => s.services.filter((srv) => !srv.deletedAt));
+  const allServices = useVisaCentreStore((s) => s.services);
+  const services = useMemo(() => allServices.filter((srv) => !srv.deletedAt), [allServices]);
 
   const [directionFilter, setDirectionFilter] = useState<'all' | 'iraq-to-china' | 'china-to-iraq' | 'both'>('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,7 +33,7 @@ export const VisaCentreServices: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="services-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Header */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -61,13 +62,13 @@ export const VisaCentreServices: React.FC = () => {
           </div>
 
           {/* Direction Filter */}
-          <div className="flex items-center gap-2 overflow-x-auto">
+          <div className="flex items-center gap-2 overflow-x-auto py-1">
             <button
               type="button"
               onClick={() => setDirectionFilter('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 min-h-[44px] rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 directionFilter === 'all'
-                  ? 'bg-royal text-white'
+                  ? 'bg-royal text-white shadow-sm'
                   : 'border border-border bg-background text-muted-foreground hover:text-foreground'
               }`}
             >
@@ -76,9 +77,9 @@ export const VisaCentreServices: React.FC = () => {
             <button
               type="button"
               onClick={() => setDirectionFilter('iraq-to-china')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 min-h-[44px] rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 directionFilter === 'iraq-to-china'
-                  ? 'bg-royal text-white'
+                  ? 'bg-royal text-white shadow-sm'
                   : 'border border-border bg-background text-muted-foreground hover:text-foreground'
               }`}
             >
@@ -87,9 +88,9 @@ export const VisaCentreServices: React.FC = () => {
             <button
               type="button"
               onClick={() => setDirectionFilter('china-to-iraq')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 min-h-[44px] rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 directionFilter === 'china-to-iraq'
-                  ? 'bg-royal text-white'
+                  ? 'bg-royal text-white shadow-sm'
                   : 'border border-border bg-background text-muted-foreground hover:text-foreground'
               }`}
             >
@@ -155,13 +156,13 @@ export const VisaCentreServices: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <Link
                     to={`/${validLang}/institute/visa-centre/services/${srv.slug}`}
-                    className="font-semibold text-royal hover:underline"
+                    className="font-semibold text-royal hover:underline min-h-[44px] inline-flex items-center px-1"
                   >
                     Details →
                   </Link>
                   <Link
                     to={`/${validLang}/institute/visa-centre/apply?service=${srv.slug}`}
-                    className="px-3 py-1.5 rounded-lg bg-royal hover:bg-royal/90 text-white font-semibold shadow-sm"
+                    className="px-4 py-2 min-h-[44px] rounded-lg bg-royal hover:bg-royal/90 text-white font-semibold shadow-sm inline-flex items-center transition-all active:scale-[0.98]"
                   >
                     Request
                   </Link>
@@ -172,7 +173,9 @@ export const VisaCentreServices: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="services-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="services-footer-disclaimer" />
+      </div>
     </div>
   );
 };

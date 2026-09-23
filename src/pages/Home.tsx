@@ -23,6 +23,7 @@ import { CulturalExchangeSection } from '../components/CulturalExchangeSection';
 import { TourismSection } from '../components/TourismSection';
 import { WomenSection } from '../components/WomenSection';
 import { VisaFlightSection } from '../components/VisaFlightSection';
+import { InitiativesSection } from '../components/InitiativesSection';
 
 
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
@@ -219,96 +220,11 @@ export function Home() {
         </div>
       </div>
 
+      {/* Initiatives Section */}
+      <InitiativesSection lang={lang as Locale} />
+
       {/* Section 1: Full-Scale Upper Trending Carousel with Covers & Navigation Arrows */}
       <section className="w-full p-4 sm:p-6 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 relative overflow-hidden">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center justify-center w-7 h-7 bg-brand-800 text-white rounded-sm">
-              <Flame size={16} className="animate-pulse" />
-            </span>
-            <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-ink-900 dark:text-neutral-100">
-              {t('trending')}
-            </h3>
-            <span className="hidden sm:inline-block text-xs text-gray-500 dark:text-neutral-400 ms-2 bg-gray-50 dark:bg-neutral-800 px-2.5 py-0.5 rounded border border-gray-200 dark:border-neutral-700 font-medium">
-              • {articles.length} {lang === 'ar' ? 'موضوعات شائعة' : lang === 'zh' ? '热门主题' : lang === 'ckb' ? 'بابەتە گەرمەکان' : 'Featured Topics'}
-            </span>
-          </div>
-
-          {/* Navigation Arrows */}
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={() => handleTrendingScroll('left')}
-              className="p-1.5 sm:p-2 rounded bg-white hover:bg-gray-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 cursor-pointer active:scale-95"
-              aria-label="Scroll Left"
-            >
-              <ChevronLeft size={16} className="rtl:rotate-180" />
-            </button>
-            <button
-              onClick={() => handleTrendingScroll('right')}
-              className="p-1.5 sm:p-2 rounded bg-white hover:bg-gray-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-ink-900 dark:text-white transition-colors border border-gray-200 dark:border-neutral-700 cursor-pointer active:scale-95"
-              aria-label="Scroll Right"
-            >
-              <ChevronRight size={16} className="rtl:rotate-180" />
-            </button>
-          </div>
-        </div>
-
-        {/* Scrollable Topic Covers Track */}
-        <div 
-          ref={trendingScrollRef}
-          className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1"
-        >
-          {articles.map((article) => {
-            const tr = getTranslation(article);
-            return (
-              <div 
-                key={`trending-cover-${article.id}`} 
-                onClick={() => navigate(`/${lang}/article/${article.slug}`)}
-                className="group shrink-0 w-[250px] sm:w-[280px] relative rounded-lg transition-all duration-300 hover:border-brand-800 cursor-pointer bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 overflow-hidden flex flex-col justify-between"
-              >
-                  {/* Topic Cover Image */}
-                  <div className="relative w-full h-[150px] sm:h-[160px] bg-gray-100 dark:bg-neutral-700 overflow-hidden border-b border-gray-100 dark:border-neutral-700">
-                    {article.imageUrl ? (
-                      <img 
-                        src={article.imageUrl} 
-                        alt={tr?.title || 'Topic Cover'}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400">
-                        <span className="italic text-xs font-semibold">
-                          {lang === 'ar' ? 'موضوع الوكالة' : lang === 'zh' ? '伊拉克-中国通讯社专题' : lang === 'ckb' ? 'بابەتی ئاژانس' : 'Iraqi-Chinese Agency Topic'}
-                        </span>
-                      </div>
-                    )}
-                    {/* Category Badge - Clean Pill */}
-                    <div className="absolute top-2 start-2 bg-brand-800 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded tracking-wider shadow-xs">
-                      {getCategoryName(article.category)}
-                    </div>
-                  </div>
-
-                  {/* Topic Info */}
-                  <div className="p-3.5 flex flex-col justify-between flex-grow space-y-2.5">
-                    <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-900 dark:text-neutral-100 transition-colors line-clamp-2 leading-snug group-hover:text-brand-800 dark:group-hover:text-brand-400">
-                      {tr?.title}
-                    </h4>
-                    <p className="text-[11px] font-normal uppercase tracking-wider text-gray-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
-                      {tr?.excerpt}
-                    </p>
-                    {/* Footer */}
-                    <div className="flex items-center justify-between text-[11px] font-medium text-gray-500 dark:text-neutral-400 pt-2.5 border-t border-gray-100 dark:border-neutral-800">
-                      <span className="flex items-center gap-1 uppercase tracking-wider">
-                        <Clock size={12} className="shrink-0" />
-                        {formatTimeAgo(article.createdAt)}
-                      </span>
-                      <span className="text-brand-800 dark:text-brand-400 font-bold group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
-                    </div>
-                  </div>
-              </div>
-            );
-          })}
-        </div>
       </section>
 
       {/* Lead Story & Popular Stories 2-Column Grid */}
@@ -1032,8 +948,6 @@ export function Home() {
           </div>
         </div>
       )}
-
-
 
     </div>
   );

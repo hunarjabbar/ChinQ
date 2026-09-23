@@ -12,7 +12,14 @@ interface BuildInfo {
 }
 
 export function DevBuildInfoBadge() {
+  // Never render dev badge in production or preview environments
+  // In Vite, import.meta.env.MODE is the standard way to check environment
+  if ((import.meta as any).env?.MODE === 'production' || (import.meta as any).env?.PROD) {
+    return null;
+  }
+
   const [buildInfo, setBuildInfo] = useState<BuildInfo | null>(null);
+
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {

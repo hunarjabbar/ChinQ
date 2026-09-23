@@ -538,3 +538,261 @@ html.dark body {
   background-size: 200% 100%;
   animation: shimmer 1.6s infinite linear;
 }
+
+/* Initiatives Section Card Styling */
+section#initiatives .initiative-card,
+section#initiatives div.grid > div,
+div#root:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > section#initiatives:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  -webkit-line-clamp: none;
+  max-height: none;
+  height: auto;
+  overflow: visible;
+}
+
+section#initiatives .initiative-card p,
+section#initiatives div.grid > div p,
+div#root:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > section#initiatives:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) p {
+  -webkit-line-clamp: none;
+  max-height: none;
+  height: auto;
+  overflow: visible;
+}
+
+section#initiatives .initiative-card:hover,
+section#initiatives div.grid > div:hover,
+div#root:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > section#initiatives:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2):hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand-800);
+  box-shadow: 0 0 0 1px var(--color-brand-800),
+              0 0 16px -1px color-mix(in srgb, var(--color-brand-800) 35%, transparent),
+              0 12px 24px -4px rgba(15, 23, 42, 0.08);
+}
+
+.dark section#initiatives .initiative-card:hover,
+.dark section#initiatives div.grid > div:hover {
+  border-color: var(--color-brand-800);
+  box-shadow: 0 0 0 1px var(--color-brand-800),
+              0 0 20px 0 color-mix(in srgb, var(--color-brand-800) 45%, transparent),
+              0 14px 28px -4px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section#initiatives .initiative-card,
+  section#initiatives div.grid > div,
+  div#root:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > section#initiatives:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) {
+    transition: none;
+  }
+  section#initiatives .initiative-card:hover,
+  section#initiatives div.grid > div:hover,
+  div#root:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > section#initiatives:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2):hover {
+    transform: none;
+    box-shadow: 0 0 0 1px var(--color-brand-800),
+                0 0 16px -1px color-mix(in srgb, var(--color-brand-800) 35%, transparent);
+  }
+}
+
+/* =====================================================
+   CANONICAL CONTAINER & VISA CENTRE ALIGNMENT SYSTEM
+   ===================================================== */
+
+.page-container {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+}
+
+.site-header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+
+.breadcrumb__item {
+  min-width: 0;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms ease, color 160ms ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.dark .tab {
+  color: #94a3b8;
+}
+
+.tab:hover {
+  color: var(--color-royal);
+}
+
+.dark .tab:hover {
+  color: #38bdf8;
+}
+
+.tab[aria-selected="true"],
+.tab[aria-current="page"] {
+  color: var(--color-navy);
+  font-weight: 600;
+  border-bottom-color: var(--color-royal);
+}
+
+.dark .tab[aria-selected="true"],
+.dark .tab[aria-current="page"] {
+  color: #f8fafc;
+  border-bottom-color: var(--color-royal);
+}
+
+.tab:active {
+  transform: scale(0.98);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-royal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .tab {
+    flex-shrink: 0;
+  }
+}
+
+.disclaimer-bar {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.disclaimer-bar__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.disclaimer-bar__action {
+  flex: 0 0 auto;
+}
+
+.hero-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(24px, 4vw, 40px);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.dark .hero-card {
+  background: #111827;
+  border-color: #1e293b;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dark .category-card {
+  background: #111827;
+  border-color: #1e293b;
+}
+
+.category-card__cta {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.policy-strip {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.dark .policy-strip {
+  background: #111827;
+  border-color: #1e293b;
+}
+
+/* BiDi Punctuation & Paragraph Alignment */
+p, .bidi-text {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+

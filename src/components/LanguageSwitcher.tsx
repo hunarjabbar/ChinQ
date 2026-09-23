@@ -54,7 +54,7 @@ export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Switch language"
-        className="h-9 sm:h-10 flex items-center gap-2 px-3 sm:px-3.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-neutral-300 hover:text-white transition-all group focus-visible:ring-2 focus-visible:ring-[#D97706]"
+        className="h-11 flex items-center gap-2 px-3 sm:px-3.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-neutral-300 hover:text-white transition-all group focus-visible:ring-2 focus-visible:ring-[#D97706]"
       >
         <Globe size={15} className="text-[#D97706] shrink-0" />
         <span className="text-[10px] font-black uppercase tracking-widest text-white">{currentLang.code}</span>
@@ -153,7 +153,7 @@ export function FloatingLanguageSwitcher({ lang: propLang }: LanguageSwitcherPro
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="relative flex items-center gap-2 bg-white/95 dark:bg-neutral-900/95 hover:bg-white dark:hover:bg-neutral-900 border border-brand-800/40 dark:border-brand-500/40 px-3 py-1.5 transition-all cursor-pointer rounded-xl shadow-md text-brand-900 dark:text-neutral-100"
+          className="relative flex items-center gap-2 bg-white/95 dark:bg-neutral-900/95 hover:bg-white dark:hover:bg-neutral-900 border border-brand-800/40 dark:border-brand-500/40 px-3 py-2.5 transition-all cursor-pointer rounded-xl shadow-md text-brand-900 dark:text-neutral-100 min-h-[44px]"
         >
           <span className="text-sm">{currentLangObj.flag}</span>
           <Globe className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400 shrink-0" />

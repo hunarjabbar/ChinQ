@@ -36,7 +36,7 @@ export const VisaCentreServiceDetail: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="service-detail-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-5xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Back link */}
         <Link
           to={`/${validLang}/institute/visa-centre/services`}
@@ -129,7 +129,9 @@ export const VisaCentreServiceDetail: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="service-detail-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="service-detail-footer-disclaimer" />
+      </div>
     </div>
   );
 };

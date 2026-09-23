@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Bell, Calendar, Tag, ArrowRight, ShieldAlert, Filter } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -12,7 +12,8 @@ export const VisaCentreNews: React.FC = () => {
   const validLang = (lang as Locale) || 'en';
   const { vt } = useVisaCentreI18n(validLang);
 
-  const announcements = useVisaCentreStore((s) => s.announcements.filter((a) => !a.deletedAt));
+  const allAnnouncements = useVisaCentreStore((s) => s.announcements);
+  const announcements = useMemo(() => allAnnouncements.filter((a) => !a.deletedAt), [allAnnouncements]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredAnnouncements = announcements.filter((a) => {
@@ -25,7 +26,7 @@ export const VisaCentreNews: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="news-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-5xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -94,7 +95,9 @@ export const VisaCentreNews: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="news-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="news-footer-disclaimer" />
+      </div>
     </div>
   );
 };

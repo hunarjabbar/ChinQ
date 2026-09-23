@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { FileCheck, ShieldCheck, Lock, AlertCircle, CheckCircle2, ArrowRight, Printer } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -16,8 +16,10 @@ export const VisaCentreApply: React.FC = () => {
   const prefilledService = searchParams.get('service') || '';
   const prefilledCategory = searchParams.get('category') || 'M';
 
-  const services = useVisaCentreStore((s) => s.services.filter((srv) => !srv.deletedAt));
-  const visaCategories = useVisaCentreStore((s) => s.visaCategories.filter((c) => !c.deletedAt));
+  const allServices = useVisaCentreStore((s) => s.services);
+  const services = useMemo(() => allServices.filter((srv) => !srv.deletedAt), [allServices]);
+  const allVisaCategories = useVisaCentreStore((s) => s.visaCategories);
+  const visaCategories = useMemo(() => allVisaCategories.filter((c) => !c.deletedAt), [allVisaCategories]);
   const submitApplication = useVisaCentreStore((s) => s.submitApplication);
 
   // Form State
@@ -104,7 +106,7 @@ export const VisaCentreApply: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="apply-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -178,7 +180,7 @@ export const VisaCentreApply: React.FC = () => {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card hover:bg-muted text-xs font-semibold text-foreground"
+                className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl border border-border bg-card hover:bg-muted text-xs font-semibold text-foreground transition-all"
               >
                 <Printer className="w-3.5 h-3.5" />
                 Print Submission Receipt
@@ -186,7 +188,7 @@ export const VisaCentreApply: React.FC = () => {
 
               <Link
                 to={`/${validLang}/institute/visa-centre/track`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold shadow-sm transition-all"
               >
                 <span>Track Application in Real Time</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -450,7 +452,7 @@ export const VisaCentreApply: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-8 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs md:text-sm shadow-sm transition-all"
+                className="px-8 py-3 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs md:text-sm shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
               >
                 {isSubmitting ? 'Registering Dossier...' : 'Submit Application Dossier'}
               </button>
@@ -459,7 +461,9 @@ export const VisaCentreApply: React.FC = () => {
         )}
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="apply-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="apply-footer-disclaimer" />
+      </div>
     </div>
   );
 };

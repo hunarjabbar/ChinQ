@@ -32,7 +32,7 @@ export const VisaCentreContact: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="contact-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-12 w-full">
+      <main className="page-container flex-1 py-10 space-y-12">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -195,7 +195,7 @@ export const VisaCentreContact: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs inline-flex items-center gap-2 shadow-sm"
+                    className="px-8 py-3 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs inline-flex items-center gap-2 shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Send Message</span>
@@ -270,7 +270,9 @@ export const VisaCentreContact: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="contact-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="contact-footer-disclaimer" />
+      </div>
     </div>
   );
 };

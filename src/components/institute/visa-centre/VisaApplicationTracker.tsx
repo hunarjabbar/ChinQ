@@ -145,12 +145,12 @@ export const VisaApplicationTracker: React.FC<VisaApplicationTrackerProps> = ({
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Quick Demo Pre-fill Links */}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground overflow-x-auto">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground overflow-x-auto py-1">
             <span className="font-semibold">{lang === 'zh' ? '测试样例:' : lang === 'ar' ? 'أمثلة تجريبية:' : 'Quick Test:'}</span>
             <button
               type="button"
               onClick={() => setSampleRecord('VC-2026-481920', 'ahmed.bayati@cises-demo.iq')}
-              className="text-royal hover:underline underline-offset-2 shrink-0"
+              className="text-royal hover:underline underline-offset-2 shrink-0 min-h-[44px] px-1 inline-flex items-center"
             >
               VC-2026-481920 (Bayati)
             </button>
@@ -158,7 +158,7 @@ export const VisaApplicationTracker: React.FC<VisaApplicationTrackerProps> = ({
             <button
               type="button"
               onClick={() => setSampleRecord('VC-2026-729410', 'zhang.wei@sinoroads-erbil.cn')}
-              className="text-royal hover:underline underline-offset-2 shrink-0"
+              className="text-royal hover:underline underline-offset-2 shrink-0 min-h-[44px] px-1 inline-flex items-center"
             >
               VC-2026-729410 (Zhang)
             </button>
@@ -166,7 +166,7 @@ export const VisaApplicationTracker: React.FC<VisaApplicationTrackerProps> = ({
 
           <button
             type="submit"
-            className="px-6 py-2.5 rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow-sm transition-all"
+            className="min-h-[44px] px-6 py-2.5 rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
           >
             <Search className="w-4 h-4" />
             {vt('trackStatusBtn')}

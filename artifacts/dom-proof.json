@@ -1,0 +1,175 @@
+{
+  "en": {
+    "heading": "Our Initiatives",
+    "subheading": "Exploring our strategic bilateral pathways.",
+    "cards": [
+      {
+        "eyebrow": "Annual Convening · Sulaymaniyah",
+        "headline": "Iraq-China Economic Summit & Bilateral Expo",
+        "body": "The summit is a dual-format event—a high-level policy summit alongside a sector-wide bilateral expo facilitating every sector of the Iraqi and Chinese economies.",
+        "bodyLength": 161,
+        "cta": "Learn more",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "334px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "Chinese Language Tutoring · Sulaymaniyah",
+        "headline": "Chinese Centre",
+        "body": "The centre is the first internationally aligned Chinese language tutoring centre in Sulaymaniyah, delivering the standard HSK curriculum, testing, and verifiable certification.",
+        "bodyLength": 176,
+        "cta": "Learn more",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "334px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "Bilateral Visa Consultancy & Facilitation",
+        "headline": "Visa Centre",
+        "body": "The centre is an independent advisory service providing documented, compliant, and up-to-date guidance for Iraq–China visa applications in both directions.",
+        "bodyLength": 155,
+        "cta": "Learn more",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "334px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  "ar": {
+    "heading": "مبادراتنا",
+    "subheading": "استكشاف مساراتنا الثنائية الاستراتيجية.",
+    "cards": [
+      {
+        "eyebrow": "اللقاء السنوي · السليمانية",
+        "headline": "القمة الاقتصادية والمعرض الثنائي بين العراق والصين",
+        "body": "القمة حدث مزدوج الصيغة يجمع بين قمة رفيعة المستوى لصناع السياسات ومعرض ثنائي شامل يغطي كافة قطاعات الاقتصادين العراقي والصيني.",
+        "bodyLength": 126,
+        "cta": "اعرف المزيد",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "286px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "تعليم اللغة الصينية · السليمانية",
+        "headline": "المركز الصيني",
+        "body": "أول مركز لتدريس اللغة الصينية بمعايير دولية في السليمانية، يقدم مناهج HSK واختبارات قياسية وشهادات معتمدة وقابلة للتحقق.",
+        "bodyLength": 120,
+        "cta": "اعرف المزيد",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "286px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "استشارات وتسهيل التأشيرات الثنائية",
+        "headline": "مركز التأشيرات",
+        "body": "خدمة استشارية مستقلة تقدم إرشادات موثقة ومحدثة ومتوافقة مع الأنظمة لطلبات التأشيرات بين العراق والصين في الاتجاهين.",
+        "bodyLength": 115,
+        "cta": "اعرف المزيد",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "286px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  "zh": {
+    "heading": "重点倡议与项目",
+    "subheading": "探索中伊双边战略合作主通道。",
+    "cards": [
+      {
+        "eyebrow": "年度峰会 · 苏莱曼尼亚",
+        "headline": "伊拉克-中国经济峰会暨双边博览会",
+        "body": "峰会采用双轨模式——高规格宏观政策峰会与全产业链双边博览会并举，全面赋能伊拉克与中国两国的全方位经济合作。",
+        "bodyLength": 53,
+        "cta": "了解更多",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "258px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "中文教育与汉考培训 · 苏莱曼尼亚",
+        "headline": "中文中心",
+        "body": "苏莱曼尼亚首家与国际标准接轨的中文教学与HSK考培中心，提供标准HSK课程体系、考务辅导与官方防伪资质认证。",
+        "bodyLength": 54,
+        "cta": "了解更多",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "258px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "双边赴华赴伊签证咨询与赋能",
+        "headline": "签证咨询中心",
+        "body": "独立专业咨询服务平台，为伊拉克与中国双向往来签证申请提供规范完备、政策合规、实时更新的一站式材料指导。",
+        "bodyLength": 51,
+        "cta": "了解更多",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "258px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  "ck": {
+    "heading": "دەستپێشخەرییەکانمان",
+    "subheading": "گەڕان بەدوای ڕێڕەوە ستراتیژییە دووقۆڵییەکانمان.",
+    "cards": [
+      {
+        "eyebrow": "کۆبوونەوەی ساڵانە · سلێمانی",
+        "headline": "لووتکەی ئابووری عێراق-چین و پێشانگای دوولایەنە",
+        "body": "لووتکەکە ڕووداوێکی دوو شێوازەیە—لووتکەیەکی باڵای داڕشتنی سیاسەت لەگەڵ پێشانگایەکی دووقۆڵی فراوان کە دەرفەت بۆ تەواوی کەرتەکانی ئابووری عێراق و چین دەڕەخسێنێت.",
+        "bodyLength": 158,
+        "cta": "زیاتر بزانە",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "310px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "فێرکردنی زمانی چینی · سلێمانی",
+        "headline": "سەنتەری چینی",
+        "body": "یەکەمین سەنتەری وانەوتنەوەی زمانی چینییە بەپێی ستانداردە نێودەوڵەتییەکان لە سلێمانی، پێشکەشکردنی پڕۆگرامی HSK، تاقیکردنەوە و بڕوانامەی باوەڕپێکراو.",
+        "bodyLength": 147,
+        "cta": "زیاتر بزانە",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "310px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      },
+      {
+        "eyebrow": "ڕاوێژکاری و ئاسانکاری ڤیزای دووقۆڵی",
+        "headline": "سەنتەری ڤیزا",
+        "body": "خزمەتگوزارییەکی ڕاوێژکاری سەربەخۆیە کە ڕێنمایی بەڵگەدار، یاسایی و نوێکراوە بۆ داواکارییەکانی ڤیزای نێوان عێراق و چین لە هەردوو ئاراستەدا پێشکەش دەکات.",
+        "bodyLength": 150,
+        "cta": "زیاتر بزانە",
+        "lineClamp": "none",
+        "maxHeight": "none",
+        "height": "310px",
+        "border": "1px solid rgb(226, 232, 240)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  "hoverGlow": {
+    "borderColor": "color(srgb 0.830196 0.318431 0.329412)",
+    "boxShadow": "color(srgb 0.8 0 0 / 0.4) 0px 0px 0px 1px, color(srgb 0.8 0 0 / 0.25) 0px 0px 18px -2px, rgba(15, 23, 42, 0.08) 0px 12px 24px -4px",
+    "transform": "matrix(1, 0, 0, 1, 0, -2)"
+  }
+}

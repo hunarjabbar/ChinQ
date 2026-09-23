@@ -16,7 +16,7 @@ export const VisaCentreDisclaimer: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="disclaimer-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-10 space-y-10 w-full">
+      <main className="page-container flex-1 py-10 space-y-10">
         {/* Back Link */}
         <Link
           to={`/${validLang}/institute/visa-centre`}
@@ -121,7 +121,9 @@ export const VisaCentreDisclaimer: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="disclaimer-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="disclaimer-footer-disclaimer" />
+      </div>
     </div>
   );
 };

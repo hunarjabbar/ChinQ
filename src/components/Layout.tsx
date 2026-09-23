@@ -67,6 +67,18 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
           {/* Top Section: Grid layout for columns */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-neutral-100 dark:border-neutral-800">
             
+            {/* Initiatives Column */}
+            <div className="md:col-span-3 space-y-4">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+                {t('footer.initiativesHeading')}
+              </h4>
+              <div className="flex flex-col gap-2.5">
+                <Link to={`/${lang}/summit`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.summit')}</Link>
+                <Link to={`/${lang}/chinese-center`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.chineseCenter')}</Link>
+                <Link to={`/${lang}/visa-centre`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.visaCentre')}</Link>
+              </div>
+            </div>
+
             {/* Institute Column */}
             <div className="md:col-span-3 space-y-4">
               <h4 className="text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">

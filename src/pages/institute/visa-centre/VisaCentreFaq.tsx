@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { HelpCircle, ChevronDown, ChevronUp, Search, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -12,7 +12,8 @@ export const VisaCentreFaq: React.FC = () => {
   const validLang = (lang as Locale) || 'en';
   const { vt } = useVisaCentreI18n(validLang);
 
-  const faqs = useVisaCentreStore((s) => s.faqs.filter((f) => !f.deletedAt));
+  const allFaqs = useVisaCentreStore((s) => s.faqs);
+  const faqs = useMemo(() => allFaqs.filter((f) => !f.deletedAt), [allFaqs]);
   const [searchTerm, setSearchTerm] = useState('');
   const [openIds, setOpenIds] = useState<Record<string, boolean>>({ [faqs[0]?.id]: true });
 
@@ -31,7 +32,7 @@ export const VisaCentreFaq: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="faq-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -112,7 +113,9 @@ export const VisaCentreFaq: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="faq-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="faq-footer-disclaimer" />
+      </div>
     </div>
   );
 };

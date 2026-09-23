@@ -17,7 +17,7 @@ export const VisaCentreProcess: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="process-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-12 w-full">
+      <main className="page-container flex-1 py-10 space-y-12">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -90,14 +90,16 @@ export const VisaCentreProcess: React.FC = () => {
           </div>
           <Link
             to={`/${validLang}/institute/visa-centre/apply`}
-            className="px-5 py-2.5 rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold shrink-0"
+            className="px-6 py-3 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white text-xs font-semibold shrink-0 inline-flex items-center transition-all shadow-sm active:scale-[0.98]"
           >
             {vt('requestServiceBtn')}
           </Link>
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="process-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="process-footer-disclaimer" />
+      </div>
     </div>
   );
 };

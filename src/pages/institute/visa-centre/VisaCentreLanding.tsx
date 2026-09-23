@@ -29,10 +29,15 @@ export const VisaCentreLanding: React.FC = () => {
   const validLang = (lang as Locale) || 'en';
   const { vt } = useVisaCentreI18n(validLang);
 
-  const visaCategories = useVisaCentreStore((s) => s.visaCategories.filter((c) => !c.deletedAt));
-  const services = useVisaCentreStore((s) => s.services.filter((srv) => !srv.deletedAt));
-  const announcements = useVisaCentreStore((s) => s.announcements.filter((a) => !a.deletedAt));
-  const faqs = useVisaCentreStore((s) => s.faqs.filter((f) => !f.deletedAt).slice(0, 4));
+  const allVisaCategories = useVisaCentreStore((s) => s.visaCategories);
+  const allServices = useVisaCentreStore((s) => s.services);
+  const allAnnouncements = useVisaCentreStore((s) => s.announcements);
+  const allFaqs = useVisaCentreStore((s) => s.faqs);
+
+  const visaCategories = React.useMemo(() => allVisaCategories.filter((c) => !c.deletedAt), [allVisaCategories]);
+  const services = React.useMemo(() => allServices.filter((srv) => !srv.deletedAt), [allServices]);
+  const announcements = React.useMemo(() => allAnnouncements.filter((a) => !a.deletedAt), [allAnnouncements]);
+  const faqs = React.useMemo(() => allFaqs.filter((f) => !f.deletedAt).slice(0, 4), [allFaqs]);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -42,11 +47,11 @@ export const VisaCentreLanding: React.FC = () => {
       {/* Nav Header */}
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 space-y-16 py-8">
+      <main className="flex-1 space-y-12 py-8">
         {/* Hero Section */}
-        <section className="max-w-7xl mx-auto px-4">
-          <div className="p-8 md:p-12 rounded-3xl border border-border bg-gradient-to-br from-card via-card to-muted/30 shadow-sm space-y-8 relative overflow-hidden">
-            <div className="max-w-3xl space-y-4">
+        <section className="page-container">
+          <div className="hero-card space-y-8 relative overflow-hidden shadow-sm">
+            <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
                 <ShieldCheck className="w-4 h-4" />
                 <span>{vt('heroBadge')}</span>
@@ -54,7 +59,7 @@ export const VisaCentreLanding: React.FC = () => {
               <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
                 {vt('heroTitle')}
               </h1>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 {vt('positioningStatement')}
               </p>
             </div>
@@ -63,21 +68,21 @@ export const VisaCentreLanding: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 to={`/${validLang}/institute/visa-centre/apply`}
-                className="px-6 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm transition-all"
+                className="min-h-[44px] px-6 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-white active:scale-[0.98]"
               >
                 <FileCheck className="w-4 h-4" />
                 {vt('requestServiceBtn')}
               </Link>
               <Link
                 to={`/${validLang}/institute/visa-centre/appointments`}
-                className="px-5 py-3 rounded-xl border border-border bg-card hover:bg-muted font-semibold text-sm text-foreground inline-flex items-center gap-2 transition-all"
+                className="min-h-[44px] px-5 py-3 rounded-xl border border-border bg-card hover:bg-muted font-semibold text-sm text-foreground inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
               >
                 <Calendar className="w-4 h-4 text-royal" />
                 {vt('bookAppointmentBtn')}
               </Link>
               <Link
                 to={`/${validLang}/institute/visa-centre/track`}
-                className="px-5 py-3 rounded-xl border border-royal/20 bg-royal/5 hover:bg-royal/10 text-royal font-semibold text-sm inline-flex items-center gap-2 transition-all"
+                className="min-h-[44px] px-5 py-3 rounded-xl border border-royal/20 bg-royal/5 hover:bg-royal/10 text-royal font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
               >
                 {vt('trackStatusBtn')} →
               </Link>
@@ -107,9 +112,9 @@ export const VisaCentreLanding: React.FC = () => {
 
         {/* Announcements Bar */}
         {announcements.length > 0 && (
-          <section className="max-w-7xl mx-auto px-4">
-            <div className="p-4 rounded-xl border border-royal/20 bg-royal/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2.5">
+          <section className="page-container">
+            <div className="policy-strip text-xs">
+              <div className="flex items-center gap-2.5 flex-wrap">
                 <span className="px-2 py-0.5 rounded bg-royal text-white font-bold text-[10px] uppercase">
                   {announcements[0].category.toUpperCase()}
                 </span>
@@ -119,7 +124,7 @@ export const VisaCentreLanding: React.FC = () => {
               </div>
               <Link
                 to={`/${validLang}/institute/visa-centre/news`}
-                className="text-royal font-semibold hover:underline inline-flex items-center gap-1 shrink-0"
+                className="text-royal font-semibold hover:underline inline-flex items-center min-h-[44px] px-2 py-1 gap-1 shrink-0 focus-visible:outline-2 focus-visible:outline-royal"
               >
                 {vt('navNews')} →
               </Link>
@@ -128,7 +133,7 @@ export const VisaCentreLanding: React.FC = () => {
         )}
 
         {/* Featured Visa Types Reference Library */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
@@ -140,18 +145,18 @@ export const VisaCentreLanding: React.FC = () => {
             </div>
             <Link
               to={`/${validLang}/institute/visa-centre/visa-types`}
-              className="text-xs font-semibold text-royal hover:underline inline-flex items-center gap-1"
+              className="text-xs font-semibold text-royal hover:underline inline-flex items-center min-h-[44px] px-2 py-1 gap-1 focus-visible:outline-2 focus-visible:outline-royal"
             >
               {vt('navVisaTypes')} ({visaCategories.length} categories) →
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="category-grid">
             {visaCategories.slice(0, 6).map((cat) => (
               <Link
                 key={cat.id}
                 to={`/${validLang}/institute/visa-centre/visa-types/${cat.direction === 'iraq-to-china' ? 'china' : 'iraq'}/${cat.category.toLowerCase()}`}
-                className="p-5 rounded-2xl border border-border bg-card hover:border-royal/40 transition-all space-y-3 flex flex-col justify-between group shadow-sm"
+                className="category-card group hover:border-royal/40 transition-all shadow-sm focus-visible:outline-2 focus-visible:outline-royal"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -170,7 +175,7 @@ export const VisaCentreLanding: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
+                <div className="category-card__cta border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-royal" />
                     {cat.processingTimeStandard}
@@ -185,7 +190,7 @@ export const VisaCentreLanding: React.FC = () => {
         </section>
 
         {/* Services Catalogue Preview */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
@@ -197,17 +202,17 @@ export const VisaCentreLanding: React.FC = () => {
             </div>
             <Link
               to={`/${validLang}/institute/visa-centre/services`}
-              className="text-xs font-semibold text-royal hover:underline inline-flex items-center gap-1"
+              className="text-xs font-semibold text-royal hover:underline inline-flex items-center min-h-[44px] px-2 py-1 gap-1 focus-visible:outline-2 focus-visible:outline-royal"
             >
               {vt('navServices')} →
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="category-grid">
             {services.map((srv) => (
               <div
                 key={srv.id}
-                className="p-6 rounded-2xl border border-border bg-card space-y-4 flex flex-col justify-between"
+                className="category-card justify-between"
               >
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
@@ -226,16 +231,16 @@ export const VisaCentreLanding: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-border flex items-center justify-between">
+                <div className="category-card__cta border-t border-border flex items-center justify-between">
                   <Link
                     to={`/${validLang}/institute/visa-centre/services/${srv.slug}`}
-                    className="text-xs font-semibold text-royal hover:underline"
+                    className="text-xs font-semibold text-royal hover:underline inline-flex items-center min-h-[44px] px-2 py-1 focus-visible:outline-2 focus-visible:outline-royal"
                   >
                     View Service Details →
                   </Link>
                   <Link
                     to={`/${validLang}/institute/visa-centre/apply?service=${srv.slug}`}
-                    className="px-3 py-1.5 rounded-lg bg-royal hover:bg-royal/90 text-white text-xs font-semibold"
+                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-lg bg-royal hover:bg-royal/90 text-white text-xs font-semibold focus-visible:outline-2 focus-visible:outline-white active:scale-[0.98]"
                   >
                     Request
                   </Link>
@@ -246,7 +251,7 @@ export const VisaCentreLanding: React.FC = () => {
         </section>
 
         {/* Process Diagram Section */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight text-foreground">
               {vt('processTitle')}
@@ -259,17 +264,17 @@ export const VisaCentreLanding: React.FC = () => {
         </section>
 
         {/* Interactive Checklist Builder */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <VisaChecklistBuilder lang={validLang} />
         </section>
 
         {/* Live Application Tracker */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <VisaApplicationTracker lang={validLang} />
         </section>
 
         {/* FAQ Section */}
-        <section className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="page-container space-y-6">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
@@ -281,7 +286,7 @@ export const VisaCentreLanding: React.FC = () => {
             </div>
             <Link
               to={`/${validLang}/institute/visa-centre/faq`}
-              className="text-xs font-semibold text-royal hover:underline"
+              className="text-xs font-semibold text-royal hover:underline inline-flex items-center min-h-[44px] px-2 py-1 focus-visible:outline-2 focus-visible:outline-royal"
             >
               {vt('navFaq')} →
             </Link>
@@ -309,7 +314,9 @@ export const VisaCentreLanding: React.FC = () => {
       </main>
 
       {/* Footer Disclaimer */}
-      <VisaDisclaimer lang={validLang} variant="card" id="landing-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="landing-footer-disclaimer" />
+      </div>
     </div>
   );
 };

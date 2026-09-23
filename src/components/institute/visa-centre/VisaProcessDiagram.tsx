@@ -102,7 +102,7 @@ export const VisaProcessDiagram: React.FC<VisaProcessDiagramProps> = ({
         <button
           type="button"
           onClick={() => setDirection('iraq-to-china')}
-          className={`px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all ${
+          className={`px-4 py-2 min-h-[44px] rounded-lg text-xs md:text-sm font-semibold transition-all ${
             direction === 'iraq-to-china'
               ? 'bg-royal text-white shadow-sm'
               : 'border border-border bg-card text-muted-foreground hover:text-foreground'
@@ -113,7 +113,7 @@ export const VisaProcessDiagram: React.FC<VisaProcessDiagramProps> = ({
         <button
           type="button"
           onClick={() => setDirection('china-to-iraq')}
-          className={`px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all ${
+          className={`px-4 py-2 min-h-[44px] rounded-lg text-xs md:text-sm font-semibold transition-all ${
             direction === 'china-to-iraq'
               ? 'bg-royal text-white shadow-sm'
               : 'border border-border bg-card text-muted-foreground hover:text-foreground'

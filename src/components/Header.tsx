@@ -2,7 +2,7 @@ import { Locale, Article } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Coins, X, Clock, ChevronRight, Search, Shield, QrCode, Smartphone, GraduationCap } from 'lucide-react';
+import { Sun, Moon, Coins, X, Clock, ChevronRight, ChevronDown, Search, Shield, QrCode, Smartphone, GraduationCap } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { FloatingLanguageSwitcher } from './LanguageSwitcher';
 import { SocialHeaderBar } from './SocialLinks';
@@ -382,7 +382,19 @@ export function Header({ lang }: { lang: Locale }) {
             <LiveDispatch lang={lang} />
           </div>
           <div className="flex-1 z-40 flex items-center px-3 sm:px-6 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-2.5 sm:gap-4 ml-auto justify-end min-w-0 flex-wrap sm:flex-nowrap py-1">
-             <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
+             {/* Initiatives Dropdown */}
+     <div className="relative group h-full flex items-center">
+       <button className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
+         {t('nav.initiatives')} <ChevronDown size={14} />
+       </button>
+       <div className="absolute top-full right-0 rtl:right-auto rtl:left-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md w-60 py-2 hidden group-hover:block z-50">
+         <Link to={`/${lang}/summit`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.summit')}</Link>
+         <Link to={`/${lang}/institute/chinese-center`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.chineseCenter')}</Link>
+         <Link to={`/${lang}/institute/visa-centre`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.visaCentre')}</Link>
+       </div>
+     </div>
+
+     <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
                {lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارە' : 'About'}
              </Link>
              <InstitutePortalCTA lang={lang!} variant="navItem" className="hidden lg:flex" />

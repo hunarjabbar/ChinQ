@@ -16,7 +16,7 @@ export const VisaCentreAbout: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="about-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-5xl mx-auto px-4 py-12 space-y-12">
+      <main className="page-container flex-1 py-12 space-y-12">
         {/* Title Header */}
         <div className="space-y-4 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -130,7 +130,9 @@ export const VisaCentreAbout: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="about-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="about-footer-disclaimer" />
+      </div>
     </div>
   );
 };

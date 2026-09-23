@@ -17,7 +17,7 @@ export const VisaCentreRequirements: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="req-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-10 w-full">
+      <main className="page-container flex-1 py-10 space-y-10">
         {/* Header */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -87,7 +87,9 @@ export const VisaCentreRequirements: React.FC = () => {
         <VisaChecklistBuilder lang={validLang} id="page-checklist-builder" />
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="req-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="req-footer-disclaimer" />
+      </div>
     </div>
   );
 };

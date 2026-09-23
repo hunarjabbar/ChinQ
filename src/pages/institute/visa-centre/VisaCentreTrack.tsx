@@ -19,7 +19,7 @@ export const VisaCentreTrack: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="track-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-10 space-y-10 w-full">
+      <main className="page-container flex-1 py-10 space-y-10">
         {/* Header */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -49,7 +49,9 @@ export const VisaCentreTrack: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="track-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="track-footer-disclaimer" />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BookOpen, ExternalLink, Clock, ArrowRight, ShieldCheck, FileText } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -12,7 +12,8 @@ export const VisaCentreTypes: React.FC = () => {
   const validLang = (lang as Locale) || 'en';
   const { vt } = useVisaCentreI18n(validLang);
 
-  const visaCategories = useVisaCentreStore((s) => s.visaCategories.filter((c) => !c.deletedAt));
+  const allVisaCategories = useVisaCentreStore((s) => s.visaCategories);
+  const visaCategories = useMemo(() => allVisaCategories.filter((c) => !c.deletedAt), [allVisaCategories]);
   const [selectedDirection, setSelectedDirection] = useState<'all' | 'iraq-to-china' | 'china-to-iraq'>('all');
 
   const filteredCategories = visaCategories.filter((cat) => {
@@ -25,7 +26,7 @@ export const VisaCentreTypes: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="types-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -189,7 +190,9 @@ export const VisaCentreTypes: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="types-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="types-footer-disclaimer" />
+      </div>
     </div>
   );
 };

@@ -168,7 +168,7 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background hover:bg-muted text-xs font-semibold text-foreground transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-lg border border-border bg-background hover:bg-muted text-xs font-semibold text-foreground transition-colors"
           >
             <Printer className="w-3.5 h-3.5" />
             {vt('printDossierBtn')}
@@ -186,7 +186,7 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
           <select
             value={direction}
             onChange={(e) => setDirection(e.target.value as any)}
-            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
+            className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
           >
             <option value="iraq-to-china">{vt('dirIraqToChina')}</option>
             <option value="china-to-iraq">{vt('dirChinaToIraq')}</option>
@@ -201,7 +201,7 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as any)}
-            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
+            className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
           >
             <option value="business">{lang === 'zh' ? '商务贸易 (M / Commercial)' : lang === 'ar' ? 'تجارة وأعمال (M / تجاري)' : lang === 'ckb' ? 'بازرگانی (M)' : 'Commercial & Business (M)'}</option>
             <option value="tourist">{lang === 'zh' ? '旅游休闲 (L / Tourist)' : lang === 'ar' ? 'سياحة وزيارة (L / سياحي)' : lang === 'ckb' ? 'گەشتیاری (L)' : 'Tourism & Sightseeing (L)'}</option>
@@ -218,7 +218,7 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
           <select
             value={applicantType}
             onChange={(e) => setApplicantType(e.target.value as any)}
-            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
+            className="w-full px-3 py-2.5 min-h-[44px] rounded-lg border border-border bg-background text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-royal"
           >
             <option value="corporate">{lang === 'zh' ? '企业在职员工/高管' : lang === 'ar' ? 'موظف أو مدير تنفيذي بشركة' : lang === 'ckb' ? 'کارمەند یان بەڕێوەبەری کۆمپانیا' : 'Corporate Employee / Executive'}</option>
             <option value="owner">{lang === 'zh' ? '企业法定代表人/投资人' : lang === 'ar' ? 'صاحب شركة / مستثمر' : lang === 'ckb' ? 'خاوەن کۆمپانیا / وەبەرهێنەر' : 'Business Owner / Investor'}</option>
@@ -252,28 +252,29 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
         {requirements.map((item) => {
           const isDone = !!checkedItems[item.id];
           return (
-            <div
+            <button
+              type="button"
               key={item.id}
               onClick={() => toggleCheck(item.id)}
-              className={`p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 select-none ${
+              className={`w-full text-left rtl:text-right p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 select-none focus-visible:outline-2 focus-visible:outline-royal ${
                 isDone
                   ? 'border-emerald-500/30 bg-emerald-500/5'
                   : 'border-border bg-card/60 hover:bg-card'
               }`}
+              aria-pressed={isDone}
             >
-              <button
-                type="button"
-                className="mt-0.5 text-royal shrink-0 focus:outline-none"
-                aria-label={`Toggle requirement ${item.title}`}
+              <div
+                className="mt-0.5 text-royal shrink-0"
+                aria-hidden="true"
               >
                 {isDone ? (
                   <CheckSquare className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 ) : (
                   <Square className="w-5 h-5 text-muted-foreground" />
                 )}
-              </button>
+              </div>
 
-              <div className="space-y-1 flex-1">
+              <div className="space-y-1 flex-1 min-w-0">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className={`text-xs md:text-sm font-semibold ${isDone ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
                     {item.title}
@@ -294,7 +295,7 @@ export const VisaChecklistBuilder: React.FC<VisaChecklistBuilderProps> = ({
                   {item.desc}
                 </p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

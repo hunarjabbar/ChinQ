@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { DollarSign, ShieldAlert, Clock, ArrowRight, HelpCircle, FileCheck } from 'lucide-react';
 import { Locale } from '../../../types';
@@ -28,14 +28,15 @@ export const VisaCentreFees: React.FC = () => {
     { type: 'Tourist Visa (On Arrival / Approval)', validity: '30 Days', stay: '30 Days', standardUSD: 75, expressUSD: 75 }
   ];
 
-  const services = useVisaCentreStore((s) => s.services.filter((srv) => !srv.deletedAt));
+  const allServices = useVisaCentreStore((s) => s.services);
+  const services = useMemo(() => allServices.filter((srv) => !srv.deletedAt), [allServices]);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <VisaDisclaimer lang={validLang} variant="banner" id="fees-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 py-10 space-y-10 w-full">
+      <main className="page-container flex-1 py-10 space-y-10">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -181,7 +182,9 @@ export const VisaCentreFees: React.FC = () => {
         </div>
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="fees-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="fees-footer-disclaimer" />
+      </div>
     </div>
   );
 };

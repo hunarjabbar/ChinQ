@@ -158,6 +158,7 @@ const VisaCentreNews = lazyWithRetry(() => import('./pages/institute/visa-centre
 const VisaCentreFaq = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreFaq').then(m => ({ default: m.VisaCentreFaq })));
 const VisaCentreContact = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreContact').then(m => ({ default: m.VisaCentreContact })));
 const VisaCentreDisclaimer = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreDisclaimer').then(m => ({ default: m.VisaCentreDisclaimer })));
+const ChineseCentreLanding = lazyWithRetry(() => import('./pages/institute/ChineseCentreLanding').then(m => ({ default: m.ChineseCentreLanding })));
 const AdminVisaCentre = lazyWithRetry(() => import('./pages/AdminVisaCentre').then(m => ({ default: m.AdminVisaCentre })));
 
 function PaymentsRedirect() {
@@ -561,6 +562,18 @@ const router = createBrowserRouter([
       { path: "events", element: <EventsCalendar /> },
       // Bilateral Visa Centre
       { path: "visa-centre", element: <VisaCentreLanding /> },
+      // Chinese Centre
+      { path: "chinese-center", element: <ChineseCentreLanding /> },
+      { path: "chinese-center/enroll", element: <ChineseCentreLanding view="enroll" /> },
+      { path: "chinese-center/courses", element: <ChineseCentreLanding view="courses" /> },
+      { path: "chinese-center/testing", element: <ChineseCentreLanding view="testing" /> },
+      { path: "chinese-center/testing/register", element: <ChineseCentreLanding view="testing-register" /> },
+      { path: "chinese-center/certificates", element: <ChineseCentreLanding view="certificates" /> },
+      { path: "chinese-center/instructors", element: <ChineseCentreLanding view="instructors" /> },
+      { path: "chinese-center/instructors/:id", element: <ChineseCentreLanding view="instructor-detail" /> },
+      { path: "chinese-center/faq", element: <ChineseCentreLanding view="faq" /> },
+      { path: "chinese-center/contact", element: <ChineseCentreLanding view="contact" /> },
+      { path: "chinese-center/*", element: <ChineseCentreLanding /> },
       { path: "visa-centre/about", element: <VisaCentreAbout /> },
       { path: "visa-centre/services", element: <VisaCentreServices /> },
       { path: "visa-centre/services/:slug", element: <VisaCentreServiceDetail /> },
@@ -631,7 +644,7 @@ export default function App() {
     <ErrorBoundary lang="en">
       <QueryClientProvider client={queryClient}>
         <ThemeApplier />
-        <DevBuildInfoBadge />
+        {process.env.NODE_ENV === 'development' && <DevBuildInfoBadge />}
         <Toaster 
           position="top-right" 
           richColors 

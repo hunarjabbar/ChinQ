@@ -123,16 +123,16 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-[#0a0a0a]" dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Institute Specialized Two-Row Header */}
-      <header className="sticky top-0 z-50 shadow-xl" id="cise-header">
+      <header className="sticky top-0 z-50 shadow-xl site-header" id="cise-header">
         {/* ROW 1: Brand & Global Actions Band */}
         <div className="bg-[#0F172A] text-white border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="site-header__inner">
             <div className="flex items-center justify-between h-14 sm:h-16 lg:h-[72px]">
               {/* Brand Wordmark */}
               <Link 
                 to={`/${lang}/institute`} 
                 aria-label={localizedBrandNames[lang] || localizedBrandNames.en}
-                className="flex items-center gap-3 sm:gap-3.5 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D97706] rounded-xl"
+                className="flex items-center gap-3 sm:gap-3.5 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D97706] rounded-xl min-h-[44px]"
               >
                 <div className="w-9 h-9 sm:w-11 sm:h-11 bg-[#D97706] rounded-xl flex items-center justify-center text-[#0F172A] font-black text-lg sm:text-xl shadow-lg group-hover:scale-105 transition-transform shrink-0">
                   CI
@@ -199,7 +199,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
 
         {/* ROW 2: Primary Institute Navigation Band */}
         <div className="bg-[#0B1120] border-b border-white/10 shadow-inner w-full max-w-full overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full overflow-x-auto scrollbar-none">
+          <div className="site-header__inner w-full overflow-x-auto scrollbar-none">
             <nav className="flex items-center gap-1 sm:gap-2 h-11 lg:h-12 w-max min-w-full lg:min-w-0" aria-label="Institute Main Navigation">
               {navItems.map((item) => {
                 const path = item.id ? `/${lang}/institute/${item.id}` : `/${lang}/institute`;
@@ -332,8 +332,8 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       </main>
 
       {/* Institute Specialized Footer */}
-      <footer className="bg-[#0F172A] text-white py-14 border-t border-white/10 w-full max-w-7xl mx-auto box-border px-4 sm:px-6">
-        <div>
+      <footer className="bg-[#0F172A] text-white py-14 border-t border-white/10 w-full">
+        <div className="page-container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="col-span-1 md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
@@ -356,24 +356,24 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
 
             <div>
               <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-5">{t('footerResearchPillarsHeading')}</h3>
-              <ul className="space-y-3 text-xs font-bold text-neutral-400">
+              <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
-                  <Link to={`/${lang}/institute/research/energy-bri`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/research/energy-bri`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerPillarEnergyBri')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/geo-economics`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/research/geo-economics`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerPillarGeoEconomics')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/diplomacy`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/research/diplomacy`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerPillarDiplomacy')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/digital-silk-road`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/research/digital-silk-road`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerPillarDigitalSilkRoad')}
                   </Link>
                 </li>
@@ -382,24 +382,24 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
 
             <div>
               <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-5">{t('footerResourcesDataHeading')}</h3>
-              <ul className="space-y-3 text-xs font-bold text-neutral-400">
+              <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
-                  <Link to={`/${lang}/institute/publications`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/publications`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerResourceWhitePapers')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/data-hub/trade`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/data-hub/trade`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerResourceTradeFlow')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/experts`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/experts`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerResourceFellows')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/partnerships`} className="hover:text-white transition-colors uppercase tracking-wider block">
+                  <Link to={`/${lang}/institute/partnerships`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
                     {t('footerResourceSyndication')}
                   </Link>
                 </li>

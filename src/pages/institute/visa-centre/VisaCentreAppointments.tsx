@@ -69,7 +69,7 @@ export const VisaCentreAppointments: React.FC = () => {
       <VisaDisclaimer lang={validLang} variant="banner" id="apt-top-disclaimer" />
       <VisaNavHeader lang={validLang} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-10 space-y-8 w-full">
+      <main className="page-container flex-1 py-10 space-y-8">
         {/* Title */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
@@ -134,7 +134,7 @@ export const VisaCentreAppointments: React.FC = () => {
                   setPhone('');
                   setPreferredDate('');
                 }}
-                className="px-4 py-2 rounded-xl bg-royal text-white font-semibold"
+                className="px-6 py-2.5 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold shadow-sm transition-all active:scale-[0.98]"
               >
                 Book Another Appointment
               </button>
@@ -285,7 +285,7 @@ export const VisaCentreAppointments: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs md:text-sm shadow-sm transition-all"
+                className="px-8 py-3 min-h-[44px] rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-xs md:text-sm shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
               >
                 {isSubmitting ? 'Confirming...' : 'Confirm Appointment Reservation'}
               </button>
@@ -294,7 +294,9 @@ export const VisaCentreAppointments: React.FC = () => {
         )}
       </main>
 
-      <VisaDisclaimer lang={validLang} variant="card" id="apt-footer-disclaimer" />
+      <div className="page-container pb-8">
+        <VisaDisclaimer lang={validLang} variant="card" id="apt-footer-disclaimer" />
+      </div>
     </div>
   );
 };
