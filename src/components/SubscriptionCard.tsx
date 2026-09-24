@@ -29,7 +29,7 @@ export function SubscriptionCard() {
       subscribed: "Subscribed",
       subscribeNow: "Subscribe Now",
       features: ["Full Market Data", "Ad-Free Experience", "Exclusive Reports"],
-      settlementTitle: "Payment Settlement Service",
+      settlementTitle: "Subscription Clearance Service",
       settlementDesc: "Secure connection to Central Bank routing...",
     },
     ar: {
@@ -87,7 +87,7 @@ export function SubscriptionCard() {
 
   const l = t[(lang as keyof typeof t) || 'en'];
 
-  // Handle the 20-second simulated payment settlement modal
+  // Handle the simulated subscription clearance modal
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (showPaymentModal) {
@@ -240,7 +240,7 @@ export function SubscriptionCard() {
         </div>
       </div>
 
-      {/* Payment Settlement Modal */}
+      {/* Subscription Clearance Modal */}
       <AnimatePresence>
         {showPaymentModal && createPortal(
           <motion.div 

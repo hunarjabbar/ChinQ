@@ -164,7 +164,7 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li><Link to={`/${lang}/summit/services/sourcing`} className="hover:text-brand-800">{lang === 'ar' ? 'تسهيل التوريد المباشر' : lang === 'zh' ? '源头跨境直采赋能' : lang === 'ckb' ? 'کڕینی ڕاستەوخۆ' : 'Sourcing Facilitation'}</Link></li>
-              <li><Link to={`/${lang}/summit/services/settlement`} className="hover:text-brand-800">{lang === 'ar' ? 'التسوية بالدينار واليوان' : lang === 'zh' ? '本币结算与清算' : lang === 'ckb' ? 'پاکتاوی دینار و یوان' : 'Payment Settlement (IQD/CNY)'}</Link></li>
+              <li><Link to={`/${lang}/summit/services/settlement`} className="hover:text-brand-800">{lang === 'ar' ? 'التسوية بالدينار واليوان' : lang === 'zh' ? '本币结算与清算' : lang === 'ckb' ? 'پاکتاوی دینار و یوان' : 'Bilateral Clearing (IQD/CNY)'}</Link></li>
               <li><Link to={`/${lang}/summit/services/insurance`} className="hover:text-brand-800">{lang === 'ar' ? 'تأمين الصادرات والشحن' : lang === 'zh' ? '中信保与货运险' : lang === 'ckb' ? 'بیمەی هەناردە' : 'Insurance Facilitation (Sinosure)'}</Link></li>
               <li><Link to={`/${lang}/summit/services/visa-tourism`} className="hover:text-brand-800">{lang === 'ar' ? 'التأشيرات والوفود التجارية' : lang === 'zh' ? '商务签证与双向考察' : lang === 'ckb' ? 'ڤیزا و شاندەکان' : 'Visa & Delegation Travel'}</Link></li>
               <li><Link to={`/${lang}/summit/services/consultancy`} className="hover:text-brand-800">{lang === 'ar' ? 'الاستشارات الاستراتيجية والقانونية' : lang === 'zh' ? '战略咨询与跨国合规' : lang === 'ckb' ? 'ڕاوێژی یاسایی و دارایی' : 'Strategic Consultancy'}</Link></li>

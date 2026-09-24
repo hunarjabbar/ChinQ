@@ -26,7 +26,7 @@ import {
   Eye,
   Check
 } from 'lucide-react';
-import { PaymentReceiptModal } from '../components/payments/PaymentReceiptModal';
+import { ReceiptModal } from '../components/admin/ReceiptModal';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 
 export function AdminPayments() {
@@ -861,7 +861,7 @@ export function AdminPayments() {
         )}
 
         {/* Certificate / Receipt Modal */}
-        <PaymentReceiptModal
+        <ReceiptModal
           isOpen={isReceiptModalOpen}
           onClose={() => setIsReceiptModalOpen(false)}
           order={selectedOrder}

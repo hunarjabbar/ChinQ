@@ -1,0 +1,207 @@
+/* =====================================================
+   ICA PAYMENT SETTLEMENT PORTAL — WHITE & RED DESIGN SYSTEM
+   ===================================================== */
+
+:root {
+  --pay-color-white: #FFFFFF;
+  --pay-color-surface: #F9FAFB;
+  --pay-color-border: #E5E7EB;
+  --pay-color-red-primary: #C8102E;
+  --pay-color-red-hover: #A00D26;
+  --pay-color-red-active: #7F0A1E;
+  --pay-color-red-soft: #FEE2E2;
+  --pay-color-red-text: #991B1B;
+  --pay-color-text: #111827;
+  --pay-color-text-muted: #6B7280;
+  --pay-color-success: #047857;
+  --pay-color-warning: #B45309;
+}
+
+/* Scoped portal container */
+.pay-portal {
+  background-color: var(--pay-color-surface);
+  color: var(--pay-color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.pay-portal h1,
+.pay-portal h2,
+.pay-portal h3,
+.pay-portal h4 {
+  font-family: 'Merriweather', 'Noto Naskh Arabic', 'Noto Serif SC', Georgia, serif;
+}
+
+[lang="ar"] .pay-portal h1,
+[lang="ar"] .pay-portal h2,
+[lang="ar"] .pay-portal h3,
+[lang="ar"] .pay-portal h4,
+[lang="ckb"] .pay-portal h1,
+[lang="ckb"] .pay-portal h2,
+[lang="ckb"] .pay-portal h3,
+[lang="ckb"] .pay-portal h4 {
+  font-family: 'Noto Naskh Arabic', 'Cairo', serif;
+}
+
+[lang="zh"] .pay-portal h1,
+[lang="zh"] .pay-portal h2,
+[lang="zh"] .pay-portal h3,
+[lang="zh"] .pay-portal h4 {
+  font-family: 'Noto Serif SC', serif;
+}
+
+/* Interactive elements motion */
+.pay-btn-primary {
+  background-color: var(--pay-color-red-primary);
+  color: #ffffff;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+  box-shadow: 0 2px 4px rgba(200, 16, 46, 0.15);
+}
+
+.pay-btn-primary:hover {
+  background-color: var(--pay-color-red-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.25);
+}
+
+.pay-btn-primary:active {
+  background-color: var(--pay-color-red-active);
+  transform: translateY(0);
+}
+
+.pay-btn-secondary {
+  background-color: #ffffff;
+  color: var(--pay-color-red-primary);
+  border: 1px solid var(--pay-color-border);
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.pay-btn-secondary:hover {
+  background-color: #fef2f2;
+  border-color: var(--pay-color-red-primary);
+  transform: translateY(-1px);
+}
+
+.pay-card {
+  background-color: #ffffff;
+  border: 1px solid var(--pay-color-border);
+  border-radius: 0.75rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.pay-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200, 16, 46, 0.08);
+  border-color: #fca5a5;
+}
+
+.pay-badge {
+  background-color: var(--pay-color-red-soft);
+  color: var(--pay-color-red-text);
+  border-radius: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pay-badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border-radius: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+}
+
+.pay-hero-gradient {
+  background: linear-gradient(135deg, #C8102E 0%, #7F0A1E 100%);
+}
+
+.pay-focus-ring:focus,
+.pay-focus-ring:focus-within {
+  outline: none;
+  border-color: var(--pay-color-red-primary);
+  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.15);
+}
+
+/* Tab underline animation */
+.pay-tab {
+  position: relative;
+  transition: color 160ms ease;
+}
+
+.pay-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  height: 2px;
+  background-color: var(--pay-color-red-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms ease;
+}
+
+.pay-tab.active::after,
+.pay-tab:hover::after {
+  transform: scaleX(1);
+}
+
+/* RTL Helpers */
+[dir="rtl"] .cta-arrow {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+/* Pulse animation for savings */
+@keyframes pay-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.animate-pay-pulse {
+  animation: pay-pulse 1.8s ease-in-out infinite;
+}
+
+/* Stepper pulse */
+@keyframes pay-node-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(200, 16, 46, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0);
+  }
+}
+
+.animate-stepper-pulse {
+  animation: pay-node-pulse 2s infinite;
+}
+
+/* Prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .pay-btn-primary,
+  .pay-btn-secondary,
+  .pay-card,
+  .pay-tab::after,
+  .animate-pay-pulse,
+  .animate-stepper-pulse {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

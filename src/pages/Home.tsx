@@ -17,13 +17,13 @@ import { ContactUs } from '../components/ContactUs';
 import { IcaFinanceEconomicsSection } from '../components/IcaFinanceEconomicsSection';
 import { TrendingBooksSection } from '../components/TrendingBooksSection';
 import PartnersSection from "../components/PartnersSection";
-import { PaymentAndSourcingSection } from "../components/PaymentAndSourcingSection";
 import { RecommendedBooksSection } from '../components/RecommendedBooksSection';
 import { CulturalExchangeSection } from '../components/CulturalExchangeSection';
 import { TourismSection } from '../components/TourismSection';
 import { WomenSection } from '../components/WomenSection';
 import { VisaFlightSection } from '../components/VisaFlightSection';
 import { InitiativesSection } from '../components/InitiativesSection';
+import { HomeSettlementSpotlight } from '../components/settlement/HomeSettlementSpotlight';
 
 
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
@@ -210,7 +210,7 @@ export function Home() {
             {[...articles.slice(0, 8), ...articles.slice(0, 8)].map((article, i) => {
               const tr = getTranslation(article);
               return (
-                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => navigate(`/${lang}/article/${article.slug}`)}>
+                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}>
                    <span className="text-xs text-brand-800 dark:text-brand-400 me-4 shrink-0 uppercase font-bold">{new Date(article.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})}</span>
                    <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors truncate">{tr?.title}</span>
                  </div>
@@ -223,9 +223,10 @@ export function Home() {
       {/* Initiatives Section */}
       <InitiativesSection lang={lang as Locale} />
 
-      {/* Section 1: Full-Scale Upper Trending Carousel with Covers & Navigation Arrows */}
-      <section className="w-full p-4 sm:p-6 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 relative overflow-hidden">
-      </section>
+      {/* Sovereign Payment Settlement Facilitation Spotlight (Direct IQD/RMB Rail, Calculator & Tracker) */}
+      <HomeSettlementSpotlight lang={lang as Locale} />
+
+      {/* Intelligence Wire is above, next section is Lead Story */}
 
       {/* Lead Story & Popular Stories 2-Column Grid */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 shadow-xs">
@@ -237,7 +238,7 @@ export function Home() {
         </div>
         {leadStory && (
           <div 
-            onClick={() => navigate(`/${lang}/article/${leadStory.slug}`)}
+            onClick={() => navigate(`/${lang}/newsroom/${leadStory.slug}`)}
             className="cursor-pointer group transition-all duration-300"
           >
             <div className="relative mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-neutral-800 shadow-sm bg-gray-100 dark:bg-neutral-800">
@@ -302,7 +303,7 @@ export function Home() {
               {popularStories.map((article) => (
                 <li 
                   key={`pop-${article.id}`} 
-                  onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                  onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
                   className="font-bold leading-snug cursor-pointer hover:text-brand-800 dark:hover:text-brand-400 transition-colors border-b border-gray-100 dark:border-neutral-800/50 pb-3 last:border-0 last:pb-0"
                 >
                   <span className="inline-block align-top max-w-[92%] ms-2 hover:underline">
@@ -529,7 +530,7 @@ export function Home() {
                   {lang === 'ar' ? 'الأخبار السياسية' : lang === 'zh' ? '政治新闻' : lang === 'ckb' ? 'هەواڵە سیاسییەکان' : 'Political News'}
                 </h2>
                 <Link 
-                  to={`/${lang}/category/politics`} 
+                  to={`/${lang}/newsroom/category/politics`} 
                   className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline"
                 >
                   {lang === 'ar' ? 'عرض المزيد ←' : lang === 'zh' ? '查看更多 →' : lang === 'ckb' ? 'بینینی زیاتر ←' : 'View More →'}
@@ -542,7 +543,7 @@ export function Home() {
                   return (
                     <div 
                       key={article.id}
-                      onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                      onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
                       className="cursor-pointer group flex flex-col h-full bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 rounded overflow-hidden shadow-sm hover:shadow-md"
                     >
                       {article.imageUrl ? (
@@ -589,7 +590,7 @@ export function Home() {
                   {lang === 'ar' ? 'آراء وتحليلات' : lang === 'zh' ? '观点与深度分析' : lang === 'ckb' ? 'ڕاو بۆچوون و شیکردنەوە' : 'Opinion & Analysis'}
                 </h2>
                 <Link 
-                  to={`/${lang}/category/opinion`} 
+                  to={`/${lang}/newsroom/category/opinion`} 
                   className="text-xs font-black uppercase tracking-widest text-brand-800 hover:underline flex items-center gap-1 group"
                 >
                   <span>{lang === 'ar' ? 'عرض جميع الآراء' : lang === 'zh' ? '查看所有观点' : lang === 'ckb' ? 'بینینی هەموو ڕاکان' : 'View All Opinions'}</span>
@@ -608,7 +609,7 @@ export function Home() {
                   return (
                     <div 
                       key={article.id}
-                      onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                      onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
                       className="cursor-pointer group flex flex-col justify-between p-3.5 rounded-xl border border-transparent hover:border-brand-800/20 hover:bg-brand-50/40 dark:hover:bg-neutral-800/50 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 shadow-none hover:shadow-md"
                     >
                       <div className="space-y-3">
@@ -663,11 +664,6 @@ export function Home() {
         </ErrorBoundary>
       </div>
 
-      <div id="settlement-sourcing" className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Bilateral Settlement & Sourcing Services">
-          <PaymentAndSourcingSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
 
       <div id="products-showcase" className="w-full my-6">
         <ErrorBoundary inline lang={lang} title="Chinese Institutional Products Showcase">
@@ -758,7 +754,7 @@ export function Home() {
                     {sectionArticles.map((article) => (
                       <div 
                         key={article.id}
-                        onClick={() => navigate(`/${lang}/article/${article.slug}`)}
+                        onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
                         className="cursor-pointer group/item hover:bg-white/60 dark:hover:bg-white/[0.08] p-3 -mx-2 rounded-lg transition-all duration-300 hover:scale-[1.01]"
                       >
                         <h4 className="text-sm font-bold leading-tight group-hover/item:text-brand-700 text-ink-900 dark:text-neutral-100 transition-colors line-clamp-3">

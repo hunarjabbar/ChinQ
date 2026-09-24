@@ -182,7 +182,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
                 {t.mbridgeBadge}
               </span>
               <Link
-                to={`/${lang}/settlement?tab=currency-settlement`}
+                to={`/${lang}/summit/services/settlement`}
                 className="inline-flex items-center gap-1.5 font-black uppercase tracking-wider text-white hover:text-white/90 underline-offset-4 hover:underline transition-all group shrink-0"
               >
                 <span>{t.calcCta}</span>
@@ -353,7 +353,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
           </div>
 
           <Link
-            to={`/${lang}/settlement`}
+            to={`/${lang}/summit/services/settlement`}
             className="inline-flex items-center gap-2 px-4 py-2 bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs shrink-0 cursor-pointer"
           >
             <span>{t.settleCta}</span>
@@ -427,7 +427,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
                     Bilateral Reference: <span className="font-bold text-neutral-700 dark:text-neutral-300">{selectedInsight.slug}</span>
                   </div>
                   <Link
-                    to={`/${lang}/settlement?tab=currency-settlement`}
+                    to={`/${lang}/summit/services/settlement`}
                     onClick={() => setSelectedInsight(null)}
                     className="inline-flex items-center gap-2 px-4 py-2 bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs uppercase tracking-wider"
                   >

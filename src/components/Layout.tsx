@@ -73,7 +73,16 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 {t('footer.initiativesHeading')}
               </h4>
               <div className="flex flex-col gap-2.5">
+                <Link to={`/${lang}/settlement`} className="text-[#C8102E] hover:underline text-xs font-bold uppercase">
+                  {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
+                </Link>
+                <Link to={`/${lang}/settlement/card`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">
+                  {lang === 'ar' ? 'بطاقة كي وICA المشتركة' : lang === 'zh' ? 'Qi & ICA 联名商务卡' : lang === 'ckb' ? 'کارتی هاوبەشی کی' : 'Qi & ICA Co-Branded Card'}
+                </Link>
                 <Link to={`/${lang}/summit`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.summit')}</Link>
+                <Link to={`/${lang}/newsroom`} className="text-brand-800 dark:text-brand-400 hover:underline text-xs font-bold uppercase">
+                  {lang === 'ar' ? 'غرفة الأخبار والمركز الإعلامي' : lang === 'zh' ? '新闻中心与媒体中心' : lang === 'ckb' ? 'ژووری هەواڵ و ناوەندی میدیا' : 'Newsroom & Media Hub'}
+                </Link>
                 <Link to={`/${lang}/chinese-center`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.chineseCenter')}</Link>
                 <Link to={`/${lang}/visa-centre`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.visaCentre')}</Link>
               </div>
@@ -242,13 +251,13 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
             </h4>
             <div className="flex flex-col gap-2.5">
               {[
+                { id: 'newsroom', to: `/${lang}/newsroom`, label: lang === 'ar' ? 'غرفة الأخبار والمركز الإعلامي' : lang === 'zh' ? '新闻与媒体中心' : lang === 'ckb' ? 'هەواڵ و ناوەندی میدیا' : 'Newsroom & Media Hub' },
                 { id: 'women', to: `/${lang}/women`, label: lang === 'ar' ? 'بوابة المرأة والسياسات' : lang === 'zh' ? '女性与双边政策专区' : lang === 'ckb' ? 'دەروازەی سەرکردایەتی ژنان' : 'Women Leadership Portal' },
                 { id: 'tourism', to: `/${lang}/tourism`, label: lang === 'ar' ? 'بوابة السياحة والتبادل' : lang === 'zh' ? '文旅与双向遗产门户' : lang === 'ckb' ? 'دەروازەی گەشتیاری دوولایەنە' : 'Bilateral Tourism Portal' },
                 { id: 'books', to: `/${lang}/books`, label: lang === 'ar' ? 'المكتبة المستقلة' : lang === 'zh' ? '主权书库与学术图书' : lang === 'ckb' ? 'کتێبخانەی سەربەخۆ' : 'Sovereign Books Library' },
                 { id: 'projects', to: `/${lang}#projects`, label: lang === 'ar' ? 'متابعة مشاريع البنية التحتية' : lang === 'zh' ? '基建管道跟踪' : lang === 'ckb' ? 'پڕۆژەکانی ژێرخان' : 'Infrastructure Pipeline', targetId: 'projects' },
                 { id: 'legal-desk', to: `/${lang}#legal`, label: lang === 'ar' ? 'القوانين والامتثال' : lang === 'zh' ? '法规与合规' : lang === 'ckb' ? 'یاسا و پابەندبوون' : 'Legal & Regulatory Desk', targetId: 'legal' },
                 { id: 'directory', to: `/${lang}#directory`, label: lang === 'ar' ? 'دليل الشركات الموردة' : lang === 'zh' ? '企业供应商名录' : lang === 'ckb' ? 'پێڕستی کۆمپانیاکان' : 'Enterprise Supplier Directory', targetId: 'directory' },
-                { id: 'settlement', to: `/${lang}/settlement`, label: lang === 'ar' ? 'التسويات النقدية والتوريد' : lang === 'zh' ? '双边结算与原厂采购' : lang === 'ckb' ? 'یەکلاییکردنەوەی دارایی و دابینکردن' : 'Bilateral Settlement & Sourcing' },
                 { id: 'about', to: `/${lang}/about`, label: lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارەی ئاژانس' : 'About Iraqi-Chinese Agency' },
                 { id: 'join', to: `/${lang}/join`, label: lang === 'ar' ? 'انضم لشبكة المحررين' : lang === 'zh' ? '加入编辑团队' : lang === 'ckb' ? 'پەیوەندی بە دەستەی سەرنووسەرانەوە بکە' : 'Join Editorial Team' },
                 { id: 'admin', to: `/${lang}/admin`, label: lang === 'ar' ? 'بوابة المؤسسة' : lang === 'zh' ? '企业后台' : lang === 'ckb' ? 'دەروازەی دامەزراوە' : 'Enterprise Portal' }

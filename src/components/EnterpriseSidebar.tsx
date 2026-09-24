@@ -734,7 +734,7 @@ ${preset.letterZh(companyName, businessField, representative)}`;
                             ].map((c, i) => (
                               <a 
                                 key={i} 
-                                href={`/${lang}/category/${c.slug}`} 
+                                href={`/${lang}/newsroom/category/${c.slug}`} 
                                 className="flex flex-col py-2.5 hover:bg-brand-50/50 dark:hover:bg-neutral-800/40 px-2 rounded-md transition-colors group cursor-pointer"
                               >
                                 <div className="flex items-center justify-between">

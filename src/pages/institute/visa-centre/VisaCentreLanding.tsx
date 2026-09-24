@@ -49,8 +49,8 @@ export const VisaCentreLanding: React.FC = () => {
 
       <main className="flex-1 space-y-12 py-8">
         {/* Hero Section */}
-        <section className="page-container">
-          <div className="hero-card space-y-8 relative overflow-hidden shadow-sm">
+        <section className="page-container relative z-10 scroll-mt-32">
+          <div className="hero-card space-y-8 relative overflow-hidden shadow-sm bg-card border border-border">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
                 <ShieldCheck className="w-4 h-4" />
@@ -112,8 +112,8 @@ export const VisaCentreLanding: React.FC = () => {
 
         {/* Announcements Bar */}
         {announcements.length > 0 && (
-          <section className="page-container">
-            <div className="policy-strip text-xs">
+          <section className="page-container relative z-20 scroll-mt-32">
+            <div className="policy-strip text-xs shadow-sm isolate">
               <div className="flex items-center gap-2.5 flex-wrap">
                 <span className="px-2 py-0.5 rounded bg-royal text-white font-bold text-[10px] uppercase">
                   {announcements[0].category.toUpperCase()}
@@ -133,7 +133,7 @@ export const VisaCentreLanding: React.FC = () => {
         )}
 
         {/* Featured Visa Types Reference Library */}
-        <section className="page-container space-y-6">
+        <section className="page-container space-y-6 relative z-10 scroll-mt-32">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold tracking-tight text-foreground">

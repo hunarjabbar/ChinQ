@@ -18,10 +18,43 @@ export function Partnerships() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();
   const isRtl = lang === 'ar' || lang === 'ckb';
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({
+    organizationName: '',
+    entityType: 'News Agency',
+    partnershipScope: 'Syndication Feed',
+    email: '',
+    notes: ''
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage('');
+    try {
+      const res = await fetch('/api/institute/partnerships', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.organizationName,
+          email: formData.email,
+          company: formData.organizationName,
+          role: formData.entityType,
+          bio: `Scope: ${formData.partnershipScope} | Notes: ${formData.notes || 'None'}`,
+          bureau: 'Global Diplomatic Intelligence Bureau',
+          hash: `ICA-PARTNER-${Math.random().toString(36).substring(2, 9).toUpperCase()}`
+        })
+      });
+      if (!res.ok) {
+        throw new Error('Failed to submit partnership application');
+      }
+      setIsSubmitted(true);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Submission failed');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const partners = [
@@ -147,35 +180,74 @@ export function Partnerships() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {errorMessage && (
+                  <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl text-red-700 dark:text-red-300 text-xs font-medium">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Organization Name</label>
-                  <input required type="text" className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white" />
+                  <input 
+                    required 
+                    type="text" 
+                    value={formData.organizationName}
+                    onChange={(e) => setFormData({ ...formData, organizationName: e.target.value })}
+                    className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Media/Entity Type</label>
-                  <select className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white font-bold">
-                    <option>News Agency</option>
-                    <option>Academic Institution</option>
-                    <option>Governmental Body</option>
-                    <option>Corporate Advisory</option>
+                  <select 
+                    value={formData.entityType}
+                    onChange={(e) => setFormData({ ...formData, entityType: e.target.value })}
+                    className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white font-bold"
+                  >
+                    <option value="News Agency">News Agency & Syndicate</option>
+                    <option value="Academic Institution">Academic Institution & University</option>
+                    <option value="Governmental Body">Governmental Body & Ministry</option>
+                    <option value="Corporate Advisory">Corporate & Financial Advisory</option>
+                    <option value="Sovereign Investment Fund">Sovereign Investment Fund</option>
+                    <option value="Think Tank & Policy Research">Think Tank & Policy Research Institute</option>
+                    <option value="Industrial Federation">Industrial Federation & Chamber of Commerce</option>
+                    <option value="Energy & Infrastructure Conglomerate">Energy & Infrastructure Conglomerate</option>
+                    <option value="Digital Logistics & Port Authority">Digital Logistics & Port Authority</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Partnership Scope</label>
-                  <select className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white font-bold">
-                    <option>Syndication Feed</option>
-                    <option>Co-Publishing</option>
-                    <option>Data Licensing</option>
-                    <option>B2B Advisory</option>
+                  <select 
+                    value={formData.partnershipScope}
+                    onChange={(e) => setFormData({ ...formData, partnershipScope: e.target.value })}
+                    className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white font-bold"
+                  >
+                    <option value="Syndication Feed">Syndication Feed & Reprints</option>
+                    <option value="Co-Publishing">Co-Publishing & Joint White Papers</option>
+                    <option value="Data Licensing">Data Licensing & API Access</option>
+                    <option value="B2B Advisory">B2B Trade & Strategic Advisory</option>
+                    <option value="Sovereign Currency Clearing & Settlement">Sovereign Currency Clearing & Settlement (IQD/e-CNY)</option>
+                    <option value="Joint Artificial Intelligence Research Lab">Joint AI & Smart Infrastructure Research Lab</option>
+                    <option value="Belt and Road Corridor Logistics Tracking">Belt and Road Corridor Logistics Tracking</option>
+                    <option value="Bilateral Diplomatic Intelligence Briefs">Bilateral Diplomatic Intelligence Briefs</option>
+                    <option value="Strategic Energy Transition Advisory">Strategic Energy & Photovoltaic Transition Advisory</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Official Email</label>
-                  <input required type="email" className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white" />
+                  <input 
+                    required 
+                    type="email" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-xs outline-none focus:ring-2 focus:ring-[#0284C7] transition-all text-neutral-900 dark:text-white" 
+                  />
                 </div>
                 <div className="pt-4">
-                  <button type="submit" className="w-full py-4 bg-[#0F172A] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl active:scale-98">
-                    Confirm Application
+                  <button 
+                    disabled={isSubmitting}
+                    type="submit" 
+                    className="w-full py-4 bg-[#0F172A] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl active:scale-98 disabled:opacity-50"
+                  >
+                    {isSubmitting ? 'Submitting Application...' : 'Confirm Application'}
                   </button>
                 </div>
                 <div className="flex items-center gap-2 text-[9px] font-bold text-neutral-400 justify-center">

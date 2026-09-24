@@ -4,13 +4,8 @@ import { Locale, PaymentOrder } from '../../types';
 import { 
   X, 
   Printer, 
-  Download, 
   ShieldCheck, 
   CheckCircle2, 
-  QrCode, 
-  Building2, 
-  Lock,
-  Globe
 } from 'lucide-react';
 import { IcaLogo } from '../IcaLogo';
 
@@ -21,7 +16,7 @@ interface Props {
   lang: Locale;
 }
 
-export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
+export function ReceiptModal({ order, isOpen, onClose, lang }: Props) {
   if (!isOpen || !order) return null;
 
   const isAr = lang === 'ar';
@@ -94,7 +89,7 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
               Cryptographic Transaction Dossier
             </span>
             <span className="text-sm font-black uppercase text-brand-900 dark:text-white">
-              {order.orderType === 'BUSINESS' ? 'Corporate Cross-Border Trade Settlement' : 'Retail Direct Remittance Verification'}
+              {order.orderType === 'BUSINESS' ? 'Corporate Cross-Border Trade Clearance' : 'Retail Direct Remittance Verification'}
             </span>
           </div>
 
@@ -270,7 +265,7 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
 
           {/* Footer note */}
           <div className="text-xs text-neutral-400 text-center leading-relaxed">
-            This digital certificate serves as legitimate proof of settlement under Sino-Iraqi sovereign economic treaties. For authentication inquiries, contact payments@iraqi-chineseagency.com or verify on the Iraqi-Chinese Agency Portal.
+            This digital certificate serves as legitimate proof of clearance under Sino-Iraqi sovereign economic treaties. For authentication inquiries, contact payments@iraqi-chineseagency.com or verify on the Iraqi-Chinese Agency Portal.
           </div>
 
         </div>
@@ -280,3 +275,5 @@ export function PaymentReceiptModal({ order, isOpen, onClose, lang }: Props) {
     document.body
   );
 }
+
+export default ReceiptModal;

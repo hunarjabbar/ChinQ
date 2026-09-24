@@ -1,4 +1,5 @@
 import { Locale } from '../types';
+import { newsroomTranslations, getNewsroomTranslation } from '../locales/newsroomTranslations';
 
 const dict = {
   en: {
@@ -431,7 +432,6 @@ const dict = {
     bilateralSettlementSystem: 'منظومة التسوية الثنائية',
     sovereignSettlementGateway: 'بوابة التسوية السيادية',
     portal: 'البوابة',
-    paymentSettlement: 'تسوية المدفوعات',
     regionalNode: 'العقدة الإقليمية',
     dialects: '٤ لهجات',
     institute: 'المعهد',
@@ -818,7 +818,6 @@ const dict = {
     bilateralSettlementSystem: '双边结算系统',
     sovereignSettlementGateway: '主权结算网关',
     portal: '门户',
-    paymentSettlement: '支付结算',
     regionalNode: '区域节点',
     dialects: '4种方言',
     institute: '研究院',
@@ -1222,7 +1221,6 @@ const dict = {
     bilateralSettlementSystem: 'سیستەمی یەکلاییکردنەوەی دوولایەنە',
     sovereignSettlementGateway: 'دەروازەی یەکلاییکردنەوەی دارایی',
     portal: 'دەروازە',
-    paymentSettlement: 'یەکلاکردنەوەی پارەدان',
     regionalNode: 'گرێی هەرێمی',
     dialects: '٤ شێوەزار',
     institute: 'پەیمانگا',
@@ -1627,7 +1625,12 @@ export function formatLocalizedPercent(value: number, lang: Locale = 'en'): stri
 
 export function useI18n(lang: Locale) {
   return {
-    t: (key: keyof typeof dict.en) => dict[lang]?.[key] || dict['en'][key],
+    t: (key: string) => {
+      if (key.startsWith('newsroom.')) {
+        return getNewsroomTranslation(lang, key);
+      }
+      return (dict[lang] as any)?.[key] || (dict['en'] as any)?.[key] || key;
+    },
     formatDate: (d: string | Date | number, style: 'long' | 'short' = 'long') => formatLocalizedDate(d, lang, style),
     formatBillion: (amt: number) => formatCurrencyBillion(amt, lang),
     formatPercent: (val: number) => formatLocalizedPercent(val, lang)
@@ -1635,4 +1638,5 @@ export function useI18n(lang: Locale) {
 }
 
 export * from '../locales/visaCentreTranslations';
+export * from '../locales/newsroomTranslations';
 

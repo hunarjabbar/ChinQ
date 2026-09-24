@@ -50,6 +50,11 @@ service cloud.firestore {
       allow read: if isAdmin();
     }
 
+    // Health / Connection Test
+    match /test/{testId} {
+      allow read: if true;
+    }
+
     // Admin Access Control
     match /admins/{uid} {
       allow read: if isSignedIn() && request.auth.uid == uid;

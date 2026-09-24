@@ -678,7 +678,7 @@ export const ICA_SERVICES: IcaServiceVertical[] = [
     id: 'settlement',
     slug: 'settlement',
     title: {
-      en: 'Payment Settlement Facilitation',
+      en: 'Bilateral Direct Clearing Facilitation',
       ar: 'تسهيل التسوية المالية والمصرفية',
       zh: '双边本币直接结算与清算通道',
       ckb: 'ئاسانکاری پاکتاوی دارایی و بانکی'
@@ -1615,7 +1615,7 @@ export const SUMMIT_FAQS = [
       ckb: 'ئایا کۆمپانیا عێراقییەکان دەتوانن مامەڵەکان بە دینار و یوان یەکلا بکەنەوە؟'
     },
     a: {
-      en: 'Yes. ICA operates the Bilateral Payment Settlement Desk on-site in partnership with the Central Bank of Iraq and Chinese clearing banks, enabling direct IQD/e-CNY execution without dollar conversion drag.',
+      en: 'Yes. ICA operates the Bilateral Direct Clearing Desk on-site in partnership with the Central Bank of Iraq and Chinese clearing banks, enabling direct IQD/e-CNY execution without dollar conversion drag.',
       ar: 'نعم، تدير وكالة ICA مكتب التسويات المالية المباشر في مقر القمة بالشراكة مع البنك المركزي والمصارف المعتمدة لتنفيذ الحوالات بالدينار واليوان دون الحاجة للدولار.',
       zh: '完全可以。ICA在峰会现场设立“双边本币结算专区”，联合伊拉克中央银行与中国清算行，支持直接开立人民币信用证及第纳尔/数字人民币直接结算，规避第三方汇兑损耗。',
       ckb: 'بەڵێ، دەزگای ICA ئۆفیسی تایبەتی پاکتاوی دارایی لە شوێنی لووتکە داناوە بۆ ئاڵوگۆڕی ڕاستەوخۆی دینار و یوان بەبێ پێویستی بە دۆلار.'

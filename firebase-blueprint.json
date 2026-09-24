@@ -51,6 +51,16 @@
         }
       },
       "required": ["name", "email", "message", "timestamp"]
+    },
+    "connectionTest": {
+      "title": "Connection Test",
+      "description": "Connection test schema for Firestore health check",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
     }
   },
   "firestore": {
@@ -61,6 +71,10 @@
     "/contact_submissions/{submissionId}": {
       "schema": "contactSubmission",
       "description": "Collection of contact form submissions"
+    },
+    "/test/{testId}": {
+      "schema": "connectionTest",
+      "description": "Connection test document for health checks"
     }
   }
 }

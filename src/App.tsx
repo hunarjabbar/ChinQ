@@ -86,7 +86,6 @@ const WomenPage = lazyWithRetry(() => import('./pages/WomenPage').then(m => ({ d
 const AdminWomen = lazyWithRetry(() => import('./pages/AdminWomen').then(m => ({ default: m.AdminWomen })));
 const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
 const AdminVisaFlight = lazyWithRetry(() => import('./pages/AdminVisaFlight').then(m => ({ default: m.AdminVisaFlight })));
-const SettlementPage = lazyWithRetry(() => import('./pages/SettlementPage').then(m => ({ default: m.SettlementPage })));
 const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
 const IcaPlusPage = lazyWithRetry(() => import('./pages/IcaPlusPage').then(m => ({ default: m.IcaPlusPage })));
 const AdminIcaPlus = lazyWithRetry(() => import('./pages/AdminIcaPlus'));
@@ -99,6 +98,14 @@ const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m
 const CulturalExchangePage = lazyWithRetry(() => import('./pages/CulturalExchangePage'));
 const AdminCulturalExchange = lazyWithRetry(() => import('./pages/AdminCulturalExchange'));
 const NewsroomPage = lazyWithRetry(() => import('./pages/NewsroomPage').then(m => ({ default: m.NewsroomPage })));
+const NewsroomLandingPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomLandingPage').then(m => ({ default: m.NewsroomLandingPage })));
+const NewsroomArticleDetailPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomArticleDetailPage').then(m => ({ default: m.NewsroomArticleDetailPage })));
+const NewsroomCategoryPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomCategoryPage').then(m => ({ default: m.NewsroomCategoryPage })));
+const NewsroomTagPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomTagPage').then(m => ({ default: m.NewsroomTagPage })));
+const NewsroomAuthorPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomAuthorPage').then(m => ({ default: m.NewsroomAuthorPage })));
+const NewsroomArchivePage = lazyWithRetry(() => import('./pages/newsroom/NewsroomArchivePage').then(m => ({ default: m.NewsroomArchivePage })));
+const NewsroomSearchPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomSearchPage').then(m => ({ default: m.NewsroomSearchPage })));
+const NewsroomFeedViewer = lazyWithRetry(() => import('./pages/newsroom/NewsroomFeedViewer').then(m => ({ default: m.NewsroomFeedViewer })));
 const InstituteHub = lazyWithRetry(() => import('./pages/InstituteHub').then(m => ({ default: m.InstituteHub })));
 const SummitPage = lazyWithRetry(() => import('./pages/SummitPage').then(m => ({ default: m.SummitPage })));
 
@@ -161,14 +168,25 @@ const VisaCentreDisclaimer = lazyWithRetry(() => import('./pages/institute/visa-
 const ChineseCentreLanding = lazyWithRetry(() => import('./pages/institute/ChineseCentreLanding').then(m => ({ default: m.ChineseCentreLanding })));
 const AdminVisaCentre = lazyWithRetry(() => import('./pages/AdminVisaCentre').then(m => ({ default: m.AdminVisaCentre })));
 
-function PaymentsRedirect() {
-  const { lang = 'en', ref } = useParams<{ lang: string; ref?: string }>();
-  const destination = ref 
-    ? `/${lang}/settlement?tab=currency-settlement&ref=${encodeURIComponent(ref)}`
-    : `/${lang}/settlement?tab=currency-settlement`;
-  return <Navigate to={destination} replace />;
-}
-
+// Sovereign Bilateral Payment Settlement Facilitation Portal Pages
+const SettlementLandingPage = lazyWithRetry(() => import('./pages/settlement/SettlementLandingPage').then(m => ({ default: m.SettlementLandingPage })));
+const SettlementAboutPage = lazyWithRetry(() => import('./pages/settlement/SettlementAboutPage').then(m => ({ default: m.SettlementAboutPage })));
+const SettlementHowItWorksPage = lazyWithRetry(() => import('./pages/settlement/SettlementHowItWorksPage').then(m => ({ default: m.SettlementHowItWorksPage })));
+const SettlementCompliancePage = lazyWithRetry(() => import('./pages/settlement/SettlementCompliancePage').then(m => ({ default: m.SettlementCompliancePage })));
+const SettlementFeesPage = lazyWithRetry(() => import('./pages/settlement/SettlementFeesPage').then(m => ({ default: m.SettlementFeesPage })));
+const SettlementCalculatorPage = lazyWithRetry(() => import('./pages/settlement/SettlementCalculatorPage').then(m => ({ default: m.SettlementCalculatorPage })));
+const SettlementTrackerPublicPage = lazyWithRetry(() => import('./pages/settlement/SettlementTrackerPublicPage').then(m => ({ default: m.SettlementTrackerPublicPage })));
+const SettlementTrackerDetailPage = lazyWithRetry(() => import('./pages/settlement/SettlementTrackerDetailPage').then(m => ({ default: m.SettlementTrackerDetailPage })));
+const SettlementGatewayPage = lazyWithRetry(() => import('./pages/settlement/SettlementGatewayPage').then(m => ({ default: m.SettlementGatewayPage })));
+const SettlementCheckoutPage = lazyWithRetry(() => import('./pages/settlement/SettlementCheckoutPage').then(m => ({ default: m.SettlementCheckoutPage })));
+const SettlementInquiryPage = lazyWithRetry(() => import('./pages/settlement/SettlementInquiryPage').then(m => ({ default: m.SettlementInquiryPage })));
+const SettlementConfirmationPage = lazyWithRetry(() => import('./pages/settlement/SettlementConfirmationPage').then(m => ({ default: m.SettlementConfirmationPage })));
+const SettlementCardLandingPage = lazyWithRetry(() => import('./pages/settlement/SettlementCardLandingPage').then(m => ({ default: m.SettlementCardLandingPage })));
+const SettlementCardRegisterPage = lazyWithRetry(() => import('./pages/settlement/SettlementCardRegisterPage').then(m => ({ default: m.SettlementCardRegisterPage })));
+const SettlementCardGeneratePage = lazyWithRetry(() => import('./pages/settlement/SettlementCardGeneratePage').then(m => ({ default: m.SettlementCardGeneratePage })));
+const SettlementFaqPage = lazyWithRetry(() => import('./pages/settlement/SettlementFaqPage').then(m => ({ default: m.SettlementFaqPage })));
+const SettlementContactPage = lazyWithRetry(() => import('./pages/settlement/SettlementContactPage').then(m => ({ default: m.SettlementContactPage })));
+const SettlementLegalPage = lazyWithRetry(() => import('./pages/settlement/SettlementLegalPage').then(m => ({ default: m.SettlementLegalPage })));
 
 function mixColor(hex: string, targetHex: string, weight: number): string {
   try {
@@ -321,7 +339,27 @@ function AdminRootRedirect() {
 function SettlementRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
-  return <Navigate to={`/${loc}/settlement${location.search}${location.hash}`} replace />;
+  const settlementSubPath = location.pathname.replace(/^\/settlement(-sourcing)?/, '');
+  return <Navigate to={`/${loc}/settlement${settlementSubPath}${location.search}${location.hash}`} replace />;
+}
+
+function NewsroomRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const isCategory = location.pathname.startsWith('/category');
+  const subPath = location.pathname.replace(/^\/(newsroom|news-room|news|article|category)/, '');
+  const targetPath = isCategory ? `/category${subPath}` : subPath;
+  return <Navigate to={`/${loc}/newsroom${targetPath}${location.search}${location.hash}`} replace />;
+}
+
+function LegacyNewsRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const isCategory = location.pathname.includes('/category/');
+  const subPath = location.pathname.replace(/^\/[^/]+\/(news-room|news|article|category)/, '');
+  const cleanLang = (lang === 'ck' || lang === 'ku') ? 'ckb' : (lang || 'en');
+  const targetPath = isCategory ? `/category${subPath}` : subPath;
+  return <Navigate to={`/${cleanLang}/newsroom${targetPath}${location.search}${location.hash}`} replace />;
 }
 
 function KurdishAliasRedirect() {
@@ -475,6 +513,29 @@ function SummitLangWrapper() {
   );
 }
 
+function SettlementLangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
+
+  if (!isValidLang) {
+    return <Navigate to="/en/settlement" replace />;
+  }
+
+  return (
+    <ErrorBoundary key={location.key} lang={safeLang}>
+      <Suspense fallback={<PageSkeleton />}>
+        <Outlet />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
   { path: "/institute", element: <InstituteRootRedirect /> },
@@ -486,9 +547,43 @@ const router = createBrowserRouter([
   { path: "/ck", element: <KurdishAliasRedirect /> },
   { path: "/ck/*", element: <KurdishAliasRedirect /> },
   { path: "/live/*", element: <Navigate to="/en" replace /> },
+  { path: "/newsroom", element: <NewsroomRootRedirect /> },
+  { path: "/newsroom/*", element: <NewsroomRootRedirect /> },
+  { path: "/news", element: <NewsroomRootRedirect /> },
+  { path: "/news/*", element: <NewsroomRootRedirect /> },
+  { path: "/news-room", element: <NewsroomRootRedirect /> },
+  { path: "/news-room/*", element: <NewsroomRootRedirect /> },
+  { path: "/article/*", element: <NewsroomRootRedirect /> },
+  { path: "/category/*", element: <NewsroomRootRedirect /> },
   { path: "/settlement", element: <SettlementRootRedirect /> },
+  { path: "/settlement/*", element: <SettlementRootRedirect /> },
   { path: "/settlement-sourcing", element: <SettlementRootRedirect /> },
+  { path: "/settlement-sourcing/*", element: <SettlementRootRedirect /> },
   { path: "/cultural-exchange", element: <RootRedirect /> },
+  {
+    path: "/:lang/settlement",
+    element: <SettlementLangWrapper />,
+    children: [
+      { index: true, element: <SettlementLandingPage /> },
+      { path: "about", element: <SettlementAboutPage /> },
+      { path: "how-it-works", element: <SettlementHowItWorksPage /> },
+      { path: "compliance", element: <SettlementCompliancePage /> },
+      { path: "fees", element: <SettlementFeesPage /> },
+      { path: "calculator", element: <SettlementCalculatorPage /> },
+      { path: "tracker", element: <SettlementTrackerPublicPage /> },
+      { path: "tracker/:referenceId", element: <SettlementTrackerDetailPage /> },
+      { path: "gateway", element: <SettlementGatewayPage /> },
+      { path: "gateway/checkout", element: <SettlementCheckoutPage /> },
+      { path: "inquiry", element: <SettlementInquiryPage /> },
+      { path: "inquiry/confirmation", element: <SettlementConfirmationPage /> },
+      { path: "card", element: <SettlementCardLandingPage /> },
+      { path: "card/register", element: <SettlementCardRegisterPage /> },
+      { path: "card/generate", element: <SettlementCardGeneratePage /> },
+      { path: "faq", element: <SettlementFaqPage /> },
+      { path: "contact", element: <SettlementContactPage /> },
+      { path: "legal", element: <SettlementLegalPage /> },
+    ]
+  },
   {
     path: "/:lang/summit",
     element: <SummitLangWrapper />,
@@ -519,7 +614,20 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-      { path: "newsroom", element: <NewsroomPage /> },
+      { path: "newsroom", element: <NewsroomLandingPage /> },
+      { path: "newsroom/:slug", element: <NewsroomArticleDetailPage /> },
+      { path: "newsroom/category/:category", element: <NewsroomCategoryPage /> },
+      { path: "newsroom/tag/:tag", element: <NewsroomTagPage /> },
+      { path: "newsroom/author/:author", element: <NewsroomAuthorPage /> },
+      { path: "newsroom/archive", element: <NewsroomArchivePage /> },
+      { path: "newsroom/search", element: <NewsroomSearchPage /> },
+      { path: "newsroom/feed/:feedType", element: <NewsroomFeedViewer /> },
+      { path: "news", element: <LegacyNewsRedirect /> },
+      { path: "news/*", element: <LegacyNewsRedirect /> },
+      { path: "news-room", element: <LegacyNewsRedirect /> },
+      { path: "news-room/*", element: <LegacyNewsRedirect /> },
+      { path: "article/*", element: <LegacyNewsRedirect /> },
+      { path: "category/*", element: <LegacyNewsRedirect /> },
       { path: "summit", element: <SummitPage /> },
       { path: "join", element: <JoinUs /> },
       { path: "women", element: <WomenPage /> },
@@ -529,13 +637,6 @@ const router = createBrowserRouter([
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
-      { path: "settlement", element: <SettlementPage /> },
-      { path: "settlement-sourcing", element: <SettlementPage /> },
-      { path: "payments", element: <PaymentsRedirect /> },
-      { path: "payments/:ref", element: <PaymentsRedirect /> },
-      { path: "article/:slug", element: <ArticlePage /> },
-      { path: "category/:slug", element: <CategoryPage /> },
-      { path: "search", element: <SearchWrapper /> }
     ]
   },
   {

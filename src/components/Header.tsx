@@ -38,132 +38,6 @@ const LiveDateTime = React.memo(function LiveDateTime({ lang }: { lang: Locale }
   );
 });
 
-function PaymentSettlementButton({ lang }: { lang: Locale }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const isRtl = lang === 'ar' || lang === 'ckb';
-  const location = useLocation();
-
-  // Automatically open for 8 seconds ONLY on the homepage
-  useEffect(() => {
-    // Strictly match the root path for each language
-    const isHomepage = location.pathname === `/${lang}` || 
-                       location.pathname === `/${lang}/`;
-    
-    if (isHomepage) {
-      setIsOpen(true);
-      const timer = setTimeout(() => {
-        setIsOpen(false);
-      }, 8000);
-      return () => clearTimeout(timer);
-    } else {
-      // Ensure it's closed if we navigate away
-      setIsOpen(false);
-    }
-  }, [location.pathname, lang]);
-
-  const showPopup = isOpen || isHovered;
-
-  const settlementTarget = `/${lang}/settlement?tab=currency-settlement`;
-
-  const handleLinkClick = () => {
-    setIsOpen(false);
-    setIsHovered(false);
-  };
-
-  return (
-    <div 
-      className="relative flex items-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <Link 
-        to={settlementTarget} 
-        onClick={handleLinkClick}
-        className="relative flex items-center gap-2 px-3 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-brand-800 hover:bg-brand-900 text-white rounded-xl text-xs sm:text-base md:text-lg font-black uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group hover:-translate-y-0.5 z-10"
-      >
-        <Coins size={18} className="text-white relative z-10 shrink-0" />
-        <span className="relative z-10">{lang === 'ar' ? 'تسوية المدفوعات' : lang === 'zh' ? '支付结算' : lang === 'ckb' ? 'خزمەتگوزاری پارەدان' : 'Payment Settlement'}</span>
-      </Link>
-      
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ 
-              opacity: 0, 
-              y: -28, 
-              scale: 0.75, 
-              transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] } 
-            }}
-            style={{ transformOrigin: isRtl ? 'top left' : 'top right' }}
-            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-2 w-[290px] sm:w-[340px] max-w-[calc(100vw-1.5rem)] bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border border-white/80 dark:border-neutral-700/60 rounded-2xl shadow-[0_12px_40px_rgba(204,0,0,0.15)] z-[100] p-4 text-brand-900 dark:text-neutral-100`}
-          >
-            {/* Arrow pointer */}
-            <div className={`absolute -top-2 ${isRtl ? 'left-6' : 'right-6'} w-4 h-4 bg-white/95 dark:bg-neutral-900/95 border-t border-l border-white/80 dark:border-neutral-700/60 transform rotate-45 z-10`}></div>
-            
-            <div className="relative z-20 flex flex-col gap-2.5 text-left rtl:text-right">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase text-brand-800 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 px-2.5 py-0.5 rounded-full tracking-widest border border-brand-200 dark:border-brand-800">
-                  {lang === 'ar' ? 'بوابة تسوية رسمية' : lang === 'zh' ? '官方结算网关' : lang === 'ckb' ? 'دەروازەی فەرمی پارەدان' : 'Official Gateway'}
-                </span>
-                <button 
-                  onClick={(e) => { 
-                    e.preventDefault(); 
-                    e.stopPropagation(); 
-                    setIsOpen(false); 
-                    setIsHovered(false);
-                  }} 
-                  className="text-neutral-400 hover:text-brand-900 dark:hover:text-white p-1 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-                  title="Close popup"
-                  aria-label="Close"
-                >
-                  <X size={14} />
-                </button>
-              </div>
-              
-              <div>
-                <h4 className="text-sm font-black text-brand-900 dark:text-neutral-100 uppercase tracking-tight">
-                  {lang === 'ar' ? 'منظومة تسوية المدفوعات الثنائية' : lang === 'zh' ? '中伊双边跨境支付结算' : lang === 'ckb' ? 'سیستەمی پارەدانی دوولایەنە' : 'Bilateral Payment Settlement'}
-                </h4>
-                <p className="text-[11px] text-neutral-600 dark:text-neutral-300 leading-relaxed font-medium mt-1">
-                  {lang === 'ar' 
-                    ? 'تسوية مباشرة وسريعة للمبادلات التجارية بالدينار العراقي (IQD) واليوان الصيني الرقمي (e-CNY) عبر قنوات آمنة ومعتمدة.' 
-                    : lang === 'zh' 
-                    ? '通过主权安全信道即时处理伊拉克第纳尔（IQD）与数字人民币（e-CNY）跨境清算与贸易结算。' 
-                    : lang === 'ckb' 
-                    ? 'پاکتاوکردنی ڕاستەوخۆی مامەڵە بازرگانییەکان بە دیناری عێراقی و یوانی چینی لە ڕێگەی کەناڵی پارێزراوەوە.' 
-                    : 'Instant sovereign clearing for cross-border contracts in Iraqi Dinar (IQD) and Digital Yuan (e-CNY).'}
-                </p>
-              </div>
-
-              {/* Action Button */}
-              <Link
-                to={settlementTarget}
-                onClick={handleLinkClick}
-                className="mt-1 w-full flex items-center justify-center gap-2 py-2 px-3 bg-brand-800 hover:bg-brand-900 text-white rounded-md text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-98"
-              >
-                <span>{lang === 'ar' ? 'دخول بوابة المدفوعات' : lang === 'zh' ? '进入结算网关' : lang === 'ckb' ? 'چوونە ناو دەروازەی پارەدان' : 'Open Settlement Gateway'}</span>
-                <ChevronRight size={14} className="rtl:rotate-180" />
-              </Link>
-
-              {/* Clean 8-second visual indicator countdown */}
-              <div className="mt-1 h-0.5 w-full bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: '100%' }}
-                  animate={{ width: '0%' }}
-                  transition={{ duration: 8, ease: 'linear' }}
-                  className="h-full bg-brand-700 dark:bg-brand-500"
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 
 function PortalDropdown({ lang }: { lang: Locale }) {
@@ -198,6 +72,24 @@ function PortalDropdown({ lang }: { lang: Locale }) {
                 variant="button" 
                 className="mx-2 my-1 bg-brand-800 text-white rounded-lg w-[calc(100%-1rem)]"
               />
+              <Link 
+                to={`/${lang}/settlement`} 
+                className="flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
+                onClick={() => setIsOpen(false)}
+              >
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-[#C8102E] text-white group-hover:bg-[#A00D26] transition-colors shrink-0">
+                  <Coins size={12} />
+                </div>
+                <div className="flex flex-col flex-1">
+                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-[#C8102E] transition-colors">
+                    {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی ڕاستەوخۆ' : 'Payment Settlement'}
+                  </span>
+                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
+                    {lang === 'ar' ? 'مقاصة سيادية وبطاقة كي' : lang === 'zh' ? '0%汇差 • Qi联名卡' : lang === 'ckb' ? 'بێ کرێی سێیەم' : 'Direct Parity • Qi Card'}
+                  </span>
+                </div>
+                <ChevronRight size={14} className="text-neutral-400 group-hover:text-[#C8102E] rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+              </Link>
               <Link 
                 to={`/${lang}/cultural-exchange`} 
                 className="flex items-center gap-3 px-4 py-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
@@ -388,20 +280,29 @@ export function Header({ lang }: { lang: Locale }) {
          {t('nav.initiatives')} <ChevronDown size={14} />
        </button>
        <div className="absolute top-full right-0 rtl:right-auto rtl:left-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md w-60 py-2 hidden group-hover:block z-50">
+         <Link to={`/${lang}/settlement`} className="block px-4 py-2 text-xs font-bold uppercase text-[#C8102E] hover:bg-red-50 dark:hover:bg-red-950/30">
+           {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '第纳尔/人民币结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
+         </Link>
          <Link to={`/${lang}/summit`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.summit')}</Link>
          <Link to={`/${lang}/institute/chinese-center`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.chineseCenter')}</Link>
          <Link to={`/${lang}/institute/visa-centre`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.visaCentre')}</Link>
        </div>
      </div>
 
-     <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
+     <Link to={`/${lang}/newsroom`} className="flex items-center text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 hover:text-brand-700 transition-colors">
+                {lang === 'ar' ? 'غرفة الأخبار' : lang === 'zh' ? '新闻中心' : lang === 'ckb' ? 'هەواڵەکان' : 'Newsroom'}
+             </Link>
+
+             <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
                {lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارە' : 'About'}
+             </Link>
+             <Link to={`/${lang}/newsroom`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 hover:text-brand-700 transition-colors">
+               {lang === 'ar' ? 'غرفة الأخبار' : lang === 'zh' ? '新闻中心' : lang === 'ckb' ? 'ژووری هەواڵ' : 'Newsroom'}
              </Link>
              <InstitutePortalCTA lang={lang!} variant="navItem" className="hidden lg:flex" />
              <Link to={`/${lang}/join`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
                {lang === 'ar' ? 'انضم للتحرير' : lang === 'zh' ? '加入编辑部' : lang === 'ckb' ? 'بەشداری بکە' : 'Join Editorial'}
              </Link>
-             <PaymentSettlementButton lang={lang} />
              <PortalDropdown lang={lang} />
           </div>
         </nav>
