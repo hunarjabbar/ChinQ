@@ -50,42 +50,67 @@ export const VisaCentreLanding: React.FC = () => {
       <main className="flex-1 space-y-12 py-8">
         {/* Hero Section */}
         <section className="page-container relative z-10 scroll-mt-32">
-          <div className="hero-card space-y-8 relative overflow-hidden shadow-sm bg-card border border-border">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
-                <ShieldCheck className="w-4 h-4" />
-                <span>{vt('heroBadge')}</span>
-              </div>
-              <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
-                {vt('heroTitle')}
-              </h1>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                {vt('positioningStatement')}
-              </p>
-            </div>
+          <div className="hero-card relative overflow-hidden shadow-sm bg-card border border-border">
+            <div className="hero-card__grid">
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal/10 text-royal text-xs font-semibold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>{vt('heroBadge')}</span>
+                  </div>
+                  <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
+                    {vt('heroTitle')}
+                  </h1>
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    {vt('positioningStatement')}
+                  </p>
+                </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                to={`/${validLang}/institute/visa-centre/apply`}
-                className="min-h-[44px] px-6 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-white active:scale-[0.98]"
-              >
-                <FileCheck className="w-4 h-4" />
-                {vt('requestServiceBtn')}
-              </Link>
-              <Link
-                to={`/${validLang}/institute/visa-centre/appointments`}
-                className="min-h-[44px] px-5 py-3 rounded-xl border border-border bg-card hover:bg-muted font-semibold text-sm text-foreground inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
-              >
-                <Calendar className="w-4 h-4 text-royal" />
-                {vt('bookAppointmentBtn')}
-              </Link>
-              <Link
-                to={`/${validLang}/institute/visa-centre/track`}
-                className="min-h-[44px] px-5 py-3 rounded-xl border border-royal/20 bg-royal/5 hover:bg-royal/10 text-royal font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
-              >
-                {vt('trackStatusBtn')} →
-              </Link>
+                {/* CTAs */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link
+                    to={`/${validLang}/institute/visa-centre/apply`}
+                    className="min-h-[44px] px-6 py-3 rounded-xl bg-royal hover:bg-royal/90 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-white active:scale-[0.98]"
+                  >
+                    <FileCheck className="w-4 h-4" />
+                    {vt('requestServiceBtn')}
+                  </Link>
+                  <Link
+                    to={`/${validLang}/institute/visa-centre/appointments`}
+                    className="min-h-[44px] px-5 py-3 rounded-xl border border-border bg-card hover:bg-muted font-semibold text-sm text-foreground inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
+                  >
+                    <Calendar className="w-4 h-4 text-royal" />
+                    {vt('bookAppointmentBtn')}
+                  </Link>
+                  <Link
+                    to={`/${validLang}/institute/visa-centre/track`}
+                    className="min-h-[44px] px-5 py-3 rounded-xl border border-royal/20 bg-royal/5 hover:bg-royal/10 text-royal font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all focus-visible:outline-2 focus-visible:outline-royal active:scale-[0.98]"
+                  >
+                    {vt('trackStatusBtn')} →
+                  </Link>
+                </div>
+              </div>
+
+              {/* Visual Asset (Map / Illustration) maintaining 16:9 Aspect Ratio */}
+              <div className="hero-card__visual flex items-center justify-center p-6 shadow-sm">
+                <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#1e3a8a_1.5px,transparent_1.5px)] [background-size:20px_20px]" />
+                <div className="relative z-10 text-center space-y-3">
+                  <div className="w-14 h-14 mx-auto rounded-full bg-royal/15 border border-royal/30 flex items-center justify-center text-royal shadow-sm">
+                    <ShieldCheck className="w-7 h-7" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-xs font-black uppercase tracking-wider text-foreground block">
+                      Iraq ⇄ China Strategic Corridor
+                    </span>
+                    <span className="text-[11px] text-muted-foreground block">
+                      Official Consular &amp; Biometric Facilitation Hub
+                    </span>
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-card/90 backdrop-blur-xs border border-border text-[9px] font-mono text-muted-foreground">
+                  16:9 Aspect Ratio
+                </div>
+              </div>
             </div>
 
             {/* Quick Metrics */}

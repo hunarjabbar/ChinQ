@@ -130,18 +130,18 @@ export function SettlementHowItWorksPage() {
         {/* Steps Stepper Grid */}
         <div className="space-y-6">
           {steps.map((st, i) => (
-            <div key={i} className="pay-card p-6 flex flex-col sm:flex-row items-start gap-5 border border-gray-200 hover:border-[#C8102E] bg-white group">
+            <div key={i} className="pay-card p-6 flex flex-col sm:flex-row items-start gap-5 border border-gray-200 hover:border-[brand-800] bg-white group">
               <div className="flex items-center gap-3 shrink-0">
-                <span className="font-mono text-2xl font-black text-[#C8102E] w-12 text-center">
+                <span className="font-mono text-2xl font-black text-[brand-800] w-12 text-center">
                   {st.num}
                 </span>
-                <div className="w-12 h-12 rounded-2xl bg-red-50 text-[#C8102E] flex items-center justify-center group-hover:bg-[#C8102E] group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-red-50 text-[brand-800] flex items-center justify-center group-hover:bg-[brand-800] group-hover:text-white transition-colors">
                   <st.icon size={22} />
                 </div>
               </div>
 
               <div className="space-y-1.5 flex-1">
-                <h3 className="text-base sm:text-lg font-black text-gray-900 group-hover:text-[#C8102E] transition-colors">
+                <h3 className="text-base sm:text-lg font-black text-gray-900 group-hover:text-[brand-800] transition-colors">
                   {st.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">

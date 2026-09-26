@@ -20,7 +20,7 @@ export function SettlementTrackerDetailPage() {
         <div className="flex items-center gap-2">
           <Link
             to={`/${lang}/settlement/tracker`}
-            className="text-xs font-bold text-gray-500 hover:text-[#C8102E] flex items-center gap-1 transition-colors"
+            className="text-xs font-bold text-gray-500 hover:text-[brand-800] flex items-center gap-1 transition-colors"
           >
             <ArrowLeft size={14} className="rtl:rotate-180" />
             <span>Back to Public Tracker</span>

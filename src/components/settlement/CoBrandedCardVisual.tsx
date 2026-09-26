@@ -91,7 +91,7 @@ export function CoBrandedCardVisual({
             isFlipped ? 'rotate-y-180 opacity-0 pointer-events-none' : 'rotate-y-0 opacity-100'
           }`}
           style={{
-            background: 'linear-gradient(135deg, #A00D26 0%, #C8102E 40%, #7F0A1E 100%)'
+            background: 'linear-gradient(135deg, brand-800 0%, brand-800 40%, brand-800 100%)'
           }}
         >
           {/* Subtle Guilloche / Geometric Background Pattern */}
@@ -100,7 +100,7 @@ export function CoBrandedCardVisual({
           {/* Top Bar: ICA Logo Left, Qi Logo Right */}
           <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#C8102E] font-black text-xs shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[brand-800] font-black text-xs shadow-sm">
                 ICA
               </div>
               <div className="flex flex-col leading-none">
@@ -239,7 +239,7 @@ export function CoBrandedCardVisual({
 
       {/* Hidden SVG element for SVG export */}
       <svg id="co-branded-card-svg" className="hidden" width="400" height="252" viewBox="0 0 400 252" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="252" rx="16" fill="#C8102E" />
+        <rect width="400" height="252" rx="16" fill="brand-800" />
         <rect x="0" y="0" width="400" height="252" rx="16" fill="url(#grad)" />
         <text x="24" y="36" fill="#ffffff" fontSize="12" fontWeight="bold">IRAQI-CHINESE AGENCY</text>
         <text x="320" y="36" fill="#fde047" fontSize="12" fontWeight="bold">QI CARD</text>
@@ -248,8 +248,8 @@ export function CoBrandedCardVisual({
         <text x="330" y="215" fill="#ffffff" fontSize="16" fontWeight="bold">{scheme}</text>
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#A00D26" />
-            <stop offset="100%" stopColor="#7F0A1E" />
+            <stop offset="0%" stopColor="brand-800" />
+            <stop offset="100%" stopColor="brand-800" />
           </linearGradient>
         </defs>
       </svg>

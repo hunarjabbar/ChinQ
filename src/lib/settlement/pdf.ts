@@ -18,7 +18,7 @@ export function generateCalculatorPdf(data: {
   const doc = new jsPDF();
   
   // Header with Red Brand Band
-  doc.setFillColor(200, 16, 46); // #C8102E
+  doc.setFillColor(200, 16, 46); // brand-800
   doc.rect(0, 0, 210, 22, 'F');
   
   doc.setTextColor(255, 255, 255);

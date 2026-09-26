@@ -14,7 +14,14 @@ import {
   Handshake,
   Globe,
   Download,
-  BookOpen
+  BookOpen,
+  Landmark,
+  Coins,
+  Scale,
+  FileCheck,
+  GraduationCap,
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { 
@@ -25,6 +32,7 @@ import {
   Area
 } from 'recharts';
 import { generateInstitutionalPdf } from '../../utils/pdfGenerator';
+import { cn } from '../../lib/utils';
 
 interface HeroCoverProps {
   src: string;
@@ -648,6 +656,296 @@ export function InstituteHome() {
                   <span>{tLocal.downloadPdf}</span>
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* First-Class Institutional Services & Bilateral Initiatives Section */}
+      <section className="space-y-8 scroll-mt-32 min-w-0" id="institutional-services">
+        <div className="section-header border-b border-neutral-200 dark:border-neutral-800 pb-6">
+          <div className="section-header__text space-y-1.5">
+            <h2 className="section-heading uppercase tracking-tight">
+              {lang === 'ar' ? 'الخدمات المؤسسية والمبادرات الثنائية' : lang === 'zh' ? '智库机构服务与战略倡议' : lang === 'ckb' ? 'خزمەتگوزارییە دامەزراوەییەکان' : 'Institutional Services & Initiatives'}
+            </h2>
+            <p className="section-eyebrow">
+              {lang === 'ar' ? 'المسارات السيادية والمرافق التشغيلية الـ٦ برعاية المعهد' : lang === 'zh' ? '由 CISE 主管运营的六大主权通道与双边服务实体' : lang === 'ckb' ? '٦ ناوەند و هێڵی سەروەری لەژێر چاودێری پەیمانگا' : 'Sovereign Clearing, Risk Mitigation, & Bilateral Facilitation Rails'}
+            </p>
+          </div>
+          <div className="section-header__action">
+            <Link 
+              to={`/${lang}/institute/services`} 
+              className="research-pillar-card__cta"
+            >
+              <span>{lang === 'ar' ? 'دليل الخدمات الكامل' : lang === 'zh' ? '查看全部服务名录' : lang === 'ckb' ? 'تەواوی خزمەتگوزارییەکان' : 'Explore All Services'}</span>
+              <span className="cta-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* 6 First-Class Initiatives Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
+          {/* Service 1: Summit */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">
+                  {lang === 'ar' ? 'الملتقى السنوي · السليمانية' : lang === 'zh' ? '年度双边峰会 · 苏莱曼尼亚' : lang === 'ckb' ? 'لووتکەی ساڵانە' : 'Annual Convening · Sulaymaniyah'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                  <Landmark size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'القمة الاقتصادية والمعرض الثنائي' : lang === 'zh' ? '伊拉克-中国经济峰会暨博览会' : lang === 'ckb' ? 'لووتکەی ئابووری و پێشانگای دوولایەنە' : 'Iraq-China Economic Summit & Bilateral Expo'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar' 
+                  ? 'منصة سيادية ثنائية المسار تضم قمة رفيعة المستوى ومعرضاً شاملاً لـ١١ قطاعاً استراتيجياً من الاقتصادين العراقي والصيني.'
+                  : lang === 'zh'
+                  ? '国家级双轨盛会：高规格部长级政策闭门峰会与涵盖国民经济11大重点产业的全景式双边博览会。'
+                  : lang === 'ckb'
+                  ? 'لووتکەیەکی ئاستبەرز و پێشانگایەکی دوولایەنەی هاوبەش بۆ ١١ کەرتی ئابووری نێوان عێراق و چین.'
+                  : 'A dual-format convening—a high-level sovereign policy summit alongside an 11-sector bilateral expo linking Iraqi & Chinese enterprises.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>Policy Track</span>
+                <span aria-hidden="true">·</span>
+                <span>B2B Finance</span>
+                <span aria-hidden="true">·</span>
+                <span>Tech Transfer</span>
+                <span aria-hidden="true">·</span>
+                <span>11 Pavilions</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/summit`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'دخول بوابة القمة' : lang === 'zh' ? '进入峰会专区' : lang === 'ckb' ? 'چوونە ناو لووتکە' : 'Enter the Summit'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 2: Settlement */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-emerald-500/30 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                  {lang === 'ar' ? 'مسار المقاصة السيادي' : lang === 'zh' ? '主权清算通道' : lang === 'ckb' ? 'هێڵی پاکتاوی سەروەری' : 'Sovereign Clearing Rail'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <Coins size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'تسوية المدفوعات المباشرة (IQD ⇄ RMB)' : lang === 'zh' ? '第纳尔/人民币直接清算结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان (IQD ⇄ RMB)' : 'Direct IQD ⇄ RMB Payment Settlement'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'مقاصة ثنائية مباشرة تقضي على وسيط الدولار، مع هامش صرف ٠٪، وتنفيذ معتمد من البنك المركزي العراقي وتكامل بطاقات Qi.'
+                  : lang === 'zh'
+                  ? '双边本币直接清算结算体系，规避第三国货币敞口，零汇率滑点，经伊拉克央行官方特许监管。'
+                  : lang === 'ckb'
+                  ? 'پاکتاوی ڕاستەوخۆی دوولایەنە کە پێویستی بە دۆلار ناهێڵێت، بە سپڕێدی ٠٪ و ڕێکخراو لەلایەن بانکی ناوەندی.'
+                  : 'Direct bilateral clearing eliminating third-currency USD friction with 0% FX drag, CBI-accredited execution, and Qi card integration.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>0% FX Spread</span>
+                <span aria-hidden="true">·</span>
+                <span>24-48h Settlement</span>
+                <span aria-hidden="true">·</span>
+                <span>CBI Regulated</span>
+                <span aria-hidden="true">·</span>
+                <span>Qi Card</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/settlement`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'بوابة التسوية السيادية' : lang === 'zh' ? '进入结算中心' : lang === 'ckb' ? 'ناوەندی پاکتاو' : 'Access Settlement Portal'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 3: Insurance Facilitation */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-blue-500/30 hover:border-blue-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">
+                  {lang === 'ar' ? 'تسهيل التأمين السيادي' : lang === 'zh' ? '主权保险促进' : lang === 'ckb' ? 'بیمەی سەروەری' : 'Sovereign Insurance Facilitation'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                  <ShieldCheck size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'تغطية ائتمان الصادرات ومخاطر المشاريع' : lang === 'zh' ? '出口信用与工程风险综合承保' : lang === 'ckb' ? 'بیمەی متمانەی هەناردە و مەترسی پڕۆژە' : 'Export Credit & Project Risk Coverage'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'تنسيق مباشر مع مؤسسة سينوشور وشركات إعادة التأمين لتوفير تغطية شاملة للشحن، والائتمان التجاري، ومخاطر السيادة.'
+                  : lang === 'zh'
+                  ? '直连中国出口信用保险公司（中信保），为双边贸易与基建工程提供跨境货运险、买方信贷险及主权政治风险兜底。'
+                  : lang === 'ckb'
+                  ? 'هەماهەنگی لەگەڵ سینۆشوور بۆ دابینکردنی بیمەی گشتگیری بار، متمانە، و کەمکردنەوەی مەترسی سیاسی.'
+                  : 'Coordinating with Sinosure and international underwriters to provide cargo transit, deferred credit, and political risk mitigation.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>Sinosure Credit</span>
+                <span aria-hidden="true">·</span>
+                <span>Cargo Insurance</span>
+                <span aria-hidden="true">·</span>
+                <span>360d Terms</span>
+                <span aria-hidden="true">·</span>
+                <span>PRR Rating</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/insurance-facilitation`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'بوابة التأمين المؤسسي' : lang === 'zh' ? '进入保险促进专区' : lang === 'ckb' ? 'بیمەی سەروەری' : 'Access Insurance Portal'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 4: Visa Advisory Centre */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-teal-500/30 hover:border-teal-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-teal-600 dark:text-teal-400">
+                  {lang === 'ar' ? 'مركز الاستشارات والفيزا' : lang === 'zh' ? '双边签证服务' : lang === 'ckb' ? 'ناوەندی ڤیزا' : 'Bilateral Visa Consultancy'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+                  <FileCheck size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'مركز التأشيرات الثنائية والاستشارات' : lang === 'zh' ? '中伊双边签证咨询与服务中心' : lang === 'ckb' ? 'ناوەندی ڕاوێژکاری ڤیزای دوولایەنە' : 'Bilateral Visa Advisory Centre'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'خدمة استشارية وتيسيرية معتمدة تقدم إرشادات موثقة ومتوافقة لمعاملات التأشيرات بين العراق والصين في كلا الاتجاهين.'
+                  : lang === 'zh'
+                  ? '独立权威咨询机构，为中国公民赴伊及伊拉克各界赴华提供标准化的商务、工签、留学及团队签证合规全流程指引。'
+                  : lang === 'ckb'
+                  ? 'خزمەتگوزارییەکی سەربەخۆی باوەڕپێکراو بۆ ڕاوێژکاری تەواوی ڤیزای بازرگانی و گەشتیاری نێوان عێراق و چین.'
+                  : 'Independent advisory providing compliant, documented guidance and document verification for Iraq–China visa applicants.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>Business Visa</span>
+                <span aria-hidden="true">·</span>
+                <span>Work Permit</span>
+                <span aria-hidden="true">·</span>
+                <span>Document Check</span>
+                <span aria-hidden="true">·</span>
+                <span>Delegations</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/visa-centre`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'دخول مركز التأشيرات' : lang === 'zh' ? '进入签证中心' : lang === 'ckb' ? 'ناوەندی ڤیزا' : 'Enter Visa Centre'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 5: Chinese Language Centre */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-rose-500/30 hover:border-rose-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-rose-600 dark:text-rose-400">
+                  {lang === 'ar' ? 'تعليم اللغة الصينية · السليمانية' : lang === 'zh' ? '语言教学与考点' : lang === 'ckb' ? 'فێرکاری زمانی چینی' : 'Chinese Language Tutoring · Sulaymaniyah'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                  <GraduationCap size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'المركز الصيني لتعليم اللغة والشهادات' : lang === 'zh' ? '中国中心汉语言教学与认证' : lang === 'ckb' ? 'ناوەندی زمانی چینی و بڕوانامەکان' : 'Chinese Centre (Language & Training)'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'أول مركز لتعليم اللغة الصينية متوافق دولياً في السليمانية، يقدم مناهج HSK القياسية واختبارات معتمدة وكادر تدريسي أصيل.'
+                  : lang === 'zh'
+                  ? '苏莱曼尼亚首个对接国际标准的专业中文教学机构，提供标准 HSK 1–9 级考级培训、商务汉语及中外语言交流合作认证。'
+                  : lang === 'ckb'
+                  ? 'یەکەمین ناوەندی ستانداردی زمانی چینی لە سلێمانی بە پرۆگرامی HSK و مامۆستایانی خاوەن بڕوانامەی باوەڕپێکراو.'
+                  : 'The first internationally aligned Chinese language training centre in Sulaymaniyah, delivering standard HSK 1–9 curricula.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>HSK 1–6</span>
+                <span aria-hidden="true">·</span>
+                <span>HSK 7–9</span>
+                <span aria-hidden="true">·</span>
+                <span>HSKK Oral</span>
+                <span aria-hidden="true">·</span>
+                <span>Business Chinese</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/chinese-center`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'استكشاف المركز الصيني' : lang === 'zh' ? '进入语言教学中心' : lang === 'ckb' ? 'ناوەندی زمانی چینی' : 'Explore Chinese Centre'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 6: Strategic Consultancy */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-purple-500/30 hover:border-purple-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 dark:text-purple-400">
+                  {lang === 'ar' ? 'الاستشارات العابرة للحدود' : lang === 'zh' ? '跨境投资战略顾问' : lang === 'ckb' ? 'ڕاوێژکاری سنووربەزێن' : 'Cross-Border Advisory'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                  <Scale size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'الاستشارات المالية والقانونية الاستراتيجية' : lang === 'zh' ? '战略财税与跨境法律合规咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی ستراتیژی' : 'Strategic Financial & Legal Consultancy'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'استشارات متخصصة للشركات الصينية الداخلة للعراق، ولرجال الأعمال العراقيين المتوسعين في الصين، والتوافق مع قوانين الاستثمار.'
+                  : lang === 'zh'
+                  ? '为中国企业入伊投资落地及伊拉克资本赴华展业提供法务架构设计、税收筹划、投资委准入审批及合规尽职调查。'
+                  : lang === 'ckb'
+                  ? 'ڕاوێژکاری پسپۆڕانە بۆ کۆمپانیا چینییەکان لە عێراق و وەبەرهێنەرانی عێراقی لە چین، بەپێی یاساکانی وەبەرهێنان.'
+                  : 'Bilateral advisory for inbound and outbound enterprises, FDI structuring, joint venture compliance, and sovereign regulatory alignment.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>FDI Advisory</span>
+                <span aria-hidden="true">·</span>
+                <span>Tax Structuring</span>
+                <span aria-hidden="true">·</span>
+                <span>KBOI & NIC</span>
+                <span aria-hidden="true">·</span>
+                <span>MOFCOM Aligned</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/consultancy`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'طلب استشارة استراتيجية' : lang === 'zh' ? '进入咨询服务专区' : lang === 'ckb' ? 'داواکاری ڕاوێژکاری' : 'Request Consultation'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
             </div>
           </div>
         </div>

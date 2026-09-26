@@ -31,8 +31,8 @@ export const VisaNavHeader: React.FC<VisaNavHeaderProps> = ({ lang }) => {
       {/* Top Banner / Breadcrumb & Positioning Row */}
       <div className="border-b border-border/50 py-2 bg-muted/30">
         <div className="page-container">
-          <div className="breadcrumb justify-between">
-            <div className="breadcrumb__item flex items-center gap-2 flex-wrap">
+          <div className="breadcrumb justify-between gap-2">
+            <div className="breadcrumb__item flex items-center gap-2 flex-wrap min-w-0 max-w-full">
               <Link
                 to={`/${lang}/institute`}
                 className="text-muted-foreground hover:text-royal transition-colors text-xs font-medium truncate max-w-xs"
@@ -50,7 +50,7 @@ export const VisaNavHeader: React.FC<VisaNavHeaderProps> = ({ lang }) => {
               </span>
             </div>
 
-            <div className="breadcrumb__item flex items-center gap-3 shrink-0">
+            <div className="breadcrumb__item flex items-center gap-2 sm:gap-3 flex-wrap min-w-0 max-w-full">
               <Link
                 to={`/${lang}/institute/visa-centre/track`}
                 className="inline-flex items-center justify-center gap-1.5 text-royal font-bold hover:underline text-xs min-h-[44px] px-2"

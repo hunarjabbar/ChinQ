@@ -40,8 +40,8 @@ export function HomeSettlementSpotlight({ lang }: Props) {
         {/* Top Header & Sovereign Badge */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#C8102E] border border-red-200 text-xs font-black uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#C8102E] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[brand-800] border border-red-200 text-xs font-black uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-[brand-800] animate-pulse"></span>
               <span>{t('settlement.badge.sovereign')}</span>
             </div>
 
@@ -76,25 +76,25 @@ export function HomeSettlementSpotlight({ lang }: Props) {
         {/* 4 Pillars Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="pay-card p-4 border border-red-100 bg-red-50/30">
-            <div className="text-[#C8102E] font-black text-lg sm:text-xl font-mono">0.00%</div>
+            <div className="text-[brand-800] font-black text-lg sm:text-xl font-mono">0.00%</div>
             <div className="text-xs font-bold text-gray-800 mt-1">Zero Third-Currency Drag</div>
             <div className="text-[11px] text-gray-500">No USD double conversion spreads</div>
           </div>
 
           <div className="pay-card p-4 border border-red-100 bg-red-50/30">
-            <div className="text-[#C8102E] font-black text-lg sm:text-xl font-mono">24 – 48 Hours</div>
+            <div className="text-[brand-800] font-black text-lg sm:text-xl font-mono">24 – 48 Hours</div>
             <div className="text-xs font-bold text-gray-800 mt-1">Direct Rapid Clearing</div>
             <div className="text-[11px] text-gray-500">Bypasses intermediary wire holds</div>
           </div>
 
           <div className="pay-card p-4 border border-red-100 bg-red-50/30">
-            <div className="text-[#C8102E] font-black text-lg sm:text-xl font-mono">CBI & PBoC</div>
+            <div className="text-[brand-800] font-black text-lg sm:text-xl font-mono">CBI & PBoC</div>
             <div className="text-xs font-bold text-gray-800 mt-1">Sovereign Regulatory Rail</div>
             <div className="text-[11px] text-gray-500">CIPS & Trade Bank of Iraq channels</div>
           </div>
 
           <div className="pay-card p-4 border border-red-100 bg-red-50/30">
-            <div className="text-[#C8102E] font-black text-lg sm:text-xl font-mono">Qi & ICA Card</div>
+            <div className="text-[brand-800] font-black text-lg sm:text-xl font-mono">Qi & ICA Card</div>
             <div className="text-xs font-bold text-gray-800 mt-1">Dual-Currency FinTech</div>
             <div className="text-[11px] text-gray-500">IQD & RMB linked wallets</div>
           </div>
@@ -111,7 +111,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                 onClick={() => setActiveTab('calc')}
                 className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeTab === 'calc'
-                    ? 'bg-[#C8102E] text-white shadow-xs'
+                    ? 'bg-[brand-800] text-white shadow-xs'
                     : 'bg-white text-gray-600 hover:text-gray-900 border border-gray-200'
                 }`}
               >
@@ -124,7 +124,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                 onClick={() => setActiveTab('tracker')}
                 className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeTab === 'tracker'
-                    ? 'bg-[#C8102E] text-white shadow-xs'
+                    ? 'bg-[brand-800] text-white shadow-xs'
                     : 'bg-white text-gray-600 hover:text-gray-900 border border-gray-200'
                 }`}
               >
@@ -135,7 +135,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
 
             <Link
               to={activeTab === 'calc' ? `/${lang}/settlement/calculator` : `/${lang}/settlement/tracker`}
-              className="text-xs font-bold text-[#C8102E] hover:underline hidden sm:flex items-center gap-1"
+              className="text-xs font-bold text-[brand-800] hover:underline hidden sm:flex items-center gap-1"
             >
               <span>{isAr ? 'فتح النظام بالكامل' : isZh ? '进入完整系统' : isCkb ? 'کردنەوەی تەواو' : 'Open Full Tool'}</span>
               <span className="cta-arrow">→</span>
@@ -154,7 +154,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                       step={5000000}
                       value={iqdAmount}
                       onChange={(e) => setIqdAmount(Math.max(1000000, Number(e.target.value)))}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 font-mono font-black text-lg text-gray-900 focus:outline-none focus:border-[#C8102E] bg-white shadow-inner"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 font-mono font-black text-lg text-gray-900 focus:outline-none focus:border-[brand-800] bg-white shadow-inner"
                     />
                     <span className="absolute end-4 top-1/2 -translate-y-1/2 font-mono text-xs font-bold text-gray-400">IQD</span>
                   </div>
@@ -166,7 +166,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                       key={preset}
                       type="button"
                       onClick={() => setIqdAmount(preset)}
-                      className="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-red-50 hover:text-[#C8102E] text-gray-600 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-red-50 hover:text-[brand-800] text-gray-600 transition-colors"
                     >
                       {(preset / 1000000).toFixed(0)}M IQD
                     </button>
@@ -189,7 +189,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                 <div className="text-xs font-bold uppercase tracking-wider text-gray-400">
                   Direct Cleared RMB Delivery
                 </div>
-                <div className="text-3xl sm:text-4xl font-black font-mono text-[#C8102E]">
+                <div className="text-3xl sm:text-4xl font-black font-mono text-[brand-800]">
                   ¥{rmbReceived.toLocaleString(undefined, { maximumFractionDigits: 2 })} RMB
                 </div>
 
@@ -219,7 +219,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="font-mono">
                   <span className="text-gray-500">Live Demonstrative Reference: </span>
-                  <strong className="text-[#C8102E] font-bold">SETTLE-2026-000123</strong>
+                  <strong className="text-[brand-800] font-bold">SETTLE-2026-000123</strong>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
@@ -229,7 +229,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
 
               {/* Visual 7-step tracker mini bar */}
               <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                <div className="bg-[#C8102E] h-full rounded-full transition-all duration-700" style={{ width: '71%' }}></div>
+                <div className="bg-[brand-800] h-full rounded-full transition-all duration-700" style={{ width: '71%' }}></div>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-[10px] font-bold text-center">
@@ -237,7 +237,7 @@ export function HomeSettlementSpotlight({ lang }: Props) {
                 <div className="p-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">2. KYC ✓</div>
                 <div className="p-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">3. Customs ✓</div>
                 <div className="p-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">4. Rate Lock ✓</div>
-                <div className="p-2 rounded-lg bg-red-100 text-[#C8102E] border border-red-300 font-black">5. Dispatching ⟳</div>
+                <div className="p-2 rounded-lg bg-red-100 text-[brand-800] border border-red-300 font-black">5. Dispatching ⟳</div>
                 <div className="p-2 rounded-lg bg-gray-50 text-gray-400 border border-gray-200">6. CIPS Exec</div>
                 <div className="p-2 rounded-lg bg-gray-50 text-gray-400 border border-gray-200">7. Archival</div>
               </div>

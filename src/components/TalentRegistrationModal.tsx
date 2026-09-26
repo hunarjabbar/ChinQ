@@ -998,7 +998,7 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                   </h3>
                   <div 
                     className="text-xs font-sans opacity-90 mt-0.5"
-                    style={{ color: '#fee2e2' }}
+                    style={{ color: 'brand-100' }}
                   >
                     {isAr ? 'موثقة ومسجلة في السجل العام لشبكة التحرير والائتلاف الاستراتيجي' : isZh ? '已载入双边主权联合信息总账与企业中央管理中枢数据库' : 'Registered in the Sovereign Ledger & Central Administration Portal'}
                   </div>

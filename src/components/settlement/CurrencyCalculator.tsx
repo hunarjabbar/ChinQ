@@ -107,7 +107,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-5">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 text-[#C8102E] text-[11px] font-black uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 text-[brand-800] text-[11px] font-black uppercase tracking-wider mb-2">
             <Zap size={13} />
             <span>{t('settlement.pillar.zeroFx')}</span>
           </div>
@@ -141,7 +141,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
               type="text"
               value={rawInput}
               onChange={handleAmountChange}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white font-mono text-lg font-bold text-gray-900 focus:outline-none focus:border-[#C8102E] focus:ring-2 focus:ring-red-100 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white font-mono text-lg font-bold text-gray-900 focus:outline-none focus:border-[brand-800] focus:ring-2 focus:ring-red-100 transition-all"
               placeholder="0"
               aria-label="Settlement input amount"
             />
@@ -155,7 +155,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
         <div className="md:col-span-2 flex justify-center py-2 md:py-0">
           <button
             onClick={toggleDirection}
-            className="w-11 h-11 rounded-full bg-white border border-gray-300 shadow-sm hover:border-[#C8102E] hover:text-[#C8102E] text-gray-600 flex items-center justify-center transition-all cursor-pointer group"
+            className="w-11 h-11 rounded-full bg-white border border-gray-300 shadow-sm hover:border-[brand-800] hover:text-[brand-800] text-gray-600 flex items-center justify-center transition-all cursor-pointer group"
             title="Toggle Clearing Direction"
           >
             <ArrowRightLeft size={16} className="group-hover:rotate-180 transition-transform duration-300" />
@@ -221,14 +221,14 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
         </div>
 
         {/* Right Column: Direct Route (Prominent Red Accent + Green Badge) */}
-        <div className="p-6 rounded-2xl border-2 border-[#C8102E] bg-white shadow-xl relative overflow-hidden flex flex-col justify-between space-y-6">
+        <div className="p-6 rounded-2xl border-2 border-[brand-800] bg-white shadow-xl relative overflow-hidden flex flex-col justify-between space-y-6">
           
           {/* Top highlight bar */}
-          <div className="absolute top-0 inset-x-0 h-1.5 bg-[#C8102E]"></div>
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-[brand-800]"></div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-black text-[#C8102E] uppercase tracking-wider flex items-center gap-1.5">
+              <span className="text-xs font-black text-[brand-800] uppercase tracking-wider flex items-center gap-1.5">
                 <CheckCircle2 size={16} className="text-emerald-600" />
                 <span>{t('settlement.calc.directRoute')}</span>
               </span>
@@ -250,7 +250,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
               <div className="text-[11px] font-bold uppercase tracking-wider text-[#991B1B]">
                 {t('settlement.calc.totalSavings')}
               </div>
-              <div className="text-xl sm:text-2xl font-black text-[#C8102E] font-mono mt-0.5">
+              <div className="text-xl sm:text-2xl font-black text-[brand-800] font-mono mt-0.5">
                 +{calculation.diff.toLocaleString(undefined, { maximumFractionDigits: 2 })} {targetCurrency}
               </div>
               <div className="text-[10px] text-gray-600 mt-1">
@@ -264,7 +264,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
                 <span>{t('settlement.calc.settlementTimeDirect')}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
-                <ShieldCheck size={14} className="text-[#C8102E]" />
+                <ShieldCheck size={14} className="text-[brand-800]" />
                 <span>Direct CBI ⇄ PBoC Sovereign Benchmark Parity</span>
               </div>
             </div>
@@ -277,7 +277,7 @@ export function CurrencyCalculator({ lang, initialAmount = 50000000, initialSour
               <span className="text-emerald-700">100% Direct Retention</span>
             </div>
             <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden flex">
-              <div className="h-full bg-[#C8102E] transition-all duration-500" style={{ width: '100%' }}></div>
+              <div className="h-full bg-[brand-800] transition-all duration-500" style={{ width: '100%' }}></div>
             </div>
           </div>
 

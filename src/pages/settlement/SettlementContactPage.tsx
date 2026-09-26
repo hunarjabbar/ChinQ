@@ -45,7 +45,7 @@ export function SettlementContactPage() {
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <MapPin size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                  <MapPin size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-gray-900">Baghdad Central Directorate</strong>
                     <span className="text-gray-500">Iraqi-Chinese Agency HQ, Al-Jadriya, Baghdad, Iraq</span>
@@ -53,7 +53,7 @@ export function SettlementContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                  <MapPin size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-gray-900">Beijing Bilateral Liaison</strong>
                     <span className="text-gray-500">Chaoyang Trade Center, Beijing, China</span>
@@ -61,7 +61,7 @@ export function SettlementContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                  <Phone size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-gray-900">Direct Telephone Desk</strong>
                     <span className="text-gray-500 font-mono">+964 780 000 8821 / +86 10 8899 7721</span>
@@ -69,7 +69,7 @@ export function SettlementContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                  <Mail size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-gray-900">Official Settlement Desk Email</strong>
                     <span className="text-gray-500 font-mono">settlement@iraq-china.agency</span>
@@ -80,7 +80,7 @@ export function SettlementContactPage() {
 
             <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-[11px] text-gray-500 space-y-1">
               <div className="font-bold text-gray-800 flex items-center gap-1.5">
-                <Clock size={13} className="text-[#C8102E]" />
+                <Clock size={13} className="text-[brand-800]" />
                 <span>Operating Hours</span>
               </div>
               <p>Baghdad: 08:30 – 16:30 (UTC+3) Sunday – Thursday</p>
@@ -109,7 +109,7 @@ export function SettlementContactPage() {
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
 
@@ -119,7 +119,7 @@ export function SettlementContactPage() {
                     type="text"
                     value={form.org}
                     onChange={(e) => setForm({ ...form, org: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
 
@@ -130,7 +130,7 @@ export function SettlementContactPage() {
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
 
@@ -142,7 +142,7 @@ export function SettlementContactPage() {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Briefly state intended trade scope, approximate volume in IQD or RMB, and specific questions..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   ></textarea>
                 </div>
 

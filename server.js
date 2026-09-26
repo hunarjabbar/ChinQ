@@ -12941,6 +12941,29 @@ async function startServer() {
       res.status(500).json({ error: "Failed to subscribe" });
     }
   });
+  app.post("/api/institute/partnerships", async (req, res) => {
+    try {
+      const { fullName, email, company, role, bio, bureau, hash } = req.body;
+      if (!fullName || !email || !company) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+      const appRecord = await prisma.partnershipApplication.create({
+        data: {
+          fullName,
+          email,
+          company,
+          role: role || "News Agency",
+          bio: bio || "",
+          bureau: bureau || "Global Diplomatic Intelligence Bureau",
+          hash: hash || `ICA-PARTNER-${Date.now()}`
+        }
+      });
+      res.json({ success: true, application: appRecord });
+    } catch (err) {
+      console.error("Error creating partnership application:", err);
+      res.status(500).json({ error: err.message || "Internal Server Error" });
+    }
+  });
   app.all("/api/*", (req, res) => {
     res.status(404).json({ error: `API route not found: ${req.method} ${req.originalUrl}` });
   });

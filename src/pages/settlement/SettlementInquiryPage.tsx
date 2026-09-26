@@ -145,7 +145,7 @@ export function SettlementInquiryPage() {
           {/* SECTION 1: Remitter Entity Details */}
           <div className="pay-card p-6 sm:p-8 space-y-5">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <Building2 size={18} className="text-[#C8102E]" />
+              <Building2 size={18} className="text-[brand-800]" />
               <h2 className="text-sm font-black uppercase tracking-wider text-gray-900">
                 1. Remitter (Payer) Enterprise Profile
               </h2>
@@ -161,7 +161,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. Al-Rafidain Heavy Machinery Trading LLC"
                   value={formData.organizationName}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -171,7 +171,7 @@ export function SettlementInquiryPage() {
                   name="organizationType"
                   value={formData.organizationType}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white"
                 >
                   <option value="CORPORATION">Joint Stock / Limited Liability Corporation</option>
                   <option value="SME">Small or Medium Enterprise (SME)</option>
@@ -187,7 +187,7 @@ export function SettlementInquiryPage() {
                   name="countryOfRegistration"
                   value={formData.countryOfRegistration}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -200,7 +200,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. 102948-BAG"
                   value={formData.commercialRegNumber}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -213,7 +213,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. IQ-TIN-889021"
                   value={formData.taxRegNumber}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -226,7 +226,7 @@ export function SettlementInquiryPage() {
                   placeholder="Authorized Officer Name"
                   value={formData.contactName}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. Managing Director / CFO"
                   value={formData.contactTitle}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -251,7 +251,7 @@ export function SettlementInquiryPage() {
                   placeholder="officer@company.iq"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -264,7 +264,7 @@ export function SettlementInquiryPage() {
                   placeholder="+964 780 123 4567"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
             </div>
@@ -273,7 +273,7 @@ export function SettlementInquiryPage() {
           {/* SECTION 2: Transaction Parameters & Beneficiary */}
           <div className="pay-card p-6 sm:p-8 space-y-5">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <FileText size={18} className="text-[#C8102E]" />
+              <FileText size={18} className="text-[brand-800]" />
               <h2 className="text-sm font-black uppercase tracking-wider text-gray-900">
                 2. Transaction Scope & Counterparty Beneficiary
               </h2>
@@ -286,7 +286,7 @@ export function SettlementInquiryPage() {
                   name="direction"
                   value={formData.direction}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white font-bold"
                 >
                   <option value="IQD_TO_RMB">IQD ➔ RMB (Import from China)</option>
                   <option value="RMB_TO_IQD">RMB ➔ IQD (Export / Project Inflow)</option>
@@ -301,7 +301,7 @@ export function SettlementInquiryPage() {
                   required
                   value={formData.sourceAmount}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] font-mono font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] font-mono font-bold"
                 />
               </div>
 
@@ -314,7 +314,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. Shenzhen Huaxin Optoelectronics Technology Co., Ltd."
                   value={formData.counterpartyName}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -327,7 +327,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. Bank of China (Shenzhen Branch)"
                   value={formData.counterpartyBank}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -339,7 +339,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. BKCHCNBJ400"
                   value={formData.counterpartySwift}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -352,7 +352,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. 6217 0098 4410 8892"
                   value={formData.counterpartyAccount}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] font-mono"
                 />
               </div>
 
@@ -365,7 +365,7 @@ export function SettlementInquiryPage() {
                   placeholder="Describe goods, machinery specifications, container volume, origin port, and commercial agreement context..."
                   value={formData.purpose}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 ></textarea>
               </div>
 
@@ -377,7 +377,7 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. 8471.30, 8504.40"
                   value={formData.hsCodes}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -389,16 +389,16 @@ export function SettlementInquiryPage() {
                   placeholder="e.g. INV-2026-CHN-098"
                   value={formData.invoiceReference}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
             </div>
           </div>
 
           {/* SECTION 3: Compliance & Attestations */}
-          <div className="pay-card p-6 sm:p-8 space-y-4 border-s-4 border-s-[#C8102E]">
+          <div className="pay-card p-6 sm:p-8 space-y-4 border-s-4 border-s-[brand-800]">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <ShieldCheck size={18} className="text-[#C8102E]" />
+              <ShieldCheck size={18} className="text-[brand-800]" />
               <h2 className="text-sm font-black uppercase tracking-wider text-gray-900">
                 3. Mandatory Regulatory & Sanctions Attestations
               </h2>
@@ -411,7 +411,7 @@ export function SettlementInquiryPage() {
                   name="sanctionsAttested"
                   checked={formData.sanctionsAttested}
                   onChange={handleChange}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700 leading-snug">
                   I certify that all remitter and beneficiary entities are free from UN Security Council and Central Bank of Iraq sanctions.
@@ -424,7 +424,7 @@ export function SettlementInquiryPage() {
                   name="antiMoneyLaunderingAttested"
                   checked={formData.antiMoneyLaunderingAttested}
                   onChange={handleChange}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700 leading-snug">
                   I attest compliance with Iraq AML/CFT Law No. 39 of 2015 and affirm funds are legitimate trade capital.
@@ -437,7 +437,7 @@ export function SettlementInquiryPage() {
                   name="cbiComplianceAttested"
                   checked={formData.cbiComplianceAttested}
                   onChange={handleChange}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700 leading-snug">
                   I agree to submit all commercial invoices and customs declarations to the CBI foreign currency clearance platform.
@@ -450,7 +450,7 @@ export function SettlementInquiryPage() {
                   name="beneficialOwnerAttested"
                   checked={formData.beneficialOwnerAttested}
                   onChange={handleChange}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700 leading-snug">
                   Ultimate Beneficial Ownership (UBO) identity is declared honestly and without nominee concealment.
@@ -463,7 +463,7 @@ export function SettlementInquiryPage() {
                   name="facilitationRoleUnderstood"
                   checked={formData.facilitationRoleUnderstood}
                   onChange={handleChange}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700 leading-snug font-bold">
                   I understand that ICA operates exclusively as a bilateral trade facilitator, and actual banking settlement occurs through accredited CBI-licensed commercial banks.

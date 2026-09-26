@@ -77,18 +77,18 @@ function PortalDropdown({ lang }: { lang: Locale }) {
                 className="flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
                 onClick={() => setIsOpen(false)}
               >
-                <div className="w-5 h-5 flex items-center justify-center rounded bg-[#C8102E] text-white group-hover:bg-[#A00D26] transition-colors shrink-0">
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-[brand-800] text-white group-hover:bg-[brand-800] transition-colors shrink-0">
                   <Coins size={12} />
                 </div>
                 <div className="flex flex-col flex-1">
-                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-[#C8102E] transition-colors">
+                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-[brand-800] transition-colors">
                     {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی ڕاستەوخۆ' : 'Payment Settlement'}
                   </span>
                   <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
                     {lang === 'ar' ? 'مقاصة سيادية وبطاقة كي' : lang === 'zh' ? '0%汇差 • Qi联名卡' : lang === 'ckb' ? 'بێ کرێی سێیەم' : 'Direct Parity • Qi Card'}
                   </span>
                 </div>
-                <ChevronRight size={14} className="text-neutral-400 group-hover:text-[#C8102E] rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+                <ChevronRight size={14} className="text-neutral-400 group-hover:text-[brand-800] rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
               </Link>
               <Link 
                 to={`/${lang}/cultural-exchange`} 
@@ -275,19 +275,30 @@ export function Header({ lang }: { lang: Locale }) {
           </div>
           <div className="flex-1 z-40 flex items-center px-3 sm:px-6 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-2.5 sm:gap-4 ml-auto justify-end min-w-0 flex-wrap sm:flex-nowrap py-1">
              {/* Initiatives Dropdown */}
-     <div className="relative group h-full flex items-center">
-       <button className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
-         {t('nav.initiatives')} <ChevronDown size={14} />
-       </button>
-       <div className="absolute top-full right-0 rtl:right-auto rtl:left-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md w-60 py-2 hidden group-hover:block z-50">
-         <Link to={`/${lang}/settlement`} className="block px-4 py-2 text-xs font-bold uppercase text-[#C8102E] hover:bg-red-50 dark:hover:bg-red-950/30">
-           {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '第纳尔/人民币结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
-         </Link>
-         <Link to={`/${lang}/summit`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.summit')}</Link>
-         <Link to={`/${lang}/institute/chinese-center`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.chineseCenter')}</Link>
-         <Link to={`/${lang}/institute/visa-centre`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800">{t('nav.visaCentre')}</Link>
-       </div>
-     </div>
+             <div className="relative group h-full flex items-center">
+               <button className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
+                 {t('nav.initiatives')} <ChevronDown size={14} />
+               </button>
+               <div className="absolute top-full right-0 rtl:right-auto rtl:left-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-2xl w-64 py-2 hidden group-hover:block z-50">
+                 <Link to={`/${lang}/institute/summit`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.summit')}</Link>
+                 <Link to={`/${lang}/institute/settlement`} className="block px-4 py-2 text-xs font-bold uppercase text-[brand-800] hover:bg-red-50 dark:hover:bg-red-950/30">
+                   {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '第纳尔/人民币结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
+                 </Link>
+                 <Link to={`/${lang}/institute/insurance-facilitation`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
+                   {lang === 'ar' ? 'تسهيل التأمين السيادي' : lang === 'zh' ? '主权保险促进' : lang === 'ckb' ? 'ئاسانکاری بیمەی سەروەری' : 'Insurance Facilitation'}
+                 </Link>
+                 <Link to={`/${lang}/institute/chinese-center`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.chineseCenter')}</Link>
+                 <Link to={`/${lang}/institute/visa-centre`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.visaCentre')}</Link>
+                 <Link to={`/${lang}/institute/consultancy`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
+                   {lang === 'ar' ? 'الاستشارات المالية والقانونية' : lang === 'zh' ? '战略财务与法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی' : 'Strategic Financial & Legal Consultancy'}
+                 </Link>
+                 <div className="border-t border-neutral-100 dark:border-neutral-800 my-1 pt-1">
+                   <Link to={`/${lang}/institute/services`} className="block px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#D97706] hover:bg-amber-50 dark:hover:bg-amber-950/30">
+                     {lang === 'ar' ? 'دليل خدمات معهد CISE الكامل →' : lang === 'zh' ? '查看 CISE 全部服务名录 →' : lang === 'ckb' ? 'تەواوی خزمەتگوزارییەکانی CISE →' : 'All CISE Institutional Services →'}
+                   </Link>
+                 </div>
+               </div>
+             </div>
 
      <Link to={`/${lang}/newsroom`} className="flex items-center text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 hover:text-brand-700 transition-colors">
                 {lang === 'ar' ? 'غرفة الأخبار' : lang === 'zh' ? '新闻中心' : lang === 'ckb' ? 'هەواڵەکان' : 'Newsroom'}

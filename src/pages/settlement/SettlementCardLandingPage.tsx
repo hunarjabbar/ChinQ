@@ -74,7 +74,7 @@ export function SettlementCardLandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="pay-card p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <Zap size={20} />
               </div>
               <h3 className="text-base font-black text-gray-900">Dual-Currency IQD & RMB Sub-Wallets</h3>
@@ -84,7 +84,7 @@ export function SettlementCardLandingPage() {
             </div>
 
             <div className="pay-card p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <Globe2 size={20} />
               </div>
               <h3 className="text-base font-black text-gray-900">Omni-Channel Acceptance</h3>
@@ -94,7 +94,7 @@ export function SettlementCardLandingPage() {
             </div>
 
             <div className="pay-card p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <ShieldCheck size={20} />
               </div>
               <h3 className="text-base font-black text-gray-900">Consular & Trade VIP Priority</h3>
@@ -104,7 +104,7 @@ export function SettlementCardLandingPage() {
             </div>
 
             <div className="pay-card p-6 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <Sparkles size={20} />
               </div>
               <h3 className="text-base font-black text-gray-900">PBOC 3.0 & EMV Security Architecture</h3>
@@ -118,7 +118,7 @@ export function SettlementCardLandingPage() {
         {/* Card Licensing Disclosure (Part 6.5) */}
         <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 space-y-2 text-xs text-gray-500 leading-relaxed">
           <div className="font-bold text-gray-900 uppercase tracking-wider text-[11px] flex items-center gap-2">
-            <Landmark size={15} className="text-[#C8102E]" />
+            <Landmark size={15} className="text-[brand-800]" />
             <span>Card Issuance Authority & Regulatory Notice</span>
           </div>
           <p>

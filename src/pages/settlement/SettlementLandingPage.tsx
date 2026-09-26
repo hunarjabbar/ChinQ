@@ -65,7 +65,7 @@ export function SettlementLandingPage() {
             <div className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 to={`/${lang}/settlement/inquiry`}
-                className="px-5 py-3.5 rounded-xl bg-white text-[#C8102E] font-black text-xs sm:text-sm hover:bg-gray-100 transition-all shadow-lg flex items-center gap-2 group cursor-pointer"
+                className="px-5 py-3.5 rounded-xl bg-white text-[brand-800] font-black text-xs sm:text-sm hover:bg-gray-100 transition-all shadow-lg flex items-center gap-2 group cursor-pointer"
               >
                 <span>{t('settlement.hero.ctaInquiry')}</span>
                 <ChevronRight size={16} className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
@@ -130,7 +130,7 @@ export function SettlementLandingPage() {
                 Full alignment with Central Bank of Iraq directives and People's Bank of China CIPS rails.
               </p>
             </div>
-            <Link to={`/${lang}/settlement/compliance`} className="text-xs font-bold text-[#C8102E] hover:underline flex items-center gap-1">
+            <Link to={`/${lang}/settlement/compliance`} className="text-xs font-bold text-[brand-800] hover:underline flex items-center gap-1">
               <span>View Full Framework</span>
               <span className="cta-arrow">→</span>
             </Link>
@@ -159,19 +159,19 @@ export function SettlementLandingPage() {
 
             <ul className="space-y-2.5 text-xs text-gray-700">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b1')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b2')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b3')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b4')}</span>
               </li>
             </ul>

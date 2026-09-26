@@ -73,7 +73,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 {t('footer.initiativesHeading')}
               </h4>
               <div className="flex flex-col gap-2.5">
-                <Link to={`/${lang}/settlement`} className="text-[#C8102E] hover:underline text-xs font-bold uppercase">
+                <Link to={`/${lang}/settlement`} className="text-[brand-800] hover:underline text-xs font-bold uppercase">
                   {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
                 </Link>
                 <Link to={`/${lang}/settlement/card`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">
@@ -85,6 +85,9 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
                 </Link>
                 <Link to={`/${lang}/chinese-center`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.chineseCenter')}</Link>
                 <Link to={`/${lang}/visa-centre`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.visaCentre')}</Link>
+                <Link to={`/${lang}/consultancy`} className="text-[brand-800] hover:underline text-xs font-bold uppercase">
+                  {lang === 'ar' ? 'الاستشارات المالية والقانونية' : lang === 'zh' ? '战略财务与法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی' : 'Strategic Financial & Legal Consultancy'}
+                </Link>
               </div>
             </div>
 

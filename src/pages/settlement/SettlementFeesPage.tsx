@@ -34,7 +34,7 @@ export function SettlementFeesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* IQD -> RMB Schedule */}
-          <div className="pay-card p-6 sm:p-8 space-y-6 border-t-4 border-t-[#C8102E]">
+          <div className="pay-card p-6 sm:p-8 space-y-6 border-t-4 border-t-[brand-800]">
             <div>
               <span className="pay-badge">Import Flow</span>
               <h2 className="text-xl font-black text-gray-900 mt-2">
@@ -60,7 +60,7 @@ export function SettlementFeesPage() {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Settlement Execution Window:</span>
-                <span className="font-mono font-bold text-[#C8102E]">24 – 48 Hours</span>
+                <span className="font-mono font-bold text-[brand-800]">24 – 48 Hours</span>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ export function SettlementFeesPage() {
           </div>
 
           {/* RMB -> IQD Schedule */}
-          <div className="pay-card p-6 sm:p-8 space-y-6 border-t-4 border-t-[#7F0A1E]">
+          <div className="pay-card p-6 sm:p-8 space-y-6 border-t-4 border-t-[brand-800]">
             <div>
               <span className="pay-badge">Export & Investment</span>
               <h2 className="text-xl font-black text-gray-900 mt-2">
@@ -100,7 +100,7 @@ export function SettlementFeesPage() {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Settlement Execution Window:</span>
-                <span className="font-mono font-bold text-[#C8102E]">24 – 48 Hours</span>
+                <span className="font-mono font-bold text-[brand-800]">24 – 48 Hours</span>
               </div>
             </div>
 
@@ -129,7 +129,7 @@ export function SettlementFeesPage() {
                 <tr>
                   <th className="p-3.5 text-start">Fee Component</th>
                   <th className="p-3.5 text-start">Traditional USD Route</th>
-                  <th className="p-3.5 text-start text-[#C8102E]">Direct Bilateral Rail (ICA)</th>
+                  <th className="p-3.5 text-start text-[brand-800]">Direct Bilateral Rail (ICA)</th>
                   <th className="p-3.5 text-start text-emerald-700">Your Net Savings</th>
                 </tr>
               </thead>
@@ -137,25 +137,25 @@ export function SettlementFeesPage() {
                 <tr>
                   <td className="p-3.5 font-bold text-gray-900">Double FX Conversion Spread</td>
                   <td className="p-3.5 text-gray-600">3.5% – 5.5% (~$4,500)</td>
-                  <td className="p-3.5 font-bold text-[#C8102E]">0.00% ($0)</td>
+                  <td className="p-3.5 font-bold text-[brand-800]">0.00% ($0)</td>
                   <td className="p-3.5 font-bold text-emerald-700">+$4,500 Saved</td>
                 </tr>
                 <tr>
                   <td className="p-3.5 font-bold text-gray-900">Intermediary Correspondent Bank Wire Tolls</td>
                   <td className="p-3.5 text-gray-600">$75 – $150 per leg</td>
-                  <td className="p-3.5 font-bold text-[#C8102E]">$0 (Direct Channel)</td>
+                  <td className="p-3.5 font-bold text-[brand-800]">$0 (Direct Channel)</td>
                   <td className="p-3.5 font-bold text-emerald-700">+$150 Saved</td>
                 </tr>
                 <tr>
                   <td className="p-3.5 font-bold text-gray-900">Beneficiary Lifting / Inward Clearance Tolls</td>
                   <td className="p-3.5 text-gray-600">0.5% – 1.0% (~$750)</td>
-                  <td className="p-3.5 font-bold text-[#C8102E]">0.35% (~$350 flat)</td>
+                  <td className="p-3.5 font-bold text-[brand-800]">0.35% (~$350 flat)</td>
                   <td className="p-3.5 font-bold text-emerald-700">+$400 Saved</td>
                 </tr>
                 <tr className="bg-red-50/60 font-black">
                   <td className="p-3.5 text-gray-900">TOTAL ESTIMATED TRANSACTION COST</td>
                   <td className="p-3.5 text-red-700">~$5,400 (5.4%)</td>
-                  <td className="p-3.5 text-[#C8102E]">~$350 (0.35%)</td>
+                  <td className="p-3.5 text-[brand-800]">~$350 (0.35%)</td>
                   <td className="p-3.5 text-emerald-700 text-sm">+$5,050 Net Advantage</td>
                 </tr>
               </tbody>

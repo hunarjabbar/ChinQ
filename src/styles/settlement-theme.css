@@ -6,10 +6,10 @@
   --pay-color-white: #FFFFFF;
   --pay-color-surface: #F9FAFB;
   --pay-color-border: #E5E7EB;
-  --pay-color-red-primary: #C8102E;
-  --pay-color-red-hover: #A00D26;
-  --pay-color-red-active: #7F0A1E;
-  --pay-color-red-soft: #FEE2E2;
+  --pay-color-red-primary: #cc0000;
+  --pay-color-red-hover: #cc0000;
+  --pay-color-red-active: #cc0000;
+  --pay-color-red-soft: #fff5f5;
   --pay-color-red-text: #991B1B;
   --pay-color-text: #111827;
   --pay-color-text-muted: #6B7280;
@@ -22,7 +22,7 @@
   background-color: var(--pay-color-surface);
   color: var(--pay-color-text);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .pay-portal h1,
@@ -121,7 +121,7 @@
 }
 
 .pay-hero-gradient {
-  background: linear-gradient(135deg, #C8102E 0%, #7F0A1E 100%);
+  background: linear-gradient(135deg, #cc0000 0%, #cc0000 100%);
 }
 
 .pay-focus-ring:focus,

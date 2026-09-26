@@ -128,7 +128,7 @@ export function SettlementCardRegisterPage() {
                   placeholder="e.g. ALI H. MOHAMMED"
                   value={formData.fullNameOnCard}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 font-mono uppercase font-bold focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 font-mono uppercase font-bold focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -138,7 +138,7 @@ export function SettlementCardRegisterPage() {
                   name="cardScheme"
                   value={formData.cardScheme}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white font-bold"
                 >
                   <option value="VISA">Visa</option>
                   <option value="MASTERCARD">Mastercard</option>
@@ -151,7 +151,7 @@ export function SettlementCardRegisterPage() {
                   name="cardTier"
                   value={formData.cardTier}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white font-bold"
                 >
                   <option value="PLATINUM">Platinum (Executive Privilege)</option>
                   <option value="GOLD">Gold (Standard Merchant)</option>
@@ -166,7 +166,7 @@ export function SettlementCardRegisterPage() {
                   name="primaryCurrency"
                   value={formData.primaryCurrency}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white font-bold"
                 >
                   <option value="DUAL">IQD & RMB Dual Direct Linked</option>
                   <option value="IQD">IQD Primary</option>
@@ -180,7 +180,7 @@ export function SettlementCardRegisterPage() {
                   name="deliveryOption"
                   value={formData.deliveryOption}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] bg-white"
                 >
                   <option value="PHYSICAL_BAGHDAD">Baghdad Qi Center (Mansour)</option>
                   <option value="PHYSICAL_ERBIL">Erbil Qi VIP Branch (Empire World)</option>
@@ -207,7 +207,7 @@ export function SettlementCardRegisterPage() {
                   placeholder="Official legal name"
                   value={formData.legalName}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -219,7 +219,7 @@ export function SettlementCardRegisterPage() {
                   required
                   value={formData.nationality}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -232,7 +232,7 @@ export function SettlementCardRegisterPage() {
                   placeholder="e.g. A18273645"
                   value={formData.passportNumber}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E] font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800] font-mono"
                 />
               </div>
 
@@ -244,7 +244,7 @@ export function SettlementCardRegisterPage() {
                   required
                   value={formData.passportExpiry}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -257,7 +257,7 @@ export function SettlementCardRegisterPage() {
                   placeholder="name@enterprise.iq"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
 
@@ -270,21 +270,21 @@ export function SettlementCardRegisterPage() {
                   placeholder="+964 770 123 4567"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[brand-800]"
                 />
               </div>
             </div>
           </div>
 
           {/* Section 3: Compliance & KYC Sign-off */}
-          <div className="pay-card p-6 sm:p-8 space-y-3 border-s-4 border-s-[#C8102E] text-xs">
+          <div className="pay-card p-6 sm:p-8 space-y-3 border-s-4 border-s-[brand-800] text-xs">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 name="termsAccepted"
                 checked={formData.termsAccepted}
                 onChange={handleChange}
-                className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                className="mt-0.5 text-[brand-800] focus:ring-red-500"
               />
               <span className="text-gray-700">
                 I agree to the Qi Card terms of service, schedule of tariffs, and electronic account agreement.
@@ -297,7 +297,7 @@ export function SettlementCardRegisterPage() {
                 name="cbiKycAccepted"
                 checked={formData.cbiKycAccepted}
                 onChange={handleChange}
-                className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                className="mt-0.5 text-[brand-800] focus:ring-red-500"
               />
               <span className="text-gray-700">
                 I authorize Qi Card and accredited banking partners to verify my identity records under CBI Anti-Money Laundering regulations.

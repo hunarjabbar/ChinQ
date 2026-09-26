@@ -18,7 +18,8 @@ import {
   ArrowRight,
   Menu,
   X,
-  ChevronDown
+  ChevronDown,
+  Landmark
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { useI18n } from '../../hooks/useI18n';
@@ -87,6 +88,13 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       icon: BookOpen 
     },
     { 
+      id: 'services', 
+      label: { en: 'Services & Initiatives', ar: 'الخدمات والمبادرات', zh: '机构服务与倡议', ckb: 'خزمەتگوزاری و دەستپێشخەرییەکان' }, 
+      shortLabel: { en: 'Services', ar: 'الخدمات', zh: '服务', ckb: 'خزمەتگوزاری' },
+      icon: Landmark,
+      hasDropdown: true
+    },
+    { 
       id: 'publications', 
       label: { en: 'Publications', ar: 'الأبحاث والمنشورات', zh: '研究文库', ckb: 'بڵاوکراوەکان' }, 
       shortLabel: { en: 'Publications', ar: 'المنشورات', zh: '文库', ckb: 'بڵاوکراوەکان' },
@@ -115,6 +123,45 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       label: { en: 'Events', ar: 'الفعاليات', zh: '政策峰会', ckb: 'چالاکییەکان' }, 
       shortLabel: { en: 'Events', ar: 'الفعاليات', zh: '峰会', ckb: 'چالاکی' },
       icon: Calendar 
+    },
+  ];
+
+  const serviceSubItems = [
+    { 
+      id: 'summit', 
+      label: { en: 'Iraq-China Economic Summit & Expo', ar: 'القمة الاقتصادية والمعرض الثنائي', zh: '伊拉克-中国经济峰会暨博览会', ckb: 'لووتکەی ئابووری و پێشانگای دوولایەنە' }, 
+      tag: { en: 'Sulaymaniyah', ar: 'السليمانية', zh: '苏莱曼尼亚', ckb: 'سلێمانی' },
+      path: `/${lang}/institute/summit` 
+    },
+    { 
+      id: 'settlement', 
+      label: { en: 'Direct IQD ⇄ RMB Clearing Rail', ar: 'تسوية المدفوعات المباشرة (دينار/يوان)', zh: '第纳尔/人民币主权清算通道', ckb: 'پاکتاوی دراوەکان (دینار/یوان)' }, 
+      tag: { en: '0% USD Drag', ar: 'بدون احتكاك بالدولار', zh: '零美元敞口', ckb: 'بێ دۆلار' },
+      path: `/${lang}/institute/settlement` 
+    },
+    { 
+      id: 'insurance-facilitation', 
+      label: { en: 'Sovereign Insurance Facilitation', ar: 'تسهيل التأمين السيادي (سينوشور)', zh: '主权保险与中信保对接服务', ckb: 'ئاسانکاری بیمەی سەروەری' }, 
+      tag: { en: 'Sinosure', ar: 'سينوشور', zh: '中信保', ckb: 'سینۆشوور' },
+      path: `/${lang}/institute/insurance-facilitation` 
+    },
+    { 
+      id: 'visa-centre', 
+      label: { en: 'Bilateral Visa Advisory Centre', ar: 'مركز الاستشارات والفيزا الثنائية', zh: '双边签证咨询与代办服务中心', ckb: 'ناوەندی ڕاوێژکاری ڤیزا' }, 
+      tag: { en: 'Bilateral', ar: 'ثنائي', zh: '双向代办', ckb: 'دوولایەنە' },
+      path: `/${lang}/institute/visa-centre` 
+    },
+    { 
+      id: 'chinese-center', 
+      label: { en: 'Chinese Language Tutoring Centre', ar: 'مركز تعليم اللغة الصينية المعتمد', zh: '汉语言教学与 HSK 认证考点', ckb: 'ناوەندی فێرکاری زمانی چینی' }, 
+      tag: { en: 'HSK 1–9', ar: 'HSK 1–9', zh: 'HSK考点', ckb: 'HSK 1–9' },
+      path: `/${lang}/institute/chinese-center` 
+    },
+    { 
+      id: 'consultancy', 
+      label: { en: 'Strategic Financial & Legal Advisory', ar: 'الاستشارات المالية والقانونية', zh: '跨境财税与战略法律咨询', ckb: 'ڕاوێژکاری دارایی و یاسایی' }, 
+      tag: { en: 'Advisory', ar: 'استشارات', zh: '财税法律', ckb: 'ڕاوێژکاری' },
+      path: `/${lang}/institute/consultancy` 
     },
   ];
 
@@ -198,12 +245,91 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
         </div>
 
         {/* ROW 2: Primary Institute Navigation Band */}
-        <div className="bg-[#0B1120] border-b border-white/10 shadow-inner w-full max-w-full overflow-hidden">
-          <div className="site-header__inner w-full overflow-x-auto scrollbar-none">
+        <div className="bg-[#0B1120] border-b border-white/10 shadow-inner w-full max-w-full overflow-x-auto lg:overflow-visible scrollbar-none">
+          <div className="site-header__inner w-full overflow-x-auto lg:overflow-visible scrollbar-none">
             <nav className="flex items-center gap-1 sm:gap-2 h-11 lg:h-12 w-max min-w-full lg:min-w-0" aria-label="Institute Main Navigation">
               {navItems.map((item) => {
                 const path = item.id ? `/${lang}/institute/${item.id}` : `/${lang}/institute`;
-                const active = item.id === '' ? isHome : location.pathname.startsWith(path);
+                const active = item.id === '' 
+                  ? isHome 
+                  : (item.id === 'services' 
+                      ? location.pathname.startsWith(`/${lang}/institute/services`) ||
+                        location.pathname.startsWith(`/${lang}/institute/summit`) ||
+                        location.pathname.startsWith(`/${lang}/institute/settlement`) ||
+                        location.pathname.startsWith(`/${lang}/institute/insurance-facilitation`) ||
+                        location.pathname.startsWith(`/${lang}/institute/visa-centre`) ||
+                        location.pathname.startsWith(`/${lang}/institute/chinese-center`) ||
+                        location.pathname.startsWith(`/${lang}/institute/consultancy`)
+                      : location.pathname.startsWith(path));
+
+                if (item.id === 'services') {
+                  return (
+                    <div key={item.id} className="relative group h-full flex items-center shrink-0">
+                      <Link
+                        to={path}
+                        className={cn(
+                          "relative h-full flex items-center gap-1.5 px-3 sm:px-4 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all focus-visible:outline-none focus-visible:text-white",
+                          active 
+                            ? "text-[#D97706] font-black" 
+                            : "text-neutral-400 hover:text-white"
+                        )}
+                      >
+                        <span>
+                          <span className="hidden 2xl:inline">{item.label[lang] || item.label.en}</span>
+                          <span className="2xl:hidden">{item.shortLabel[lang] || item.shortLabel.en}</span>
+                        </span>
+                        <ChevronDown size={12} className="transition-transform group-hover:rotate-180 opacity-70" />
+
+                        {active && (
+                          <motion.div 
+                            layoutId="activeTabUnderline"
+                            className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#D97706] rounded-t-sm shadow-[0_0_8px_rgba(217,119,6,0.6)]"
+                          />
+                        )}
+                      </Link>
+
+                      {/* Dropdown Menu for First-Class Services */}
+                      <div className="absolute top-full left-0 rtl:left-auto rtl:right-0 bg-[#0F172A] border border-white/10 shadow-2xl rounded-2xl w-80 py-3 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                        <div className="px-4 pb-2 mb-2 border-b border-white/10 flex items-center justify-between">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">
+                            {lang === 'ar' ? 'المبادرات والخدمات التشغيلية' : lang === 'zh' ? '智库六大直属服务' : lang === 'ckb' ? 'خزمەتگوزارییە سەرەکییەکان' : 'CISE Operational Initiatives'}
+                          </span>
+                        </div>
+                        <div className="space-y-1 px-2">
+                          {serviceSubItems.map((sub) => {
+                            const isSubActive = location.pathname.startsWith(sub.path);
+                            return (
+                              <Link
+                                key={sub.id}
+                                to={sub.path}
+                                className={cn(
+                                  "flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all",
+                                  isSubActive 
+                                    ? "bg-[#D97706]/15 text-[#D97706]" 
+                                    : "text-neutral-300 hover:text-white hover:bg-white/5"
+                                )}
+                              >
+                                <span className="truncate pr-2">{sub.label[lang] || sub.label.en}</span>
+                                <span className="text-[9px] font-black uppercase tracking-wider text-neutral-500 shrink-0">
+                                  {sub.tag[lang] || sub.tag.en}
+                                </span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                        <div className="pt-2 mt-2 border-t border-white/10 px-2">
+                          <Link
+                            to={`/${lang}/institute/services`}
+                            className="flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-[#D97706] hover:bg-[#D97706]/10 transition-colors"
+                          >
+                            <span>{lang === 'ar' ? 'دليل الخدمات الكامل' : lang === 'zh' ? '查看全部服务目录' : lang === 'ckb' ? 'هەموو خزمەتگوزارییەکان' : 'View Full Services Directory'}</span>
+                            <ArrowRight size={13} className={isRtl ? 'rotate-180' : ''} />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
                 
                 return (
                   <Link
@@ -217,8 +343,8 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                     )}
                   >
                     <span>
-                      <span className="hidden xl:inline">{item.label[lang] || item.label.en}</span>
-                      <span className="xl:hidden">{item.shortLabel[lang] || item.shortLabel.en}</span>
+                      <span className="hidden 2xl:inline">{item.label[lang] || item.label.en}</span>
+                      <span className="2xl:hidden">{item.shortLabel[lang] || item.shortLabel.en}</span>
                     </span>
 
                     {/* Gold Underline Tab Highlight */}
@@ -295,7 +421,17 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {navItems.map((item) => {
                   const path = item.id ? `/${lang}/institute/${item.id}` : `/${lang}/institute`;
-                  const active = item.id === '' ? isHome : location.pathname.startsWith(path);
+                  const active = item.id === '' 
+                    ? isHome 
+                    : (item.id === 'services'
+                        ? location.pathname.startsWith(`/${lang}/institute/services`) ||
+                          location.pathname.startsWith(`/${lang}/institute/summit`) ||
+                          location.pathname.startsWith(`/${lang}/institute/settlement`) ||
+                          location.pathname.startsWith(`/${lang}/institute/insurance-facilitation`) ||
+                          location.pathname.startsWith(`/${lang}/institute/visa-centre`) ||
+                          location.pathname.startsWith(`/${lang}/institute/chinese-center`) ||
+                          location.pathname.startsWith(`/${lang}/institute/consultancy`)
+                        : location.pathname.startsWith(path));
                   const Icon = item.icon;
                   
                   return (
@@ -317,6 +453,26 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                 })}
               </div>
 
+              {/* Mobile First-Class Initiatives Quick Strip */}
+              <div className="pt-3 border-t border-white/10 space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706] block px-1">
+                  {lang === 'ar' ? 'المبادرات الـ٦ التشغيلية' : lang === 'zh' ? '智库六大运营倡议' : lang === 'ckb' ? '٦ دەستپێشخەری سەرەکی' : '6 Core Institutional Initiatives'}
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                  {serviceSubItems.map((sub) => (
+                    <Link
+                      key={sub.id}
+                      to={sub.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="px-3 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-neutral-300 hover:text-white flex items-center justify-between"
+                    >
+                      <span className="truncate">{sub.label[lang] || sub.label.en}</span>
+                      <span className="text-[9px] text-[#D97706] shrink-0 font-bold uppercase">{sub.tag[lang] || sub.tag.en}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                 <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">Language</span>
                 <LanguageSwitcher lang={lang} />
@@ -334,7 +490,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       {/* Institute Specialized Footer */}
       <footer className="bg-[#0F172A] text-white py-14 border-t border-white/10 w-full">
         <div className="page-container">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 bg-[#D97706] rounded-xl flex items-center justify-center text-[#0F172A] font-black text-xl shadow-md">
@@ -354,26 +510,70 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               </p>
             </div>
 
+            {/* Column 3: Institutional Services (All 6 First-Class Initiatives) */}
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-5">{t('footerResearchPillarsHeading')}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">
+                {lang === 'ar' ? 'الخدمات والمبادرات' : lang === 'zh' ? '智库服务与倡议' : lang === 'ckb' ? 'خزمەتگوزارییەکان' : 'Institutional Services'}
+              </h3>
               <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
-                  <Link to={`/${lang}/institute/research/energy-bri`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/summit`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'القمة والمعرض الثنائي' : lang === 'zh' ? '经济峰会暨博览会' : lang === 'ckb' ? 'لووتکەی ئابووری' : 'Bilateral Summit & Expo'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/settlement`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'تسوية المدفوعات السيادية' : lang === 'zh' ? '第纳尔/人民币清算' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement Rail'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/insurance-facilitation`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'تأمين الصادرات (سينوشور)' : lang === 'zh' ? '主权保险对接' : lang === 'ckb' ? 'بیمەی سەروەری' : 'Insurance Facilitation'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/visa-centre`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'مركز استشارات التأشيرات' : lang === 'zh' ? '双边签证中心' : lang === 'ckb' ? 'ناوەندی ڤیزا' : 'Visa Advisory Centre'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/chinese-center`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'مركز تعليم اللغة الصينية' : lang === 'zh' ? '汉语言教学中心' : lang === 'ckb' ? 'ناوەندی زمانی چینی' : 'Chinese Language Centre'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/consultancy`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'الاستشارات المالية والقانونية' : lang === 'zh' ? '战略财税与法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی' : 'Financial & Legal Advisory'}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/${lang}/institute/services`} className="text-[#D97706] hover:underline uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'دليل الخدمات الكامل ←' : lang === 'zh' ? '全部服务名录 →' : lang === 'ckb' ? 'تەواوی خزمەتگوزارییەکان ←' : 'All Services Directory →'}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">{t('footerResearchPillarsHeading')}</h3>
+              <ul className="space-y-1 text-xs font-bold text-neutral-400">
+                <li>
+                  <Link to={`/${lang}/institute/research/energy-bri`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerPillarEnergyBri')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/geo-economics`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/research/geo-economics`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerPillarGeoEconomics')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/diplomacy`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/research/diplomacy`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerPillarDiplomacy')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/research/digital-silk-road`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/research/digital-silk-road`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerPillarDigitalSilkRoad')}
                   </Link>
                 </li>
@@ -381,25 +581,25 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
             </div>
 
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-5">{t('footerResourcesDataHeading')}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">{t('footerResourcesDataHeading')}</h3>
               <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
-                  <Link to={`/${lang}/institute/publications`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/publications`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerResourceWhitePapers')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/data-hub/trade`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/data-hub/trade`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerResourceTradeFlow')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/experts`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/experts`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerResourceFellows')}
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/partnerships`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[40px]">
+                  <Link to={`/${lang}/institute/partnerships`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {t('footerResourceSyndication')}
                   </Link>
                 </li>

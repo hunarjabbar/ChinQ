@@ -47,7 +47,7 @@ export function ComplianceBadges({ lang, compact = false }: Props) {
             key={i} 
             className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-xs"
           >
-            <b.icon size={12} className="text-[#C8102E]" />
+            <b.icon size={12} className="text-[brand-800]" />
             <span>{b.title}</span>
           </span>
         ))}
@@ -63,16 +63,16 @@ export function ComplianceBadges({ lang, compact = false }: Props) {
           href={badge.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="pay-card p-3.5 sm:p-4 flex flex-col justify-between border border-gray-200 hover:border-[#C8102E] bg-white group"
+          className="pay-card p-3.5 sm:p-4 flex flex-col justify-between border border-gray-200 hover:border-[brand-800] bg-white group"
         >
           <div className="flex items-center justify-between mb-2">
-            <div className="w-8 h-8 rounded-lg bg-red-50 text-[#C8102E] flex items-center justify-center group-hover:bg-[#C8102E] group-hover:text-white transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-red-50 text-[brand-800] flex items-center justify-center group-hover:bg-[brand-800] group-hover:text-white transition-colors">
               <badge.icon size={18} />
             </div>
             <CheckCircle size={14} className="text-emerald-600" />
           </div>
           <div>
-            <div className="text-xs font-black text-gray-900 group-hover:text-[#C8102E] transition-colors">
+            <div className="text-xs font-black text-gray-900 group-hover:text-[brand-800] transition-colors">
               {badge.title}
             </div>
             <div className="text-[10px] text-gray-500 mt-0.5 leading-snug">

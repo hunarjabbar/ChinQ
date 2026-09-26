@@ -34,7 +34,7 @@ export function SettlementConfirmationPage() {
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-white border border-gray-200 inline-block font-mono text-base sm:text-lg font-black text-[#C8102E] shadow-xs">
+          <div className="p-4 rounded-xl bg-white border border-gray-200 inline-block font-mono text-base sm:text-lg font-black text-[brand-800] shadow-xs">
             {referenceId}
           </div>
 
@@ -47,7 +47,7 @@ export function SettlementConfirmationPage() {
         <div className="space-y-4">
           <div className="border-b border-gray-200 pb-3">
             <h2 className="text-lg font-black text-gray-900 flex items-center gap-2">
-              <Clock size={18} className="text-[#C8102E]" />
+              <Clock size={18} className="text-[brand-800]" />
               <span>Real-Time Settlement Milestone Status</span>
             </h2>
           </div>

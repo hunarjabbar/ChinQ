@@ -20,17 +20,20 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
   const isRtl = lang === 'ar' || lang === 'ckb';
   const location = useLocation();
 
+  const isCise = location.pathname.includes('/institute/summit');
+  const basePath = isCise ? `/${lang}/institute/summit` : `/${lang}/summit`;
+
   const navItems = [
-    { label: { en: 'Overview', ar: 'نظرة عامة', zh: '峰会总览', ckb: 'پوختە' }, path: `/${lang}/summit` },
-    { label: { en: 'Expo & 11 Pavilions', ar: 'المعرض و١١ جناحاً', zh: '双边博览会与11展区', ckb: 'پێشانگا و ١١ کەرت' }, path: `/${lang}/summit/expo` },
-    { label: { en: 'Floor Plan & Booths', ar: 'المخطط وحجز الأجنحة', zh: '展位平面图与预订', ckb: 'نەخشەی هۆڵ و شوێنەکان' }, path: `/${lang}/summit/expo/floor-plan` },
-    { label: { en: '3-Day Agenda', ar: 'برنامج الـ٣ أيام', zh: '三日全景日程', ckb: 'بەرنامەی ٣ ڕۆژە' }, path: `/${lang}/summit/agenda` },
-    { label: { en: 'Speakers & Fellows', ar: 'المتحدثون والباحثون', zh: '演讲嘉宾与学者', ckb: 'وتاربێژان و توێژەران' }, path: `/${lang}/summit/speakers` },
-    { label: { en: 'ICA 5 Services', ar: 'خدمات ICA الـ٥', zh: 'ICA五大直采服务', ckb: '٥ خزمەتگوزاری سەرەکی' }, path: `/${lang}/summit/services` },
-    { label: { en: 'B2B Matchmaking', ar: 'التوفيق التجاري B2B', zh: 'B2B精准商贸配对', ckb: 'کۆبوونەوەی بازرگانی B2B' }, path: `/${lang}/summit/b2b-matchmaking` },
-    { label: { en: 'Why Sulaymaniyah', ar: 'لماذا السليمانية', zh: '为何选择苏莱曼尼亚', ckb: 'بۆچی سلێمانی' }, path: `/${lang}/summit/about-sulaymaniyah` },
-    { label: { en: 'Sponsorship', ar: 'الرعاية والاستثمار', zh: '赞助与权益', ckb: 'سپۆنسەری' }, path: `/${lang}/summit/sponsors` },
-    { label: { en: 'VIP Access', ar: 'تسجيل الوفود الرسمية', zh: '贵宾与政要通道', ckb: 'تۆماری شاندی فەرمی' }, path: `/${lang}/summit/vip-registration` },
+    { label: { en: 'Overview', ar: 'نظرة عامة', zh: '峰会总览', ckb: 'پوختە' }, path: `${basePath}` },
+    { label: { en: 'Expo & 11 Pavilions', ar: 'المعرض و١١ جناحاً', zh: '双边博览会与11展区', ckb: 'پێشانگا و ١١ کەرت' }, path: `${basePath}/expo` },
+    { label: { en: 'Floor Plan & Booths', ar: 'المخطط وحجز الأجنحة', zh: '展位平面图与预订', ckb: 'نەخشەی هۆڵ و شوێنەکان' }, path: `${basePath}/floor-plan` },
+    { label: { en: '3-Day Agenda', ar: 'برنامج الـ٣ أيام', zh: '三日全景日程', ckb: 'بەرنامەی ٣ ڕۆژە' }, path: `${basePath}/agenda` },
+    { label: { en: 'Speakers & Fellows', ar: 'المتحدثون والباحثون', zh: '演讲嘉宾与学者', ckb: 'وتاربێژان و توێژەران' }, path: `${basePath}/speakers` },
+    { label: { en: 'ICA 5 Services', ar: 'خدمات ICA الـ٥', zh: 'ICA五大直采服务', ckb: '٥ خزمەتگوزاری سەرەکی' }, path: `${basePath}/services` },
+    { label: { en: 'B2B Matchmaking', ar: 'التوفيق التجاري B2B', zh: 'B2B精准商贸配对', ckb: 'کۆبوونەوەی بازرگانی B2B' }, path: `${basePath}/b2b` },
+    { label: { en: 'Why Sulaymaniyah', ar: 'لماذا السليمانية', zh: '为何选择苏莱曼尼亚', ckb: 'بۆچی سلێمانی' }, path: `${basePath}/about-sulaymaniyah` },
+    { label: { en: 'Sponsorship', ar: 'الرعاية والاستثمار', zh: '赞助与权益', ckb: 'سپۆنسەری' }, path: `${basePath}/sponsors` },
+    { label: { en: 'VIP Access', ar: 'تسجيل الوفود الرسمية', zh: '贵宾与政要通道', ckb: 'تۆماری شاندی فەرمی' }, path: `${basePath}/register/vip` },
   ];
 
   return (
@@ -64,7 +67,7 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="flex items-center justify-between h-20 gap-4">
             {/* Summit Brand / Logo */}
-            <Link to={`/${lang}/summit`} className="flex items-center gap-3 shrink-0 group">
+            <Link to={basePath} className="flex items-center gap-3 shrink-0 group">
               <div className="w-11 h-11 rounded-xl bg-brand-800 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
                 <Landmark className="w-6 h-6" />
               </div>

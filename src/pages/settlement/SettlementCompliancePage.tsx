@@ -35,9 +35,9 @@ export function SettlementCompliancePage() {
         <div className="space-y-8">
           
           {/* Pillar 1: Iraqi Sovereign Compliance */}
-          <div className="pay-card p-6 sm:p-8 space-y-4 border-s-4 border-s-[#C8102E]">
+          <div className="pay-card p-6 sm:p-8 space-y-4 border-s-4 border-s-[brand-800]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <Landmark size={20} />
               </div>
               <div>
@@ -62,7 +62,7 @@ export function SettlementCompliancePage() {
           {/* Pillar 2: Chinese Regulatory Framework */}
           <div className="pay-card p-6 sm:p-8 space-y-4 border-s-4 border-s-red-700">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
                 <ShieldCheck size={20} />
               </div>
               <div>

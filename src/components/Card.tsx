@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'article';
+  variant?: 'default' | 'article' | 'hero';
   // Article-specific props
   imageUrl?: string | null;
   category?: string;
@@ -24,7 +24,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export function Card({
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(function Card({
   variant = 'default',
   imageUrl,
   category,
@@ -41,7 +41,7 @@ export function Card({
   className = '',
   children,
   ...props
-}: CardProps) {
+}: CardProps, ref) {
   if (variant === 'article' && href) {
     return (
       <Link
@@ -125,14 +125,27 @@ export function Card({
     );
   }
 
+  if (variant === 'hero') {
+    return (
+      <Component
+        ref={ref}
+        className={className}
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  }
+
   return (
     <Component
+      ref={ref}
       className={`bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xs p-6 ${className}`}
       {...props}
     >
       {children}
     </Component>
   );
-}
+});
 
 export default Card;

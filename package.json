@@ -11,6 +11,7 @@
     "postinstall": "npx prisma generate",
     "preview": "npx vite preview",
     "clean": "npx rimraf dist",
+    "typecheck": "npx tsc --noEmit",
     "lint": "npx tsc --noEmit",
     "lint:css": "npx stylelint \"src/**/*.css\"",
     "test:viewports": "node scripts/test-viewport-and-headings.mjs"

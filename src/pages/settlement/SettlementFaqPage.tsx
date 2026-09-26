@@ -95,10 +95,10 @@ export function SettlementFaqPage() {
                 <button
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : i)}
-                  className="w-full p-5 text-start font-black text-sm text-gray-900 flex items-center justify-between gap-4 cursor-pointer hover:text-[#C8102E] transition-colors"
+                  className="w-full p-5 text-start font-black text-sm text-gray-900 flex items-center justify-between gap-4 cursor-pointer hover:text-[brand-800] transition-colors"
                 >
                   <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={18} className="text-[#C8102E] shrink-0" /> : <ChevronDown size={18} className="text-gray-400 shrink-0" />}
+                  {isOpen ? <ChevronUp size={18} className="text-[brand-800] shrink-0" /> : <ChevronDown size={18} className="text-gray-400 shrink-0" />}
                 </button>
 
                 {isOpen && (

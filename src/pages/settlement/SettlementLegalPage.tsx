@@ -40,7 +40,7 @@ export function SettlementLegalPage() {
         {/* Section 2: Terms of Use */}
         <div className="pay-card p-6 sm:p-8 space-y-4 text-xs text-gray-600 leading-relaxed">
           <h2 className="text-base font-black text-gray-900 flex items-center gap-2">
-            <FileText size={16} className="text-[#C8102E]" />
+            <FileText size={16} className="text-[brand-800]" />
             <span>1. Terms of Facilitation Service</span>
           </h2>
           <p>
@@ -57,7 +57,7 @@ export function SettlementLegalPage() {
         {/* Section 3: AML/CFT Statutory Policy */}
         <div className="pay-card p-6 sm:p-8 space-y-4 text-xs text-gray-600 leading-relaxed">
           <h2 className="text-base font-black text-gray-900 flex items-center gap-2">
-            <Scale size={16} className="text-[#C8102E]" />
+            <Scale size={16} className="text-[brand-800]" />
             <span>2. Anti-Money Laundering & Sanctions Policy</span>
           </h2>
           <p>
@@ -74,7 +74,7 @@ export function SettlementLegalPage() {
         {/* Section 4: Privacy & Data Protection */}
         <div className="pay-card p-6 sm:p-8 space-y-4 text-xs text-gray-600 leading-relaxed">
           <h2 className="text-base font-black text-gray-900 flex items-center gap-2">
-            <ShieldCheck size={16} className="text-[#C8102E]" />
+            <ShieldCheck size={16} className="text-[brand-800]" />
             <span>3. Data Protection & Confidentiality</span>
           </h2>
           <p>

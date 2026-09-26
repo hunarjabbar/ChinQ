@@ -166,7 +166,20 @@ const VisaCentreFaq = lazyWithRetry(() => import('./pages/institute/visa-centre/
 const VisaCentreContact = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreContact').then(m => ({ default: m.VisaCentreContact })));
 const VisaCentreDisclaimer = lazyWithRetry(() => import('./pages/institute/visa-centre/VisaCentreDisclaimer').then(m => ({ default: m.VisaCentreDisclaimer })));
 const ChineseCentreLanding = lazyWithRetry(() => import('./pages/institute/ChineseCentreLanding').then(m => ({ default: m.ChineseCentreLanding })));
+const InsuranceFacilitationPage = lazyWithRetry(() => import('./pages/institute/InsuranceFacilitationPage').then(m => ({ default: m.InsuranceFacilitationPage })));
+const CiseServicesDirectory = lazyWithRetry(() => import('./pages/institute/CiseServicesDirectory').then(m => ({ default: m.CiseServicesDirectory })));
 const AdminVisaCentre = lazyWithRetry(() => import('./pages/AdminVisaCentre').then(m => ({ default: m.AdminVisaCentre })));
+
+// Strategic Financial & Legal Consultancy
+const ConsultancyLanding = lazyWithRetry(() => import('./pages/consultancy/ConsultancyLanding').then(m => ({ default: m.ConsultancyLanding })));
+const ConsultancyIraqBound = lazyWithRetry(() => import('./pages/consultancy/ConsultancyIraqBound').then(m => ({ default: m.ConsultancyIraqBound })));
+const ConsultancyChinaBound = lazyWithRetry(() => import('./pages/consultancy/ConsultancyChinaBound').then(m => ({ default: m.ConsultancyChinaBound })));
+const ConsultancyBilateral = lazyWithRetry(() => import('./pages/consultancy/ConsultancyBilateral').then(m => ({ default: m.ConsultancyBilateral })));
+const ConsultancyInquiry = lazyWithRetry(() => import('./pages/consultancy/ConsultancyInquiry').then(m => ({ default: m.ConsultancyInquiry })));
+const ConsultancyAbout = lazyWithRetry(() => import('./pages/consultancy/ConsultancyMisc').then(m => ({ default: m.ConsultancyAbout })));
+const ConsultancyFAQ = lazyWithRetry(() => import('./pages/consultancy/ConsultancyMisc').then(m => ({ default: m.ConsultancyFAQ })));
+const ConsultancyContact = lazyWithRetry(() => import('./pages/consultancy/ConsultancyMisc').then(m => ({ default: m.ConsultancyContact })));
+const ConsultancyLegal = lazyWithRetry(() => import('./pages/consultancy/ConsultancyMisc').then(m => ({ default: m.ConsultancyLegal })));
 
 // Sovereign Bilateral Payment Settlement Facilitation Portal Pages
 const SettlementLandingPage = lazyWithRetry(() => import('./pages/settlement/SettlementLandingPage').then(m => ({ default: m.SettlementLandingPage })));
@@ -237,9 +250,9 @@ function ThemeApplier() {
         const bc = (brandColor && brandColor.startsWith('#') && brandColor !== '#8B0000' && brandColor !== '#990000' && brandColor !== '#C91C24' && brandColor !== '#800000' && brandColor !== '#a30000') 
           ? brandColor 
           : '#cc0000';
-        root.style.setProperty('--color-brand-950', mixColor(bc, '#000000', 0.18));
-        root.style.setProperty('--color-brand-900', bc); // Exact same red tone as trending background red (#cc0000)
-        root.style.setProperty('--color-brand-800', bc); // Trending background red (#cc0000)
+        root.style.setProperty('--color-brand-950', bc);
+        root.style.setProperty('--color-brand-900', bc);
+        root.style.setProperty('--color-brand-800', bc);
         root.style.setProperty('--color-brand-700', mixColor(bc, '#ffffff', 0.12));
         root.style.setProperty('--color-brand-600', mixColor(bc, '#ffffff', 0.25));
         root.style.setProperty('--color-brand-500', mixColor(bc, '#ffffff', 0.45));
@@ -343,6 +356,13 @@ function SettlementRootRedirect() {
   return <Navigate to={`/${loc}/settlement${settlementSubPath}${location.search}${location.hash}`} replace />;
 }
 
+function ConsultancyRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const consultancySubPath = location.pathname.replace(/^\/consultancy/, '');
+  return <Navigate to={`/${loc}/institute/consultancy${consultancySubPath}${location.search}${location.hash}`} replace />;
+}
+
 function NewsroomRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
@@ -350,6 +370,11 @@ function NewsroomRootRedirect() {
   const subPath = location.pathname.replace(/^\/(newsroom|news-room|news|article|category)/, '');
   const targetPath = isCategory ? `/category${subPath}` : subPath;
   return <Navigate to={`/${loc}/newsroom${targetPath}${location.search}${location.hash}`} replace />;
+}
+
+function LegacyInsuranceRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  return <Navigate to={`/${lang || 'en'}/institute/insurance-facilitation`} replace />;
 }
 
 function LegacyNewsRedirect() {
@@ -559,7 +584,58 @@ const router = createBrowserRouter([
   { path: "/settlement/*", element: <SettlementRootRedirect /> },
   { path: "/settlement-sourcing", element: <SettlementRootRedirect /> },
   { path: "/settlement-sourcing/*", element: <SettlementRootRedirect /> },
+  { path: "/consultancy", element: <ConsultancyRootRedirect /> },
+  { path: "/consultancy/*", element: <ConsultancyRootRedirect /> },
   { path: "/cultural-exchange", element: <RootRedirect /> },
+  {
+    path: "/:lang/institute/settlement",
+    element: <SettlementLangWrapper />,
+    children: [
+      { index: true, element: <SettlementLandingPage /> },
+      { path: "about", element: <SettlementAboutPage /> },
+      { path: "how-it-works", element: <SettlementHowItWorksPage /> },
+      { path: "compliance", element: <SettlementCompliancePage /> },
+      { path: "fees", element: <SettlementFeesPage /> },
+      { path: "calculator", element: <SettlementCalculatorPage /> },
+      { path: "tracker", element: <SettlementTrackerPublicPage /> },
+      { path: "tracker/:referenceId", element: <SettlementTrackerDetailPage /> },
+      { path: "gateway", element: <SettlementGatewayPage /> },
+      { path: "gateway/checkout", element: <SettlementCheckoutPage /> },
+      { path: "inquiry", element: <SettlementInquiryPage /> },
+      { path: "inquiry/confirmation", element: <SettlementConfirmationPage /> },
+      { path: "card", element: <SettlementCardLandingPage /> },
+      { path: "card/register", element: <SettlementCardRegisterPage /> },
+      { path: "card/generate", element: <SettlementCardGeneratePage /> },
+      { path: "faq", element: <SettlementFaqPage /> },
+      { path: "contact", element: <SettlementContactPage /> },
+      { path: "legal", element: <SettlementLegalPage /> },
+    ]
+  },
+  {
+    path: "/:lang/institute/summit",
+    element: <SummitLangWrapper />,
+    children: [
+      { index: true, element: <SummitLandingPage /> },
+      { path: "about-sulaymaniyah", element: <SummitAboutSulaymaniyah /> },
+      { path: "agenda", element: <SummitAgendaPage /> },
+      { path: "speakers", element: <SummitSpeakersPage /> },
+      { path: "expo", element: <SummitExpoPage /> },
+      { path: "expo/sectors/:slug", element: <SummitSectorPavilionPage /> },
+      { path: "floor-plan", element: <SummitFloorPlanPage /> },
+      { path: "services/insurance", element: <LegacyInsuranceRedirect /> },
+      { path: "register/exhibitor", element: <SummitExhibitorRegisterPage /> },
+      { path: "register/visitor", element: <SummitVisitorRegisterPage /> },
+      { path: "register/vip", element: <SummitVipRegisterPage /> },
+      { path: "services", element: <SummitServicesPage /> },
+      { path: "services/request", element: <SummitServiceRequestPage /> },
+      { path: "services/:slug", element: <SummitServiceDetailPage /> },
+      { path: "b2b", element: <SummitB2BMatchmakingPage /> },
+      { path: "sponsors", element: <SummitSponsorsPage /> },
+      { path: "media", element: <SummitMediaPage /> },
+      { path: "faq", element: <SummitFaqPage /> },
+      { path: "contact", element: <SummitContactPage /> },
+    ]
+  },
   {
     path: "/:lang/settlement",
     element: <SettlementLangWrapper />,
@@ -595,6 +671,7 @@ const router = createBrowserRouter([
       { path: "expo", element: <SummitExpoPage /> },
       { path: "expo/sectors/:slug", element: <SummitSectorPavilionPage /> },
       { path: "floor-plan", element: <SummitFloorPlanPage /> },
+      { path: "services/insurance", element: <LegacyInsuranceRedirect /> },
       { path: "register/exhibitor", element: <SummitExhibitorRegisterPage /> },
       { path: "register/visitor", element: <SummitVisitorRegisterPage /> },
       { path: "register/vip", element: <SummitVipRegisterPage /> },
@@ -637,6 +714,15 @@ const router = createBrowserRouter([
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
+      { path: "consultancy", element: <ConsultancyLanding /> },
+      { path: "consultancy/about", element: <ConsultancyAbout /> },
+      { path: "consultancy/iraq-bound", element: <ConsultancyIraqBound /> },
+      { path: "consultancy/china-bound", element: <ConsultancyChinaBound /> },
+      { path: "consultancy/bilateral", element: <ConsultancyBilateral /> },
+      { path: "consultancy/inquiry", element: <ConsultancyInquiry /> },
+      { path: "consultancy/faq", element: <ConsultancyFAQ /> },
+      { path: "consultancy/contact", element: <ConsultancyContact /> },
+      { path: "consultancy/legal", element: <ConsultancyLegal /> },
     ]
   },
   {
@@ -644,9 +730,14 @@ const router = createBrowserRouter([
     element: <InstituteLangWrapper />,
     children: [
       { index: true, element: <InstituteHome /> },
+      { path: "services", element: <CiseServicesDirectory /> },
+      { path: "initiatives", element: <CiseServicesDirectory /> },
       { path: "about", element: <AboutInstitute /> },
       { path: "research", element: <ResearchPillars /> },
       { path: "research/:pillar", element: <ResearchPillarDetail /> },
+      { path: "insurance-facilitation", element: <InsuranceFacilitationPage /> },
+      { path: "services/insurance", element: <InsuranceFacilitationPage /> },
+      { path: "insurance", element: <InsuranceFacilitationPage /> },
       { path: "publications", element: <PublicationsArchive /> },
       { path: "publications/:slug", element: <PublicationDetail /> },
       { path: "data-hub", element: <DataHub /> },
@@ -663,8 +754,12 @@ const router = createBrowserRouter([
       { path: "events", element: <EventsCalendar /> },
       // Bilateral Visa Centre
       { path: "visa-centre", element: <VisaCentreLanding /> },
+      { path: "visa-center", element: <VisaCentreLanding /> },
+      { path: "services/visa-centre", element: <VisaCentreLanding /> },
       // Chinese Centre
       { path: "chinese-center", element: <ChineseCentreLanding /> },
+      { path: "chinese-centre", element: <ChineseCentreLanding /> },
+      { path: "services/chinese-center", element: <ChineseCentreLanding /> },
       { path: "chinese-center/enroll", element: <ChineseCentreLanding view="enroll" /> },
       { path: "chinese-center/courses", element: <ChineseCentreLanding view="courses" /> },
       { path: "chinese-center/testing", element: <ChineseCentreLanding view="testing" /> },
@@ -675,6 +770,7 @@ const router = createBrowserRouter([
       { path: "chinese-center/faq", element: <ChineseCentreLanding view="faq" /> },
       { path: "chinese-center/contact", element: <ChineseCentreLanding view="contact" /> },
       { path: "chinese-center/*", element: <ChineseCentreLanding /> },
+      { path: "chinese-centre/*", element: <ChineseCentreLanding /> },
       { path: "visa-centre/about", element: <VisaCentreAbout /> },
       { path: "visa-centre/services", element: <VisaCentreServices /> },
       { path: "visa-centre/services/:slug", element: <VisaCentreServiceDetail /> },
@@ -690,6 +786,18 @@ const router = createBrowserRouter([
       { path: "visa-centre/faq", element: <VisaCentreFaq /> },
       { path: "visa-centre/contact", element: <VisaCentreContact /> },
       { path: "visa-centre/disclaimer", element: <VisaCentreDisclaimer /> },
+      { path: "visa-center/*", element: <VisaCentreLanding /> },
+      // Strategic Financial & Legal Consultancy
+      { path: "consultancy", element: <ConsultancyLanding /> },
+      { path: "services/consultancy", element: <ConsultancyLanding /> },
+      { path: "consultancy/about", element: <ConsultancyAbout /> },
+      { path: "consultancy/iraq-bound", element: <ConsultancyIraqBound /> },
+      { path: "consultancy/china-bound", element: <ConsultancyChinaBound /> },
+      { path: "consultancy/bilateral", element: <ConsultancyBilateral /> },
+      { path: "consultancy/inquiry", element: <ConsultancyInquiry /> },
+      { path: "consultancy/faq", element: <ConsultancyFAQ /> },
+      { path: "consultancy/contact", element: <ConsultancyContact /> },
+      { path: "consultancy/legal", element: <ConsultancyLegal /> },
     ]
   },
   {

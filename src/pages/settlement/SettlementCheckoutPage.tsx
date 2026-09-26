@@ -172,7 +172,7 @@ export function SettlementCheckoutPage() {
             <div 
               key={s} 
               className={`h-2 rounded-full transition-all duration-300 ${
-                s <= step ? 'bg-[#C8102E]' : 'bg-gray-200'
+                s <= step ? 'bg-[brand-800]' : 'bg-gray-200'
               }`}
             ></div>
           ))}
@@ -197,7 +197,7 @@ export function SettlementCheckoutPage() {
                   key={opt.id}
                   className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
                     settlementType === opt.id 
-                      ? 'border-[#C8102E] bg-red-50/40 ring-2 ring-red-100' 
+                      ? 'border-[brand-800] bg-red-50/40 ring-2 ring-red-100' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
@@ -206,7 +206,7 @@ export function SettlementCheckoutPage() {
                     name="settlementType"
                     checked={settlementType === opt.id}
                     onChange={() => setSettlementType(opt.id)}
-                    className="mt-1 text-[#C8102E] focus:ring-red-500"
+                    className="mt-1 text-[brand-800] focus:ring-red-500"
                   />
                   <div>
                     <div className="text-xs sm:text-sm font-bold text-gray-900">{opt.title}</div>
@@ -244,7 +244,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={payerName}
                     onChange={(e) => setPayerName(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -253,7 +253,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={payerTaxId}
                     onChange={(e) => setPayerTaxId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -262,7 +262,7 @@ export function SettlementCheckoutPage() {
                     type="email"
                     value={payerEmail}
                     onChange={(e) => setPayerEmail(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -271,7 +271,7 @@ export function SettlementCheckoutPage() {
                     type="tel"
                     value={payerPhone}
                     onChange={(e) => setPayerPhone(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
               </div>
@@ -287,7 +287,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={beneficiaryName}
                     onChange={(e) => setBeneficiaryName(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -296,7 +296,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={beneficiaryCountry}
                     onChange={(e) => setBeneficiaryCountry(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -305,7 +305,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={beneficiaryBank}
                     onChange={(e) => setBeneficiaryBank(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
                 <div>
@@ -314,7 +314,7 @@ export function SettlementCheckoutPage() {
                     type="text"
                     value={beneficiaryAccount}
                     onChange={(e) => setBeneficiaryAccount(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#C8102E]"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[brand-800]"
                   />
                 </div>
               </div>
@@ -346,7 +346,7 @@ export function SettlementCheckoutPage() {
               </h2>
 
               {/* 15-Min Timer Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-50 text-[#C8102E] border border-red-200 font-mono text-xs font-bold">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-50 text-[brand-800] border border-red-200 font-mono text-xs font-bold">
                 <Clock size={14} className="animate-spin" />
                 <span>Rate Locked: {formatTimer(secondsRemaining)} remaining</span>
               </div>
@@ -379,7 +379,7 @@ export function SettlementCheckoutPage() {
             <div className="p-4 rounded-xl bg-red-50/60 border border-red-200 flex items-center justify-between">
               <div>
                 <span className="text-xs text-gray-500 font-bold block">Guaranteed Net Delivery:</span>
-                <span className="text-xl sm:text-2xl font-mono font-black text-[#C8102E]">
+                <span className="text-xl sm:text-2xl font-mono font-black text-[brand-800]">
                   {targetAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })} {currency === 'IQD' ? 'RMB' : 'IQD'}
                 </span>
               </div>
@@ -419,7 +419,7 @@ export function SettlementCheckoutPage() {
                   type="checkbox"
                   checked={sanctionsDeclared}
                   onChange={(e) => setSanctionsDeclared(e.target.checked)}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700">
                   I attest that neither the remitter, the beneficiary, nor any associated freight carriers are listed on Central Bank of Iraq or UN Security Council sanctions lists.
@@ -431,7 +431,7 @@ export function SettlementCheckoutPage() {
                   type="checkbox"
                   checked={amlDeclared}
                   onChange={(e) => setAmlDeclared(e.target.checked)}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700">
                   I declare that funds originate from legitimate commercial trade pursuant to Iraqi AML Law No. 39 of 2015.
@@ -443,7 +443,7 @@ export function SettlementCheckoutPage() {
                   type="checkbox"
                   checked={uboDeclared}
                   onChange={(e) => setUboDeclared(e.target.checked)}
-                  className="mt-0.5 text-[#C8102E] focus:ring-red-500"
+                  className="mt-0.5 text-[brand-800] focus:ring-red-500"
                 />
                 <span className="text-gray-700">
                   Ultimate Beneficial Ownership (UBO) documentation is verified and available for Central Bank audit inspection.
@@ -495,7 +495,7 @@ export function SettlementCheckoutPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Guaranteed Credited:</span>
-                <span className="font-black font-mono text-[#C8102E] text-sm">
+                <span className="font-black font-mono text-[brand-800] text-sm">
                   {targetAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })} {currency === 'IQD' ? 'RMB' : 'IQD'}
                 </span>
               </div>
@@ -538,7 +538,7 @@ export function SettlementCheckoutPage() {
             <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 max-w-md mx-auto text-xs space-y-2 text-start font-mono">
               <div className="flex justify-between">
                 <span className="text-gray-500">Reference No:</span>
-                <span className="font-bold text-[#C8102E]">{checkoutResult.referenceId}</span>
+                <span className="font-bold text-[brand-800]">{checkoutResult.referenceId}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Instruction Code:</span>

@@ -124,7 +124,7 @@ export function SettlementCardGeneratePage() {
                 maxLength={26}
                 value={cardData.fullNameOnCard || ''}
                 onChange={handleNameChange}
-                className="w-full px-3 py-2 rounded-xl border border-gray-300 font-mono font-bold uppercase focus:outline-none focus:border-[#C8102E]"
+                className="w-full px-3 py-2 rounded-xl border border-gray-300 font-mono font-bold uppercase focus:outline-none focus:border-[brand-800]"
               />
             </div>
 
@@ -137,7 +137,7 @@ export function SettlementCardGeneratePage() {
                   onClick={() => handleSchemeChange('VISA')}
                   className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer ${
                     cardData.cardScheme === 'VISA' 
-                      ? 'border-[#C8102E] bg-red-50 text-[#C8102E]' 
+                      ? 'border-[brand-800] bg-red-50 text-[brand-800]' 
                       : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                   }`}
                 >
@@ -148,7 +148,7 @@ export function SettlementCardGeneratePage() {
                   onClick={() => handleSchemeChange('MASTERCARD')}
                   className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer ${
                     cardData.cardScheme === 'MASTERCARD' 
-                      ? 'border-[#C8102E] bg-red-50 text-[#C8102E]' 
+                      ? 'border-[brand-800] bg-red-50 text-[brand-800]' 
                       : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                   }`}
                 >
@@ -168,7 +168,7 @@ export function SettlementCardGeneratePage() {
                     onClick={() => handleTierChange(tr)}
                     className={`py-1.5 px-2 rounded-lg font-bold text-[11px] border transition-all cursor-pointer ${
                       cardData.cardTier === tr 
-                        ? 'border-[#C8102E] bg-red-50 text-[#C8102E]' 
+                        ? 'border-[brand-800] bg-red-50 text-[brand-800]' 
                         : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                     }`}
                   >

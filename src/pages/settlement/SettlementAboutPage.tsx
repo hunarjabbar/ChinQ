@@ -40,7 +40,7 @@ export function SettlementAboutPage() {
         {/* Core Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="pay-card p-6 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
               <Zap size={20} />
             </div>
             <h3 className="text-base font-black text-gray-900">Zero Third-Currency Drag</h3>
@@ -50,7 +50,7 @@ export function SettlementAboutPage() {
           </div>
 
           <div className="pay-card p-6 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
               <ShieldCheck size={20} />
             </div>
             <h3 className="text-base font-black text-gray-900">Sovereign Compliance</h3>
@@ -60,7 +60,7 @@ export function SettlementAboutPage() {
           </div>
 
           <div className="pay-card p-6 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#C8102E] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-red-50 text-[brand-800] flex items-center justify-center font-bold">
               <Layers size={20} />
             </div>
             <h3 className="text-base font-black text-gray-900">Enterprise Facilitation</h3>

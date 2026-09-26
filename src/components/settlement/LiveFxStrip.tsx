@@ -64,16 +64,16 @@ export function LiveFxStrip({ lang }: Props) {
 
           <div className="flex items-center gap-2 text-gray-900 font-bold">
             <span>1 RMB = </span>
-            <span className="text-[#C8102E] font-black text-sm">{rates.iqdPerRmb.toFixed(2)} IQD</span>
+            <span className="text-[brand-800] font-black text-sm">{rates.iqdPerRmb.toFixed(2)} IQD</span>
             <span className="text-gray-400">|</span>
             <span>1,000,000 IQD = </span>
-            <span className="text-[#C8102E] font-black text-sm">{(1000000 * rates.rmbPerIqd).toFixed(2)} RMB</span>
+            <span className="text-[brand-800] font-black text-sm">{(1000000 * rates.rmbPerIqd).toFixed(2)} RMB</span>
           </div>
         </div>
 
         {/* Center: Savings banner */}
         <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 text-[#991B1B] text-[11px] font-bold">
-          <TrendingUp size={14} className="text-[#C8102E]" />
+          <TrendingUp size={14} className="text-[brand-800]" />
           <span>
             {isAr 
               ? 'وفر مباشر +٥.٦٪ مقارنة بمسار التحويل الثلاثي عبر الدولار' 
@@ -91,10 +91,10 @@ export function LiveFxStrip({ lang }: Props) {
           <button 
             onClick={fetchRates}
             disabled={isRefreshing}
-            className="p-1 text-gray-400 hover:text-[#C8102E] transition-colors rounded hover:bg-gray-100 cursor-pointer"
+            className="p-1 text-gray-400 hover:text-[brand-800] transition-colors rounded hover:bg-gray-100 cursor-pointer"
             title="Refresh Parity Rates"
           >
-            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-[#C8102E]' : ''} />
+            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-[brand-800]' : ''} />
           </button>
         </div>
 
