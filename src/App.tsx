@@ -107,6 +107,7 @@ const NewsroomArchivePage = lazyWithRetry(() => import('./pages/newsroom/Newsroo
 const NewsroomSearchPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomSearchPage').then(m => ({ default: m.NewsroomSearchPage })));
 const NewsroomFeedViewer = lazyWithRetry(() => import('./pages/newsroom/NewsroomFeedViewer').then(m => ({ default: m.NewsroomFeedViewer })));
 const InstituteHub = lazyWithRetry(() => import('./pages/InstituteHub').then(m => ({ default: m.InstituteHub })));
+const CommandHubPage = lazyWithRetry(() => import('./pages/CommandHubPage').then(m => ({ default: m.CommandHubPage })));
 const SummitPage = lazyWithRetry(() => import('./pages/SummitPage').then(m => ({ default: m.SummitPage })));
 
 // Summit Pages
@@ -563,6 +564,10 @@ function SettlementLangWrapper() {
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
+  { path: "/hub", element: <CommandHubPage /> },
+  { path: "/hub/*", element: <CommandHubPage /> },
+  { path: "/:lang/hub", element: <CommandHubPage /> },
+  { path: "/:lang/hub/*", element: <CommandHubPage /> },
   { path: "/institute", element: <InstituteRootRedirect /> },
   { path: "/institute/*", element: <InstituteRootRedirect /> },
   { path: "/summit", element: <SummitRootRedirect /> },

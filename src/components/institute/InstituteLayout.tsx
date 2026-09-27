@@ -24,6 +24,8 @@ import {
 import { cn } from '../../lib/utils';
 import { useI18n } from '../../hooks/useI18n';
 import { LanguageSwitcher } from '../LanguageSwitcher';
+import { CiseHubFooterLogin } from './CiseHubFooterLogin';
+import { HubLoginFooter } from '../HubLoginFooter';
 
 interface InstituteLayoutProps {
   children: React.ReactNode;
@@ -607,6 +609,9 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
             </div>
           </div>
 
+          {/* CISE Command Hub Footer Login Widget */}
+          <CiseHubFooterLogin lang={lang} className="my-8" />
+
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-wrap items-center gap-4">
               <Link 
@@ -624,6 +629,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <HubLoginFooter lang={lang} />
               <LanguageSwitcher lang={lang} />
             </div>
           </div>
