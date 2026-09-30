@@ -100,13 +100,13 @@ export const VisaCentreCategoryDetail: React.FC = () => {
           </div>
 
           {/* Documentation Checklist */}
-          {found.requirements?.[validLang] && found.requirements[validLang].length > 0 && (
+          {(found.requirements as any)?.[validLang] && (found.requirements as any)[validLang].length > 0 && (
             <div className="space-y-3 pt-4 border-t border-border">
               <span className="text-sm font-bold text-foreground block">
                 Required Consular Documentation:
               </span>
               <div className="space-y-2">
-                {found.requirements[validLang].map((req, i) => (
+                {(found.requirements as any)[validLang].map((req: any, i: number) => (
                   <div key={i} className="p-3 rounded-xl bg-muted/40 border border-border/60 flex items-start gap-2.5 text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                     <span className="text-foreground/90">{req}</span>

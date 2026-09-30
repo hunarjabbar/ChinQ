@@ -164,7 +164,7 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
 
             {summitChips && summitChips.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-8">
-                {summitChips.map((chip, idx) => (
+                {summitChips.map((chip: string, idx: number) => (
                   <span key={idx} className="bg-white/10 text-white border border-white/20 text-xs font-bold px-3.5 py-1 rounded-full">
                     {chip}
                   </span>

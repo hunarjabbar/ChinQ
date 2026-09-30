@@ -4,6 +4,7 @@ import { Video, Radio, ArrowRight, Play, Film, Tv, Clapperboard, Users } from 'l
 import { portalStore } from '../../data/portalData';
 import { getPortalTranslation } from '../../locales/portalTranslations';
 import { PortalLocale } from '../../types/portals';
+import { IcaPlusSection } from '../../components/IcaPlusSection';
 
 export function IcaMediaPage() {
   const { lang = 'en' } = useParams<{ lang: string }>();
@@ -124,6 +125,11 @@ export function IcaMediaPage() {
               <div className="text-[10px] text-[#4B5563]">Youth & Culture</div>
             </div>
           </Link>
+        </div>
+
+        {/* ICA+ EXCLUSIVE Premium Media Hub Subsection */}
+        <div className="mb-14">
+          <IcaPlusSection />
         </div>
 
         {/* Full Media Library Grid */}

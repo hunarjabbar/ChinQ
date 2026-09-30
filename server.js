@@ -5409,7 +5409,8 @@ async function startServer() {
   });
   app.use("/src/assets/images", express.static(path.join(process.cwd(), "src/assets/images")));
   app.use("/assets/images", express.static(path.join(process.cwd(), "src/assets/images")));
-  if (process.env.NODE_ENV !== "production") {
+  const useStaticProd = fs.existsSync(path.join(process.cwd(), "dist")) || fs.existsSync(path.join(process.cwd(), "build"));
+  if (process.env.NODE_ENV !== "production" && !useStaticProd) {
     const vite = await createViteServer({
       server: { middlewareMode: true, allowedHosts: true },
       appType: "spa"
@@ -5422,7 +5423,10 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), "dist");
+    let distPath = path.join(process.cwd(), "dist");
+    if (!fs.existsSync(distPath) && fs.existsSync(path.join(process.cwd(), "build"))) {
+      distPath = path.join(process.cwd(), "build");
+    }
     app.use(express.static(distPath, {
       setHeaders: (res, path2) => {
         if (path2.endsWith(".html")) {

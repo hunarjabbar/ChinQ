@@ -269,7 +269,7 @@ export function CiseServicesDirectory() {
     const matchesSearch = !searchFilter || 
       srv.title.toLowerCase().includes(searchFilter.toLowerCase()) || 
       srv.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      srv.features.some(f => f.toLowerCase().includes(searchFilter.toLowerCase()));
+      srv.features.some((f: string) => f.toLowerCase().includes(searchFilter.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -429,7 +429,7 @@ export function CiseServicesDirectory() {
 
                   {/* Clean Unboxed Metadata Features (Zero-Pill Compliance) */}
                   <div className="pt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
-                    {srv.features.map((feature, idx) => (
+                    {srv.features.map((feature: string, idx: number) => (
                       <React.Fragment key={idx}>
                         <span>{feature}</span>
                         {idx < srv.features.length - 1 && <span className="text-neutral-300 dark:text-neutral-700" aria-hidden="true">·</span>}

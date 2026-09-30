@@ -108,7 +108,7 @@ export function CategoryPage() {
   } else {
     const matchingTopic = ADDITIONAL_TOPICS.find(t => t.slug === slug);
     if (matchingTopic) {
-      categoryName = lang === 'ar' ? matchingTopic.nameAr : lang === 'zh' ? matchingTopic.nameZh : lang === 'ckb' ? matchingTopic.nameCkb : matchingTopic.nameEn;
+      categoryName = (lang === 'ar' ? matchingTopic.nameAr : lang === 'zh' ? matchingTopic.nameZh : lang === 'ckb' ? matchingTopic.nameCkb : matchingTopic.nameEn) || '';
     } else {
       categoryName = slug?.toUpperCase() || '';
     }

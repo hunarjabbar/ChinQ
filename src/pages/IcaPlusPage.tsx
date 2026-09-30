@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Search, Mic, Video as VideoIcon, Film, Clock, MapPin, PlayCircle, ExternalLink } from 'lucide-react';
+import { Search, Mic, Video as VideoIcon, Film, Clock, MapPin, PlayCircle, ExternalLink, ArrowLeft } from 'lucide-react';
 import { apiFetch } from '../lib/api';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 type Tab = 'podcasts' | 'videos' | 'documentaries';
 
@@ -38,6 +38,17 @@ export function IcaPlusPage() {
 
   return (
     <div className="w-full bg-white dark:bg-neutral-900 border-x border-brand-800/10 dark:border-neutral-800 shadow-xs p-4 sm:p-6 md:p-8">
+      {/* Back to Media Hub */}
+      <div className="mb-6">
+        <Link
+          to={`/${language}/media`}
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-800 hover:text-brand-900 dark:text-brand-400 dark:hover:text-brand-300 transition-colors group"
+        >
+          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform rtl:rotate-180 rtl:group-hover:translate-x-1" />
+          <span>Back to Media & Newsroom</span>
+        </Link>
+      </div>
+
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

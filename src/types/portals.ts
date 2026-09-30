@@ -9,6 +9,8 @@ export interface LocalizedString {
   ar: string;
   zh: string;
   ckb: string;
+  ck?: string;
+  [key: string]: string | undefined;
 }
 
 // -------------------------------------------------------------

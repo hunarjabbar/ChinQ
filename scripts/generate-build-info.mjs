@@ -28,5 +28,8 @@ if (fs.existsSync('public')) {
 if (fs.existsSync('dist')) {
   fs.writeFileSync('dist/build-info.json', JSON.stringify(buildInfo, null, 2));
 }
+if (fs.existsSync('build')) {
+  fs.writeFileSync('build/build-info.json', JSON.stringify(buildInfo, null, 2));
+}
 
 console.log('✅ Generated build-info.json');

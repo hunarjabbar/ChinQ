@@ -451,6 +451,13 @@ function GenericRootRedirect() {
   return <Navigate to={`/${loc}${subPath}${location.search}${location.hash}`} replace />;
 }
 
+function IcaPlusRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/ica-plus/, '/media/ica-plus');
+  return <Navigate to={`/${loc}${subPath}${location.search}${location.hash}`} replace />;
+}
+
 function InstituteServiceSummitRedirect() {
   const { lang } = useParams<{ lang: string }>();
   return <Navigate to={`/${lang || 'en'}/summit`} replace />;
@@ -739,8 +746,8 @@ const router = createBrowserRouter([
   { path: "/women/*", element: <GenericRootRedirect /> },
   { path: "/podcasts", element: <GenericRootRedirect /> },
   { path: "/podcasts/*", element: <GenericRootRedirect /> },
-  { path: "/ica-plus", element: <GenericRootRedirect /> },
-  { path: "/ica-plus/*", element: <GenericRootRedirect /> },
+  { path: "/ica-plus", element: <IcaPlusRootRedirect /> },
+  { path: "/ica-plus/*", element: <IcaPlusRootRedirect /> },
   { path: "/visa-flights", element: <GenericRootRedirect /> },
   { path: "/visa-flights/*", element: <GenericRootRedirect /> },
   {
@@ -905,7 +912,8 @@ const router = createBrowserRouter([
       { path: "cultural-exchange/*", element: <LegacyCulturalExchangeRedirect /> },
       { path: "books", element: <BooksPage /> },
       { path: "podcasts", element: <PodcastsPage /> },
-      { path: "ica-plus", element: <IcaPlusPage /> },
+      { path: "ica-plus", element: <Navigate to="../media/ica-plus" replace /> },
+      { path: "media/ica-plus", element: <IcaPlusPage /> },
       { path: "visa-flights", element: <VisaFlightPage /> },
       { path: "consultancy", element: <ConsultancyLanding /> },
       { path: "consultancy/about", element: <ConsultancyAbout /> },

@@ -18,7 +18,7 @@ function IcaPlusSectionContent() {
   const { data: videos = [] } = useQuery({ queryKey: ['ica-plus-featured-videos'], queryFn: async () => (await apiFetch('/api/videos?featured=true')).json() });
   const { data: docs = [] } = useQuery({ queryKey: ['ica-plus-featured-docs'], queryFn: async () => (await apiFetch('/api/documentaries?featured=true')).json() });
 
-  const allFeatured = [...podcasts.map(p => ({...p, type: 'podcast'})), ...videos.map(v => ({...v, type: 'video'})), ...docs.map(d => ({...d, type: 'documentary'}))]
+  const allFeatured = [...podcasts.map((p: any) => ({...p, type: 'podcast'})), ...videos.map((v: any) => ({...v, type: 'video'})), ...docs.map((d: any) => ({...d, type: 'documentary'}))]
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, 3); // Take top 3 most recent featured items across all media
 
@@ -56,7 +56,7 @@ function IcaPlusSectionContent() {
               {t('mediaHubDesc')}
             </p>
             <Link 
-              to={`/${lang}/ica-plus`}
+              to={`/${lang}/media/ica-plus`}
               className="inline-flex items-center justify-center gap-3 w-full sm:w-max px-8 py-4 bg-red-700 hover:bg-red-600 text-white border border-red-500/50 rounded-xl text-sm font-black uppercase tracking-widest transition-all shadow-xl group active:scale-95"
             >
               <span>{t('enterArchive')}</span>

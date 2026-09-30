@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShieldCheck, Lock, Landmark, Zap, Code, AlertCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Lock, Landmark, Zap, Code, AlertCircle, ArrowRight, CheckCircle2, QrCode, Copy, Check } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import { Locale } from '../../types';
 import { SettlementLayout } from '../../components/settlement/SettlementLayout';
 import { ComplianceBadges } from '../../components/settlement/ComplianceBadges';
@@ -13,6 +14,17 @@ export function SettlementGatewayPage() {
   const isAr = lang === 'ar';
   const isZh = lang === 'zh';
   const isCkb = lang === 'ckb';
+
+  const defaultPayload = 'ICA-MBRIDGE-GATEWAY-2026-SANDBOX-VERIFY://secure?node=CBI_CIPS_HUB&auth=active';
+  const [customPayloadInput, setCustomPayloadInput] = useState('');
+  const [qrPayload, setQrPayload] = useState(defaultPayload);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyPayload = () => {
+    navigator.clipboard.writeText(qrPayload);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <SettlementLayout lang={lang}>
@@ -45,6 +57,84 @@ export function SettlementGatewayPage() {
               <span>{t('settlement.gateway.launchCheckout')}</span>
               <span className="cta-arrow">→</span>
             </Link>
+          </div>
+        </div>
+
+        {/* Mobile Payment QR Verification Feature */}
+        <div className="pay-card p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+            <div>
+              <div className="flex items-center gap-2 text-brand-800 font-bold text-xs uppercase tracking-wider mb-1">
+                <QrCode size={16} />
+                <span>Mobile Verification Node</span>
+              </div>
+              <h2 className="text-xl font-black text-gray-900">Instant Mobile Payment QR Verification</h2>
+              <p className="text-xs text-gray-600">Scan with any CBI or PBOC digital clearing app to verify sandbox terminal handshake.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold border border-emerald-200">
+                Live Scanner Ready
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-2xl border border-gray-200 shadow-inner">
+              <div className="bg-white p-4 rounded-xl shadow-md border border-gray-100">
+                <QRCodeSVG
+                  value={qrPayload}
+                  size={180}
+                  level="H"
+                  includeMargin={true}
+                  bgColor="#ffffff"
+                  fgColor="#0f172a"
+                />
+              </div>
+              <span className="mt-3 text-[11px] font-mono text-gray-500">SESSION ID: ICA-VERIFY-2026-QRS</span>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                  Custom Verification Payload / Ref
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={customPayloadInput}
+                    onChange={(e) => setCustomPayloadInput(e.target.value)}
+                    placeholder="Enter reference or wallet ID"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                  <button
+                    onClick={() => setQrPayload(customPayloadInput || defaultPayload)}
+                    className="pay-btn-primary px-4 py-2 rounded-xl text-xs font-bold shrink-0 cursor-pointer"
+                  >
+                    Update QR
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-4 bg-brand-50/50 rounded-xl border border-brand-100 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-brand-900">Encoded Verification String:</span>
+                  <button
+                    onClick={handleCopyPayload}
+                    className="flex items-center gap-1 text-xs text-brand-700 hover:text-brand-900 font-semibold cursor-pointer"
+                  >
+                    {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                    <span>{copied ? 'Copied' : 'Copy Payload'}</span>
+                  </button>
+                </div>
+                <div className="p-2 bg-white rounded border border-brand-200 font-mono text-[10px] text-gray-600 break-all">
+                  {qrPayload}
+                </div>
+              </div>
+
+              <div className="text-[11px] text-gray-500 leading-relaxed">
+                * Compatible with mBridge Digital Clearing Hub, CIPS Interbank Gateway, and CBI e-CNY QR verification standards.
+              </div>
+            </div>
           </div>
         </div>
 
