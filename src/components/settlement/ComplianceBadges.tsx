@@ -45,9 +45,9 @@ export function ComplianceBadges({ lang, compact = false }: Props) {
         {badges.map((b, i) => (
           <span 
             key={i} 
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-gray-200 text-[11px] font-bold text-gray-700 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-[11px] font-bold text-neutral-700 dark:text-neutral-300 shadow-xs"
           >
-            <b.icon size={12} className="text-[brand-800]" />
+            <b.icon size={13} className="text-brand-800 dark:text-brand-400" />
             <span>{b.title}</span>
           </span>
         ))}
@@ -63,19 +63,19 @@ export function ComplianceBadges({ lang, compact = false }: Props) {
           href={badge.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="pay-card p-3.5 sm:p-4 flex flex-col justify-between border border-gray-200 hover:border-[brand-800] bg-white group"
+          className="pay-card p-4 flex flex-col justify-between border border-neutral-200 dark:border-neutral-800 hover:border-brand-800 dark:hover:border-brand-700 bg-white dark:bg-neutral-900 group shadow-xs transition-all"
         >
-          <div className="flex items-center justify-between mb-2">
-            <div className="w-8 h-8 rounded-lg bg-red-50 text-[brand-800] flex items-center justify-center group-hover:bg-[brand-800] group-hover:text-white transition-colors">
+          <div className="flex items-center justify-between mb-3">
+            <div className="w-9 h-9 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-800 dark:text-brand-400 flex items-center justify-center group-hover:bg-brand-800 group-hover:text-white transition-colors">
               <badge.icon size={18} />
             </div>
-            <CheckCircle size={14} className="text-emerald-600" />
+            <CheckCircle size={15} className="text-emerald-600 dark:text-emerald-400" />
           </div>
           <div>
-            <div className="text-xs font-black text-gray-900 group-hover:text-[brand-800] transition-colors">
+            <div className="text-xs font-black text-ink-950 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
               {badge.title}
             </div>
-            <div className="text-[10px] text-gray-500 mt-0.5 leading-snug">
+            <div className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1 leading-snug">
               {badge.sub}
             </div>
           </div>

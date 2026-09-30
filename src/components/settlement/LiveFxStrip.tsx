@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RefreshCw, ArrowRightLeft, TrendingUp, ShieldCheck } from 'lucide-react';
+import { RefreshCw, TrendingUp } from 'lucide-react';
 import { Locale } from '../../types';
 import { LiveFxData } from '../../types/settlement';
 
@@ -52,28 +52,28 @@ export function LiveFxStrip({ lang }: Props) {
   }, []);
 
   return (
-    <div className="w-full bg-white border-y border-gray-200 shadow-xs py-2 px-4 text-xs font-mono">
+    <div className="w-full bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800 shadow-xs py-2 px-4 text-xs font-mono transition-colors">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         
         {/* Left: Live indicator and parity fixing */}
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-bold uppercase tracking-wider border border-emerald-200">
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800/40">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>{isAr ? 'تحديث فوري' : isZh ? '双边实时牌价' : isCkb ? 'نوێکردنەوەی کاتی' : 'Live Direct Parity'}</span>
           </div>
 
-          <div className="flex items-center gap-2 text-gray-900 font-bold">
+          <div className="flex items-center gap-2 text-ink-950 dark:text-white font-bold">
             <span>1 RMB = </span>
-            <span className="text-[brand-800] font-black text-sm">{rates.iqdPerRmb.toFixed(2)} IQD</span>
-            <span className="text-gray-400">|</span>
+            <span className="text-brand-800 dark:text-brand-400 font-black text-sm">{rates.iqdPerRmb.toFixed(2)} IQD</span>
+            <span className="text-neutral-400">|</span>
             <span>1,000,000 IQD = </span>
-            <span className="text-[brand-800] font-black text-sm">{(1000000 * rates.rmbPerIqd).toFixed(2)} RMB</span>
+            <span className="text-brand-800 dark:text-brand-400 font-black text-sm">{(1000000 * rates.rmbPerIqd).toFixed(2)} RMB</span>
           </div>
         </div>
 
         {/* Center: Savings banner */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 text-[#991B1B] text-[11px] font-bold">
-          <TrendingUp size={14} className="text-[brand-800]" />
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-lg bg-brand-50 dark:bg-brand-950/40 text-brand-900 dark:text-brand-300 text-[11px] font-bold border border-brand-200 dark:border-brand-800/40">
+          <TrendingUp size={14} className="text-brand-800 dark:text-brand-400" />
           <span>
             {isAr 
               ? 'وفر مباشر +٥.٦٪ مقارنة بمسار التحويل الثلاثي عبر الدولار' 
@@ -86,15 +86,15 @@ export function LiveFxStrip({ lang }: Props) {
         </div>
 
         {/* Right: Controls & timestamp */}
-        <div className="flex items-center gap-3 text-gray-500 text-[11px]">
+        <div className="flex items-center gap-3 text-neutral-500 dark:text-neutral-400 text-[11px]">
           <span>{isAr ? 'آخر تحديث:' : isZh ? '更新时间:' : isCkb ? 'دوایین نوێکردنەوە:' : 'Updated:'} {rates.lastUpdated}</span>
           <button 
             onClick={fetchRates}
             disabled={isRefreshing}
-            className="p-1 text-gray-400 hover:text-[brand-800] transition-colors rounded hover:bg-gray-100 cursor-pointer"
+            className="p-1 text-neutral-400 hover:text-brand-800 dark:hover:text-brand-400 transition-colors rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
             title="Refresh Parity Rates"
           >
-            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-[brand-800]' : ''} />
+            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-brand-800' : ''} />
           </button>
         </div>
 

@@ -121,11 +121,11 @@ export function PublicationsArchive() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12">
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 text-[#D97706]">
+        <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
           <FileText size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">Institutional Archive</span>
         </div>
-        <h1 className="text-3xl lg:text-5xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">
+        <h1 className="text-3xl lg:text-5xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">
           Faceted Research Archive
         </h1>
         <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium max-w-2xl leading-relaxed">
@@ -144,7 +144,7 @@ export function PublicationsArchive() {
                 placeholder="Search research..." 
                 value={searchQuery}
                 onChange={(e) => updateFilter('q', e.target.value)}
-                className="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+                className="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
               />
               <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 w-4 h-4" />
             </div>
@@ -158,7 +158,7 @@ export function PublicationsArchive() {
                     onClick={() => updateFilter('topic', topic.id)}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                       activeTopic === topic.id 
-                        ? 'bg-[#0F172A] text-white' 
+                        ? 'bg-[var(--color-ink-900)] text-white' 
                         : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`}
                   >
@@ -178,7 +178,7 @@ export function PublicationsArchive() {
                     onClick={() => updateFilter('type', type.id)}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                       activeType === type.id 
-                        ? 'bg-[#0284C7] text-white shadow-md' 
+                        ? 'bg-[var(--color-brand-800)] text-white shadow-md' 
                         : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`}
                   >
@@ -198,7 +198,7 @@ export function PublicationsArchive() {
                     onClick={() => updateFilter('region', region.id)}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                       activeRegion === region.id 
-                        ? 'bg-[#D97706] text-[#0F172A] shadow-md' 
+                        ? 'bg-[var(--color-brand-800)] text-[var(--color-ink-900)] shadow-md' 
                         : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`}
                   >
@@ -229,8 +229,8 @@ export function PublicationsArchive() {
               <button 
                 onClick={() => updateFilter('sort', 'date')}
                 className={cn(
-                  "transition-all underline-offset-4 decoration-[#0284C7]/30",
-                  sortBy === 'date' ? "text-[#0284C7] underline" : "text-neutral-400 hover:text-neutral-600"
+                  "transition-all underline-offset-4 decoration-[var(--color-brand-800)]/30",
+                  sortBy === 'date' ? "text-[var(--color-brand-800)] underline" : "text-neutral-400 hover:text-neutral-600"
                 )}
               >
                 Date
@@ -238,8 +238,8 @@ export function PublicationsArchive() {
               <button 
                 onClick={() => updateFilter('sort', 'relevance')}
                 className={cn(
-                  "transition-all underline-offset-4 decoration-[#0284C7]/30",
-                  sortBy === 'relevance' ? "text-[#0284C7] underline" : "text-neutral-400 hover:text-neutral-600"
+                  "transition-all underline-offset-4 decoration-[var(--color-brand-800)]/30",
+                  sortBy === 'relevance' ? "text-[var(--color-brand-800)] underline" : "text-neutral-400 hover:text-neutral-600"
                 )}
               >
                 Relevance
@@ -266,7 +266,7 @@ export function PublicationsArchive() {
                       </div>
                     )}
                   </div>
-                  <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-tight group-hover:text-[#0284C7] transition-colors">
+                  <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-tight group-hover:text-[var(--color-brand-800)] transition-colors">
                     {pub[`title${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof Publication] as string || pub.titleEn}
                   </h3>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400 font-medium line-clamp-3 leading-relaxed">
@@ -285,7 +285,7 @@ export function PublicationsArchive() {
                       <span className="text-neutral-900 dark:text-neutral-100">{getRegionLabel(pub.region)}</span>
                     </div>
                   </div>
-                  <div className="mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-[#0284C7]">
+                  <div className="mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">
                     <span>{t('accessPublication')}</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
                   </div>
@@ -295,7 +295,7 @@ export function PublicationsArchive() {
           </div>
 
           <div className="pt-12 text-center">
-            <button className="px-8 py-4 border-2 border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-[#0F172A] dark:hover:text-white hover:border-[#0F172A] dark:hover:border-[#0284C7] transition-all cursor-pointer">
+            <button className="px-8 py-4 border-2 border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-[var(--color-ink-900)] dark:hover:text-white hover:border-[var(--color-ink-900)] dark:hover:border-[var(--color-brand-800)] transition-all cursor-pointer">
               {t('loadMore')}
             </button>
           </div>

@@ -22,7 +22,7 @@ const pillars = {
     id: 'energy-bri',
     title: 'Energy & Belt and Road',
     icon: Database,
-    color: '#0284C7',
+    color: 'var(--color-brand-800)',
     description: 'Analyzing the multi-decadal energy cooperation between the PRC and Iraq, with a focus on the 2019 "Oil-for-Projects" agreement and the Grand Faw Port logistics integration.',
     questions: [
       'How does the 2019 "Oil-for-Projects" framework impact Iraq\'s sovereign debt sustainability?',
@@ -45,7 +45,7 @@ const pillars = {
     id: 'geo-economics',
     title: 'Geo-Economics & Settlement',
     icon: TrendingUp,
-    color: '#D97706',
+    color: 'var(--color-brand-800)',
     description: 'The definitive center for research on the internationalization of the Renminbi (CNY) within the Iraqi financial system and the macroeconomic impacts of direct IQD/CNY settlement.',
     questions: [
       'What are the liquidity requirements for a stable IQD/CNY direct clearing hub?',
@@ -68,7 +68,7 @@ const pillars = {
     id: 'diplomacy',
     title: 'Bilateral Diplomacy',
     icon: Handshake,
-    color: '#0F172A',
+    color: 'var(--color-ink-900)',
     description: 'Tracking high-level diplomatic engagements, sovereign summits, and the evolving legal frameworks governing Iraq-China relations across central and regional governments.',
     questions: [
       'What are the core legal protections for Chinese investors in the Kurdistan Region?',
@@ -91,7 +91,7 @@ const pillars = {
     id: 'digital-silk-road',
     title: 'Digital Silk Road & Tech',
     icon: Globe,
-    color: '#047857',
+    color: 'var(--accent-primary)',
     description: 'Focusing on the export of Chinese digital infrastructure, 5G deployment, smart city architecture, and cybersecurity standards within the West Asian corridor.',
     questions: [
       'What are the security standards for 5G deployment in Iraqi logistics hubs?',
@@ -136,7 +136,7 @@ export default function ResearchPillarDetail() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
-      <Link to={`/${lang}/institute/research`} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-[#0284C7] transition-colors">
+      <Link to={`/${lang}/institute/research`} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors">
         <ArrowLeft size={14} className="rtl:rotate-180" />
         <span>Research Pillars</span>
       </Link>
@@ -148,7 +148,7 @@ export default function ResearchPillarDetail() {
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-xl" style={{ backgroundColor: pillar.color }}>
               <pillar.icon size={32} />
             </div>
-            <h1 className="text-4xl lg:text-7xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter leading-none">
+            <h1 className="text-4xl lg:text-7xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter leading-none">
               {pillar.title}
             </h1>
             <p className="text-xl text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed max-w-3xl">
@@ -160,7 +160,7 @@ export default function ResearchPillarDetail() {
             {pillar.metrics.map(metric => (
               <div key={metric.label} className="p-8 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl shadow-sm">
                 <span className="block text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-2">{metric.label}</span>
-                <span className="text-3xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter" style={{ color: pillar.color }}>{metric.value}</span>
+                <span className="text-3xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter" style={{ color: pillar.color }}>{metric.value}</span>
               </div>
             ))}
           </div>
@@ -168,20 +168,20 @@ export default function ResearchPillarDetail() {
 
         {/* Pillar Sidebar */}
         <aside className="lg:col-span-4 space-y-8">
-          <div className="p-8 bg-[#0F172A] text-white rounded-3xl shadow-2xl space-y-6">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">Pillar Leadership</h3>
+          <div className="p-8 bg-[var(--color-ink-900)] text-white rounded-3xl shadow-2xl space-y-6">
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">Pillar Leadership</h3>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center font-black">
                 {pillar.leadFellow.split(' ').map(n => n[0]).join('')}
               </div>
               <div>
                 <span className="block text-sm font-black uppercase tracking-tight">{pillar.leadFellow}</span>
-                <span className="block text-[10px] font-bold text-[#0284C7] uppercase tracking-widest">Lead Research Fellow</span>
+                <span className="block text-[10px] font-bold text-[var(--color-brand-800)] uppercase tracking-widest">Lead Research Fellow</span>
               </div>
             </div>
             <button 
               onClick={() => setShowInterviewModal(true)}
-              className="w-full py-4 bg-white text-[#0F172A] rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#0284C7] hover:text-white transition-all shadow-md"
+              className="w-full py-4 bg-white text-[var(--color-ink-900)] rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[var(--color-brand-800)] hover:text-white transition-all shadow-md"
             >
               Request Interview
             </button>
@@ -192,17 +192,17 @@ export default function ResearchPillarDetail() {
             <div className="space-y-3">
               <Link to={`/${lang}/institute/publications?topic=${pillar.id}`} className="flex items-center justify-between p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl group transition-all">
                 <div className="flex items-center gap-3">
-                  <FileText size={18} className="text-[#0284C7]" />
+                  <FileText size={18} className="text-[var(--color-brand-800)]" />
                   <span className="text-xs font-black uppercase tracking-widest">Publications</span>
                 </div>
-                <ChevronRight size={14} className="text-neutral-300 group-hover:text-[#0284C7] transition-all rtl:rotate-180" />
+                <ChevronRight size={14} className="text-neutral-300 group-hover:text-[var(--color-brand-800)] transition-all rtl:rotate-180" />
               </Link>
               <Link to={`/${lang}/institute/data-hub`} className="flex items-center justify-between p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl group transition-all">
                 <div className="flex items-center gap-3">
-                  <PieChart size={18} className="text-[#0284C7]" />
+                  <PieChart size={18} className="text-[var(--color-brand-800)]" />
                   <span className="text-xs font-black uppercase tracking-widest">Data Hub</span>
                 </div>
-                <ChevronRight size={14} className="text-neutral-300 group-hover:text-[#0284C7] transition-all rtl:rotate-180" />
+                <ChevronRight size={14} className="text-neutral-300 group-hover:text-[var(--color-brand-800)] transition-all rtl:rotate-180" />
               </Link>
             </div>
           </div>
@@ -213,11 +213,11 @@ export default function ResearchPillarDetail() {
         {/* Research Questions */}
         <div className="space-y-8">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 text-[#D97706]">
+            <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
               <Target size={18} />
               <span className="text-[10px] font-black uppercase tracking-widest">Primary Inquiry</span>
             </div>
-            <h3 className="text-3xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">Core Research Questions</h3>
+            <h3 className="text-3xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">Core Research Questions</h3>
           </div>
           <div className="space-y-4">
             {pillar.questions.map((q, i) => (
@@ -232,23 +232,23 @@ export default function ResearchPillarDetail() {
         {/* Related Experts */}
         <div className="space-y-8">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 text-[#0284C7]">
+            <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
               <Users size={18} />
               <span className="text-[10px] font-black uppercase tracking-widest">Institutional Fellows</span>
             </div>
-            <h3 className="text-3xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">Domain Experts</h3>
+            <h3 className="text-3xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">Domain Experts</h3>
           </div>
           <div className="grid grid-cols-1 gap-4">
             {pillar.domainExperts.map((expert) => (
-              <Link key={expert.slug} to={`/${lang}/institute/experts/${expert.slug}`} className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl flex items-center gap-6 hover:border-[#0284C7] transition-all group">
-                <div className="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center font-black group-hover:scale-110 transition-transform text-[#0F172A] dark:text-white text-xs">
+              <Link key={expert.slug} to={`/${lang}/institute/experts/${expert.slug}`} className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl flex items-center gap-6 hover:border-[var(--color-brand-800)] transition-all group">
+                <div className="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center font-black group-hover:scale-110 transition-transform text-[var(--color-ink-900)] dark:text-white text-xs">
                   {expert.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div className="flex-grow">
-                  <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase">{expert.name}</h4>
+                  <h4 className="text-sm font-black text-[var(--color-ink-900)] dark:text-white uppercase">{expert.name}</h4>
                   <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">{expert.role}</p>
                 </div>
-                <ChevronRight size={20} className="text-neutral-200 group-hover:text-[#0284C7] transition-all rtl:rotate-180" />
+                <ChevronRight size={20} className="text-neutral-200 group-hover:text-[var(--color-brand-800)] transition-all rtl:rotate-180" />
               </Link>
             ))}
           </div>
@@ -261,7 +261,7 @@ export default function ResearchPillarDetail() {
           <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative">
             <div className="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-neutral-800 mb-6">
               <div>
-                <h3 className="text-base font-black uppercase text-[#0F172A] dark:text-white">Request Scholar Briefing</h3>
+                <h3 className="text-base font-black uppercase text-[var(--color-ink-900)] dark:text-white">Request Scholar Briefing</h3>
                 <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">{pillar.title} Domain</p>
               </div>
               <button 

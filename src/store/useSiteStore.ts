@@ -35,13 +35,11 @@ export interface SiteConfig {
   brandColor: string;
   inkColor: string;
   paperColor: string;
-  darkMode: boolean;
   socialLinks: SocialLinksConfig;
 }
 
 interface SiteStore extends SiteConfig {
   updateSettings: (settings: Partial<SiteConfig>) => void;
-  toggleDarkMode: () => void;
 }
 
 export function sanitizeSocialUrl(url: string, fallback: string): string {
@@ -87,16 +85,15 @@ const DEFAULT_SOCIAL_LINKS: SocialLinksConfig = {
 };
 
 const DEFAULT_STATE: SiteConfig = {
-  siteName: 'Iraqi-Chinese Agency',
+  siteName: 'Iraqi-Chinese Agency — Media & Newsroom Portal',
   contactEmail: 'admin@iraqi-chineseagency.com',
   cachingEnabled: true,
   autoTranslate: true,
   geoLatencyRoute: 'baghdad-beijing',
   systemMaintenance: false,
-  brandColor: '#cc0000',
-  inkColor: '#0f172a',
-  paperColor: '#ffffff',
-  darkMode: false,
+  brandColor: '#c8150e',
+  inkColor: '#1a1a1a',
+  paperColor: '#fcfbfd',
   socialLinks: DEFAULT_SOCIAL_LINKS,
 };
 
@@ -119,7 +116,6 @@ export const useSiteStore = create<SiteStore>()(
           socialLinks: sanitizedSocialLinks,
         };
       }),
-      toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
     }),
     {
       name: 'site-config-storage',
@@ -139,23 +135,32 @@ export const useSiteStore = create<SiteStore>()(
             ...sanitizedPersistedSocial,
           },
         };
-        // Vanish legacy crimson and dark maroon tones from storage in favor of trending background red #cc0000
+        // Purge any legacy darkMode flags from storage to maintain strict light visual identity
+        if ('darkMode' in (merged as any)) {
+          delete (merged as any).darkMode;
+        }
+        if (typeof document !== 'undefined') {
+          document.documentElement.classList.remove('dark');
+          document.body?.classList.remove('dark');
+        }
+        // Ensure brand color strictly adheres to CISE Blood Kiss #c8150e
         if (
           !merged.brandColor ||
           merged.brandColor === '#8B0000' ||
           merged.brandColor === '#990000' ||
           merged.brandColor === '#800000' ||
           merged.brandColor === '#C91C24' ||
-          merged.brandColor === '#a30000'
+          merged.brandColor === '#a30000' ||
+          merged.brandColor === '#cc0000'
         ) {
-          merged.brandColor = '#cc0000';
+          merged.brandColor = '#c8150e';
         }
         // Safeguard inkColor and paperColor to prevent white-on-white text invisibility
         if (!merged.inkColor || ['#ffffff', '#fff', '#fafafa', '#f4f4f5', '#f8fafc'].includes(merged.inkColor.toLowerCase().trim())) {
-          merged.inkColor = '#0f172a';
+          merged.inkColor = '#1a1a1a';
         }
         if (!merged.paperColor) {
-          merged.paperColor = '#ffffff';
+          merged.paperColor = '#fcfbfd';
         }
         return merged;
       },

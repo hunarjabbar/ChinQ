@@ -7,7 +7,7 @@ import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Article, Locale, Study, MarketData } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { useAuthStore } from '../store/useAuthStore';
-import { BookOpen, Lock, ChevronRight, ChevronLeft, Sparkles, AlertCircle, Activity, Flame, Clock, Radio } from 'lucide-react';
+import { BookOpen, Lock, ChevronRight, ChevronLeft, Sparkles, AlertCircle, Activity, Flame, Clock, Radio, Newspaper } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ar, zhCN, enUS, ckb } from 'date-fns/locale';
 import { cn } from '../lib/utils';
@@ -24,6 +24,7 @@ import { WomenSection } from '../components/WomenSection';
 import { VisaFlightSection } from '../components/VisaFlightSection';
 import { InitiativesSection } from '../components/InitiativesSection';
 import { HomeSettlementSpotlight } from '../components/settlement/HomeSettlementSpotlight';
+import { DirectPortalAccess } from '../components/DirectPortalAccess';
 
 
 import { EditorialShowcaseSection } from '../components/EditorialShowcaseSection';
@@ -197,28 +198,10 @@ export function Home() {
   const popularStories = articles.slice(0, 5); // Popular stories list
 
   return (
-    <div className="flex flex-col w-full bg-white dark:bg-neutral-900 transition-colors">
+    <div className="flex flex-col w-full bg-white transition-colors">
       
-      {/* IRAQ-CHINA INTELLIGENCE WIRE - VERTICAL TICKER */}
-      <div className="w-full bg-white dark:bg-neutral-900 text-ink-900 dark:text-white border-b border-gray-200 dark:border-neutral-800 flex overflow-hidden h-12 relative items-center">
-        <div className="flex-shrink-0 font-black text-brand-800 dark:text-brand-400 pe-6 border-e border-gray-200 dark:border-neutral-800 uppercase tracking-[0.2em] text-xs sm:text-sm z-10 bg-white dark:bg-neutral-900 h-full flex items-center px-4">
-          <Activity size={14} className="me-2 animate-pulse text-brand-800 dark:text-brand-400" />
-          {lang === 'ar' ? 'سلك المعلومات' : lang === 'zh' ? '信息简报' : lang === 'ckb' ? 'تێلیگرافی هەواڵ' : 'INTELLIGENCE WIRE'}
-        </div>
-        <div className="flex-grow h-full relative overflow-hidden ms-6">
-          <div className="animate-marquee-vertical flex flex-col absolute top-0 left-0 w-full">
-            {[...articles.slice(0, 8), ...articles.slice(0, 8)].map((article, i) => {
-              const tr = getTranslation(article);
-              return (
-                 <div key={`${article.id}-${i}`} className="h-12 flex items-center shrink-0 cursor-pointer group" onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}>
-                   <span className="text-xs text-brand-800 dark:text-brand-400 me-4 shrink-0 uppercase font-bold">{new Date(article.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})}</span>
-                   <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-900 dark:text-neutral-100 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors truncate">{tr?.title}</span>
-                 </div>
-              )
-            })}
-          </div>
-        </div>
-      </div>
+      {/* DIRECT PORTAL ACCESS GATEWAYS (Live Portal, Newsroom, Media Hub) */}
+      <DirectPortalAccess lang={lang as Locale} />
 
       {/* Initiatives Section */}
       <InitiativesSection lang={lang as Locale} />
@@ -229,62 +212,57 @@ export function Home() {
       {/* Intelligence Wire is above, next section is Lead Story */}
 
       {/* Lead Story & Popular Stories 2-Column Grid */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 shadow-xs">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-neutral-800 border-b border-gray-200 dark:border-neutral-800">
         {/* Column 2: Lead Story */}
-        <section className="lg:col-span-7 p-4 sm:p-6 md:p-8 overflow-hidden">
-        <div className="flex items-center gap-2 mb-4 sm:mb-6 uppercase text-brand-800 dark:text-brand-400 text-xs sm:text-sm font-black tracking-widest border-b border-gray-100 dark:border-neutral-800 pb-2">
-            <span className="w-2.5 h-2.5 bg-brand-800 dark:bg-brand-400 rounded-sm"></span>
-            {lang === 'ar' ? 'القصة الرئيسية' : lang === 'zh' ? '头条新闻' : lang === 'ckb' ? 'چیرۆکی سەرەکی' : 'Lead Story'}
-        </div>
+        <section className="lg:col-span-8 p-6 sm:p-10 border-e border-neutral-200 dark:border-neutral-800">
         {leadStory && (
           <div 
             onClick={() => navigate(`/${lang}/newsroom/${leadStory.slug}`)}
-            className="cursor-pointer group transition-all duration-300"
+            className="cursor-pointer group"
           >
-            <div className="relative mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-neutral-800 shadow-sm bg-gray-100 dark:bg-neutral-800">
-              <div className="w-full h-[260px] sm:h-[300px] md:h-[400px] overflow-hidden">
-                {leadStory.imageUrl ? (
-                  <img 
-                    src={leadStory.imageUrl} 
-                    alt={getTranslation(leadStory)?.title || 'Lead story image'}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    fetchPriority="high"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <span className="italic">Image not available</span>
-                  </div>
-                )}
-              </div>
-              <div className="absolute top-4 start-4 bg-brand-800 text-white text-xs font-black uppercase px-3 py-1.5 rounded-sm shadow-sm">
-                {lang === 'ar' ? 'تقرير خاص' : lang === 'ckb' ? 'ڕاپۆرتی تایبەت' : lang === 'zh' ? '特别报道' : 'Special Report'}
-              </div>
-            </div>
-            
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-[1.1] mb-5 px-1 tracking-tight text-brand-800 dark:text-neutral-100 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
-              {getTranslation(leadStory)?.title}
-            </h2>
-            
-            <div className="flex items-center space-x-4 rtl:space-x-reverse text-xs font-bold uppercase mb-6 px-1 text-gray-500 dark:text-neutral-400 border-y border-gray-100 dark:border-neutral-800 py-3">
-              <span>By {(leadStory as any).author?.name || 'Staff Reporter'}</span>
-              <span>•</span>
-              <span className="text-brand-800 dark:text-brand-400">
-                {formatTimeAgo(leadStory.createdAt)}
-              </span>
+            <div className="relative mb-8 aspect-video overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
+              {leadStory.imageUrl ? (
+                <img 
+                  src={leadStory.imageUrl} 
+                  alt={getTranslation(leadStory)?.title || 'Lead story image'}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  fetchPriority="high"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-neutral-300">
+                  <span className="italic text-sm">Image not available</span>
+                </div>
+              )}
             </div>
 
-            <div className="space-y-4 px-1 text-base sm:text-lg leading-relaxed text-gray-700 dark:text-neutral-300">
-              <p className="first-letter:text-6xl first-letter:font-black first-letter:float-start first-letter:pe-3 first-letter:text-brand-800 dark:first-letter:text-brand-400">
-                {getTranslation(leadStory)?.excerpt || getTranslation(leadStory)?.content?.substring(0, 300)}
-              </p>
-              {getTranslation(leadStory)?.content && getTranslation(leadStory)!.content.length > 300 && (
-                <p className="opacity-90">
-                  {getTranslation(leadStory)!.content.substring(300, 700)}...
+            <div className="max-w-3xl">
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-800 dark:text-brand-400 mb-4 flex items-center gap-3">
+                <span className="w-8 h-px bg-brand-800 dark:bg-brand-400"></span>
+                {lang === 'ar' ? 'تقرير استراتيجي خاص' : lang === 'ckb' ? 'ڕاپۆرتی ستراتیژی تایبەت' : lang === 'zh' ? '主权战略研究' : 'Strategic Special Report'}
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-6 tracking-tighter text-ink-950 dark:text-white group-hover:text-brand-800 transition-colors">
+                {getTranslation(leadStory)?.title}
+              </h2>
+              
+              <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-8 border-y border-neutral-100 dark:border-neutral-800 py-4">
+                <span>By {(leadStory as any).author?.name || 'Staff Correspondent'}</span>
+                <span className="w-1 h-1 bg-neutral-300 rounded-full"></span>
+                <span className="text-brand-800 dark:text-brand-400">
+                  {formatTimeAgo(leadStory.createdAt)}
+                </span>
+                <span className="ms-auto font-mono tabular-nums opacity-60">7 min read</span>
+              </div>
+
+              <div className="space-y-6 text-lg leading-relaxed text-neutral-600 dark:text-neutral-300 font-serif max-w-2xl">
+                <p className="first-letter:text-6xl first-letter:font-black first-letter:float-start first-letter:pe-4 first-letter:text-ink-950 dark:first-letter:text-white first-letter:leading-none">
+                  {getTranslation(leadStory)?.excerpt || getTranslation(leadStory)?.content?.substring(0, 300)}
                 </p>
-              )}
-              <div className="pt-6 mt-4 flex items-center justify-between text-xs font-bold text-brand-800 dark:text-brand-400 border-t border-gray-100 dark:border-neutral-800 group-hover:underline">
-                <span>{lang === 'ar' ? '← اقرأ التقرير والتحليل الكامل' : lang === 'zh' ? '查看完整深度报道与数据图表 →' : lang === 'ckb' ? 'خوێندنەوەی ڕاپۆرتی تەواو' : 'Read Full Editorial & Analytical Dossier →'}</span>
-                <span className="text-gray-400 dark:text-neutral-500 font-normal no-underline">7 min read</span>
+                <div className="pt-8">
+                  <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 border-b-2 border-brand-800 pb-1">
+                    {lang === 'ar' ? 'متابعة التحليل الكامل' : lang === 'zh' ? '查阅完整研判' : lang === 'ckb' ? 'خوێندنەوەی تەواو' : 'Continue Reading Full Dossier'} →
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -292,88 +270,122 @@ export function Home() {
       </section>
 
       {/* Column 3: Most Popular & Widget */}
-      <section className="lg:col-span-5 flex flex-col p-4 sm:p-6 md:p-8 space-y-8 bg-white dark:bg-neutral-900">
+      <section className="lg:col-span-4 flex flex-col p-6 sm:p-10 space-y-12 bg-neutral-50/50 dark:bg-neutral-900/50">
         <BricsSection lang={lang as Locale} />
         
-        <div className="mt-10">
-            <h3 className="text-base sm:text-lg uppercase font-black border-b border-gray-200 dark:border-neutral-800 pb-3 mb-6 text-brand-800 dark:text-neutral-100 tracking-wider">
+        <div>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] border-b border-neutral-200 dark:border-neutral-800 pb-4 mb-8 text-ink-950 dark:text-white flex items-center gap-3">
+              <span className="w-1.5 h-1.5 bg-brand-800 rounded-full"></span>
               {t('popular')}
             </h3>
-            <ol className="space-y-5 list-decimal list-inside text-base text-ink-900 dark:text-neutral-200">
-              {popularStories.map((article) => (
-                <li 
+            <div className="space-y-6">
+              {popularStories.map((article, idx) => (
+                <div 
                   key={`pop-${article.id}`} 
                   onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
-                  className="font-bold leading-snug cursor-pointer hover:text-brand-800 dark:hover:text-brand-400 transition-colors border-b border-gray-100 dark:border-neutral-800/50 pb-3 last:border-0 last:pb-0"
+                  className="group cursor-pointer flex gap-4 items-start"
                 >
-                  <span className="inline-block align-top max-w-[92%] ms-2 hover:underline">
-                    {getTranslation(article)?.title}
+                  <span className="text-2xl font-black text-neutral-300 dark:text-neutral-700 font-mono shrink-0 tabular-nums leading-none">
+                    {(idx + 1).toString().padStart(2, '0')}
                   </span>
-                </li>
+                  <div className="space-y-1.5 flex-1">
+                    <h4 className="font-bold leading-snug text-ink-950 dark:text-neutral-200 group-hover:text-brand-800 transition-colors text-sm">
+                      {getTranslation(article)?.title}
+                    </h4>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-neutral-400">
+                      {formatTimeAgo(article.createdAt)}
+                    </div>
+                  </div>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         
-        {/* LIVE COVERAGE HIGHLIGHT */}
-        <div className="bg-red-700 dark:bg-red-800 text-white border-2 border-red-600/90 p-8 sm:p-10 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 min-h-[460px] sm:min-h-[500px] flex flex-col justify-between relative overflow-hidden group">
-          {/* Subtle background glow effect */}
-          <div className="pointer-events-none absolute -top-24 -end-24 w-64 h-64 bg-red-500/20 rounded-full blur-2xl"></div>
-          <div className="pointer-events-none absolute -bottom-24 -start-24 w-64 h-64 bg-red-900/40 rounded-full blur-2xl"></div>
-
+        {/* ICA MEDIA & NEWSROOM HIGHLIGHT CARD */}
+        <div className="relative overflow-hidden p-6 sm:p-8 rounded-3xl bg-brand-800 border border-brand-700 text-white shadow-xl group transition-all duration-300">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white text-red-700 rounded-full font-black uppercase text-xs tracking-widest shadow-sm mb-5">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-80"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-700"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-black uppercase tracking-[0.25em] mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-80"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
               </span>
-              <span>{lang === 'ar' ? 'تغطية مباشرة خاصة' : lang === 'ckb' ? 'رووماڵی ڕاستەوخۆی تایبەت' : lang === 'zh' ? '特别直播报道' : 'Special Live Coverage'}</span>
+              <span>{lang === 'ar' ? 'غرفة الأخبار والإنتاج الإعلامي' : lang === 'ckb' ? 'ناوەندی میدیا و ژووری هەواڵ' : lang === 'zh' ? '中伊融媒体与新闻中心' : 'ICA Media & Newsroom'}</span>
             </div>
 
-            <h3 className="font-black text-2xl sm:text-3xl leading-snug text-white mb-4 tracking-tight">
-              <Link to={`/${lang}/live`} className="hover:text-red-100 transition-colors">
-                {lang === 'ar' ? 'القمة الاقتصادية العراقية الصينية 2026' : lang === 'ckb' ? 'لووتکەی ئابووری عێراق-چین ٢٠٢٦' : lang === 'zh' ? '2026年伊拉克-中国经济峰会' : 'Iraq-China Economic Summit 2026'}
+            <h3 className="font-black text-xl sm:text-2xl leading-tight mb-3 text-white uppercase tracking-tight">
+              <Link to={`/${lang}/newsroom`} className="hover:text-amber-200 transition-colors">
+                {lang === 'ar' 
+                  ? 'غرفة أخبار وكالة الأنباء العراقية الصينية (ICA)' 
+                  : lang === 'ckb' 
+                  ? 'ژووری هەواڵی ئاژانسی عێراقی-چینی (ICA)' 
+                  : lang === 'zh' 
+                  ? '中伊通讯社 (ICA) 融媒体与全球新闻中心' 
+                  : 'ICA Media & Global Newsroom'}
               </Link>
             </h3>
 
-            <p className="text-sm sm:text-base text-white/95 mb-6 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-white/95 mb-5 leading-relaxed font-normal">
               {lang === 'ar' 
-                ? 'تغطية وبث مباشر على مدار الساعة لاتفاقيات التجارة الاستراتيجية ومشاريع الطاقة وممر التنمية الإقليمي بين بغداد وبكين.' 
+                ? 'تغطيات صحفية ميدانية موثقة، تحقيقات استراتيجية حصرية، وتقارير جيواقتصادية متخصصة ترصد مسار العلاقات والاتفاقيات بين العراق والصين.' 
                 : lang === 'ckb' 
-                ? 'ڕووماڵ و پەخشی ڕاستەوخۆ بۆ ڕێککەوتننامە ستراتیژییە بازرگانییەکان، پڕۆژەکانی وزە و ڕێگەی گەشەپێدان.' 
+                ? 'ڕووماڵی وردی ڕۆژنامەوانی، ڕاپۆرتی تایبەتی ستراتیژی و شیکردنەوەی ئابووری لەسەر پەیوەندییەکانی عێراق و چین.' 
                 : lang === 'zh' 
-                ? '全天候实时报道巴格达与北京之间的战略贸易协定、能源基建项目以及区域发展走廊规划。' 
-                : '24/7 continuous broadcast and live updates on strategic trade treaties, clean energy infrastructure, and bilateral development corridors.'}
+                ? '汇聚权威实地采访、独家地缘经贸深度研判与全天候双边战略动向，提供中伊经贸与多边合作一手权威资讯。' 
+                : 'Authoritative real-time journalism, exclusive geopolitical dossiers, and investigative coverage tracking Sino-Iraqi strategic partnerships.'}
             </p>
 
-            <div className="bg-red-800/85 border border-red-500/40 rounded-lg p-4 mb-6 text-xs text-white/95 space-y-1.5 backdrop-blur-xs shadow-inner">
-              <div className="font-black uppercase tracking-wider text-red-200 flex items-center justify-between">
-                <span>{lang === 'ar' ? 'موجز القمة المباشر' : lang === 'zh' ? '峰会实时简报' : lang === 'ckb' ? 'کورتەی لووتکە' : 'Summit Briefing'}</span>
-                <span className="bg-red-950/70 border border-red-400/30 px-2 py-0.5 rounded text-[10px] text-white font-bold tracking-widest uppercase">
-                  {lang === 'ar' ? 'قريباً' : lang === 'zh' ? '即将上线' : lang === 'ckb' ? 'بەم زووانە' : 'Coming Soon'}
+            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 mb-5 text-xs text-white/90 space-y-1.5 backdrop-blur-xs">
+              <div className="font-black uppercase tracking-wider text-amber-300 flex items-center justify-between text-[10px]">
+                <span className="flex items-center gap-1.5">
+                  <Activity size={12} className="text-amber-300 animate-pulse" />
+                  <span>{lang === 'ar' ? 'البث الصحفي المباشر' : lang === 'zh' ? '编采即时通报' : lang === 'ckb' ? 'تێلیگرافی ڕاستەوخۆ' : 'Editorial Wire & Dispatches'}</span>
+                </span>
+                <span className="bg-white/15 border border-white/25 px-2 py-0.5 rounded-full text-[9px] text-white font-bold tracking-widest uppercase">
+                  {lang === 'ar' ? '24/7 مباشر' : lang === 'zh' ? '全天候发稿' : lang === 'ckb' ? '٢٤/٧ ئۆنلاین' : '24/7 Wire'}
                 </span>
               </div>
-              <div className="text-white/90 leading-normal font-medium">
+              <div className="text-white/90 leading-relaxed text-[11px]">
                 {lang === 'ar' 
-                  ? 'مفاوضات استثمارية كبرى تشمل 14 قطاعاً حيوياً ومذكرات تفاهم صناعية مشتركة.' 
+                  ? 'تحديثات فورية للأخبار والتحليلات السياسية والاقتصادية وأسواق الطاقة ومشاريع البنية التحتية.' 
                   : lang === 'zh' 
-                  ? '涵盖14个关键领域的重大投资协议与双边联合工业合作备忘录。' 
+                  ? '涵盖能源大宗、双边清算、基础设施、产业投资及高层互访的实时新闻电讯。' 
                   : lang === 'ckb' 
-                  ? 'ڕێککەوتنی گەورەی وەبەرهێنان لە ١٤ کەرتی جیاوازدا.' 
-                  : 'High-level multilateral pacts spanning 14 strategic economic and energy sectors.'}
+                  ? 'نوێکاری بەردەوام لە بوارەکانی وزە، بازرگانی، ژێرخان و وەبەرهێنانی هاوبەش.' 
+                  : 'Continuous live dispatches spanning energy infrastructure, bilateral finance, and diplomacy.'}
               </div>
             </div>
-          </div>
 
-          <div className="relative z-10 pt-2">
+            {/* Sub-routing Quick Chips */}
+            <div className="flex flex-wrap items-center gap-2 mb-5">
+              <Link 
+                to={`/${lang}/media`}
+                className="text-[10px] font-bold px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+              >
+                {lang === 'ar' ? 'الوسائط المتعددة' : lang === 'zh' ? '多媒体中心' : lang === 'ckb' ? 'میدیای بینراو' : 'Multimedia'}
+              </Link>
+              <Link 
+                to={`/${lang}/newsroom/archive`}
+                className="text-[10px] font-bold px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+              >
+                {lang === 'ar' ? 'الأرشيف الصحفي' : lang === 'zh' ? '新闻档案' : lang === 'ckb' ? 'ئەرشیڤی هەواڵ' : 'Archive'}
+              </Link>
+              <Link 
+                to={`/${lang}/newsroom/search`}
+                className="text-[10px] font-bold px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+              >
+                {lang === 'ar' ? 'البحث بالتقارير' : lang === 'zh' ? '智库检索' : lang === 'ckb' ? 'گەڕان لە هەواڵ' : 'Search Dossiers'}
+              </Link>
+            </div>
+
             <Link 
-              to={`/${lang}/live/iraq-china-summit-2026`} 
-              className="inline-flex items-center justify-between w-full px-6 py-4 bg-white hover:bg-neutral-100 text-red-700 rounded-lg text-sm font-black uppercase tracking-wider transition-all shadow-lg hover:shadow-xl group cursor-pointer"
+              to={`/${lang}/newsroom`} 
+              className="bg-white hover:bg-neutral-100 text-brand-800 px-6 py-3.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shadow-md flex items-center justify-between w-full group cursor-pointer"
             >
               <span className="flex items-center gap-2">
-                <Radio size={16} className="text-red-700 animate-pulse" />
-                <span>{lang === 'ar' ? 'متابعة التحديثات' : lang === 'ckb' ? 'سەیرکردنی نوێکارییەکان' : lang === 'zh' ? '关注更新' : 'Follow Updates'}</span>
+                <Newspaper size={14} className="text-brand-800" />
+                <span>{lang === 'ar' ? 'استكشاف غرفة الأخبار' : lang === 'ckb' ? 'چوونە نێو ژووری هەواڵ' : lang === 'zh' ? '进入 ICA 新闻与媒体中心' : 'Explore ICA Media & Newsroom'}</span>
               </span>
-              <span className="group-hover:translate-x-1.5 transition-transform rtl:group-hover:-translate-x-1.5 text-base font-black">→</span>
+              <span className="group-hover:translate-x-1.5 transition-transform rtl:group-hover:-translate-x-1.5 text-sm font-black">→</span>
             </Link>
           </div>
         </div>
@@ -415,7 +427,7 @@ export function Home() {
       </div>
 
       {/* Premium Media Hub - Full Screen Adaptive Layout */}
-      <div className="w-full bg-neutral-50 dark:bg-neutral-950 py-12 md:py-20 border-y border-neutral-200 dark:border-neutral-800">
+      <div className="w-full py-8 md:py-12 bg-transparent border-0">
         <div className="w-full max-w-full mx-auto px-4 sm:px-6 md:px-8">
           <IcaPlusSection />
         </div>
@@ -432,82 +444,66 @@ export function Home() {
 
       {/* 2. Deep Research & Intelligence Studies */}
       {studies.length > 0 && (
-        <div className="w-full my-6">
+        <div className="w-full my-12">
           <ErrorBoundary inline lang={lang} title="Deep Research & Intelligence Studies">
-            <section className="bg-white dark:bg-neutral-900 border-t-4 border-double border-brand-800 p-4 sm:p-6 md:p-8 space-y-6 shadow-xs rounded-lg">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-neutral-200 dark:border-neutral-800 pb-4 gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-brand-50 dark:bg-brand-950/40 rounded-lg text-brand-800 dark:text-brand-400">
-                    <BookOpen size={20} />
+            <section className="bg-white dark:bg-neutral-900 border-t-2 border-ink-950 dark:border-neutral-700 pt-10 space-y-10">
+              <div className="flex flex-col sm:flex-row justify-between items-baseline gap-4">
+                <div className="space-y-2">
+                  <div className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-800 dark:text-brand-400">
+                    {lang === 'ar' ? 'أبحاث ودراسات' : lang === 'zh' ? '智库报告' : 'Intelligence & Research'}
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-brand-800 dark:text-white tracking-tight">
+                  <h2 className="text-3xl sm:text-4xl font-black text-ink-950 dark:text-white tracking-tighter uppercase">
                     {t('studies')}
                   </h2>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 px-3 py-1 border border-neutral-200 dark:border-neutral-700 rounded-md">
-                  {lang === 'ar' ? 'معلومات الوكالة العراقية الصينية' : lang === 'zh' ? '伊中通讯社智库信息' : lang === 'ckb' ? 'زانیاری ئاژانسی عێراقی - چینی' : 'Iraqi-Chinese Agency Information'}
-                </span>
+                <div className="text-[10px] font-black uppercase tracking-widest text-neutral-400 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-brand-800 rounded-full"></span>
+                  {lang === 'ar' ? 'التحليلات الجيواقتصادية' : lang === 'zh' ? '地缘经济研判' : 'Geoeconomic Analysis'}
+                </div>
               </div>
 
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 min-w-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {studies.map((study) => {
                   const isLocked = study.isPrivate && !isSubscribed;
                   return (
                     <div 
                       key={study.id}
                       onClick={() => setSelectedStudy(study)}
-                      className="group cursor-pointer flex flex-col justify-between bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800/60 transition-all duration-300 hover:scale-[1.02] hover:brightness-105 rounded-xl overflow-hidden shadow-sm hover:shadow-lg"
+                      className="group cursor-pointer flex flex-col space-y-4"
                     >
-                      <div className="space-y-4">
+                      <div className="relative aspect-video overflow-hidden border border-neutral-100 dark:border-neutral-800 bg-neutral-50">
                         {study.imageUrl && (
-                          <div className="relative w-full aspect-video overflow-hidden border-b border-neutral-200 dark:border-neutral-700">
-                            <img 
-                              src={study.imageUrl} 
-                              alt={getStudyTitle(study)} 
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              referrerPolicy="no-referrer"
-                            />
-                            {isLocked && (
-                              <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center">
-                                <div className="bg-black/80 text-amber-400 text-xs px-3.5 py-1.5 rounded-full flex items-center gap-1.5 font-bold uppercase tracking-wider shadow-sm border border-amber-500/30">
-                                  <Lock size={12} className="animate-pulse" />
-                                  <span>{lang === 'ar' ? 'مغلق' : lang === 'ckb' ? 'داخراو' : lang === 'zh' ? '加锁专享' : 'Premium Lock'}</span>
-                                </div>
-                              </div>
-                            )}
-                            <div className="absolute top-3 start-3 flex gap-1.5">
-                              {study.isPrivate ? (
-                                <span className="bg-amber-600 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-                                  PREMIUM
-                                </span>
-                              ) : (
-                                <span className="bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-                                  OPEN ACCESS
-                                </span>
-                              )}
+                          <img 
+                            src={study.imageUrl} 
+                            alt={getStudyTitle(study)} 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            referrerPolicy="no-referrer"
+                          />
+                        )}
+                        {isLocked && (
+                          <div className="absolute inset-0 bg-ink-950/40 backdrop-blur-xs flex items-center justify-center">
+                            <div className="bg-white text-ink-950 text-[10px] px-3 py-1 font-black uppercase tracking-widest shadow-xl border border-neutral-200">
+                              <Lock size={12} className="inline me-1.5" />
+                              {lang === 'ar' ? 'مغلق' : 'Premium Access'}
                             </div>
                           </div>
                         )}
-
-                        <div className="p-5 space-y-3">
-                          <div className="flex items-center gap-2 text-xs uppercase text-neutral-500 dark:text-neutral-400 font-bold tracking-wider">
-                            <span>{study.author?.name || 'Research Desk'}</span>
-                            <span>•</span>
-                            <span>{new Date(study.createdAt).toLocaleDateString(dateLocale.code)}</span>
-                          </div>
-                          <h3 className="text-base sm:text-lg font-bold leading-snug group-hover:text-brand-700 dark:group-hover:text-brand-400 text-brand-800 dark:text-white transition-colors line-clamp-3">
-                            {getStudyTitle(study)}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
-                            {getStudyExcerpt(study)}
-                          </p>
-                        </div>
                       </div>
 
-                      <div className="p-5 pt-0">
-                        <div className="w-full py-2.5 px-4 text-center text-xs font-bold uppercase tracking-wider bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 text-neutral-800 dark:text-neutral-100 hover:text-white hover:bg-brand-800 dark:hover:bg-brand-700 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
-                          <span>{study.isPrivate ? t('premiumStudy') : 'Read Access'}</span>
-                          <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                      <div className="space-y-3">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                          {new Date(study.createdAt).toLocaleDateString(dateLocale.code)} • {study.author?.name || 'Research Desk'}
+                        </div>
+                        <h3 className="text-lg font-black leading-tight text-ink-950 dark:text-white group-hover:text-brand-800 transition-colors uppercase tracking-tight">
+                          {getStudyTitle(study)}
+                        </h3>
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-3 leading-relaxed font-serif">
+                          {getStudyExcerpt(study)}
+                        </p>
+                        <div className="pt-2">
+                           <span className="text-[10px] font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 border-b border-brand-800/30 group-hover:border-brand-800 transition-colors">
+                             {study.isPrivate ? t('premiumStudy') : 'View Report'} →
+                           </span>
                         </div>
                       </div>
                     </div>
@@ -733,8 +729,7 @@ export function Home() {
       {/* 9. Specialized Industry Tracks */}
       <div className="w-full my-6">
         <ErrorBoundary inline lang={lang} title="Specialized Bilateral Industry Tracks">
-          <section className="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border-0 relative shadow-sm rounded-2xl p-6 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/80 dark:from-neutral-800/20 dark:to-neutral-900/80 pointer-events-none" />
+            <section className="bg-transparent border-0 relative shadow-none p-6 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
               {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
                 const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
@@ -747,7 +742,7 @@ export function Home() {
                 if (catSlug === 'business-statistics') title = t('businessStats');
                 
                 return (
-                  <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-white/40 dark:bg-neutral-800/40 backdrop-blur-md border-0 relative group shadow-xs overflow-hidden">
+                  <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 relative group shadow-none overflow-hidden">
                     <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
                       {title}
                     </h3>

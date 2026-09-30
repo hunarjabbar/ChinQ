@@ -29,7 +29,7 @@ export function DataHub() {
       titleCkb: 'گەڕانچی بازرگانی',
       descriptionEn: 'The definitive interface for bilateral trade flow mapping, including HS2 categorization and YoY trends.',
       icon: TrendingUp,
-      color: '#0284C7',
+      color: 'var(--color-brand-800)',
       path: `/${lang}/institute/data-hub/trade`,
       stats: { label: '2025 Volume', value: '$51.17B' }
     },
@@ -41,7 +41,7 @@ export function DataHub() {
       titleCkb: 'ڕێڕەوی بەدواداچوون',
       descriptionEn: 'Real-time monitoring of the Yiwu → Sulaymaniyah → Basra logistics spine and infrastructure nodes.',
       icon: Map,
-      color: '#047857',
+      color: 'var(--accent-primary)',
       path: `/${lang}/institute/data-hub/corridor`,
       stats: { label: 'Active Nodes', value: '4 Strategic' }
     },
@@ -53,7 +53,7 @@ export function DataHub() {
       titleCkb: 'پڕۆژەکانی پشتێنە و ڕێگە',
       descriptionEn: 'The authoritative registry of China-linked infrastructure and energy projects with verification status.',
       icon: Building2,
-      color: '#D97706',
+      color: 'var(--color-brand-800)',
       path: `/${lang}/institute/data-hub/projects`,
       stats: { label: 'Verified Value', value: '$9.0B+' }
     },
@@ -74,11 +74,11 @@ export function DataHub() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="space-y-6 max-w-3xl">
-        <div className="inline-flex items-center gap-2 text-[#0284C7]">
+        <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
           <Database size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">Institutional Data Hub</span>
         </div>
-        <h1 className="text-4xl lg:text-7xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter leading-none">
+        <h1 className="text-4xl lg:text-7xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter leading-none">
           Strategic Intelligence Interface
         </h1>
         <p className="text-xl text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed">
@@ -92,7 +92,7 @@ export function DataHub() {
           <Link 
             key={module.id} 
             to={module.path}
-            className="group relative bg-white dark:bg-neutral-900 rounded-[2.5rem] p-10 lg:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-2xl hover:border-[#0284C7] transition-all overflow-hidden"
+            className="group relative bg-white dark:bg-neutral-900 rounded-[2.5rem] p-10 lg:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-2xl hover:border-[var(--color-brand-800)] transition-all overflow-hidden"
           >
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-10 group-hover:scale-110 transition-all">
               <module.icon size={160} />
@@ -105,14 +105,14 @@ export function DataHub() {
                 </div>
                 <div className="text-right rtl:text-left">
                   <span className="block text-[10px] font-black uppercase tracking-widest text-neutral-400">{module.stats.label}</span>
-                  <span className="block text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter" style={{ color: module.color }}>
+                  <span className="block text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter" style={{ color: module.color }}>
                     {module.stats.value}
                   </span>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-3xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter group-hover:text-[#0284C7] transition-colors">
+                <h3 className="text-3xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter group-hover:text-[var(--color-brand-800)] transition-colors">
                   {module[`title${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof typeof module] as string || module.titleEn}
                 </h3>
                 <p className="text-sm text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed">
@@ -121,8 +121,8 @@ export function DataHub() {
               </div>
 
               <div className="pt-6 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7]">Launch Dashboard</span>
-                <ChevronRight size={20} className="text-neutral-300 group-hover:text-[#0284C7] group-hover:translate-x-2 transition-all rtl:rotate-180 rtl:group-hover:-translate-x-2" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">Launch Dashboard</span>
+                <ChevronRight size={20} className="text-neutral-300 group-hover:text-[var(--color-brand-800)] group-hover:translate-x-2 transition-all rtl:rotate-180 rtl:group-hover:-translate-x-2" />
               </div>
             </div>
           </Link>
@@ -130,11 +130,11 @@ export function DataHub() {
       </div>
 
       {/* Global Data Status Strip */}
-      <div className="bg-[#0F172A] rounded-[2.5rem] p-12 text-white relative overflow-hidden group">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#0284C720,transparent)]" />
+      <div className="bg-[var(--color-ink-900)] rounded-[2.5rem] p-12 text-white relative overflow-hidden group">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--color-brand-800)20,transparent)]" />
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="space-y-6 max-w-xl">
-            <div className="flex items-center gap-2 text-[#D97706]">
+            <div className="flex items-center gap-2 text-[var(--color-brand-800)]">
               <ShieldCheck size={18} />
               <span className="text-[10px] font-black uppercase tracking-widest">Verification Status</span>
             </div>
@@ -150,11 +150,11 @@ export function DataHub() {
           <div className="grid grid-cols-2 gap-4 w-full lg:w-auto">
             <div className="p-8 bg-white/5 border border-white/10 rounded-3xl text-center">
               <span className="block text-4xl font-black mb-2 tracking-tighter">98.4%</span>
-              <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-[#0284C7]">Correlation Index</span>
+              <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-[var(--color-brand-800)]">Correlation Index</span>
             </div>
             <div className="p-8 bg-white/5 border border-white/10 rounded-3xl text-center">
               <span className="block text-4xl font-black mb-2 tracking-tighter">Q1 2026</span>
-              <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-[#D97706]">Latest Batch</span>
+              <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-[var(--color-brand-800)]">Latest Batch</span>
             </div>
           </div>
         </div>

@@ -90,7 +90,7 @@ export function SummitB2BMatchmakingPage() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10">
         
         {/* Header Hero */}
-        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-start">
           <div className="flex items-center gap-2">
             <Handshake className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
@@ -109,12 +109,12 @@ export function SummitB2BMatchmakingPage() {
 
         {/* Confirmation Toast */}
         {bookingSuccess && (
-          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-300">
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-300 text-start">
             <div className="flex items-center gap-2">
               <CheckCircle2 size={16} />
-              <span><strong>Session Locked!</strong> You have been added to session <strong>{bookingSuccess}</strong>. Confirmation dispatched to your accredited pass.</span>
+              <span><strong>{lang === 'ar' ? 'تم حجز الجلسة!' : 'Session Locked!'}</strong> {lang === 'ar' ? `تمت إضافتك إلى الجلسة ${bookingSuccess}. تم إرسال التأكيد إلى بطاقتك المعتمدة.` : `You have been added to session ${bookingSuccess}. Confirmation dispatched to your accredited pass.`}</span>
             </div>
-            <button onClick={() => setBookingSuccess(null)} className="font-bold underline cursor-pointer">Dismiss</button>
+            <button onClick={() => setBookingSuccess(null)} className="font-bold underline cursor-pointer">{lang === 'ar' ? 'إغلاق' : 'Dismiss'}</button>
           </div>
         )}
 
@@ -131,7 +131,7 @@ export function SummitB2BMatchmakingPage() {
                     : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200'
                 }`}
               >
-                Day {d} Deal Rooms
+                {lang === 'ar' ? `اليوم ${d} - غرف الصفقات` : `Day ${d} Deal Rooms`}
               </button>
             ))}
           </div>
@@ -141,9 +141,9 @@ export function SummitB2BMatchmakingPage() {
             <select
               value={selectedSector}
               onChange={(e) => setSelectedSector(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 font-semibold"
+              className="px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 font-semibold outline-hidden"
             >
-              <option value="all">All Sectors</option>
+              <option value="all">{lang === 'ar' ? 'كافة القطاعات' : 'All Sectors'}</option>
               {SECTOR_PAVILIONS.map(s => (
                 <option key={s.id} value={s.slug}>{s.name[lang]}</option>
               ))}
@@ -156,15 +156,15 @@ export function SummitB2BMatchmakingPage() {
           {filteredRooms.map((room) => (
             <div
               key={room.id}
-              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs hover:border-brand-600 transition-all flex flex-col justify-between space-y-6"
+              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs hover:border-brand-600 transition-all flex flex-col justify-between space-y-6 text-start"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-brand-100 dark:bg-brand-950 text-brand-900 dark:text-brand-300">
-                    Day {room.day} • {room.time}
+                    {lang === 'ar' ? 'اليوم' : 'Day'} {room.day} • {room.time}
                   </span>
                   <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                    {room.slotsLeft} Private Slots Remaining
+                    {lang === 'ar' ? `متبقي ${room.slotsLeft} مقاعد خاصة` : `${room.slotsLeft} Private Slots Remaining`}
                   </span>
                 </div>
 
@@ -175,22 +175,22 @@ export function SummitB2BMatchmakingPage() {
                 <div className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
                   <div className="flex items-center gap-2">
                     <MapPin size={14} className="text-brand-800 dark:text-brand-400 shrink-0" />
-                    <span><strong>Location:</strong> {room.room}</span>
+                    <span><strong>{lang === 'ar' ? 'الموقع:' : 'Location:'}</strong> {room.room}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users size={14} className="text-brand-800 dark:text-brand-400 shrink-0" />
-                    <span><strong>Delegation:</strong> {room.delegations}</span>
+                    <span><strong>{lang === 'ar' ? 'الوفد المشارك:' : 'Delegation:'}</strong> {room.delegations}</span>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
-                <span className="text-[11px] text-neutral-400 font-bold">Includes Interpreter</span>
+                <span className="text-[11px] text-neutral-400 font-bold">{lang === 'ar' ? 'تشمل مترجم فوري' : 'Includes Interpreter'}</span>
                 <button
                   onClick={() => setBookingSuccess(room.id)}
                   className="px-4 py-2 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-colors cursor-pointer"
                 >
-                  Book Deal Slot →
+                  {lang === 'ar' ? 'حجز موعد صفقة ←' : 'Book Deal Slot →'}
                 </button>
               </div>
             </div>

@@ -1,14 +1,15 @@
-// server/data/figures/types.ts
-export interface HistoricalFigureData {
+export interface HistoricalFigureTranslation {
+  lang: string;
+  title: string;
+  excerpt: string;
+  content: string;
+}
+
+export interface HistoricalFigure {
   slug: string;
   imageUrl: string;
   lifespan: string;
-  categorySlug: 'historical-figures';
-  region: 'kurdish' | 'chinese' | 'iraqi';
-  translations: {
-    lang: 'en' | 'ar' | 'zh' | 'ckb';
-    title: string;
-    excerpt: string;
-    content: string;
-  }[];
+  categorySlug: string;
+  region: string;
+  translations: HistoricalFigureTranslation[];
 }

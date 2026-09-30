@@ -332,27 +332,27 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
   return (
     <section 
       id="ica-business-hub" 
-      className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
+      className="w-full bg-white dark:bg-neutral-900 border-y border-slate-200 dark:border-neutral-700 shadow-xs p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-800/10 text-brand-800 dark:text-brand-400 text-xs font-bold uppercase tracking-wider mb-4 border border-brand-800/20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 text-brand-800 dark:bg-brand-950/40 dark:text-brand-300 text-xs font-bold uppercase tracking-wider mb-4 border border-brand-200 dark:border-brand-800/40">
             <Building2 className="w-3.5 h-3.5" />
             {t.badge}
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-brand-600 dark:text-brand-500 tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
             {t.title}
           </h2>
-          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed font-sans">
             {t.desc}
           </p>
         </div>
 
         {/* 4 Sovereign Investor Guarantees Grid */}
         <div className="mb-14">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6">
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 mb-6">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{t.guaranteesTitle}</span>
           </div>
@@ -363,20 +363,20 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
               return (
               <div 
                 key={idx}
-                className="bg-white dark:bg-neutral-800/90 border border-neutral-200/80 dark:border-neutral-700/80 rounded-xl p-5 shadow-xs hover:border-brand-600/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="bg-white dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700/80 rounded-2xl p-5 shadow-xs hover:border-brand-700 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-8 h-8 rounded-lg bg-brand-800/10 text-brand-700 dark:text-brand-400 font-bold text-sm flex items-center justify-center mb-3">
+                  <div className="w-8 h-8 rounded-xl bg-brand-50 text-brand-800 dark:bg-brand-950/50 dark:text-brand-300 font-bold text-sm flex items-center justify-center mb-3 border border-brand-200/60 dark:border-brand-800/40">
                     {minimalSigns[idx % minimalSigns.length]}
                   </div>
-                  <h4 className="text-sm font-black text-brand-700 dark:text-brand-400 mb-2 leading-snug">
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white mb-2 leading-snug">
                     {g.title}
                   </h4>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-neutral-300 leading-relaxed font-normal">
                     {g.desc}
                   </p>
                 </div>
-                <div className="pt-3 mt-3 border-t border-neutral-100 dark:border-neutral-700/60 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                <div className="pt-3 mt-3 border-t border-slate-100 dark:border-neutral-700/60 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                   <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                   <span>Verified Legal Immunity</span>
                 </div>
@@ -388,43 +388,43 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
 
         {/* Official Investment Laws Download Bar */}
         <div className="relative mb-16">
-          <div className="relative z-10 p-6 sm:p-8 md:p-10 bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 text-white rounded-2xl shadow-2xl border border-brand-600/40 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="flex items-start gap-4 sm:gap-5">
-              <div className="p-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl shrink-0 mt-0.5 border border-white/20 shadow-inner">
+          <div className="relative z-10 p-6 sm:p-8 md:p-10 bg-brand-800 border border-brand-700 text-white rounded-3xl shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 transition-all duration-300">
+            <div className="flex items-start gap-4 sm:gap-5 max-w-2xl">
+              <div className="p-3.5 bg-white/15 border border-white/25 text-white rounded-2xl shrink-0 mt-0.5 shadow-sm">
                 <FileText className="w-7 h-7" />
               </div>
               <div>
-                <h4 className="text-lg sm:text-xl font-black text-white mb-2 tracking-tight">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-black uppercase tracking-[0.25em] mb-3">
+                  <Sparkles size={11} className="text-amber-300 animate-pulse" />
+                  <span>Official Codification</span>
+                </div>
+                <h4 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase tracking-tight mb-2 leading-tight">
                   {t.lawsTitle}
                 </h4>
-                <p className="text-xs sm:text-sm text-brand-100 max-w-xl leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-normal">
                   Direct authorized codification of Federal Law No. 13 and KRG Law No. 4, governing corporate immunity, zero tariff imports, and sovereign capital repatriation.
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
               {t.laws.map((law, idx) => (
                 <a
                   key={idx}
                   href={law.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 px-4.5 py-3 bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl text-xs sm:text-sm font-bold text-white transition-all group backdrop-blur-sm shadow-sm"
+                  className="flex items-center gap-2.5 px-4.5 py-3 bg-white/15 hover:bg-white/25 border border-white/30 rounded-xl text-xs sm:text-sm font-bold text-white transition-all group shadow-sm"
                 >
-                  <Download className="w-4 h-4 text-brand-200 group-hover:scale-110 transition-transform" />
+                  <Download className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
                   <span className="truncate max-w-[200px] sm:max-w-xs">{law.name}</span>
-                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 bg-black/30 text-brand-200 rounded-md">
+                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 bg-white/20 text-white border border-white/30 rounded-md">
                     PDF / Official
                   </span>
                 </a>
               ))}
             </div>
           </div>
-
-          {/* Smooth Smoke-like Red Blurry Effect Underneath */}
-          <div className="absolute -bottom-6 left-8 right-8 h-10 bg-brand-600/60 blur-2xl rounded-full pointer-events-none z-0 opacity-75" />
-          <div className="absolute -bottom-10 left-16 right-16 h-12 bg-brand-500/40 blur-3xl rounded-full pointer-events-none z-0 opacity-50" />
         </div>
 
         {/* Category Filter Tabs */}
@@ -543,25 +543,30 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
         </div>
 
         {/* Bottom Fast Action Links */}
-        <div className="mt-12 py-10 px-8 sm:px-10 rounded-2xl bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 text-white border border-brand-600/50 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-12 py-8 sm:py-10 px-6 sm:px-10 rounded-3xl bg-brand-800 border border-brand-700 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300">
           <div className="flex items-center gap-4 text-start">
-            <div className="p-3.5 bg-white/10 backdrop-blur-md text-white rounded-xl border border-white/20 shadow-inner">
+            <div className="p-3.5 bg-white/15 border border-white/25 text-white rounded-2xl shadow-sm shrink-0">
               <Globe2 className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-base sm:text-lg font-black text-white mb-1 tracking-tight">
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-white/15 border border-white/25 text-white text-[9px] font-black uppercase tracking-wider mb-2">
+                <Sparkles size={10} className="text-amber-300 animate-pulse" />
+                <span>Trade Corridor Fast-Track</span>
+              </div>
+              <h4 className="text-base sm:text-lg lg:text-xl font-black text-white mb-1 uppercase tracking-tight">
                 {lang === 'ar' ? 'هل تبحث عن خدمات التوريد والتسوية الثنائية؟' : lang === 'zh' ? '需要双边大宗集采与本币跨境清算服务？' : lang === 'ckb' ? 'پێویستت بە خزمەتگوزاری دابینکردن و پاکتاوی داراییە؟' : 'Looking for Cross-Border Procurement & Currency Settlement?'}
               </h4>
-              <p className="text-xs sm:text-sm text-brand-100 font-sans">
-                {lang === 'ar' ? 'قم بزيارة مكتب التسوية والمقاصة الثنائية أدناه.' : lang === 'zh' ? '请下滚访问下方直通清算与采购服务台。' : lang === 'ckb' ? 'دەتوانیت سەردانی دەفتەری خزمەتگوزاری دارایی بکەیت لە خوارەوە.' : 'Direct access to the settlement and sourcing desk below.'}
+              <p className="text-xs sm:text-sm text-white/95 font-normal leading-relaxed">
+                {lang === 'ar' ? 'قم بزيارة مكتب التسوية والمقاصة الثنائية أدناه.' : lang === 'zh' ? '请下滚访问下方直通清算与采购服务台。' : lang === 'ckb' ? 'دەتوانیت سەردانی دەفتەری خزمەتگوزاری دارایی بکەیت لە خوارەوە.' : 'Direct access to the bilateral sovereign settlement and sourcing desk.'}
               </p>
             </div>
           </div>
           <Link
             to={`/${lang}/settlement`}
-            className="px-6 py-3.5 bg-white hover:bg-brand-50 text-brand-900 text-xs sm:text-sm font-black rounded-xl transition-all shadow-md hover:shadow-lg shrink-0 tracking-wider uppercase"
+            className="px-7 py-3.5 bg-white hover:bg-neutral-100 text-brand-800 text-xs sm:text-sm font-black rounded-xl transition-all shadow-md hover:shadow-lg shrink-0 tracking-wider uppercase flex items-center gap-2 group cursor-pointer"
           >
-            {lang === 'ar' ? 'الانتقال إلى مكتب التسوية ←' : lang === 'zh' ? '前往双边结算与集采台 →' : lang === 'ckb' ? 'بڕۆ بۆ دەفتەری دارایی ←' : 'Go to Settlement & Sourcing →'}
+            <span>{lang === 'ar' ? 'الانتقال إلى مكتب التسوية' : lang === 'zh' ? '前往双边结算与集采台' : lang === 'ckb' ? 'بڕۆ بۆ دەفتەری دارایی' : 'Go to Settlement & Sourcing'}</span>
+            <span className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">{isRtl ? '←' : '→'}</span>
           </Link>
         </div>
       </div>

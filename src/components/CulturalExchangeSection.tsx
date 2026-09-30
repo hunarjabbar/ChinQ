@@ -153,39 +153,39 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
   }, [programs]);
 
   return (
-    <section className="w-full bg-paper-50 dark:bg-paper-950 border-y border-paper-200 dark:border-paper-800 py-12 md:py-16 my-8 transition-colors duration-300 relative overflow-hidden">
+    <section className="w-full bg-slate-50/50 dark:bg-neutral-950 border-y border-slate-200 dark:border-neutral-800 py-12 md:py-16 my-8 transition-colors duration-300 relative overflow-hidden">
       {/* Background radial atmosphere using brand tokens */}
-      <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-brand-800/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full bg-brand-900/5 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-red-600/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full bg-red-800/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-paper-200 dark:border-paper-800">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-neutral-800">
           <div className="space-y-2 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-950 border border-brand-200 dark:border-brand-900 text-brand-800 dark:text-brand-300 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider">
               <GraduationCap className="w-3.5 h-3.5" />
               <span>{t.sectionBadge}</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-paper-950 dark:text-paper-50 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               {t.title}
             </h2>
 
-            <p className="text-sm sm:text-base text-paper-700 dark:text-paper-300 leading-relaxed font-sans">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed font-sans">
               {t.subtitle}
             </p>
           </div>
 
           <div className="shrink-0">
             <Link
-              to={`/${lang}/cultural-exchange`}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-paper-300 dark:border-paper-700 hover:border-brand-800 dark:hover:border-brand-500 bg-paper-100 dark:bg-paper-900 text-paper-900 dark:text-paper-100 text-xs sm:text-sm font-semibold transition group shadow-2xs hover:shadow-xs"
+              to={`/${lang}/institute/services/cultural-exchange`}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-neutral-700 hover:border-red-700 dark:hover:border-red-500 bg-white dark:bg-neutral-900 text-slate-900 dark:text-neutral-100 text-xs sm:text-sm font-semibold transition group shadow-2xs hover:shadow-xs"
             >
               <span>{t.viewAll}</span>
               {isRtl ? (
-                <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition duration-200 text-brand-800 dark:text-brand-400" />
+                <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition duration-200 text-red-700 dark:text-red-400" />
               ) : (
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition duration-200 text-brand-800 dark:text-brand-400" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition duration-200 text-red-700 dark:text-red-400" />
               )}
             </Link>
           </div>
@@ -198,8 +198,8 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
               onClick={() => setSelectedCategory('all')}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-1.5 border ${
                 selectedCategory === 'all'
-                  ? 'bg-brand-800 text-paper-50 border-brand-800 shadow-xs'
-                  : 'bg-paper-100 dark:bg-paper-900 text-paper-700 dark:text-paper-300 border-paper-200 dark:border-paper-800 hover:bg-paper-200 dark:hover:bg-paper-850'
+                  ? 'bg-red-700 text-white border-red-700 shadow-xs'
+                  : 'bg-white dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800'
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -216,19 +216,19 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
                   onClick={() => setSelectedCategory(cat.slug)}
                   className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-1.5 border ${
                     isActive
-                      ? 'bg-brand-800 text-paper-50 border-brand-800 shadow-xs'
-                      : 'bg-paper-100 dark:bg-paper-900 text-paper-700 dark:text-paper-300 border-paper-200 dark:border-paper-800 hover:bg-paper-200 dark:hover:bg-paper-850'
+                      ? 'bg-red-700 text-white border-red-700 shadow-xs'
+                      : 'bg-white dark:bg-neutral-900 text-slate-700 dark:text-neutral-300 border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800'
                   }`}
                 >
                   {isAnchor && (
-                    <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-paper-50' : 'bg-brand-700'} animate-pulse shrink-0`} />
+                    <span className={`w-2 h-2 rounded-full ${isActive ? 'bg-white' : 'bg-red-600'} animate-pulse shrink-0`} />
                   )}
                   <span>{getCategoryName(cat)}</span>
                   {typeof cat._count?.programs === 'number' && (
                     <span className={`text-[11px] px-1.5 py-0.2 rounded-full ${
                       isActive
-                        ? 'bg-brand-900 text-paper-50'
-                        : 'bg-paper-200 dark:bg-paper-800 text-paper-600 dark:text-paper-400'
+                        ? 'bg-red-900 text-white'
+                        : 'bg-slate-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-400'
                     }`}>
                       {cat._count.programs}
                     </span>

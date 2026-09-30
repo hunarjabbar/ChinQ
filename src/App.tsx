@@ -11,6 +11,8 @@ import { useEffect, Suspense, lazy } from 'react';
 import { Layout } from './components/Layout';
 import { InstituteLayout } from './components/institute/InstituteLayout';
 import { AdminLayout } from './components/AdminLayout';
+import { NewsroomLayout } from './components/newsroom/NewsroomLayout';
+import { LivePortalLayout } from './components/live/LivePortalLayout';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { useSiteStore } from './store/useSiteStore';
 import { DevBuildInfoBadge } from './components/DevBuildInfoBadge';
@@ -64,8 +66,6 @@ function lazyWithRetry<T extends React.ComponentType<any>>(
 }
 
 const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
-const LiveEventPage = lazyWithRetry(() => import('./pages/LiveEventPage').then(m => ({ default: m.LiveEventPage })));
-const LivePortal = lazyWithRetry(() => import('./pages/LivePortal').then(m => ({ default: m.LivePortal })));
 const SearchPage = lazyWithRetry(() => import('./pages/SearchPage'));
 const AdminArticles = lazyWithRetry(() => import('./pages/AdminArticles').then(m => ({ default: m.AdminArticles })));
 const AdminArticleNew = lazyWithRetry(() => import('./pages/AdminArticleNew').then(m => ({ default: m.AdminArticleNew })));
@@ -73,6 +73,7 @@ const AdminAuditLogs = lazyWithRetry(() => import('./pages/AdminAuditLogs').then
 const AdminBrics = lazyWithRetry(() => import('./pages/AdminBrics').then(m => ({ default: m.AdminBrics })));
 const AdminChineseProducts = lazyWithRetry(() => import('./pages/AdminChineseProducts').then(m => ({ default: m.AdminChineseProducts })));
 const AdminBusiness = lazyWithRetry(() => import('./pages/AdminBusiness'));
+const AdminVideos = lazyWithRetry(() => import('./pages/AdminVideos'));
 const AdminUsers = lazyWithRetry(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })));
 const AdminMedia = lazyWithRetry(() => import('./pages/AdminMedia').then(m => ({ default: m.AdminMedia })));
 const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings').then(m => ({ default: m.AdminSettings })));
@@ -95,9 +96,39 @@ const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
 const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
 const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEconomics').then(m => ({ default: m.AdminFinanceEconomics })));
 const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
-const CulturalExchangePage = lazyWithRetry(() => import('./pages/CulturalExchangePage'));
+const CulturalExchangeLanding = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeLanding').then(m => ({ default: m.CulturalExchangeLanding })));
+const CulturalExchangePrograms = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangePrograms').then(m => ({ default: m.CulturalExchangePrograms })));
+const CulturalExchangeProgramDetail = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeProgramDetail').then(m => ({ default: m.CulturalExchangeProgramDetail })));
+const CulturalExchangePartners = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangePartners').then(m => ({ default: m.CulturalExchangePartners })));
+const CulturalExchangeApply = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeApply').then(m => ({ default: m.CulturalExchangeApply })));
+const CulturalExchangeFAQ = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeFAQ').then(m => ({ default: m.CulturalExchangeFAQ })));
+const CulturalExchangeContact = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeContact').then(m => ({ default: m.CulturalExchangeContact })));
 const AdminCulturalExchange = lazyWithRetry(() => import('./pages/AdminCulturalExchange'));
-const NewsroomPage = lazyWithRetry(() => import('./pages/NewsroomPage').then(m => ({ default: m.NewsroomPage })));
+
+// Portal 1: ICA Public Portal Pages
+const IcaPublicHome = lazyWithRetry(() => import('./pages/public/IcaPublicHome').then(m => ({ default: m.IcaPublicHome })));
+const IcaWorldPage = lazyWithRetry(() => import('./pages/public/IcaWorldPage').then(m => ({ default: m.IcaWorldPage })));
+const IcaTrendingPage = lazyWithRetry(() => import('./pages/public/IcaTrendingPage').then(m => ({ default: m.IcaTrendingPage })));
+const IcaInitiativesPage = lazyWithRetry(() => import('./pages/public/IcaInitiativesPage').then(m => ({ default: m.IcaInitiativesPage })));
+const IcaInitiativeDetailPage = lazyWithRetry(() => import('./pages/public/IcaInitiativeDetailPage').then(m => ({ default: m.IcaInitiativeDetailPage })));
+const IcaFeaturedPage = lazyWithRetry(() => import('./pages/public/IcaFeaturedPage').then(m => ({ default: m.IcaFeaturedPage })));
+const IcaMediaPage = lazyWithRetry(() => import('./pages/public/IcaMediaPage').then(m => ({ default: m.IcaMediaPage })));
+const IcaAboutPage = lazyWithRetry(() => import('./pages/public/IcaAboutPage').then(m => ({ default: m.IcaAboutPage })));
+const IcaContactPage = lazyWithRetry(() => import('./pages/public/IcaContactPage').then(m => ({ default: m.IcaContactPage })));
+
+// Portal 2: Secretariat Command Hub Pages
+const SecretariatHubLayout = lazyWithRetry(() => import('./pages/secretariat/SecretariatHubLayout').then(m => ({ default: m.SecretariatHubLayout })));
+const SecretariatDashboard = lazyWithRetry(() => import('./pages/secretariat/SecretariatDashboard').then(m => ({ default: m.SecretariatDashboard })));
+const SecretariatContentCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatContentCrud').then(m => ({ default: m.SecretariatContentCrud })));
+const SecretariatInitiativesCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatInitiativesCrud').then(m => ({ default: m.SecretariatInitiativesCrud })));
+const SecretariatMediaCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatMediaCrud').then(m => ({ default: m.SecretariatMediaCrud })));
+const SecretariatNewsletterCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatNewsletterCrud').then(m => ({ default: m.SecretariatNewsletterCrud })));
+const SecretariatFormsCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatFormsCrud').then(m => ({ default: m.SecretariatFormsCrud })));
+const SecretariatUsersCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatUsersCrud').then(m => ({ default: m.SecretariatUsersCrud })));
+const SecretariatAuditCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatAuditCrud').then(m => ({ default: m.SecretariatAuditCrud })));
+const SecretariatSettings = lazyWithRetry(() => import('./pages/secretariat/SecretariatSettings').then(m => ({ default: m.SecretariatSettings })));
+
+// Portal 3: ICA Newsroom Pages
 const NewsroomLandingPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomLandingPage').then(m => ({ default: m.NewsroomLandingPage })));
 const NewsroomArticleDetailPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomArticleDetailPage').then(m => ({ default: m.NewsroomArticleDetailPage })));
 const NewsroomCategoryPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomCategoryPage').then(m => ({ default: m.NewsroomCategoryPage })));
@@ -105,7 +136,22 @@ const NewsroomTagPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomTag
 const NewsroomAuthorPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomAuthorPage').then(m => ({ default: m.NewsroomAuthorPage })));
 const NewsroomArchivePage = lazyWithRetry(() => import('./pages/newsroom/NewsroomArchivePage').then(m => ({ default: m.NewsroomArchivePage })));
 const NewsroomSearchPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomSearchPage').then(m => ({ default: m.NewsroomSearchPage })));
-const NewsroomFeedViewer = lazyWithRetry(() => import('./pages/newsroom/NewsroomFeedViewer').then(m => ({ default: m.NewsroomFeedViewer })));
+const NewsroomFeedPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomFeedPage').then(m => ({ default: m.NewsroomFeedPage })));
+const NewsroomSitemapPage = lazyWithRetry(() => import('./pages/newsroom/NewsroomSitemapPage').then(m => ({ default: m.NewsroomSitemapPage })));
+
+// Portal 4: Live Portal & Enriched Media Hub Pages
+const LiveLandingPage = lazyWithRetry(() => import('./pages/live/LiveLandingPage').then(m => ({ default: m.LiveLandingPage })));
+const LiveNowPage = lazyWithRetry(() => import('./pages/live/LiveNowPage').then(m => ({ default: m.LiveNowPage })));
+const LiveSchedulePage = lazyWithRetry(() => import('./pages/live/LiveSchedulePage').then(m => ({ default: m.LiveSchedulePage })));
+const LiveMoviesPage = lazyWithRetry(() => import('./pages/live/LiveMoviesPage').then(m => ({ default: m.LiveMoviesPage })));
+const LiveDramaPage = lazyWithRetry(() => import('./pages/live/LiveDramaPage').then(m => ({ default: m.LiveDramaPage })));
+const LiveDocumentaryPage = lazyWithRetry(() => import('./pages/live/LiveDocumentaryPage').then(m => ({ default: m.LiveDocumentaryPage })));
+const LiveExchangePage = lazyWithRetry(() => import('./pages/live/LiveExchangePage').then(m => ({ default: m.LiveExchangePage })));
+const LiveArchivePage = lazyWithRetry(() => import('./pages/live/LiveArchivePage').then(m => ({ default: m.LiveArchivePage })));
+const LiveSearchPage = lazyWithRetry(() => import('./pages/live/LiveSearchPage').then(m => ({ default: m.LiveSearchPage })));
+const LiveRssFeedPage = lazyWithRetry(() => import('./pages/live/LiveRssFeedPage').then(m => ({ default: m.LiveRssFeedPage })));
+const LiveDetailVideoPage = lazyWithRetry(() => import('./pages/live/LiveDetailVideoPage').then(m => ({ default: m.LiveDetailVideoPage })));
+
 const InstituteHub = lazyWithRetry(() => import('./pages/InstituteHub').then(m => ({ default: m.InstituteHub })));
 const CommandHubPage = lazyWithRetry(() => import('./pages/CommandHubPage').then(m => ({ default: m.CommandHubPage })));
 const SummitPage = lazyWithRetry(() => import('./pages/SummitPage').then(m => ({ default: m.SummitPage })));
@@ -225,32 +271,27 @@ function mixColor(hex: string, targetHex: string, weight: number): string {
 }
 
 function ThemeApplier() {
-  const { brandColor, inkColor, paperColor, darkMode } = useSiteStore();
+  const { brandColor, inkColor, paperColor } = useSiteStore();
   
   useEffect(() => {
     try {
       const root = document.documentElement;
-      if (darkMode) {
-        root.classList.add('dark');
-        document.body.classList.add('dark');
-        root.style.setProperty('--color-ink-900', '#f4f4f5');
-        root.style.setProperty('--color-paper-50', '#09090b');
-      } else {
-        root.classList.remove('dark');
-        document.body.classList.remove('dark');
-        const safeInk = (!inkColor || ['#ffffff', '#fff', '#fafafa', '#f4f4f5', '#f8fafc'].includes(inkColor.toLowerCase().trim()))
-          ? '#0f172a'
-          : inkColor;
-        const safePaper = (!paperColor || ['#000000', '#000', '#09090b', '#0f172a'].includes(paperColor.toLowerCase().trim()))
-          ? '#ffffff'
-          : paperColor;
-        root.style.setProperty('--color-ink-900', safeInk);
-        root.style.setProperty('--color-paper-50', safePaper);
-      }
+      root.classList.remove('dark');
+      document.body?.classList.remove('dark');
+
+      const safeInk = (!inkColor || ['#ffffff', '#fff', '#fafafa', '#f4f4f5', '#f8fafc'].includes(inkColor.toLowerCase().trim()))
+        ? 'var(--color-ink-900)'
+        : inkColor;
+      const safePaper = (!paperColor || ['#000000', '#000', '#09090b', 'var(--color-ink-900)'].includes(paperColor.toLowerCase().trim()))
+        ? '#ffffff'
+        : paperColor;
+      root.style.setProperty('--color-ink-900', safeInk);
+      root.style.setProperty('--color-paper-50', safePaper);
+
       if (brandColor) {
         const bc = (brandColor && brandColor.startsWith('#') && brandColor !== '#8B0000' && brandColor !== '#990000' && brandColor !== '#C91C24' && brandColor !== '#800000' && brandColor !== '#a30000') 
           ? brandColor 
-          : '#cc0000';
+          : 'var(--color-brand-800)';
         root.style.setProperty('--color-brand-950', bc);
         root.style.setProperty('--color-brand-900', bc);
         root.style.setProperty('--color-brand-800', bc);
@@ -266,7 +307,7 @@ function ThemeApplier() {
     } catch (e) {
       console.warn("ThemeApplier style property error:", e);
     }
-  }, [brandColor, inkColor, paperColor, darkMode]);
+  }, [brandColor, inkColor, paperColor]);
   
   return null;
 }
@@ -378,6 +419,21 @@ function LegacyInsuranceRedirect() {
   return <Navigate to={`/${lang || 'en'}/institute/insurance-facilitation`} replace />;
 }
 
+function CulturalExchangeRootRedirect() {
+  const location = useLocation();
+  const loc = (typeof window !== 'undefined' ? localStorage.getItem('ica_lang') : null) || 'en';
+  const subPath = location.pathname.replace(/^\/cultural-exchange/, '');
+  return <Navigate to={`/${loc}/institute/services/cultural-exchange${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function LegacyCulturalExchangeRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const cleanLang = (lang === 'ck' || lang === 'ku') ? 'ckb' : (lang || 'en');
+  const subPath = location.pathname.replace(/^\/[^/]+\/cultural-exchange/, '');
+  return <Navigate to={`/${cleanLang}/institute/services/cultural-exchange${subPath}${location.search}${location.hash}`} replace />;
+}
+
 function LegacyNewsRedirect() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
@@ -388,10 +444,71 @@ function LegacyNewsRedirect() {
   return <Navigate to={`/${cleanLang}/newsroom${targetPath}${location.search}${location.hash}`} replace />;
 }
 
+function GenericRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname;
+  return <Navigate to={`/${loc}${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function InstituteServiceSummitRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  return <Navigate to={`/${lang || 'en'}/summit`} replace />;
+}
+
+function InstituteServiceSettlementRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  return <Navigate to={`/${lang || 'en'}/settlement`} replace />;
+}
+
 function KurdishAliasRedirect() {
   const location = useLocation();
   const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
   return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+}
+
+function SecretariatRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/secretariat/, '');
+  return <Navigate to={`/${loc}/secretariat${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function LiveRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/live/, '');
+  return <Navigate to={`/${loc}/live${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function PublicPortalRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/(portal|public)/, '');
+  return <Navigate to={`/${loc}/portal${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function SecretariatLangWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
+
+  if (isCkbAlias) {
+    const targetPath = location.pathname.replace(/^\/ck(\/|$)/, '/ckb$1');
+    return <Navigate to={`${targetPath}${location.search}${location.hash}`} replace />;
+  }
+
+  if (!isValidLang) {
+    return <Navigate to="/en/secretariat" replace />;
+  }
+
+  return (
+    <ErrorBoundary key={location.key} lang={safeLang}>
+      <Suspense fallback={<PageSkeleton />}>
+        <Outlet />
+      </Suspense>
+    </ErrorBoundary>
+  );
 }
 
 function SearchWrapper() {
@@ -574,9 +691,16 @@ const router = createBrowserRouter([
   { path: "/summit/*", element: <SummitRootRedirect /> },
   { path: "/admin", element: <AdminRootRedirect /> },
   { path: "/admin/*", element: <AdminRootRedirect /> },
+  { path: "/secretariat", element: <SecretariatRootRedirect /> },
+  { path: "/secretariat/*", element: <SecretariatRootRedirect /> },
+  { path: "/portal", element: <PublicPortalRootRedirect /> },
+  { path: "/portal/*", element: <PublicPortalRootRedirect /> },
+  { path: "/public", element: <PublicPortalRootRedirect /> },
+  { path: "/public/*", element: <PublicPortalRootRedirect /> },
+  { path: "/live", element: <LiveRootRedirect /> },
+  { path: "/live/*", element: <LiveRootRedirect /> },
   { path: "/ck", element: <KurdishAliasRedirect /> },
   { path: "/ck/*", element: <KurdishAliasRedirect /> },
-  { path: "/live/*", element: <Navigate to="/en" replace /> },
   { path: "/newsroom", element: <NewsroomRootRedirect /> },
   { path: "/newsroom/*", element: <NewsroomRootRedirect /> },
   { path: "/news", element: <NewsroomRootRedirect /> },
@@ -591,7 +715,34 @@ const router = createBrowserRouter([
   { path: "/settlement-sourcing/*", element: <SettlementRootRedirect /> },
   { path: "/consultancy", element: <ConsultancyRootRedirect /> },
   { path: "/consultancy/*", element: <ConsultancyRootRedirect /> },
-  { path: "/cultural-exchange", element: <RootRedirect /> },
+  { path: "/cultural-exchange", element: <CulturalExchangeRootRedirect /> },
+  { path: "/cultural-exchange/*", element: <CulturalExchangeRootRedirect /> },
+  { path: "/world", element: <GenericRootRedirect /> },
+  { path: "/world/*", element: <GenericRootRedirect /> },
+  { path: "/trending", element: <GenericRootRedirect /> },
+  { path: "/trending/*", element: <GenericRootRedirect /> },
+  { path: "/initiatives", element: <GenericRootRedirect /> },
+  { path: "/initiatives/*", element: <GenericRootRedirect /> },
+  { path: "/featured", element: <GenericRootRedirect /> },
+  { path: "/featured/*", element: <GenericRootRedirect /> },
+  { path: "/media", element: <GenericRootRedirect /> },
+  { path: "/media/*", element: <GenericRootRedirect /> },
+  { path: "/about", element: <GenericRootRedirect /> },
+  { path: "/about/*", element: <GenericRootRedirect /> },
+  { path: "/contact", element: <GenericRootRedirect /> },
+  { path: "/contact/*", element: <GenericRootRedirect /> },
+  { path: "/books", element: <GenericRootRedirect /> },
+  { path: "/books/*", element: <GenericRootRedirect /> },
+  { path: "/tourism", element: <GenericRootRedirect /> },
+  { path: "/tourism/*", element: <GenericRootRedirect /> },
+  { path: "/women", element: <GenericRootRedirect /> },
+  { path: "/women/*", element: <GenericRootRedirect /> },
+  { path: "/podcasts", element: <GenericRootRedirect /> },
+  { path: "/podcasts/*", element: <GenericRootRedirect /> },
+  { path: "/ica-plus", element: <GenericRootRedirect /> },
+  { path: "/ica-plus/*", element: <GenericRootRedirect /> },
+  { path: "/visa-flights", element: <GenericRootRedirect /> },
+  { path: "/visa-flights/*", element: <GenericRootRedirect /> },
   {
     path: "/:lang/institute/settlement",
     element: <SettlementLangWrapper />,
@@ -627,14 +778,18 @@ const router = createBrowserRouter([
       { path: "expo", element: <SummitExpoPage /> },
       { path: "expo/sectors/:slug", element: <SummitSectorPavilionPage /> },
       { path: "floor-plan", element: <SummitFloorPlanPage /> },
+      { path: "expo/floor-plan", element: <Navigate to="../floor-plan" replace /> },
       { path: "services/insurance", element: <LegacyInsuranceRedirect /> },
       { path: "register/exhibitor", element: <SummitExhibitorRegisterPage /> },
+      { path: "expo/register", element: <Navigate to="../register/exhibitor" replace /> },
       { path: "register/visitor", element: <SummitVisitorRegisterPage /> },
+      { path: "expo/visitor-register", element: <Navigate to="../register/visitor" replace /> },
       { path: "register/vip", element: <SummitVipRegisterPage /> },
       { path: "services", element: <SummitServicesPage /> },
       { path: "services/request", element: <SummitServiceRequestPage /> },
       { path: "services/:slug", element: <SummitServiceDetailPage /> },
       { path: "b2b", element: <SummitB2BMatchmakingPage /> },
+      { path: "b2b-matchmaking", element: <Navigate to="../b2b" replace /> },
       { path: "sponsors", element: <SummitSponsorsPage /> },
       { path: "media", element: <SummitMediaPage /> },
       { path: "faq", element: <SummitFaqPage /> },
@@ -676,14 +831,18 @@ const router = createBrowserRouter([
       { path: "expo", element: <SummitExpoPage /> },
       { path: "expo/sectors/:slug", element: <SummitSectorPavilionPage /> },
       { path: "floor-plan", element: <SummitFloorPlanPage /> },
+      { path: "expo/floor-plan", element: <Navigate to="../floor-plan" replace /> },
       { path: "services/insurance", element: <LegacyInsuranceRedirect /> },
       { path: "register/exhibitor", element: <SummitExhibitorRegisterPage /> },
+      { path: "expo/register", element: <Navigate to="../register/exhibitor" replace /> },
       { path: "register/visitor", element: <SummitVisitorRegisterPage /> },
+      { path: "expo/visitor-register", element: <Navigate to="../register/visitor" replace /> },
       { path: "register/vip", element: <SummitVipRegisterPage /> },
       { path: "services", element: <SummitServicesPage /> },
       { path: "services/request", element: <SummitServiceRequestPage /> },
       { path: "services/:slug", element: <SummitServiceDetailPage /> },
       { path: "b2b", element: <SummitB2BMatchmakingPage /> },
+      { path: "b2b-matchmaking", element: <Navigate to="../b2b" replace /> },
       { path: "sponsors", element: <SummitSponsorsPage /> },
       { path: "media", element: <SummitMediaPage /> },
       { path: "faq", element: <SummitFaqPage /> },
@@ -697,24 +856,53 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "newsroom", element: <NewsroomLandingPage /> },
-      { path: "newsroom/:slug", element: <NewsroomArticleDetailPage /> },
+      { path: "newsroom/archive", element: <NewsroomArchivePage /> },
+      { path: "newsroom/search", element: <NewsroomSearchPage /> },
+      { path: "newsroom/sitemap", element: <NewsroomSitemapPage /> },
+      { path: "newsroom/feed", element: <NewsroomFeedPage /> },
+      { path: "newsroom/feed/:feedType", element: <NewsroomFeedPage /> },
       { path: "newsroom/category/:category", element: <NewsroomCategoryPage /> },
       { path: "newsroom/tag/:tag", element: <NewsroomTagPage /> },
       { path: "newsroom/author/:author", element: <NewsroomAuthorPage /> },
-      { path: "newsroom/archive", element: <NewsroomArchivePage /> },
-      { path: "newsroom/search", element: <NewsroomSearchPage /> },
-      { path: "newsroom/feed/:feedType", element: <NewsroomFeedViewer /> },
+      { path: "newsroom/:slug", element: <NewsroomArticleDetailPage /> },
+
+      // ICA Public Portal
+      { path: "portal", element: <IcaPublicHome /> },
+      { path: "portal/world", element: <IcaWorldPage /> },
+      { path: "portal/trending", element: <IcaTrendingPage /> },
+      { path: "portal/initiatives", element: <IcaInitiativesPage /> },
+      { path: "portal/initiatives/:id", element: <IcaInitiativeDetailPage /> },
+      { path: "portal/featured", element: <IcaFeaturedPage /> },
+      { path: "portal/media", element: <IcaMediaPage /> },
+      { path: "portal/about", element: <IcaAboutPage /> },
+      { path: "portal/contact", element: <IcaContactPage /> },
+      { path: "public", element: <IcaPublicHome /> },
+      { path: "public/world", element: <IcaWorldPage /> },
+      { path: "public/trending", element: <IcaTrendingPage /> },
+      { path: "public/initiatives", element: <IcaInitiativesPage /> },
+      { path: "public/initiatives/:id", element: <IcaInitiativeDetailPage /> },
+      { path: "public/featured", element: <IcaFeaturedPage /> },
+      { path: "public/media", element: <IcaMediaPage /> },
+      { path: "public/about", element: <IcaAboutPage /> },
+      { path: "public/contact", element: <IcaContactPage /> },
+      { path: "world", element: <IcaWorldPage /> },
+      { path: "trending", element: <IcaTrendingPage /> },
+      { path: "initiatives", element: <IcaInitiativesPage /> },
+      { path: "initiatives/:id", element: <IcaInitiativeDetailPage /> },
+      { path: "featured", element: <IcaFeaturedPage /> },
+      { path: "media", element: <IcaMediaPage /> },
+      { path: "contact", element: <IcaContactPage /> },
       { path: "news", element: <LegacyNewsRedirect /> },
       { path: "news/*", element: <LegacyNewsRedirect /> },
       { path: "news-room", element: <LegacyNewsRedirect /> },
       { path: "news-room/*", element: <LegacyNewsRedirect /> },
       { path: "article/*", element: <LegacyNewsRedirect /> },
       { path: "category/*", element: <LegacyNewsRedirect /> },
-      { path: "summit", element: <SummitPage /> },
       { path: "join", element: <JoinUs /> },
       { path: "women", element: <WomenPage /> },
       { path: "tourism", element: <TourismPage /> },
-      { path: "cultural-exchange", element: <CulturalExchangePage /> },
+      { path: "cultural-exchange", element: <LegacyCulturalExchangeRedirect /> },
+      { path: "cultural-exchange/*", element: <LegacyCulturalExchangeRedirect /> },
       { path: "books", element: <BooksPage /> },
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <IcaPlusPage /> },
@@ -743,6 +931,10 @@ const router = createBrowserRouter([
       { path: "insurance-facilitation", element: <InsuranceFacilitationPage /> },
       { path: "services/insurance", element: <InsuranceFacilitationPage /> },
       { path: "insurance", element: <InsuranceFacilitationPage /> },
+      { path: "services/summit", element: <InstituteServiceSummitRedirect /> },
+      { path: "services/summit/*", element: <InstituteServiceSummitRedirect /> },
+      { path: "services/settlement", element: <InstituteServiceSettlementRedirect /> },
+      { path: "services/settlement/*", element: <InstituteServiceSettlementRedirect /> },
       { path: "publications", element: <PublicationsArchive /> },
       { path: "publications/:slug", element: <PublicationDetail /> },
       { path: "data-hub", element: <DataHub /> },
@@ -803,14 +995,100 @@ const router = createBrowserRouter([
       { path: "consultancy/faq", element: <ConsultancyFAQ /> },
       { path: "consultancy/contact", element: <ConsultancyContact /> },
       { path: "consultancy/legal", element: <ConsultancyLegal /> },
+      // People-to-People & Cultural Exchange (CISE First-Class Service)
+      { path: "cultural-exchange", element: <CulturalExchangeLanding /> },
+      { path: "cultural-exchange/programs", element: <CulturalExchangePrograms /> },
+      { path: "cultural-exchange/programs/:slug", element: <CulturalExchangeProgramDetail /> },
+      { path: "cultural-exchange/partners", element: <CulturalExchangePartners /> },
+      { path: "cultural-exchange/apply", element: <CulturalExchangeApply /> },
+      { path: "cultural-exchange/faq", element: <CulturalExchangeFAQ /> },
+      { path: "cultural-exchange/contact", element: <CulturalExchangeContact /> },
+      { path: "cultural-exchange/*", element: <CulturalExchangeLanding /> },
+      { path: "services/cultural-exchange", element: <CulturalExchangeLanding /> },
+      { path: "services/cultural-exchange/programs", element: <CulturalExchangePrograms /> },
+      { path: "services/cultural-exchange/programs/:slug", element: <CulturalExchangeProgramDetail /> },
+      { path: "services/cultural-exchange/partners", element: <CulturalExchangePartners /> },
+      { path: "services/cultural-exchange/apply", element: <CulturalExchangeApply /> },
+      { path: "services/cultural-exchange/faq", element: <CulturalExchangeFAQ /> },
+      { path: "services/cultural-exchange/contact", element: <CulturalExchangeContact /> },
+      { path: "services/cultural-exchange/*", element: <CulturalExchangeLanding /> },
     ]
   },
   {
     path: "/:lang",
     element: <ImmersiveLangWrapper />,
     children: [
-      { path: "live", element: <LivePortal /> },
-      { path: "live/:slug", element: <LiveEventPage /> }
+      { path: "live", element: <LiveLandingPage /> },
+      { path: "live/now", element: <LiveNowPage /> },
+      { path: "live/schedule", element: <LiveSchedulePage /> },
+      { path: "live/movies", element: <LiveMoviesPage /> },
+      { path: "live/drama", element: <LiveDramaPage /> },
+      { path: "live/documentary", element: <LiveDocumentaryPage /> },
+      { path: "live/exchange", element: <LiveExchangePage /> },
+      { path: "live/archive", element: <LiveArchivePage /> },
+      { path: "live/search", element: <LiveSearchPage /> },
+      { path: "live/feed", element: <LiveRssFeedPage /> },
+      { path: "live/watch/:id", element: <LiveDetailVideoPage /> },
+      { path: "live/:slug", element: <LiveDetailVideoPage /> }
+    ]
+  },
+  {
+    path: "/:lang/secretariat",
+    element: <SecretariatLangWrapper />,
+    children: [
+      {
+        element: <SecretariatHubLayout />,
+        children: [
+          { index: true, element: <SecretariatDashboard /> },
+          { path: "content", element: <SecretariatContentCrud /> },
+          { path: "initiatives", element: <SecretariatInitiativesCrud /> },
+          { path: "media", element: <SecretariatMediaCrud /> },
+          { path: "newsletter", element: <SecretariatNewsletterCrud /> },
+          { path: "forms", element: <SecretariatFormsCrud /> },
+          { path: "users", element: <SecretariatUsersCrud /> },
+          { path: "audit", element: <SecretariatAuditCrud /> },
+          { path: "settings", element: <SecretariatSettings /> }
+        ]
+      }
+    ]
+  },
+  {
+    path: "/:lang/newsroom/admin",
+    element: <AdminLangWrapper />,
+    children: [
+      {
+        element: <NewsroomLayout />,
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: "articles", element: <AdminArticles /> },
+          { path: "categories", element: <AdminArticles /> }, // Placeholder
+          { path: "tags", element: <AdminArticles /> }, // Placeholder
+          { path: "authors", element: <AdminUsers /> }, // Placeholder
+          { path: "feeds", element: <AdminArticles /> }, // Placeholder
+          { path: "analytics", element: <AdminDashboard /> }, // Placeholder
+          { path: "settings", element: <AdminSettings /> }
+        ]
+      }
+    ]
+  },
+  {
+    path: "/:lang/live/admin",
+    element: <AdminLangWrapper />,
+    children: [
+      {
+        element: <LivePortalLayout />,
+        children: [
+          { index: true, element: <AdminDashboard /> },
+          { path: "streams", element: <AdminLiveEvents /> },
+          { path: "movies", element: <AdminVideos /> },
+          { path: "drama", element: <AdminVideos /> },
+          { path: "documentary", element: <AdminVideos /> },
+          { path: "exchange", element: <AdminVideos /> },
+          { path: "schedule", element: <AdminLiveEvents /> },
+          { path: "analytics", element: <AdminDashboard /> },
+          { path: "settings", element: <AdminSettings /> }
+        ]
+      }
     ]
   },
   {

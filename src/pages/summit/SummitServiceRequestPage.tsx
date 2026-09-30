@@ -38,7 +38,7 @@ export function SummitServiceRequestPage() {
         {/* Header Hero */}
         <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-center">
           <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-brand-100 dark:bg-brand-950 text-brand-900 dark:text-brand-300 inline-block">
-            Service Desk Intake
+            {lang === 'ar' ? 'مكتب استلام الطلبات' : 'Service Desk Intake'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
             {lang === 'ar' ? 'طلب إحدى خدمات ICA التنفيذية' : lang === 'zh' ? 'ICA中伊商贸直采服务统一申请单' : lang === 'ckb' ? 'داواکاری خزمەتگوزارییەکانی ICA' : 'Unified ICA Service Desk Request'}
@@ -58,10 +58,10 @@ export function SummitServiceRequestPage() {
 
             <div className="space-y-2">
               <h2 className="text-2xl font-black text-neutral-900 dark:text-neutral-100">
-                Service Request Dispatched!
+                {lang === 'ar' ? 'تم إرسال طلب الخدمة!' : 'Service Request Dispatched!'}
               </h2>
               <p className="text-xs text-neutral-500">
-                Ticket Reference: <strong className="text-brand-800">SRV-ICA-{Math.floor(10000 + Math.random() * 90000)}</strong>. An assigned trade officer will contact <strong>{formData.email}</strong> within 12 business hours.
+                Ticket Reference: <strong className="text-brand-800">SRV-ICA-{Math.floor(10000 + Math.random() * 90000)}</strong>. {lang === 'ar' ? `سيتواصل معك مسؤول تجاري مخصص على ${formData.email} خلال ١٢ ساعة عمل.` : `An assigned trade officer will contact ${formData.email} within 12 business hours.`}
               </p>
             </div>
 
@@ -76,13 +76,13 @@ export function SummitServiceRequestPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-10 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6">
-            <div className="space-y-4 text-xs">
+            <div className="space-y-4 text-xs text-start">
               <div className="space-y-1">
-                <label className="font-bold text-neutral-700 dark:text-neutral-300">Target ICA Service</label>
+                <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'خدمة ICA المطلوبة' : 'Target ICA Service'}</label>
                 <select
                   value={formData.serviceSlug}
                   onChange={(e) => setFormData({ ...formData, serviceSlug: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 font-semibold"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 font-semibold outline-hidden"
                 >
                   {ICA_SERVICES.map(s => (
                     <option key={s.id} value={s.slug}>{s.title[lang]} ({s.badge[lang]})</option>
@@ -92,60 +92,60 @@ export function SummitServiceRequestPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Company Name</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'اسم الشركة' : 'Company Name'}</label>
                   <input
                     type="text"
                     required
                     value={formData.companyName}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                     placeholder="e.g. Al-Mashriq Logistics LLC"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Representative Name</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'اسم الممثل' : 'Representative Name'}</label>
                   <input
                     type="text"
                     required
                     value={formData.contactName}
                     onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                     placeholder="Full Name"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Email Address</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address'}</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="contact@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Phone / WhatsApp</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'الهاتف / واتساب' : 'Phone / WhatsApp'}</label>
                   <input
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+964 770 000 0000"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-neutral-700 dark:text-neutral-300">Estimated Transaction / Project Value</label>
+                <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'القيمة التقديرية للمشروع / الصفقة' : 'Estimated Transaction / Project Value'}</label>
                 <select
                   value={formData.dealSize}
                   onChange={(e) => setFormData({ ...formData, dealSize: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                 >
                   <option value="Under $100k">Under $100,000 USD</option>
                   <option value="$100k - $500k">$100,000 – $500,000 USD</option>
@@ -156,23 +156,24 @@ export function SummitServiceRequestPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-neutral-700 dark:text-neutral-300">Scope Details & Requirements</label>
+                <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">{lang === 'ar' ? 'تفاصيل النطاق والمتطلبات' : 'Scope Details & Requirements'}</label>
                 <textarea
                   rows={4}
                   required
                   value={formData.details}
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                  placeholder="Describe goods, manufacturer names, destination ports, or specific legal/clearing assistance needed..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                  placeholder={lang === 'ar' ? 'اشرح تفاصيل البضاعة، أسماء المصانع، موانئ الوصول، أو المساعدة القانونية المطلوبة...' : "Describe goods, manufacturer names, destination ports, or specific legal/clearing assistance needed..."}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                 ></textarea>
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
             >
-              Submit Service Request to Trade Desk →
+              <span>{lang === 'ar' ? 'إرسال طلب الخدمة إلى المكتب التجاري' : 'Submit Service Request to Trade Desk'}</span>
+              <ArrowRight size={15} className={isRtl ? 'rotate-180' : ''} />
             </button>
           </form>
         )}

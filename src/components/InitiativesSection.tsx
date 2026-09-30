@@ -87,6 +87,24 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
         { label: lang === 'ar' ? 'الاستثمار بالعراق' : lang === 'zh' ? '投资伊拉克' : lang === 'ckb' ? 'وەبەرهێنان لە عێراق' : 'Iraq-Bound', path: `/${lang}/institute/consultancy/iraq-bound` },
         { label: lang === 'ar' ? 'دخول السوق الصيني' : lang === 'zh' ? '进入中国' : lang === 'ckb' ? 'بازاڕی چین' : 'China-Bound', path: `/${lang}/institute/consultancy/china-bound` }
       ]
+    },
+    {
+      id: 'cultural-exchange',
+      eyebrow: t('initiatives.card.culturalExchange.eyebrow'),
+      headline: t('initiatives.card.culturalExchange.headline'),
+      description: t('initiatives.card.culturalExchange.body'),
+      cta: t('initiatives.card.culturalExchange.cta'),
+      path: `/${lang}/institute/services/cultural-exchange`,
+      tags: [
+        t('initiatives.card.culturalExchange.chips.universityMous'),
+        t('initiatives.card.culturalExchange.chips.studentFellowships'),
+        t('initiatives.card.culturalExchange.chips.artsResidencies'),
+        t('initiatives.card.culturalExchange.chips.civilizationalDialogue')
+      ],
+      secondaryLinks: [
+        { label: lang === 'ar' ? 'دليل البرامج' : lang === 'zh' ? '全部项目' : lang === 'ckb' ? 'بەرنامەکان' : 'All Programs', path: `/${lang}/institute/services/cultural-exchange/programs` },
+        { label: lang === 'ar' ? 'الجامعات الشريكة' : lang === 'zh' ? '合作高校' : lang === 'ckb' ? 'زانکۆ هاوبەشەکان' : 'Partners', path: `/${lang}/institute/services/cultural-exchange/partners` }
+      ]
     }
   ];
 
@@ -114,110 +132,107 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
   }, []);
 
   return (
-    <section id="initiatives" className="py-20 w-full bg-surface">
+    <section id="initiatives" className="py-16 sm:py-20 w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D97706]/10 border border-[#D97706]/20 text-[10px] font-black uppercase tracking-widest text-[#D97706]">
-            <span>{lang === 'ar' ? 'المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE)' : lang === 'zh' ? '中国战略与经济研究所 (CISE) 主管运营' : lang === 'ckb' ? 'پەیمانگای چینی (CISE)' : 'Chinese Institute for Strategic & Economic Studies (CISE)'}</span>
+        <div className="text-center mb-16 space-y-4">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-800 dark:text-brand-400">
+            {lang === 'ar' ? 'المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE)' : lang === 'zh' ? '中国战略与经济研究所 (CISE) 主管运营' : lang === 'ckb' ? 'پەیمانگای چینی (CISE)' : 'Chinese Institute for Strategic & Economic Studies (CISE)'}
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-navy uppercase tracking-tighter mb-2">{t('home.initiatives.heading')}</h2>
-          <p className="text-navy/70 text-lg max-w-2xl mx-auto">{t('home.initiatives.subheading')}</p>
+          <h2 className="text-3xl md:text-5xl font-black text-ink-950 dark:text-white uppercase tracking-tighter">{t('home.initiatives.heading')}</h2>
+          <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-2xl mx-auto font-serif leading-relaxed italic">{t('home.initiatives.subheading')}</p>
         </div>
 
         {/* Tier 1: Full-width Hero Banner for Summit */}
         <Card
           variant="hero"
           ref={heroRef}
-          className={`summit-hero-card mb-10 transition-all duration-700 ease-out hover:-translate-y-1 ${
-            hasScrolledIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-          style={{
-            opacity: hasScrolledIn ? 1 : 0,
-            transform: hasScrolledIn ? 'translateY(0px)' : 'translateY(16px)',
-          }}
+          className="relative overflow-hidden p-8 sm:p-12 md:p-14 rounded-3xl bg-brand-800 border border-brand-700 text-white mb-16 transition-all duration-300 shadow-xl"
         >
-          <div 
-            className="summit-hero-card__texture" 
-            aria-hidden="true" 
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E")`
-            }} 
-          />
-          <div className="summit-hero-card__glow" aria-hidden="true" />
-          <div className="summit-hero-card__content">
-            <p className="summit-hero-card__eyebrow">
-              <Sparkles size={13} className="text-amber-300 inline-block me-1.5" />
-              {t('summit.section.eyebrow')}
-            </p>
-            <h2 className="summit-hero-card__headline">
+          <div className="relative z-10 max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-black uppercase tracking-[0.25em] mb-5">
+              <Sparkles size={12} className="text-amber-300 animate-pulse" />
+              <span>{t('summit.section.eyebrow')}</span>
+            </div>
+            
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-5 leading-[1.05]">
               {t('summit.section.headline')}
-            </h2>
-            <p className="summit-hero-card__body">
+            </h3>
+
+            <p className="text-white/95 text-sm sm:text-base lg:text-lg leading-relaxed mb-8 max-w-3xl font-normal">
               {t('summit.section.body')}
             </p>
+
             {summitChips && summitChips.length > 0 && (
-              <ul className="summit-hero-card__chips">
+              <div className="flex flex-wrap gap-2 mb-8">
                 {summitChips.map((chip, idx) => (
-                  <li key={idx}>{chip}</li>
+                  <span key={idx} className="bg-white/10 text-white border border-white/20 text-xs font-bold px-3.5 py-1 rounded-full">
+                    {chip}
+                  </span>
                 ))}
-              </ul>
+              </div>
             )}
-            <div className="summit-hero-card__actions">
-              <Link to={`/${lang}/institute/summit`} className="summit-hero-card__cta summit-hero-card__cta--primary group">
+
+            <div className="flex flex-wrap items-center gap-4">
+              <Link 
+                to={`/${lang}/summit`} 
+                className="bg-white hover:bg-neutral-100 text-brand-800 px-7 py-3.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shadow-md flex items-center gap-2.5 group cursor-pointer"
+              >
                 <span>{t('summit.section.cta').replace(' →', '').replace(' ←', '')}</span>
-                <ArrowRight size={16} className={`transition-transform group-hover:translate-x-1 ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+                <ArrowRight size={14} className={`transition-transform group-hover:translate-x-1 ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
               </Link>
-              <Link to={`/${lang}/institute/summit/agenda`} className="summit-hero-card__cta summit-hero-card__cta--secondary group">
+              
+              <Link 
+                to={`/${lang}/summit/agenda`} 
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3.5 rounded-xl text-xs font-bold tracking-wide transition-all flex items-center gap-2 group cursor-pointer"
+              >
                 <span>{t('summit.section.secondary').replace(' →', '').replace(' ←', '')}</span>
-                <Compass size={16} className={`transition-transform group-hover:rotate-45 ${isRtl ? 'rotate-180' : ''}`} />
+                <Compass size={14} className={`transition-transform group-hover:rotate-45 ${isRtl ? 'rotate-180' : ''}`} />
               </Link>
             </div>
           </div>
         </Card>
 
-        {/* Tier 2: Grid of 5 Remaining Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Tier 2: Grid of Remaining Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {initiatives.map((item) => (
             <div
               key={item.id}
-              className="initiative-card p-6 rounded-2xl bg-card border border-border transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-md hover:-translate-y-1"
+              className="initiative-card flex flex-col justify-between group"
             >
-              <div>
-                <span className="text-[10px] uppercase tracking-widest font-black mb-2 block text-gold-text">
+              <div className="space-y-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-800 dark:text-brand-400 mb-1">
                   {item.eyebrow}
-                </span>
-                <h3 className="text-lg font-black text-navy mb-3 uppercase leading-snug">
+                </div>
+                <h3 className="text-xl font-black text-ink-950 dark:text-white uppercase leading-tight group-hover:text-brand-800 transition-colors tracking-tight">
                   {item.headline}
                 </h3>
-                <p className="text-navy/80 text-xs mb-4 leading-relaxed line-clamp-3">
+                <p className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed line-clamp-3 font-serif italic">
                   {item.description}
                 </p>
 
                 {item.tags && item.tags.length > 0 && (
-                  <div className="mb-4 flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {item.tags.map((tag, idx) => (
-                      <span key={idx} className="px-2 py-0.5 bg-surface border border-border rounded text-[9px] font-bold text-navy/60 uppercase tracking-tighter">
-                        {tag}
+                      <span key={idx} className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
+                        {tag}{idx < item.tags!.length - 1 ? ' •' : ''}
                       </span>
                     ))}
                   </div>
                 )}
               </div>
 
-              <div className="space-y-2 pt-2 border-t border-border">
-                <Link to={item.path} className="inline-flex items-center text-xs font-black transition-all text-royal hover:gap-2">
-                  {item.cta} <ArrowRight className={`ms-1.5 ${isRtl ? 'rotate-180' : ''}`} size={14} />
+              <div className="space-y-4 pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+                <Link to={item.path} className="inline-flex items-center text-[10px] font-black uppercase tracking-widest transition-all text-brand-800 hover:text-brand-900 gap-2">
+                  <span>{item.cta}</span>
+                  <ArrowRight className={`transition-transform group-hover:translate-x-1 ${isRtl ? 'rotate-180' : ''}`} size={12} />
                 </Link>
 
                 {item.secondaryLinks && item.secondaryLinks.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-bold text-gray-500 pt-1">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
                     {item.secondaryLinks.map((link, idx) => (
-                      <React.Fragment key={idx}>
-                        <Link to={link.path} className="hover:text-royal underline whitespace-nowrap">
-                          {link.label}
-                        </Link>
-                        {idx < item.secondaryLinks!.length - 1 && <span className="opacity-30">•</span>}
-                      </React.Fragment>
+                      <Link key={idx} to={link.path} className="hover:text-brand-800 transition-colors underline decoration-neutral-200 underline-offset-4">
+                        {link.label}
+                      </Link>
                     ))}
                   </div>
                 )}

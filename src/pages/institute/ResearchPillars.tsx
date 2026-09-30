@@ -66,7 +66,7 @@ export function ResearchPillars() {
         {pillars.map((pillar) => (
           <div key={pillar.id} className="research-pillar-card">
             <div className="flex items-center justify-between">
-              <div className="research-pillar-card__icon" style={{ backgroundColor: pillar.icon === Database ? '#0284C7' : pillar.icon === TrendingUp ? '#D97706' : pillar.icon === Handshake ? '#0F172A' : '#047857' }}>
+              <div className="research-pillar-card__icon" style={{ backgroundColor: pillar.icon === Database ? 'var(--accent-primary)' : pillar.icon === TrendingUp ? 'var(--accent-primary)' : pillar.icon === Handshake ? 'var(--surface-dark)' : 'var(--accent-primary)' }}>
                 <pillar.icon size={24} />
               </div>
               <div className="research-pillar-card__metric">

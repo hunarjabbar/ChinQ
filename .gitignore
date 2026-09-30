@@ -1,13 +1,4 @@
-node_modules/
-coverage/
-.DS_Store
-*.log
-.env*
-!.env.example
-
-# Database
-*.db
-*.db-journal
-*.db-wal
-*.db-shm
-prisma/*.db*
+node_modules
+.env
+.dev.env.json
+.dev.pid

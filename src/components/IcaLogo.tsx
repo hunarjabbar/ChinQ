@@ -13,7 +13,7 @@ export interface IcaLogoProps {
 /**
  * Standardized Official Iraqi-Chinese Agency (ICA) Brand Logo & Emblem
  * Represents the bilateral sovereign corridor between Baghdad & Beijing.
- * Colors: Standardized Sovereign Red (Brand-800 #cc0000), Imperial Silk Road Gold (#F59E0B), Ink (#1A1A1A).
+ * Colors: Standardized Sovereign Red (Brand-800 var(--color-brand-800)), Imperial Silk Road Gold (#F59E0B), Ink (#1A1A1A).
  */
 export function IcaLogo({
   size = 'md',
@@ -53,7 +53,7 @@ export function IcaLogo({
         {/* Brand Diplomatic Red Gradient */}
         <linearGradient id="icaRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#E60000" />
-          <stop offset="50%" stopColor="#cc0000" />
+          <stop offset="50%" stopColor="var(--color-brand-800)" />
           <stop offset="100%" stopColor="#b30000" />
         </linearGradient>
 
@@ -61,12 +61,12 @@ export function IcaLogo({
         <linearGradient id="icaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#FDE047" />
           <stop offset="50%" stopColor="#F59E0B" />
-          <stop offset="100%" stopColor="#D97706" />
+          <stop offset="100%" stopColor="var(--color-brand-800)" />
         </linearGradient>
 
         {/* Outer Shadow & Glow Filter */}
         <filter id="icaShadow" x="-10%" y="-10%" width="125%" height="125%" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#cc0000" floodOpacity="0.25" />
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="var(--color-brand-800)" floodOpacity="0.25" />
         </filter>
 
         <linearGradient id="icaInnerSheen" x1="0%" y1="0%" x2="0%" y2="100%">

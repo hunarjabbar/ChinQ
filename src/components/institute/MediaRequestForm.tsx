@@ -55,7 +55,7 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
               {...register('fullName')}
               type="text"
               placeholder="Full Name"
-              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
             />
           </div>
           {errors.fullName && <p className="text-[10px] text-rose-500 font-bold uppercase">{errors.fullName.message}</p>}
@@ -69,7 +69,7 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
               {...register('organization')}
               type="text"
               placeholder="e.g. Al Jazeera, Financial Times"
-              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
             />
           </div>
           {errors.organization && <p className="text-[10px] text-rose-500 font-bold uppercase">{errors.organization.message}</p>}
@@ -85,7 +85,7 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
               {...register('email')}
               type="email"
               placeholder="name@organization.com"
-              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
             />
           </div>
           {errors.email && <p className="text-[10px] text-rose-500 font-bold uppercase">{errors.email.message}</p>}
@@ -97,7 +97,7 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
             <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-300" size={16} />
             <select 
               {...register('requestType')}
-              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] appearance-none transition-all"
+              className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 pl-12 pr-4 py-3 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] appearance-none transition-all"
             >
               <option value="INTERVIEW">Expert Interview</option>
               <option value="BRIEFING">Institutional Briefing</option>
@@ -114,13 +114,13 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
           {...register('message')}
           rows={4}
           placeholder="Please describe the scope of your request, specific questions, or syndication requirements."
-          className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 p-6 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+          className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 p-6 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
         />
         {errors.message && <p className="text-[10px] text-rose-500 font-bold uppercase">{errors.message.message}</p>}
       </div>
 
-      <div className="p-6 bg-[#0F172A] rounded-2xl border border-white/10 space-y-4">
-        <div className="flex items-center gap-3 text-[#D97706]">
+      <div className="p-6 bg-[var(--color-ink-900)] rounded-2xl border border-white/10 space-y-4">
+        <div className="flex items-center gap-3 text-[var(--color-brand-800)]">
           <ShieldCheck size={18} />
           <span className="text-[10px] font-black uppercase tracking-widest">Verification Requirement</span>
         </div>
@@ -133,7 +133,7 @@ export function MediaRequestForm({ expertName, publicationTitle, onSuccess }: Me
       <button 
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 bg-[#0284C7] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl flex items-center justify-center gap-3 disabled:opacity-50"
+        className="w-full py-4 bg-[var(--color-brand-800)] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl flex items-center justify-center gap-3 disabled:opacity-50"
       >
         {isSubmitting ? (
           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

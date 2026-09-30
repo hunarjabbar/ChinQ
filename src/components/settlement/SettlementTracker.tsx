@@ -277,19 +277,19 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
   };
 
   return (
-    <div className="w-full bg-white rounded-2xl border border-gray-200 shadow-md p-5 sm:p-8 space-y-8">
+    <div className="w-full bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-xl p-5 sm:p-8 space-y-8 transition-colors">
       
       {/* Top Header & Search Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-100 dark:border-neutral-800 pb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 text-[brand-800] text-[11px] font-black uppercase tracking-wider mb-2">
-            <ShieldCheck size={13} />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/50 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800/40 text-[11px] font-black uppercase tracking-wider mb-2">
+            <ShieldCheck size={13} className="text-brand-800 dark:text-brand-400" />
             <span>ISO 20022 & CIPS Clearing Verification</span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-black text-ink-950 dark:text-white tracking-tight">
             {t('settlement.tracker.title')}
           </h3>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1 max-w-xl">
             {t('settlement.tracker.subtitle')}
           </p>
         </div>
@@ -301,7 +301,7 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
             value={searchRef}
             onChange={(e) => setSearchRef(e.target.value)}
             placeholder={t('settlement.tracker.inputPlaceholder')}
-            className="px-4 py-2.5 rounded-xl border border-gray-300 font-mono text-xs uppercase font-bold focus:outline-none focus:border-[brand-800] w-full md:w-64"
+            className="px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 font-mono text-xs uppercase font-bold text-ink-950 dark:text-white focus:outline-none focus:border-brand-800 focus:ring-2 focus:ring-brand-500/20 w-full md:w-64"
           />
           <button
             type="submit"
@@ -313,19 +313,19 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
       </div>
 
       {/* Active Stage Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-50 via-white to-red-50/40 border border-red-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-brand-50/70 via-white to-brand-50/40 dark:from-brand-950/30 dark:via-neutral-850 dark:to-brand-950/20 border border-brand-200 dark:border-brand-900/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-[brand-800] text-white flex items-center justify-center font-mono font-black text-lg shadow-md shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-brand-800 text-white flex items-center justify-center font-mono font-black text-lg shadow-md shrink-0">
             {currentStage}/8
           </div>
           <div>
-            <div className="text-[11px] font-black uppercase tracking-wider text-[#991B1B]">
+            <div className="text-[11px] font-black uppercase tracking-wider text-brand-900 dark:text-brand-300">
               {t('settlement.tracker.stage')}
             </div>
-            <div className="text-base sm:text-lg font-black text-gray-900">
+            <div className="text-base sm:text-lg font-black text-ink-950 dark:text-white">
               {stages[currentStage - 1]?.name[lang] || stages[currentStage - 1]?.name.en}
             </div>
-            <div className="text-xs text-gray-500 mt-0.5">
+            <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
               {stages[currentStage - 1]?.description[lang] || stages[currentStage - 1]?.description.en}
             </div>
           </div>
@@ -338,16 +338,16 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
             className="pay-btn-secondary px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer"
             title="Refresh Milestone Status"
           >
-            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-[brand-800]' : ''} />
+            <RefreshCw size={13} className={isRefreshing ? 'animate-spin text-brand-800 dark:text-brand-400' : ''} />
             <span>{isAr ? 'تحديث' : isZh ? '刷新' : isCkb ? 'نوێکردنەوە' : 'Refresh'}</span>
           </button>
 
           <button
             onClick={advanceDemoStage}
-            className="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="px-3 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-neutral-200 dark:border-neutral-700"
             title="Advance Stage (Verification Demo)"
           >
-            <Play size={13} className="text-[brand-800]" />
+            <Play size={13} className="text-brand-800 dark:text-brand-400" />
             <span>Advance Stage</span>
           </button>
 
@@ -364,12 +364,12 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
       {/* Progress Bar (Overall percentage) */}
       <div className="space-y-2">
         <div className="flex justify-between items-center text-xs font-bold">
-          <span className="text-gray-500">Bilateral Clearance Velocity</span>
-          <span className="text-[brand-800] font-mono">{progressPercent}% Completed</span>
+          <span className="text-neutral-500 dark:text-neutral-400">Bilateral Clearance Velocity</span>
+          <span className="text-brand-800 dark:text-brand-400 font-mono">{progressPercent}% Completed</span>
         </div>
-        <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+        <div className="w-full h-2.5 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-[brand-800] rounded-full transition-all duration-500" 
+            className="h-full bg-brand-800 rounded-full transition-all duration-500" 
             style={{ width: `${progressPercent}%` }}
           ></div>
         </div>
@@ -382,12 +382,11 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
         <div className="hidden lg:grid grid-cols-8 gap-2 relative">
           
           {/* Continuous Connecting Line */}
-          <div className="absolute top-5 inset-x-6 h-0.5 bg-gray-200 -z-0"></div>
+          <div className="absolute top-5 inset-x-6 h-0.5 bg-neutral-200 dark:bg-neutral-800 -z-0"></div>
           
           {stages.map((st) => {
             const isCompleted = st.id < currentStage;
             const isActive = st.id === currentStage;
-            const isPending = st.id > currentStage;
 
             return (
               <div 
@@ -401,8 +400,8 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
                     isCompleted 
                       ? 'bg-emerald-600 text-white shadow-xs' 
                       : isActive 
-                      ? 'bg-[brand-800] text-white animate-stepper-pulse ring-4 ring-red-100' 
-                      : 'bg-white border-2 border-gray-300 text-gray-400'
+                      ? 'bg-brand-800 text-white shadow-md ring-4 ring-brand-100 dark:ring-brand-950/60' 
+                      : 'bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 text-neutral-400'
                   }`}
                 >
                   {isCompleted ? <CheckCircle2 size={16} /> : <span>{st.id}</span>}
@@ -411,12 +410,12 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
                 {/* Stage Title */}
                 <div>
                   <div className={`text-[11px] font-black uppercase tracking-tight leading-snug line-clamp-2 ${
-                    isActive ? 'text-[brand-800]' : isCompleted ? 'text-gray-800' : 'text-gray-400'
+                    isActive ? 'text-brand-800 dark:text-brand-400' : isCompleted ? 'text-neutral-800 dark:text-neutral-200' : 'text-neutral-400 dark:text-neutral-500'
                   }`}>
                     {st.name[lang] || st.name.en}
                   </div>
                   {st.timestamp && (
-                    <div className="text-[9px] text-gray-400 font-mono mt-0.5">
+                    <div className="text-[9px] text-neutral-400 dark:text-neutral-500 font-mono mt-0.5">
                       {st.timestamp.split(' ')[1]}
                     </div>
                   )}
@@ -427,7 +426,7 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
         </div>
 
         {/* Mobile Stepper (Stacked / Vertical) */}
-        <div className="lg:hidden space-y-4 relative border-s-2 border-gray-200 ms-4 ps-6">
+        <div className="lg:hidden space-y-4 relative border-s-2 border-neutral-200 dark:border-neutral-800 ms-4 ps-6">
           {stages.map((st) => {
             const isCompleted = st.id < currentStage;
             const isActive = st.id === currentStage;
@@ -440,21 +439,21 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
                     isCompleted 
                       ? 'bg-emerald-600 text-white' 
                       : isActive 
-                      ? 'bg-[brand-800] text-white animate-stepper-pulse ring-4 ring-red-100' 
-                      : 'bg-white border-2 border-gray-300 text-gray-400'
+                      ? 'bg-brand-800 text-white ring-4 ring-brand-100 dark:ring-brand-950/60' 
+                      : 'bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 text-neutral-400'
                   }`}
                 >
                   {isCompleted ? <CheckCircle2 size={14} /> : <span>{st.id}</span>}
                 </div>
 
-                <div className="text-xs font-black uppercase text-gray-900">
+                <div className="text-xs font-black uppercase text-ink-950 dark:text-white">
                   {st.name[lang] || st.name.en}
                 </div>
-                <div className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
                   {st.description[lang] || st.description.en}
                 </div>
                 {st.timestamp && (
-                  <div className="text-[10px] text-gray-400 font-mono mt-1">
+                  <div className="text-[10px] text-neutral-400 dark:text-neutral-500 font-mono mt-1">
                     Timestamp: {st.timestamp}
                   </div>
                 )}
@@ -467,52 +466,52 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
 
       {/* Settlement Summary Panel */}
       {record && (
-        <div className="border border-gray-200 rounded-2xl p-5 sm:p-6 bg-gray-50/60 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-3">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 sm:p-6 bg-neutral-50/70 dark:bg-neutral-850/60 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-3">
             <div className="flex items-center gap-2">
-              <Landmark size={18} className="text-[brand-800]" />
-              <span className="text-xs font-black uppercase tracking-wider text-gray-800">
+              <Landmark size={18} className="text-brand-800 dark:text-brand-400" />
+              <span className="text-xs font-black uppercase tracking-wider text-ink-950 dark:text-white">
                 Official Transaction Summary
               </span>
             </div>
-            <span className="font-mono font-bold text-xs text-[brand-800]">
+            <span className="font-mono font-bold text-xs text-brand-800 dark:text-brand-400">
               {record.referenceId}
             </span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-            <div className="p-3 bg-white rounded-xl border border-gray-200">
-              <span className="text-[10px] text-gray-400 uppercase block font-bold">Source Capital</span>
-              <span className="font-mono font-bold text-gray-900 mt-0.5 block">
+            <div className="p-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-750">
+              <span className="text-[10px] text-neutral-400 uppercase block font-bold">Source Capital</span>
+              <span className="font-mono font-bold text-ink-950 dark:text-white mt-0.5 block">
                 {record.sourceAmount.toLocaleString()} {record.sourceCurrency}
               </span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-gray-200">
-              <span className="text-[10px] text-gray-400 uppercase block font-bold">Target Credited</span>
-              <span className="font-mono font-bold text-emerald-700 mt-0.5 block">
+            <div className="p-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-750">
+              <span className="text-[10px] text-neutral-400 uppercase block font-bold">Target Credited</span>
+              <span className="font-mono font-bold text-emerald-700 dark:text-emerald-400 mt-0.5 block">
                 {record.targetAmount.toLocaleString()} {record.targetCurrency}
               </span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-gray-200">
-              <span className="text-[10px] text-gray-400 uppercase block font-bold">Payer Entity</span>
-              <span className="font-bold text-gray-800 truncate block mt-0.5" title={record.payer.organizationName}>
+            <div className="p-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-750">
+              <span className="text-[10px] text-neutral-400 uppercase block font-bold">Payer Entity</span>
+              <span className="font-bold text-neutral-800 dark:text-neutral-200 truncate block mt-0.5" title={record.payer.organizationName}>
                 {record.payer.organizationName}
               </span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-gray-200">
-              <span className="text-[10px] text-gray-400 uppercase block font-bold">Beneficiary Bank</span>
-              <span className="font-bold text-gray-800 truncate block mt-0.5" title={record.beneficiary.bankName}>
+            <div className="p-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-750">
+              <span className="text-[10px] text-neutral-400 uppercase block font-bold">Beneficiary Bank</span>
+              <span className="font-bold text-neutral-800 dark:text-neutral-200 truncate block mt-0.5" title={record.beneficiary.bankName}>
                 {record.beneficiary.bankName}
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500 pt-2 border-t border-gray-200">
-            <span>Executing Partner: <strong className="text-gray-700">{record.executingBank}</strong></span>
-            <span>Est. Settlement Target: <strong className="text-gray-700">{record.estimatedSettlementDate}</strong></span>
+          <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-neutral-500 dark:text-neutral-400 pt-2 border-t border-neutral-200 dark:border-neutral-800">
+            <span>Executing Partner: <strong className="text-neutral-700 dark:text-neutral-300">{record.executingBank}</strong></span>
+            <span>Est. Settlement Target: <strong className="text-neutral-700 dark:text-neutral-300">{record.estimatedSettlementDate}</strong></span>
           </div>
         </div>
       )}

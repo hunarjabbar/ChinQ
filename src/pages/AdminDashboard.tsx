@@ -29,7 +29,7 @@ import { AdminSubscribers } from '../components/admin/AdminSubscribers';
 import { AdminAnnouncements } from '../components/admin/AdminAnnouncements';
 import { AdminAuditLogs } from '../components/admin/AdminAuditLogs';
 import { AdminReviewQueue } from '../components/admin/AdminReviewQueue';
-import { LivePublishForm } from '../components/LivePublishForm';
+import AdminLiveEvents from './AdminLiveEvents';
 import { AdminUsersContent } from './AdminUsers';
 import { Clock } from 'lucide-react';
 
@@ -205,19 +205,7 @@ export function AdminDashboard() {
             {activeTab === 'search' && <AdminAIImport categories={categories} />}
             {activeTab === 'live' && (
               <div className="space-y-8 animate-in fade-in duration-500">
-                 <div className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl space-y-6">
-                  <div className="flex items-center gap-3 border-b border-neutral-200 pb-4">
-                    <Radio className="text-brand-800 animate-pulse" size={24} />
-                    <h3 className="text-sm font-black uppercase tracking-widest text-brand-800">Active parent streams</h3>
-                  </div>
-                  {events.length > 0 ? (
-                    <LivePublishForm events={events} />
-                  ) : (
-                    <div className="py-12 text-center text-neutral-400 italic text-sm font-medium bg-white rounded-xl border border-dashed border-neutral-200">
-                      No active parent event streams detected.
-                    </div>
-                  )}
-                </div>
+                <AdminLiveEvents />
               </div>
             )}
             {activeTab === 'announcements' && <AdminAnnouncements />}

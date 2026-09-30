@@ -148,6 +148,12 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       path: `/${lang}/institute/insurance-facilitation` 
     },
     { 
+      id: 'cultural-exchange', 
+      label: { en: 'Cultural Exchange', ar: 'التبادل الثقافي', zh: '文化交流', ckb: 'ئاڵوگۆڕی کولتووری' }, 
+      tag: { en: 'Academic MOUs', ar: 'مذكرات تفاهم', zh: '学术交流', ckb: 'لێکتێگەیشتنی زانکۆیی' },
+      path: `/${lang}/institute/services/cultural-exchange` 
+    },
+    { 
       id: 'visa-centre', 
       label: { en: 'Bilateral Visa Advisory Centre', ar: 'مركز الاستشارات والفيزا الثنائية', zh: '双边签证咨询与代办服务中心', ckb: 'ناوەندی ڕاوێژکاری ڤیزا' }, 
       tag: { en: 'Bilateral', ar: 'ثنائي', zh: '双向代办', ckb: 'دوولایەنە' },
@@ -174,23 +180,23 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       {/* Institute Specialized Two-Row Header */}
       <header className="sticky top-0 z-50 shadow-xl site-header" id="cise-header">
         {/* ROW 1: Brand & Global Actions Band */}
-        <div className="bg-[#0F172A] text-white border-b border-white/10">
+        <div className="bg-[var(--color-ink-900)] text-white border-b border-white/10">
           <div className="site-header__inner">
             <div className="flex items-center justify-between h-14 sm:h-16 lg:h-[72px]">
               {/* Brand Wordmark */}
               <Link 
                 to={`/${lang}/institute`} 
                 aria-label={localizedBrandNames[lang] || localizedBrandNames.en}
-                className="flex items-center gap-3 sm:gap-3.5 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D97706] rounded-xl min-h-[44px]"
+                className="flex items-center gap-3 sm:gap-3.5 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-800)] rounded-xl min-h-[44px]"
               >
-                <div className="w-9 h-9 sm:w-11 sm:h-11 bg-[#D97706] rounded-xl flex items-center justify-center text-[#0F172A] font-black text-lg sm:text-xl shadow-lg group-hover:scale-105 transition-transform shrink-0">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 bg-white rounded-xl flex items-center justify-center text-neutral-950 font-black text-lg sm:text-xl shadow-lg shadow-white/10 group-hover:scale-105 group-hover:shadow-white/25 transition-all shrink-0">
                   CI
                 </div>
                 <div className="flex flex-col text-left rtl:text-right">
-                  <div className="text-xs sm:text-base lg:text-lg font-black tracking-tight uppercase leading-tight text-white group-hover:text-amber-300 transition-colors whitespace-nowrap">
+                  <div className="text-xs sm:text-base lg:text-lg font-black tracking-tight uppercase leading-tight text-white group-hover:text-white transition-colors whitespace-nowrap">
                     Chinese Institute
                   </div>
-                  <div className="hidden sm:block text-[9px] sm:text-[10px] lg:text-[11px] font-bold text-[#D97706] uppercase tracking-widest leading-none mt-0.5 whitespace-nowrap">
+                  <div className="hidden sm:block text-[9px] sm:text-[10px] lg:text-[11px] font-bold text-white uppercase tracking-widest leading-none mt-0.5 whitespace-nowrap opacity-95">
                     For Strategic and Economic Studies
                   </div>
                 </div>
@@ -201,7 +207,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                 {/* Back to ICA button */}
                 <Link 
                   to={`/${lang}`}
-                  className="h-8 sm:h-10 px-2 sm:px-4 rounded-xl border border-white/20 hover:border-white/40 text-[10px] sm:text-xs font-black uppercase tracking-wider text-neutral-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-[#0284C7]"
+                  className="h-8 sm:h-10 px-2 sm:px-4 rounded-xl border border-white/20 hover:border-white/40 text-[10px] sm:text-xs font-black uppercase tracking-wider text-neutral-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-[var(--color-brand-800)]"
                 >
                   {isRtl ? <ArrowRight size={13} /> : <ArrowLeft size={13} />}
                   <span className="hidden sm:inline">{t('backToIca')}</span>
@@ -213,7 +219,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                   href={`/${lang}/newsroom`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden md:flex h-9 sm:h-10 px-3 sm:px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all items-center gap-2 shadow-sm hover:shadow-md whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white"
+                  className="hidden md:flex h-9 sm:h-10 px-3 sm:px-4 rounded-xl bg-[var(--color-brand-800)] hover:bg-[#0369A1] text-white text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all items-center gap-2 shadow-sm hover:shadow-md whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <span>{t('footerIcaNewsroom')}</span>
                   <ArrowUpRight size={14} className="shrink-0" />
@@ -223,7 +229,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                 <button 
                   onClick={() => setIsSearchOpen(true)}
                   aria-label="Search Institute publications and data"
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#D97706]"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[var(--color-brand-800)]"
                 >
                   <Search size={15} />
                 </button>
@@ -261,7 +267,8 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                         location.pathname.startsWith(`/${lang}/institute/insurance-facilitation`) ||
                         location.pathname.startsWith(`/${lang}/institute/visa-centre`) ||
                         location.pathname.startsWith(`/${lang}/institute/chinese-center`) ||
-                        location.pathname.startsWith(`/${lang}/institute/consultancy`)
+                        location.pathname.startsWith(`/${lang}/institute/consultancy`) ||
+                        location.pathname.startsWith(`/${lang}/institute/cultural-exchange`)
                       : location.pathname.startsWith(path));
 
                 if (item.id === 'services') {
@@ -272,28 +279,28 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                         className={cn(
                           "relative h-full flex items-center gap-1.5 px-3 sm:px-4 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all focus-visible:outline-none focus-visible:text-white",
                           active 
-                            ? "text-[#D97706] font-black" 
-                            : "text-neutral-400 hover:text-white"
+                            ? "text-white font-black drop-shadow-sm" 
+                            : "text-neutral-300 hover:text-white"
                         )}
                       >
-                        <span>
+                        <span className="text-white">
                           <span className="hidden 2xl:inline">{item.label[lang] || item.label.en}</span>
                           <span className="2xl:hidden">{item.shortLabel[lang] || item.shortLabel.en}</span>
                         </span>
-                        <ChevronDown size={12} className="transition-transform group-hover:rotate-180 opacity-70" />
+                        <ChevronDown size={12} className="transition-transform group-hover:rotate-180 opacity-70 text-white" />
 
                         {active && (
                           <motion.div 
                             layoutId="activeTabUnderline"
-                            className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#D97706] rounded-t-sm shadow-[0_0_8px_rgba(217,119,6,0.6)]"
+                            className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-t-sm shadow-[0_0_8px_rgba(255,255,255,0.7)]"
                           />
                         )}
                       </Link>
 
                       {/* Dropdown Menu for First-Class Services */}
-                      <div className="absolute top-full left-0 rtl:left-auto rtl:right-0 bg-[#0F172A] border border-white/10 shadow-2xl rounded-2xl w-80 py-3 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="absolute top-full left-0 rtl:left-auto rtl:right-0 bg-[var(--color-ink-900)] border border-white/10 shadow-2xl rounded-2xl w-80 py-3 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                         <div className="px-4 pb-2 mb-2 border-b border-white/10 flex items-center justify-between">
-                          <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">
                             {lang === 'ar' ? 'المبادرات والخدمات التشغيلية' : lang === 'zh' ? '智库六大直属服务' : lang === 'ckb' ? 'خزمەتگوزارییە سەرەکییەکان' : 'CISE Operational Initiatives'}
                           </span>
                         </div>
@@ -307,7 +314,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                                 className={cn(
                                   "flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all",
                                   isSubActive 
-                                    ? "bg-[#D97706]/15 text-[#D97706]" 
+                                    ? "bg-[var(--color-brand-800)]/15 text-[var(--color-brand-800)]" 
                                     : "text-neutral-300 hover:text-white hover:bg-white/5"
                                 )}
                               >
@@ -322,7 +329,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                         <div className="pt-2 mt-2 border-t border-white/10 px-2">
                           <Link
                             to={`/${lang}/institute/services`}
-                            className="flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-[#D97706] hover:bg-[#D97706]/10 transition-colors"
+                            className="flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-[var(--color-brand-800)] hover:bg-[var(--color-brand-800)]/10 transition-colors"
                           >
                             <span>{lang === 'ar' ? 'دليل الخدمات الكامل' : lang === 'zh' ? '查看全部服务目录' : lang === 'ckb' ? 'هەموو خزمەتگوزارییەکان' : 'View Full Services Directory'}</span>
                             <ArrowRight size={13} className={isRtl ? 'rotate-180' : ''} />
@@ -340,20 +347,20 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                     className={cn(
                       "relative h-full flex items-center px-3 sm:px-4 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all shrink-0 focus-visible:outline-none focus-visible:text-white",
                       active 
-                        ? "text-[#D97706] font-black" 
-                        : "text-neutral-400 hover:text-white"
+                        ? "text-white font-black drop-shadow-sm" 
+                        : "text-neutral-300 hover:text-white"
                     )}
                   >
-                    <span>
+                    <span className={active ? "text-white" : "text-neutral-300 group-hover:text-white"}>
                       <span className="hidden 2xl:inline">{item.label[lang] || item.label.en}</span>
                       <span className="2xl:hidden">{item.shortLabel[lang] || item.shortLabel.en}</span>
                     </span>
 
-                    {/* Gold Underline Tab Highlight */}
+                    {/* White Underline Tab Highlight */}
                     {active && (
                       <motion.div 
                         layoutId="activeTabUnderline"
-                        className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#D97706] rounded-t-sm shadow-[0_0_8px_rgba(217,119,6,0.6)]"
+                        className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-t-sm shadow-[0_0_8px_rgba(255,255,255,0.7)]"
                       />
                     )}
                   </Link>
@@ -370,7 +377,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-[#0F172A]/95 backdrop-blur-xl flex flex-col items-center justify-center p-6"
+              className="fixed inset-0 z-[100] bg-[var(--color-ink-900)]/95 backdrop-blur-xl flex flex-col items-center justify-center p-6"
             >
               <button 
                 onClick={() => setIsSearchOpen(false)}
@@ -381,7 +388,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               </button>
               <div className="w-full max-w-3xl space-y-8">
                 <div className="space-y-2 text-center">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">{t('searchCiseInstitutional')}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">{t('searchCiseInstitutional')}</span>
                   <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter">{t('searchFindResearchData')}</h2>
                 </div>
                 <div className="relative">
@@ -392,7 +399,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder={t('searchPlaceholderInstitute')}
-                    className="w-full bg-white/5 border-b-2 border-white/20 focus:border-[#D97706] py-5 pl-16 pr-6 text-xl sm:text-2xl font-black text-white outline-none transition-all placeholder:text-neutral-500"
+                    className="w-full bg-white/5 border-b-2 border-white/20 focus:border-[var(--color-brand-800)] py-5 pl-16 pr-6 text-xl sm:text-2xl font-black text-white outline-none transition-all placeholder:text-neutral-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -418,7 +425,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-[#0F172A] border-b border-white/10 px-4 py-6 space-y-4 shadow-2xl"
+              className="lg:hidden bg-[var(--color-ink-900)] border-b border-white/10 px-4 py-6 space-y-4 shadow-2xl"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {navItems.map((item) => {
@@ -432,7 +439,8 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                           location.pathname.startsWith(`/${lang}/institute/insurance-facilitation`) ||
                           location.pathname.startsWith(`/${lang}/institute/visa-centre`) ||
                           location.pathname.startsWith(`/${lang}/institute/chinese-center`) ||
-                          location.pathname.startsWith(`/${lang}/institute/consultancy`)
+                          location.pathname.startsWith(`/${lang}/institute/consultancy`) ||
+                          location.pathname.startsWith(`/${lang}/institute/cultural-exchange`)
                         : location.pathname.startsWith(path));
                   const Icon = item.icon;
                   
@@ -444,7 +452,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all",
                         active 
-                          ? "bg-[#D97706] text-[#0F172A] font-black shadow-md" 
+                          ? "bg-[var(--color-brand-800)] text-[var(--color-ink-900)] font-black shadow-md" 
                           : "text-neutral-300 hover:text-white hover:bg-white/5"
                       )}
                     >
@@ -457,8 +465,8 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
 
               {/* Mobile First-Class Initiatives Quick Strip */}
               <div className="pt-3 border-t border-white/10 space-y-2">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706] block px-1">
-                  {lang === 'ar' ? 'المبادرات الـ٦ التشغيلية' : lang === 'zh' ? '智库六大运营倡议' : lang === 'ckb' ? '٦ دەستپێشخەری سەرەکی' : '6 Core Institutional Initiatives'}
+                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)] block px-1">
+                  {lang === 'ar' ? 'المبادرات والخدمات التشغيلية' : lang === 'zh' ? '智库直属运营倡议' : lang === 'ckb' ? 'دەستپێشخەرییە سەرەکییەکان' : 'Core Institutional Initiatives'}
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                   {serviceSubItems.map((sub) => (
@@ -469,7 +477,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                       className="px-3 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-neutral-300 hover:text-white flex items-center justify-between"
                     >
                       <span className="truncate">{sub.label[lang] || sub.label.en}</span>
-                      <span className="text-[9px] text-[#D97706] shrink-0 font-bold uppercase">{sub.tag[lang] || sub.tag.en}</span>
+                      <span className="text-[9px] text-[var(--color-brand-800)] shrink-0 font-bold uppercase">{sub.tag[lang] || sub.tag.en}</span>
                     </Link>
                   ))}
                 </div>
@@ -490,19 +498,19 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
       </main>
 
       {/* Institute Specialized Footer */}
-      <footer className="bg-[#0F172A] text-white py-14 border-t border-white/10 w-full">
+      <footer className="bg-[var(--color-ink-900)] text-white py-14 border-t border-white/10 w-full">
         <div className="page-container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 bg-[#D97706] rounded-xl flex items-center justify-center text-[#0F172A] font-black text-xl shadow-md">
+                <div className="w-11 h-11 bg-[var(--color-brand-800)] rounded-xl flex items-center justify-center text-[var(--color-ink-900)] font-black text-xl shadow-md">
                   CI
                 </div>
                 <div>
                   <h2 className="text-base sm:text-lg font-black tracking-tight uppercase leading-tight">
                     {t('footerInstituteName')}
                   </h2>
-                  <p className="text-[10px] font-bold text-[#D97706] uppercase tracking-[0.2em]">
+                  <p className="text-[10px] font-bold text-[var(--color-brand-800)] uppercase tracking-[0.2em]">
                     {t('footerInstituteSubtitle')}
                   </p>
                 </div>
@@ -512,9 +520,9 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
               </p>
             </div>
 
-            {/* Column 3: Institutional Services (All 6 First-Class Initiatives) */}
+            {/* Column 3: Institutional Services (All 7 First-Class Initiatives) */}
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">
+              <h3 className="text-xs font-black uppercase tracking-widest text-[var(--color-brand-800)] mb-4">
                 {lang === 'ar' ? 'الخدمات والمبادرات' : lang === 'zh' ? '智库服务与倡议' : lang === 'ckb' ? 'خزمەتگوزارییەکان' : 'Institutional Services'}
               </h3>
               <ul className="space-y-1 text-xs font-bold text-neutral-400">
@@ -534,6 +542,11 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                   </Link>
                 </li>
                 <li>
+                  <Link to={`/${lang}/institute/services/cultural-exchange`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
+                    {lang === 'ar' ? 'التبادل الثقافي والأكاديمي' : lang === 'zh' ? '文化与学术交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری' : 'Cultural Exchange'}
+                  </Link>
+                </li>
+                <li>
                   <Link to={`/${lang}/institute/visa-centre`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
                     {lang === 'ar' ? 'مركز استشارات التأشيرات' : lang === 'zh' ? '双边签证中心' : lang === 'ckb' ? 'ناوەندی ڤیزا' : 'Visa Advisory Centre'}
                   </Link>
@@ -549,7 +562,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/${lang}/institute/services`} className="text-[#D97706] hover:underline uppercase tracking-wider flex items-center min-h-[34px]">
+                  <Link to={`/${lang}/institute/services`} className="text-[var(--color-brand-800)] hover:underline uppercase tracking-wider flex items-center min-h-[34px]">
                     {lang === 'ar' ? 'دليل الخدمات الكامل ←' : lang === 'zh' ? '全部服务名录 →' : lang === 'ckb' ? 'تەواوی خزمەتگوزارییەکان ←' : 'All Services Directory →'}
                   </Link>
                 </li>
@@ -557,7 +570,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
             </div>
 
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">{t('footerResearchPillarsHeading')}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[var(--color-brand-800)] mb-4">{t('footerResearchPillarsHeading')}</h3>
               <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
                   <Link to={`/${lang}/institute/research/energy-bri`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
@@ -583,7 +596,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
             </div>
 
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#D97706] mb-4">{t('footerResourcesDataHeading')}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[var(--color-brand-800)] mb-4">{t('footerResourcesDataHeading')}</h3>
               <ul className="space-y-1 text-xs font-bold text-neutral-400">
                 <li>
                   <Link to={`/${lang}/institute/publications`} className="hover:text-white transition-colors uppercase tracking-wider flex items-center min-h-[34px]">
@@ -616,7 +629,7 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
             <div className="flex flex-wrap items-center gap-4">
               <Link 
                 to={`/${lang}`}
-                className="text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-[#D97706] transition-colors flex items-center gap-1.5"
+                className="text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors flex items-center gap-1.5"
               >
                 {isRtl ? <ArrowRight size={12} /> : <ArrowLeft size={12} />}
                 <span>{t('backToIca')}</span>

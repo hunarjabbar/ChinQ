@@ -21,7 +21,7 @@ export function ExecutiveOverview({ lang }: ExecutiveOverviewProps) {
           <Link to={`/${lang}/institute`} className="text-royal hover:underline">The Chinese Institute for Strategic and Economic Studies</Link> — the agency's research and knowledge partner, publishing quad-lingual policy analysis, trade data, and sector studies on China–Iraq relations, and convening experts, fellows, and academic institutions including the <Link to={`/${lang}/institute/about`} className="text-royal hover:underline">China Studies Centre at the University of Sulaimani</Link> (the first of its kind in Iraq and the Middle East).
         </li>
         <li>
-          <Link to={`/${lang}/newsroom`} className="text-royal hover:underline">ICA Newsroom</Link> — the agency's quad-lingual media wing (English, Arabic, Mandarin Chinese, Central Kurdish), delivering sourced briefs, daily commentary, and syndicated analysis to regional and international partners.
+          <Link to={`/${lang}/newsroom`} className="text-royal hover:underline">ICA Media & Newsroom</Link> — the agency's quad-lingual media wing (English, Arabic, Mandarin Chinese, Central Kurdish), delivering sourced briefs, daily commentary, and syndicated analysis to regional and international partners.
         </li>
         <li>
           <Link to={`/${lang}/summit`} className="text-royal hover:underline">The Iraq-China Economic Summit & Bilateral Expo</Link> — the agency's annual convening platform in <Link to={`/${lang}/summit/about-sulaymaniyah`} className="text-royal hover:underline">Sulaymaniyah</Link>, hosting a high-level policy summit alongside a sector-wide bilateral expo that facilitates participation from every sector of the Iraqi and Chinese economies.

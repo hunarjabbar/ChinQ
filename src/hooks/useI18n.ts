@@ -1,5 +1,5 @@
 import { Locale } from '../types';
-import { newsroomTranslations, getNewsroomTranslation } from '../locales/newsroomTranslations';
+import { newsroomTranslations, getNewsroomTranslation } from '../locales/portalTranslations';
 
 const dict = {
   en: {
@@ -307,7 +307,7 @@ const dict = {
     bilateralDataAppendix: 'Bilateral Data Appendix',
     liveTradeFlowDashboard: 'Live Trade Flow Dashboard',
     annualTrade: 'Annual Trade',
-    icaNewsroom: 'ICA Newsroom',
+    icaNewsroom: 'ICA Media & Newsroom',
     viewPillar: 'View Pillar',
     readBrief: 'Read Brief',
     downloadPdf: 'Download PDF',
@@ -356,7 +356,7 @@ const dict = {
     footerFaq: 'FAQ',
     footerMediaCenter: 'Media Center',
     footerSecretariatContact: 'Secretariat Contact',
-    footerIcaNewsroom: 'ICA Newsroom',
+    footerIcaNewsroom: 'ICA Media & Newsroom',
     searchCiseInstitutional: 'CISE Institutional Search',
     searchFindResearchData: 'Find Research & Data',
     searchPlaceholderInstitute: 'Search publications, experts, datasets...',
@@ -486,6 +486,7 @@ const dict = {
 
     // CISE Canonical Services Taxonomy
     'cise.nav.services': 'Services',
+    'cise.nav.culturalExchange': 'Cultural Exchange',
     'cise.services.index.heading': 'Institute Strategic Services',
     'cise.services.index.body': 'Operational delivery units and sovereign bilateral services operated under the Chinese Institute for Strategic and Economic Studies.',
     'cise.services.summit.label': 'Iraq-China Economic Summit & Bilateral Expo',
@@ -500,6 +501,8 @@ const dict = {
     'cise.services.insurance.description': 'Sovereign risk coverage, Sinosure export credit alignment, cargo insurance, and project underwriting for bilateral infrastructure.',
     'cise.services.consultancy.label': 'Strategic Financial & Legal Consultancy',
     'cise.services.consultancy.description': 'Cross-border regulatory advisory, foreign investment structuring, company establishment, and tax compliance between Iraq and China.',
+    'cise.services.culturalExchange.label': 'Sino-Iraqi Cultural & Educational Exchange',
+    'cise.services.culturalExchange.description': 'Bilateral university MOUs, student immersion fellowships, arts residencies, and civilizational dialogues connecting Iraq and China.',
 
     // ICA Initiative Cards Membership Labels
     'initiatives.card.summit.membershipLabel': 'A service of CISE',
@@ -508,7 +511,18 @@ const dict = {
     'initiatives.card.settlement.membershipLabel': 'A service of CISE',
     'initiatives.card.insurance.membershipLabel': 'A service of CISE',
     'initiatives.card.consultancy.membershipLabel': 'A service of CISE',
+    'initiatives.card.culturalExchange.membershipLabel': 'A service of CISE',
     'initiatives.card.ciseMembershipLabel': 'A service of CISE',
+
+    // ICA Initiative Card - Cultural Exchange
+    'initiatives.card.culturalExchange.eyebrow': 'People-to-People & Cultural Exchange',
+    'initiatives.card.culturalExchange.headline': 'Sino-Iraqi Cultural & Educational Exchange',
+    'initiatives.card.culturalExchange.body': 'Bilateral university MOUs, student immersion fellowships, arts residencies, and civilizational dialogues connecting Iraq and China.',
+    'initiatives.card.culturalExchange.chips.universityMous': 'University MOUs',
+    'initiatives.card.culturalExchange.chips.studentFellowships': 'Student Fellowships',
+    'initiatives.card.culturalExchange.chips.artsResidencies': 'Arts Residencies',
+    'initiatives.card.culturalExchange.chips.civilizationalDialogue': 'Civilizational Dialogue',
+    'initiatives.card.culturalExchange.cta': 'Enter Cultural Exchange →',
   },
   ar: {
     news: 'أخبار',
@@ -819,7 +833,7 @@ const dict = {
     bilateralDataAppendix: 'ملحق البيانات الثنائية',
     liveTradeFlowDashboard: 'لوحة التدفقات التجارية المباشرة',
     annualTrade: 'حجم التجارة السنوية',
-    icaNewsroom: 'غرفة أخبار ICA',
+    icaNewsroom: 'إعلام وغرفة أخبار الوكالة',
     viewPillar: 'عرض الركيزة',
     readBrief: 'قراءة الموجز',
     downloadPdf: 'تحميل ملف PDF',
@@ -868,7 +882,7 @@ const dict = {
     footerFaq: 'الأسئلة الشائعة',
     footerMediaCenter: 'المركز الإعلامي',
     footerSecretariatContact: 'الاتصال بالسكرتارية',
-    footerIcaNewsroom: 'غرفة أخبار ICA',
+    footerIcaNewsroom: 'إعلام وغرفة أخبار الوكالة',
     searchCiseInstitutional: 'بحث مؤسسة CISE',
     searchFindResearchData: 'البحث عن الأبحاث والبيانات',
     searchPlaceholderInstitute: 'البحث في المنشورات والخبراء وقواعد البيانات...',
@@ -922,6 +936,7 @@ const dict = {
 
     // CISE Canonical Services Taxonomy
     'cise.nav.services': 'الخدمات',
+    'cise.nav.culturalExchange': 'التبادل الثقافي',
     'cise.services.index.heading': 'الخدمات الاستراتيجية للمعهد',
     'cise.services.index.body': 'وحدات التنفيذ التشغيلي والخدمات الثنائية السيادية العاملة تحت مظلة المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE).',
     'cise.services.summit.label': 'القمة الاقتصادية والمعرض الثنائي بين العراق والصين',
@@ -936,6 +951,8 @@ const dict = {
     'cise.services.insurance.description': 'تغطية المخاطر السيادية، والتنسيق مع شركة سينوسور (Sinosure) للتأمين على ائتمان الصادرات وتأمين الشحن والمشاريع الكبرى.',
     'cise.services.consultancy.label': 'الاستشارات المالية والقانونية الاستراتيجية',
     'cise.services.consultancy.description': 'استشارات تنظيمية عبر الحدود، وهيكلة الاستثمارات الأجنبية، وتأسيس الشركات، والامتثال الضريبي بين العراق والصين.',
+    'cise.services.culturalExchange.label': 'التبادل الثقافي والتعليمي الصيني-العراقي',
+    'cise.services.culturalExchange.description': 'مذكرات تفاهم جامعية ثنائية، زمالات انغماس طلابي، إقامات فنية، وحوارات حضارية تربط العراق والصين.',
 
     // ICA Initiative Cards Membership Labels
     'initiatives.card.summit.membershipLabel': 'خدمة تابعة للمعهد',
@@ -944,7 +961,18 @@ const dict = {
     'initiatives.card.settlement.membershipLabel': 'خدمة تابعة للمعهد',
     'initiatives.card.insurance.membershipLabel': 'خدمة تابعة للمعهد',
     'initiatives.card.consultancy.membershipLabel': 'خدمة تابعة للمعهد',
+    'initiatives.card.culturalExchange.membershipLabel': 'خدمة تابعة للمعهد',
     'initiatives.card.ciseMembershipLabel': 'خدمة تابعة للمعهد',
+
+    // ICA Initiative Card - Cultural Exchange
+    'initiatives.card.culturalExchange.eyebrow': 'التبادل الشعبي والثقافي',
+    'initiatives.card.culturalExchange.headline': 'التبادل الثقافي والتعليمي الصيني-العراقي',
+    'initiatives.card.culturalExchange.body': 'مذكرات تفاهم جامعية ثنائية، زمالات انغماس طلابي، إقامات فنية، وحوارات حضارية تربط العراق والصين.',
+    'initiatives.card.culturalExchange.chips.universityMous': 'مذكرات تفاهم جامعية',
+    'initiatives.card.culturalExchange.chips.studentFellowships': 'زمالات طلابية',
+    'initiatives.card.culturalExchange.chips.artsResidencies': 'إقامات فنية',
+    'initiatives.card.culturalExchange.chips.civilizationalDialogue': 'حوار الحضارات',
+    'initiatives.card.culturalExchange.cta': 'ادخل إلى التبادل الثقافي ←',
   },
   zh: {
     news: '新闻',
@@ -1248,7 +1276,7 @@ const dict = {
     bilateralDataAppendix: '双边数据附录',
     liveTradeFlowDashboard: '实时贸易流态看板',
     annualTrade: '年双边贸易额',
-    icaNewsroom: 'ICA 新闻室',
+    icaNewsroom: 'ICA 媒体与新闻中心',
     viewPillar: '查看支柱',
     readBrief: '阅读简报',
     downloadPdf: '下载 PDF 报告',
@@ -1297,7 +1325,7 @@ const dict = {
     footerFaq: '常见问题',
     footerMediaCenter: '媒体中心',
     footerSecretariatContact: '秘书处联系方式',
-    footerIcaNewsroom: 'ICA 新闻室',
+    footerIcaNewsroom: 'ICA 媒体与新闻中心',
     searchCiseInstitutional: 'CISE 机构搜索',
     searchFindResearchData: '查找研究与数据',
     searchPlaceholderInstitute: '搜索出版物、专家、数据集...',
@@ -1423,6 +1451,7 @@ const dict = {
 
     // CISE Canonical Services Taxonomy
     'cise.nav.services': '核心服务',
+    'cise.nav.culturalExchange': '文化交流',
     'cise.services.index.heading': '研究院战略服务集群',
     'cise.services.index.body': '中国战略与经济研究院（CISE）旗下的实体运营交付单元与主权级双边赋能服务。',
     'cise.services.summit.label': '伊拉克-中国经济峰会暨双边博览会',
@@ -1437,6 +1466,8 @@ const dict = {
     'cise.services.insurance.description': '对接中国出口信用保险公司（Sinosure）与伊拉克权威保司，为双边基建及贸易提供全方位保单覆盖。',
     'cise.services.consultancy.label': '战略金融与跨国合规法律咨询',
     'cise.services.consultancy.description': '跨国商业准入与监管导航、跨境合资并购、外商投资架构搭建及双向财税合规专业顾问服务。',
+    'cise.services.culturalExchange.label': '中伊文化与教育交流',
+    'cise.services.culturalExchange.description': '双边大学谅解备忘录、学生沉浸式奖学金、艺术驻留以及连接伊拉克与中国的文明对话。',
 
     // ICA Initiative Cards Membership Labels
     'initiatives.card.summit.membershipLabel': '研究院服务',
@@ -1445,7 +1476,18 @@ const dict = {
     'initiatives.card.settlement.membershipLabel': '研究院服务',
     'initiatives.card.insurance.membershipLabel': '研究院服务',
     'initiatives.card.consultancy.membershipLabel': '研究院服务',
+    'initiatives.card.culturalExchange.membershipLabel': '研究院服务',
     'initiatives.card.ciseMembershipLabel': '研究院服务',
+
+    // ICA Initiative Card - Cultural Exchange
+    'initiatives.card.culturalExchange.eyebrow': '民间与文化交流',
+    'initiatives.card.culturalExchange.headline': '中伊文化与教育交流',
+    'initiatives.card.culturalExchange.body': '双边大学谅解备忘录、学生沉浸式奖学金、艺术驻留以及连接伊拉克与中国的文明对话。',
+    'initiatives.card.culturalExchange.chips.universityMous': '大学谅解备忘录',
+    'initiatives.card.culturalExchange.chips.studentFellowships': '学生奖学金',
+    'initiatives.card.culturalExchange.chips.artsResidencies': '艺术驻留',
+    'initiatives.card.culturalExchange.chips.civilizationalDialogue': '文明对话',
+    'initiatives.card.culturalExchange.cta': '进入文化交流 →',
   },
   ckb: {
     footerCopy: 'کۆپی',
@@ -1455,7 +1497,7 @@ const dict = {
     footerFaq: 'پرسیارە باوەکان',
     footerMediaCenter: 'ناوەندی میدیا',
     footerSecretariatContact: 'پەیوەندی بە سکرتاریەت',
-    footerIcaNewsroom: 'ژووری هەواڵی ICA',
+    footerIcaNewsroom: 'میدیا و ژووری هەواڵی ICA',
     searchCiseInstitutional: 'گەڕانی دامەزراوەیی CISE',
     searchFindResearchData: 'دۆزینەوەی توێژینەوە و داتا',
     searchPlaceholderInstitute: 'گەڕان لە بڵاوکراوەکان، پسپۆڕان، داتاکان...',
@@ -1767,7 +1809,7 @@ const dict = {
     bilateralDataAppendix: 'پاشکۆی داتای دووقۆڵی',
     liveTradeFlowDashboard: 'داشبۆردی ڕاستەوخۆی جووڵەی بازرگانی',
     annualTrade: 'ئاڵوگۆڕی بازرگانی ساڵانە',
-    icaNewsroom: 'ژووری هەواڵی ICA',
+    icaNewsroom: 'میدیا و ژووری هەواڵی ICA',
     viewPillar: 'بینینی تەوەر',
     readBrief: 'خوێندنەوەی پوختە',
     downloadPdf: 'داگرتنی PDF',
@@ -1910,6 +1952,7 @@ const dict = {
 
     // CISE Canonical Services Taxonomy
     'cise.nav.services': 'خزمەتگوزارییەکان',
+    'cise.nav.culturalExchange': 'ئاڵوگۆڕی کولتووری',
     'cise.services.index.heading': 'خزمەتگوزارییە ستراتیژییەکانی پەیمانگا',
     'cise.services.index.body': 'بەشەکانی جێبەجێکردنی کارگێڕی و خزمەتگوزارییە سەروەرییە دوولایەنەکان لەژێر چەتری پەیمانگای چینی بۆ لێکۆڵینەوەی ستراتیژی و ئابووری (CISE).',
     'cise.services.summit.label': 'لووتکەی ئابووری عێراق-چین و پێشانگای دوولایەنە',
@@ -1924,6 +1967,8 @@ const dict = {
     'cise.services.insurance.description': 'داپۆشینی مەترسییە سەروەرییەکان، هەماهەنگی لەگەڵ سینۆشور (Sinosure) بۆ بیمەی هەناردە و داپۆشینی پڕۆژەکانی ژێرخان.',
     'cise.services.consultancy.label': 'ڕاوێژکاری دارایی و یاسایی ستراتیژی',
     'cise.services.consultancy.description': 'ڕاوێژی ڕێسایی نێودەوڵەتی، داڕشتنی وەبەرهێنانی بیانی، دامەزراندنی کۆمپانیا و پابەندبوونی باج لە نێوان عێراق و چیندا.',
+    'cise.services.culturalExchange.label': 'ئاڵوگۆڕی کولتووری و پەروەردەیی چینی-عێراقی',
+    'cise.services.culturalExchange.description': 'یاداشتە تێگەیشتنەکانی زانکۆیی دوولایەنە، زەمالەی نوقمبوونی قوتابیان، نیشتەجێبوونی هونەری، و گفتوگۆی شارستانی کە عێراق و چین بەیەکەوە دەبەستێت.',
 
     // ICA Initiative Cards Membership Labels
     'initiatives.card.summit.membershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
@@ -1932,7 +1977,18 @@ const dict = {
     'initiatives.card.settlement.membershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
     'initiatives.card.insurance.membershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
     'initiatives.card.consultancy.membershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
+    'initiatives.card.culturalExchange.membershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
     'initiatives.card.ciseMembershipLabel': 'خزمەتگوزارییەکی پەیمانگا',
+
+    // ICA Initiative Card - Cultural Exchange
+    'initiatives.card.culturalExchange.eyebrow': 'ئاڵوگۆڕی گەلی و کولتووری',
+    'initiatives.card.culturalExchange.headline': 'ئاڵوگۆڕی کولتووری و پەروەردەیی چینی-عێراقی',
+    'initiatives.card.culturalExchange.body': 'یاداشتە تێگەیشتنەکانی زانکۆیی دوولایەنە، زەمالەی نوقمبوونی قوتابیان، نیشتەجێبوونی هونەری، و گفتوگۆی شارستانی کە عێراق و چین بەیەکەوە دەبەستێت.',
+    'initiatives.card.culturalExchange.chips.universityMous': 'یاداشتی لێکتێگەیشتنی زانکۆکان',
+    'initiatives.card.culturalExchange.chips.studentFellowships': 'زەمالەی قوتابیان',
+    'initiatives.card.culturalExchange.chips.artsResidencies': 'نیشتەجێبوونی هونەری',
+    'initiatives.card.culturalExchange.chips.civilizationalDialogue': 'گفتوگۆی شارستانی',
+    'initiatives.card.culturalExchange.cta': 'بچۆ ژوورەوە بۆ ئاڵوگۆڕی کولتووری ←',
     format: 'شێواز',
     allPillars: 'هەموو تەوەرەکان',
     allTypes: 'هەموو جۆرەکان',
@@ -2037,5 +2093,5 @@ export function useI18n(lang: Locale) {
 }
 
 export * from '../locales/visaCentreTranslations';
-export * from '../locales/newsroomTranslations';
+export * from '../locales/portalTranslations';
 

@@ -41,23 +41,34 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
       {/* Knowledge Partner Sovereign Top Banner */}
       <aside aria-label="Knowledge Partner Bar" className="bg-ink-950 border-b border-brand-800/40 text-neutral-200 text-xs py-2 px-3 sm:px-8 min-w-0">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3 min-w-0">
-          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-neutral-400 shrink-0">
-              {t('footerKnowledgePartner')}
-            </span>
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-wrap">
             <Link 
-              to={`/${lang}/institute`}
-              className="text-[10px] sm:text-[11px] font-black tracking-wide text-brand-300 hover:text-white underline decoration-brand-500/50 underline-offset-2 flex items-center gap-1 transition-colors truncate max-w-[190px] sm:max-w-none"
+              to={`/${lang}`}
+              className="text-[10px] sm:text-[11px] font-bold text-neutral-300 hover:text-white flex items-center gap-1.5 transition-colors shrink-0 group"
+              title="Return to Iraqi-Chinese Agency Portal"
             >
-              <span className="truncate">Chinese Institute for Strategic and Economic Studies</span>
-              <ExternalLink size={11} className="shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-500 group-hover:scale-125 transition-transform"></span>
+              <span>{lang === 'ar' ? 'الوكالة العراقية الصينية' : lang === 'zh' ? '伊拉克中国机构 (ICA)' : lang === 'ckb' ? 'ئاژانسی عێراق-چین' : 'Iraqi-Chinese Agency (ICA)'}</span>
             </Link>
+            <span className="text-neutral-600 hidden sm:inline" aria-hidden="true">|</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-neutral-400 shrink-0">
+                {t('footerKnowledgePartner')}:
+              </span>
+              <Link 
+                to={`/${lang}/institute`}
+                className="text-[10px] sm:text-[11px] font-black tracking-wide text-brand-300 hover:text-white underline decoration-brand-500/50 underline-offset-2 flex items-center gap-1 transition-colors truncate max-w-[200px] sm:max-w-none"
+              >
+                <span className="truncate">Chinese Institute for Strategic and Economic Studies</span>
+                <ExternalLink size={11} className="shrink-0" />
+              </Link>
+            </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-semibold text-neutral-400 min-w-0 flex-wrap">
-            <span className="shrink-0">{SUMMIT_CANONICAL.dates[lang]}</span>
+            <span className="shrink-0 font-bold text-neutral-300">{SUMMIT_CANONICAL.dates[lang]}</span>
             <span className="shrink-0 opacity-50">•</span>
-            <span className="truncate max-w-[160px] sm:max-w-none">{SUMMIT_CANONICAL.venue.name[lang]}</span>
+            <span className="truncate max-w-[180px] sm:max-w-none">{SUMMIT_CANONICAL.venue.name[lang]}</span>
           </div>
         </div>
       </aside>
@@ -68,7 +79,7 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
           <div className="flex items-center justify-between h-20 gap-4">
             {/* Summit Brand / Logo */}
             <Link to={basePath} className="flex items-center gap-3 shrink-0 group">
-              <div className="w-11 h-11 rounded-xl bg-brand-800 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+              <div className="w-11 h-11 rounded-xl bg-brand-800 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform ring-1 ring-brand-700/50">
                 <Landmark className="w-6 h-6" />
               </div>
               <div className="flex flex-col">
@@ -84,14 +95,14 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
             {/* Quick Actions */}
             <div className="flex items-center gap-2 sm:gap-3">
               <Link
-                to={`/${lang}/summit/expo/register`}
+                to={`/${lang}/summit/register/exhibitor`}
                 className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-brand-800 hover:bg-brand-900 text-white shadow-sm transition-all hover:shadow-md cursor-pointer"
               >
                 <span>{lang === 'ar' ? 'حجز جناح كعارض' : lang === 'zh' ? '申请参展展位' : lang === 'ckb' ? 'تۆماری وەک عارز' : 'Exhibitor Booth'}</span>
                 <ArrowRight size={14} className={isRtl ? 'rotate-180' : ''} />
               </Link>
               <Link
-                to={`/${lang}/summit/expo/visitor-register`}
+                to={`/${lang}/summit/register/visitor`}
                 className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-700 transition-all cursor-pointer"
               >
                 <span>{lang === 'ar' ? 'تسجيل الزوار والمشترين' : lang === 'zh' ? '买家/观众免费注册' : lang === 'ckb' ? 'تۆماری سەردانکەران' : 'Visitor Pass'}</span>
@@ -100,17 +111,17 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
           </div>
 
           {/* Scrolling Sub-navigation bar */}
-          <div className="w-full overflow-x-auto no-scrollbar min-w-0">
-            <nav className="flex items-center gap-1 py-2.5 border-t border-neutral-100 dark:border-neutral-800/80 text-xs font-bold whitespace-nowrap min-w-max">
+          <div className="w-full overflow-x-auto no-scrollbar min-w-0 border-t border-neutral-100 dark:border-neutral-800/80">
+            <nav className="flex items-center gap-1 py-2.5 text-xs font-bold whitespace-nowrap min-w-max">
               {navItems.map((item, idx) => {
-                const isActive = location.pathname === item.path || (item.path !== `/${lang}/summit` && location.pathname.startsWith(item.path));
+                const isActive = item.path === basePath ? location.pathname === basePath : location.pathname.startsWith(item.path);
                 return (
                   <Link
                     key={idx}
                     to={item.path}
                     className={`px-3 py-1.5 rounded-lg transition-all ${
                       isActive 
-                        ? 'bg-brand-800 text-white shadow-xs font-black' 
+                        ? 'bg-brand-800 text-white shadow-xs font-black ring-1 ring-brand-700/50' 
                         : 'text-neutral-600 dark:text-neutral-300 hover:text-brand-800 dark:hover:text-brand-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/60'
                     }`}
                   >
@@ -154,10 +165,10 @@ export function SummitLayout({ children, lang, activeNav }: SummitLayoutProps) {
               {lang === 'ar' ? 'المعرض والقطاعات' : lang === 'zh' ? '博览会与产业展区' : lang === 'ckb' ? 'پێشانگا و کەرتەکان' : 'Expo & 11 Sectors'}
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link to={`/${lang}/summit/expo`} className="hover:text-brand-800">{lang === 'ar' ? 'دليل الأجنحة الـ١١' : lang === 'zh' ? '11大产业展区总览' : lang === 'ckb' ? 'ڕێبەری ١١ کەرت' : '11 Sector Pavilions'}</Link></li>
-              <li><Link to={`/${lang}/summit/expo/floor-plan`} className="hover:text-brand-800">{lang === 'ar' ? 'مخطط القاعة التفاعلي' : lang === 'zh' ? '交互式展馆平面图' : lang === 'ckb' ? 'نەخشەی هۆڵەکان' : 'Interactive Floor Plan'}</Link></li>
-              <li><Link to={`/${lang}/summit/expo/register`} className="hover:text-brand-800">{lang === 'ar' ? 'تسجيل العارضين' : lang === 'zh' ? '展商参展报名' : lang === 'ckb' ? 'تۆماری عارزان' : 'Exhibitor Booking'}</Link></li>
-              <li><Link to={`/${lang}/summit/b2b-matchmaking`} className="hover:text-brand-800">{lang === 'ar' ? 'حجز جلسات B2B' : lang === 'zh' ? 'B2B商贸精准对接' : lang === 'ckb' ? 'کۆبوونەوەی B2B' : 'B2B Matchmaking'}</Link></li>
+              <li><Link to={`/${lang}/summit/expo`} className="hover:text-brand-800 transition-colors">{lang === 'ar' ? 'دليل الأجنحة الـ١١' : lang === 'zh' ? '11大产业展区总览' : lang === 'ckb' ? 'ڕێبەری ١١ کەرت' : '11 Sector Pavilions'}</Link></li>
+              <li><Link to={`/${lang}/summit/floor-plan`} className="hover:text-brand-800 transition-colors">{lang === 'ar' ? 'مخطط القاعة التفاعلي' : lang === 'zh' ? '交互式展馆平面图' : lang === 'ckb' ? 'نەخشەی هۆڵەکان' : 'Interactive Floor Plan'}</Link></li>
+              <li><Link to={`/${lang}/summit/register/exhibitor`} className="hover:text-brand-800 transition-colors">{lang === 'ar' ? 'تسجيل العارضين' : lang === 'zh' ? '展商参展报名' : lang === 'ckb' ? 'تۆماری عارزان' : 'Exhibitor Booking'}</Link></li>
+              <li><Link to={`/${lang}/summit/b2b`} className="hover:text-brand-800 transition-colors">{lang === 'ar' ? 'حجز جلسات B2B' : lang === 'zh' ? 'B2B商贸精准对接' : lang === 'ckb' ? 'کۆبوونەوەی B2B' : 'B2B Matchmaking'}</Link></li>
             </ul>
           </div>
 

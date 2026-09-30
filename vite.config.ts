@@ -1,39 +1,24 @@
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
-import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    react(),
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    build: {
-      outDir: 'dist',
-      emptyOutDir: true,
-      chunkSizeWarningLimit: 2000,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          }
-        }
-      }
-    },
-    server: {
-      allowedHosts: true,
-      hmr: process.env.DISABLE_HMR === 'true' ? false : {
-        clientPort: 443,
-      },
-      watch: {
-        usePolling: true,
-        interval: 1000,
-      },
-    },
-  };
+  },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
 });

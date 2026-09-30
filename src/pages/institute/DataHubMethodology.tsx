@@ -21,11 +21,11 @@ export default function DataHubMethodology() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="space-y-6 max-w-3xl">
-        <div className="inline-flex items-center gap-2 text-[#D97706]">
+        <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
           <ShieldCheck size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">Institutional Standards</span>
         </div>
-        <h1 className="text-4xl lg:text-7xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter leading-none">
+        <h1 className="text-4xl lg:text-7xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter leading-none">
           Data Hub Methodology
         </h1>
         <p className="text-xl text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed">
@@ -38,8 +38,8 @@ export default function DataHubMethodology() {
         {/* Core Principles */}
         <div className="lg:col-span-8 space-y-16">
           <section className="space-y-8">
-            <h2 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter flex items-center gap-3">
-              <Database className="text-[#0284C7]" />
+            <h2 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter flex items-center gap-3">
+              <Database className="text-[var(--color-brand-800)]" />
               <span>Primary Data Sources</span>
             </h2>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-w-0">
@@ -51,7 +51,7 @@ export default function DataHubMethodology() {
               ].map(source => (
                 <div key={source.name} className="p-8 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-tight">{source.name}</h4>
+                    <h4 className="text-sm font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tight">{source.name}</h4>
                     <span className="text-[9px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 px-2 py-1 rounded">Official</span>
                   </div>
                   <p className="text-xs text-neutral-500 font-medium leading-relaxed">{source.description}</p>
@@ -65,8 +65,8 @@ export default function DataHubMethodology() {
           </section>
 
           <section className="space-y-8">
-            <h2 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter flex items-center gap-3">
-              <AlertCircle className="text-[#D97706]" />
+            <h2 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter flex items-center gap-3">
+              <AlertCircle className="text-[var(--color-brand-800)]" />
               <span>Divergence Handling</span>
             </h2>
             <div className="p-10 bg-rose-50 dark:bg-rose-950/20 rounded-3xl border border-rose-100 dark:border-rose-900/50 space-y-6">
@@ -100,8 +100,8 @@ export default function DataHubMethodology() {
           </section>
 
           <section className="space-y-8">
-            <h2 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter flex items-center gap-3">
-              <Quote className="text-[#0284C7]" />
+            <h2 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter flex items-center gap-3">
+              <Quote className="text-[var(--color-brand-800)]" />
               <span>Citation Guidance</span>
             </h2>
             <div className="space-y-6">
@@ -109,7 +109,7 @@ export default function DataHubMethodology() {
                 When using ICA Data Hub visualizations or raw datasets in external publications, 
                 media outlets and academic institutions must adhere to the following citation format:
               </p>
-              <div className="p-8 bg-[#0F172A] text-white rounded-3xl font-mono text-xs leading-relaxed select-all">
+              <div className="p-8 bg-[var(--color-ink-900)] text-white rounded-3xl font-mono text-xs leading-relaxed select-all">
                 "Iraqi-Chinese Agency (ICA) Data Hub. [Visualization Title]. Retrieved from 
                 iraqi-chineseagency.ai.studio/data-hub. Accessed [Date]."
               </div>
@@ -120,7 +120,7 @@ export default function DataHubMethodology() {
         {/* Sidebar */}
         <aside className="lg:col-span-4 space-y-8">
           <div className="p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl space-y-6 shadow-sm">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-[#0284C7]">Validation Pipeline</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">Validation Pipeline</h3>
             <div className="space-y-8 relative">
               <div className="absolute left-2.5 top-0 bottom-0 w-0.5 bg-neutral-100 dark:bg-neutral-800 rtl:left-auto rtl:right-2.5" />
               {[
@@ -130,9 +130,9 @@ export default function DataHubMethodology() {
                 { step: 'Publication', desc: 'Final render in Hub after expert peer review.' }
               ].map((item, i) => (
                 <div key={i} className="relative z-10 flex items-start gap-4">
-                  <div className="w-5 h-5 rounded-full bg-white dark:bg-neutral-900 border-2 border-[#0284C7] flex-shrink-0" />
+                  <div className="w-5 h-5 rounded-full bg-white dark:bg-neutral-900 border-2 border-[var(--color-brand-800)] flex-shrink-0" />
                   <div className="space-y-1">
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[#0F172A] dark:text-white">{item.step}</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[var(--color-ink-900)] dark:text-white">{item.step}</h4>
                     <p className="text-[10px] text-neutral-400 font-bold leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function DataHubMethodology() {
           </div>
 
           <div className="p-8 bg-neutral-900 text-white rounded-3xl space-y-6 shadow-2xl">
-            <div className="flex items-center gap-3 text-[#D97706]">
+            <div className="flex items-center gap-3 text-[var(--color-brand-800)]">
               <GitBranch size={20} />
               <h3 className="text-[10px] font-black uppercase tracking-widest">Open Data Initiative</h3>
             </div>
@@ -149,7 +149,7 @@ export default function DataHubMethodology() {
               Researchers requiring full API access to raw CSV datasets can apply 
               for an institutional key through the partnerships portal.
             </p>
-            <button className="w-full py-4 bg-white text-[#0F172A] rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#0284C7] hover:text-white transition-all">
+            <button className="w-full py-4 bg-white text-[var(--color-ink-900)] rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[var(--color-brand-800)] hover:text-white transition-all">
               Apply for API Key
             </button>
           </div>

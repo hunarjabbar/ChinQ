@@ -1,129 +1,80 @@
-import { useMemo } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Twitter, Linkedin } from 'lucide-react';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { ArticleGrid } from '../../components/newsroom/ArticleGrid';
-import { SearchBar } from '../../components/newsroom/SearchBar';
-import { newsroomArticles, newsroomAuthors } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import { ArrowLeft, Award, MapPin } from 'lucide-react';
+import { Card } from '../../components/Card';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomAuthorPage() {
-  const { lang: paramLang, author: authorSlug } = useParams<{
-    lang?: string;
-    author?: string;
-  }>();
+  const { lang = 'en', author } = useParams<{ lang: string; author: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : paramLang === 'ck'
-    ? 'ckb'
-    : 'en') as Locale;
-
-  const currentAuthor = newsroomAuthors.find((a) => a.slug === authorSlug);
-
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-
-  const authorName = currentAuthor
-    ? currentAuthor.name[lang] || currentAuthor.name.en
-    : authorSlug || 'Author';
-
-  const authorTitle = currentAuthor
-    ? currentAuthor.title[lang] || currentAuthor.title.en
-    : '';
-
-  const authorBio = currentAuthor
-    ? currentAuthor.bio[lang] || currentAuthor.bio.en
-    : '';
-
-  const authorArticles = useMemo(() => {
-    return newsroomArticles.filter(
-      (a) => a.author.slug === authorSlug && a.status === 'published'
-    );
-  }, [authorSlug]);
+  const authors = portalStore.getNewsAuthors();
+  const currentAuthor = authors.find(a => a.slug === author) || authors[0];
+  const authorArticles = portalStore.getNewsArticles().filter(a => a.author.slug === currentAuthor.slug);
 
   return (
-    <div className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
+    <div className="bg-[#FFFFFF] min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: 'Authors' },
-              { label: authorName },
-            ]}
-          />
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to Newsroom</span>
+        </Link>
 
-          <div className="w-full md:w-auto">
-            <SearchBar lang={lang} />
+        {/* Author Bio Header Card */}
+        <div className="p-8 rounded-3xl bg-[#F9FAFB] border border-[#E5E7EB] mb-12 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <img
+            src={currentAuthor.avatar}
+            alt={currentAuthor.name}
+            className="w-24 h-24 rounded-2xl object-cover shrink-0 shadow-md"
+          />
+          <div className="space-y-2 text-center sm:text-start flex-1">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+              <span className="text-xs font-mono font-bold text-[var(--color-brand-800)] uppercase">
+                {currentAuthor.bureau[currentLang] || currentAuthor.bureau.en}
+              </span>
+              <span className="text-neutral-300">•</span>
+              <span className="text-xs text-[#4B5563]">
+                {currentAuthor.credentials}
+              </span>
+            </div>
+
+            <h1 className="font-serif text-3xl font-black text-[#000000]">
+              {currentAuthor.name}
+            </h1>
+
+            <p className="text-xs sm:text-sm text-[#4B5563] leading-relaxed max-w-2xl">
+              {currentAuthor.bio[currentLang] || currentAuthor.bio.en}
+            </p>
           </div>
         </div>
 
-        {/* Author Bio Header Card */}
-        {currentAuthor && (
-          <header className="p-8 sm:p-10 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-10 flex flex-col md:flex-row items-center md:items-start gap-8 text-center md:text-start">
-            <img
-              src={currentAuthor.photo}
-              alt={authorName}
-              className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-neutral-100 dark:border-neutral-800 shadow-md shrink-0"
+        {/* Articles by Author */}
+        <h2 className="font-serif text-2xl font-black text-[#000000] mb-8 pb-4 border-b border-[#E5E7EB]">
+          Published Bylines ({authorArticles.length})
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {authorArticles.map(article => (
+            <Card
+              key={article.id}
+              variant="portal"
+              href={`/${currentLang}/newsroom/${article.slug}`}
+              imageUrl={article.imageUrl}
+              category={article.tags[0] || 'Dispatch'}
+              title={article.title[currentLang] || article.title.en}
+              excerpt={article.excerpt[currentLang] || article.excerpt.en}
+              publishDate={article.publishDate}
+              readTime={`${article.readingTimeMinutes} min`}
+              ctaText="Read Article"
             />
-
-            <div className="space-y-3 flex-grow">
-              <div className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
-                Editorial Contributor
-              </div>
-              <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-50">
-                {authorName}
-              </h1>
-              <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-400">
-                {authorTitle}
-              </p>
-              {authorBio && (
-                <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 max-w-3xl leading-relaxed">
-                  {authorBio}
-                </p>
-              )}
-
-              {currentAuthor.publicLinks && (
-                <div className="pt-2 flex items-center justify-center md:justify-start gap-3">
-                  {currentAuthor.publicLinks.twitter && (
-                    <a
-                      href={currentAuthor.publicLinks.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:text-sky-500 transition-colors"
-                      aria-label="Twitter Profile"
-                    >
-                      <Twitter size={16} />
-                    </a>
-                  )}
-                  {currentAuthor.publicLinks.linkedin && (
-                    <a
-                      href={currentAuthor.publicLinks.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:text-blue-600 transition-colors"
-                      aria-label="LinkedIn Profile"
-                    >
-                      <Linkedin size={16} />
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-          </header>
-        )}
-
-        {/* Dispatches by Author */}
-        <ArticleGrid
-          articles={authorArticles}
-          lang={lang}
-          heading={`Published Dispatches (${authorArticles.length})`}
-          showViewAll={false}
-          emptyMessage={`No dispatches currently listed for ${authorName}.`}
-        />
+          ))}
+        </div>
       </div>
     </div>
   );

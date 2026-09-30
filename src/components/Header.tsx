@@ -1,330 +1,448 @@
-import { Locale, Article } from '../types';
-import { useI18n } from '../hooks/useI18n';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Coins, X, Clock, ChevronRight, ChevronDown, Search, Shield, QrCode, Smartphone, GraduationCap } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
-import { FloatingLanguageSwitcher } from './LanguageSwitcher';
-import { SocialHeaderBar } from './SocialLinks';
-import { motion, AnimatePresence } from 'motion/react';
-import { useSiteStore } from '../store/useSiteStore';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Locale, translations } from '../locales';
+import { NotificationBell } from './NotificationBell';
 import { IcaLogo } from './IcaLogo';
-import { LiveDispatch } from './LiveDispatch';
-import { AppQrModal } from './AppQrModal';
-import { InstitutePortalCTA } from './InstitutePortalCTA';
+import { 
+  Menu, 
+  X, 
+  ShieldCheck, 
+  TrendingUp, 
+  Building2, 
+  CreditCard, 
+  CalendarDays, 
+  Radio,
+  Newspaper,
+  Film,
+  Sparkles,
+  ChevronRight,
+  ExternalLink,
+  GraduationCap,
+  Globe2,
+  FileText,
+  Briefcase
+} from 'lucide-react';
 
-const LiveDateTime = React.memo(function LiveDateTime({ lang }: { lang: Locale }) {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 10000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const localeCode = lang === 'ar' ? 'ar-IQ' : lang === 'zh' ? 'zh-CN' : lang === 'ckb' ? 'ckb-IQ' : 'en-US';
-  const formattedDate = time.toLocaleDateString(localeCode, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-  const formattedTime = time.toLocaleTimeString(localeCode, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 whitespace-nowrap flex items-center gap-1.5">
-        <Clock className="w-3 h-3 text-brand-800 dark:text-brand-400 animate-pulse" />
-        <span>{formattedTime}</span>
-      </div>
-      <div className="text-[11px] font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-widest border-t border-neutral-200 dark:border-neutral-800 pt-1 whitespace-nowrap">
-        {formattedDate}
-      </div>
-    </div>
-  );
-});
-
-
-
-function PortalDropdown({ lang }: { lang: Locale }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const { t } = useI18n(lang);
-  const isRtl = lang === 'ar' || lang === 'ckb';
-
-  return (
-    <div 
-      className="relative flex items-center h-full"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      <button 
-        className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-ink-900 dark:bg-neutral-800 text-white text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-brand-800 transition-all rounded-lg shadow-sm whitespace-nowrap min-h-[38px] sm:min-h-[42px] cursor-pointer"
-      >
-        <span>{t('portal')}</span>
-        <ChevronRight size={14} className={`transition-transform duration-300 ${isOpen ? (isRtl ? '-rotate-90' : 'rotate-90') : (isRtl ? 'rotate-180' : '')}`} />
-      </button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 5, scale: 0.95, transition: { duration: 0.2 } }}
-            className={`absolute top-full ${isRtl ? 'left-0' : 'right-0'} mt-1 w-56 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-md overflow-hidden z-50`}
-          >
-            <div className="flex flex-col py-1">
-              <InstitutePortalCTA 
-                lang={lang!} 
-                variant="button" 
-                className="mx-2 my-1 bg-brand-800 text-white rounded-lg w-[calc(100%-1rem)]"
-              />
-              <Link 
-                to={`/${lang}/settlement`} 
-                className="flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-5 h-5 flex items-center justify-center rounded bg-[brand-800] text-white group-hover:bg-[brand-800] transition-colors shrink-0">
-                  <Coins size={12} />
-                </div>
-                <div className="flex flex-col flex-1">
-                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-[brand-800] transition-colors">
-                    {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی ڕاستەوخۆ' : 'Payment Settlement'}
-                  </span>
-                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
-                    {lang === 'ar' ? 'مقاصة سيادية وبطاقة كي' : lang === 'zh' ? '0%汇差 • Qi联名卡' : lang === 'ckb' ? 'بێ کرێی سێیەم' : 'Direct Parity • Qi Card'}
-                  </span>
-                </div>
-                <ChevronRight size={14} className="text-neutral-400 group-hover:text-[brand-800] rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
-              </Link>
-              <Link 
-                to={`/${lang}/cultural-exchange`} 
-                className="flex items-center gap-3 px-4 py-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group border-b border-neutral-100 dark:border-neutral-800/60"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-5 h-5 flex items-center justify-center rounded bg-red-600 text-white group-hover:bg-red-700 transition-colors shrink-0">
-                  <GraduationCap size={12} />
-                </div>
-                <div className="flex flex-col flex-1">
-                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
-                    {lang === 'ar' ? 'التبادل الثقافي' : lang === 'zh' ? '人文交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری' : 'Cultural Exchange'}
-                  </span>
-                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
-                    {lang === 'ar' ? 'منح وشراكات أكاديمية' : lang === 'zh' ? '高校同盟与研学' : lang === 'ckb' ? 'بەرنامە و زانکۆکان' : 'Academic & Residencies'}
-                  </span>
-                </div>
-                <ChevronRight size={14} className="text-neutral-400 group-hover:text-brand-800 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
-              </Link>
-              <Link 
-                to={`/${lang}/admin`} 
-                className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-5 h-5 flex items-center justify-center rounded bg-ink-900 dark:bg-neutral-700 text-white group-hover:bg-brand-800 transition-colors shrink-0">
-                  <Shield size={12} />
-                </div>
-                <div className="flex flex-col flex-1">
-                  <span className="text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors">
-                    {t('commandHub')}
-                  </span>
-                  <span className="text-[9px] text-neutral-500 uppercase tracking-wide">
-                    {t('signIn')}
-                  </span>
-                </div>
-                <ChevronRight size={14} className="text-neutral-400 group-hover:text-brand-800 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+interface HeaderProps {
+  lang?: Locale;
+  currentLocale?: Locale;
+  setLocale?: (locale: Locale) => void;
 }
 
-
-export function Header({ lang }: { lang: Locale }) {
-  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
-  const siteName = useSiteStore(state => state.siteName);
-  const darkMode = useSiteStore(state => state.darkMode);
-  const toggleDarkMode = useSiteStore(state => state.toggleDarkMode);
+export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }) => {
+  const activeLocale = lang || currentLocale || 'en';
+  const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useI18n(lang);
-  
-  const { data: articles = [] } = useQuery<Article[]>({
-    queryKey: ['articles'],
-    queryFn: async () => {
-      const res = await fetch('/api/articles');
-      if (!res.ok) throw new Error('Network response was not ok');
-      return res.json();
-    }
-  });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const t = translations[activeLocale];
+  const isCise = location.pathname.startsWith('/institute');
+  const isAr = activeLocale === 'ar';
+  const isZh = activeLocale === 'zh';
+  const isCkb = activeLocale === 'ckb';
+  const isRtl = isAr || isCkb;
 
-  const breakingNews = articles.slice(0, 5); // Grab latest 5 for the ticker
-  
-  const getTranslation = (article: Article) => {
-    return article.translations.find(tr => tr.lang === lang) || 
-           article.translations.find(tr => tr.lang === 'en') || 
-           article.translations[0];
+  const handleLanguageChange = (newLoc: Locale) => {
+    if (typeof setLocale === 'function') {
+      try {
+        setLocale(newLoc);
+      } catch (e) {
+        console.warn('setLocale callback error:', e);
+      }
+    }
+
+    try {
+      document.cookie = `ica_lang=${newLoc}; path=/; max-age=31536000; SameSite=Lax`;
+      localStorage.setItem('ica_lang', newLoc);
+      document.documentElement.lang = newLoc;
+      document.documentElement.dir = newLoc === 'ar' || newLoc === 'ckb' ? 'rtl' : 'ltr';
+    } catch {}
+
+    const currentPath = location.pathname;
+    const localeRegex = /^\/(en|ar|zh|ckb)(\/.*)?$/;
+    const match = currentPath.match(localeRegex);
+    if (match) {
+      const rest = match[2] || '';
+      navigate(`/${newLoc}${rest}${location.search}${location.hash}`);
+    } else {
+      navigate(`/${newLoc}${currentPath}${location.search}${location.hash}`);
+    }
+  };
+
+  // Primary desktop navigation links
+  const primaryNavLinks = [
+    { to: `/${activeLocale}/newsroom`, label: isAr ? 'غرفة الأخبار' : isZh ? '新闻中心' : isCkb ? 'ژووری هەواڵ' : 'Newsroom', icon: Newspaper },
+    { to: `/${activeLocale}/live`, label: isAr ? 'البث المباشر' : isZh ? '在线直播' : isCkb ? 'پەخشی زیندوو' : 'Live Portal', icon: Radio, isLive: true },
+    { to: `/${activeLocale}/media`, label: isAr ? 'المركز الإعلامي' : isZh ? '融媒体' : isCkb ? 'میدیا' : 'Media Hub', icon: Film },
+    { to: `/${activeLocale}/settlement`, label: t.nav.settlement, icon: CreditCard },
+    { to: `/${activeLocale}/institute`, label: t.nav.institute, icon: Building2 },
+    { to: `/${activeLocale}/summit`, label: t.nav.summit, icon: CalendarDays },
+    { to: `/${activeLocale}/hub`, label: t.nav.hub, icon: Sparkles },
+  ];
+
+  const isLinkActive = (targetTo: string) => {
+    if (targetTo === `/${activeLocale}`) {
+      return location.pathname === '/' || location.pathname === `/${activeLocale}` || location.pathname === `/${activeLocale}/`;
+    }
+    return location.pathname === targetTo || location.pathname.startsWith(`${targetTo}/`);
   };
 
   return (
-    <div className="w-full sticky top-0 z-[100] bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b-[3px] border-ink-900 dark:border-neutral-700 shadow-md transition-colors duration-300">
-      {/* Main Masthead Wrapper */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative overflow-visible box-border">
-        <header 
-          className="relative flex flex-col items-center pt-5 pb-3 md:pt-6 md:pb-4 z-50 w-full"
-        >
-          <div className="relative z-10 flex flex-col items-center w-full">
-            {/* Eyebrow Label - Refined tracking for anti-slop compliance */}
-            <div className={`text-[10px] font-black uppercase text-neutral-500 dark:text-neutral-400 text-center mb-3 ${lang === 'ar' || lang === 'ckb' ? 'tracking-normal' : 'tracking-widest'}`}>
-              {lang === 'ar' 
-                ? 'الممر المعلوماتي والمستقل • جمهورية العراق — جمهورية الصين الشعبية'
-                : lang === 'zh' 
-                ? '主权信息与经贸走廊 • 中国 — 伊拉克'
-                : lang === 'ckb' 
-                ? 'سەرچاوەی زانیاری سەربەخۆی عێراق- چین'
-                : 'The Sovereign Information Corridor • China — Iraq'}
-            </div>
-
-            <div className="w-full flex flex-row items-center justify-between gap-4 md:gap-8 mb-5">
-              {/* Left Info Column */}
-              <div className="hidden lg:flex flex-col items-start gap-1.5 w-1/4 text-left rtl:items-start rtl:text-right shrink-0">
-                <span className="text-[10px] font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 whitespace-nowrap">
-                  {lang === 'ar' ? 'المجلد CLXII العدد 402' : lang === 'zh' ? '第 CLXII 卷 第 402 期' : lang === 'ckb' ? 'بەرگی CLXII ژمارە ٤٠٢' : 'Vol. CLXII No. 402'}
-                </span>
-                <LiveDateTime lang={lang} />
-              </div>
-
-              {/* Centered Logo & Title Lockup with Controls Placed Underneath */}
-              <div className="flex flex-col items-center group flex-1 shrink-0 px-1 sm:px-2 gap-3 min-w-0">
-                <Link to={`/${lang}`} className="relative w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-8">
-                  <div className="flex items-center justify-center shrink-0">
-                    <IcaLogo size={110} variant="mark" lang={lang} className="w-12 h-12 sm:w-20 sm:h-20 lg:w-26 lg:h-26 drop-shadow-xl group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="flex flex-col items-start justify-center text-start min-w-0">
-                    {lang === 'ar' ? (
-                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-normal text-2xl sm:text-5xl lg:text-6xl select-none leading-tight truncate">الوكالة العراقية - الصينية</span>
-                    ) : lang === 'ckb' ? (
-                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-normal text-2xl sm:text-5xl lg:text-6xl select-none leading-tight truncate">ئاژانسی عێراقی - چینی</span>
-                    ) : lang === 'zh' ? (
-                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-wider text-2xl sm:text-5xl lg:text-6xl select-none leading-tight truncate">伊拉克-中国通讯社</span>
-                    ) : (
-                      <span className="whitespace-nowrap text-brand-800 dark:text-brand-400 font-black tracking-tight text-xl sm:text-5xl lg:text-6xl select-none leading-tight truncate">Iraqi-Chinese Agency</span>
-                    )}
-                  </div>
-                  <div className="absolute -bottom-4 left-0 right-0 h-1 bg-brand-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center hidden md:block" />
-                </Link>
-
-                {/* Right Controls Placed Underneath the Header Title */}
-                <div className="flex items-center gap-1.5 sm:gap-2.5 bg-neutral-100/90 dark:bg-neutral-800/90 p-1 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-sm transition-colors mt-1">
-                   {/* QR Code App Download Trigger */}
-                   <button
-                     id="header-qr-download-btn"
-                     onClick={() => setIsQrModalOpen(true)}
-                     title={lang === 'ar' ? "تحميل تطبيق الوكالة (QR)" : lang === 'zh' ? "扫码下载客户端应用" : lang === 'ckb' ? "دابەزاندنی ئەپ (QR)" : "Download ICA App (QR Code)"}
-                     aria-label="Download ICA App"
-                     className="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/60 dark:hover:bg-brand-900/60 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800/60 transition-all duration-200 shadow-xs cursor-pointer active:scale-95 group"
-                   >
-                     <QrCode size={14} className="group-hover:rotate-12 transition-transform text-brand-700 dark:text-brand-400" />
-                     <span className="hidden sm:inline text-[10px] font-black uppercase tracking-wider">
-                       {lang === 'ar' ? 'تطبيق QR' : lang === 'zh' ? '应用二维码' : lang === 'ckb' ? 'ئەپ QR' : 'App QR'}
-                     </span>
-                   </button>
-                   <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
-                   <button
-                     id="dark-mode-toggle-btn"
-                     onClick={toggleDarkMode}
-                     title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                     aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                     className="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-md flex items-center gap-1.5 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-600 border border-neutral-200/80 dark:border-neutral-600 transition-all duration-200 shadow-xs cursor-pointer active:scale-95"
-                   >
-                     {darkMode ? (
-                       <>
-                         <Sun size={14} className="text-amber-400 fill-amber-400" />
-                         <span className="hidden xl:inline text-[10px] font-black uppercase tracking-wider text-neutral-200">Light</span>
-                       </>
-                     ) : (
-                       <>
-                         <Moon size={14} className="text-slate-800 fill-slate-800" />
-                         <span className="hidden xl:inline text-[10px] font-black uppercase tracking-wider text-neutral-800">Dark</span>
-                       </>
-                     )}
-                   </button>
-                   <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700" />
-                   <FloatingLanguageSwitcher lang={lang} />
-                </div>
-              </div>
-            </div>
-
-            {/* Functional Row: Social Channels, Join Us, and Search */}
-            <div className="w-full flex flex-col md:flex-row items-center justify-between border-t border-b border-neutral-100 dark:border-neutral-800 py-2.5 px-4 md:px-0 gap-3 md:gap-0">
-              <div className="flex-1 flex justify-start">
-                 <div className="relative group w-full max-w-[200px] lg:max-w-[280px]">
-                   <input type="text" placeholder={lang === 'ar' ? 'بحث...' : lang === 'zh' ? '搜索...' : lang === 'ckb' ? 'گەڕان...' : 'Search...'} className="w-full bg-neutral-100 dark:bg-neutral-800 border-none rounded-full px-4 py-2 text-xs focus:ring-2 focus:ring-brand-500/50 outline-none text-neutral-800 dark:text-neutral-200 shadow-inner" />
-                   <Search className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
-                 </div>
-              </div>
-              <div className="flex-1 flex justify-center items-center gap-4">
-                <SocialHeaderBar lang={lang} />
-                <Link to={`/${lang}/join`} className="flex items-center text-[11px] font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full shadow-2xs hover:shadow-md hover:-translate-y-0.5 duration-300">
-                  {lang === 'ar' ? 'انضم إلينا' : lang === 'zh' ? '加入我们' : lang === 'ckb' ? 'بەشداربە لەگەڵمان' : 'Join Us'}
-                </Link>
-              </div>
-              <div className="flex-1 flex justify-end"></div>
-            </div>
+    <header className="sticky top-0 z-50 w-full shadow-lg transition-colors" dir={isRtl ? 'rtl' : 'ltr'}>
+      
+      {/* TIER 1: Sovereign Top Diplomatic Band */}
+      <div className="w-full bg-brand-950 text-white border-b border-brand-900/80 text-[11px] py-1.5 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          
+          {/* Diplomatic Corridor Label */}
+          <div className="flex items-center gap-2 text-brand-200">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
+            <span className="font-bold tracking-wider uppercase text-[10px] sm:text-[11px]">
+              {isAr
+                ? 'الممر الاستراتيجي الثنائي • بغداد – بكين • البوابة الرسمية السيادية'
+                : isZh
+                ? '中伊双边战略走廊 • 巴格达 – 北京 • 官方主权权威门户'
+                : isCkb
+                ? 'ڕێڕەوی ستراتیژی دووقۆڵی • بەغداد – پەکین • دەروازەی فەرمی'
+                : 'Bilateral Strategic Corridor • Baghdad – Beijing • Official Sovereign Portal'}
+            </span>
           </div>
-        </header>
 
-        {/* Navigation / Breaking News Ticker */}
-        <nav className="min-h-[44px] sm:min-h-[52px] border-t border-neutral-200 dark:border-neutral-800 flex justify-between items-stretch bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md relative z-30 overflow-hidden sm:overflow-visible">
-          <div className="flex-shrink-0 z-10 flex items-stretch relative">
-            <LiveDispatch lang={lang} />
+          {/* Quick 1-Click Direct Portal Access Badges on Desktop */}
+          <div className="hidden lg:flex items-center gap-2 font-mono text-[10px]">
+            <Link
+              to={`/${activeLocale}/live`}
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600/80 hover:bg-red-600 text-white font-bold transition-colors border border-red-400/30"
+              title="Direct Access to Live Portal"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+              <span>LIVE PORTAL</span>
+            </Link>
+
+            <Link
+              to={`/${activeLocale}/newsroom`}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-100 font-bold transition-colors"
+              title="Direct Access to Newsroom"
+            >
+              <Newspaper size={11} className="text-amber-300" />
+              <span>NEWSROOM</span>
+            </Link>
+
+            <Link
+              to={`/${activeLocale}/media`}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-100 font-bold transition-colors"
+              title="Direct Access to Media Hub"
+            >
+              <Film size={11} className="text-amber-300" />
+              <span>MEDIA</span>
+            </Link>
           </div>
-          <div className="flex-1 z-40 flex items-center px-3 sm:px-6 bg-white dark:bg-neutral-900 border-l rtl:border-l-0 rtl:border-r border-neutral-100 dark:border-neutral-800 gap-2.5 sm:gap-4 ml-auto justify-end min-w-0 flex-wrap sm:flex-nowrap py-1">
-             {/* Initiatives Dropdown */}
-             <div className="relative group h-full flex items-center">
-               <button className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
-                 {t('nav.initiatives')} <ChevronDown size={14} />
-               </button>
-               <div className="absolute top-full right-0 rtl:right-auto rtl:left-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-2xl w-64 py-2 hidden group-hover:block z-50">
-                 <Link to={`/${lang}/institute/summit`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.summit')}</Link>
-                 <Link to={`/${lang}/institute/settlement`} className="block px-4 py-2 text-xs font-bold uppercase text-[brand-800] hover:bg-red-50 dark:hover:bg-red-950/30">
-                   {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '第纳尔/人民币结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
-                 </Link>
-                 <Link to={`/${lang}/institute/insurance-facilitation`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
-                   {lang === 'ar' ? 'تسهيل التأمين السيادي' : lang === 'zh' ? '主权保险促进' : lang === 'ckb' ? 'ئاسانکاری بیمەی سەروەری' : 'Insurance Facilitation'}
-                 </Link>
-                 <Link to={`/${lang}/institute/chinese-center`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.chineseCenter')}</Link>
-                 <Link to={`/${lang}/institute/visa-centre`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">{t('nav.visaCentre')}</Link>
-                 <Link to={`/${lang}/institute/consultancy`} className="block px-4 py-2 text-xs font-bold uppercase hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
-                   {lang === 'ar' ? 'الاستشارات المالية والقانونية' : lang === 'zh' ? '战略财务与法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی' : 'Strategic Financial & Legal Consultancy'}
-                 </Link>
-                 <div className="border-t border-neutral-100 dark:border-neutral-800 my-1 pt-1">
-                   <Link to={`/${lang}/institute/services`} className="block px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#D97706] hover:bg-amber-50 dark:hover:bg-amber-950/30">
-                     {lang === 'ar' ? 'دليل خدمات معهد CISE الكامل →' : lang === 'zh' ? '查看 CISE 全部服务名录 →' : lang === 'ckb' ? 'تەواوی خزمەتگوزارییەکانی CISE →' : 'All CISE Institutional Services →'}
-                   </Link>
-                 </div>
-               </div>
-             </div>
 
-     <Link to={`/${lang}/newsroom`} className="flex items-center text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 hover:text-brand-700 transition-colors">
-                {lang === 'ar' ? 'غرفة الأخبار' : lang === 'zh' ? '新闻中心' : lang === 'ckb' ? 'هەواڵەکان' : 'Newsroom'}
-             </Link>
-
-             <Link to={`/${lang}/about`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
-               {lang === 'ar' ? 'حول الوكالة' : lang === 'zh' ? '关于我们' : lang === 'ckb' ? 'دەربارە' : 'About'}
-             </Link>
-             <Link to={`/${lang}/newsroom`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 hover:text-brand-700 transition-colors">
-               {lang === 'ar' ? 'غرفة الأخبار' : lang === 'zh' ? '新闻中心' : lang === 'ckb' ? 'ژووری هەواڵ' : 'Newsroom'}
-             </Link>
-             <InstitutePortalCTA lang={lang!} variant="navItem" className="hidden lg:flex" />
-             <Link to={`/${lang}/join`} className="hidden lg:flex items-center text-xs font-black uppercase tracking-widest text-neutral-800 dark:text-neutral-200 hover:text-brand-800 transition-colors">
-               {lang === 'ar' ? 'انضم للتحرير' : lang === 'zh' ? '加入编辑部' : lang === 'ckb' ? 'بەشداری بکە' : 'Join Editorial'}
-             </Link>
-             <PortalDropdown lang={lang} />
+          {/* Language Switcher Controls */}
+          <div className="flex items-center gap-1 shrink-0 font-bold text-[10px]">
+            {(['en', 'ar', 'zh', 'ckb'] as Locale[]).map((loc) => (
+              <button
+                key={loc}
+                onClick={() => handleLanguageChange(loc)}
+                className={`px-2 py-0.5 rounded transition-all uppercase cursor-pointer ${
+                  activeLocale === loc
+                    ? 'bg-brand-800 text-amber-300 font-black shadow-xs border border-brand-700'
+                    : 'text-brand-300/80 hover:text-white hover:bg-white/10'
+                }`}
+                title={loc === 'ar' ? 'العربية' : loc === 'zh' ? '中文' : loc === 'ckb' ? 'کوردی' : 'English'}
+              >
+                {loc === 'ar' ? 'عربي' : loc === 'zh' ? '中文' : loc === 'ckb' ? 'کوردی' : 'EN'}
+              </button>
+            ))}
           </div>
-        </nav>
+
+        </div>
       </div>
 
-      {/* App PWA Download QR Code Modal */}
-      <AppQrModal 
-        isOpen={isQrModalOpen} 
-        onClose={() => setIsQrModalOpen(false)} 
-        lang={lang} 
-      />
-    </div>
+      {/* TIER 2: Main Brand Masthead Bar (Rich Sovereign Red) */}
+      <div className="w-full bg-brand-800 text-white border-b border-brand-700 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between gap-4">
+          
+          {/* Brand Identity with Official Logo & Wordmark */}
+          <Link to={`/${activeLocale}`} className="flex items-center gap-3.5 group shrink-0 select-none py-1">
+            {/* Real Official ICA Logo Emblem */}
+            <div className="shrink-0 transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
+              <IcaLogo size={46} variant="mark" className="shrink-0" />
+            </div>
+
+            {/* Typography Masthead */}
+            <div className="flex flex-col text-start leading-none">
+              <span className="text-lg sm:text-2xl font-black uppercase tracking-tight text-white group-hover:text-amber-200 transition-colors drop-shadow-xs">
+                {isAr
+                  ? 'الوكالة العراقية الصينية'
+                  : isZh
+                  ? '伊中通讯社'
+                  : isCkb
+                  ? 'ئاژانسی عێراقی-چینی'
+                  : 'IRAQI-CHINESE AGENCY'}
+              </span>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase text-brand-100">
+                  {isAr
+                    ? 'المقر السيادي العام للإعلام والتبادل الثنائي'
+                    : isZh
+                    ? '双边国家级综合传媒与战略智库'
+                    : isCkb
+                    ? 'دەروازەی فەرمی ڕاگەیاندن و ئاڵوگۆڕ'
+                    : 'SOVEREIGN MEDIA & BILATERAL EMBASSY WIRE'}
+                </span>
+              </div>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden xl:flex items-center gap-1 sm:gap-1.5 font-bold">
+            {primaryNavLinks.map((link) => {
+              const isActive = isLinkActive(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 relative ${
+                    isActive
+                      ? 'bg-white/20 text-white shadow-inner border border-white/30 backdrop-blur-xs'
+                      : 'text-brand-100 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <link.icon size={14} className={isActive ? 'text-amber-300' : 'text-brand-200'} />
+                  <span>{link.label}</span>
+                  {link.isLive && (
+                    <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right Header Actions */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Notification Center */}
+            <NotificationBell currentLocale={activeLocale} variant="header" />
+
+            {/* Direct Portal Inquiry CTA */}
+            <Link
+              to={`/${activeLocale}/newsroom`}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-neutral-100 text-brand-800 font-black text-xs transition-colors shadow-md cursor-pointer"
+            >
+              <span>{isAr ? 'غرفة الأخبار' : isZh ? '即时新闻' : isCkb ? 'هەواڵەکان' : 'News Desk'}</span>
+              <ChevronRight size={14} className="cta-arrow" />
+            </Link>
+
+            {/* Mobile Hamburger Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer focus:outline-none"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ENRICHED MOBILE / TABLET DRAWER MENU */}
+      {mobileMenuOpen && (
+        <div className="xl:hidden bg-brand-950 text-white border-t border-brand-800 px-4 py-6 space-y-6 shadow-2xl max-h-[85vh] overflow-y-auto backdrop-blur-xl animate-in fade-in slide-in-from-top-4 duration-200">
+          
+          {/* Drawer Top: Direct 1-Click Portals */}
+          <div className="space-y-3">
+            <div className="text-[11px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1.5 border-b border-brand-900 pb-1.5">
+              <Sparkles size={13} />
+              <span>{isAr ? 'البوابات الرئيسية الفورية (نقرة واحدة)' : isZh ? '核心直达门户' : isCkb ? 'دەروازە سەرەکییەکان' : 'Core Direct Portals'}</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <Link
+                to={`/${activeLocale}/live`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-2xl bg-gradient-to-r from-red-600 to-brand-800 text-white flex items-center justify-between border border-red-400/40 shadow-md"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Radio size={18} className="text-amber-300 animate-pulse" />
+                  <div>
+                    <div className="text-xs font-black">{isAr ? 'البوابة الحية' : isZh ? '在线直播门户' : 'Live Portal'}</div>
+                    <div className="text-[10px] text-brand-200">24/7 Broadcast</div>
+                  </div>
+                </div>
+                <span className="text-[9px] bg-white text-brand-900 font-black px-1.5 py-0.5 rounded uppercase">LIVE</span>
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/newsroom`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white flex items-center justify-between border border-white/20 shadow-xs"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Newspaper size={18} className="text-amber-300" />
+                  <div>
+                    <div className="text-xs font-black">{isAr ? 'غرفة الأخبار' : isZh ? '国际新闻中心' : 'ICA Newsroom'}</div>
+                    <div className="text-[10px] text-brand-200">Official Wire</div>
+                  </div>
+                </div>
+                <ChevronRight size={14} className="text-brand-300" />
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/media`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white flex items-center justify-between border border-white/20 shadow-xs"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Film size={18} className="text-amber-300" />
+                  <div>
+                    <div className="text-xs font-black">{isAr ? 'المركز الإعلامي' : isZh ? '融媒体制作中心' : 'Media Hub'}</div>
+                    <div className="text-[10px] text-brand-200">Video & Audio</div>
+                  </div>
+                </div>
+                <ChevronRight size={14} className="text-brand-300" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Drawer Section 2: Strategic Bilateral Infrastructure */}
+          <div className="space-y-2">
+            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
+              {isAr ? 'البنية التحتية والاتفاقيات الثنائية' : isZh ? '双边经贸与主权结算体系' : 'Strategic Bilateral Infrastructure'}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              <Link
+                to={`/${activeLocale}/settlement`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <CreditCard size={15} className="text-amber-400" />
+                  <span>{isAr ? 'تسوية المدفوعات السيادية (IQD/RMB)' : isZh ? '本币直接清算中心' : 'Sovereign Payment Settlement'}</span>
+                </span>
+                <span className="text-[10px] text-emerald-400 font-mono">0.0% Fee</span>
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/settlement/card`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <CreditCard size={15} className="text-amber-400" />
+                  <span>{isAr ? 'بطاقة كي وICA المشتركة' : isZh ? 'Qi & ICA 联名商务卡' : 'Qi & ICA Sovereign Card'}</span>
+                </span>
+                <span className="text-[10px] text-brand-300 font-mono">Dual-FX</span>
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/summit`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <CalendarDays size={15} className="text-amber-400" />
+                  <span>{isAr ? 'قمة العراق والصين للاستثمار 2026' : isZh ? '2026中伊投资峰会' : 'Iraq-China Summit 2026'}</span>
+                </span>
+                <span className="text-[10px] text-amber-300 font-mono">Sulaymaniyah</span>
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/consultancy`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <Briefcase size={15} className="text-amber-400" />
+                  <span>{isAr ? 'الاستشارات الاستراتيجية والقانونية' : isZh ? '战略财务与法律咨询' : 'Strategic & Legal Consultancy'}</span>
+                </span>
+                <ChevronRight size={13} className="text-neutral-500" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Drawer Section 3: CISE Strategic Institute & Consular Services */}
+          <div className="space-y-2">
+            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
+              {isAr ? 'معهد الدراسات والخدمات القنصلية (CISE)' : isZh ? '中伊战略研究所与领事服务' : 'CISE Institute & Bilateral Services'}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              <Link
+                to={`/${activeLocale}/institute`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <Building2 size={15} className="text-brand-300" />
+                  <span>{isAr ? 'بوابة المعهد الصيني العراقي' : isZh ? '研究所总门户' : 'CISE Institute Portal'}</span>
+                </span>
+                <ChevronRight size={13} className="text-neutral-500" />
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/institute/visa-centre`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <ShieldCheck size={15} className="text-brand-300" />
+                  <span>{isAr ? 'مركز التأشيرات الثنائية' : isZh ? '双向签证服务中心' : 'Bilateral Visa Centre'}</span>
+                </span>
+                <ChevronRight size={13} className="text-neutral-500" />
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/institute/chinese-center`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <GraduationCap size={15} className="text-brand-300" />
+                  <span>{isAr ? 'المركز الصيني وتعليم اللغة' : isZh ? '中华文化与语言研修中心' : 'Chinese Language & Testing'}</span>
+                </span>
+                <ChevronRight size={13} className="text-neutral-500" />
+              </Link>
+
+              <Link
+                to={`/${activeLocale}/institute/data-hub`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
+              >
+                <span className="flex items-center gap-2">
+                  <TrendingUp size={15} className="text-brand-300" />
+                  <span>{isAr ? 'مركز البيانات الاقتصادية وتتبع الحزام والطريق' : isZh ? '一带一路与经贸数据中枢' : 'Data Hub & BRI Tracker'}</span>
+                </span>
+                <ChevronRight size={13} className="text-neutral-500" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Drawer Section 4: Public & Command Hub */}
+          <div className="space-y-2">
+            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
+              {isAr ? 'الإدارة والمنصات العامة' : isZh ? '指挥中心与公众平台' : 'Operations & Public Access'}
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <Link
+                to={`/${activeLocale}/hub`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 font-bold text-center border border-white/10"
+              >
+                {isAr ? 'مركز القيادة الموحد' : isZh ? '指挥总枢' : 'Command Hub'}
+              </Link>
+              <Link
+                to={`/${activeLocale}/portal`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 font-bold text-center border border-white/10"
+              >
+                {isAr ? 'البوابة العامة' : isZh ? '公众门户' : 'Public Portal'}
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      )}
+
+    </header>
   );
-}
+};

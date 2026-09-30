@@ -238,6 +238,29 @@ export function CiseServicesDirectory() {
         { label: lang === 'ar' ? 'التسجيل في اختبار HSK' : lang === 'zh' ? 'HSK考级报名' : lang === 'ckb' ? 'تاقیکردنەوەی HSK' : 'HSK Testing Registration', path: `/${lang}/institute/chinese-center/testing/register` },
         { label: lang === 'ar' ? 'التسجيل الأكاديمي' : lang === 'zh' ? '在线选课入学' : lang === 'ckb' ? 'تۆمارکردن' : 'Enrollment Desk', path: `/${lang}/institute/chinese-center/enroll` }
       ]
+    },
+    {
+      id: 'cultural-exchange',
+      category: 'mobility',
+      badge: lang === 'ar' ? 'التبادل الشعبي والثقافي' : lang === 'zh' ? '民间与文化交流' : lang === 'ckb' ? 'ئاڵوگۆڕی گەلی و کولتووری' : 'People-to-People & Cultural Exchange',
+      title: t('initiatives.card.culturalExchange.headline'),
+      description: t('initiatives.card.culturalExchange.body'),
+      route: `/${lang}/institute/services/cultural-exchange`,
+      icon: GraduationCap,
+      accentColor: 'border-red-500/30 hover:border-red-500',
+      tagColor: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40',
+      actionLabel: t('initiatives.card.culturalExchange.cta').replace(' →', '').replace(' ←', ''),
+      features: [
+        t('initiatives.card.culturalExchange.chips.universityMous'),
+        t('initiatives.card.culturalExchange.chips.studentFellowships'),
+        t('initiatives.card.culturalExchange.chips.artsResidencies'),
+        t('initiatives.card.culturalExchange.chips.civilizationalDialogue')
+      ],
+      deepLinks: [
+        { label: lang === 'ar' ? 'دليل البرامج' : lang === 'zh' ? '全部项目' : lang === 'ckb' ? 'بەرنامەکان' : 'All Programs', path: `/${lang}/institute/services/cultural-exchange/programs` },
+        { label: lang === 'ar' ? 'الجامعات الشريكة' : lang === 'zh' ? '合作院校' : lang === 'ckb' ? 'زانکۆ هاوبەشەکان' : 'Partner Universities', path: `/${lang}/institute/services/cultural-exchange/partners` },
+        { label: lang === 'ar' ? 'طلب التقديم' : lang === 'zh' ? '在线申请' : lang === 'ckb' ? 'داواکاری' : 'Apply / Inquire', path: `/${lang}/institute/services/cultural-exchange/apply` }
+      ]
     }
   ];
 
@@ -254,20 +277,20 @@ export function CiseServicesDirectory() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12 min-w-0" dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
-        <Link to={`/${lang}`} className="hover:text-[#D97706] transition-colors">{lang === 'ar' ? 'الرئيسية' : lang === 'zh' ? '首页' : lang === 'ckb' ? 'سەرەکی' : 'Home'}</Link>
+        <Link to={`/${lang}`} className="hover:text-[var(--color-brand-800)] transition-colors">{lang === 'ar' ? 'الرئيسية' : lang === 'zh' ? '首页' : lang === 'ckb' ? 'سەرەکی' : 'Home'}</Link>
         <span className="opacity-40">/</span>
-        <Link to={`/${lang}/institute`} className="hover:text-[#D97706] transition-colors">
+        <Link to={`/${lang}/institute`} className="hover:text-[var(--color-brand-800)] transition-colors">
           {lang === 'ar' ? 'المعهد الصيني (CISE)' : lang === 'zh' ? '中国战略与经济研究所' : lang === 'ckb' ? 'پەیمانگای چینی' : 'CISE Institute'}
         </Link>
         <span className="opacity-40">/</span>
-        <span className="text-[#D97706] font-black">{currentCopy.title}</span>
+        <span className="text-[var(--color-brand-800)] font-black">{currentCopy.title}</span>
       </nav>
 
       {/* Hero Taxonomy Banner */}
-      <section className="bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D] text-white rounded-3xl p-8 sm:p-12 lg:p-14 relative overflow-hidden shadow-2xl border border-white/10">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D97706]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
+      <section className="bg-gradient-to-br from-[var(--color-ink-900)] via-[#1E293B] to-[#0A0F1D] text-white rounded-3xl p-8 sm:p-12 lg:p-14 relative overflow-hidden shadow-2xl border border-white/10">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-brand-800)]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
         <div className="relative z-10 max-w-4xl space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#D97706] backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)] backdrop-blur-md">
             <Landmark size={14} />
             <span>{currentCopy.eyebrow}</span>
           </div>
@@ -281,7 +304,7 @@ export function CiseServicesDirectory() {
           </p>
 
           <div className="pt-2 flex items-center gap-2 text-xs text-neutral-400">
-            <ShieldCheck size={16} className="text-[#D97706] shrink-0" />
+            <ShieldCheck size={16} className="text-[var(--color-brand-800)] shrink-0" />
             <span className="text-[11px] font-bold leading-normal">{currentCopy.governanceNote}</span>
           </div>
         </div>
@@ -289,19 +312,19 @@ export function CiseServicesDirectory() {
         {/* Sovereign Metrics Grid */}
         <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-            <span className="text-xs font-black uppercase tracking-wider text-[#D97706] block">{currentCopy.statSovereignClearing}</span>
+            <span className="text-xs font-black uppercase tracking-wider text-[var(--color-brand-800)] block">{currentCopy.statSovereignClearing}</span>
             <span className="text-xs text-neutral-300 font-medium mt-0.5 block">{currentCopy.statSovereignClearingSub}</span>
           </div>
           <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-            <span className="text-xs font-black uppercase tracking-wider text-[#D97706] block">{currentCopy.statRiskCoverage}</span>
+            <span className="text-xs font-black uppercase tracking-wider text-[var(--color-brand-800)] block">{currentCopy.statRiskCoverage}</span>
             <span className="text-xs text-neutral-300 font-medium mt-0.5 block">{currentCopy.statRiskCoverageSub}</span>
           </div>
           <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-            <span className="text-xs font-black uppercase tracking-wider text-[#D97706] block">{currentCopy.statAccredited}</span>
+            <span className="text-xs font-black uppercase tracking-wider text-[var(--color-brand-800)] block">{currentCopy.statAccredited}</span>
             <span className="text-xs text-neutral-300 font-medium mt-0.5 block">{currentCopy.statAccreditedSub}</span>
           </div>
           <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-            <span className="text-xs font-black uppercase tracking-wider text-[#D97706] block">{currentCopy.statConvene}</span>
+            <span className="text-xs font-black uppercase tracking-wider text-[var(--color-brand-800)] block">{currentCopy.statConvene}</span>
             <span className="text-xs text-neutral-300 font-medium mt-0.5 block">{currentCopy.statConveneSub}</span>
           </div>
         </div>
@@ -317,7 +340,7 @@ export function CiseServicesDirectory() {
               className={cn(
                 "px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all min-h-[40px]",
                 activeCategory === 'all'
-                  ? "bg-white dark:bg-neutral-800 text-[#D97706] shadow-sm font-black"
+                  ? "bg-white dark:bg-neutral-800 text-[var(--color-brand-800)] shadow-sm font-black"
                   : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
               )}
             >
@@ -328,7 +351,7 @@ export function CiseServicesDirectory() {
               className={cn(
                 "px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all min-h-[40px]",
                 activeCategory === 'clearing'
-                  ? "bg-white dark:bg-neutral-800 text-[#D97706] shadow-sm font-black"
+                  ? "bg-white dark:bg-neutral-800 text-[var(--color-brand-800)] shadow-sm font-black"
                   : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
               )}
             >
@@ -339,7 +362,7 @@ export function CiseServicesDirectory() {
               className={cn(
                 "px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all min-h-[40px]",
                 activeCategory === 'convening'
-                  ? "bg-white dark:bg-neutral-800 text-[#D97706] shadow-sm font-black"
+                  ? "bg-white dark:bg-neutral-800 text-[var(--color-brand-800)] shadow-sm font-black"
                   : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
               )}
             >
@@ -350,7 +373,7 @@ export function CiseServicesDirectory() {
               className={cn(
                 "px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all min-h-[40px]",
                 activeCategory === 'mobility'
-                  ? "bg-white dark:bg-neutral-800 text-[#D97706] shadow-sm font-black"
+                  ? "bg-white dark:bg-neutral-800 text-[var(--color-brand-800)] shadow-sm font-black"
                   : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
               )}
             >
@@ -366,7 +389,7 @@ export function CiseServicesDirectory() {
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
               placeholder={currentCopy.searchPlaceholder}
-              className="w-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl py-2.5 px-10 text-xs font-medium text-neutral-900 dark:text-white outline-none focus:border-[#D97706] transition-colors"
+              className="w-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl py-2.5 px-10 text-xs font-medium text-neutral-900 dark:text-white outline-none focus:border-[var(--color-brand-800)] transition-colors"
             />
           </div>
         </div>
@@ -386,16 +409,16 @@ export function CiseServicesDirectory() {
                 <div className="space-y-4">
                   {/* Category Kicker */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706] block">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)] block">
                       {srv.badge}
                     </span>
-                    <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-[#0F172A] dark:text-white">
+                    <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-[var(--color-ink-900)] dark:text-white">
                       <Icon size={18} />
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+                  <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                     {srv.title}
                   </h3>
 
@@ -419,7 +442,7 @@ export function CiseServicesDirectory() {
                 <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800 space-y-3">
                   <Link 
                     to={srv.route}
-                    className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-sm group"
+                    className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-sm group"
                   >
                     <span>{srv.actionLabel}</span>
                     <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -432,7 +455,7 @@ export function CiseServicesDirectory() {
                         <React.Fragment key={idx}>
                           <Link 
                             to={link.path}
-                            className="hover:text-[#D97706] hover:underline whitespace-nowrap transition-colors"
+                            className="hover:text-[var(--color-brand-800)] hover:underline whitespace-nowrap transition-colors"
                           >
                             {link.label}
                           </Link>
@@ -451,11 +474,11 @@ export function CiseServicesDirectory() {
       {/* Direct Institutional Consultation Banner */}
       <section className="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2 max-w-2xl text-center md:text-start">
-          <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-black uppercase tracking-widest text-[#D97706]">
+          <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-black uppercase tracking-widest text-[var(--color-brand-800)]">
             <Layers size={14} />
             <span>{lang === 'ar' ? 'التنسيق بين المؤسسات' : lang === 'zh' ? '机构对口协调与业务支持' : lang === 'ckb' ? 'هەماهەنگی دامەزراوەیی' : 'Inter-Institutional Alignment'}</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] dark:text-white uppercase">
+          <h2 className="text-xl sm:text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase">
             {lang === 'ar' ? 'هل تحتاج إلى استشارة حكومية أو مسار سيادي مخصص؟' : lang === 'zh' ? '需要定制化政府间合作咨询或主权通道对接？' : lang === 'ckb' ? 'پێویستیت بە ڕاوێژکاری حکومی یان هێڵی سەروەری تایبەت هەیە؟' : 'Need Custom Sovereign Alignment or Inter-Governmental Coordination?'}
           </h2>
           <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
@@ -472,7 +495,7 @@ export function CiseServicesDirectory() {
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
           <Link 
             to={`/${lang}/institute/partnerships`}
-            className="w-full sm:w-auto h-12 px-6 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-[#0F172A] text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md"
+            className="w-full sm:w-auto h-12 px-6 rounded-xl bg-[var(--color-brand-800)] hover:bg-[var(--color-brand-900)] text-[var(--color-ink-900)] text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md"
           >
             <span>{lang === 'ar' ? 'شراكات المعهد' : lang === 'zh' ? '智库伙伴关系' : lang === 'ckb' ? 'هاوبەشییەکان' : 'Institute Partnerships'}</span>
             <ArrowRight size={14} className={isRtl ? 'rotate-180' : ''} />

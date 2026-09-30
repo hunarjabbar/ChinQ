@@ -1,10 +1,13 @@
 import { create } from 'zustand';
 
+import { PortalScope } from '../types/portals';
+
 interface User {
   id: string;
   email: string;
   name: string;
   role: string;
+  scopes?: PortalScope[];
   subscriptionStatus?: string;
   subscriptionPlan?: string;
   subscriptionEndDate?: string;

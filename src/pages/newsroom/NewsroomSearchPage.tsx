@@ -1,108 +1,120 @@
-import { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Search } from 'lucide-react';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { ArticleListItem } from '../../components/newsroom/ArticleListItem';
-import { SearchBar } from '../../components/newsroom/SearchBar';
-import { EmptyState } from '../../components/EmptyState';
-import { newsroomArticles } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import React, { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Search, ArrowLeft, ArrowRight, Tag, X } from 'lucide-react';
+import { Card } from '../../components/Card';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomSearchPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('q') || '';
-  const paramLang = searchParams.get('lang');
+  const { lang = 'en' } = useParams<{ lang: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : 'en') as Locale;
+  const [query, setQuery] = useState('');
+  const allArticles = portalStore.getNewsArticles().filter(a => a.status === 'published');
 
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-  const resultsForLabel = getNewsroomTranslation(lang, 'newsroom.search.resultsFor');
-  const noResultsLabel = getNewsroomTranslation(lang, 'newsroom.search.noResults');
+  const results = query.trim()
+    ? allArticles.filter(a => {
+        const q = query.toLowerCase();
+        const title = (a.title[currentLang] || a.title.en).toLowerCase();
+        const excerpt = (a.excerpt[currentLang] || a.excerpt.en).toLowerCase();
+        const author = a.author.name.toLowerCase();
+        const tags = a.tags.map(t => t.toLowerCase()).join(' ');
+        return title.includes(q) || excerpt.includes(q) || author.includes(q) || tags.includes(q);
+      })
+    : [];
 
-  const matchedArticles = useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
-
-    return newsroomArticles.filter((art) => {
-      const title = (art.title[lang] || art.title.en).toLowerCase();
-      const excerpt = (art.excerpt[lang] || art.excerpt.en).toLowerCase();
-      const body = (art.body[lang] || art.body.en).toLowerCase();
-      const category = (art.category.name[lang] || art.category.name.en).toLowerCase();
-      const author = (art.author.name[lang] || art.author.name.en).toLowerCase();
-
-      return (
-        title.includes(q) ||
-        excerpt.includes(q) ||
-        body.includes(q) ||
-        category.includes(q) ||
-        author.includes(q)
-      );
-    });
-  }, [query, lang]);
+  const suggestedQueries = ['Grand Faw', 'e-CNY', 'Consular', 'Solar', 'Basra', 'Trade Accord'];
 
   return (
-    <div className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: 'Search Results' },
-            ]}
-          />
+    <div className="bg-[#FFFFFF] min-h-screen py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to Newsroom</span>
+        </Link>
 
-          <div className="w-full md:w-auto">
-            <SearchBar
-              lang={lang}
-              initialQuery={query}
-              onSearchSubmit={(newQ) => setSearchParams({ q: newQ, lang })}
-            />
-          </div>
+        <div className="mb-8">
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-[#000000] mb-3">
+            Search Dispatch Ledger
+          </h1>
+          <p className="text-sm text-[#4B5563]">
+            Full-text real-time search across bilateral dispatches, accords, and archives.
+          </p>
         </div>
 
-        <header className="p-8 sm:p-10 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
-            <Search size={13} />
-            <span>Search Archive</span>
+        {/* Search Bar Input */}
+        <div className="relative mb-6">
+          <div className="absolute inset-y-0 inset-inline-start-4 flex items-center pointer-events-none text-neutral-400">
+            <Search size={18} />
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-50">
-            {query.trim() ? (
-              <>
-                {resultsForLabel} <span className="text-brand-800">&quot;{query}&quot;</span>
-              </>
-            ) : (
-              'Search Dispatches'
-            )}
-          </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            Found {matchedArticles.length} matching official reports and media briefs.
-          </p>
-        </header>
-
-        {/* Results List */}
-        {matchedArticles.length > 0 ? (
-          <div className="space-y-4">
-            {matchedArticles.map((article) => (
-              <ArticleListItem key={article.id} article={article} lang={lang} />
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            icon={<Search size={36} />}
-            title={query ? `No results found for "${query}"` : 'Enter a search term'}
-            description={
-              query
-                ? noResultsLabel
-                : 'Use keywords, topics, or names of officials to search the newsroom archive.'
-            }
-            actionLabel="View all articles"
-            actionHref={`/${lang}/newsroom/archive`}
+          <input
+            type="text"
+            autoFocus
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder={t('newsroom.searchPlaceholder')}
+            className="w-full ps-12 pe-10 py-4 rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] text-sm text-[#000000] focus:border-[var(--color-brand-800)] focus:outline-none shadow-xs"
           />
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              className="absolute inset-y-0 inset-inline-end-4 flex items-center text-neutral-400 hover:text-[#000000]"
+            >
+              <X size={16} />
+            </button>
+          )}
+        </div>
+
+        {/* Suggested Queries */}
+        <div className="flex flex-wrap items-center gap-2 mb-10 text-xs">
+          <span className="text-[#4B5563] font-bold">Popular topics:</span>
+          {suggestedQueries.map(sq => (
+            <button
+              key={sq}
+              onClick={() => setQuery(sq)}
+              className="px-3 py-1 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[var(--color-brand-800)] text-[#000000] transition-colors cursor-pointer"
+            >
+              {sq}
+            </button>
+          ))}
+        </div>
+
+        {/* Search Results */}
+        {query.trim() && (
+          <div>
+            <div className="text-xs font-mono font-bold text-[#4B5563] uppercase tracking-wider mb-6 pb-2 border-b border-[#E5E7EB]">
+              Search Results ({results.length})
+            </div>
+
+            {results.length === 0 ? (
+              <div className="p-12 text-center text-neutral-500 text-sm bg-[#F9FAFB] rounded-2xl border border-[#E5E7EB]">
+                No verified dispatches matched "{query}". Try a different keyword or topic tag.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {results.map(article => (
+                  <Card
+                    key={article.id}
+                    variant="portal"
+                    href={`/${currentLang}/newsroom/${article.slug}`}
+                    imageUrl={article.imageUrl}
+                    category={article.tags[0] || 'Dispatch'}
+                    title={article.title[currentLang] || article.title.en}
+                    excerpt={article.excerpt[currentLang] || article.excerpt.en}
+                    publishDate={article.publishDate}
+                    readTime={`${article.readingTimeMinutes} min`}
+                    author={{ name: article.author.name }}
+                    ctaText="Read Article"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

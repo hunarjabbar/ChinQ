@@ -79,11 +79,11 @@ export function ExpertsDirectory() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12">
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 text-[#0284C7]">
+        <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
           <Users size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">Institutional Faculty</span>
         </div>
-        <h1 className="text-3xl lg:text-5xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">
+        <h1 className="text-3xl lg:text-5xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">
           Fellows & Scholars
         </h1>
         <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium max-w-2xl leading-relaxed">
@@ -99,7 +99,7 @@ export function ExpertsDirectory() {
             placeholder="Search experts by name, topic, or pillar..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0284C7] transition-all"
+            className="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[var(--color-brand-800)] transition-all"
           />
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 w-4 h-4" />
         </div>
@@ -110,7 +110,7 @@ export function ExpertsDirectory() {
           </button>
           <button 
             onClick={() => openBooking()}
-            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#0F172A] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[var(--color-ink-900)] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
           >
             <MessageSquare size={16} />
             <span>Media Booking</span>
@@ -131,12 +131,12 @@ export function ExpertsDirectory() {
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink-900)] via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6">
                 <h3 className="text-xl font-black text-white uppercase tracking-tighter leading-tight">
                   {expert[`name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof Expert] as string || expert.nameEn}
                 </h3>
-                <p className="text-[10px] font-bold text-[#D97706] uppercase tracking-[0.2em] mt-1">
+                <p className="text-[10px] font-bold text-[var(--color-brand-800)] uppercase tracking-[0.2em] mt-1">
                   {expert[`title${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof Expert] as string || expert.titleEn}
                 </p>
               </div>
@@ -158,13 +158,13 @@ export function ExpertsDirectory() {
 
               <div className="pt-6 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <button className="text-neutral-400 hover:text-[#0284C7] transition-colors"><Linkedin size={16} /></button>
-                  <button className="text-neutral-400 hover:text-[#0284C7] transition-colors"><Twitter size={16} /></button>
-                  <button className="text-neutral-400 hover:text-[#0284C7] transition-colors"><Mail size={16} /></button>
+                  <button className="text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors"><Linkedin size={16} /></button>
+                  <button className="text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors"><Twitter size={16} /></button>
+                  <button className="text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors"><Mail size={16} /></button>
                 </div>
                 <button 
                   onClick={() => openBooking(expert)}
-                  className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#0F172A] dark:text-white hover:text-[#0284C7] transition-colors"
+                  className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[var(--color-ink-900)] dark:text-white hover:text-[var(--color-brand-800)] transition-colors"
                 >
                   <span>Book Consultation</span>
                   <ChevronRight size={14} />
@@ -177,11 +177,11 @@ export function ExpertsDirectory() {
 
       {/* Media Booking CTA */}
       <section className="bg-[#F8FAFC] dark:bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center gap-8 shadow-inner">
-        <div className="w-16 h-16 bg-[#0F172A] rounded-2xl flex items-center justify-center text-[#D97706] shrink-0">
+        <div className="w-16 h-16 bg-[var(--color-ink-900)] rounded-2xl flex items-center justify-center text-[var(--color-brand-800)] shrink-0">
           <MessageSquare size={32} />
         </div>
         <div className="space-y-2 flex-grow text-center md:text-left rtl:md:text-right">
-          <h3 className="text-xl font-black text-[#0F172A] dark:text-white uppercase tracking-tight">Institutional Media Booking</h3>
+          <h3 className="text-xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tight">Institutional Media Booking</h3>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed max-w-2xl">
             Accredited news agencies can request interviews, expert commentary, or panel participation 
             from our resident and non-resident fellows. Please submit a formal booking request 
@@ -190,7 +190,7 @@ export function ExpertsDirectory() {
         </div>
         <button 
           onClick={() => openBooking()}
-          className="w-full md:w-auto px-8 py-4 bg-[#0F172A] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl whitespace-nowrap"
+          className="w-full md:w-auto px-8 py-4 bg-[var(--color-ink-900)] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl whitespace-nowrap"
         >
           Submit Booking Request
         </button>
@@ -205,7 +205,7 @@ export function ExpertsDirectory() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMediaDrawerOpen(false)}
-              className="absolute inset-0 bg-[#0F172A]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-[var(--color-ink-900)]/80 backdrop-blur-sm"
             />
             <motion.div 
               initial={{ x: '100%' }}
@@ -217,7 +217,7 @@ export function ExpertsDirectory() {
               <div className="p-8 lg:p-12 space-y-12">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
-                    <h2 className="text-3xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">Media & Advisory</h2>
+                    <h2 className="text-3xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">Media & Advisory</h2>
                     <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">Chinese Institute for Strategic and Economic Studies</p>
                   </div>
                   <button 
@@ -237,7 +237,7 @@ export function ExpertsDirectory() {
                         className="w-12 h-12 rounded-xl object-cover grayscale"
                       />
                       <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-white">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-[var(--color-ink-900)] dark:text-white">
                           {selectedExpert[`name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof Expert] as string || selectedExpert.nameEn}
                         </h4>
                         <p className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">

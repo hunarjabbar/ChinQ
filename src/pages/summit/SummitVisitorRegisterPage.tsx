@@ -62,7 +62,7 @@ export function SummitVisitorRegisterPage() {
             </div>
 
             {/* Digital Badge Mockup */}
-            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 max-w-sm mx-auto text-left space-y-4 shadow-sm">
+            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 max-w-sm mx-auto text-start space-y-4 shadow-sm">
               <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-700 pb-3">
                 <div className="text-[10px] font-black uppercase tracking-wider text-brand-800 dark:text-brand-400">
                   SUMMIT 2026 DELEGATE
@@ -87,10 +87,11 @@ export function SummitVisitorRegisterPage() {
 
             <div className="pt-4 flex flex-wrap justify-center gap-4">
               <Link
-                to={`/${lang}/summit/b2b-matchmaking`}
-                className="px-6 py-2.5 rounded-xl bg-brand-800 text-white text-xs font-bold hover:bg-brand-900 transition-colors"
+                to={`/${lang}/summit/b2b`}
+                className="px-6 py-2.5 rounded-xl bg-brand-800 text-white text-xs font-bold hover:bg-brand-900 transition-colors shadow-sm inline-flex items-center gap-1.5"
               >
-                Schedule B2B Meetings Now →
+                <span>{lang === 'ar' ? 'جدولة لقاءات B2B الآن' : lang === 'zh' ? '即刻预约B2B洽谈' : lang === 'ckb' ? 'دیاریکردنی کۆبوونەوەی B2B' : 'Schedule B2B Meetings Now'}</span>
+                <ArrowRight size={14} className={isRtl ? 'rotate-180' : ''} />
               </Link>
             </div>
           </div>

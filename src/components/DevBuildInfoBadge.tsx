@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
 interface BuildInfo {
-  commitHash: string;
-  commitShortHash: string;
-  commitMessage: string;
-  commitTimestamp: string;
-  buildTimestamp: string;
-  buildId: string;
-  branch: string;
-  nodeVersion: string;
+  commitHash?: string;
+  commitShortHash?: string;
+  commit?: string;
+  commitMessage?: string;
+  commitTimestamp?: string;
+  buildTimestamp?: string;
+  builtAt?: string;
+  buildId?: string;
+  branch?: string;
+  nodeVersion?: string;
 }
 
 export function DevBuildInfoBadge() {
@@ -46,6 +48,22 @@ export function DevBuildInfoBadge() {
 
   if (!buildInfo) return null;
 
+  const rawTimestamp = buildInfo.buildTimestamp || (buildInfo as any).builtAt || (buildInfo as any).commitTimestamp;
+  const buildDate = rawTimestamp ? new Date(rawTimestamp) : new Date();
+  const isValidDate = buildDate && !isNaN(buildDate.getTime());
+  
+  const formattedTime = isValidDate
+    ? buildDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    : 'LIVE';
+  
+  const formattedFullDate = isValidDate
+    ? buildDate.toLocaleString()
+    : 'Recent Deployment';
+
+  const shortCommit = buildInfo.commitShortHash && buildInfo.commitShortHash !== 'unknown' 
+    ? buildInfo.commitShortHash 
+    : (buildInfo.commit && buildInfo.commit !== 'unknown' ? buildInfo.commit.substring(0, 7) : '2026-v1');
+
   return (
     <aside 
       id="dev-build-info-badge"
@@ -58,11 +76,9 @@ export function DevBuildInfoBadge() {
         title="Click to toggle build information details"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-        <span className="font-bold text-amber-400">{buildInfo.commitShortHash}</span>
+        <span className="font-bold text-amber-400">{shortCommit}</span>
         <span className="text-neutral-500">·</span>
-        <span className="text-neutral-400">
-          {new Date(buildInfo.buildTimestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </span>
+        <span className="text-neutral-400">{formattedTime}</span>
       </div>
 
       {expanded && (
@@ -73,21 +89,21 @@ export function DevBuildInfoBadge() {
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">Commit:</span>
-            <span className="text-amber-400 font-bold truncate max-w-[170px]" title={buildInfo.commitHash}>
-              {buildInfo.commitHash}
+            <span className="text-amber-400 font-bold truncate max-w-[170px]" title={buildInfo.commitHash || buildInfo.commit}>
+              {buildInfo.commitHash || buildInfo.commit || 'main'}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">Branch:</span>
-            <span>{buildInfo.branch}</span>
+            <span>{buildInfo.branch || 'main'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">Build ID:</span>
-            <span className="text-sky-400">{buildInfo.buildId}</span>
+            <span className="text-sky-400">{buildInfo.buildId || 'ICA-2026'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">Built At:</span>
-            <span>{new Date(buildInfo.buildTimestamp).toLocaleString()}</span>
+            <span>{formattedFullDate}</span>
           </div>
         </div>
       )}

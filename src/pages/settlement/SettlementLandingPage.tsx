@@ -65,7 +65,7 @@ export function SettlementLandingPage() {
             <div className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 to={`/${lang}/settlement/inquiry`}
-                className="px-5 py-3.5 rounded-xl bg-white text-[brand-800] font-black text-xs sm:text-sm hover:bg-gray-100 transition-all shadow-lg flex items-center gap-2 group cursor-pointer"
+                className="px-5 py-3.5 rounded-xl bg-white text-brand-800 font-black text-xs sm:text-sm hover:bg-neutral-100 transition-all shadow-lg flex items-center gap-2 group cursor-pointer"
               >
                 <span>{t('settlement.hero.ctaInquiry')}</span>
                 <ChevronRight size={16} className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
@@ -89,7 +89,7 @@ export function SettlementLandingPage() {
 
               <Link
                 to={`/${lang}/settlement/card`}
-                className="px-5 py-3.5 rounded-xl bg-amber-400 text-gray-900 hover:bg-amber-300 font-black text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                className="px-5 py-3.5 rounded-xl bg-amber-400 text-neutral-900 hover:bg-amber-300 font-black text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
               >
                 <CreditCard size={16} />
                 <span>{t('settlement.hero.ctaCard')}</span>
@@ -121,16 +121,16 @@ export function SettlementLandingPage() {
 
         {/* COMPLIANCE BADGES SECTION */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+          <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-3">
             <div>
-              <h2 className="text-lg sm:text-xl font-black text-gray-900">
+              <h2 className="text-lg sm:text-xl font-black text-ink-950 dark:text-white">
                 {isAr ? 'الأطر الرقابية والسيادية المعتمدة' : isZh ? '双边主权合规清算架构' : isCkb ? 'چوارچێوەی یاسایی و چاودێری' : 'Sovereign Compliance & Clearing Framework'}
               </h2>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                 Full alignment with Central Bank of Iraq directives and People's Bank of China CIPS rails.
               </p>
             </div>
-            <Link to={`/${lang}/settlement/compliance`} className="text-xs font-bold text-[brand-800] hover:underline flex items-center gap-1">
+            <Link to={`/${lang}/settlement/compliance`} className="text-xs font-bold text-brand-800 dark:text-brand-400 hover:underline flex items-center gap-1">
               <span>View Full Framework</span>
               <span className="cta-arrow">→</span>
             </Link>
@@ -145,33 +145,33 @@ export function SettlementLandingPage() {
         </section>
 
         {/* CO-BRANDED CARD SHOWCASE BANNER */}
-        <section className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-10 shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <section className="bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 p-6 sm:p-10 shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-8 items-center transition-colors">
           <div className="lg:col-span-6 space-y-4">
             <div className="pay-badge">
               {isAr ? 'البطاقة السيادية المشتركة' : isZh ? 'Qi & ICA 联名商务主权卡' : isCkb ? 'کارتی هاوبەشی سەروەری' : 'Qi & ICA Sovereign FinTech'}
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-ink-950 dark:text-white tracking-tight">
               {t('settlement.card.title')}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
               {t('settlement.card.tagline')}
             </p>
 
-            <ul className="space-y-2.5 text-xs text-gray-700">
+            <ul className="space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-brand-800 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b1')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-brand-800 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b2')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-brand-800 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b3')}</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[brand-800] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-brand-800 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span>{t('settlement.card.b4')}</span>
               </li>
             </ul>
@@ -203,15 +203,15 @@ export function SettlementLandingPage() {
         </section>
 
         {/* COMPLIANT GATEWAY HIGHLIGHT */}
-        <section className="bg-gradient-to-r from-red-50/70 via-white to-red-50/50 rounded-3xl border border-red-200 p-8 sm:p-12 text-center space-y-6">
+        <section className="bg-gradient-to-r from-brand-50/70 via-white to-brand-50/50 dark:from-neutral-900 dark:via-neutral-850 dark:to-neutral-900 rounded-3xl border border-brand-200 dark:border-brand-900/60 p-8 sm:p-12 text-center space-y-6 transition-colors">
           <div className="max-w-2xl mx-auto space-y-3">
             <div className="pay-badge mx-auto">
               ISO 20022 Host-to-Host Gateway
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-ink-950 dark:text-white tracking-tight">
               {t('settlement.gateway.title')}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
               {t('settlement.gateway.subtitle')}
             </p>
           </div>

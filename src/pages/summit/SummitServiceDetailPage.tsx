@@ -19,16 +19,16 @@ export function SummitServiceDetailPage() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10">
         
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-bold text-neutral-500">
-          <Link to={`/${lang}/summit`} className="hover:text-brand-800">Summit</Link>
+        <div className="flex items-center gap-2 text-xs font-bold text-neutral-500 text-start">
+          <Link to={`/${lang}/summit`} className="hover:text-brand-800">{lang === 'ar' ? 'القمة' : 'Summit'}</Link>
           <span>/</span>
-          <Link to={`/${lang}/summit/services`} className="hover:text-brand-800">Services</Link>
+          <Link to={`/${lang}/summit/services`} className="hover:text-brand-800">{lang === 'ar' ? 'الخدمات' : 'Services'}</Link>
           <span>/</span>
           <span className="text-neutral-900 dark:text-neutral-100">{service.title[lang]}</span>
         </div>
 
         {/* Service Header */}
-        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6">
+        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6 text-start">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <span className="px-3 py-1 rounded-lg text-xs font-black uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
               {service.badge[lang]}
@@ -36,14 +36,15 @@ export function SummitServiceDetailPage() {
 
             <Link
               to={`/${lang}/summit/services/request?service=${service.slug}`}
-              className="px-5 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
             >
-              Request Service Engagement →
+              <span>{lang === 'ar' ? 'طلب الارتباط بالخدمة' : 'Request Service Engagement'}</span>
+              <ArrowRight size={15} className={isRtl ? 'rotate-180' : ''} />
             </Link>
           </div>
 
           <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100">
+            <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
               {service.title[lang]}
             </h1>
             <div className="text-sm font-bold text-brand-800 dark:text-brand-400 mt-2">
@@ -57,8 +58,8 @@ export function SummitServiceDetailPage() {
         </div>
 
         {/* Core Capabilities Grid */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-black text-neutral-900 dark:text-neutral-100">
+        <div className="space-y-4 text-start">
+          <h2 className="text-xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
             {lang === 'ar' ? 'القدرات والمزايا التنفيذية' : lang === 'zh' ? '核心服务能力与实施标准' : lang === 'ckb' ? 'توانا و تایبەتمەندییە سەرەکییەکان' : 'Core Operational Capabilities'}
           </h2>
 
@@ -73,8 +74,8 @@ export function SummitServiceDetailPage() {
         </div>
 
         {/* Guaranteed Deliverables */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-black text-neutral-900 dark:text-neutral-100">
+        <div className="space-y-4 text-start">
+          <h2 className="text-xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
             {lang === 'ar' ? 'المخرجات والوثائق المسلمة للمستفيد' : lang === 'zh' ? '企业专属交付成果与合规凭据' : lang === 'ckb' ? 'بەڵگەنامە و ئەنجامە مسۆگەرکراوەکان' : 'Guaranteed Deliverables & Outputs'}
           </h2>
 
@@ -89,24 +90,25 @@ export function SummitServiceDetailPage() {
         </div>
 
         {/* Summit On-Site Role */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900 text-white border border-neutral-800 flex flex-wrap items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900 text-white border border-neutral-800 flex flex-wrap items-center justify-between gap-6 text-start">
           <div className="space-y-2 max-w-2xl">
             <div className="text-xs font-black uppercase tracking-widest text-brand-400">
-              On-Site Summit Facilitation Desk
+              {lang === 'ar' ? 'مكتب التسهيلات الميداني في القمة' : 'On-Site Summit Facilitation Desk'}
             </div>
             <h3 className="text-xl font-black">
               {service.summitRole[lang]}
             </h3>
             <p className="text-xs text-neutral-400 leading-relaxed">
-              Available throughout the 3-day Summit & Expo in Sulaymaniyah for live negotiations, contract seals, and regulatory clearances.
+              {lang === 'ar' ? 'متواجدون طوال أيام القمة والمعرض الثلاثة في السليمانية للمفاوضات المباشرة، ختم العقود، والتخليصات التنظيمية.' : 'Available throughout the 3-day Summit & Expo in Sulaymaniyah for live negotiations, contract seals, and regulatory clearances.'}
             </p>
           </div>
 
           <Link
             to={`/${lang}/summit/services/request?service=${service.slug}`}
-            className="px-6 py-3 rounded-xl bg-brand-800 hover:bg-brand-700 text-white text-xs font-black uppercase tracking-wider transition-colors shrink-0"
+            className="px-6 py-3 rounded-xl bg-brand-800 hover:bg-brand-700 text-white text-xs font-black uppercase tracking-wider transition-colors shrink-0 inline-flex items-center gap-2"
           >
-            Book On-Site Appointment →
+            <span>{lang === 'ar' ? 'حجز موعد ميداني' : 'Book On-Site Appointment'}</span>
+            <ArrowRight size={15} className={isRtl ? 'rotate-180' : ''} />
           </Link>
         </div>
 

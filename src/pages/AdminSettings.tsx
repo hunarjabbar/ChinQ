@@ -28,7 +28,7 @@ export function AdminSettings() {
     autoTranslate: siteSettings.autoTranslate,
     geoLatencyRoute: siteSettings.geoLatencyRoute,
     systemMaintenance: siteSettings.systemMaintenance,
-    brandColor: siteSettings.brandColor || '#cc0000',
+    brandColor: siteSettings.brandColor || 'var(--color-brand-800)',
     inkColor: siteSettings.inkColor || '#1A1A1A',
     paperColor: siteSettings.paperColor || '#FAFAFA',
     socialLinks: siteSettings.socialLinks || {

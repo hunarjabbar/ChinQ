@@ -3,18 +3,18 @@
    ===================================================== */
 
 :root {
-  --pay-color-white: #FFFFFF;
-  --pay-color-surface: #F9FAFB;
-  --pay-color-border: #E5E7EB;
-  --pay-color-red-primary: #cc0000;
-  --pay-color-red-hover: #cc0000;
-  --pay-color-red-active: #cc0000;
-  --pay-color-red-soft: #fff5f5;
-  --pay-color-red-text: #991B1B;
-  --pay-color-text: #111827;
-  --pay-color-text-muted: #6B7280;
-  --pay-color-success: #047857;
-  --pay-color-warning: #B45309;
+  --pay-color-white: var(--color-snowman);
+  --pay-color-surface: var(--color-snowman-alt);
+  --pay-color-border: var(--color-border);
+  --pay-color-red-primary: var(--accent-primary);
+  --pay-color-red-hover: var(--accent-primary-hover);
+  --pay-color-red-active: var(--accent-primary-active);
+  --pay-color-red-soft: var(--accent-soft);
+  --pay-color-red-text: var(--accent-text);
+  --pay-color-text: var(--color-text);
+  --pay-color-text-muted: var(--color-text-muted);
+  --pay-color-success: var(--color-success);
+  --pay-color-warning: var(--color-warning);
 }
 
 /* Scoped portal container */
@@ -53,46 +53,46 @@
 /* Interactive elements motion */
 .pay-btn-primary {
   background-color: var(--pay-color-red-primary);
-  color: #ffffff;
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
-  box-shadow: 0 2px 4px rgba(200, 16, 46, 0.15);
+  color: var(--color-snowman);
+  transition: transform var(--motion-fast) var(--ease-out), background-color var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) var(--ease-out);
+  box-shadow: 0 2px 4px rgba(200, 21, 14, 0.15);
 }
 
 .pay-btn-primary:hover {
   background-color: var(--pay-color-red-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.25);
+  box-shadow: var(--shadow-blood-glow);
 }
 
 .pay-btn-primary:active {
   background-color: var(--pay-color-red-active);
-  transform: translateY(0);
+  transform: translateY(1px) scale(0.98);
 }
 
 .pay-btn-secondary {
-  background-color: #ffffff;
+  background-color: var(--color-snowman);
   color: var(--pay-color-red-primary);
   border: 1px solid var(--pay-color-border);
-  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  transition: transform var(--motion-fast) var(--ease-out), border-color var(--motion-fast) var(--ease-out), background-color var(--motion-fast) var(--ease-out);
 }
 
 .pay-btn-secondary:hover {
-  background-color: #fef2f2;
+  background-color: var(--accent-soft);
   border-color: var(--pay-color-red-primary);
   transform: translateY(-1px);
 }
 
 .pay-card {
-  background-color: #ffffff;
+  background-color: var(--color-snowman);
   border: 1px solid var(--pay-color-border);
   border-radius: 0.75rem;
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  transition: transform var(--motion-base) var(--ease-out), box-shadow var(--motion-base) var(--ease-out), border-color var(--motion-base) var(--ease-out);
 }
 
 .pay-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(200, 16, 46, 0.08);
-  border-color: #fca5a5;
+  box-shadow: var(--shadow-blood-glow);
+  border-color: var(--accent-primary);
 }
 
 .pay-badge {
@@ -110,8 +110,8 @@
 }
 
 .pay-badge-success {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: #ecfdf5;
+  color: var(--color-success);
   border-radius: 6px;
   font-size: 11px;
   text-transform: uppercase;
@@ -121,14 +121,14 @@
 }
 
 .pay-hero-gradient {
-  background: linear-gradient(135deg, #cc0000 0%, #cc0000 100%);
+  background: linear-gradient(135deg, var(--color-chocolate) 0%, var(--accent-primary) 50%, var(--color-chocolate-active) 100%);
 }
 
 .pay-focus-ring:focus,
 .pay-focus-ring:focus-within {
   outline: none;
   border-color: var(--pay-color-red-primary);
-  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.15);
+  box-shadow: var(--focus-ring);
 }
 
 /* Tab underline animation */
@@ -178,13 +178,13 @@
 /* Stepper pulse */
 @keyframes pay-node-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.6);
+    box-shadow: 0 0 0 0 rgba(200, 21, 14, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(200, 16, 46, 0);
+    box-shadow: 0 0 0 10px rgba(200, 21, 14, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0);
+    box-shadow: 0 0 0 0 rgba(200, 21, 14, 0);
   }
 }
 

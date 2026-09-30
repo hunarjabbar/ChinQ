@@ -20,6 +20,8 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { Locale } from '../types';
 import { useSiteStore } from '../store/useSiteStore';
+import { BrandIcons } from './common/BrandIcons';
+import { FlaticonIcon } from './common/FlaticonIcon';
 
 export type SocialPlatformKey = 'whatsapp' | 'facebook' | 'facebookAr' | 'facebookZh' | 'facebookCkb' | 'telegram' | 'telegramAr' | 'telegramZh' | 'telegramCkb' | 'instagram' | 'linkedin' | 'weibo' | 'wechat' | 'youtube' | 'youtubeAr' | 'youtubeZh' | 'youtubeCkb' | 'x' | 'xAr' | 'xZh' | 'xCkb';
 
@@ -190,7 +192,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     badgeZh: '新浪官方蓝V认证',
     badgeAr: 'توثيق مستقل',
     badgeCkb: 'هەژماری باوەڕپێکراو',
-    colorHex: '#cc0000',
+    colorHex: 'var(--color-brand-800)',
     bgClass: 'bg-brand-50 text-brand-700',
     textClass: 'text-brand-600',
     borderClass: 'border-brand-200',
@@ -225,7 +227,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
     badgeZh: '高清专题纪录片',
     badgeAr: 'بث وثائقي فائق الدقة',
     badgeCkb: 'پەخشی کوالێتی بەرز',
-    colorHex: '#cc0000',
+    colorHex: 'var(--color-brand-800)',
     bgClass: 'bg-brand-50 text-brand-800',
     textClass: 'text-brand-600',
     borderClass: 'border-brand-200',
@@ -250,7 +252,7 @@ export const SOCIAL_PLATFORMS: SocialItemData[] = [
   },
 ];
 
-// Helper to render platform icon strictly using Lucide icons
+// Helper to render platform icon with authentic brand vectors and crisp typography
 export function PlatformIcon({ 
   platform, 
   size = 18, 
@@ -262,26 +264,26 @@ export function PlatformIcon({
 }) {
   switch (platform) {
     case 'whatsapp':
-      return <MessageCircle size={size} className={className} />;
+      return <BrandIcons.WhatsApp size={size} className={className} />;
     case 'facebook':
     case 'facebookAr':
     case 'facebookZh':
     case 'facebookCkb':
-      return <Facebook size={size} className={className} />;
+      return <BrandIcons.Facebook size={size} className={className} />;
     case 'telegram':
-      return <Send size={size} className={className} />;
+      return <BrandIcons.Telegram size={size} className={className} />;
     case 'instagram':
-      return <Instagram size={size} className={className} />;
+      return <BrandIcons.Instagram size={size} className={className} />;
     case 'linkedin':
-      return <Linkedin size={size} className={className} />;
+      return <BrandIcons.LinkedIn size={size} className={className} />;
     case 'weibo':
-      return <Globe size={size} className={className} />;
+      return <BrandIcons.Weibo size={size} className={className} />;
     case 'wechat':
-      return <QrCode size={size} className={className} />;
+      return <BrandIcons.WeChat size={size} className={className} />;
     case 'youtube':
-      return <Youtube size={size} className={className} />;
+      return <BrandIcons.YouTube size={size} className={className} />;
     case 'x':
-      return <Twitter size={size} className={className} />;
+      return <BrandIcons.X size={size} className={className} />;
     default:
       return <Share2 size={size} className={className} />;
   }
@@ -824,42 +826,42 @@ export function ArticleSocialBar({
   const shareTargets = [
     {
       name: 'WhatsApp',
-      icon: <MessageCircle size={16} />,
+      icon: <BrandIcons.WhatsApp size={16} />,
       href: `https://api.whatsapp.com/send?text=${encodeURIComponent(articleTitle + ' ' + articleUrl)}`,
       color: 'hover:bg-[#25D366] hover:text-white',
       border: 'border-emerald-200'
     },
     {
       name: 'X (Twitter)',
-      icon: <Twitter size={16} />,
+      icon: <BrandIcons.X size={15} />,
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(articleTitle)}&url=${encodeURIComponent(articleUrl)}`,
       color: 'hover:bg-black hover:text-white',
       border: 'border-neutral-300'
     },
     {
       name: 'LinkedIn',
-      icon: <Linkedin size={16} />,
+      icon: <BrandIcons.LinkedIn size={16} />,
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`,
       color: 'hover:bg-[#0A66C2] hover:text-white',
       border: 'border-sky-200'
     },
     {
       name: 'Facebook',
-      icon: <Facebook size={16} />,
+      icon: <BrandIcons.Facebook size={16} />,
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`,
       color: 'hover:bg-[#1877F2] hover:text-white',
       border: 'border-blue-200'
     },
     {
       name: 'Weibo',
-      icon: <Globe size={16} />,
+      icon: <BrandIcons.Weibo size={16} />,
       href: `https://service.weibo.com/share/share.php?url=${encodeURIComponent(articleUrl)}&title=${encodeURIComponent(articleTitle)}`,
       color: 'hover:bg-brand-800 hover:text-white',
       border: 'border-brand-200'
     },
     {
       name: 'WeChat',
-      icon: <QrCode size={16} />,
+      icon: <BrandIcons.WeChat size={16} />,
       onClick: () => setActiveWechat(true),
       color: 'hover:bg-[#07C160] hover:text-white',
       border: 'border-emerald-200'

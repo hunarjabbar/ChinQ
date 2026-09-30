@@ -1,152 +1,68 @@
-import { useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import { Archive, Calendar, Filter } from 'lucide-react';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { ArticleListItem } from '../../components/newsroom/ArticleListItem';
-import { SearchBar } from '../../components/newsroom/SearchBar';
-import { EmptyState } from '../../components/EmptyState';
-import { newsroomArticles, newsroomCategories } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Calendar, FileText, ArrowRight } from 'lucide-react';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomArchivePage() {
-  const { lang: paramLang } = useParams<{ lang?: string }>();
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : paramLang === 'ck'
-    ? 'ckb'
-    : 'en') as Locale;
+  const { lang = 'en' } = useParams<{ lang: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const [selectedYear, setSelectedYear] = useState<string>('all');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-  const archiveHeading = getNewsroomTranslation(lang, 'newsroom.archive.heading');
-  const allCategoriesLabel = getNewsroomTranslation(lang, 'newsroom.landing.categories.all');
-
-  const years = useMemo(() => {
-    const set = new Set<string>();
-    newsroomArticles.forEach((a) => {
-      const year = new Date(a.publishDate).getFullYear().toString();
-      set.add(year);
-    });
-    return Array.from(set).sort().reverse();
-  }, []);
-
-  const filteredArticles = useMemo(() => {
-    return newsroomArticles
-      .filter((art) => {
-        if (art.status !== 'published') return false;
-        if (selectedYear !== 'all') {
-          const year = new Date(art.publishDate).getFullYear().toString();
-          if (year !== selectedYear) return false;
-        }
-        if (selectedCategory !== 'all') {
-          if (art.category.slug !== selectedCategory) return false;
-        }
-        return true;
-      })
-      .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-  }, [selectedYear, selectedCategory]);
+  const articles = portalStore.getNewsArticles().filter(a => a.status === 'published');
 
   return (
-    <div className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: archiveHeading },
-            ]}
-          />
+    <div className="bg-[#FFFFFF] min-h-screen py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to Newsroom</span>
+        </Link>
 
-          <div className="w-full md:w-auto">
-            <SearchBar lang={lang} />
-          </div>
+        <div className="mb-10 pb-6 border-b border-[#E5E7EB]">
+          <span className="text-xs font-mono font-bold text-[var(--color-brand-800)] uppercase tracking-wider block mb-1">
+            Historical Records
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-[#000000]">
+            Chronological Archive
+          </h1>
+          <p className="text-sm text-[#4B5563] mt-2">
+            Complete indexed record of accredited dispatches and ministerial declarations.
+          </p>
         </div>
 
-        <header className="p-8 sm:p-10 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
-            <Archive size={14} />
-            <span>Official Records & Archives</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-50">
-            {archiveHeading}
-          </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-3xl leading-relaxed">
-            Historical repository of all official releases, executive communiqués, and joint commission declarations published by the Iraqi-Chinese Agency.
-          </p>
-
-          {/* Archive Filter Controls */}
-          <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex flex-wrap items-center gap-4 text-xs font-bold">
-            <div className="flex items-center gap-2 text-neutral-500">
-              <Calendar size={14} />
-              <span>Year:</span>
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-bold"
-              >
-                <option value="all">All Years</option>
-                {years.map((y) => (
-                  <option key={y} value={y}>
-                    {y}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex items-center gap-2 text-neutral-500">
-              <Filter size={14} />
-              <span>Category:</span>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-bold"
-              >
-                <option value="all">{allCategoriesLabel}</option>
-                {newsroomCategories.map((c) => (
-                  <option key={c.id} value={c.slug}>
-                    {c.name[lang] || c.name.en}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {(selectedYear !== 'all' || selectedCategory !== 'all') && (
-              <button
-                type="button"
-                onClick={() => {
-                  setSelectedYear('all');
-                  setSelectedCategory('all');
-                }}
-                className="text-brand-800 dark:text-brand-400 hover:underline uppercase tracking-wider"
-              >
-                Reset Filters
-              </button>
-            )}
-          </div>
-        </header>
-
-        {/* Filtered Articles Listing */}
         <div className="space-y-4">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
-              <ArticleListItem key={article.id} article={article} lang={lang} />
-            ))
-          ) : (
-            <EmptyState
-              title="No archived articles found"
-              description="No dispatches match the selected year and category combination."
-              actionLabel="Show all articles"
-              onAction={() => {
-                setSelectedYear('all');
-                setSelectedCategory('all');
-              }}
-            />
-          )}
+          {articles.map(article => (
+            <Link
+              key={article.id}
+              to={`/${currentLang}/newsroom/${article.slug}`}
+              className="ica-card-interactive group flex flex-col sm:flex-row sm:items-center justify-between p-6 rounded-2xl bg-white border border-[#E5E7EB] hover:border-[var(--color-brand-800)] gap-4"
+            >
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs text-[#4B5563] font-mono">
+                  <span className="text-[var(--color-brand-800)] font-bold">{article.publishDate}</span>
+                  <span>•</span>
+                  <span>{article.author.name}</span>
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#000000] group-hover:text-[var(--color-brand-800)] transition-colors">
+                  {article.title[currentLang] || article.title.en}
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-3 self-end sm:self-center shrink-0">
+                <span className="px-2.5 py-1 rounded bg-[#F9FAFB] border border-[#E5E7EB] text-[11px] font-mono text-[#000000]">
+                  {article.tags[0] || 'Dispatch'}
+                </span>
+                <span className="text-[var(--color-brand-800)] cta-arrow transition-transform">
+                  <ArrowRight size={16} className="rtl:rotate-180" />
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

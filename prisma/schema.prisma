@@ -8,40 +8,40 @@ datasource db {
 }
 
 model User {
-  id                  String    @id @default(cuid())
-  email               String    @unique
-  password            String    @default("")
-  name                String
-  role                String    @default("AUTHOR")
-  digitalId           String?   @unique
-  memberCode          String?   @unique
-  department          String?   @default("Editorial & Intelligence")
-  title               String?   @default("Strategic Analyst")
-  clearanceLevel      String?   @default("LEVEL-2")
-  badgeStatus         String?   @default("ACTIVE")
-  nationality         String?   @default("Iraqi / Chinese")
-  passportOrIdNumber  String?   @default("IQ-2026-998821")
-  asaishCode          String?   @unique
-  iraqiInfoCard       String?
-  addressHouseNo      String?   @default("14")
-  addressStreetNo     String?   @default("Al-Karrada St 62")
-  addressDistrictName String?   @default("Al-Karrada")
-  addressDistrictNumber String? @default("902")
-  phoneNumber         String?   @default("+964 780 000 0000")
-  dateOfBirth         String?   @default("1985-06-15")
-  emergencyContact    String?   @default("Baghdad HQ Security Desk")
-  credentialIssuedDate DateTime? @default(now())
-  credentialExpiryDate DateTime?
-  renewalCount        Int       @default(0)
-  lastRenewedAt       DateTime?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
-  stripeCustomerId    String?   @unique
-  subscriptionStatus  String    @default("INACTIVE")
-  subscriptionPlan    String?
-  subscriptionEndDate DateTime?
-  articles            Article[]
-  studies             Study[]
+  id                    String    @id @default(cuid())
+  email                 String    @unique
+  password              String    @default("")
+  name                  String
+  role                  String    @default("AUTHOR")
+  digitalId             String?   @unique
+  memberCode            String?   @unique
+  department            String?   @default("Editorial & Intelligence")
+  title                 String?   @default("Strategic Analyst")
+  clearanceLevel        String?   @default("LEVEL-2")
+  badgeStatus           String?   @default("ACTIVE")
+  nationality           String?   @default("Iraqi / Chinese")
+  passportOrIdNumber    String?   @default("IQ-2026-998821")
+  asaishCode            String?   @unique
+  iraqiInfoCard         String?
+  addressHouseNo        String?   @default("14")
+  addressStreetNo       String?   @default("Al-Karrada St 62")
+  addressDistrictName   String?   @default("Al-Karrada")
+  addressDistrictNumber String?   @default("902")
+  phoneNumber           String?   @default("+964 780 000 0000")
+  dateOfBirth           String?   @default("1985-06-15")
+  emergencyContact      String?   @default("Baghdad HQ Security Desk")
+  credentialIssuedDate  DateTime? @default(now())
+  credentialExpiryDate  DateTime?
+  renewalCount          Int       @default(0)
+  lastRenewedAt         DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  stripeCustomerId      String?   @unique
+  subscriptionStatus    String    @default("INACTIVE")
+  subscriptionPlan      String?
+  subscriptionEndDate   DateTime?
+  articles              Article[]
+  studies               Study[]
 }
 
 model Category {
@@ -386,7 +386,6 @@ model VisaFlightInquiry {
   updatedAt       DateTime @updatedAt
 }
 
-
 model Partner {
   id             String   @id @default(cuid())
   name           String
@@ -480,10 +479,10 @@ model SourcingPillar {
   readTimeZh                    String   @default("2 分钟精读")
   readTimeCkb                   String   @default("٢ خولەک خوێندنەوە")
   metricsJson                   String   @default("[]")
-  comprehensiveSpecificationEn   String   @default("[]")
-  comprehensiveSpecificationAr   String   @default("[]")
-  comprehensiveSpecificationZh   String   @default("[]")
-  comprehensiveSpecificationCkb  String   @default("[]")
+  comprehensiveSpecificationEn  String   @default("[]")
+  comprehensiveSpecificationAr  String   @default("[]")
+  comprehensiveSpecificationZh  String   @default("[]")
+  comprehensiveSpecificationCkb String   @default("[]")
   updates2026En                 String   @default("[]")
   updates2026Ar                 String   @default("[]")
   updates2026Zh                 String   @default("[]")
@@ -498,96 +497,96 @@ model SourcingPillar {
 }
 
 model PaymentOrder {
-  id                    String    @id @default(cuid())
-  reference             String    @unique
-  orderType             String    @default("RETAIL") // RETAIL | BUSINESS
-  direction             String    @default("IQD_TO_ECNY") // IQD_TO_ECNY | ECNY_TO_IQD
-  sourceCurrency        String    @default("IQD")
-  targetCurrency        String    @default("E_CNY")
-  sourceAmount          Float
-  targetAmount          Float
-  exchangeRate          Float
-  feeAmount             Float
-  feePercent            Float
-  status                String    @default("PENDING_SETTLEMENT") // PENDING_SETTLEMENT | PROCESSING | COMPLETED | COMPLIANCE_HOLD | REJECTED
-  
-  senderName            String
-  senderEmail           String
-  senderPhone           String?   @default("")
-  senderIdNumber        String?   @default("")
-  senderEntity          String?   @default("INDIVIDUAL") // INDIVIDUAL | ENTERPRISE | GOVERNMENT
-  senderCompany         String?   @default("")
+  id             String @id @default(cuid())
+  reference      String @unique
+  orderType      String @default("RETAIL") // RETAIL | BUSINESS
+  direction      String @default("IQD_TO_ECNY") // IQD_TO_ECNY | ECNY_TO_IQD
+  sourceCurrency String @default("IQD")
+  targetCurrency String @default("E_CNY")
+  sourceAmount   Float
+  targetAmount   Float
+  exchangeRate   Float
+  feeAmount      Float
+  feePercent     Float
+  status         String @default("PENDING_SETTLEMENT") // PENDING_SETTLEMENT | PROCESSING | COMPLETED | COMPLIANCE_HOLD | REJECTED
+
+  senderName     String
+  senderEmail    String
+  senderPhone    String? @default("")
+  senderIdNumber String? @default("")
+  senderEntity   String? @default("INDIVIDUAL") // INDIVIDUAL | ENTERPRISE | GOVERNMENT
+  senderCompany  String? @default("")
 
   recipientName         String
-  recipientIdentifier   String    // e-CNY Wallet ID / Bank Account IBAN / Mobile
-  recipientEntity       String?   @default("INDIVIDUAL") // INDIVIDUAL | ENTERPRISE
-  recipientBankOrBureau String?   @default("PBOC mBridge Digital Clearing Hub")
+  recipientIdentifier   String // e-CNY Wallet ID / Bank Account IBAN / Mobile
+  recipientEntity       String? @default("INDIVIDUAL") // INDIVIDUAL | ENTERPRISE
+  recipientBankOrBureau String? @default("PBOC mBridge Digital Clearing Hub")
 
-  purpose               String    @default("COMMERCIAL_TRADE") // REMITTANCE | TUITION | COMMERCIAL_TRADE | PORT_CUSTOMS | LOGISTICS | TRAVEL
-  settlementMethod      String    @default("MBRIDGE_CBDC") // E_CNY_WALLET | MBRIDGE_CBDC | CIPS_INTERBANK | ZAIN_CASH | QI_CARD | FIB_TRANSFER | AL_FAW_ESCROW
+  purpose          String @default("COMMERCIAL_TRADE") // REMITTANCE | TUITION | COMMERCIAL_TRADE | PORT_CUSTOMS | LOGISTICS | TRAVEL
+  settlementMethod String @default("MBRIDGE_CBDC") // E_CNY_WALLET | MBRIDGE_CBDC | CIPS_INTERBANK | ZAIN_CASH | QI_CARD | FIB_TRANSFER | AL_FAW_ESCROW
 
-  commercialInvoiceRef  String?   @default("")
-  billOfLading          String?   @default("")
-  customsDeclarationNo  String?   @default("")
-  contractValueUsd      Float?    @default(0.0)
-  taxRegistrationNumber String?   @default("")
+  commercialInvoiceRef  String? @default("")
+  billOfLading          String? @default("")
+  customsDeclarationNo  String? @default("")
+  contractValueUsd      Float?  @default(0.0)
+  taxRegistrationNumber String? @default("")
 
-  settlementTxHash      String?   @default("")
-  verificationCode      String?   @default("")
-  qrPayload             String?   @default("")
-  complianceNotes       String?   @default("")
-  adminNotes            String?   @default("")
-  rejectionReason       String?   @default("")
+  settlementTxHash String? @default("")
+  verificationCode String? @default("")
+  qrPayload        String? @default("")
+  complianceNotes  String? @default("")
+  adminNotes       String? @default("")
+  rejectionReason  String? @default("")
 
-  settledAt             DateTime?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  settledAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model PaymentExchangeRate {
-  id                    String    @id @default(cuid())
-  pair                  String    @unique @default("IQD_ECNY")
-  baseRate              Float     @default(188.50)
-  bidRate               Float     @default(187.80)
-  askRate               Float     @default(189.20)
-  retailFeePercent      Float     @default(0.75)
-  businessFeePercent    Float     @default(0.35)
-  minimumRetailIqd      Float     @default(25000.0)
-  minimumBusinessIqd    Float     @default(1000000.0)
-  change24h             Float     @default(0.42)
-  high24h               Float     @default(189.85)
-  low24h                Float     @default(187.10)
-  volume24h             String    @default("¥ 42.8M / د.ع 8.06B")
-  ecnyReservePool       Float     @default(150000000.0)
-  iqdReservePool        Float     @default(28275000000.0)
-  mbridgeStatus         String    @default("ACTIVE")
-  cipsGatewayStatus     String    @default("ONLINE")
-  cbiClearingStatus     String    @default("SYNCHRONIZED")
-  lastUpdatedBy         String?   @default("PBOC / CBI Clearing Interbank Feed")
-  updatedAt             DateTime  @updatedAt
+  id                 String   @id @default(cuid())
+  pair               String   @unique @default("IQD_ECNY")
+  baseRate           Float    @default(188.50)
+  bidRate            Float    @default(187.80)
+  askRate            Float    @default(189.20)
+  retailFeePercent   Float    @default(0.75)
+  businessFeePercent Float    @default(0.35)
+  minimumRetailIqd   Float    @default(25000.0)
+  minimumBusinessIqd Float    @default(1000000.0)
+  change24h          Float    @default(0.42)
+  high24h            Float    @default(189.85)
+  low24h             Float    @default(187.10)
+  volume24h          String   @default("¥ 42.8M / د.ع 8.06B")
+  ecnyReservePool    Float    @default(150000000.0)
+  iqdReservePool     Float    @default(28275000000.0)
+  mbridgeStatus      String   @default("ACTIVE")
+  cipsGatewayStatus  String   @default("ONLINE")
+  cbiClearingStatus  String   @default("SYNCHRONIZED")
+  lastUpdatedBy      String?  @default("PBOC / CBI Clearing Interbank Feed")
+  updatedAt          DateTime @updatedAt
 }
 
 model BricsTopic {
-  id             String   @id @default(cuid())
-  slug           String   @unique
-  titleEn        String
-  titleAr        String   @default("")
-  titleZh        String   @default("")
-  titleCkb       String   @default("")
-  summaryEn      String
-  summaryAr      String   @default("")
-  summaryZh      String   @default("")
-  summaryCkb     String   @default("")
-  contentEn      String
-  contentAr      String   @default("")
-  contentZh      String   @default("")
-  contentCkb     String   @default("")
-  imageUrl       String?
-  category       String   @default("ECONOMY")
-  isFeatured     Boolean  @default(true)
-  order          Int      @default(0)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  titleEn    String
+  titleAr    String   @default("")
+  titleZh    String   @default("")
+  titleCkb   String   @default("")
+  summaryEn  String
+  summaryAr  String   @default("")
+  summaryZh  String   @default("")
+  summaryCkb String   @default("")
+  contentEn  String
+  contentAr  String   @default("")
+  contentZh  String   @default("")
+  contentCkb String   @default("")
+  imageUrl   String?
+  category   String   @default("ECONOMY")
+  isFeatured Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model ChineseProduct {
@@ -616,7 +615,7 @@ model AuditLog {
   action    String
   resource  String
   itemId    String?
-  details   String?  
+  details   String?
 }
 
 model Video {
@@ -671,31 +670,31 @@ model Documentary {
 }
 
 model FinanceInsight {
-  id             String   @id @default(cuid())
-  slug           String   @unique
-  category       String
-  coverImage     String
-  author         String   @default("ICA Economic Research Desk")
-  featured       Boolean  @default(false)
-  order          Int      @default(0)
-  publishedAt    DateTime @default(now())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  category    String
+  coverImage  String
+  author      String   @default("ICA Economic Research Desk")
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  titleEn        String
-  titleAr        String   @default("")
-  titleZh        String   @default("")
-  titleCkb       String   @default("")
+  titleEn  String
+  titleAr  String @default("")
+  titleZh  String @default("")
+  titleCkb String @default("")
 
-  summaryEn      String
-  summaryAr      String   @default("")
-  summaryZh      String   @default("")
-  summaryCkb     String   @default("")
+  summaryEn  String
+  summaryAr  String @default("")
+  summaryZh  String @default("")
+  summaryCkb String @default("")
 
-  bodyEn         String   @default("")
-  bodyAr         String   @default("")
-  bodyZh         String   @default("")
-  bodyCkb        String   @default("")
+  bodyEn  String @default("")
+  bodyAr  String @default("")
+  bodyZh  String @default("")
+  bodyCkb String @default("")
 }
 
 model CulturalExchangeCategory {
@@ -742,4 +741,3 @@ model CulturalExchangeProgram {
   createdAt           DateTime                 @default(now())
   updatedAt           DateTime                 @updatedAt
 }
-

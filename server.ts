@@ -175,18 +175,18 @@ async function startServer() {
 
   app.use(
     helmet({
-      contentSecurityPolicy: {
+      contentSecurityPolicy: process.env.NODE_ENV === "production" ? {
         directives: {
           defaultSrc: ["'self'"],
-          scriptSrc: ["'self'"],
-          frameSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "blob:"],
+          frameSrc: ["'self'", "https:", ...allowedFrameAncestors],
           imgSrc: ["'self'", "data:", "blob:", "https:"],
           connectSrc: ["'self'", "https:", "wss:"],
           styleSrc: ["'self'", "'unsafe-inline'", "https:"],
           fontSrc: ["'self'", "data:", "https:"],
           frameAncestors: allowedFrameAncestors,
         },
-      },
+      } : false,
       frameguard: false, // Ensure iframe embedding in AI Studio is permitted
       crossOriginEmbedderPolicy: false,
       crossOriginOpenerPolicy: false,
@@ -270,6 +270,34 @@ async function startServer() {
         }
       });
     }
+    next();
+  });
+
+  // 301 Permanent Redirects for Cultural Exchange Migration to CISE Service
+  app.use((req, res, next) => {
+    const rawPath = req.path;
+    // Skip API routes, static assets, and dev files
+    if (rawPath.startsWith('/api') || rawPath.startsWith('/@') || rawPath.startsWith('/src') || rawPath.includes('.')) {
+      return next();
+    }
+
+    // Top-level unlocalized: /cultural-exchange -> /en/institute/services/cultural-exchange
+    if (rawPath === '/cultural-exchange' || rawPath.startsWith('/cultural-exchange/')) {
+      const rest = rawPath.replace(/^\/cultural-exchange/, '');
+      const query = req.url.includes('?') ? '?' + req.url.split('?')[1] : '';
+      return res.redirect(301, `/en/institute/services/cultural-exchange${rest}${query}`);
+    }
+
+    // Localized: /:lang/cultural-exchange -> /:lang/institute/services/cultural-exchange
+    const localizedMatch = rawPath.match(/^\/(en|ar|zh|ckb|ck|ku)\/cultural-exchange(\/.*)?$/);
+    if (localizedMatch) {
+      let lang = localizedMatch[1];
+      if (lang === 'ck' || lang === 'ku') lang = 'ckb';
+      const rest = localizedMatch[2] || '';
+      const query = req.url.includes('?') ? '?' + req.url.split('?')[1] : '';
+      return res.redirect(301, `/${lang}/institute/services/cultural-exchange${rest}${query}`);
+    }
+
     next();
   });
 
@@ -4548,12 +4576,32 @@ async function startServer() {
       server: { middlewareMode: true, allowedHosts: true },
       appType: "spa",
     });
+
+    // Ensure no-cache for development to fix preview update issues (Stage 1 Part B.5)
+    app.use((req, res, next) => {
+      res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+      next();
+    });
+
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
     
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
+    app.use(express.static(distPath, {
+      setHeaders: (res, path) => {
+        if (path.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        }
+      }
+    }));
+
+    app.get("*", (req, res, next) => {
+      // Guard for static assets to avoid SPA fallback hijacking (Stage 1 Part B.16)
+      if (req.path.match(/\.(css|js|woff2|png|jpg|jpeg|svg|ico|webp|json|map)$/)) {
+        return res.status(404).end();
+      }
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

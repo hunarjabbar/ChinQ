@@ -75,14 +75,14 @@ export default function DataHubCorridorTracker() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="space-y-4 text-center lg:text-left rtl:lg:text-right">
-        <div className="inline-flex items-center gap-2 text-[#047857]">
+        <div className="inline-flex items-center gap-2 text-[var(--accent-primary)]">
           <Activity size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">Logistics Intelligence</span>
         </div>
-        <h1 className="text-3xl lg:text-5xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">
+        <h1 className="text-3xl lg:text-5xl font-black text-[var(--surface-dark)] uppercase tracking-tighter">
           Corridor Active Tracker
         </h1>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium max-w-2xl leading-relaxed mx-auto lg:mx-0">
+        <p className="text-sm text-[var(--color-text-muted)] font-medium max-w-2xl leading-relaxed mx-auto lg:mx-0">
           Real-time monitoring of the Yiwu → Sulaymaniyah → Basra logistics spine. 
           Tracking infrastructure readiness and trade node throughput.
         </p>
@@ -90,28 +90,28 @@ export default function DataHubCorridorTracker() {
 
       <div className="relative">
         {/* Connection Line */}
-        <div className="absolute top-1/2 left-0 right-0 h-1 bg-neutral-100 dark:bg-neutral-800 -translate-y-1/2 hidden lg:block" />
+        <div className="absolute top-1/2 left-0 right-0 h-1 bg-[var(--color-border)] -translate-y-1/2 hidden lg:block" />
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
           {nodes.map((node, i) => (
             <div key={node.id} className="space-y-6">
               <div className="flex flex-col items-center lg:items-start space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-[#0F172A] text-white flex items-center justify-center shadow-xl relative">
+                <div className="w-16 h-16 rounded-2xl bg-[var(--surface-dark)] text-white flex items-center justify-center shadow-xl relative">
                   <MapPin size={24} />
                   {i < nodes.length - 1 && (
                     <ArrowRight size={16} className="absolute -right-6 top-1/2 -translate-y-1/2 text-neutral-300 hidden lg:block rtl:rotate-180 rtl:-left-6 rtl:right-auto" />
                   )}
                 </div>
                 <div className="text-center lg:text-left rtl:lg:text-right">
-                  <span className="text-[9px] font-black text-[#047857] uppercase tracking-widest">{node.type}</span>
-                  <h3 className="text-xl font-black text-[#0F172A] dark:text-white uppercase tracking-tight">
+                  <span className="text-[9px] font-black text-[var(--accent-primary)] uppercase tracking-widest">{node.type}</span>
+                  <h3 className="text-xl font-black text-[var(--surface-dark)] uppercase tracking-tight">
                     {node[`name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof typeof node] as string || node.nameEn}
                   </h3>
                 </div>
               </div>
 
               <div 
-                className="bg-white dark:bg-neutral-900 rounded-3xl p-8 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6 hover:shadow-xl hover:border-[#047857]/30 transition-all group cursor-pointer active:scale-[0.98]"
+                className="bg-[var(--color-snowman)] rounded-3xl p-8 border border-[var(--color-border)] shadow-sm space-y-6 hover:shadow-xl hover:border-[var(--accent-primary)]/30 transition-all group cursor-pointer active:scale-[0.98]"
                 onClick={() => setSelectedNodeId(node.id)}
               >
                 <div className="flex items-center justify-between">
@@ -131,11 +131,11 @@ export default function DataHubCorridorTracker() {
                 <div className="grid grid-cols-2 gap-4 pt-6 border-t border-neutral-50 dark:border-neutral-800">
                   <div className="space-y-1">
                     <span className="block text-[8px] font-black uppercase tracking-widest text-neutral-400">Throughput</span>
-                    <span className="block text-xs font-black text-[#0F172A] dark:text-white">{node.volume}</span>
+                    <span className="block text-xs font-black text-[var(--color-ink-900)] dark:text-white">{node.volume}</span>
                   </div>
                   <div className="space-y-1">
                     <span className="block text-[8px] font-black uppercase tracking-widest text-neutral-400">Provider</span>
-                    <span className="block text-xs font-black text-[#0F172A] dark:text-white">Active</span>
+                    <span className="block text-xs font-black text-[var(--color-ink-900)] dark:text-white">Active</span>
                   </div>
                 </div>
 
@@ -162,7 +162,7 @@ export default function DataHubCorridorTracker() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="p-8 bg-[#0F172A] text-white rounded-3xl space-y-8 relative overflow-hidden shadow-2xl"
+            className="p-8 bg-[var(--color-ink-900)] text-white rounded-3xl space-y-8 relative overflow-hidden shadow-2xl"
           >
             <div className="absolute top-0 right-0 p-12 opacity-5">
               <MapPin size={120} />
@@ -190,32 +190,32 @@ export default function DataHubCorridorTracker() {
 
               <div className="grid grid-cols-2 gap-6 flex-1">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#047857]">Operational Efficiency</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)]">Operational Efficiency</span>
                   <div className="text-2xl font-black">94.2%</div>
                   <div className="h-1 bg-neutral-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 w-[94%]" />
+                    <div className="h-full bg-[var(--color-success)] w-[94%]" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#047857]">Customs Speed</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)]">Customs Speed</span>
                   <div className="text-2xl font-black">1.4 Days</div>
                   <div className="h-1 bg-neutral-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 w-[80%]" />
+                    <div className="h-full bg-[var(--color-success)] w-[80%]" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#047857]">Carrier Density</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)]">Carrier Density</span>
                   <div className="text-2xl font-black">High</div>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#047857]">Security Rating</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)]">Security Rating</span>
                   <div className="text-2xl font-black">Tier 1</div>
                 </div>
               </div>
             </div>
 
             <div className="pt-8 border-t border-white/5 flex flex-wrap gap-4">
-              <button className="px-6 py-3 bg-[#047857] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
+              <button className="px-6 py-3 bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
                 Download Node Datasheet
               </button>
               <button className="px-6 py-3 bg-white/5 text-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-white/10 hover:bg-white/10 transition-all">
@@ -227,36 +227,36 @@ export default function DataHubCorridorTracker() {
       </AnimatePresence>
 
       {/* Logistics Detail Strip */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-16 border-t border-neutral-100 dark:border-neutral-800">
-        <div className="p-8 bg-[#F8FAFC] dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 flex items-start gap-6">
-          <div className="p-4 bg-white dark:bg-neutral-800 rounded-2xl shadow-sm text-[#0284C7]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-16 border-t border-[var(--color-border)]">
+        <div className="p-8 bg-[var(--color-snowman-alt)] rounded-3xl border border-[var(--color-border)] flex items-start gap-6">
+          <div className="p-4 bg-[var(--color-snowman)] rounded-2xl shadow-sm text-[var(--accent-primary)] border border-[var(--color-border)]">
             <Truck size={24} />
           </div>
           <div className="space-y-2">
-            <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-tight">Active Land Fleets</h4>
-            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
+            <h4 className="text-sm font-black text-[var(--surface-dark)] uppercase tracking-tight">Active Land Fleets</h4>
+            <p className="text-xs text-[var(--color-text-muted)] font-medium leading-relaxed">
               1,200+ verified logistics vehicles active on the Yiwu–Sulaymaniyah land route monthly.
             </p>
           </div>
         </div>
-        <div className="p-8 bg-[#F8FAFC] dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 flex items-start gap-6">
-          <div className="p-4 bg-white dark:bg-neutral-800 rounded-2xl shadow-sm text-[#0284C7]">
+        <div className="p-8 bg-[var(--color-snowman-alt)] rounded-3xl border border-[var(--color-border)] flex items-start gap-6">
+          <div className="p-4 bg-[var(--color-snowman)] rounded-2xl shadow-sm text-[var(--accent-primary)] border border-[var(--color-border)]">
             <Package size={24} />
           </div>
           <div className="space-y-2">
-            <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-tight">Commodity Mix</h4>
-            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
+            <h4 className="text-sm font-black text-[var(--surface-dark)] uppercase tracking-tight">Commodity Mix</h4>
+            <p className="text-xs text-[var(--color-text-muted)] font-medium leading-relaxed">
               72% of transit volume consists of electronics, automotive parts, and refined construction materials.
             </p>
           </div>
         </div>
-        <div className="p-8 bg-[#F8FAFC] dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 flex items-start gap-6">
-          <div className="p-4 bg-white dark:bg-neutral-800 rounded-2xl shadow-sm text-[#0284C7]">
+        <div className="p-8 bg-[var(--color-snowman-alt)] rounded-3xl border border-[var(--color-border)] flex items-start gap-6">
+          <div className="p-4 bg-[var(--color-snowman)] rounded-2xl shadow-sm text-[var(--accent-primary)] border border-[var(--color-border)]">
             <Building2 size={24} />
           </div>
           <div className="space-y-2">
-            <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-tight">Infrastructure Delta</h4>
-            <p className="text-xs text-neutral-500 font-medium leading-relaxed">
+            <h4 className="text-sm font-black text-[var(--surface-dark)] uppercase tracking-tight">Infrastructure Delta</h4>
+            <p className="text-xs text-[var(--color-text-muted)] font-medium leading-relaxed">
               New warehouse facilities in Sulaymaniyah increased regional cold-chain capacity by 40% in Q1 2026.
             </p>
           </div>

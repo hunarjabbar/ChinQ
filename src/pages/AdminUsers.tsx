@@ -73,7 +73,7 @@ export function AdminUsersContent() {
       ctx.strokeRect(6, 6, 888, 528);
 
       // Top Red Header Banner
-      ctx.fillStyle = '#cc0000';
+      ctx.fillStyle = 'var(--color-brand-800)';
       ctx.fillRect(6, 6, 888, 90);
 
       // Header Text
@@ -86,7 +86,7 @@ export function AdminUsersContent() {
       // Clearance Pill in Header
       ctx.fillStyle = '#FAF0E6';
       ctx.fillRect(720, 26, 150, 40);
-      ctx.fillStyle = '#cc0000';
+      ctx.fillStyle = 'var(--color-brand-800)';
       ctx.font = 'bold 16px sans-serif';
       ctx.fillText(user.clearanceLevel || 'LEVEL-2', 745, 52);
 
@@ -138,7 +138,7 @@ export function AdminUsersContent() {
       drawField('Renewals Count', String(user.renewalCount || 0), 630, 395);
 
       // Bottom Footer Bar
-      ctx.fillStyle = '#cc0000';
+      ctx.fillStyle = 'var(--color-brand-800)';
       ctx.fillRect(6, 480, 888, 54);
       ctx.fillStyle = '#FAF0E6';
       ctx.font = 'bold 11px monospace';

@@ -1,61 +1,4 @@
-import { prisma } from './db.js';
-
-export const SEED_CULTURAL_CATEGORIES = [
-  {
-    slug: 'educational-exchange',
-    nameEn: 'Educational Exchange Programs',
-    nameAr: 'برامج التبادل التعليمي والمدرسي',
-    nameZh: '教育与学术交流项目',
-    nameCkb: 'بەرنامەکانی ئاڵوگۆڕی پەروەردەیی',
-    order: 1
-  },
-  {
-    slug: 'higher-education-university',
-    nameEn: 'Higher Education & University Partnerships',
-    nameAr: 'شراكات التعليم العالي والجامعات',
-    nameZh: '高等教育与大学战略合作',
-    nameCkb: 'هاوبەشییەکانی خوێندنی باڵا و زانکۆکان',
-    order: 2
-  },
-  {
-    slug: 'arts-heritage',
-    nameEn: 'Arts & Heritage Exchange',
-    nameAr: 'تبادل الفنون والتراث الثقافي',
-    nameZh: '艺术与文化遗产传承交流',
-    nameCkb: 'ئاڵوگۆڕی هونەر و کەلەپوور',
-    order: 3
-  },
-  {
-    slug: 'youth-language',
-    nameEn: 'Youth & Language Programs',
-    nameAr: 'برامج الشباب واللغات الصينية العربية',
-    nameZh: '青年领袖与中阿双语互通计划',
-    nameCkb: 'بەرنامەکانی گەنجان و فێربوونی زمان',
-    order: 4
-  },
-  {
-    slug: 'professional-vocational',
-    nameEn: 'Professional & Vocational Exchange',
-    nameAr: 'التبادل المهني والتدريب التقني التخصصي',
-    nameZh: '专业技能与高端职教交流',
-    nameCkb: 'ئاڵوگۆڕی پیشەیی و ڕاهێنانی تەکنیکی',
-    order: 5
-  }
-];
-
-export const SEED_CULTURAL_PROGRAMS = [
-  // Category 1: Educational Exchange Programs
-  {
-    slug: 'sino-iraqi-k12-stem-immersion',
-    titleEn: 'Sino-Iraqi STEM & Robotics Youth Immersion 2026',
-    titleAr: 'برنامج المعايشة الشبابية الصينية العراقية للروبوتات والعلوم والتكنولوجيا',
-    titleZh: '2026年中伊青少年STEM科学与人工智能机器人研学营',
-    titleCkb: 'بەرنامەی گەنجانی عێراقی-چینی بۆ زانست و ڕۆبۆتیک ٢٠٢٦',
-    descriptionEn: 'A high-impact 3-week cultural and robotics immersion connecting 40 outstanding Iraqi high school students with premier science laboratories in Shanghai and Beijing.',
-    descriptionAr: 'برنامج معايشة ثقافية وعلمية مكثف لمدة ٣ أسابيع يربط ٤٠ طالباً متميزاً من المدارس الثانوية العراقية بمختبرات الابتكار والذكاء الاصطناعي الرائدة في شنغهاي وبكين.',
-    descriptionZh: '为期3周的深度科技与文化研学营，选拔40名优秀伊拉克高中生前往上海和北京的顶尖人工智能与机器人实验室开展沉浸式研讨。',
-    descriptionCkb: 'بەرنامەیەکی بەهێزی ٣ هەفتەیی بۆ ٤٠ قوتابی لێهاتووی ئامادەیی عێراق لە تاقیگەکانی ڕۆبۆتیک و هۆشی دەستکرد لە شەنگهای و پەکین.',
-    detailsEn: `The Sino-Iraqi STEM & Robotics Immersion is an annual flagship exchange initiative co-organized by the Iraqi-Chinese Agency, the Chinese Association for Science and Technology (CAST), and top Iraqi STEM secondary academies.
+var __defProp=Object.defineProperty;var __name=(target,value)=>__defProp(target,"name",{value,configurable:true});import{prisma}from"./db.js";const SEED_CULTURAL_CATEGORIES=[{slug:"educational-exchange",nameEn:"Educational Exchange Programs",nameAr:"\u0628\u0631\u0627\u0645\u062C \u0627\u0644\u062A\u0628\u0627\u062F\u0644 \u0627\u0644\u062A\u0639\u0644\u064A\u0645\u064A \u0648\u0627\u0644\u0645\u062F\u0631\u0633\u064A",nameZh:"\u6559\u80B2\u4E0E\u5B66\u672F\u4EA4\u6D41\u9879\u76EE",nameCkb:"\u0628\u06D5\u0631\u0646\u0627\u0645\u06D5\u06A9\u0627\u0646\u06CC \u0626\u0627\u06B5\u0648\u06AF\u06C6\u0695\u06CC \u067E\u06D5\u0631\u0648\u06D5\u0631\u062F\u06D5\u06CC\u06CC",order:1},{slug:"higher-education-university",nameEn:"Higher Education & University Partnerships",nameAr:"\u0634\u0631\u0627\u0643\u0627\u062A \u0627\u0644\u062A\u0639\u0644\u064A\u0645 \u0627\u0644\u0639\u0627\u0644\u064A \u0648\u0627\u0644\u062C\u0627\u0645\u0639\u0627\u062A",nameZh:"\u9AD8\u7B49\u6559\u80B2\u4E0E\u5927\u5B66\u6218\u7565\u5408\u4F5C",nameCkb:"\u0647\u0627\u0648\u0628\u06D5\u0634\u06CC\u06CC\u06D5\u06A9\u0627\u0646\u06CC \u062E\u0648\u06CE\u0646\u062F\u0646\u06CC \u0628\u0627\u06B5\u0627 \u0648 \u0632\u0627\u0646\u06A9\u06C6\u06A9\u0627\u0646",order:2},{slug:"arts-heritage",nameEn:"Arts & Heritage Exchange",nameAr:"\u062A\u0628\u0627\u062F\u0644 \u0627\u0644\u0641\u0646\u0648\u0646 \u0648\u0627\u0644\u062A\u0631\u0627\u062B \u0627\u0644\u062B\u0642\u0627\u0641\u064A",nameZh:"\u827A\u672F\u4E0E\u6587\u5316\u9057\u4EA7\u4F20\u627F\u4EA4\u6D41",nameCkb:"\u0626\u0627\u06B5\u0648\u06AF\u06C6\u0695\u06CC \u0647\u0648\u0646\u06D5\u0631 \u0648 \u06A9\u06D5\u0644\u06D5\u067E\u0648\u0648\u0631",order:3},{slug:"youth-language",nameEn:"Youth & Language Programs",nameAr:"\u0628\u0631\u0627\u0645\u062C \u0627\u0644\u0634\u0628\u0627\u0628 \u0648\u0627\u0644\u0644\u063A\u0627\u062A \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0627\u0644\u0639\u0631\u0628\u064A\u0629",nameZh:"\u9752\u5E74\u9886\u8896\u4E0E\u4E2D\u963F\u53CC\u8BED\u4E92\u901A\u8BA1\u5212",nameCkb:"\u0628\u06D5\u0631\u0646\u0627\u0645\u06D5\u06A9\u0627\u0646\u06CC \u06AF\u06D5\u0646\u062C\u0627\u0646 \u0648 \u0641\u06CE\u0631\u0628\u0648\u0648\u0646\u06CC \u0632\u0645\u0627\u0646",order:4},{slug:"professional-vocational",nameEn:"Professional & Vocational Exchange",nameAr:"\u0627\u0644\u062A\u0628\u0627\u062F\u0644 \u0627\u0644\u0645\u0647\u0646\u064A \u0648\u0627\u0644\u062A\u062F\u0631\u064A\u0628 \u0627\u0644\u062A\u0642\u0646\u064A \u0627\u0644\u062A\u062E\u0635\u0635\u064A",nameZh:"\u4E13\u4E1A\u6280\u80FD\u4E0E\u9AD8\u7AEF\u804C\u6559\u4EA4\u6D41",nameCkb:"\u0626\u0627\u06B5\u0648\u06AF\u06C6\u0695\u06CC \u067E\u06CC\u0634\u06D5\u06CC\u06CC \u0648 \u0695\u0627\u0647\u06CE\u0646\u0627\u0646\u06CC \u062A\u06D5\u06A9\u0646\u06CC\u06A9\u06CC",order:5}];const SEED_CULTURAL_PROGRAMS=[{slug:"sino-iraqi-k12-stem-immersion",titleEn:"Sino-Iraqi STEM & Robotics Youth Immersion 2026",titleAr:"\u0628\u0631\u0646\u0627\u0645\u062C \u0627\u0644\u0645\u0639\u0627\u064A\u0634\u0629 \u0627\u0644\u0634\u0628\u0627\u0628\u064A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0644\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0648\u0627\u0644\u0639\u0644\u0648\u0645 \u0648\u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627",titleZh:"2026\u5E74\u4E2D\u4F0A\u9752\u5C11\u5E74STEM\u79D1\u5B66\u4E0E\u4EBA\u5DE5\u667A\u80FD\u673A\u5668\u4EBA\u7814\u5B66\u8425",titleCkb:"\u0628\u06D5\u0631\u0646\u0627\u0645\u06D5\u06CC \u06AF\u06D5\u0646\u062C\u0627\u0646\u06CC \u0639\u06CE\u0631\u0627\u0642\u06CC-\u0686\u06CC\u0646\u06CC \u0628\u06C6 \u0632\u0627\u0646\u0633\u062A \u0648 \u0695\u06C6\u0628\u06C6\u062A\u06CC\u06A9 \u0662\u0660\u0662\u0666",descriptionEn:"A high-impact 3-week cultural and robotics immersion connecting 40 outstanding Iraqi high school students with premier science laboratories in Shanghai and Beijing.",descriptionAr:"\u0628\u0631\u0646\u0627\u0645\u062C \u0645\u0639\u0627\u064A\u0634\u0629 \u062B\u0642\u0627\u0641\u064A\u0629 \u0648\u0639\u0644\u0645\u064A\u0629 \u0645\u0643\u062B\u0641 \u0644\u0645\u062F\u0629 \u0663 \u0623\u0633\u0627\u0628\u064A\u0639 \u064A\u0631\u0628\u0637 \u0664\u0660 \u0637\u0627\u0644\u0628\u0627\u064B \u0645\u062A\u0645\u064A\u0632\u0627\u064B \u0645\u0646 \u0627\u0644\u0645\u062F\u0627\u0631\u0633 \u0627\u0644\u062B\u0627\u0646\u0648\u064A\u0629 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0628\u0645\u062E\u062A\u0628\u0631\u0627\u062A \u0627\u0644\u0627\u0628\u062A\u0643\u0627\u0631 \u0648\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0627\u0644\u0631\u0627\u0626\u062F\u0629 \u0641\u064A \u0634\u0646\u063A\u0647\u0627\u064A \u0648\u0628\u0643\u064A\u0646.",descriptionZh:"\u4E3A\u671F3\u5468\u7684\u6DF1\u5EA6\u79D1\u6280\u4E0E\u6587\u5316\u7814\u5B66\u8425\uFF0C\u9009\u62D440\u540D\u4F18\u79C0\u4F0A\u62C9\u514B\u9AD8\u4E2D\u751F\u524D\u5F80\u4E0A\u6D77\u548C\u5317\u4EAC\u7684\u9876\u5C16\u4EBA\u5DE5\u667A\u80FD\u4E0E\u673A\u5668\u4EBA\u5B9E\u9A8C\u5BA4\u5F00\u5C55\u6C89\u6D78\u5F0F\u7814\u8BA8\u3002",descriptionCkb:"\u0628\u06D5\u0631\u0646\u0627\u0645\u06D5\u06CC\u06D5\u06A9\u06CC \u0628\u06D5\u0647\u06CE\u0632\u06CC \u0663 \u0647\u06D5\u0641\u062A\u06D5\u06CC\u06CC \u0628\u06C6 \u0664\u0660 \u0642\u0648\u062A\u0627\u0628\u06CC \u0644\u06CE\u0647\u0627\u062A\u0648\u0648\u06CC \u0626\u0627\u0645\u0627\u062F\u06D5\u06CC\u06CC \u0639\u06CE\u0631\u0627\u0642 \u0644\u06D5 \u062A\u0627\u0642\u06CC\u06AF\u06D5\u06A9\u0627\u0646\u06CC \u0695\u06C6\u0628\u06C6\u062A\u06CC\u06A9 \u0648 \u0647\u06C6\u0634\u06CC \u062F\u06D5\u0633\u062A\u06A9\u0631\u062F \u0644\u06D5 \u0634\u06D5\u0646\u06AF\u0647\u0627\u06CC \u0648 \u067E\u06D5\u06A9\u06CC\u0646.",detailsEn:`The Sino-Iraqi STEM & Robotics Immersion is an annual flagship exchange initiative co-organized by the Iraqi-Chinese Agency, the Chinese Association for Science and Technology (CAST), and top Iraqi STEM secondary academies.
 
 ### Program Core Objectives
 - Hands-on workshops in machine learning, micro-electronics, and aerospace principles.
@@ -63,78 +6,22 @@ export const SEED_CULTURAL_PROGRAMS = [
 - Direct mentorship under senior Chinese engineering fellows and academic faculty.
 - Collaborative capstone prototype development presented at the Shanghai Global Youth Innovation Forum.
 
-All travel, accommodation, training materials, and laboratory access are fully covered under the bilateral initiative grant.`,
-    detailsAr: `تعد معايشة العلوم والروبوتات الصينية العراقية مبادرة سنوية رائدة تنظمها الوكالة العراقية الصينية بالتعاون مع الجمعية الصينية للعلوم والتكنولوجيا (CAST) ومدارس المتميزين والموهوبين في العراق.
+All travel, accommodation, training materials, and laboratory access are fully covered under the bilateral initiative grant.`,detailsAr:`\u062A\u0639\u062F \u0645\u0639\u0627\u064A\u0634\u0629 \u0627\u0644\u0639\u0644\u0648\u0645 \u0648\u0627\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0645\u0628\u0627\u062F\u0631\u0629 \u0633\u0646\u0648\u064A\u0629 \u0631\u0627\u0626\u062F\u0629 \u062A\u0646\u0638\u0645\u0647\u0627 \u0627\u0644\u0648\u0643\u0627\u0644\u0629 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0628\u0627\u0644\u062A\u0639\u0627\u0648\u0646 \u0645\u0639 \u0627\u0644\u062C\u0645\u0639\u064A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0644\u0644\u0639\u0644\u0648\u0645 \u0648\u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627 (CAST) \u0648\u0645\u062F\u0627\u0631\u0633 \u0627\u0644\u0645\u062A\u0645\u064A\u0632\u064A\u0646 \u0648\u0627\u0644\u0645\u0648\u0647\u0648\u0628\u064A\u0646 \u0641\u064A \u0627\u0644\u0639\u0631\u0627\u0642.
 
-### المحاور الرئيسية للبرنامج:
-- ورش عمل تطبيقية في تعلم الآلة، الإلكترونيات الدقيقة، وهندسة الطيران.
-- تجربة ثقافية أصيلة تشتمل على أساسيات اللغة الصينية وجولات ميدانية تراثية في بكين وشنغهاي.
-- إشراف أكاديمي مباشر من كبار المهندسين والباحثين في الجامعات الصينية.
-- تطوير نموذج هندسي مصغر يتم استعراضه في منتدى الابتكار الشبابي الدولي في شنغهاي.
+### \u0627\u0644\u0645\u062D\u0627\u0648\u0631 \u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629 \u0644\u0644\u0628\u0631\u0646\u0627\u0645\u062C:
+- \u0648\u0631\u0634 \u0639\u0645\u0644 \u062A\u0637\u0628\u064A\u0642\u064A\u0629 \u0641\u064A \u062A\u0639\u0644\u0645 \u0627\u0644\u0622\u0644\u0629\u060C \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0627\u062A \u0627\u0644\u062F\u0642\u064A\u0642\u0629\u060C \u0648\u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u0637\u064A\u0631\u0627\u0646.
+- \u062A\u062C\u0631\u0628\u0629 \u062B\u0642\u0627\u0641\u064A\u0629 \u0623\u0635\u064A\u0644\u0629 \u062A\u0634\u062A\u0645\u0644 \u0639\u0644\u0649 \u0623\u0633\u0627\u0633\u064A\u0627\u062A \u0627\u0644\u0644\u063A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0648\u062C\u0648\u0644\u0627\u062A \u0645\u064A\u062F\u0627\u0646\u064A\u0629 \u062A\u0631\u0627\u062B\u064A\u0629 \u0641\u064A \u0628\u0643\u064A\u0646 \u0648\u0634\u0646\u063A\u0647\u0627\u064A.
+- \u0625\u0634\u0631\u0627\u0641 \u0623\u0643\u0627\u062F\u064A\u0645\u064A \u0645\u0628\u0627\u0634\u0631 \u0645\u0646 \u0643\u0628\u0627\u0631 \u0627\u0644\u0645\u0647\u0646\u062F\u0633\u064A\u0646 \u0648\u0627\u0644\u0628\u0627\u062D\u062B\u064A\u0646 \u0641\u064A \u0627\u0644\u062C\u0627\u0645\u0639\u0627\u062A \u0627\u0644\u0635\u064A\u0646\u064A\u0629.
+- \u062A\u0637\u0648\u064A\u0631 \u0646\u0645\u0648\u0630\u062C \u0647\u0646\u062F\u0633\u064A \u0645\u0635\u063A\u0631 \u064A\u062A\u0645 \u0627\u0633\u062A\u0639\u0631\u0627\u0636\u0647 \u0641\u064A \u0645\u0646\u062A\u062F\u0649 \u0627\u0644\u0627\u0628\u062A\u0643\u0627\u0631 \u0627\u0644\u0634\u0628\u0627\u0628\u064A \u0627\u0644\u062F\u0648\u0644\u064A \u0641\u064A \u0634\u0646\u063A\u0647\u0627\u064A.
 
-تغطي المنحة بالكامل تكاليف السفر والإقامة ومستلزمات التدريب ومختبرات البحث.`,
-    detailsZh: `中伊青少年STEM科学与人工智能机器人研学营是由伊中通讯社联合中国科学技术协会（CAST）及伊拉克重点科创中学联合主办的旗舰交流项目。
+\u062A\u063A\u0637\u064A \u0627\u0644\u0645\u0646\u062D\u0629 \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u062A\u0643\u0627\u0644\u064A\u0641 \u0627\u0644\u0633\u0641\u0631 \u0648\u0627\u0644\u0625\u0642\u0627\u0645\u0629 \u0648\u0645\u0633\u062A\u0644\u0632\u0645\u0627\u062A \u0627\u0644\u062A\u062F\u0631\u064A\u0628 \u0648\u0645\u062E\u062A\u0628\u0631\u0627\u062A \u0627\u0644\u0628\u062D\u062B.`,detailsZh:`\u4E2D\u4F0A\u9752\u5C11\u5E74STEM\u79D1\u5B66\u4E0E\u4EBA\u5DE5\u667A\u80FD\u673A\u5668\u4EBA\u7814\u5B66\u8425\u662F\u7531\u4F0A\u4E2D\u901A\u8BAF\u793E\u8054\u5408\u4E2D\u56FD\u79D1\u5B66\u6280\u672F\u534F\u4F1A\uFF08CAST\uFF09\u53CA\u4F0A\u62C9\u514B\u91CD\u70B9\u79D1\u521B\u4E2D\u5B66\u8054\u5408\u4E3B\u529E\u7684\u65D7\u8230\u4EA4\u6D41\u9879\u76EE\u3002
 
-### 核心亮点
-- 涵盖机器学习、微电子与航天技术的高端实操工作坊。
-- 融入书法、汉语会话与故宫/大运河历史文化调研的沉浸体验。
-- 由中国知名院校工程导师进行一对一创新辅导。
-- 营员共同组队完成创新项目并在上海全球青少年科创论坛公开展演。`,
-    detailsCkb: `ئەم بەرنامەیە گەشتێکی ٣ هەفتەیی زانستی و کەلەپوورییە کە لەلایەن ئاژانسی عێراقی-چینی و ڕێکخراوی زانستی چین بۆ قوتابیانی بەتوانای عێراق ڕێکدەخرێت. هەموو تێچووی گەشت و مانەوە دابینکراوە.`,
-    categorySlug: 'educational-exchange',
-    institutionName: 'Shanghai Jiao Tong University & CAST Innovation Center',
-    coverImage: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'July 15 - August 5, 2026',
-    programStartDate: '2026-07-15',
-    programEndDate: '2026-08-05',
-    applicationDeadline: 'May 10, 2026',
-    eligibility: 'Iraqi secondary students aged 15-18 with demonstrated academic excellence in mathematics, computing, or natural sciences.',
-    contactUrl: '/en/contact?subject=stem-immersion',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/stem-2026',
-    featured: true,
-    order: 1
-  },
-  {
-    slug: 'silk-road-schools-twinning',
-    titleEn: 'Baghdad-Nanjing Sister Schools Friendship Accord',
-    titleAr: 'مبادرة التوأمة المدرسية وصداقة طريق الحرير بين بغداد ونانجينغ',
-    titleZh: '巴格达与南京丝路姊妹学校友好共建工程',
-    titleCkb: 'پڕۆژەی برایەتی قوتابخانەکانی بەغدا و نانجینگ',
-    descriptionEn: 'Institutional twinning between historical secondary schools in Baghdad and Nanjing, establishing continuous student pen-pal exchanges, virtual co-classes, and faculty curriculum visits.',
-    descriptionAr: 'توأمة مؤسسية بين المدارس الثانوية التاريخية في بغداد ونانجينغ، تؤسس لبرامج تواصل طلابي مستمرة، فصول دراسية تفاعلية عبر الإنترنت، وزيارات متبادلة للكوادر التدريسية.',
-    descriptionZh: '巴格达与六朝古都南京重点高中间的机构结对项目，建立常态化跨文化同伴研学、云端联合授课与教学骨干互访机制。',
-    descriptionCkb: 'پەیمانی برایەتی و هاوکاری نێوان قوتابخانە مێژووییەکانی بەغدا و نانجینگ بۆ ئاڵوگۆڕی زانستی و فەرهەنگی بەردەوام.',
-    detailsEn: `This bilateral twinning accord links 10 premier Iraqi preparatory institutions with their counterparts in Jiangsu Province. 
-Students engage in bi-weekly shared bilingual humanities sessions, history forums comparing Mesopotamian and Yangtze civilizations, and joint environmental science observations.`,
-    detailsAr: `يربط اتفاق التوأمة ١٠ مؤسسات إعدادية رائدة في بغداد بنظيراتها في مقاطعة جيانغسو الصينية، متضمناً حصصاً تفاعلية دورية في اللغات والعلوم وجلسات مقارنة بين حضارتي وادي الرافدين ونهر اليانغتسي.`,
-    detailsZh: `该结对工程深化两座文明古城青年一代的相互认知，涵盖水利与古代灌溉文明研讨、青年文学赏析及数字环保科学联合监测。`,
-    detailsCkb: `ئەم پەیمانە دەرفەتی پەیوەندی بەردەوام لە نێوان مامۆستایان و قوتابیانی هەردوو وڵات دەڕەخسێنێت.`,
-    categorySlug: 'educational-exchange',
-    institutionName: 'Nanjing No. 1 Middle School & Baghdad Al-Markaziya High School',
-    coverImage: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'Continuous Academic Cycle 2026-2028',
-    programStartDate: '2026-09-01',
-    programEndDate: '2028-06-30',
-    applicationDeadline: 'June 20, 2026',
-    eligibility: 'Accredited public and private secondary schools in Baghdad, Basra, and Erbil.',
-    contactUrl: '/en/contact?subject=sister-schools',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/schools',
-    featured: false,
-    order: 2
-  },
-
-  // Category 2: Higher Education & University Partnerships
-  {
-    slug: 'baghdad-tsinghua-ai-engineering-fellowship',
-    titleEn: 'Baghdad-Tsinghua Joint AI & Sustainable Engineering Fellowship',
-    titleAr: 'زمالة بغداد - تسينغهوا المشتركة في الذكاء الاصطناعي والهندسة المستدامة',
-    titleZh: '巴格达大学与清华大学人工智能与可持续工程联合学者计划',
-    titleCkb: 'هاوبەشی زانکۆی بەغدا و تسینگوا بۆ هۆشی دەستکرد و ئەندازیاری',
-    descriptionEn: 'A premier dual-institution scholarship granting full doctoral and post-doctoral research residencies at Tsinghua University for Iraqi engineering and computer science researchers.',
-    descriptionAr: 'منحة أكاديمية عليا توفر إقامات بحثية كاملة لدرجتي الدكتوراه وما بعد الدكتوراه في جامعة تسينغهوا العريقة لباحثي الهندسة وعلوم الحاسوب في العراق.',
-    descriptionZh: '清华大学与巴格达大学联合设立的高端博后及博士联合培养奖学金，聚焦清洁能源电网、大模型算法及智慧基础设施应用。',
-    descriptionCkb: 'زەمالەی تایبەتی دکتۆرا و پۆست-دکتۆرا لە زانکۆی تسینگوا لە چین بۆ توێژەران و ئەندازیارانی عێراق بە تەواوی خەرجییەکانەوە.',
-    detailsEn: `The Baghdad-Tsinghua Joint Fellowship is the centerpiece of the comprehensive higher education protocol signed between the Iraqi Ministry of Higher Education and Scientific Research and Tsinghua University.
+### \u6838\u5FC3\u4EAE\u70B9
+- \u6DB5\u76D6\u673A\u5668\u5B66\u4E60\u3001\u5FAE\u7535\u5B50\u4E0E\u822A\u5929\u6280\u672F\u7684\u9AD8\u7AEF\u5B9E\u64CD\u5DE5\u4F5C\u574A\u3002
+- \u878D\u5165\u4E66\u6CD5\u3001\u6C49\u8BED\u4F1A\u8BDD\u4E0E\u6545\u5BAB/\u5927\u8FD0\u6CB3\u5386\u53F2\u6587\u5316\u8C03\u7814\u7684\u6C89\u6D78\u4F53\u9A8C\u3002
+- \u7531\u4E2D\u56FD\u77E5\u540D\u9662\u6821\u5DE5\u7A0B\u5BFC\u5E08\u8FDB\u884C\u4E00\u5BF9\u4E00\u521B\u65B0\u8F85\u5BFC\u3002
+- \u8425\u5458\u5171\u540C\u7EC4\u961F\u5B8C\u6210\u521B\u65B0\u9879\u76EE\u5E76\u5728\u4E0A\u6D77\u5168\u7403\u9752\u5C11\u5E74\u79D1\u521B\u8BBA\u575B\u516C\u5F00\u5C55\u6F14\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u0628\u06D5\u0631\u0646\u0627\u0645\u06D5\u06CC\u06D5 \u06AF\u06D5\u0634\u062A\u06CE\u06A9\u06CC \u0663 \u0647\u06D5\u0641\u062A\u06D5\u06CC\u06CC \u0632\u0627\u0646\u0633\u062A\u06CC \u0648 \u06A9\u06D5\u0644\u06D5\u067E\u0648\u0648\u0631\u06CC\u06CC\u06D5 \u06A9\u06D5 \u0644\u06D5\u0644\u0627\u06CC\u06D5\u0646 \u0626\u0627\u0698\u0627\u0646\u0633\u06CC \u0639\u06CE\u0631\u0627\u0642\u06CC-\u0686\u06CC\u0646\u06CC \u0648 \u0695\u06CE\u06A9\u062E\u0631\u0627\u0648\u06CC \u0632\u0627\u0646\u0633\u062A\u06CC \u0686\u06CC\u0646 \u0628\u06C6 \u0642\u0648\u062A\u0627\u0628\u06CC\u0627\u0646\u06CC \u0628\u06D5\u062A\u0648\u0627\u0646\u0627\u06CC \u0639\u06CE\u0631\u0627\u0642 \u0695\u06CE\u06A9\u062F\u06D5\u062E\u0631\u06CE\u062A. \u0647\u06D5\u0645\u0648\u0648 \u062A\u06CE\u0686\u0648\u0648\u06CC \u06AF\u06D5\u0634\u062A \u0648 \u0645\u0627\u0646\u06D5\u0648\u06D5 \u062F\u0627\u0628\u06CC\u0646\u06A9\u0631\u0627\u0648\u06D5.`,categorySlug:"educational-exchange",institutionName:"Shanghai Jiao Tong University & CAST Innovation Center",coverImage:"https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",eventDate:"July 15 - August 5, 2026",programStartDate:"2026-07-15",programEndDate:"2026-08-05",applicationDeadline:"May 10, 2026",eligibility:"Iraqi secondary students aged 15-18 with demonstrated academic excellence in mathematics, computing, or natural sciences.",contactUrl:"/en/contact?subject=stem-immersion",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/stem-2026",featured:true,order:1},{slug:"silk-road-schools-twinning",titleEn:"Baghdad-Nanjing Sister Schools Friendship Accord",titleAr:"\u0645\u0628\u0627\u062F\u0631\u0629 \u0627\u0644\u062A\u0648\u0623\u0645\u0629 \u0627\u0644\u0645\u062F\u0631\u0633\u064A\u0629 \u0648\u0635\u062F\u0627\u0642\u0629 \u0637\u0631\u064A\u0642 \u0627\u0644\u062D\u0631\u064A\u0631 \u0628\u064A\u0646 \u0628\u063A\u062F\u0627\u062F \u0648\u0646\u0627\u0646\u062C\u064A\u0646\u063A",titleZh:"\u5DF4\u683C\u8FBE\u4E0E\u5357\u4EAC\u4E1D\u8DEF\u59CA\u59B9\u5B66\u6821\u53CB\u597D\u5171\u5EFA\u5DE5\u7A0B",titleCkb:"\u067E\u0695\u06C6\u0698\u06D5\u06CC \u0628\u0631\u0627\u06CC\u06D5\u062A\u06CC \u0642\u0648\u062A\u0627\u0628\u062E\u0627\u0646\u06D5\u06A9\u0627\u0646\u06CC \u0628\u06D5\u063A\u062F\u0627 \u0648 \u0646\u0627\u0646\u062C\u06CC\u0646\u06AF",descriptionEn:"Institutional twinning between historical secondary schools in Baghdad and Nanjing, establishing continuous student pen-pal exchanges, virtual co-classes, and faculty curriculum visits.",descriptionAr:"\u062A\u0648\u0623\u0645\u0629 \u0645\u0624\u0633\u0633\u064A\u0629 \u0628\u064A\u0646 \u0627\u0644\u0645\u062F\u0627\u0631\u0633 \u0627\u0644\u062B\u0627\u0646\u0648\u064A\u0629 \u0627\u0644\u062A\u0627\u0631\u064A\u062E\u064A\u0629 \u0641\u064A \u0628\u063A\u062F\u0627\u062F \u0648\u0646\u0627\u0646\u062C\u064A\u0646\u063A\u060C \u062A\u0624\u0633\u0633 \u0644\u0628\u0631\u0627\u0645\u062C \u062A\u0648\u0627\u0635\u0644 \u0637\u0644\u0627\u0628\u064A \u0645\u0633\u062A\u0645\u0631\u0629\u060C \u0641\u0635\u0648\u0644 \u062F\u0631\u0627\u0633\u064A\u0629 \u062A\u0641\u0627\u0639\u0644\u064A\u0629 \u0639\u0628\u0631 \u0627\u0644\u0625\u0646\u062A\u0631\u0646\u062A\u060C \u0648\u0632\u064A\u0627\u0631\u0627\u062A \u0645\u062A\u0628\u0627\u062F\u0644\u0629 \u0644\u0644\u0643\u0648\u0627\u062F\u0631 \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A\u0629.",descriptionZh:"\u5DF4\u683C\u8FBE\u4E0E\u516D\u671D\u53E4\u90FD\u5357\u4EAC\u91CD\u70B9\u9AD8\u4E2D\u95F4\u7684\u673A\u6784\u7ED3\u5BF9\u9879\u76EE\uFF0C\u5EFA\u7ACB\u5E38\u6001\u5316\u8DE8\u6587\u5316\u540C\u4F34\u7814\u5B66\u3001\u4E91\u7AEF\u8054\u5408\u6388\u8BFE\u4E0E\u6559\u5B66\u9AA8\u5E72\u4E92\u8BBF\u673A\u5236\u3002",descriptionCkb:"\u067E\u06D5\u06CC\u0645\u0627\u0646\u06CC \u0628\u0631\u0627\u06CC\u06D5\u062A\u06CC \u0648 \u0647\u0627\u0648\u06A9\u0627\u0631\u06CC \u0646\u06CE\u0648\u0627\u0646 \u0642\u0648\u062A\u0627\u0628\u062E\u0627\u0646\u06D5 \u0645\u06CE\u0698\u0648\u0648\u06CC\u06CC\u06D5\u06A9\u0627\u0646\u06CC \u0628\u06D5\u063A\u062F\u0627 \u0648 \u0646\u0627\u0646\u062C\u06CC\u0646\u06AF \u0628\u06C6 \u0626\u0627\u06B5\u0648\u06AF\u06C6\u0695\u06CC \u0632\u0627\u0646\u0633\u062A\u06CC \u0648 \u0641\u06D5\u0631\u0647\u06D5\u0646\u06AF\u06CC \u0628\u06D5\u0631\u062F\u06D5\u0648\u0627\u0645.",detailsEn:`This bilateral twinning accord links 10 premier Iraqi preparatory institutions with their counterparts in Jiangsu Province. 
+Students engage in bi-weekly shared bilingual humanities sessions, history forums comparing Mesopotamian and Yangtze civilizations, and joint environmental science observations.`,detailsAr:`\u064A\u0631\u0628\u0637 \u0627\u062A\u0641\u0627\u0642 \u0627\u0644\u062A\u0648\u0623\u0645\u0629 \u0661\u0660 \u0645\u0624\u0633\u0633\u0627\u062A \u0625\u0639\u062F\u0627\u062F\u064A\u0629 \u0631\u0627\u0626\u062F\u0629 \u0641\u064A \u0628\u063A\u062F\u0627\u062F \u0628\u0646\u0638\u064A\u0631\u0627\u062A\u0647\u0627 \u0641\u064A \u0645\u0642\u0627\u0637\u0639\u0629 \u062C\u064A\u0627\u0646\u063A\u0633\u0648 \u0627\u0644\u0635\u064A\u0646\u064A\u0629\u060C \u0645\u062A\u0636\u0645\u0646\u0627\u064B \u062D\u0635\u0635\u0627\u064B \u062A\u0641\u0627\u0639\u0644\u064A\u0629 \u062F\u0648\u0631\u064A\u0629 \u0641\u064A \u0627\u0644\u0644\u063A\u0627\u062A \u0648\u0627\u0644\u0639\u0644\u0648\u0645 \u0648\u062C\u0644\u0633\u0627\u062A \u0645\u0642\u0627\u0631\u0646\u0629 \u0628\u064A\u0646 \u062D\u0636\u0627\u0631\u062A\u064A \u0648\u0627\u062F\u064A \u0627\u0644\u0631\u0627\u0641\u062F\u064A\u0646 \u0648\u0646\u0647\u0631 \u0627\u0644\u064A\u0627\u0646\u063A\u062A\u0633\u064A.`,detailsZh:`\u8BE5\u7ED3\u5BF9\u5DE5\u7A0B\u6DF1\u5316\u4E24\u5EA7\u6587\u660E\u53E4\u57CE\u9752\u5E74\u4E00\u4EE3\u7684\u76F8\u4E92\u8BA4\u77E5\uFF0C\u6DB5\u76D6\u6C34\u5229\u4E0E\u53E4\u4EE3\u704C\u6E89\u6587\u660E\u7814\u8BA8\u3001\u9752\u5E74\u6587\u5B66\u8D4F\u6790\u53CA\u6570\u5B57\u73AF\u4FDD\u79D1\u5B66\u8054\u5408\u76D1\u6D4B\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u067E\u06D5\u06CC\u0645\u0627\u0646\u06D5 \u062F\u06D5\u0631\u0641\u06D5\u062A\u06CC \u067E\u06D5\u06CC\u0648\u06D5\u0646\u062F\u06CC \u0628\u06D5\u0631\u062F\u06D5\u0648\u0627\u0645 \u0644\u06D5 \u0646\u06CE\u0648\u0627\u0646 \u0645\u0627\u0645\u06C6\u0633\u062A\u0627\u06CC\u0627\u0646 \u0648 \u0642\u0648\u062A\u0627\u0628\u06CC\u0627\u0646\u06CC \u0647\u06D5\u0631\u062F\u0648\u0648 \u0648\u06B5\u0627\u062A \u062F\u06D5\u0695\u06D5\u062E\u0633\u06CE\u0646\u06CE\u062A.`,categorySlug:"educational-exchange",institutionName:"Nanjing No. 1 Middle School & Baghdad Al-Markaziya High School",coverImage:"https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",eventDate:"Continuous Academic Cycle 2026-2028",programStartDate:"2026-09-01",programEndDate:"2028-06-30",applicationDeadline:"June 20, 2026",eligibility:"Accredited public and private secondary schools in Baghdad, Basra, and Erbil.",contactUrl:"/en/contact?subject=sister-schools",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/schools",featured:false,order:2},{slug:"baghdad-tsinghua-ai-engineering-fellowship",titleEn:"Baghdad-Tsinghua Joint AI & Sustainable Engineering Fellowship",titleAr:"\u0632\u0645\u0627\u0644\u0629 \u0628\u063A\u062F\u0627\u062F - \u062A\u0633\u064A\u0646\u063A\u0647\u0648\u0627 \u0627\u0644\u0645\u0634\u062A\u0631\u0643\u0629 \u0641\u064A \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0648\u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u0645\u0633\u062A\u062F\u0627\u0645\u0629",titleZh:"\u5DF4\u683C\u8FBE\u5927\u5B66\u4E0E\u6E05\u534E\u5927\u5B66\u4EBA\u5DE5\u667A\u80FD\u4E0E\u53EF\u6301\u7EED\u5DE5\u7A0B\u8054\u5408\u5B66\u8005\u8BA1\u5212",titleCkb:"\u0647\u0627\u0648\u0628\u06D5\u0634\u06CC \u0632\u0627\u0646\u06A9\u06C6\u06CC \u0628\u06D5\u063A\u062F\u0627 \u0648 \u062A\u0633\u06CC\u0646\u06AF\u0648\u0627 \u0628\u06C6 \u0647\u06C6\u0634\u06CC \u062F\u06D5\u0633\u062A\u06A9\u0631\u062F \u0648 \u0626\u06D5\u0646\u062F\u0627\u0632\u06CC\u0627\u0631\u06CC",descriptionEn:"A premier dual-institution scholarship granting full doctoral and post-doctoral research residencies at Tsinghua University for Iraqi engineering and computer science researchers.",descriptionAr:"\u0645\u0646\u062D\u0629 \u0623\u0643\u0627\u062F\u064A\u0645\u064A\u0629 \u0639\u0644\u064A\u0627 \u062A\u0648\u0641\u0631 \u0625\u0642\u0627\u0645\u0627\u062A \u0628\u062D\u062B\u064A\u0629 \u0643\u0627\u0645\u0644\u0629 \u0644\u062F\u0631\u062C\u062A\u064A \u0627\u0644\u062F\u0643\u062A\u0648\u0631\u0627\u0647 \u0648\u0645\u0627 \u0628\u0639\u062F \u0627\u0644\u062F\u0643\u062A\u0648\u0631\u0627\u0647 \u0641\u064A \u062C\u0627\u0645\u0639\u0629 \u062A\u0633\u064A\u0646\u063A\u0647\u0648\u0627 \u0627\u0644\u0639\u0631\u064A\u0642\u0629 \u0644\u0628\u0627\u062D\u062B\u064A \u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0648\u0639\u0644\u0648\u0645 \u0627\u0644\u062D\u0627\u0633\u0648\u0628 \u0641\u064A \u0627\u0644\u0639\u0631\u0627\u0642.",descriptionZh:"\u6E05\u534E\u5927\u5B66\u4E0E\u5DF4\u683C\u8FBE\u5927\u5B66\u8054\u5408\u8BBE\u7ACB\u7684\u9AD8\u7AEF\u535A\u540E\u53CA\u535A\u58EB\u8054\u5408\u57F9\u517B\u5956\u5B66\u91D1\uFF0C\u805A\u7126\u6E05\u6D01\u80FD\u6E90\u7535\u7F51\u3001\u5927\u6A21\u578B\u7B97\u6CD5\u53CA\u667A\u6167\u57FA\u7840\u8BBE\u65BD\u5E94\u7528\u3002",descriptionCkb:"\u0632\u06D5\u0645\u0627\u0644\u06D5\u06CC \u062A\u0627\u06CC\u0628\u06D5\u062A\u06CC \u062F\u06A9\u062A\u06C6\u0631\u0627 \u0648 \u067E\u06C6\u0633\u062A-\u062F\u06A9\u062A\u06C6\u0631\u0627 \u0644\u06D5 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u062A\u0633\u06CC\u0646\u06AF\u0648\u0627 \u0644\u06D5 \u0686\u06CC\u0646 \u0628\u06C6 \u062A\u0648\u06CE\u0698\u06D5\u0631\u0627\u0646 \u0648 \u0626\u06D5\u0646\u062F\u0627\u0632\u06CC\u0627\u0631\u0627\u0646\u06CC \u0639\u06CE\u0631\u0627\u0642 \u0628\u06D5 \u062A\u06D5\u0648\u0627\u0648\u06CC \u062E\u06D5\u0631\u062C\u06CC\u06CC\u06D5\u06A9\u0627\u0646\u06D5\u0648\u06D5.",detailsEn:`The Baghdad-Tsinghua Joint Fellowship is the centerpiece of the comprehensive higher education protocol signed between the Iraqi Ministry of Higher Education and Scientific Research and Tsinghua University.
 
 ### Key Fellowship Tracks
 - **Smart Infrastructure & Hydrology**: Developing neural-network modeling for Tigris-Euphrates water security and smart distribution networks.
@@ -143,232 +30,22 @@ Students engage in bi-weekly shared bilingual humanities sessions, history forum
 
 ### Grant Package
 - 100% tuition waiver at Tsinghua University School of Computing & Department of Civil Engineering.
-- Comprehensive monthly research stipend (¥12,000 / month).
+- Comprehensive monthly research stipend (\xA512,000 / month).
 - State-of-the-art supercomputing allocation and lab bench resources.
-- Fully funded travel allowances and medical insurance.`,
-    detailsAr: `تمثل زمالة بغداد - تسينغهوا ركيزة التعاون الأكاديمي المشترك بين وزارة التعليم العالي والبحث العلمي العراقية وجامعة تسينغهوا المصنفة في طليعة جامعات آسيا والعالم.
+- Fully funded travel allowances and medical insurance.`,detailsAr:`\u062A\u0645\u062B\u0644 \u0632\u0645\u0627\u0644\u0629 \u0628\u063A\u062F\u0627\u062F - \u062A\u0633\u064A\u0646\u063A\u0647\u0648\u0627 \u0631\u0643\u064A\u0632\u0629 \u0627\u0644\u062A\u0639\u0627\u0648\u0646 \u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A \u0627\u0644\u0645\u0634\u062A\u0631\u0643 \u0628\u064A\u0646 \u0648\u0632\u0627\u0631\u0629 \u0627\u0644\u062A\u0639\u0644\u064A\u0645 \u0627\u0644\u0639\u0627\u0644\u064A \u0648\u0627\u0644\u0628\u062D\u062B \u0627\u0644\u0639\u0644\u0645\u064A \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0648\u062C\u0627\u0645\u0639\u0629 \u062A\u0633\u064A\u0646\u063A\u0647\u0648\u0627 \u0627\u0644\u0645\u0635\u0646\u0641\u0629 \u0641\u064A \u0637\u0644\u064A\u0639\u0629 \u062C\u0627\u0645\u0639\u0627\u062A \u0622\u0633\u064A\u0627 \u0648\u0627\u0644\u0639\u0627\u0644\u0645.
 
-### المسارات البحثية الأساسية:
-- **البنية التحتية الذكية والهيدرولوجيا**: تطوير نماذج الشبكات العصبية لحماية الأمن المائي لنهري دجلة والفرات وإدارة الموارد المائية.
-- **منظومات الطاقة النظيفة**: دراسة كفاءة الألواح الشمسية في البيئات الصحراوية وتخزين الطاقة والشبكات الكهربائية المستقلة.
-- **نماذج الذكاء الاصطناعي اللغوية**: تطوير خوارزميات معالجة اللغة الطبيعية المتخصصة في الترجمة المصطلحية الصينية العربية في المجالات الاقتصادية والقانونية.
+### \u0627\u0644\u0645\u0633\u0627\u0631\u0627\u062A \u0627\u0644\u0628\u062D\u062B\u064A\u0629 \u0627\u0644\u0623\u0633\u0627\u0633\u064A\u0629:
+- **\u0627\u0644\u0628\u0646\u064A\u0629 \u0627\u0644\u062A\u062D\u062A\u064A\u0629 \u0627\u0644\u0630\u0643\u064A\u0629 \u0648\u0627\u0644\u0647\u064A\u062F\u0631\u0648\u0644\u0648\u062C\u064A\u0627**: \u062A\u0637\u0648\u064A\u0631 \u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0634\u0628\u0643\u0627\u062A \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0644\u062D\u0645\u0627\u064A\u0629 \u0627\u0644\u0623\u0645\u0646 \u0627\u0644\u0645\u0627\u0626\u064A \u0644\u0646\u0647\u0631\u064A \u062F\u062C\u0644\u0629 \u0648\u0627\u0644\u0641\u0631\u0627\u062A \u0648\u0625\u062F\u0627\u0631\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062F \u0627\u0644\u0645\u0627\u0626\u064A\u0629.
+- **\u0645\u0646\u0638\u0648\u0645\u0627\u062A \u0627\u0644\u0637\u0627\u0642\u0629 \u0627\u0644\u0646\u0638\u064A\u0641\u0629**: \u062F\u0631\u0627\u0633\u0629 \u0643\u0641\u0627\u0621\u0629 \u0627\u0644\u0623\u0644\u0648\u0627\u062D \u0627\u0644\u0634\u0645\u0633\u064A\u0629 \u0641\u064A \u0627\u0644\u0628\u064A\u0626\u0627\u062A \u0627\u0644\u0635\u062D\u0631\u0627\u0648\u064A\u0629 \u0648\u062A\u062E\u0632\u064A\u0646 \u0627\u0644\u0637\u0627\u0642\u0629 \u0648\u0627\u0644\u0634\u0628\u0643\u0627\u062A \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0626\u064A\u0629 \u0627\u0644\u0645\u0633\u062A\u0642\u0644\u0629.
+- **\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0627\u0644\u0644\u063A\u0648\u064A\u0629**: \u062A\u0637\u0648\u064A\u0631 \u062E\u0648\u0627\u0631\u0632\u0645\u064A\u0627\u062A \u0645\u0639\u0627\u0644\u062C\u0629 \u0627\u0644\u0644\u063A\u0629 \u0627\u0644\u0637\u0628\u064A\u0639\u064A\u0629 \u0627\u0644\u0645\u062A\u062E\u0635\u0635\u0629 \u0641\u064A \u0627\u0644\u062A\u0631\u062C\u0645\u0629 \u0627\u0644\u0645\u0635\u0637\u0644\u062D\u064A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0627\u0644\u0639\u0631\u0628\u064A\u0629 \u0641\u064A \u0627\u0644\u0645\u062C\u0627\u0644\u0627\u062A \u0627\u0644\u0627\u0642\u062A\u0635\u0627\u062F\u064A\u0629 \u0648\u0627\u0644\u0642\u0627\u0646\u0648\u0646\u064A\u0629.
 
-### حزمة الدعم والامتيازات:
-- إعفاء دراسي بنسبة ١٠٠٪ في جامعة تسينغهوا.
-- مخصصات بحثية ومعيشية شهرية (١٢,٠٠٠ يوان شهرياً).
-- استخدام حواسيب فائقة السرعة ومختبرات تخصصية متقدمة.
-- تغطية كاملة لتذاكر السفر السنوية والتأمين الصحي الشامل.`,
-    detailsZh: `该联合学者计划旨在构筑中伊高等教育合作标杆，聚焦两河流域水资源数字化调控、沙漠极端工况光伏材料研发及中阿大语言模型工业应用。
+### \u062D\u0632\u0645\u0629 \u0627\u0644\u062F\u0639\u0645 \u0648\u0627\u0644\u0627\u0645\u062A\u064A\u0627\u0632\u0627\u062A:
+- \u0625\u0639\u0641\u0627\u0621 \u062F\u0631\u0627\u0633\u064A \u0628\u0646\u0633\u0628\u0629 \u0661\u0660\u0660\u066A \u0641\u064A \u062C\u0627\u0645\u0639\u0629 \u062A\u0633\u064A\u0646\u063A\u0647\u0648\u0627.
+- \u0645\u062E\u0635\u0635\u0627\u062A \u0628\u062D\u062B\u064A\u0629 \u0648\u0645\u0639\u064A\u0634\u064A\u0629 \u0634\u0647\u0631\u064A\u0629 (\u0661\u0662,\u0660\u0660\u0660 \u064A\u0648\u0627\u0646 \u0634\u0647\u0631\u064A\u0627\u064B).
+- \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u062D\u0648\u0627\u0633\u064A\u0628 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u0633\u0631\u0639\u0629 \u0648\u0645\u062E\u062A\u0628\u0631\u0627\u062A \u062A\u062E\u0635\u0635\u064A\u0629 \u0645\u062A\u0642\u062F\u0645\u0629.
+- \u062A\u063A\u0637\u064A\u0629 \u0643\u0627\u0645\u0644\u0629 \u0644\u062A\u0630\u0627\u0643\u0631 \u0627\u0644\u0633\u0641\u0631 \u0627\u0644\u0633\u0646\u0648\u064A\u0629 \u0648\u0627\u0644\u062A\u0623\u0645\u064A\u0646 \u0627\u0644\u0635\u062D\u064A \u0627\u0644\u0634\u0627\u0645\u0644.`,detailsZh:`\u8BE5\u8054\u5408\u5B66\u8005\u8BA1\u5212\u65E8\u5728\u6784\u7B51\u4E2D\u4F0A\u9AD8\u7B49\u6559\u80B2\u5408\u4F5C\u6807\u6746\uFF0C\u805A\u7126\u4E24\u6CB3\u6D41\u57DF\u6C34\u8D44\u6E90\u6570\u5B57\u5316\u8C03\u63A7\u3001\u6C99\u6F20\u6781\u7AEF\u5DE5\u51B5\u5149\u4F0F\u6750\u6599\u7814\u53D1\u53CA\u4E2D\u963F\u5927\u8BED\u8A00\u6A21\u578B\u5DE5\u4E1A\u5E94\u7528\u3002
 
-入选学者将获得全额学费减免、高规格科研津贴（每月1.2万元人民币）、清华国家重点实验室算力支持及双向国际差旅保障。`,
-    detailsCkb: `ئەم زەمالە زانستییە تایبەتە بە خوێندنی دکتۆرا و توێژینەوەی باڵا لە زانکۆی بەناوبانگی تسینگوا لە بوارەکانی وزەی نوێبووەوە و هۆشی دەستکرد.`,
-    categorySlug: 'higher-education-university',
-    institutionName: 'Tsinghua University & University of Baghdad',
-    coverImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'Fall Semester Intake 2026',
-    programStartDate: '2026-09-15',
-    programEndDate: '2029-06-30',
-    applicationDeadline: 'June 30, 2026',
-    eligibility: 'Holders of Master’s or Doctorate in Computer Science, Electrical, Civil, or Materials Engineering with minimum GPA 3.5/4.0.',
-    contactUrl: '/en/contact?subject=tsinghua-fellowship',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/tsinghua-phd',
-    featured: true,
-    order: 3
-  },
-  {
-    slug: 'mustansiriyah-peking-archaeological-mou',
-    titleEn: 'Mustansiriyah-Peking University Civilizational Heritage Alliance',
-    titleAr: 'تحالف التراث الحضاري بين الجامعة المستنصرية وجامعة بكين',
-    titleZh: '北京大学与穆斯坦西里亚大学两河-华夏古文明互鉴研究联盟',
-    titleCkb: 'پەیمانی کەلەپووری شارستانی لە نێوان زانکۆی موستەنسرییە و زانکۆی پەکین',
-    descriptionEn: 'A historic institutional partnership between two of the world\'s oldest academic lineages, advancing digital archeology, cuneiform preservation, and Silk Road comparative historiography.',
-    descriptionAr: 'شراكة مؤسسية تاريخية تجمع بين أعرق الصروح المعرفية في العالم، متخصصة في الآثار الرقمية، حفظ الألواح المسمارية، ودراسات مقارنة تاريخ طريق الحرير.',
-    descriptionZh: '依托两座承载千年文脉的高等学府，开展美索不达米亚楔形文字数字拓印、丝绸之路文献互译与历史地理多学科联合科考。',
-    descriptionCkb: 'هاوبەشییەکی مێژوویی نێوان زانکۆی موستەنسرییە لە بەغدا و زانکۆی پەکین بۆ پاراستنی شوێنەوارە دێرینەکان و مێژووی ڕێگای ئاوریشم.',
-    detailsEn: `Connecting Mustansiriyah University (originally founded in 1227 CE) and Peking University (established 1898 CE as the Imperial University of Peking), this alliance brings cutting-edge 3D photogrammetry and AI-assisted multispectral imaging to Iraqi antiquities.
-Faculty and graduate students undertake dual field seasons in Babylon, Nineveh, and Xi'an.`,
-    detailsAr: `تجمع هذه الاتفاقية بين الجامعة المستنصرية التي تأسست في بغداد عام ١٢٢٧ ميلادية وجامعة بكين المرموقة، وتوظف أحدث تقنيات التصوير الطيفي والمسح الليزري ثلاثي الأبعاد لحفظ الآثار العراقية وترجمة المخطوطات القديمة.`,
-    detailsZh: `该联盟涵盖巴比伦遗址、尼尼微古城与中国西安大明宫遗址的多源遥感监测与文物数字化保护，每年选派青年学者赴中伊两地进行联合田野考古调查。`,
-    detailsCkb: `ئەم پڕۆژەیە گرنگی دەدات بە بەکارهێنانی تەکنەلۆژیای سێ ڕەهەندی بۆ پاراستنی شوێنەوارە دێرینەکانی بابل و نەینەوا و بەڵگەنامە مێژووییەکان.`,
-    categorySlug: 'higher-education-university',
-    institutionName: 'Peking University School of Archaeology & Mustansiriyah University',
-    coverImage: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'Ongoing Academic MOU (2025-2030)',
-    programStartDate: '2025-10-01',
-    programEndDate: null,
-    applicationDeadline: null,
-    eligibility: 'Academic faculty and post-graduate researchers in Archaeology, History, and Cultural Heritage Preservation.',
-    contactUrl: '/en/contact?subject=peking-heritage',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/heritage-alliance',
-    featured: true,
-    order: 4
-  },
-
-  // Category 3: Arts & Heritage Exchange
-  {
-    slug: 'mesopotamia-yangtze-calligraphy-dialogue',
-    titleEn: 'Two Rivers, Two Scripts: Arabic & Chinese Calligraphy Masterclass',
-    titleAr: 'حوار النهرين: ملتقى وأساتذة الخط العربي والخط الصيني بالفرشاة',
-    titleZh: '两河墨韵：阿拉伯书法与中国宣纸水墨大师对话巡展',
-    titleCkb: 'دوو ڕووبار، دوو خەت: شاکاری خۆشنووسی عەرەبی و چینی',
-    descriptionEn: 'An unprecedented artistic residency bringing together legendary Iraqi master calligraphers with contemporary Chinese ink masters for collaborative exhibitions in Baghdad, Beijing, and Hangzhou.',
-    descriptionAr: 'إقامة فنية استثنائية تجمع كبار أساتذة الخط العربي في العراق مع رواد فن الحبر والفرشاة الصينيين، وتتوج بمعارض مشتركة في بغداد وبكين وهانغتشو.',
-    descriptionZh: '汇聚伊拉克顶级阿拉伯传统书法名家与中国国家画院水墨艺术大师的驻留创作计划，在巴格达、北京与杭州三地举办大型巡展。',
-    descriptionCkb: 'پێشانگە و خولی تایبەتی خۆشنووسی بۆ کۆکردنەوەی مامۆستایانی خۆشنووسی عێراق و هونەرمەندانی وێنەکێشانی چینی.',
-    detailsEn: `Focusing on the metaphysical rhythm and sacred geometry of both Arabic scripts (Thuluth, Kufic, Diwani) and Chinese calligraphy styles (Kaishu, Xingshu, Caoshu).
-The program produces a collaborative commemorative art portfolio published in Arabic, Chinese, and English, accompanied by open public masterclasses.`,
-    detailsAr: `يستكشف الملتقى الأبعاد الجمالية والهندسية المشتركة بين حروف الخط العربي الكوفي والثلث والديواني، وفنون الخط الصيني بالحبر على ورق شوان، مقدماً ورشاً تفاعلية مفتوحة للجمهور والطلبة.`,
-    detailsZh: `该艺术驻留探索两大东方古老书法体系关于气韵、结构与留白的深刻哲学呼应，联合创作卷轴作品将被中伊两国国家博物馆永久馆藏。`,
-    detailsCkb: `ئەم خولە لێکۆڵینەوە لە هاوبەشییە فەلسەفی و جوانییەکانی خۆشنووسی عەرەبی و چینی دەکات.`,
-    categorySlug: 'arts-heritage',
-    institutionName: 'China National Academy of Painting & Iraqi Calligraphers Society',
-    coverImage: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'November 10 - December 5, 2026',
-    programStartDate: '2026-11-10',
-    programEndDate: '2026-12-05',
-    applicationDeadline: 'August 15, 2026',
-    eligibility: 'Practicing visual artists, calligraphers, and art institute faculty members.',
-    contactUrl: '/en/contact?subject=calligraphy-masterclass',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/calligraphy',
-    featured: false,
-    order: 5
-  },
-
-  // Category 4: Youth & Language Programs
-  {
-    slug: 'chinese-bridge-iraq-speaking-competition',
-    titleEn: 'Chinese Bridge Proficiency Competition & Scholarship Pipeline',
-    titleAr: 'مسابقة "جسر اللغة الصينية" الوطنية ومنح التبادل اللغوي في الصين',
-    titleZh: '伊拉克“汉语桥”中文秀与全额语合交流奖学金选拔赛',
-    titleCkb: 'پێشبڕکێی نیشتمانی "پردی زمانی چینی" و بەخشینی زەمالە',
-    descriptionEn: 'The definitive annual Chinese language showcase for Iraqi university students, awarding full one-year and four-year language immersion scholarships at leading Chinese normal universities.',
-    descriptionAr: 'المسابقة الوطنية السنوية الكبرى لإتقان اللغة الصينية لطلبة الجامعات العراقية، والتي تمنح الفائزين منحاً دراسية كاملة لدراسة اللغة الصينية في كبرى جامعات بكين ووهان.',
-    descriptionZh: '面向伊拉克高校学子的顶级汉语水平大赛，优胜者将获得教育部中外语言交流合作中心全额赴华进修及攻读学位奖学金。',
-    descriptionCkb: 'پێشبڕکێی گەورەی زمانی چینی بۆ قوتابیانی زانکۆکانی عێراق کە خەڵاتەکەی زەمالەی تەواوی خوێندنی یەک ساڵەی زمانە لە پەکین.',
-    detailsEn: `Co-hosted by the Center for Language Education and Cooperation (CLEC) and the Iraqi-Chinese Agency, this competition evaluates Chinese speech, cultural talent performance (musical instruments, martial arts, or song), and knowledge of contemporary Chinese society.`,
-    detailsAr: `تقام المسابقة برعاية مركز تعليم اللغة والتعاون الدولي (CLEC)، وتتضمن اختبارات في الإلقاء، المعرفة العامة، وتقديم فقرات من الفنون الصينية التقليدية، وتفتح آفاق العمل كمترجمين معتمدين.`,
-    detailsZh: `赛事涵盖主题演讲、中华才艺展示与国情知识问答三大环节，累计已向伊拉克各省输送超过120名优秀青年赴华深造。`,
-    detailsCkb: `ئەم پێشبڕکێیە ڕێگە بۆ لاوانی عێراق دەکاتەوە لە بوارەکانی وەرگێڕان و بازرگانی نێودەوڵەتیدا کار بکەن.`,
-    categorySlug: 'youth-language',
-    institutionName: 'Beijing Language and Culture University (BLCU) & CLEC',
-    coverImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'Annual Finals: October 2026',
-    programStartDate: '2026-10-18',
-    programEndDate: '2026-10-22',
-    applicationDeadline: 'September 1, 2026',
-    eligibility: 'Enrolled undergraduate or postgraduate students with HSK-3 certification or equivalent learning background.',
-    contactUrl: '/en/contact?subject=chinese-bridge',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/chinese-bridge',
-    featured: false,
-    order: 6
-  },
-
-  // Category 5: Professional & Vocational Exchange
-  {
-    slug: 'luban-workshop-modern-rail-telecom',
-    titleEn: 'Luban Workshop: Advanced High-Speed Rail & 5G Telecommunications',
-    titleAr: 'ورشة لوبان المتقدمة: تدريب تقنيات سكك الحديد الحديثة واتصالات الجيل الخامس',
-    titleZh: '伊拉克鲁班工坊：高铁牵引供电与5G智能通信高端职教培训',
-    titleCkb: 'وۆرکشۆپی لوبان: ڕاهێنانی تەکنیکی شەمەندەفەری خێرا و پەیوەندییەکانی 5G',
-    descriptionEn: 'State-of-the-art vocational training hubs established under the famed Chinese "Luban Workshop" framework, certifying Iraqi technicians in smart railway signalling and industrial IoT.',
-    descriptionAr: 'مراكز تدريب تقني وهندسي فائق التطور ضمن إطار "ورش لوبان" العالمية، تمنح شهادات مهنية دولية للفنيين العراقيين في إشارات القطارات الذكية وإنترنت الأشياء الصناعي.',
-    descriptionZh: '中伊职业技术教育合作的里程碑项目，配备全真模拟高铁调度台与5G专网实训系统，直接对接中伊重大基础设施项目人才用工需求。',
-    descriptionCkb: 'ناوەندێکی پێشکەوتووی ڕاهێنانی پیشەیی لە عێراق بە هەماهەنگی لەگەڵ پسپۆڕانی چین بۆ پێگەیاندنی تەکنیککاران لە بواری گواستنەوەی مۆدێرن.',
-    detailsEn: `The Luban Workshop provides continuous 6-month modular certification courses for Iraqi civil and electrical technicians.
-Participants train directly on enterprise-grade hardware provided by CRRC and Huawei, enabling direct career placement with flagship Belt and Road infrastructure projects in Iraq.`,
-    detailsAr: `توفر ورشة لوبان دورات تدريبية متخصصة تمتد لـ ٦ أشهر، يتدرب خلالها المهندسون والفنيون العراقيون على أحدث المعدات الصناعية التي توفرها شركات عالمية رائدة، مما يؤهلهم للعمل المباشر في كبرى المشاريع الوطنية.`,
-    detailsZh: `工坊采取“学历教育+职业培训”双轨制，每年为伊拉克铁路总局、电力部门及主流通信运营商定向输送数百名持证高技能人才。`,
-    detailsCkb: `ئەم خولە ٦ مانگییە ئامانجی پەروەردەکردنی کادری تەکنیکی عێراقییە بۆ بەڕێوەبردنی پڕۆژە پیشەسازییە گەورەکان.`,
-    categorySlug: 'professional-vocational',
-    institutionName: 'Tianjin Railway Technical College & Iraqi Ministry of Transport',
-    coverImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-    eventDate: 'Cohort 4 Enrollment (August 2026)',
-    programStartDate: '2026-08-15',
-    programEndDate: '2027-02-15',
-    applicationDeadline: 'July 10, 2026',
-    eligibility: 'Technical diploma or Bachelor in Electrical, Mechanical, Civil, or Telecommunications Engineering.',
-    contactUrl: '/en/contact?subject=luban-workshop',
-    applicationUrl: 'https://cultural.iraqi-chineseagency.com/apply/luban',
-    featured: true,
-    order: 7
-  }
-];
-
-export async function seedCulturalExchange() {
-  try {
-    console.log('🏛️ Checking and seeding Cultural Exchange data...');
-
-    // 1. Seed or update categories
-    const categoryMap: Record<string, string> = {};
-
-    for (const cat of SEED_CULTURAL_CATEGORIES) {
-      const existing = await prisma.culturalExchangeCategory.findUnique({
-        where: { slug: cat.slug }
-      });
-
-      if (!existing) {
-        const created = await prisma.culturalExchangeCategory.create({
-          data: {
-            slug: cat.slug,
-            nameEn: cat.nameEn,
-            nameAr: cat.nameAr,
-            nameZh: cat.nameZh,
-            nameCkb: cat.nameCkb,
-            order: cat.order
-          }
-        });
-        categoryMap[cat.slug] = created.id;
-        console.log(`  + Created cultural category: ${cat.nameEn}`);
-      } else {
-        categoryMap[cat.slug] = existing.id;
-      }
-    }
-
-    // 2. Seed programs
-    for (const prog of SEED_CULTURAL_PROGRAMS) {
-      const catId = categoryMap[prog.categorySlug];
-      if (!catId) continue;
-
-      const existingProg = await prisma.culturalExchangeProgram.findUnique({
-        where: { slug: prog.slug }
-      });
-
-      if (!existingProg) {
-        await prisma.culturalExchangeProgram.create({
-          data: {
-            slug: prog.slug,
-            titleEn: prog.titleEn,
-            titleAr: prog.titleAr,
-            titleZh: prog.titleZh,
-            titleCkb: prog.titleCkb,
-            descriptionEn: prog.descriptionEn,
-            descriptionAr: prog.descriptionAr,
-            descriptionZh: prog.descriptionZh,
-            descriptionCkb: prog.descriptionCkb,
-            detailsEn: prog.detailsEn,
-            detailsAr: prog.detailsAr,
-            detailsZh: prog.detailsZh,
-            detailsCkb: prog.detailsCkb,
-            categoryId: catId,
-            institutionName: prog.institutionName,
-            coverImage: prog.coverImage,
-            eventDate: prog.eventDate,
-            programStartDate: prog.programStartDate,
-            programEndDate: prog.programEndDate,
-            applicationDeadline: prog.applicationDeadline,
-            eligibility: prog.eligibility,
-            contactUrl: prog.contactUrl,
-            applicationUrl: prog.applicationUrl,
-            featured: prog.featured,
-            order: prog.order
-          }
-        });
-        console.log(`  + Created cultural program: ${prog.titleEn}`);
-      }
-    }
-
-    console.log('✅ Cultural Exchange seeding verified.');
-  } catch (error) {
-    console.error('⚠️ Error seeding cultural exchange data:', error);
-  }
-}
+\u5165\u9009\u5B66\u8005\u5C06\u83B7\u5F97\u5168\u989D\u5B66\u8D39\u51CF\u514D\u3001\u9AD8\u89C4\u683C\u79D1\u7814\u6D25\u8D34\uFF08\u6BCF\u67081.2\u4E07\u5143\u4EBA\u6C11\u5E01\uFF09\u3001\u6E05\u534E\u56FD\u5BB6\u91CD\u70B9\u5B9E\u9A8C\u5BA4\u7B97\u529B\u652F\u6301\u53CA\u53CC\u5411\u56FD\u9645\u5DEE\u65C5\u4FDD\u969C\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u0632\u06D5\u0645\u0627\u0644\u06D5 \u0632\u0627\u0646\u0633\u062A\u06CC\u06CC\u06D5 \u062A\u0627\u06CC\u0628\u06D5\u062A\u06D5 \u0628\u06D5 \u062E\u0648\u06CE\u0646\u062F\u0646\u06CC \u062F\u06A9\u062A\u06C6\u0631\u0627 \u0648 \u062A\u0648\u06CE\u0698\u06CC\u0646\u06D5\u0648\u06D5\u06CC \u0628\u0627\u06B5\u0627 \u0644\u06D5 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u0628\u06D5\u0646\u0627\u0648\u0628\u0627\u0646\u06AF\u06CC \u062A\u0633\u06CC\u0646\u06AF\u0648\u0627 \u0644\u06D5 \u0628\u0648\u0627\u0631\u06D5\u06A9\u0627\u0646\u06CC \u0648\u0632\u06D5\u06CC \u0646\u0648\u06CE\u0628\u0648\u0648\u06D5\u0648\u06D5 \u0648 \u0647\u06C6\u0634\u06CC \u062F\u06D5\u0633\u062A\u06A9\u0631\u062F.`,categorySlug:"higher-education-university",institutionName:"Tsinghua University & University of Baghdad",coverImage:"https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",eventDate:"Fall Semester Intake 2026",programStartDate:"2026-09-15",programEndDate:"2029-06-30",applicationDeadline:"June 30, 2026",eligibility:"Holders of Master\u2019s or Doctorate in Computer Science, Electrical, Civil, or Materials Engineering with minimum GPA 3.5/4.0.",contactUrl:"/en/contact?subject=tsinghua-fellowship",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/tsinghua-phd",featured:true,order:3},{slug:"mustansiriyah-peking-archaeological-mou",titleEn:"Mustansiriyah-Peking University Civilizational Heritage Alliance",titleAr:"\u062A\u062D\u0627\u0644\u0641 \u0627\u0644\u062A\u0631\u0627\u062B \u0627\u0644\u062D\u0636\u0627\u0631\u064A \u0628\u064A\u0646 \u0627\u0644\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0645\u0633\u062A\u0646\u0635\u0631\u064A\u0629 \u0648\u062C\u0627\u0645\u0639\u0629 \u0628\u0643\u064A\u0646",titleZh:"\u5317\u4EAC\u5927\u5B66\u4E0E\u7A46\u65AF\u5766\u897F\u91CC\u4E9A\u5927\u5B66\u4E24\u6CB3-\u534E\u590F\u53E4\u6587\u660E\u4E92\u9274\u7814\u7A76\u8054\u76DF",titleCkb:"\u067E\u06D5\u06CC\u0645\u0627\u0646\u06CC \u06A9\u06D5\u0644\u06D5\u067E\u0648\u0648\u0631\u06CC \u0634\u0627\u0631\u0633\u062A\u0627\u0646\u06CC \u0644\u06D5 \u0646\u06CE\u0648\u0627\u0646 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u0645\u0648\u0633\u062A\u06D5\u0646\u0633\u0631\u06CC\u06CC\u06D5 \u0648 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u067E\u06D5\u06A9\u06CC\u0646",descriptionEn:"A historic institutional partnership between two of the world's oldest academic lineages, advancing digital archeology, cuneiform preservation, and Silk Road comparative historiography.",descriptionAr:"\u0634\u0631\u0627\u0643\u0629 \u0645\u0624\u0633\u0633\u064A\u0629 \u062A\u0627\u0631\u064A\u062E\u064A\u0629 \u062A\u062C\u0645\u0639 \u0628\u064A\u0646 \u0623\u0639\u0631\u0642 \u0627\u0644\u0635\u0631\u0648\u062D \u0627\u0644\u0645\u0639\u0631\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0627\u0644\u0645\u060C \u0645\u062A\u062E\u0635\u0635\u0629 \u0641\u064A \u0627\u0644\u0622\u062B\u0627\u0631 \u0627\u0644\u0631\u0642\u0645\u064A\u0629\u060C \u062D\u0641\u0638 \u0627\u0644\u0623\u0644\u0648\u0627\u062D \u0627\u0644\u0645\u0633\u0645\u0627\u0631\u064A\u0629\u060C \u0648\u062F\u0631\u0627\u0633\u0627\u062A \u0645\u0642\u0627\u0631\u0646\u0629 \u062A\u0627\u0631\u064A\u062E \u0637\u0631\u064A\u0642 \u0627\u0644\u062D\u0631\u064A\u0631.",descriptionZh:"\u4F9D\u6258\u4E24\u5EA7\u627F\u8F7D\u5343\u5E74\u6587\u8109\u7684\u9AD8\u7B49\u5B66\u5E9C\uFF0C\u5F00\u5C55\u7F8E\u7D22\u4E0D\u8FBE\u7C73\u4E9A\u6954\u5F62\u6587\u5B57\u6570\u5B57\u62D3\u5370\u3001\u4E1D\u7EF8\u4E4B\u8DEF\u6587\u732E\u4E92\u8BD1\u4E0E\u5386\u53F2\u5730\u7406\u591A\u5B66\u79D1\u8054\u5408\u79D1\u8003\u3002",descriptionCkb:"\u0647\u0627\u0648\u0628\u06D5\u0634\u06CC\u06CC\u06D5\u06A9\u06CC \u0645\u06CE\u0698\u0648\u0648\u06CC\u06CC \u0646\u06CE\u0648\u0627\u0646 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u0645\u0648\u0633\u062A\u06D5\u0646\u0633\u0631\u06CC\u06CC\u06D5 \u0644\u06D5 \u0628\u06D5\u063A\u062F\u0627 \u0648 \u0632\u0627\u0646\u06A9\u06C6\u06CC \u067E\u06D5\u06A9\u06CC\u0646 \u0628\u06C6 \u067E\u0627\u0631\u0627\u0633\u062A\u0646\u06CC \u0634\u0648\u06CE\u0646\u06D5\u0648\u0627\u0631\u06D5 \u062F\u06CE\u0631\u06CC\u0646\u06D5\u06A9\u0627\u0646 \u0648 \u0645\u06CE\u0698\u0648\u0648\u06CC \u0695\u06CE\u06AF\u0627\u06CC \u0626\u0627\u0648\u0631\u06CC\u0634\u0645.",detailsEn:`Connecting Mustansiriyah University (originally founded in 1227 CE) and Peking University (established 1898 CE as the Imperial University of Peking), this alliance brings cutting-edge 3D photogrammetry and AI-assisted multispectral imaging to Iraqi antiquities.
+Faculty and graduate students undertake dual field seasons in Babylon, Nineveh, and Xi'an.`,detailsAr:`\u062A\u062C\u0645\u0639 \u0647\u0630\u0647 \u0627\u0644\u0627\u062A\u0641\u0627\u0642\u064A\u0629 \u0628\u064A\u0646 \u0627\u0644\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0645\u0633\u062A\u0646\u0635\u0631\u064A\u0629 \u0627\u0644\u062A\u064A \u062A\u0623\u0633\u0633\u062A \u0641\u064A \u0628\u063A\u062F\u0627\u062F \u0639\u0627\u0645 \u0661\u0662\u0662\u0667 \u0645\u064A\u0644\u0627\u062F\u064A\u0629 \u0648\u062C\u0627\u0645\u0639\u0629 \u0628\u0643\u064A\u0646 \u0627\u0644\u0645\u0631\u0645\u0648\u0642\u0629\u060C \u0648\u062A\u0648\u0638\u0641 \u0623\u062D\u062F\u062B \u062A\u0642\u0646\u064A\u0627\u062A \u0627\u0644\u062A\u0635\u0648\u064A\u0631 \u0627\u0644\u0637\u064A\u0641\u064A \u0648\u0627\u0644\u0645\u0633\u062D \u0627\u0644\u0644\u064A\u0632\u0631\u064A \u062B\u0644\u0627\u062B\u064A \u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0644\u062D\u0641\u0638 \u0627\u0644\u0622\u062B\u0627\u0631 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629 \u0648\u062A\u0631\u062C\u0645\u0629 \u0627\u0644\u0645\u062E\u0637\u0648\u0637\u0627\u062A \u0627\u0644\u0642\u062F\u064A\u0645\u0629.`,detailsZh:`\u8BE5\u8054\u76DF\u6DB5\u76D6\u5DF4\u6BD4\u4F26\u9057\u5740\u3001\u5C3C\u5C3C\u5FAE\u53E4\u57CE\u4E0E\u4E2D\u56FD\u897F\u5B89\u5927\u660E\u5BAB\u9057\u5740\u7684\u591A\u6E90\u9065\u611F\u76D1\u6D4B\u4E0E\u6587\u7269\u6570\u5B57\u5316\u4FDD\u62A4\uFF0C\u6BCF\u5E74\u9009\u6D3E\u9752\u5E74\u5B66\u8005\u8D74\u4E2D\u4F0A\u4E24\u5730\u8FDB\u884C\u8054\u5408\u7530\u91CE\u8003\u53E4\u8C03\u67E5\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u067E\u0695\u06C6\u0698\u06D5\u06CC\u06D5 \u06AF\u0631\u0646\u06AF\u06CC \u062F\u06D5\u062F\u0627\u062A \u0628\u06D5 \u0628\u06D5\u06A9\u0627\u0631\u0647\u06CE\u0646\u0627\u0646\u06CC \u062A\u06D5\u06A9\u0646\u06D5\u0644\u06C6\u0698\u06CC\u0627\u06CC \u0633\u06CE \u0695\u06D5\u0647\u06D5\u0646\u062F\u06CC \u0628\u06C6 \u067E\u0627\u0631\u0627\u0633\u062A\u0646\u06CC \u0634\u0648\u06CE\u0646\u06D5\u0648\u0627\u0631\u06D5 \u062F\u06CE\u0631\u06CC\u0646\u06D5\u06A9\u0627\u0646\u06CC \u0628\u0627\u0628\u0644 \u0648 \u0646\u06D5\u06CC\u0646\u06D5\u0648\u0627 \u0648 \u0628\u06D5\u06B5\u06AF\u06D5\u0646\u0627\u0645\u06D5 \u0645\u06CE\u0698\u0648\u0648\u06CC\u06CC\u06D5\u06A9\u0627\u0646.`,categorySlug:"higher-education-university",institutionName:"Peking University School of Archaeology & Mustansiriyah University",coverImage:"https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1200&q=80",eventDate:"Ongoing Academic MOU (2025-2030)",programStartDate:"2025-10-01",programEndDate:null,applicationDeadline:null,eligibility:"Academic faculty and post-graduate researchers in Archaeology, History, and Cultural Heritage Preservation.",contactUrl:"/en/contact?subject=peking-heritage",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/heritage-alliance",featured:true,order:4},{slug:"mesopotamia-yangtze-calligraphy-dialogue",titleEn:"Two Rivers, Two Scripts: Arabic & Chinese Calligraphy Masterclass",titleAr:"\u062D\u0648\u0627\u0631 \u0627\u0644\u0646\u0647\u0631\u064A\u0646: \u0645\u0644\u062A\u0642\u0649 \u0648\u0623\u0633\u0627\u062A\u0630\u0629 \u0627\u0644\u062E\u0637 \u0627\u0644\u0639\u0631\u0628\u064A \u0648\u0627\u0644\u062E\u0637 \u0627\u0644\u0635\u064A\u0646\u064A \u0628\u0627\u0644\u0641\u0631\u0634\u0627\u0629",titleZh:"\u4E24\u6CB3\u58A8\u97F5\uFF1A\u963F\u62C9\u4F2F\u4E66\u6CD5\u4E0E\u4E2D\u56FD\u5BA3\u7EB8\u6C34\u58A8\u5927\u5E08\u5BF9\u8BDD\u5DE1\u5C55",titleCkb:"\u062F\u0648\u0648 \u0695\u0648\u0648\u0628\u0627\u0631\u060C \u062F\u0648\u0648 \u062E\u06D5\u062A: \u0634\u0627\u06A9\u0627\u0631\u06CC \u062E\u06C6\u0634\u0646\u0648\u0648\u0633\u06CC \u0639\u06D5\u0631\u06D5\u0628\u06CC \u0648 \u0686\u06CC\u0646\u06CC",descriptionEn:"An unprecedented artistic residency bringing together legendary Iraqi master calligraphers with contemporary Chinese ink masters for collaborative exhibitions in Baghdad, Beijing, and Hangzhou.",descriptionAr:"\u0625\u0642\u0627\u0645\u0629 \u0641\u0646\u064A\u0629 \u0627\u0633\u062A\u062B\u0646\u0627\u0626\u064A\u0629 \u062A\u062C\u0645\u0639 \u0643\u0628\u0627\u0631 \u0623\u0633\u0627\u062A\u0630\u0629 \u0627\u0644\u062E\u0637 \u0627\u0644\u0639\u0631\u0628\u064A \u0641\u064A \u0627\u0644\u0639\u0631\u0627\u0642 \u0645\u0639 \u0631\u0648\u0627\u062F \u0641\u0646 \u0627\u0644\u062D\u0628\u0631 \u0648\u0627\u0644\u0641\u0631\u0634\u0627\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u064A\u0646\u060C \u0648\u062A\u062A\u0648\u062C \u0628\u0645\u0639\u0627\u0631\u0636 \u0645\u0634\u062A\u0631\u0643\u0629 \u0641\u064A \u0628\u063A\u062F\u0627\u062F \u0648\u0628\u0643\u064A\u0646 \u0648\u0647\u0627\u0646\u063A\u062A\u0634\u0648.",descriptionZh:"\u6C47\u805A\u4F0A\u62C9\u514B\u9876\u7EA7\u963F\u62C9\u4F2F\u4F20\u7EDF\u4E66\u6CD5\u540D\u5BB6\u4E0E\u4E2D\u56FD\u56FD\u5BB6\u753B\u9662\u6C34\u58A8\u827A\u672F\u5927\u5E08\u7684\u9A7B\u7559\u521B\u4F5C\u8BA1\u5212\uFF0C\u5728\u5DF4\u683C\u8FBE\u3001\u5317\u4EAC\u4E0E\u676D\u5DDE\u4E09\u5730\u4E3E\u529E\u5927\u578B\u5DE1\u5C55\u3002",descriptionCkb:"\u067E\u06CE\u0634\u0627\u0646\u06AF\u06D5 \u0648 \u062E\u0648\u0644\u06CC \u062A\u0627\u06CC\u0628\u06D5\u062A\u06CC \u062E\u06C6\u0634\u0646\u0648\u0648\u0633\u06CC \u0628\u06C6 \u06A9\u06C6\u06A9\u0631\u062F\u0646\u06D5\u0648\u06D5\u06CC \u0645\u0627\u0645\u06C6\u0633\u062A\u0627\u06CC\u0627\u0646\u06CC \u062E\u06C6\u0634\u0646\u0648\u0648\u0633\u06CC \u0639\u06CE\u0631\u0627\u0642 \u0648 \u0647\u0648\u0646\u06D5\u0631\u0645\u06D5\u0646\u062F\u0627\u0646\u06CC \u0648\u06CE\u0646\u06D5\u06A9\u06CE\u0634\u0627\u0646\u06CC \u0686\u06CC\u0646\u06CC.",detailsEn:`Focusing on the metaphysical rhythm and sacred geometry of both Arabic scripts (Thuluth, Kufic, Diwani) and Chinese calligraphy styles (Kaishu, Xingshu, Caoshu).
+The program produces a collaborative commemorative art portfolio published in Arabic, Chinese, and English, accompanied by open public masterclasses.`,detailsAr:`\u064A\u0633\u062A\u0643\u0634\u0641 \u0627\u0644\u0645\u0644\u062A\u0642\u0649 \u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0627\u0644\u062C\u0645\u0627\u0644\u064A\u0629 \u0648\u0627\u0644\u0647\u0646\u062F\u0633\u064A\u0629 \u0627\u0644\u0645\u0634\u062A\u0631\u0643\u0629 \u0628\u064A\u0646 \u062D\u0631\u0648\u0641 \u0627\u0644\u062E\u0637 \u0627\u0644\u0639\u0631\u0628\u064A \u0627\u0644\u0643\u0648\u0641\u064A \u0648\u0627\u0644\u062B\u0644\u062B \u0648\u0627\u0644\u062F\u064A\u0648\u0627\u0646\u064A\u060C \u0648\u0641\u0646\u0648\u0646 \u0627\u0644\u062E\u0637 \u0627\u0644\u0635\u064A\u0646\u064A \u0628\u0627\u0644\u062D\u0628\u0631 \u0639\u0644\u0649 \u0648\u0631\u0642 \u0634\u0648\u0627\u0646\u060C \u0645\u0642\u062F\u0645\u0627\u064B \u0648\u0631\u0634\u0627\u064B \u062A\u0641\u0627\u0639\u0644\u064A\u0629 \u0645\u0641\u062A\u0648\u062D\u0629 \u0644\u0644\u062C\u0645\u0647\u0648\u0631 \u0648\u0627\u0644\u0637\u0644\u0628\u0629.`,detailsZh:`\u8BE5\u827A\u672F\u9A7B\u7559\u63A2\u7D22\u4E24\u5927\u4E1C\u65B9\u53E4\u8001\u4E66\u6CD5\u4F53\u7CFB\u5173\u4E8E\u6C14\u97F5\u3001\u7ED3\u6784\u4E0E\u7559\u767D\u7684\u6DF1\u523B\u54F2\u5B66\u547C\u5E94\uFF0C\u8054\u5408\u521B\u4F5C\u5377\u8F74\u4F5C\u54C1\u5C06\u88AB\u4E2D\u4F0A\u4E24\u56FD\u56FD\u5BB6\u535A\u7269\u9986\u6C38\u4E45\u9986\u85CF\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u062E\u0648\u0644\u06D5 \u0644\u06CE\u06A9\u06C6\u06B5\u06CC\u0646\u06D5\u0648\u06D5 \u0644\u06D5 \u0647\u0627\u0648\u0628\u06D5\u0634\u06CC\u06CC\u06D5 \u0641\u06D5\u0644\u0633\u06D5\u0641\u06CC \u0648 \u062C\u0648\u0627\u0646\u06CC\u06CC\u06D5\u06A9\u0627\u0646\u06CC \u062E\u06C6\u0634\u0646\u0648\u0648\u0633\u06CC \u0639\u06D5\u0631\u06D5\u0628\u06CC \u0648 \u0686\u06CC\u0646\u06CC \u062F\u06D5\u06A9\u0627\u062A.`,categorySlug:"arts-heritage",institutionName:"China National Academy of Painting & Iraqi Calligraphers Society",coverImage:"https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",eventDate:"November 10 - December 5, 2026",programStartDate:"2026-11-10",programEndDate:"2026-12-05",applicationDeadline:"August 15, 2026",eligibility:"Practicing visual artists, calligraphers, and art institute faculty members.",contactUrl:"/en/contact?subject=calligraphy-masterclass",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/calligraphy",featured:false,order:5},{slug:"chinese-bridge-iraq-speaking-competition",titleEn:"Chinese Bridge Proficiency Competition & Scholarship Pipeline",titleAr:'\u0645\u0633\u0627\u0628\u0642\u0629 "\u062C\u0633\u0631 \u0627\u0644\u0644\u063A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629" \u0627\u0644\u0648\u0637\u0646\u064A\u0629 \u0648\u0645\u0646\u062D \u0627\u0644\u062A\u0628\u0627\u062F\u0644 \u0627\u0644\u0644\u063A\u0648\u064A \u0641\u064A \u0627\u0644\u0635\u064A\u0646',titleZh:"\u4F0A\u62C9\u514B\u201C\u6C49\u8BED\u6865\u201D\u4E2D\u6587\u79C0\u4E0E\u5168\u989D\u8BED\u5408\u4EA4\u6D41\u5956\u5B66\u91D1\u9009\u62D4\u8D5B",titleCkb:'\u067E\u06CE\u0634\u0628\u0695\u06A9\u06CE\u06CC \u0646\u06CC\u0634\u062A\u0645\u0627\u0646\u06CC "\u067E\u0631\u062F\u06CC \u0632\u0645\u0627\u0646\u06CC \u0686\u06CC\u0646\u06CC" \u0648 \u0628\u06D5\u062E\u0634\u06CC\u0646\u06CC \u0632\u06D5\u0645\u0627\u0644\u06D5',descriptionEn:"The definitive annual Chinese language showcase for Iraqi university students, awarding full one-year and four-year language immersion scholarships at leading Chinese normal universities.",descriptionAr:"\u0627\u0644\u0645\u0633\u0627\u0628\u0642\u0629 \u0627\u0644\u0648\u0637\u0646\u064A\u0629 \u0627\u0644\u0633\u0646\u0648\u064A\u0629 \u0627\u0644\u0643\u0628\u0631\u0649 \u0644\u0625\u062A\u0642\u0627\u0646 \u0627\u0644\u0644\u063A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0644\u0637\u0644\u0628\u0629 \u0627\u0644\u062C\u0627\u0645\u0639\u0627\u062A \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0629\u060C \u0648\u0627\u0644\u062A\u064A \u062A\u0645\u0646\u062D \u0627\u0644\u0641\u0627\u0626\u0632\u064A\u0646 \u0645\u0646\u062D\u0627\u064B \u062F\u0631\u0627\u0633\u064A\u0629 \u0643\u0627\u0645\u0644\u0629 \u0644\u062F\u0631\u0627\u0633\u0629 \u0627\u0644\u0644\u063A\u0629 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0641\u064A \u0643\u0628\u0631\u0649 \u062C\u0627\u0645\u0639\u0627\u062A \u0628\u0643\u064A\u0646 \u0648\u0648\u0647\u0627\u0646.",descriptionZh:"\u9762\u5411\u4F0A\u62C9\u514B\u9AD8\u6821\u5B66\u5B50\u7684\u9876\u7EA7\u6C49\u8BED\u6C34\u5E73\u5927\u8D5B\uFF0C\u4F18\u80DC\u8005\u5C06\u83B7\u5F97\u6559\u80B2\u90E8\u4E2D\u5916\u8BED\u8A00\u4EA4\u6D41\u5408\u4F5C\u4E2D\u5FC3\u5168\u989D\u8D74\u534E\u8FDB\u4FEE\u53CA\u653B\u8BFB\u5B66\u4F4D\u5956\u5B66\u91D1\u3002",descriptionCkb:"\u067E\u06CE\u0634\u0628\u0695\u06A9\u06CE\u06CC \u06AF\u06D5\u0648\u0631\u06D5\u06CC \u0632\u0645\u0627\u0646\u06CC \u0686\u06CC\u0646\u06CC \u0628\u06C6 \u0642\u0648\u062A\u0627\u0628\u06CC\u0627\u0646\u06CC \u0632\u0627\u0646\u06A9\u06C6\u06A9\u0627\u0646\u06CC \u0639\u06CE\u0631\u0627\u0642 \u06A9\u06D5 \u062E\u06D5\u06B5\u0627\u062A\u06D5\u06A9\u06D5\u06CC \u0632\u06D5\u0645\u0627\u0644\u06D5\u06CC \u062A\u06D5\u0648\u0627\u0648\u06CC \u062E\u0648\u06CE\u0646\u062F\u0646\u06CC \u06CC\u06D5\u06A9 \u0633\u0627\u06B5\u06D5\u06CC \u0632\u0645\u0627\u0646\u06D5 \u0644\u06D5 \u067E\u06D5\u06A9\u06CC\u0646.",detailsEn:`Co-hosted by the Center for Language Education and Cooperation (CLEC) and the Iraqi-Chinese Agency, this competition evaluates Chinese speech, cultural talent performance (musical instruments, martial arts, or song), and knowledge of contemporary Chinese society.`,detailsAr:`\u062A\u0642\u0627\u0645 \u0627\u0644\u0645\u0633\u0627\u0628\u0642\u0629 \u0628\u0631\u0639\u0627\u064A\u0629 \u0645\u0631\u0643\u0632 \u062A\u0639\u0644\u064A\u0645 \u0627\u0644\u0644\u063A\u0629 \u0648\u0627\u0644\u062A\u0639\u0627\u0648\u0646 \u0627\u0644\u062F\u0648\u0644\u064A (CLEC)\u060C \u0648\u062A\u062A\u0636\u0645\u0646 \u0627\u062E\u062A\u0628\u0627\u0631\u0627\u062A \u0641\u064A \u0627\u0644\u0625\u0644\u0642\u0627\u0621\u060C \u0627\u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u0639\u0627\u0645\u0629\u060C \u0648\u062A\u0642\u062F\u064A\u0645 \u0641\u0642\u0631\u0627\u062A \u0645\u0646 \u0627\u0644\u0641\u0646\u0648\u0646 \u0627\u0644\u0635\u064A\u0646\u064A\u0629 \u0627\u0644\u062A\u0642\u0644\u064A\u062F\u064A\u0629\u060C \u0648\u062A\u0641\u062A\u062D \u0622\u0641\u0627\u0642 \u0627\u0644\u0639\u0645\u0644 \u0643\u0645\u062A\u0631\u062C\u0645\u064A\u0646 \u0645\u0639\u062A\u0645\u062F\u064A\u0646.`,detailsZh:`\u8D5B\u4E8B\u6DB5\u76D6\u4E3B\u9898\u6F14\u8BB2\u3001\u4E2D\u534E\u624D\u827A\u5C55\u793A\u4E0E\u56FD\u60C5\u77E5\u8BC6\u95EE\u7B54\u4E09\u5927\u73AF\u8282\uFF0C\u7D2F\u8BA1\u5DF2\u5411\u4F0A\u62C9\u514B\u5404\u7701\u8F93\u9001\u8D85\u8FC7120\u540D\u4F18\u79C0\u9752\u5E74\u8D74\u534E\u6DF1\u9020\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u067E\u06CE\u0634\u0628\u0695\u06A9\u06CE\u06CC\u06D5 \u0695\u06CE\u06AF\u06D5 \u0628\u06C6 \u0644\u0627\u0648\u0627\u0646\u06CC \u0639\u06CE\u0631\u0627\u0642 \u062F\u06D5\u06A9\u0627\u062A\u06D5\u0648\u06D5 \u0644\u06D5 \u0628\u0648\u0627\u0631\u06D5\u06A9\u0627\u0646\u06CC \u0648\u06D5\u0631\u06AF\u06CE\u0695\u0627\u0646 \u0648 \u0628\u0627\u0632\u0631\u06AF\u0627\u0646\u06CC \u0646\u06CE\u0648\u062F\u06D5\u0648\u06B5\u06D5\u062A\u06CC\u062F\u0627 \u06A9\u0627\u0631 \u0628\u06A9\u06D5\u0646.`,categorySlug:"youth-language",institutionName:"Beijing Language and Culture University (BLCU) & CLEC",coverImage:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",eventDate:"Annual Finals: October 2026",programStartDate:"2026-10-18",programEndDate:"2026-10-22",applicationDeadline:"September 1, 2026",eligibility:"Enrolled undergraduate or postgraduate students with HSK-3 certification or equivalent learning background.",contactUrl:"/en/contact?subject=chinese-bridge",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/chinese-bridge",featured:false,order:6},{slug:"luban-workshop-modern-rail-telecom",titleEn:"Luban Workshop: Advanced High-Speed Rail & 5G Telecommunications",titleAr:"\u0648\u0631\u0634\u0629 \u0644\u0648\u0628\u0627\u0646 \u0627\u0644\u0645\u062A\u0642\u062F\u0645\u0629: \u062A\u062F\u0631\u064A\u0628 \u062A\u0642\u0646\u064A\u0627\u062A \u0633\u0643\u0643 \u0627\u0644\u062D\u062F\u064A\u062F \u0627\u0644\u062D\u062F\u064A\u062B\u0629 \u0648\u0627\u062A\u0635\u0627\u0644\u0627\u062A \u0627\u0644\u062C\u064A\u0644 \u0627\u0644\u062E\u0627\u0645\u0633",titleZh:"\u4F0A\u62C9\u514B\u9C81\u73ED\u5DE5\u574A\uFF1A\u9AD8\u94C1\u7275\u5F15\u4F9B\u7535\u4E0E5G\u667A\u80FD\u901A\u4FE1\u9AD8\u7AEF\u804C\u6559\u57F9\u8BAD",titleCkb:"\u0648\u06C6\u0631\u06A9\u0634\u06C6\u067E\u06CC \u0644\u0648\u0628\u0627\u0646: \u0695\u0627\u0647\u06CE\u0646\u0627\u0646\u06CC \u062A\u06D5\u06A9\u0646\u06CC\u06A9\u06CC \u0634\u06D5\u0645\u06D5\u0646\u062F\u06D5\u0641\u06D5\u0631\u06CC \u062E\u06CE\u0631\u0627 \u0648 \u067E\u06D5\u06CC\u0648\u06D5\u0646\u062F\u06CC\u06CC\u06D5\u06A9\u0627\u0646\u06CC 5G",descriptionEn:'State-of-the-art vocational training hubs established under the famed Chinese "Luban Workshop" framework, certifying Iraqi technicians in smart railway signalling and industrial IoT.',descriptionAr:'\u0645\u0631\u0627\u0643\u0632 \u062A\u062F\u0631\u064A\u0628 \u062A\u0642\u0646\u064A \u0648\u0647\u0646\u062F\u0633\u064A \u0641\u0627\u0626\u0642 \u0627\u0644\u062A\u0637\u0648\u0631 \u0636\u0645\u0646 \u0625\u0637\u0627\u0631 "\u0648\u0631\u0634 \u0644\u0648\u0628\u0627\u0646" \u0627\u0644\u0639\u0627\u0644\u0645\u064A\u0629\u060C \u062A\u0645\u0646\u062D \u0634\u0647\u0627\u062F\u0627\u062A \u0645\u0647\u0646\u064A\u0629 \u062F\u0648\u0644\u064A\u0629 \u0644\u0644\u0641\u0646\u064A\u064A\u0646 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u064A\u0646 \u0641\u064A \u0625\u0634\u0627\u0631\u0627\u062A \u0627\u0644\u0642\u0637\u0627\u0631\u0627\u062A \u0627\u0644\u0630\u0643\u064A\u0629 \u0648\u0625\u0646\u062A\u0631\u0646\u062A \u0627\u0644\u0623\u0634\u064A\u0627\u0621 \u0627\u0644\u0635\u0646\u0627\u0639\u064A.',descriptionZh:"\u4E2D\u4F0A\u804C\u4E1A\u6280\u672F\u6559\u80B2\u5408\u4F5C\u7684\u91CC\u7A0B\u7891\u9879\u76EE\uFF0C\u914D\u5907\u5168\u771F\u6A21\u62DF\u9AD8\u94C1\u8C03\u5EA6\u53F0\u4E0E5G\u4E13\u7F51\u5B9E\u8BAD\u7CFB\u7EDF\uFF0C\u76F4\u63A5\u5BF9\u63A5\u4E2D\u4F0A\u91CD\u5927\u57FA\u7840\u8BBE\u65BD\u9879\u76EE\u4EBA\u624D\u7528\u5DE5\u9700\u6C42\u3002",descriptionCkb:"\u0646\u0627\u0648\u06D5\u0646\u062F\u06CE\u06A9\u06CC \u067E\u06CE\u0634\u06A9\u06D5\u0648\u062A\u0648\u0648\u06CC \u0695\u0627\u0647\u06CE\u0646\u0627\u0646\u06CC \u067E\u06CC\u0634\u06D5\u06CC\u06CC \u0644\u06D5 \u0639\u06CE\u0631\u0627\u0642 \u0628\u06D5 \u0647\u06D5\u0645\u0627\u0647\u06D5\u0646\u06AF\u06CC \u0644\u06D5\u06AF\u06D5\u06B5 \u067E\u0633\u067E\u06C6\u0695\u0627\u0646\u06CC \u0686\u06CC\u0646 \u0628\u06C6 \u067E\u06CE\u06AF\u06D5\u06CC\u0627\u0646\u062F\u0646\u06CC \u062A\u06D5\u06A9\u0646\u06CC\u06A9\u06A9\u0627\u0631\u0627\u0646 \u0644\u06D5 \u0628\u0648\u0627\u0631\u06CC \u06AF\u0648\u0627\u0633\u062A\u0646\u06D5\u0648\u06D5\u06CC \u0645\u06C6\u062F\u06CE\u0631\u0646.",detailsEn:`The Luban Workshop provides continuous 6-month modular certification courses for Iraqi civil and electrical technicians.
+Participants train directly on enterprise-grade hardware provided by CRRC and Huawei, enabling direct career placement with flagship Belt and Road infrastructure projects in Iraq.`,detailsAr:`\u062A\u0648\u0641\u0631 \u0648\u0631\u0634\u0629 \u0644\u0648\u0628\u0627\u0646 \u062F\u0648\u0631\u0627\u062A \u062A\u062F\u0631\u064A\u0628\u064A\u0629 \u0645\u062A\u062E\u0635\u0635\u0629 \u062A\u0645\u062A\u062F \u0644\u0640 \u0666 \u0623\u0634\u0647\u0631\u060C \u064A\u062A\u062F\u0631\u0628 \u062E\u0644\u0627\u0644\u0647\u0627 \u0627\u0644\u0645\u0647\u0646\u062F\u0633\u0648\u0646 \u0648\u0627\u0644\u0641\u0646\u064A\u0648\u0646 \u0627\u0644\u0639\u0631\u0627\u0642\u064A\u0648\u0646 \u0639\u0644\u0649 \u0623\u062D\u062F\u062B \u0627\u0644\u0645\u0639\u062F\u0627\u062A \u0627\u0644\u0635\u0646\u0627\u0639\u064A\u0629 \u0627\u0644\u062A\u064A \u062A\u0648\u0641\u0631\u0647\u0627 \u0634\u0631\u0643\u0627\u062A \u0639\u0627\u0644\u0645\u064A\u0629 \u0631\u0627\u0626\u062F\u0629\u060C \u0645\u0645\u0627 \u064A\u0624\u0647\u0644\u0647\u0645 \u0644\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0641\u064A \u0643\u0628\u0631\u0649 \u0627\u0644\u0645\u0634\u0627\u0631\u064A\u0639 \u0627\u0644\u0648\u0637\u0646\u064A\u0629.`,detailsZh:`\u5DE5\u574A\u91C7\u53D6\u201C\u5B66\u5386\u6559\u80B2+\u804C\u4E1A\u57F9\u8BAD\u201D\u53CC\u8F68\u5236\uFF0C\u6BCF\u5E74\u4E3A\u4F0A\u62C9\u514B\u94C1\u8DEF\u603B\u5C40\u3001\u7535\u529B\u90E8\u95E8\u53CA\u4E3B\u6D41\u901A\u4FE1\u8FD0\u8425\u5546\u5B9A\u5411\u8F93\u9001\u6570\u767E\u540D\u6301\u8BC1\u9AD8\u6280\u80FD\u4EBA\u624D\u3002`,detailsCkb:`\u0626\u06D5\u0645 \u062E\u0648\u0644\u06D5 \u0666 \u0645\u0627\u0646\u06AF\u06CC\u06CC\u06D5 \u0626\u0627\u0645\u0627\u0646\u062C\u06CC \u067E\u06D5\u0631\u0648\u06D5\u0631\u062F\u06D5\u06A9\u0631\u062F\u0646\u06CC \u06A9\u0627\u062F\u0631\u06CC \u062A\u06D5\u06A9\u0646\u06CC\u06A9\u06CC \u0639\u06CE\u0631\u0627\u0642\u06CC\u06CC\u06D5 \u0628\u06C6 \u0628\u06D5\u0695\u06CE\u0648\u06D5\u0628\u0631\u062F\u0646\u06CC \u067E\u0695\u06C6\u0698\u06D5 \u067E\u06CC\u0634\u06D5\u0633\u0627\u0632\u06CC\u06CC\u06D5 \u06AF\u06D5\u0648\u0631\u06D5\u06A9\u0627\u0646.`,categorySlug:"professional-vocational",institutionName:"Tianjin Railway Technical College & Iraqi Ministry of Transport",coverImage:"https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",eventDate:"Cohort 4 Enrollment (August 2026)",programStartDate:"2026-08-15",programEndDate:"2027-02-15",applicationDeadline:"July 10, 2026",eligibility:"Technical diploma or Bachelor in Electrical, Mechanical, Civil, or Telecommunications Engineering.",contactUrl:"/en/contact?subject=luban-workshop",applicationUrl:"https://cultural.iraqi-chineseagency.com/apply/luban",featured:true,order:7}];async function seedCulturalExchange(){try{console.log("\u{1F3DB}\uFE0F Checking and seeding Cultural Exchange data...");const categoryMap={};for(const cat of SEED_CULTURAL_CATEGORIES){const existing=await prisma.culturalExchangeCategory.findUnique({where:{slug:cat.slug}});if(!existing){const created=await prisma.culturalExchangeCategory.create({data:{slug:cat.slug,nameEn:cat.nameEn,nameAr:cat.nameAr,nameZh:cat.nameZh,nameCkb:cat.nameCkb,order:cat.order}});categoryMap[cat.slug]=created.id;console.log(`  + Created cultural category: ${cat.nameEn}`)}else{categoryMap[cat.slug]=existing.id}}for(const prog of SEED_CULTURAL_PROGRAMS){const catId=categoryMap[prog.categorySlug];if(!catId)continue;const existingProg=await prisma.culturalExchangeProgram.findUnique({where:{slug:prog.slug}});if(!existingProg){await prisma.culturalExchangeProgram.create({data:{slug:prog.slug,titleEn:prog.titleEn,titleAr:prog.titleAr,titleZh:prog.titleZh,titleCkb:prog.titleCkb,descriptionEn:prog.descriptionEn,descriptionAr:prog.descriptionAr,descriptionZh:prog.descriptionZh,descriptionCkb:prog.descriptionCkb,detailsEn:prog.detailsEn,detailsAr:prog.detailsAr,detailsZh:prog.detailsZh,detailsCkb:prog.detailsCkb,categoryId:catId,institutionName:prog.institutionName,coverImage:prog.coverImage,eventDate:prog.eventDate,programStartDate:prog.programStartDate,programEndDate:prog.programEndDate,applicationDeadline:prog.applicationDeadline,eligibility:prog.eligibility,contactUrl:prog.contactUrl,applicationUrl:prog.applicationUrl,featured:prog.featured,order:prog.order}});console.log(`  + Created cultural program: ${prog.titleEn}`)}}console.log("\u2705 Cultural Exchange seeding verified.")}catch(error){console.error("\u26A0\uFE0F Error seeding cultural exchange data:",error)}}__name(seedCulturalExchange,"seedCulturalExchange");export{SEED_CULTURAL_CATEGORIES,SEED_CULTURAL_PROGRAMS,seedCulturalExchange};

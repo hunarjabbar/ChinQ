@@ -17,7 +17,7 @@ export function SummitServicesPage() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-12">
         
         {/* Header Hero */}
-        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-start">
           <div className="flex items-center gap-2">
             <Briefcase className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
@@ -36,9 +36,10 @@ export function SummitServicesPage() {
           <div className="pt-2">
             <Link
               to={`/${lang}/summit/services/request`}
-              className="px-5 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors inline-block"
+              className="px-5 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
             >
-              Submit Unified Service Request →
+              <span>{lang === 'ar' ? 'تقديم طلب خدمة موحد' : lang === 'zh' ? '提交统一服务申请' : 'Submit Unified Service Request'}</span>
+              <ArrowRight size={15} className={isRtl ? 'rotate-180' : ''} />
             </Link>
           </div>
         </div>
@@ -48,7 +49,7 @@ export function SummitServicesPage() {
           {ICA_SERVICES.map((srv, idx) => (
             <div
               key={srv.id}
-              className="p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-brand-600 transition-all shadow-xs flex flex-col justify-between space-y-6"
+              className="p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-brand-600 transition-all shadow-xs flex flex-col justify-between space-y-6 text-start"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -74,7 +75,7 @@ export function SummitServicesPage() {
                 </p>
 
                 <div className="space-y-2 pt-2">
-                  <div className="text-[11px] font-bold text-neutral-700 dark:text-neutral-300 uppercase">Key Deliverables:</div>
+                  <div className="text-[11px] font-bold text-neutral-700 dark:text-neutral-300 uppercase">{lang === 'ar' ? 'المخرجات الأساسية:' : 'Key Deliverables:'}</div>
                   {srv.deliverables[lang].slice(0, 3).map((feat, fidx) => (
                     <div key={fidx} className="flex items-start gap-2 text-xs text-neutral-600 dark:text-neutral-400">
                       <CheckCircle2 size={14} className="text-emerald-600 shrink-0 mt-0.5" />
@@ -89,14 +90,14 @@ export function SummitServicesPage() {
                   to={`/${lang}/summit/services/${srv.slug}`}
                   className="text-xs font-bold text-brand-800 dark:text-brand-400 hover:underline flex items-center gap-1"
                 >
-                  <span>Detailed Specifications</span>
+                  <span>{lang === 'ar' ? 'المواصفات التفصيلية' : lang === 'zh' ? '查看详细规格' : 'Detailed Specifications'}</span>
                   <ArrowRight size={13} className={isRtl ? 'rotate-180' : ''} />
                 </Link>
                 <Link
                   to={`/${lang}/summit/services/request?service=${srv.slug}`}
-                  className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-neutral-800 dark:text-neutral-200 text-xs font-bold transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-neutral-800 dark:text-neutral-200 text-xs font-bold transition-colors cursor-pointer"
                 >
-                  Request Service
+                  {lang === 'ar' ? 'طلب الخدمة' : lang === 'zh' ? '申请服务' : 'Request Service'}
                 </Link>
               </div>
             </div>

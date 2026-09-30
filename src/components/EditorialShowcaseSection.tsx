@@ -121,65 +121,63 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
   return (
     <section 
       aria-label="Editorial Showcase"
-      className="w-full bg-white dark:bg-neutral-900 border-2 border-ink-900 dark:border-neutral-700 shadow-sm p-6 sm:p-8 md:p-10 transition-colors duration-300 text-start"
+      className="w-full bg-white dark:bg-neutral-900 border-t-2 border-ink-950 dark:border-neutral-700 pt-16 pb-12 transition-colors duration-300 text-start"
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       {/* Top Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-brand-800 pb-6 mb-8">
-        <div className="max-w-3xl space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-brand-800 rounded-full animate-ping" />
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-800 dark:text-brand-400">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+        <div className="max-w-3xl space-y-6">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 bg-brand-800 rounded-full animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-800 dark:text-brand-400">
               {content.eyebrow}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-brand-900 dark:text-white leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-ink-950 dark:text-white leading-[1.05]">
             {content.title}
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed text-justify">
+          <p className="text-base text-neutral-500 dark:text-neutral-400 leading-relaxed font-serif italic max-w-2xl">
             {content.desc}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        <div className="flex flex-wrap items-center gap-6 shrink-0">
           <Link 
             to={`/${lang}/about`}
-            className="px-5 py-2.5 bg-paper-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-500 text-brand-900 dark:text-neutral-100 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
+            className="text-[10px] font-black uppercase tracking-widest text-ink-950 dark:text-white border-b-2 border-ink-950 dark:border-white/20 hover:border-brand-800 transition-all pb-1 flex items-center gap-2 group cursor-pointer"
           >
-            <Building2 className="w-3.5 h-3.5 text-brand-800 dark:text-brand-400" />
             <span>{content.exploreAboutBtn}</span>
-            {isRtl ? <ChevronLeft className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+            {isRtl ? <ChevronLeft className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
           </Link>
 
           <Link 
             to={`/${lang}/join`}
-            className="px-6 py-2.5 bg-brand-800 hover:bg-brand-700 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+            className="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-xl flex items-center gap-2 cursor-pointer"
           >
-            <UserPlus className="w-3.5 h-3.5 text-white" />
+            <UserPlus className="w-4 h-4" />
             <span>{content.joinEditorialBtn}</span>
-            {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
           </Link>
         </div>
       </div>
 
       {/* Grid: Metrics on left, Bureaus on right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         {/* Metrics Strip */}
-        <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div className="lg:col-span-5 grid grid-cols-1 gap-10">
           {content.metrics.map((m, idx) => (
             <div 
               key={idx} 
-              className="p-4 bg-paper-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-800 flex flex-col justify-center space-y-1"
+              className="space-y-3"
             >
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-black text-brand-800 dark:text-brand-400">
+              <div className="flex items-baseline gap-4">
+                <span className="text-5xl font-black text-ink-950 dark:text-white tracking-tighter tabular-nums">
                   {m.num}
                 </span>
-                <span className="text-xs font-bold text-brand-900 dark:text-white uppercase tracking-wider">
+                <span className="text-[10px] font-black text-brand-800 dark:text-brand-400 uppercase tracking-[0.2em]">
                   {m.label}
                 </span>
               </div>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 font-serif italic">
                 {m.sub}
               </p>
             </div>
@@ -187,49 +185,52 @@ export function EditorialShowcaseSection({ lang }: EditorialShowcaseProps) {
         </div>
 
         {/* Bureaus Active Grid */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
-          <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2">
-            <h3 className="text-xs font-black uppercase tracking-widest text-brand-900 dark:text-white flex items-center gap-2">
-              <Radio className="w-4 h-4 text-brand-800 dark:text-brand-400" />
+        <div className="lg:col-span-7 space-y-10">
+          <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800 pb-4">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-ink-950 dark:text-white flex items-center gap-3">
+              <Radio className="w-4 h-4 text-brand-800" />
               {content.bureausTitle}
             </h3>
-            <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 border border-emerald-200 dark:border-emerald-800">
-              Live Network Telemetry
+            <span className="text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+              Live Telemetry
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10">
             {content.bureaus.map((b, i) => (
               <div 
                 key={i} 
-                className="p-3.5 bg-white dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700 hover:border-brand-800 dark:hover:border-brand-600 transition-colors space-y-1.5"
+                className="space-y-2 group"
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-sm text-brand-900 dark:text-white">
+                  <h4 className="font-black text-sm text-ink-950 dark:text-white uppercase tracking-tight group-hover:text-brand-800 transition-colors">
                     {b.name}
                   </h4>
-                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-2xs">
+                  <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
                     {b.status}
                   </span>
                 </div>
-                <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
+                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 font-serif italic">
                   {b.role}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="p-3 bg-brand-50/60 dark:bg-brand-950/30 border border-brand-800/20 text-[11px] text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-brand-800 dark:text-brand-400 shrink-0" />
-              {lang === 'ar' ? 'جميع المراسلات والتقارير متزامنة ومحمية بتشفير عالي الأمان.' : lang === 'zh' ? '所有公文电传与采编简报均受高等级主权加密保护并实时同步。' : lang === 'ckb' ? 'هەموو ڕاپۆرت و بروسکەکان بە تەواوی مشەفەرکراون و پارێزراون.' : 'All dispatches & intelligence reports are synchronized and cryptographically secured.'}
-            </span>
-            <Link 
-              to={`/${lang}/about`} 
-              className="text-xs font-bold text-brand-800 dark:text-brand-400 hover:underline uppercase tracking-wider shrink-0 ml-2 rtl:ml-0 rtl:mr-2"
-            >
-              {lang === 'ar' ? 'عرض السجل' : lang === 'zh' ? '查阅机构章程' : lang === 'ckb' ? 'بینینی وردەکاری' : 'View Protocol'}
-            </Link>
+          <div className="pt-10 mt-10 border-t border-neutral-100 dark:border-neutral-800">
+            <div className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-brand-800 opacity-50" />
+                {lang === 'ar' ? 'جميع المراسلات متزامنة ومحمية بتشفير عالي.' : 'All dispatches are synchronized and cryptographically secured.'}
+              </span>
+              <Link 
+                to={`/${lang}/about`} 
+                className="hover:text-brand-800 underline decoration-neutral-200 underline-offset-4 transition-colors"
+              >
+                {lang === 'ar' ? 'عرض السجل' : 'View Protocol'}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

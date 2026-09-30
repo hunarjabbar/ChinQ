@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useNotificationStore } from './useNotificationStore';
 import {
   VisaCategory,
   VisaService,
@@ -528,6 +529,26 @@ export const useVisaCentreStore = create<VisaCentreState>()(
           diff: JSON.stringify({ referenceId, visaCategory: params.visaCategory, direction: params.direction })
         });
 
+        useNotificationStore.getState().addNotification({
+          category: 'visa',
+          type: 'info',
+          title: {
+            en: `Application Registered (Ref: ${referenceId})`,
+            ar: `تم تسجيل المعاملة بنجاح (مرجع: ${referenceId})`,
+            zh: `服务与签证申请已受理 (单号: ${referenceId})`,
+            ckb: `داواکارییەکە تۆمارکرا (کۆد: ${referenceId})`,
+          },
+          message: {
+            en: `Your ${params.visaCategory} application/request (${referenceId}) has been logged into the consular queue.`,
+            ar: `تم تسجيل طلبك للمفئة (${params.visaCategory}) بنجاح بكود المتابعة ${referenceId}.`,
+            zh: `您的 (${params.visaCategory}) 级业务申请单 (${referenceId}) 已成功登记至领事排队系统。`,
+            ckb: `داواکارییەکەت بۆ جۆری (${params.visaCategory}) بە سەرکەوتوویی تۆمارکرا.`,
+          },
+          referenceId,
+          link: '/institute/visa-tracking',
+          showToast: true,
+        });
+
         return { referenceId, applicationId, applicantId };
       },
 
@@ -614,6 +635,30 @@ export const useVisaCentreStore = create<VisaCentreState>()(
           entityId: id,
           diff: JSON.stringify({ status, note })
         });
+
+        const targetApp = get().applications.find((a) => a.id === id);
+        if (targetApp) {
+          const notifType = status === 'approved' ? 'success' : status === 'refused' ? 'error' : 'info';
+          useNotificationStore.getState().addNotification({
+            category: 'visa',
+            type: notifType,
+            title: {
+              en: `Application Status Changed: ${status.toUpperCase()} (${targetApp.referenceId})`,
+              ar: `تغيير حالة المعاملة: ${status.toUpperCase()} (${targetApp.referenceId})`,
+              zh: `签证申请状态更新: ${status.toUpperCase()} (${targetApp.referenceId})`,
+              ckb: `گۆڕانکاری لە دۆخی داواکاری: ${status.toUpperCase()} (${targetApp.referenceId})`,
+            },
+            message: {
+              en: note || `Application ${targetApp.referenceId} status set to ${status}.`,
+              ar: note || `تم تحديث حالة المعاملة ${targetApp.referenceId} إلى ${status}.`,
+              zh: note || `单号 ${targetApp.referenceId} 的状态已更新为 ${status}。`,
+              ckb: note || `دۆخی داواکاری ${targetApp.referenceId} گۆڕدرا بۆ ${status}.`,
+            },
+            referenceId: targetApp.referenceId,
+            link: '/institute/visa-tracking',
+            showToast: true,
+          });
+        }
       },
 
       assignApplication: (id, assignedTo, actor) => {

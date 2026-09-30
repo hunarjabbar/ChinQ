@@ -1,77 +1,60 @@
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import { Tag } from 'lucide-react';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { ArticleGrid } from '../../components/newsroom/ArticleGrid';
-import { SearchBar } from '../../components/newsroom/SearchBar';
-import { newsroomArticles, newsroomTags } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Tag } from 'lucide-react';
+import { Card } from '../../components/Card';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomTagPage() {
-  const { lang: paramLang, tag: tagSlug } = useParams<{
-    lang?: string;
-    tag?: string;
-  }>();
+  const { lang = 'en', tag } = useParams<{ lang: string; tag: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : paramLang === 'ck'
-    ? 'ckb'
-    : 'en') as Locale;
-
-  const currentTag = newsroomTags.find((t) => t.slug === tagSlug);
-
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-
-  const tagName = currentTag
-    ? currentTag.name[lang] || currentTag.name.en
-    : tagSlug || 'Tag';
-
-  const matchedArticles = useMemo(() => {
-    return newsroomArticles.filter(
-      (a) => a.tags.some((t) => t.slug === tagSlug) && a.status === 'published'
-    );
-  }, [tagSlug]);
+  const decodedTag = decodeURIComponent(tag || '');
+  const articles = portalStore.getNewsArticles().filter(a =>
+    a.status === 'published' && a.tags.some(t => t.toLowerCase() === decodedTag.toLowerCase())
+  );
 
   return (
-    <div className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
+    <div className="bg-[#FFFFFF] min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: `Tag: #${tagName}` },
-            ]}
-          />
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to Newsroom</span>
+        </Link>
 
-          <div className="w-full md:w-auto">
-            <SearchBar lang={lang} />
-          </div>
+        <div className="mb-10 pb-6 border-b border-[#E5E7EB]">
+          <span className="text-xs font-mono font-bold text-[var(--color-brand-800)] uppercase tracking-wider block mb-1">
+            Subject Tag
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-[#000000]">
+            #{decodedTag}
+          </h1>
+          <p className="text-xs text-[#4B5563] mt-2">
+            Showing {articles.length} dispatches indexed under this subject tag.
+          </p>
         </div>
 
-        <header className="p-8 sm:p-10 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
-            <Tag size={13} />
-            <span>Topic Tag</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-50">
-            #{tagName}
-          </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            Dispatches and official releases tagged under #{tagName}.
-          </p>
-        </header>
-
-        <ArticleGrid
-          articles={matchedArticles}
-          lang={lang}
-          heading={`Tagged Dispatches (${matchedArticles.length})`}
-          showViewAll={false}
-          emptyMessage={`No dispatches found tagged under #${tagName}.`}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map(article => (
+            <Card
+              key={article.id}
+              variant="portal"
+              href={`/${currentLang}/newsroom/${article.slug}`}
+              imageUrl={article.imageUrl}
+              category={article.tags[0] || 'Dispatch'}
+              title={article.title[currentLang] || article.title.en}
+              excerpt={article.excerpt[currentLang] || article.excerpt.en}
+              publishDate={article.publishDate}
+              readTime={`${article.readingTimeMinutes} min`}
+              ctaText="Read Article"
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

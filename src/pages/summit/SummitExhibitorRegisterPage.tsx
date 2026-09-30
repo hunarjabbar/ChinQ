@@ -45,7 +45,7 @@ export function SummitExhibitorRegisterPage() {
         {/* Header Hero */}
         <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-center">
           <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-brand-100 dark:bg-brand-950 text-brand-900 dark:text-brand-300 inline-block">
-            Official Exhibitor Portal
+            {lang === 'ar' ? 'البوابة الرسمية للعارضين' : lang === 'zh' ? '官方参展商门户' : 'Official Exhibitor Portal'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
             {lang === 'ar' ? 'طلب حجز جناح في المعرض الثنائي' : lang === 'zh' ? '中伊双边博览会参展申请表' : lang === 'ckb' ? 'فۆرمی داواکاری حجزکردنی شوێن' : 'Exhibitor Booth Application & Contract'}
@@ -84,28 +84,28 @@ export function SummitExhibitorRegisterPage() {
             
             {/* Enterprise Information */}
             <div className="space-y-4">
-              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2 text-start">
                 1. Enterprise & Contact Details
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-start">
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Company Name (Bilingual / English)</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Company Name (Bilingual / English)</label>
                   <input
                     type="text"
                     required
                     value={formData.companyName}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                     placeholder="e.g. Zhejiang Heavy Industries Co., Ltd."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Country / Region of Origin</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Country / Region of Origin</label>
                   <select
                     value={formData.country}
                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   >
                     <option value="China">People's Republic of China</option>
                     <option value="Iraq">Republic of Iraq</option>
@@ -116,38 +116,38 @@ export function SummitExhibitorRegisterPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Primary Contact Person</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Primary Contact Person</label>
                   <input
                     type="text"
                     required
                     value={formData.contactName}
                     onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                     placeholder="Full Name & Job Title"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Official Work Email</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Official Work Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="director@enterprise.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">WhatsApp / WeChat / Phone Number</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">WhatsApp / WeChat / Phone Number</label>
                   <input
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+86 138 0000 0000 / +964 770 000 0000"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
               </div>
@@ -155,16 +155,16 @@ export function SummitExhibitorRegisterPage() {
 
             {/* Sector and Booth Selection */}
             <div className="space-y-4">
-              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2 text-start">
                 2. Sector & Space Requirements
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-start">
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Industry Sector Pavilion</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Industry Sector Pavilion</label>
                   <select
                     value={formData.sector}
                     onChange={(e) => setFormData({ ...formData, sector: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   >
                     {SECTOR_PAVILIONS.map(s => (
                       <option key={s.id} value={s.slug}>{s.name[lang]}</option>
@@ -173,13 +173,13 @@ export function SummitExhibitorRegisterPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Requested Booth ID</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Requested Booth ID</label>
                   <input
                     type="text"
                     value={formData.boothId}
                     onChange={(e) => setFormData({ ...formData, boothId: e.target.value })}
                     placeholder="e.g. A-108"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
               </div>
@@ -187,36 +187,36 @@ export function SummitExhibitorRegisterPage() {
 
             {/* ICA Value-Added Services */}
             <div className="space-y-3">
-              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+              <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2 text-start">
                 3. Integrated ICA Services & Logistics Facilitation
               </h3>
-              <div className="space-y-2.5 text-xs">
-                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer">
+              <div className="space-y-2.5 text-xs text-start">
+                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer border border-transparent hover:border-brand-300/30 transition-all">
                   <input
                     type="checkbox"
                     checked={formData.needClearingSupport}
                     onChange={(e) => setFormData({ ...formData, needClearingSupport: e.target.checked })}
-                    className="rounded text-brand-800 focus:ring-brand-800"
+                    className="rounded text-brand-800 focus:ring-brand-800 w-4 h-4"
                   />
                   <span><strong>IQD/CNY Direct Settlement:</strong> Assist with dual-currency invoicing and trade bank clearing.</span>
                 </label>
 
-                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer">
+                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer border border-transparent hover:border-brand-300/30 transition-all">
                   <input
                     type="checkbox"
                     checked={formData.needSinosureUnderwriting}
                     onChange={(e) => setFormData({ ...formData, needSinosureUnderwriting: e.target.checked })}
-                    className="rounded text-brand-800 focus:ring-brand-800"
+                    className="rounded text-brand-800 focus:ring-brand-800 w-4 h-4"
                   />
                   <span><strong>Sinosure Export Credit Insurance:</strong> Facilitate policy underwriting for deals signed at summit.</span>
                 </label>
 
-                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer">
+                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer border border-transparent hover:border-brand-300/30 transition-all">
                   <input
                     type="checkbox"
                     checked={formData.needVisaAssistance}
                     onChange={(e) => setFormData({ ...formData, needVisaAssistance: e.target.checked })}
-                    className="rounded text-brand-800 focus:ring-brand-800"
+                    className="rounded text-brand-800 focus:ring-brand-800 w-4 h-4"
                   />
                   <span><strong>Official Visa & Delegation Letter:</strong> Issue expedited VIP invitation letter for Iraqi/Chinese entry.</span>
                 </label>

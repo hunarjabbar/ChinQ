@@ -119,7 +119,7 @@ END:VCALENDAR`;
           {filteredSessions.map((session) => (
             <div
               key={session.id}
-              className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-brand-600 transition-all shadow-xs space-y-4"
+              className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-brand-600 transition-all shadow-xs space-y-4 text-start"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex flex-wrap items-center gap-2.5">
@@ -149,7 +149,7 @@ END:VCALENDAR`;
                     onClick={() => setSelectedSessionModal(session)}
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-black bg-brand-800 text-white hover:bg-brand-900 transition-colors cursor-pointer"
                   >
-                    <span>Details</span>
+                    <span>{lang === 'ar' ? 'التفاصيل' : lang === 'zh' ? '查看详情' : 'Details'}</span>
                   </button>
                 </div>
               </div>
@@ -168,17 +168,17 @@ END:VCALENDAR`;
                 {session.instituteResearchTitle ? (
                   <div className="flex items-center gap-2 text-brand-800 dark:text-brand-300 font-bold">
                     <BookOpen size={14} className="shrink-0" />
-                    <span>Institute Paper:</span>
+                    <span>{lang === 'ar' ? 'ورقة بحثية:' : lang === 'zh' ? '智库报告:' : 'Institute Paper:'}</span>
                     <Link to={`/${lang}/institute/publications`} className="underline hover:text-brand-900 dark:hover:text-white">
                       {session.instituteResearchTitle[lang]}
                     </Link>
                   </div>
                 ) : (
-                  <div className="text-[11px] text-neutral-400">Sovereign Plenary Track</div>
+                  <div className="text-[11px] text-neutral-400 uppercase font-black tracking-widest">{lang === 'ar' ? 'مسار الجلسة العامة' : 'Sovereign Plenary Track'}</div>
                 )}
 
                 <div className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
-                  Simultaneous Translation: AR / ZH / EN / CKB
+                  {lang === 'ar' ? 'ترجمة فورية: العربية / الصينية / الإنجليزية / الكردية' : 'Simultaneous Translation: AR / ZH / EN / CKB'}
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@ END:VCALENDAR`;
         {/* Modal for Session Details */}
         {selectedSessionModal && (
           <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white dark:bg-neutral-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 border border-neutral-200 dark:border-neutral-800 shadow-2xl space-y-6">
+            <div className="bg-white dark:bg-neutral-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 border border-neutral-200 dark:border-neutral-800 shadow-2xl space-y-6 text-start">
               <div className="flex items-center justify-between">
                 <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-100 dark:bg-brand-950 text-brand-900 dark:text-brand-300">
                   {selectedSessionModal.track} • Day {selectedSessionModal.day}
@@ -218,10 +218,10 @@ END:VCALENDAR`;
 
               {selectedSessionModal.instituteResearchTitle && (
                 <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs space-y-1">
-                  <div className="font-bold text-brand-800 dark:text-brand-300">Supported Knowledge Paper:</div>
+                  <div className="font-bold text-brand-800 dark:text-brand-300">{lang === 'ar' ? 'ورقة بحثية داعمة:' : 'Supported Knowledge Paper:'}</div>
                   <div className="text-neutral-700 dark:text-neutral-300 font-semibold">{selectedSessionModal.instituteResearchTitle[lang]}</div>
                   <Link to={`/${lang}/institute/publications`} className="text-brand-700 dark:text-brand-400 underline font-bold block pt-1">
-                    Download Policy Monograph from Institute Portal →
+                    {lang === 'ar' ? 'تحميل الدراسة من بوابة المعهد ←' : 'Download Policy Monograph from Institute Portal →'}
                   </Link>
                 </div>
               )}
@@ -229,15 +229,15 @@ END:VCALENDAR`;
               <div className="pt-2 flex items-center justify-end gap-3">
                 <button
                   onClick={() => downloadIcs(selectedSessionModal)}
-                  className="px-4 py-2 rounded-xl text-xs font-black bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-neutral-800 dark:text-neutral-200 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-black bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
                 >
                   Download .ICS
                 </button>
                 <button
                   onClick={() => setSelectedSessionModal(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-black bg-brand-800 text-white hover:bg-brand-900 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-black bg-brand-800 text-white hover:bg-brand-900 transition-colors cursor-pointer"
                 >
-                  Close
+                  {lang === 'ar' ? 'إغلاق' : 'Close'}
                 </button>
               </div>
             </div>

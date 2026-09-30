@@ -14,7 +14,7 @@ export function SummitSponsorsPage() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-12">
         
         {/* Header Hero */}
-        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-start">
           <div className="flex items-center gap-2">
             <Award className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
@@ -38,7 +38,7 @@ export function SummitSponsorsPage() {
             return (
               <div
                 key={tier.id}
-                className={`p-6 sm:p-8 rounded-3xl border transition-all flex flex-col justify-between space-y-6 ${
+                className={`p-6 sm:p-8 rounded-3xl border transition-all flex flex-col justify-between space-y-6 text-start ${
                   isTop
                     ? 'bg-neutral-900 text-white border-brand-800 shadow-xl ring-2 ring-brand-700'
                     : 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-neutral-200 dark:border-neutral-800 shadow-xs'
@@ -75,7 +75,7 @@ export function SummitSponsorsPage() {
                       : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-neutral-800 dark:text-neutral-200'
                   }`}
                 >
-                  Inquire for Tier →
+                  {lang === 'ar' ? 'استفسار عن الباقة ←' : lang === 'zh' ? '立即咨询该方案' : 'Inquire for Tier →'}
                 </Link>
               </div>
             );

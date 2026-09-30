@@ -57,7 +57,7 @@ export function ResearchBehindSummit({ lang }: ResearchBehindSummitProps) {
         {/* Section Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 pb-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/60 border border-brand-700/60 text-[11px] font-black uppercase tracking-widest text-brand-300">
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-300">
               <Award size={14} className="text-amber-300" />
               <span>{lang === 'ar' ? 'الأبحاث والإنتاج الفكري خلف القمة' : lang === 'zh' ? '智库背书 · 峰会学术与政策研究底座' : lang === 'ckb' ? 'توێژینەوە زانستییەکانی پشت لووتکە' : 'Knowledge Engine Behind the Summit'}</span>
             </div>
@@ -89,9 +89,9 @@ export function ResearchBehindSummit({ lang }: ResearchBehindSummitProps) {
           {flagshipReports.map((report, idx) => (
             <div key={idx} className="bg-neutral-800/80 rounded-2xl p-6 border border-neutral-700/80 flex flex-col justify-between space-y-4 hover:border-brand-600/70 transition-all group">
               <div className="space-y-3">
-                <span className="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-brand-950 text-brand-300 border border-brand-800/60 inline-block">
+                <div className="text-[10px] font-black uppercase tracking-wider text-brand-300">
                   {report.tag}
-                </span>
+                </div>
                 <h3 className="text-sm font-black text-white group-hover:text-brand-300 transition-colors leading-snug">
                   {report.title[lang]}
                 </h3>

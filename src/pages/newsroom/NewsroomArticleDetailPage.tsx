@@ -1,198 +1,231 @@
-import { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Calendar, Clock, ArrowLeft, User, Folder } from 'lucide-react';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { Badge } from '../../components/Badge';
-import { Button } from '../../components/Button';
-import { AuthorByline } from '../../components/newsroom/AuthorByline';
-import { ShareButtons } from '../../components/newsroom/ShareButtons';
-import { RelatedArticles } from '../../components/newsroom/RelatedArticles';
-import { newsroomArticles } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import {
+  Calendar,
+  Clock,
+  Share2,
+  Bookmark,
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Tag,
+  ShieldCheck,
+  BookOpen
+} from 'lucide-react';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomArticleDetailPage() {
-  const { lang: paramLang, slug } = useParams<{ lang?: string; slug?: string }>();
-  const navigate = useNavigate();
+  const { lang = 'en', slug } = useParams<{ lang: string; slug: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : paramLang === 'ck'
-    ? 'ckb'
-    : 'en') as Locale;
-
-  const article = newsroomArticles.find((a) => a.slug === slug);
-
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-  const backLabel = getNewsroomTranslation(lang, 'newsroom.article.backToNewsroom');
-  const readTimeLabel = getNewsroomTranslation(lang, 'newsroom.card.readTime');
-  const publishedOnLabel = getNewsroomTranslation(lang, 'newsroom.card.publishedOn');
-  const breakingLabel = getNewsroomTranslation(lang, 'newsroom.breaking.label');
+  const [copied, setCopied] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
+      setScrollProgress(Number(scroll));
+    };
 
-  if (!article) {
-    return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16">
-        <h2 className="text-2xl font-black text-neutral-900 dark:text-neutral-100 mb-4 font-serif">
-          Dispatch Not Found
-        </h2>
-        <p className="text-neutral-500 mb-6 max-w-md text-sm">
-          The requested newsroom article does not exist or has been archived.
-        </p>
-        <Button onClick={() => navigate(`/${lang}/newsroom`)} variant="primary">
-          {backLabel}
-        </Button>
-      </div>
-    );
-  }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const title = article.title[lang] || article.title.en;
-  const subtitle = article.subtitle[lang] || article.subtitle.en;
-  const categoryName = article.category.name[lang] || article.category.name.en;
-  const authorName = article.author.name[lang] || article.author.name.en;
-  const bodyText = article.body[lang] || article.body.en;
+  const articles = portalStore.getNewsArticles();
+  const article = articles.find(a => a.slug === slug) || articles[0];
+  const relatedArticles = articles.filter(a => a.id !== article.id).slice(0, 2);
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const handleShare = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    }
+  };
 
   return (
-    <article className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Navigation Breadcrumbs */}
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: categoryName, href: `/${lang}/newsroom/category/${article.category.slug}` },
-              { label: title.slice(0, 32) + '...' },
-            ]}
-          />
+    <div className="bg-[#FFFFFF] min-h-screen">
+      {/* Reading Progress Top Bar */}
+      <div
+        className="fixed top-0 inset-inline-0 h-1 bg-[var(--color-brand-800)] z-50 transition-all duration-75"
+        style={{ width: `${Math.min(Math.max(scrollProgress * 100, 0), 100)}%` }}
+      ></div>
 
-          <Link
-            to={`/${lang}/newsroom`}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-500 hover:text-brand-800 transition-colors uppercase tracking-wider shrink-0"
-          >
-            <ArrowLeft size={14} className="rtl:rotate-180" />
-            <span>{backLabel}</span>
-          </Link>
-        </div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Back Link */}
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to Newsroom</span>
+        </Link>
 
-        {/* Article Header Metadata */}
+        {/* Article Header */}
         <header className="space-y-4 mb-8">
           <div className="flex flex-wrap items-center gap-2">
-            <Link to={`/${lang}/newsroom/category/${article.category.slug}`}>
-              <Badge variant="category" size="md">
-                {categoryName}
-              </Badge>
-            </Link>
-            {article.breaking && (
-              <Badge variant="breaking" size="md">
-                {breakingLabel}
-              </Badge>
+            <span className="px-2.5 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] text-[10px] font-mono font-black uppercase tracking-wider">
+              {article.tags[0] || 'SOVEREIGN DISPATCH'}
+            </span>
+            {article.isBreaking && (
+              <span className="px-2.5 py-0.5 rounded bg-[var(--color-brand-800)] text-white text-[10px] font-mono font-bold uppercase tracking-wider animate-soft-vibrate">
+                BREAKING
+              </span>
             )}
           </div>
 
-          <h1 className="font-serif text-2xl sm:text-4xl lg:text-[2.65rem] font-black text-neutral-900 dark:text-neutral-50 leading-tight">
-            {title}
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-[#000000] leading-tight">
+            {article.title[currentLang] || article.title.en}
           </h1>
 
-          {subtitle && (
-            <p className="font-sans text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed font-medium">
-              {subtitle}
-            </p>
-          )}
+          <p className="text-base sm:text-lg text-[#4B5563] leading-relaxed font-sans">
+            {article.excerpt[currentLang] || article.excerpt.en}
+          </p>
 
-          {/* Author Byline & Date Header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-800 text-xs text-neutral-600 dark:text-neutral-400">
-            <Link
-              to={`/${lang}/newsroom/author/${article.author.slug}`}
-              className="flex items-center gap-2.5 font-bold hover:text-brand-800 transition-colors"
-            >
+          <div className="pt-4 border-t border-[#E5E7EB] flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
               <img
-                src={article.author.photo}
-                alt={authorName}
-                className="w-8 h-8 rounded-full object-cover border border-neutral-300 dark:border-neutral-700"
+                src={article.author.avatar}
+                alt={article.author.name}
+                className="w-10 h-10 rounded-full object-cover"
               />
-              <div className="flex flex-col">
-                <span className="text-neutral-900 dark:text-neutral-100 font-bold">{authorName}</span>
-                <span className="text-[10px] text-neutral-400 font-normal">
-                  {article.author.title[lang] || article.author.title.en}
-                </span>
+              <div className="text-xs">
+                <div className="font-bold text-[#000000]">{article.author.name}</div>
+                <div className="text-[11px] text-[#4B5563]">
+                  {article.author.bureau[currentLang] || article.author.bureau.en} • {article.author.title[currentLang] || article.author.title.en}
+                </div>
               </div>
-            </Link>
+            </div>
 
-            <div className="flex items-center gap-4 text-xs font-semibold">
-              <span className="flex items-center gap-1.5">
-                <Calendar size={13} className="text-brand-800 dark:text-brand-400" />
-                <span>
-                  {publishedOnLabel} {new Date(article.publishDate).toLocaleDateString()}
-                </span>
+            <div className="flex items-center gap-4 text-xs text-[#4B5563] font-mono">
+              <span className="flex items-center gap-1">
+                <Calendar size={13} className="text-[var(--color-brand-800)]" />
+                <span>{article.publishDate}</span>
               </span>
-              <span className="flex items-center gap-1.5">
-                <Clock size={13} className="text-brand-800 dark:text-brand-400" />
-                <span>{article.readTimeMinutes} {readTimeLabel}</span>
+              <span>•</span>
+              <span className="flex items-center gap-1">
+                <Clock size={13} className="text-[var(--color-brand-800)]" />
+                <span>{article.readingTimeMinutes} min read</span>
               </span>
+
+              <button
+                onClick={handleShare}
+                className="px-3 py-1.5 rounded-lg border border-[#E5E7EB] hover:border-[var(--color-brand-800)] text-[#000000] flex items-center gap-1.5 cursor-pointer transition-colors"
+                title="Share link"
+              >
+                {copied ? <Check size={13} className="text-green-600" /> : <Share2 size={13} />}
+                <span>{copied ? 'Copied' : 'Share'}</span>
+              </button>
             </div>
           </div>
         </header>
 
-        {/* Hero Image */}
-        <div className="relative aspect-video w-full rounded-3xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 shadow-md mb-8">
+        {/* Lead Hero Image */}
+        <div className="rounded-3xl overflow-hidden aspect-[16/9] mb-12 bg-neutral-100 shadow-md">
           <img
-            src={article.heroImage.url}
-            alt={article.heroImage.alt[lang] || article.heroImage.alt.en || title}
+            src={article.imageUrl}
+            alt={article.title[currentLang] || article.title.en}
             className="w-full h-full object-cover"
           />
-          <div className="absolute bottom-3 inset-inline-start-3 bg-neutral-900/80 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-md">
-            {article.heroImage.credit}
-          </div>
         </div>
 
-        {/* Social Share Buttons */}
-        <ShareButtons title={title} url={currentUrl} lang={lang} />
+        {/* Content Layout: Sticky TOC + Article Body */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Main Article Body */}
+          <main className="lg:col-span-8 prose prose-neutral max-w-none text-[#000000]">
+            <div
+              className="space-y-6 text-sm sm:text-base leading-relaxed"
+              dangerouslySetInnerHTML={{
+                __html: article.content[currentLang] || article.content.en
+              }}
+            />
 
-        {/* Long-form Article Body */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none text-neutral-800 dark:text-neutral-200 font-sans text-base leading-relaxed space-y-6">
-          {bodyText.split('\n\n').map((paragraph, idx) => (
-            <p key={idx} className="whitespace-pre-line leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
+            {/* Tags Strip */}
+            <div className="mt-12 pt-6 border-t border-[#E5E7EB] flex flex-wrap items-center gap-2">
+              <Tag size={14} className="text-[var(--color-brand-800)]" />
+              {article.tags.map(tag => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] text-xs font-mono text-[#000000]"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Author Credential Bio Box */}
+            <div className="mt-8 p-6 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-start gap-4">
+              <img
+                src={article.author.avatar}
+                alt={article.author.name}
+                className="w-14 h-14 rounded-2xl object-cover shrink-0"
+              />
+              <div className="space-y-1 text-xs">
+                <div className="font-bold text-[#000000] text-sm">{article.author.name}</div>
+                <div className="text-[var(--color-brand-800)] font-medium font-mono text-[11px]">{article.author.credentials}</div>
+                <p className="text-[#4B5563] leading-relaxed pt-1">
+                  {article.author.bio[currentLang] || article.author.bio.en}
+                </p>
+              </div>
+            </div>
+          </main>
+
+          {/* Sticky Sidebar: Table of Contents & Related */}
+          <aside className="lg:col-span-4 space-y-8">
+            <div className="sticky top-24 p-6 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-4 text-xs">
+              <div className="flex items-center gap-2 font-black text-sm uppercase tracking-wider text-[#000000] border-b border-[#E5E7EB] pb-3">
+                <BookOpen size={16} className="text-[var(--color-brand-800)]" />
+                <span>{t('newsroom.tableOfContents')}</span>
+              </div>
+              <ul className="space-y-2.5 text-[#4B5563]">
+                <li>
+                  <a href="#summary" className="hover:text-[var(--color-brand-800)] transition-colors block">
+                    1. Executive Summary & Overview
+                  </a>
+                </li>
+                <li>
+                  <a href="#corridors" className="hover:text-[var(--color-brand-800)] transition-colors block">
+                    2. Infrastructure & Freight Protocols
+                  </a>
+                </li>
+                <li>
+                  <a href="#clearance" className="hover:text-[var(--color-brand-800)] transition-colors block">
+                    3. Direct Sovereign Financial Clearance
+                  </a>
+                </li>
+              </ul>
+
+              <div className="pt-4 border-t border-[#E5E7EB]">
+                <div className="text-[11px] font-bold text-[#000000] uppercase tracking-wider mb-3">
+                  {t('newsroom.relatedArticles')}
+                </div>
+                <div className="space-y-3">
+                  {relatedArticles.map(rel => (
+                    <Link
+                      key={rel.id}
+                      to={`/${currentLang}/newsroom/${rel.slug}`}
+                      className="block group"
+                    >
+                      <h4 className="font-serif font-bold text-xs text-[#000000] group-hover:text-[var(--color-brand-800)] transition-colors line-clamp-2">
+                        {rel.title[currentLang] || rel.title.en}
+                      </h4>
+                      <span className="text-[10px] text-[#4B5563] font-mono mt-0.5 block">
+                        {rel.publishDate}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
-
-        {/* Tags Row */}
-        {article.tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 pt-6 mt-8 border-t border-neutral-200 dark:border-neutral-800">
-            <span className="text-xs font-bold uppercase text-neutral-400 me-2">Tags:</span>
-            {article.tags.map((tag) => (
-              <Link
-                key={tag.id}
-                to={`/${lang}/newsroom/tag/${tag.slug}`}
-                className="px-3 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-brand-50 hover:text-brand-800 dark:hover:bg-neutral-700 text-xs font-bold text-neutral-700 dark:text-neutral-300 transition-colors"
-              >
-                #{tag.name[lang] || tag.name.en}
-              </Link>
-            ))}
-          </div>
-        )}
-
-        {/* Author Bio Box */}
-        <div className="mt-10">
-          <AuthorByline author={article.author} lang={lang} showBio={true} />
-        </div>
-
-        {/* Related Articles */}
-        <RelatedArticles
-          currentArticle={article}
-          articles={newsroomArticles}
-          lang={lang}
-        />
       </div>
-    </article>
+    </div>
   );
 }
 

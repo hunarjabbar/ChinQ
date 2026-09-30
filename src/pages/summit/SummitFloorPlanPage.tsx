@@ -137,7 +137,7 @@ export function SummitFloorPlanPage() {
                         setSelectedBooth({ id: b.id, size: b.size, type: b.type, price: b.price });
                       }
                     }}
-                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-28 ${
+                    className={`p-4 rounded-xl border text-start transition-all cursor-pointer flex flex-col justify-between h-28 ${
                       isSelected
                         ? 'bg-brand-800 text-white border-brand-900 shadow-md ring-2 ring-brand-400'
                         : isReserved
@@ -220,7 +220,7 @@ export function SummitFloorPlanPage() {
 
             <div className="space-y-3 pt-4">
               <Link
-                to={`/${lang}/summit/expo/register?booth=${selectedBooth?.id || 'A-108'}&price=${selectedBooth?.price || 3600}`}
+                to={`/${lang}/summit/register/exhibitor?booth=${selectedBooth?.id || 'A-108'}&price=${selectedBooth?.price || 3600}`}
                 className="w-full py-3.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md text-center block cursor-pointer"
               >
                 Proceed to Exhibitor Registration →

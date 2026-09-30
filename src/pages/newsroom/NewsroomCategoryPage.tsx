@@ -1,97 +1,71 @@
-import { useMemo } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Breadcrumb } from '../../components/Breadcrumb';
-import { ArticleGrid } from '../../components/newsroom/ArticleGrid';
-import { CategoryFilter } from '../../components/newsroom/CategoryFilter';
-import { SearchBar } from '../../components/newsroom/SearchBar';
-import { NewsroomNewsletterSignup } from '../../components/newsroom/NewsroomNewsletterSignup';
-import { newsroomArticles, newsroomCategories } from '../../data/newsroomData';
-import { Locale } from '../../types';
-import { getNewsroomTranslation } from '../../locales/newsroomTranslations';
+import { ArrowLeft, Tag } from 'lucide-react';
+import { Card } from '../../components/Card';
+import { portalStore } from '../../data/portalData';
+import { getPortalTranslation } from '../../locales/portalTranslations';
+import { PortalLocale } from '../../types/portals';
 
 export function NewsroomCategoryPage() {
-  const { lang: paramLang, category: categorySlug } = useParams<{
-    lang?: string;
-    category?: string;
-  }>();
+  const { lang = 'en', category } = useParams<{ lang: string; category: string }>();
+  const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;
+  const t = (key: string) => getPortalTranslation(currentLang, key);
 
-  const lang: Locale = (['en', 'ar', 'zh', 'ckb'].includes(paramLang || '')
-    ? paramLang
-    : paramLang === 'ck'
-    ? 'ckb'
-    : 'en') as Locale;
-
-  const currentCategory = newsroomCategories.find((c) => c.slug === categorySlug);
-
-  const homeLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.home');
-  const newsroomLabel = getNewsroomTranslation(lang, 'newsroom.breadcrumb.label');
-  const categoriesLabel = getNewsroomTranslation(lang, 'newsroom.filter.categories');
-
-  const categoryName = currentCategory
-    ? currentCategory.name[lang] || currentCategory.name.en
-    : categorySlug || 'Category';
-
-  const categoryDesc = currentCategory
-    ? currentCategory.description[lang] || currentCategory.description.en
-    : '';
-
-  const matchedArticles = useMemo(() => {
-    return newsroomArticles.filter((a) => a.category.slug === categorySlug && a.status === 'published');
-  }, [categorySlug]);
+  const categories = portalStore.getNewsCategories();
+  const currentCat = categories.find(c => c.slug === category);
+  const articles = portalStore.getNewsArticles().filter(a => a.category === category && a.status === 'published');
 
   return (
-    <div className="min-h-screen bg-neutral-50/60 dark:bg-neutral-950 py-8 sm:py-12">
+    <div className="bg-[#FFFFFF] min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Header Row with Breadcrumbs & Search */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <Breadcrumb
-            items={[
-              { label: homeLabel, href: `/${lang}` },
-              { label: newsroomLabel, href: `/${lang}/newsroom` },
-              { label: categoriesLabel },
-              { label: categoryName },
-            ]}
-          />
+        <Link
+          to={`/${currentLang}/newsroom`}
+          className="inline-flex items-center gap-2 text-xs font-mono text-[var(--color-brand-800)] font-bold uppercase tracking-wider mb-6 hover:underline"
+        >
+          <ArrowLeft size={14} className="rtl:rotate-180" />
+          <span>Back to All Categories</span>
+        </Link>
 
-          <div className="w-full md:w-auto">
-            <SearchBar lang={lang} />
-          </div>
-        </div>
-
-        {/* Category Header */}
-        <header className="p-8 sm:p-10 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 space-y-3">
-          <div className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
-            {categoriesLabel}
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-50">
-            {categoryName}
+        <div className="mb-10 pb-6 border-b border-[#E5E7EB]">
+          <span className="text-xs font-mono font-bold text-[var(--color-brand-800)] uppercase tracking-wider block mb-1">
+            Category Dossier
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-[#000000]">
+            {currentCat?.name[currentLang] || currentCat?.name.en || category}
           </h1>
-          {categoryDesc && (
-            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
-              {categoryDesc}
+          {currentCat && (
+            <p className="text-sm text-[#4B5563] mt-2 max-w-2xl">
+              {currentCat.description[currentLang] || currentCat.description.en}
             </p>
           )}
-        </header>
+        </div>
 
-        {/* Category Filter Pills (Link Mode) */}
-        <CategoryFilter
-          categories={newsroomCategories}
-          activeCategorySlug={categorySlug}
-          lang={lang}
-          isLinkMode={true}
-        />
-
-        {/* Article Grid */}
-        <ArticleGrid
-          articles={matchedArticles}
-          lang={lang}
-          heading={`${categoryName} (${matchedArticles.length})`}
-          showViewAll={false}
-          emptyMessage={`No dispatches found in the ${categoryName} category.`}
-        />
-
-        {/* Newsletter Signup */}
-        <NewsroomNewsletterSignup lang={lang} />
+        {articles.length === 0 ? (
+          <div className="p-12 text-center text-neutral-500 text-sm">
+            No published dispatches under this category yet.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map(article => (
+              <Card
+                key={article.id}
+                variant="portal"
+                href={`/${currentLang}/newsroom/${article.slug}`}
+                imageUrl={article.imageUrl}
+                category={article.tags[0] || 'Dispatch'}
+                title={article.title[currentLang] || article.title.en}
+                excerpt={article.excerpt[currentLang] || article.excerpt.en}
+                publishDate={article.publishDate}
+                readTime={`${article.readingTimeMinutes} min`}
+                author={{
+                  name: article.author.name,
+                  avatar: article.author.avatar
+                }}
+                ctaText="Read Article"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

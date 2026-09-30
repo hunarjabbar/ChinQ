@@ -49,11 +49,11 @@ export function AboutInstitute() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-20">
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 text-[#0284C7]">
+        <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
           <Building2 size={18} />
           <span className="text-[10px] font-black uppercase tracking-[0.3em]">{t('about.charter.eyebrow')}</span>
         </div>
-        <h1 className="text-3xl lg:text-5xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">
+        <h1 className="text-3xl lg:text-5xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">
           {t('about.charter.title')}
         </h1>
         <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium max-w-2xl leading-relaxed" style={{ unicodeBidi: 'plaintext', textAlign: 'start' }}>
@@ -66,7 +66,7 @@ export function AboutInstitute() {
           {/* Mission & Charter */}
           <section className="bg-white dark:bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-8">
             <div className="space-y-4">
-              <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">{t('about.charter.sectionTitle')}</h3>
+              <h3 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">{t('about.charter.sectionTitle')}</h3>
               <p className="text-base text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed" style={{ unicodeBidi: 'plaintext', textAlign: 'start' }}>
                 {t('about.charter.body')}
               </p>
@@ -74,19 +74,19 @@ export function AboutInstitute() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700/50 charter-card__body">
-                <div className="w-10 h-10 rounded-lg bg-[#0F172A] flex items-center justify-center text-[#D97706]">
+                <div className="w-10 h-10 rounded-lg bg-[var(--color-ink-900)] flex items-center justify-center text-[var(--color-brand-800)]">
                   <Scale size={20} />
                 </div>
-                <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase">{t('about.charter.researchIndependence.title')}</h4>
+                <h4 className="text-sm font-black text-[var(--color-ink-900)] dark:text-white uppercase">{t('about.charter.researchIndependence.title')}</h4>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed font-medium" style={{ unicodeBidi: 'plaintext', textAlign: 'start' }}>
                   {t('about.charter.researchIndependence.body')}
                 </p>
               </div>
               <div className="space-y-3 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700/50 charter-card__body">
-                <div className="w-10 h-10 rounded-lg bg-[#0284C7] flex items-center justify-center text-white">
+                <div className="w-10 h-10 rounded-lg bg-[var(--color-brand-800)] flex items-center justify-center text-white">
                   <ShieldCheck size={20} />
                 </div>
-                <h4 className="text-sm font-black text-[#0F172A] dark:text-white uppercase">{t('about.charter.dataProvenance.title')}</h4>
+                <h4 className="text-sm font-black text-[var(--color-ink-900)] dark:text-white uppercase">{t('about.charter.dataProvenance.title')}</h4>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed font-medium" style={{ unicodeBidi: 'plaintext', textAlign: 'start' }}>
                   {t('about.charter.dataProvenance.body')}
                 </p>
@@ -96,7 +96,7 @@ export function AboutInstitute() {
 
           {/* Advisory Board */}
           <section className="space-y-8">
-            <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">{aboutInstituteData.advisoryBoard.title}</h3>
+            <h3 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">{aboutInstituteData.advisoryBoard.title}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {aboutInstituteData.advisoryBoard.members.map(member => (
                 <div key={member.id} className="flex items-center gap-4 p-5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
@@ -104,8 +104,8 @@ export function AboutInstitute() {
                      {member.name.split(' ').map(n => n[0]).join('')}
                    </div>
                    <div>
-                     <h4 className="text-xs font-black text-[#0F172A] dark:text-white uppercase">{member.name}</h4>
-                     <p className="text-[10px] font-bold text-[#0284C7] uppercase tracking-widest mt-0.5">{member.role}</p>
+                     <h4 className="text-xs font-black text-[var(--color-ink-900)] dark:text-white uppercase">{member.name}</h4>
+                     <p className="text-[10px] font-bold text-[var(--color-brand-800)] uppercase tracking-widest mt-0.5">{member.role}</p>
                      <p className="text-[9px] font-medium text-neutral-400 mt-0.5">{member.org}</p>
                    </div>
                 </div>
@@ -115,8 +115,8 @@ export function AboutInstitute() {
         </div>
 
         <aside className="lg:col-span-4 space-y-8">
-          <div className="bg-[#0F172A] text-white rounded-3xl p-8 border border-white/10 shadow-2xl space-y-6">
-             <div className="flex items-center gap-2 text-[#D97706]">
+          <div className="bg-[var(--color-ink-900)] text-white rounded-3xl p-8 border border-white/10 shadow-2xl space-y-6">
+             <div className="flex items-center gap-2 text-[var(--color-brand-800)]">
                 <FileCheck size={18} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Reports</span>
              </div>
@@ -139,28 +139,28 @@ export function AboutInstitute() {
           </div>
 
           <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6">
-             <div className="flex items-center gap-2 text-[#0284C7]">
+             <div className="flex items-center gap-2 text-[var(--color-brand-800)]">
                 <Globe size={18} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Contact</span>
              </div>
-             <h3 className="text-xl font-black text-[#0F172A] dark:text-white uppercase tracking-tight">{aboutInstituteData.contact.title}</h3>
+             <h3 className="text-xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tight">{aboutInstituteData.contact.title}</h3>
              <div className="space-y-4 text-xs font-medium text-neutral-600 dark:text-neutral-400">
                 <div className="flex items-start gap-3">
-                   <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
+                   <div className="w-2 h-2 rounded-full bg-[var(--color-brand-800)] mt-1.5 shrink-0" />
                    <p>{aboutInstituteData.contact.address}</p>
                 </div>
                 <div className="flex items-start gap-3">
-                   <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
+                   <div className="w-2 h-2 rounded-full bg-[var(--color-brand-800)] mt-1.5 shrink-0" />
                    <p>{aboutInstituteData.contact.email}</p>
                 </div>
                 <div className="flex items-start gap-3">
-                   <div className="w-2 h-2 rounded-full bg-[#D97706] mt-1.5 shrink-0" />
+                   <div className="w-2 h-2 rounded-full bg-[var(--color-brand-800)] mt-1.5 shrink-0" />
                    <p>{aboutInstituteData.contact.phone}</p>
                 </div>
              </div>
              <button 
                onClick={() => setShowInquiryModal(true)}
-               className="w-full py-3 mt-4 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-white hover:border-[#0284C7] transition-all"
+               className="w-full py-3 mt-4 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-xs font-black uppercase tracking-widest text-[var(--color-ink-900)] dark:text-white hover:border-[var(--color-brand-800)] transition-all"
              >
                 {aboutInstituteData.contact.cta}
              </button>
@@ -173,7 +173,7 @@ export function AboutInstitute() {
           <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative">
             <div className="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-neutral-800 mb-6">
               <div>
-                <h3 className="text-base font-black uppercase text-[#0F172A] dark:text-white">Direct Institute Inquiry</h3>
+                <h3 className="text-base font-black uppercase text-[var(--color-ink-900)] dark:text-white">Direct Institute Inquiry</h3>
                 <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">Sovereign & Academic Protocol</p>
               </div>
               <button 

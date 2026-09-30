@@ -46,19 +46,19 @@ export function CiseHubFooterLogin({ lang = 'en', className = '' }: CiseHubFoote
   };
 
   return (
-    <div className={`p-4 sm:p-5 rounded-2xl bg-neutral-900/90 border border-amber-500/20 text-white shadow-xl backdrop-blur-md space-y-3 relative overflow-hidden group ${className}`} dir={isRtl ? 'rtl' : 'ltr'}>
-      <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-amber-500/10 transition-colors"></div>
+    <div className={`p-4 sm:p-5 rounded-2xl bg-[var(--surface-dark)] border border-[var(--accent-primary)]/30 text-white shadow-xl backdrop-blur-md space-y-3 relative overflow-hidden group ${className}`} dir={isRtl ? 'rtl' : 'ltr'}>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-primary)]/10 rounded-full blur-2xl pointer-events-none group-hover:bg-[var(--accent-primary)]/20 transition-colors"></div>
       
       <div className="flex items-center justify-between gap-3 relative z-10">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[var(--accent-primary)]/15 border border-[var(--accent-primary)]/30 flex items-center justify-center text-[var(--accent-primary)] shrink-0">
             <Lock size={15} />
           </div>
           <div>
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-400/90 block">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-primary)] block">
               {currentLabel.badge}
             </span>
-            <h4 className="text-xs sm:text-sm font-black uppercase tracking-tight text-white group-hover:text-amber-300 transition-colors">
+            <h4 className="text-xs sm:text-sm font-black uppercase tracking-tight text-white group-hover:text-[var(--accent-soft)] transition-colors">
               {currentLabel.title}
             </h4>
           </div>
@@ -66,7 +66,7 @@ export function CiseHubFooterLogin({ lang = 'en', className = '' }: CiseHubFoote
 
         <Link
           to="/hub/login"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-all shrink-0 min-h-[36px]"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] active:bg-[var(--accent-primary-active)] text-white font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-98 transition-all shrink-0 min-h-[36px]"
         >
           <KeyRound size={13} />
           <span>{currentLabel.cta}</span>
@@ -74,7 +74,7 @@ export function CiseHubFooterLogin({ lang = 'en', className = '' }: CiseHubFoote
         </Link>
       </div>
 
-      <p className="text-[11px] text-neutral-400 leading-relaxed font-medium relative z-10">
+      <p className="text-[11px] text-neutral-300 leading-relaxed font-medium relative z-10">
         {currentLabel.subtitle}
       </p>
     </div>

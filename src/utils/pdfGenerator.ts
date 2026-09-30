@@ -35,31 +35,31 @@ export function generateInstitutionalPdf({
     const margin = 20;
     const maxTextWidth = pageWidth - margin * 2;
 
-    // Header Branding Bar
-    doc.setFillColor(15, 23, 42); // #0F172A Dark Navy
+    // Header Branding Bar - Lonely Chocolate (#4F0905)
+    doc.setFillColor(79, 9, 5);
     doc.rect(0, 0, pageWidth, 28, 'F');
 
-    // CISE Gold Accent Line
-    doc.setFillColor(217, 119, 6); // #D97706 Amber
+    // CISE Blood Kiss Accent Line (#C8150E)
+    doc.setFillColor(200, 21, 14);
     doc.rect(0, 28, pageWidth, 2, 'F');
 
     // Header Text
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(252, 251, 253);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
     doc.text('CHINESE INSTITUTE FOR STRATEGIC AND ECONOMIC STUDIES', margin, 14);
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
-    doc.setTextColor(217, 119, 6);
+    doc.setTextColor(200, 21, 14);
     doc.text('IRAQI-CHINESE AGENCY (ICA) · SOVEREIGN POLICY RESEARCH', margin, 21);
 
     let yPosition = 45;
 
-    // Category Badge
-    doc.setFillColor(2, 132, 199); // #0284C7
+    // Category Badge - Blood Kiss (#C8150E)
+    doc.setFillColor(200, 21, 14);
     doc.roundedRect(margin, yPosition, 45, 6, 1, 1, 'F');
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(252, 251, 253);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7);
     doc.text(category.toUpperCase(), margin + 3, yPosition + 4.2);
@@ -67,7 +67,7 @@ export function generateInstitutionalPdf({
     yPosition += 14;
 
     // Title
-    doc.setTextColor(15, 23, 42);
+    doc.setTextColor(26, 26, 26);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     const splitTitle = doc.splitTextToSize(title, maxTextWidth);
@@ -77,27 +77,27 @@ export function generateInstitutionalPdf({
     // Subtitle / Meta
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(100, 116, 139);
+    doc.setTextColor(92, 85, 87);
     doc.text(`Lead Authors: ${author}  |  Published: ${date}`, margin, yPosition);
     yPosition += 8;
 
     // Divider
-    doc.setDrawColor(226, 232, 240);
+    doc.setDrawColor(229, 224, 226);
     doc.setLineWidth(0.5);
     doc.line(margin, yPosition, pageWidth - margin, yPosition);
     yPosition += 10;
 
     // Executive Summary Box
-    doc.setFillColor(248, 250, 252);
-    doc.setDrawColor(203, 213, 225);
+    doc.setFillColor(247, 244, 245);
+    doc.setDrawColor(207, 200, 202);
     doc.roundedRect(margin, yPosition, maxTextWidth, 26, 2, 2, 'FD');
 
-    doc.setTextColor(217, 119, 6);
+    doc.setTextColor(200, 21, 14);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(8);
     doc.text('EXECUTIVE BRIEFING', margin + 4, yPosition + 6);
 
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(26, 26, 26);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8.5);
     const splitSummary = doc.splitTextToSize(summary, maxTextWidth - 8);
@@ -112,7 +112,7 @@ export function generateInstitutionalPdf({
       '3. Infrastructure Milestones: Primary logistics hubs at Grand Faw Port and the northern Sulaymaniyah terminal establish high-throughput transit connectivity between the Gulf and Mediterranean markets.'
     ];
 
-    doc.setTextColor(15, 23, 42);
+    doc.setTextColor(26, 26, 26);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
     doc.text('STRATEGIC FINDINGS & POLICY DIRECTIVES', margin, yPosition);

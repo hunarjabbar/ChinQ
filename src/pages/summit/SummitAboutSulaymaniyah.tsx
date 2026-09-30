@@ -129,10 +129,11 @@ export function SummitAboutSulaymaniyah() {
               </h2>
             </div>
             <Link
-              to={`/${lang}/summit/expo/floor-plan`}
-              className="px-4 py-2 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors"
+              to={`/${lang}/summit/floor-plan`}
+              className="px-5 py-2.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider transition-colors shadow-sm inline-flex items-center gap-1.5"
             >
-              Interactive Floor Plan →
+              <span>{lang === 'ar' ? 'المخطط التفاعلي للأجنحة' : lang === 'zh' ? '交互式展馆平面图' : lang === 'ckb' ? 'نەخشەی پێشانگا' : 'Interactive Floor Plan'}</span>
+              <ArrowRight size={14} className={isRtl ? 'rotate-180' : ''} />
             </Link>
           </div>
 

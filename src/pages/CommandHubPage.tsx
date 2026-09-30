@@ -9,8 +9,9 @@ import {
   BarChart3, Settings, LogOut, KeyRound, Lock, Search, Bell, Command,
   Plus, Edit, Trash2, RotateCcw, Eye, Download, CheckCircle, AlertTriangle,
   RefreshCw, Shield, Server, FileSpreadsheet, HardDrive, Cpu, Layers,
-  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode
+  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode, Radio, GraduationCap
 } from 'lucide-react';
+import { IcaAdministrationSection } from '../components/hub/IcaAdministrationSection';
 
 interface AuditLogEntry {
   id: string;
@@ -401,34 +402,121 @@ export function CommandHubPage() {
               </Link>
             </div>
 
+            {/* ICA Administration (4 Portals CRUD) */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between px-3">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">ICA Administration</span>
+                <span className="text-[9px] bg-red-950/80 text-red-400 border border-red-800/40 px-1.5 py-0.5 rounded font-mono font-bold">PORTALS</span>
+              </div>
+              <Link
+                to="/hub/ica/public"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/ica/public') ? 'bg-[var(--color-brand-800)] text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Globe size={16} />
+                <span>Public Portal</span>
+              </Link>
+              <Link
+                to="/hub/ica/secretariat"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/ica/secretariat') ? 'bg-[var(--color-brand-800)] text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Shield size={16} />
+                <span>Secretariat Hub</span>
+              </Link>
+              <Link
+                to="/hub/ica/newsroom"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/ica/newsroom') ? 'bg-[var(--color-brand-800)] text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <FileText size={16} />
+                <span>Newsroom</span>
+              </Link>
+              <Link
+                to="/hub/ica/live"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/ica/live') ? 'bg-[var(--color-brand-800)] text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Radio size={16} />
+                <span>Live & Media Hub</span>
+              </Link>
+            </div>
+
             {/* Institute Section */}
             <div className="space-y-1">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500 px-3">Institute</span>
-              <Link to="/hub/institute" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+              <Link
+                to="/hub/institute"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/institute') && !path.includes('pillars') && !path.includes('publications') && !path.includes('experts') && !path.includes('data-hub') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
                 <Building size={16} />
-                <span>Overview & Settings</span>
+                <span>Overview & Charter</span>
               </Link>
-              <Link to="/hub/institute/pillars" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+              <Link
+                to="/hub/institute/pillars"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.includes('pillars') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
                 <Layers size={16} />
                 <span>Research Pillars</span>
               </Link>
-              <Link to="/hub/institute/publications" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+              <Link
+                to="/hub/institute/publications"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.includes('publications') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
                 <BookOpen size={16} />
-                <span>Publications CRUD</span>
+                <span>Publications</span>
               </Link>
-              <Link to="/hub/institute/experts" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+              <Link
+                to="/hub/institute/experts"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.includes('experts') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
                 <Users size={16} />
                 <span>Experts Directory</span>
               </Link>
-              <Link to="/hub/institute/data-hub" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+              <Link
+                to="/hub/institute/data-hub"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.includes('data-hub') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
                 <Database size={16} />
                 <span>Data & Corridor Hub</span>
+              </Link>
+              <Link
+                to="/hub/institute/settings"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.includes('institute/settings') ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Settings size={16} />
+                <span>Institute Settings</span>
               </Link>
             </div>
 
             {/* Initiatives / Services Section */}
             <div className="space-y-1">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500 px-3">Services</span>
+              <Link
+                to="/hub/services"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path === '/services' ? 'bg-brand-800 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Briefcase size={16} />
+                <span>Services Overview</span>
+              </Link>
               <Link to="/hub/services/summit" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <Award size={16} />
                 <span>Summit & Expo</span>
@@ -447,11 +535,15 @@ export function CommandHubPage() {
               </Link>
               <Link to="/hub/services/insurance" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <ShieldCheck size={16} />
-                <span>Insurance Facilitation</span>
+                <span>Insurance</span>
               </Link>
               <Link to="/hub/services/consultancy" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <Briefcase size={16} />
-                <span>Strategic Consultancy</span>
+                <span>Consultancy</span>
+              </Link>
+              <Link to="/hub/services/cultural-exchange" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <GraduationCap size={16} />
+                <span>Cultural Exchange</span>
               </Link>
             </div>
 
@@ -469,19 +561,41 @@ export function CommandHubPage() {
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500 px-3">Governance</span>
               <Link to="/hub/users" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <UserCheck size={16} />
-                <span>Users & Roles</span>
+                <span>Users</span>
+              </Link>
+              <Link to="/hub/users/roles" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <KeyRound size={16} />
+                <span>Roles</span>
               </Link>
               <Link to="/hub/audit" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <Shield size={16} />
-                <span>Audit Logs</span>
+                <span>Audit Log</span>
               </Link>
+              <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500 px-3 pt-2 block">Analytics</span>
               <Link to="/hub/analytics" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <BarChart3 size={16} />
-                <span>Analytics</span>
+                <span>Overview</span>
               </Link>
+              <Link to="/hub/analytics/content" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <FileText size={16} />
+                <span>Content</span>
+              </Link>
+              <Link to="/hub/analytics/submissions" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <Inbox size={16} />
+                <span>Submissions</span>
+              </Link>
+              <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500 px-3 pt-2 block">System</span>
               <Link to="/hub/system" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
                 <Server size={16} />
-                <span>System Health</span>
+                <span>Build Info</span>
+              </Link>
+              <Link to="/hub/system/revalidation" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <RefreshCw size={16} />
+                <span>Revalidation</span>
+              </Link>
+              <Link to="/hub/system/backup" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <HardDrive size={16} />
+                <span>Backup</span>
               </Link>
             </div>
           </div>
@@ -489,6 +603,12 @@ export function CommandHubPage() {
 
         {/* Dynamic Content Display per Route */}
         <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-neutral-950">
+          {/* ICA Administration Sub-sections */}
+          {path.startsWith('/ica/public') && <IcaAdministrationSection subSection="public" lang={activeLocale} />}
+          {path.startsWith('/ica/secretariat') && <IcaAdministrationSection subSection="secretariat" lang={activeLocale} />}
+          {path.startsWith('/ica/newsroom') && <IcaAdministrationSection subSection="newsroom" lang={activeLocale} />}
+          {path.startsWith('/ica/live') && <IcaAdministrationSection subSection="live" lang={activeLocale} />}
+
           {/* Dashboard View */}
           {(path === '' || path === '/') && (
             <div className="space-y-6">

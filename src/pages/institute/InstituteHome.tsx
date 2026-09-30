@@ -44,11 +44,11 @@ function HeroCover({ src, alt, badgeText }: HeroCoverProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="relative w-full h-[280px] lg:h-full min-h-[280px] lg:min-h-[420px] overflow-hidden rounded-t-3xl lg:rounded-t-none lg:rounded-s-3xl bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#1E3A5F]">
+    <div className="relative w-full h-[280px] lg:h-full min-h-[280px] lg:min-h-[420px] overflow-hidden rounded-t-3xl lg:rounded-t-none lg:rounded-s-3xl bg-gradient-to-br from-[var(--color-ink-900)] via-[#1E293B] to-[#1E3A5F]">
       {/* Background Watermark Fallback */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-15" aria-hidden="true">
         <div className="text-center">
-          <div className="text-8xl sm:text-9xl font-black text-[#D97706] tracking-tighter">CI</div>
+          <div className="text-8xl sm:text-9xl font-black text-[var(--color-brand-800)] tracking-tighter">CI</div>
           <div className="text-[10px] font-bold text-white uppercase tracking-[0.3em] mt-2">CISE Official Publication</div>
         </div>
       </div>
@@ -65,13 +65,13 @@ function HeroCover({ src, alt, badgeText }: HeroCoverProps) {
       )}
 
       {/* Gradient Overlay for Readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-[#0F172A]/30 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink-900)]/80 via-transparent to-[var(--color-ink-900)]/30 pointer-events-none" />
 
       {/* Floating Badge */}
       <div className="absolute top-5 left-5 rtl:left-auto rtl:right-5 z-10">
         <Link 
           to="publications?type=white-paper" 
-          className="inline-block bg-[#D97706] hover:bg-[#B45309] text-[#0F172A] text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg transition-transform hover:scale-105"
+          className="inline-block bg-[var(--color-brand-800)] hover:bg-[var(--color-brand-900)] text-[var(--color-ink-900)] text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-lg transition-transform hover:scale-105"
         >
           {badgeText}
         </Link>
@@ -168,7 +168,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'Sovereign crude allocations, refinery modernization, and long-term oil-for-infrastructure frameworks.',
         metricLabel: 'Crude Imports',
         metricValue: '520k bpd',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'geo-economics',
@@ -176,7 +176,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'Cross-border RMB clearing, direct IQD-CNY currency swaps, and financial risk mitigation.',
         metricLabel: 'Trade Balance',
         metricValue: '$52.4B',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'diplomacy',
@@ -184,7 +184,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'High-level ministerial summits, municipal sister-city pacts, and bilateral treaties.',
         metricLabel: 'Engagements',
         metricValue: '12 Scheduled',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'digital-silk-road',
@@ -192,7 +192,7 @@ const i18nInstituteHome: Record<Locale, {
         description: '5G telecommunications nodes, sovereign data centers, AI governance, and smart transit corridors.',
         metricLabel: 'Tech Transfer',
         metricValue: '74% Active',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       }
     ],
     publications: [
@@ -261,7 +261,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'تخصيصات النفط السيادية، وتحديث مصافي التكرير، وأطر اتفاقيات "النفط مقابل الإعمار" طويلة الأمد.',
         metricLabel: 'واردات النفط',
         metricValue: '٥٢٠ ألف برميل/يوم',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'geo-economics',
@@ -269,7 +269,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'المقاصة المالية بالرنمينبي عبر الحدود، واتفاقيات مبادلة الدينار واليوان، وإدارة المخاطر النقدية.',
         metricLabel: 'الميزان التجاري',
         metricValue: '٥٢.٤ مليار $',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'diplomacy',
@@ -277,7 +277,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'القمم الوزارية رفيعة المستوى، واتفاقيات التوأمة بين المدن، والمعاهدات الاستراتيجية الملزمة.',
         metricLabel: 'الارتباطات',
         metricValue: '١٢ فعالية مجدولة',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'digital-silk-road',
@@ -285,7 +285,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'عقد اتصالات الجيل الخامس، ومراكز البيانات السيادية، وأطر حوكمة الذكاء الاصطناعي للممرات الذكية.',
         metricLabel: 'نقل التكنولوجيا',
         metricValue: '٧٤٪ نشط',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       }
     ],
     publications: [
@@ -354,7 +354,7 @@ const i18nInstituteHome: Record<Locale, {
         description: '主权原油配额调度、炼化一体化升级与“石油换项目”长期框架落地研究。',
         metricLabel: '原油进口量',
         metricValue: '52万桶/日',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'geo-economics',
@@ -362,7 +362,7 @@ const i18nInstituteHome: Record<Locale, {
         description: '人民币跨境清算机制、伊拉克第纳尔与人民币本币互换及系统性金融风险防控。',
         metricLabel: '双边贸易额',
         metricValue: '524亿美元',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'diplomacy',
@@ -370,7 +370,7 @@ const i18nInstituteHome: Record<Locale, {
         description: '部长级高层对话、友好省市缔约及规范中伊全面战略伙伴关系的演进法律架构。',
         metricLabel: '外事安排',
         metricValue: '已定12场',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'digital-silk-road',
@@ -378,7 +378,7 @@ const i18nInstituteHome: Record<Locale, {
         description: '5G通信核心节点、主权数据中心、人工智能治理框架与智慧运输走廊系统。',
         metricLabel: '技术转化',
         metricValue: '74% 实施度',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       }
     ],
     publications: [
@@ -447,7 +447,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'تەرخانکردنی نەوتی خاوی سەروەری، نوێکردنەوەی پاڵاوگەکان، و ڕێککەوتنی "نەوت بەرامبەر پڕۆژەکان".',
         metricLabel: 'هاوردەی نەوت',
         metricValue: '٥٢٠ هەزار بەرمیل/ڕۆژ',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'geo-economics',
@@ -455,7 +455,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'پاکتاوکردنی دراوی ڕێنمینبی لە سنوورەکان، ئاڵوگۆڕی ڕاستەوخۆی دینار و یوان، و کەمکردنەوەی مەترسییە داراییەکان.',
         metricLabel: 'تەرازوی بازرگانی',
         metricValue: '٥٢.٤ ملیار $',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'diplomacy',
@@ -463,7 +463,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'لووتکە وەزارییە باڵاکان، پەیماننامەکانی دەستەخوشکی شارەکان و ڕێککەوتننامە دووقۆڵییەکان.',
         metricLabel: 'دیدار و کۆبوونەوەکان',
         metricValue: '١٢ دیداری دیاریکراو',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       },
       {
         id: 'digital-silk-road',
@@ -471,7 +471,7 @@ const i18nInstituteHome: Record<Locale, {
         description: 'گرێکانی پەیوەندی 5G، سەنتەرەکانی داتای سەروەری، حوکمڕانی زیرەکی دەستکرد و ڕێڕەوە هۆشمەندەکان.',
         metricLabel: 'گواستنەوەی تەکنەلۆجیا',
         metricValue: '٧٤٪ چالاک',
-        iconBg: '#0F172A'
+        iconBg: 'var(--color-ink-900)'
       }
     ],
     publications: [
@@ -563,7 +563,7 @@ export function InstituteHome() {
           {/* Hero Content Column */}
           <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6 min-w-0">
             <div className="space-y-4 min-w-0">
-              <div className="flex items-center gap-2 text-[#0284C7] dark:text-[#38BDF8]">
+              <div className="flex items-center gap-2 text-[var(--color-brand-800)] dark:text-[#38BDF8]">
                 <ShieldCheck size={16} />
                 <span className="text-[10px] font-black uppercase tracking-[0.2em]">{tLocal.sovereignIntegrity}</span>
               </div>
@@ -572,7 +572,7 @@ export function InstituteHome() {
                 to={`/${lang}/institute/publications/mapping-iraq-china-development-corridor`}
                 className="block group"
               >
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] dark:text-white leading-tight font-serif group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8] transition-colors">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--color-ink-900)] dark:text-white leading-tight font-serif group-hover:text-[var(--color-brand-800)] dark:group-hover:text-[#38BDF8] transition-colors">
                   {tLocal.leadReportTitle}
                 </h1>
               </Link>
@@ -584,12 +584,12 @@ export function InstituteHome() {
               {/* Strategic Metadata Tags */}
               <div className="flex flex-wrap gap-2.5 pt-2 text-xs font-semibold">
                 <span className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
-                  <FileText size={13} className="text-[#0284C7]" />
+                  <FileText size={13} className="text-[var(--color-brand-800)]" />
                   <span>{tLocal.tier3Report}</span>
                 </span>
                 
                 <span className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300">
-                  <Users size={13} className="text-[#D97706]" />
+                  <Users size={13} className="text-[var(--color-brand-800)]" />
                   <span>{tLocal.ciseFellowsPanel}</span>
                 </span>
 
@@ -597,7 +597,7 @@ export function InstituteHome() {
                   to={`/${lang}/institute/publications?date=2026-09`}
                   className="flex items-center gap-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 transition-colors"
                 >
-                  <Calendar size={13} className="text-[#D97706]" />
+                  <Calendar size={13} className="text-[var(--color-brand-800)]" />
                   <span>{tLocal.publishedSep2026}</span>
                 </Link>
               </div>
@@ -611,7 +611,7 @@ export function InstituteHome() {
                   href="https://www.fmprc.gov.cn/eng/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-[#0284C7] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
+                  className="hover:text-[var(--color-brand-800)] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
                 >
                   <span>FM PRC</span>
                   <ExternalLink size={10} />
@@ -621,7 +621,7 @@ export function InstituteHome() {
                   href="https://www.worldbank.org/en/country/iraq" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-[#0284C7] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
+                  className="hover:text-[var(--color-brand-800)] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
                 >
                   <span>World Bank</span>
                   <ExternalLink size={10} />
@@ -631,7 +631,7 @@ export function InstituteHome() {
                   href="https://oil.gov.iq" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-[#0284C7] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
+                  className="hover:text-[var(--color-brand-800)] dark:hover:text-[#38BDF8] flex items-center gap-1 transition-colors"
                 >
                   <span>Iraq MOO</span>
                   <ExternalLink size={10} />
@@ -669,7 +669,7 @@ export function InstituteHome() {
               {lang === 'ar' ? 'الخدمات المؤسسية والمبادرات الثنائية' : lang === 'zh' ? '智库机构服务与战略倡议' : lang === 'ckb' ? 'خزمەتگوزارییە دامەزراوەییەکان' : 'Institutional Services & Initiatives'}
             </h2>
             <p className="section-eyebrow">
-              {lang === 'ar' ? 'المسارات السيادية والمرافق التشغيلية الـ٦ برعاية المعهد' : lang === 'zh' ? '由 CISE 主管运营的六大主权通道与双边服务实体' : lang === 'ckb' ? '٦ ناوەند و هێڵی سەروەری لەژێر چاودێری پەیمانگا' : 'Sovereign Clearing, Risk Mitigation, & Bilateral Facilitation Rails'}
+              {lang === 'ar' ? 'المسارات السيادية والمرافق التشغيلية الـ٧ برعاية المعهد' : lang === 'zh' ? '由 CISE 主管运营的七大主权通道与双边服务实体' : lang === 'ckb' ? '٧ ناوەند و هێڵی سەروەری لەژێر چاودێری پەیمانگا' : 'Sovereign Clearing, Risk Mitigation, Cultural Exchange & Bilateral Facilitation Rails'}
             </p>
           </div>
           <div className="section-header__action">
@@ -689,14 +689,14 @@ export function InstituteHome() {
           <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">
                   {lang === 'ar' ? 'الملتقى السنوي · السليمانية' : lang === 'zh' ? '年度双边峰会 · 苏莱曼尼亚' : lang === 'ckb' ? 'لووتکەی ساڵانە' : 'Annual Convening · Sulaymaniyah'}
                 </span>
                 <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
                   <Landmark size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'القمة الاقتصادية والمعرض الثنائي' : lang === 'zh' ? '伊拉克-中国经济峰会暨博览会' : lang === 'ckb' ? 'لووتکەی ئابووری و پێشانگای دوولایەنە' : 'Iraq-China Economic Summit & Bilateral Expo'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -721,7 +721,7 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/summit`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'دخول بوابة القمة' : lang === 'zh' ? '进入峰会专区' : lang === 'ckb' ? 'چوونە ناو لووتکە' : 'Enter the Summit'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -740,7 +740,7 @@ export function InstituteHome() {
                   <Coins size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'تسوية المدفوعات المباشرة (IQD ⇄ RMB)' : lang === 'zh' ? '第纳尔/人民币直接清算结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان (IQD ⇄ RMB)' : 'Direct IQD ⇄ RMB Payment Settlement'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -765,7 +765,7 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/settlement`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'بوابة التسوية السيادية' : lang === 'zh' ? '进入结算中心' : lang === 'ckb' ? 'ناوەندی پاکتاو' : 'Access Settlement Portal'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -784,7 +784,7 @@ export function InstituteHome() {
                   <ShieldCheck size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'تغطية ائتمان الصادرات ومخاطر المشاريع' : lang === 'zh' ? '出口信用与工程风险综合承保' : lang === 'ckb' ? 'بیمەی متمانەی هەناردە و مەترسی پڕۆژە' : 'Export Credit & Project Risk Coverage'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -809,7 +809,7 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/insurance-facilitation`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'بوابة التأمين المؤسسي' : lang === 'zh' ? '进入保险促进专区' : lang === 'ckb' ? 'بیمەی سەروەری' : 'Access Insurance Portal'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -828,7 +828,7 @@ export function InstituteHome() {
                   <FileCheck size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'مركز التأشيرات الثنائية والاستشارات' : lang === 'zh' ? '中伊双边签证咨询与服务中心' : lang === 'ckb' ? 'ناوەندی ڕاوێژکاری ڤیزای دوولایەنە' : 'Bilateral Visa Advisory Centre'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -853,7 +853,7 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/visa-centre`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'دخول مركز التأشيرات' : lang === 'zh' ? '进入签证中心' : lang === 'ckb' ? 'ناوەندی ڤیزا' : 'Enter Visa Centre'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -872,7 +872,7 @@ export function InstituteHome() {
                   <GraduationCap size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'المركز الصيني لتعليم اللغة والشهادات' : lang === 'zh' ? '中国中心汉语言教学与认证' : lang === 'ckb' ? 'ناوەندی زمانی چینی و بڕوانامەکان' : 'Chinese Centre (Language & Training)'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -897,7 +897,7 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/chinese-center`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'استكشاف المركز الصيني' : lang === 'zh' ? '进入语言教学中心' : lang === 'ckb' ? 'ناوەندی زمانی چینی' : 'Explore Chinese Centre'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
@@ -916,7 +916,7 @@ export function InstituteHome() {
                   <Scale size={18} />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-[#0F172A] dark:text-white uppercase leading-snug">
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
                 {lang === 'ar' ? 'الاستشارات المالية والقانونية الاستراتيجية' : lang === 'zh' ? '战略财税与跨境法律合规咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی ستراتیژی' : 'Strategic Financial & Legal Consultancy'}
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -941,9 +941,53 @@ export function InstituteHome() {
             <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
               <Link 
                 to={`/${lang}/institute/consultancy`} 
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
               >
                 <span>{lang === 'ar' ? 'طلب استشارة استراتيجية' : lang === 'zh' ? '进入咨询服务专区' : lang === 'ckb' ? 'داواکاری ڕاوێژکاری' : 'Request Consultation'}</span>
+                <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Service 7: Cultural & Educational Exchange */}
+          <div className="p-7 rounded-3xl bg-white dark:bg-neutral-900 border border-indigo-500/30 hover:border-indigo-500 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+                  {lang === 'ar' ? 'التبادل الثقافي والأكاديمي' : lang === 'zh' ? '中伊人文与高校交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کەلتووری و ئەکادیمی' : 'People-to-People Exchange'}
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                  <Globe size={18} />
+                </div>
+              </div>
+              <h3 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase leading-snug">
+                {lang === 'ar' ? 'التبادل الثقافي والتعليمي العراقي الصيني' : lang === 'zh' ? '中伊人文教育交流与大学联盟' : lang === 'ckb' ? 'ئاڵوگۆڕی کەلتووری و پەروەردەیی عێراق و چین' : 'Sino-Iraqi Cultural & Educational Exchange'}
+              </h3>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                {lang === 'ar'
+                  ? 'مذكرات تفاهم جامعية ثنائية، زمالات معايشة طلابية، إقامات فنية، وحوارات حضارية تربط العراق والصين.'
+                  : lang === 'zh'
+                  ? '涵盖两国高校双边合作备忘录、青年学者沉浸式研学、艺术家联合驻留与文明互鉴高端对话。'
+                  : lang === 'ckb'
+                  ? 'ڕێککەوتننامەی زانکۆیی، زەمالەی خوێندکاران، ئیقامەی هونەری و دیالۆگی شارستانی لە نێوان عێراق و چین.'
+                  : 'Bilateral university MOUs, student immersion fellowships, arts residencies, and civilizational dialogues connecting Iraq and China.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+                <span>University MOUs</span>
+                <span aria-hidden="true">·</span>
+                <span>STEM Immersion</span>
+                <span aria-hidden="true">·</span>
+                <span>Arts Residencies</span>
+                <span aria-hidden="true">·</span>
+                <span>Civilizational Dialogue</span>
+              </div>
+            </div>
+            <div className="pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
+              <Link 
+                to={`/${lang}/institute/services/cultural-exchange`} 
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--color-ink-900)] hover:bg-[#1E293B] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all group"
+              >
+                <span>{lang === 'ar' ? 'استكشاف برامج التبادل' : lang === 'zh' ? '进入人文交流专区' : lang === 'ckb' ? 'گەڕان لە پرۆگرامەکان' : 'Explore Exchange Programs'}</span>
                 <ArrowRight size={14} className={cn("transition-transform group-hover:translate-x-1", isRtl && "rotate-180 group-hover:-translate-x-1")} />
               </Link>
             </div>
@@ -990,7 +1034,7 @@ export function InstituteHome() {
               </div>
             </div>
 
-            <h3 className="research-pillar-card__title group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8] transition-colors">
+            <h3 className="research-pillar-card__title group-hover:text-[var(--color-brand-800)] dark:group-hover:text-[#38BDF8] transition-colors">
               {tLocal.pillars[0].title}
             </h3>
             <p className="research-pillar-card__description">
@@ -1002,17 +1046,17 @@ export function InstituteHome() {
                 <AreaChart data={oilData}>
                   <defs>
                     <linearGradient id="colorOil" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#0284C7" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#0284C7" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="var(--color-brand-800)" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="var(--color-brand-800)" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <Area type="monotone" dataKey="value" stroke="#0284C7" strokeWidth={2} fillOpacity={1} fill="url(#colorOil)" />
+                  <Area type="monotone" dataKey="value" stroke="var(--color-brand-800)" strokeWidth={2} fillOpacity={1} fill="url(#colorOil)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
 
             <div className="research-pillar-card__footer">
-              <span className="research-pillar-card__cta group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]">
+              <span className="research-pillar-card__cta group-hover:text-[var(--color-brand-800)] dark:group-hover:text-[#38BDF8]">
                 <span>{tLocal.viewPillar}</span>
                 <span className="cta-arrow" aria-hidden="true">→</span>
               </span>
@@ -1025,7 +1069,7 @@ export function InstituteHome() {
             className="research-pillar-card group"
           >
             <div className="flex items-center justify-between">
-              <div className="research-pillar-card__icon" style={{ color: '#D97706' }}>
+              <div className="research-pillar-card__icon" style={{ color: 'var(--color-brand-800)' }}>
                 <TrendingUp size={24} />
               </div>
               <div className="research-pillar-card__metric">
@@ -1034,7 +1078,7 @@ export function InstituteHome() {
               </div>
             </div>
 
-            <h3 className="research-pillar-card__title group-hover:text-[#D97706] transition-colors">
+            <h3 className="research-pillar-card__title group-hover:text-[var(--color-brand-800)] transition-colors">
               {tLocal.pillars[1].title}
             </h3>
             <p className="research-pillar-card__description">
@@ -1044,13 +1088,13 @@ export function InstituteHome() {
             <div className="research-pillar-card__sparkline">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={tradeData}>
-                  <Bar dataKey="value" fill="#D97706" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="value" fill="var(--color-brand-800)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             <div className="research-pillar-card__footer">
-              <span className="research-pillar-card__cta group-hover:text-[#D97706]">
+              <span className="research-pillar-card__cta group-hover:text-[var(--color-brand-800)]">
                 <span>{tLocal.viewPillar}</span>
                 <span className="cta-arrow" aria-hidden="true">→</span>
               </span>
@@ -1072,7 +1116,7 @@ export function InstituteHome() {
               </div>
             </div>
 
-            <h3 className="research-pillar-card__title group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8] transition-colors">
+            <h3 className="research-pillar-card__title group-hover:text-[var(--color-brand-800)] dark:group-hover:text-[#38BDF8] transition-colors">
               {tLocal.pillars[2].title}
             </h3>
             <p className="research-pillar-card__description">
@@ -1085,13 +1129,13 @@ export function InstituteHome() {
                 <span className="text-[10px] font-bold text-neutral-700 dark:text-neutral-300 truncate">Next Summit: Nov 2026</span>
               </div>
               <div className="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#0284C7] shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[var(--color-brand-800)] shrink-0" />
                 <span className="text-[10px] font-bold text-neutral-700 dark:text-neutral-300 truncate">Baghdad-Beijing Dialogue</span>
               </div>
             </div>
 
             <div className="research-pillar-card__footer">
-              <span className="research-pillar-card__cta group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]">
+              <span className="research-pillar-card__cta group-hover:text-[var(--color-brand-800)] dark:group-hover:text-[#38BDF8]">
                 <span>{tLocal.viewPillar}</span>
                 <span className="cta-arrow" aria-hidden="true">→</span>
               </span>
@@ -1167,7 +1211,7 @@ export function InstituteHome() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 sm:gap-8 min-w-0">
           {tLocal.publications.map((pub, i) => (
             <Link key={i} to={`/${lang}/institute/publications/${pub.id}`} className="group cursor-pointer flex flex-col justify-between min-w-0">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0F172A] to-[#1E293B] mb-4 shadow-md group-hover:shadow-xl transition-all border border-neutral-200 dark:border-neutral-800">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--color-ink-900)] to-[#1E293B] mb-4 shadow-md group-hover:shadow-xl transition-all border border-neutral-200 dark:border-neutral-800">
                 <img 
                   src={pub.img} 
                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -1175,16 +1219,16 @@ export function InstituteHome() {
                   alt={pub.title}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink-900)] via-[var(--color-ink-900)]/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
                 
                 <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10">
-                  <div className="bg-[#0284C7] text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md shadow-lg">
+                  <div className="bg-[var(--color-brand-800)] text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md shadow-lg">
                     {pub.type}
                   </div>
                 </div>
                 
                 <div className="absolute bottom-5 left-5 right-5 z-10">
-                  <div className="flex items-center gap-1.5 text-[#D97706] mb-1.5">
+                  <div className="flex items-center gap-1.5 text-[var(--color-brand-800)] mb-1.5">
                     <ShieldCheck size={12} />
                     <span className="text-[9px] font-black uppercase tracking-widest">{tLocal.verifiedData}</span>
                   </div>
@@ -1203,11 +1247,11 @@ export function InstituteHome() {
       </section>
 
       {/* Partnership & Media Callout */}
-      <section className="bg-[#0F172A] rounded-3xl p-8 sm:p-12 lg:p-14 relative overflow-hidden shadow-2xl border border-white/10 min-w-0">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0284C7]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
+      <section className="bg-[var(--color-ink-900)] rounded-3xl p-8 sm:p-12 lg:p-14 relative overflow-hidden shadow-2xl border border-white/10 min-w-0">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-brand-800)]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center min-w-0">
           <div className="lg:col-span-7 space-y-5 min-w-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#D97706]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">
               <Handshake size={14} />
               <span>{tLocal.collaborationEyebrow}</span>
             </div>
@@ -1220,10 +1264,10 @@ export function InstituteHome() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link 
                 to={`/${lang}/institute/partnerships`} 
-                className="btn-primary justify-center !bg-[#D97706] hover:!bg-[#B45309] !text-[#0F172A] !border-[#D97706]"
+                className="btn-primary justify-center !bg-white hover:!bg-neutral-100 !text-neutral-950 !border-white shadow-lg shadow-white/10 hover:shadow-white/20 transition-all font-black group"
               >
-                <span>{tLocal.partnerCta}</span>
-                <span className="cta-arrow" aria-hidden="true">→</span>
+                <span className="text-neutral-950 font-black">{tLocal.partnerCta}</span>
+                <span className="cta-arrow text-neutral-950 font-black group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" aria-hidden="true">→</span>
               </Link>
               <Link 
                 to={`/${lang}/institute/experts`} 

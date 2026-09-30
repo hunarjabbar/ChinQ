@@ -65,16 +65,16 @@ export function SettlementLayout({ lang, children }: Props) {
     <div dir={isRtl ? 'rtl' : 'ltr'} className="pay-portal flex flex-col min-h-screen">
       
       {/* Top Sovereign Regulatory Notice Bar */}
-      <div className="w-full bg-[#111827] text-white text-[11px] py-2 px-4 border-b border-gray-800">
+      <div className="w-full bg-neutral-950 text-white text-[11px] py-2 px-4 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-start">
           <div className="flex items-center gap-2">
-            <ShieldCheck size={14} className="text-[brand-800] shrink-0" />
-            <span className="text-gray-300">
+            <ShieldCheck size={14} className="text-brand-400 shrink-0" />
+            <span className="text-neutral-300">
               <strong className="text-white font-bold">Central Bank of Iraq (CBI) & PBoC Accredited:</strong> Direct IQD ⇄ RMB Bilateral Settlement & Clearing Facility
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-gray-400">
+          <div className="flex items-center gap-4 text-neutral-400">
             <Link to={`/${lang}/institute`} className="hover:text-white transition-colors flex items-center gap-1 font-bold">
               <span>{lang === 'ar' ? 'المعهد الصيني (CISE)' : lang === 'zh' ? '中伊战略研究所' : lang === 'ckb' ? 'پەیمانگای چینی' : 'CISE Institute'}</span>
               <span className="cta-arrow">→</span>
@@ -88,22 +88,22 @@ export function SettlementLayout({ lang, children }: Props) {
       </div>
 
       {/* Main Header */}
-      <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-40 shadow-xs">
+      <header className="w-full bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 z-40 shadow-xs transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           
           {/* Logo & Portal Identity */}
           <Link to={basePath} className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-[brand-800] text-white flex items-center justify-center font-black text-sm shadow-md group-hover:bg-[brand-800] transition-colors shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-brand-800 text-white flex items-center justify-center font-black text-sm shadow-md group-hover:bg-brand-700 transition-colors shrink-0">
               ICA
             </div>
             <div>
-              <div className="text-sm sm:text-base font-black text-gray-900 tracking-tight flex items-center gap-2">
+              <div className="text-sm sm:text-base font-black text-ink-950 dark:text-white tracking-tight flex items-center gap-2">
                 <span>{t('settlement.title')}</span>
-                <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-red-100 text-[#991B1B] font-bold">
+                <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-brand-50 dark:bg-brand-950/50 text-brand-800 dark:text-brand-300 font-bold border border-brand-200 dark:border-brand-800/40">
                   Sovereign Parity
                 </span>
               </div>
-              <div className="text-[10px] text-gray-500 font-medium">
+              <div className="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium">
                 Iraqi-Chinese Agency • FinTech & Settlement Directorate
               </div>
             </div>
@@ -113,31 +113,16 @@ export function SettlementLayout({ lang, children }: Props) {
           <div className="flex items-center gap-3">
             
             {/* Language Switcher */}
-            <div className="flex items-center gap-1 text-xs font-bold border border-gray-200 rounded-lg p-1 bg-gray-50">
-              <Link 
-                to={switchLang('en')} 
-                className={`px-2 py-1 rounded transition-colors ${lang === 'en' ? 'bg-[brand-800] text-white' : 'text-gray-600 hover:text-gray-900'}`}
-              >
-                EN
-              </Link>
-              <Link 
-                to={switchLang('ar')} 
-                className={`px-2 py-1 rounded transition-colors ${lang === 'ar' ? 'bg-[brand-800] text-white' : 'text-gray-600 hover:text-gray-900'}`}
-              >
-                عربي
-              </Link>
-              <Link 
-                to={switchLang('zh')} 
-                className={`px-2 py-1 rounded transition-colors ${lang === 'zh' ? 'bg-[brand-800] text-white' : 'text-gray-600 hover:text-gray-900'}`}
-              >
-                中文
-              </Link>
-              <Link 
-                to={switchLang('ckb')} 
-                className={`px-2 py-1 rounded transition-colors ${lang === 'ckb' ? 'bg-[brand-800] text-white' : 'text-gray-600 hover:text-gray-900'}`}
-              >
-                کوردی
-              </Link>
+            <div className="flex items-center gap-1 text-xs font-bold border border-neutral-200 dark:border-neutral-700 rounded-lg p-1 bg-neutral-50 dark:bg-neutral-800">
+              {(['en', 'ar', 'zh', 'ckb'] as Locale[]).map((l) => (
+                <Link 
+                  key={l}
+                  to={switchLang(l)} 
+                  className={`px-2 py-1 rounded transition-colors uppercase ${lang === l ? 'bg-brand-800 text-white shadow-xs' : 'text-neutral-600 dark:text-neutral-300 hover:text-ink-950 dark:hover:text-white'}`}
+                >
+                  {l === 'ar' ? 'عربي' : l === 'zh' ? '中文' : l === 'ckb' ? 'کوردی' : 'EN'}
+                </Link>
+              ))}
             </div>
 
             {/* Inquiry CTA */}
@@ -153,7 +138,7 @@ export function SettlementLayout({ lang, children }: Props) {
         </div>
 
         {/* Secondary Navigation Ribbon */}
-        <nav className="border-t border-gray-100 bg-gray-50/70 overflow-x-auto scrollbar-none">
+        <nav className="border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/80 overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto px-4 flex items-center gap-1 sm:gap-2 py-1.5 whitespace-nowrap text-xs font-bold">
             {navLinks.map((item, idx) => {
               const isActive = item.exact 
@@ -166,8 +151,8 @@ export function SettlementLayout({ lang, children }: Props) {
                   to={item.to}
                   className={`px-3 py-1.5 rounded-lg transition-all ${
                     isActive 
-                      ? 'bg-white text-[brand-800] shadow-xs font-black border border-gray-200' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/80'
+                      ? 'bg-white dark:bg-neutral-800 text-brand-800 dark:text-brand-400 shadow-xs font-black border border-neutral-200 dark:border-neutral-700' 
+                      : 'text-neutral-600 dark:text-neutral-400 hover:text-ink-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'
                   }`}
                 >
                   {item.label}
@@ -188,7 +173,7 @@ export function SettlementLayout({ lang, children }: Props) {
       </main>
 
       {/* Portal Footer */}
-      <footer className="w-full bg-white border-t border-gray-200 mt-16 pt-12 pb-10 text-xs text-gray-600">
+      <footer className="w-full bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 mt-16 pt-12 pb-10 text-xs text-neutral-600 dark:text-neutral-400 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-10">
           
           {/* Top Columns */}
@@ -197,70 +182,70 @@ export function SettlementLayout({ lang, children }: Props) {
             {/* Column 1: Identity */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-[brand-800] text-white flex items-center justify-center font-black text-xs">
+                <div className="w-7 h-7 rounded-lg bg-brand-800 text-white flex items-center justify-center font-black text-xs">
                   ICA
                 </div>
-                <span className="font-black text-gray-900 text-sm">
+                <span className="font-black text-ink-950 dark:text-white text-sm">
                   {t('settlement.title')}
                 </span>
               </div>
-              <p className="text-gray-500 leading-relaxed text-[11px]">
+              <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed text-[11px]">
                 {t('settlement.hero.desc')}
               </p>
-              <div className="flex items-center gap-2 text-[10px] text-gray-400 font-mono">
-                <Lock size={12} className="text-[brand-800]" />
+              <div className="flex items-center gap-2 text-[10px] text-neutral-400 dark:text-neutral-500 font-mono">
+                <Lock size={12} className="text-brand-800 dark:text-brand-400" />
                 <span>TLS 1.3 Host-to-Host Encrypted Rails</span>
               </div>
             </div>
 
             {/* Column 2: Core Solutions */}
             <div className="space-y-2">
-              <h4 className="font-black text-gray-900 uppercase tracking-wider text-[11px] mb-3">
+              <h4 className="font-black text-ink-950 dark:text-white uppercase tracking-wider text-[11px] mb-3">
                 Core Systems
               </h4>
-              <ul className="space-y-1.5 text-gray-500 text-[11px]">
-                <li><Link to={`/${lang}/settlement/calculator`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.calculator')}</Link></li>
-                <li><Link to={`/${lang}/settlement/tracker`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.tracker')}</Link></li>
-                <li><Link to={`/${lang}/settlement/gateway`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.gateway')}</Link></li>
-                <li><Link to={`/${lang}/settlement/card`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.card')}</Link></li>
-                <li><Link to={`/${lang}/settlement/how-it-works`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.howItWorks')}</Link></li>
+              <ul className="space-y-1.5 text-neutral-500 dark:text-neutral-400 text-[11px]">
+                <li><Link to={`/${lang}/settlement/calculator`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.calculator')}</Link></li>
+                <li><Link to={`/${lang}/settlement/tracker`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.tracker')}</Link></li>
+                <li><Link to={`/${lang}/settlement/gateway`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.gateway')}</Link></li>
+                <li><Link to={`/${lang}/settlement/card`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.card')}</Link></li>
+                <li><Link to={`/${lang}/settlement/how-it-works`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.howItWorks')}</Link></li>
               </ul>
             </div>
 
             {/* Column 3: Compliance & Legal */}
             <div className="space-y-2">
-              <h4 className="font-black text-gray-900 uppercase tracking-wider text-[11px] mb-3">
+              <h4 className="font-black text-ink-950 dark:text-white uppercase tracking-wider text-[11px] mb-3">
                 Regulatory Framework
               </h4>
-              <ul className="space-y-1.5 text-gray-500 text-[11px]">
-                <li><Link to={`/${lang}/settlement/compliance`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.compliance')}</Link></li>
-                <li><Link to={`/${lang}/settlement/fees`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.fees')}</Link></li>
-                <li><Link to={`/${lang}/settlement/legal`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.legal')}</Link></li>
-                <li><Link to={`/${lang}/settlement/faq`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.faq')}</Link></li>
-                <li><Link to={`/${lang}/settlement/contact`} className="hover:text-[brand-800] transition-colors">{t('settlement.nav.contact')}</Link></li>
+              <ul className="space-y-1.5 text-neutral-500 dark:text-neutral-400 text-[11px]">
+                <li><Link to={`/${lang}/settlement/compliance`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.compliance')}</Link></li>
+                <li><Link to={`/${lang}/settlement/fees`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.fees')}</Link></li>
+                <li><Link to={`/${lang}/settlement/legal`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.legal')}</Link></li>
+                <li><Link to={`/${lang}/settlement/faq`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.faq')}</Link></li>
+                <li><Link to={`/${lang}/settlement/contact`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">{t('settlement.nav.contact')}</Link></li>
               </ul>
             </div>
 
             {/* Column 4: Institutional Links */}
             <div className="space-y-2">
-              <h4 className="font-black text-gray-900 uppercase tracking-wider text-[11px] mb-3">
+              <h4 className="font-black text-ink-950 dark:text-white uppercase tracking-wider text-[11px] mb-3">
                 Authoritative Authorities
               </h4>
-              <ul className="space-y-1.5 text-gray-500 text-[11px]">
-                <li><a href="https://cbi.iq" target="_blank" rel="noopener noreferrer" className="hover:text-[brand-800] transition-colors flex items-center gap-1"><span>Central Bank of Iraq</span><ExternalLink size={10} /></a></li>
-                <li><a href="http://www.pbc.gov.cn" target="_blank" rel="noopener noreferrer" className="hover:text-[brand-800] transition-colors flex items-center gap-1"><span>People's Bank of China</span><ExternalLink size={10} /></a></li>
-                <li><a href="https://www.cips.com.cn" target="_blank" rel="noopener noreferrer" className="hover:text-[brand-800] transition-colors flex items-center gap-1"><span>CIPS Cross-Border System</span><ExternalLink size={10} /></a></li>
-                <li><a href="https://qi.iq" target="_blank" rel="noopener noreferrer" className="hover:text-[brand-800] transition-colors flex items-center gap-1"><span>Qi Card (International Smart Card)</span><ExternalLink size={10} /></a></li>
-                <li><Link to={`/${lang}`} className="hover:text-[brand-800] transition-colors">Iraqi-Chinese Agency Main Portal</Link></li>
+              <ul className="space-y-1.5 text-neutral-500 dark:text-neutral-400 text-[11px]">
+                <li><a href="https://cbi.iq" target="_blank" rel="noopener noreferrer" className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors flex items-center gap-1"><span>Central Bank of Iraq</span><ExternalLink size={10} /></a></li>
+                <li><a href="http://www.pbc.gov.cn" target="_blank" rel="noopener noreferrer" className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors flex items-center gap-1"><span>People's Bank of China</span><ExternalLink size={10} /></a></li>
+                <li><a href="https://www.cips.com.cn" target="_blank" rel="noopener noreferrer" className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors flex items-center gap-1"><span>CIPS Cross-Border System</span><ExternalLink size={10} /></a></li>
+                <li><a href="https://qi.iq" target="_blank" rel="noopener noreferrer" className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors flex items-center gap-1"><span>Qi Card (International Smart Card)</span><ExternalLink size={10} /></a></li>
+                <li><Link to={`/${lang}`} className="hover:text-brand-800 dark:hover:text-brand-400 transition-colors">Iraqi-Chinese Agency Main Portal</Link></li>
               </ul>
             </div>
 
           </div>
 
           {/* Compliance & Regulatory Disclaimer (Part 8.5) */}
-          <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-[11px] text-gray-500 leading-relaxed">
-            <div className="font-black uppercase tracking-wider text-gray-900 flex items-center gap-1.5">
-              <ShieldCheck size={14} className="text-[brand-800]" />
+          <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 space-y-2 text-[11px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            <div className="font-black uppercase tracking-wider text-ink-950 dark:text-white flex items-center gap-1.5">
+              <ShieldCheck size={14} className="text-brand-800 dark:text-brand-400" />
               <span>{t('settlement.disclaimer.title')}</span>
             </div>
             <p>
@@ -269,14 +254,14 @@ export function SettlementLayout({ lang, children }: Props) {
           </div>
 
           {/* Bottom Copyright */}
-          <div className="border-t border-gray-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-400">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-400">
             <div>
               © 2026 Iraqi-Chinese Agency (ICA). All rights reserved. Sovereign Bilateral Payment Settlement Desk.
             </div>
             <div className="flex items-center gap-4">
-              <Link to={`/${lang}/settlement/legal`} className="hover:text-gray-600">Terms of Use</Link>
-              <Link to={`/${lang}/settlement/legal`} className="hover:text-gray-600">AML/CFT Policy</Link>
-              <Link to={`/${lang}/settlement/legal`} className="hover:text-gray-600">Privacy Notice</Link>
+              <Link to={`/${lang}/settlement/legal`} className="hover:text-neutral-600 dark:hover:text-neutral-200">Terms of Use</Link>
+              <Link to={`/${lang}/settlement/legal`} className="hover:text-neutral-600 dark:hover:text-neutral-200">AML/CFT Policy</Link>
+              <Link to={`/${lang}/settlement/legal`} className="hover:text-neutral-600 dark:hover:text-neutral-200">Privacy Notice</Link>
             </div>
           </div>
 

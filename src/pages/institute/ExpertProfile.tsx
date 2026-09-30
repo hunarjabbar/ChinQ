@@ -45,7 +45,7 @@ export default function ExpertProfile() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-16" dir={isRtl ? 'rtl' : 'ltr'}>
-      <Link to={`/${lang}/institute/experts`} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-[#0284C7] transition-colors">
+      <Link to={`/${lang}/institute/experts`} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors">
         <ArrowLeft size={14} className="rtl:rotate-180" />
         <span>Fellows Directory</span>
       </Link>
@@ -55,7 +55,7 @@ export default function ExpertProfile() {
         <aside className="lg:col-span-4 space-y-8">
           <div className="space-y-6">
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-tr from-[#0284C7] to-[#D97706] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
+              <div className="absolute -inset-2 bg-gradient-to-tr from-[var(--color-brand-800)] to-[var(--color-brand-800)] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
               <img 
                 src={expert.image} 
                 alt={expert.name}
@@ -71,11 +71,11 @@ export default function ExpertProfile() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[#0284C7] transition-all border border-neutral-100 dark:border-neutral-800"><Linkedin size={18} /></a>
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[#0284C7] transition-all border border-neutral-100 dark:border-neutral-800"><Twitter size={18} /></a>
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[#0284C7] transition-all border border-neutral-100 dark:border-neutral-800"><Globe size={18} /></a>
+                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Linkedin size={18} /></a>
+                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Twitter size={18} /></a>
+                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Globe size={18} /></a>
               </div>
-              <button className="w-full py-4 bg-[#0F172A] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-3">
+              <button className="w-full py-4 bg-[var(--color-ink-900)] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-3">
                 <MessageSquare size={16} />
                 <span>Request Briefing</span>
               </button>
@@ -83,7 +83,7 @@ export default function ExpertProfile() {
           </div>
 
           <div className="p-8 bg-neutral-50 dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 space-y-6">
-            <h4 className="text-[10px] font-black uppercase tracking-widest text-[#D97706]">Expertise Domains</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">Expertise Domains</h4>
             <div className="flex flex-wrap gap-2">
               {expert.topics.map(topic => (
                 <span key={topic} className="px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-lg text-[10px] font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 uppercase tracking-tight">
@@ -110,14 +110,14 @@ export default function ExpertProfile() {
         <main className="lg:col-span-8 space-y-16">
           <div className="space-y-6">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 text-[#0284C7]">
+              <div className="inline-flex items-center gap-2 text-[var(--color-brand-800)]">
                 <ShieldCheck size={16} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Verified Senior Fellow</span>
               </div>
-              <h1 className="text-4xl lg:text-6xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter">
+              <h1 className="text-4xl lg:text-6xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter">
                 {expert.name}
               </h1>
-              <p className="text-xl font-bold text-[#D97706] uppercase tracking-tight">{expert.title}</p>
+              <p className="text-xl font-bold text-[var(--color-brand-800)] uppercase tracking-tight">{expert.title}</p>
             </div>
             
             <div className="prose prose-neutral dark:prose-invert max-w-none">
@@ -128,14 +128,14 @@ export default function ExpertProfile() {
           </div>
 
           <div className="space-y-8">
-            <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter flex items-center gap-3">
-              <Award className="text-[#D97706]" />
+            <h3 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter flex items-center gap-3">
+              <Award className="text-[var(--color-brand-800)]" />
               <span>Key Accomplishments</span>
             </h3>
             <div className="grid grid-cols-1 gap-4">
               {expert.achievements.map((achievement, idx) => (
                 <div key={idx} className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-lg bg-neutral-50 dark:bg-neutral-800 flex items-center justify-center text-[#D97706] font-black text-sm shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-neutral-50 dark:bg-neutral-800 flex items-center justify-center text-[var(--color-brand-800)] font-black text-sm shrink-0">
                     {idx + 1}
                   </div>
                   <p className="text-sm font-bold text-neutral-700 dark:text-neutral-300 leading-snug">
@@ -148,11 +148,11 @@ export default function ExpertProfile() {
 
           <div className="space-y-8">
             <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800 pb-4">
-              <h3 className="text-2xl font-black text-[#0F172A] dark:text-white uppercase tracking-tighter flex items-center gap-3">
-                <FileText className="text-[#0284C7]" />
+              <h3 className="text-2xl font-black text-[var(--color-ink-900)] dark:text-white uppercase tracking-tighter flex items-center gap-3">
+                <FileText className="text-[var(--color-brand-800)]" />
                 <span>Recent Publications</span>
               </h3>
-              <Link to={`/${lang}/institute/publications?author=${expert.id}`} className="text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-[#0284C7] transition-colors">
+              <Link to={`/${lang}/institute/publications?author=${expert.id}`} className="text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-[var(--color-brand-800)] transition-colors">
                 View All
               </Link>
             </div>
@@ -162,7 +162,7 @@ export default function ExpertProfile() {
                 <Link 
                   key={pub.id}
                   to={`/${lang}/institute/publications/${pub.slug}`}
-                  className="p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl hover:border-[#0284C7] hover:shadow-xl transition-all group"
+                  className="p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl hover:border-[var(--color-brand-800)] hover:shadow-xl transition-all group"
                 >
                   <div className="flex items-center justify-between gap-8">
                     <div className="space-y-3">
@@ -172,11 +172,11 @@ export default function ExpertProfile() {
                         </span>
                         <span className="text-[9px] font-bold text-neutral-400">{new Date(pub.date).toLocaleDateString()}</span>
                       </div>
-                      <h4 className="text-lg font-black text-[#0F172A] dark:text-white uppercase group-hover:text-[#0284C7] transition-colors">
+                      <h4 className="text-lg font-black text-[var(--color-ink-900)] dark:text-white uppercase group-hover:text-[var(--color-brand-800)] transition-colors">
                         {pub.title}
                       </h4>
                     </div>
-                    <ChevronRight size={24} className="text-neutral-200 dark:text-neutral-700 group-hover:text-[#0284C7] transition-all rtl:rotate-180" />
+                    <ChevronRight size={24} className="text-neutral-200 dark:text-neutral-700 group-hover:text-[var(--color-brand-800)] transition-all rtl:rotate-180" />
                   </div>
                 </Link>
               ))}

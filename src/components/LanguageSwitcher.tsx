@@ -54,9 +54,9 @@ export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Switch language"
-        className="h-11 flex items-center gap-2 px-3 sm:px-3.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-neutral-300 hover:text-white transition-all group focus-visible:ring-2 focus-visible:ring-[#D97706]"
+        className="h-11 flex items-center gap-2 px-3 sm:px-3.5 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 text-neutral-300 hover:text-white transition-all group focus-visible:ring-2 focus-visible:ring-[var(--color-brand-800)]"
       >
-        <Globe size={15} className="text-[#D97706] shrink-0" />
+        <Globe size={15} className="text-[var(--color-brand-800)] shrink-0" />
         <span className="text-[10px] font-black uppercase tracking-widest text-white">{currentLang.code}</span>
         <ChevronDown size={13} className={cn("text-neutral-400 transition-transform duration-200", isOpen && "rotate-180")} />
       </button>
@@ -70,7 +70,7 @@ export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.96 }}
               transition={{ duration: 0.15 }}
-              className="absolute right-0 rtl:right-auto rtl:left-0 top-full mt-2 w-48 bg-[#0F172A] border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
+              className="absolute right-0 rtl:right-auto rtl:left-0 top-full mt-2 w-48 bg-[var(--color-ink-900)] border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
             >
               <div className="p-2 space-y-1">
                 {languages.map((l) => (
@@ -79,7 +79,7 @@ export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
                     onClick={() => handleLanguageChange(l.code)}
                     className={cn(
                       "w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all group",
-                      lang === l.code ? "bg-[#0284C7] text-white" : "hover:bg-white/5 text-neutral-400 hover:text-white"
+                      lang === l.code ? "bg-[var(--color-brand-800)] text-white" : "hover:bg-white/5 text-neutral-400 hover:text-white"
                     )}
                   >
                     <div className="flex flex-col items-start">

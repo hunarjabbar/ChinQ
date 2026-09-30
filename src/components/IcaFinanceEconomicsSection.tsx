@@ -136,19 +136,17 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
           </div>
 
           {/* Real-Time Live Settlement Rate Card Tie-In */}
-          <div className="w-full md:w-auto md:min-w-[340px] bg-red-700 dark:bg-red-800 text-white rounded-xl p-4 sm:p-6 shadow-md border border-red-600/80 transition-all hover:shadow-lg shrink-0 overflow-hidden">
+          <div className="w-full md:w-auto md:min-w-[340px] bg-brand-800 border border-brand-700 text-white rounded-2xl p-5 sm:p-6 shadow-xl transition-all hover:shadow-2xl shrink-0 overflow-hidden relative">
             {/* Header */}
-            <div className="flex items-center justify-between gap-2 border-b border-red-600/60 pb-3 mb-3.5">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between gap-2 border-b border-white/15 pb-3 mb-3.5">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-black uppercase tracking-wider">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-80"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider text-white">
-                  {t.liveRateBadge}
-                </span>
+                <span>{t.liveRateBadge}</span>
               </div>
-              <span className="text-xs font-bold text-white/90 bg-red-800/80 border border-red-500/40 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-bold text-white bg-white/15 border border-white/25 px-2.5 py-0.5 rounded-full">
                 {rateData?.cbiClearingStatus === 'SYNCHRONIZED' ? 'CBI • PBOC' : 'LIVE'}
               </span>
             </div>
@@ -169,21 +167,21 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
                 <div className="text-xs font-medium text-white/80 mb-1">
                   {t.change24h}
                 </div>
-                <div className="inline-flex items-center gap-1 text-xs font-bold text-white bg-red-800/80 border border-red-500/40 px-2.5 py-1 rounded">
-                  {(rateData?.change24h ?? 0.45) >= 0 ? <TrendingUp size={13} className="text-white" /> : <TrendingDown size={13} className="text-white" />}
+                <div className="inline-flex items-center gap-1 text-xs font-bold text-white bg-white/15 border border-white/25 px-2.5 py-1 rounded-full">
+                  {(rateData?.change24h ?? 0.45) >= 0 ? <TrendingUp size={13} className="text-amber-300" /> : <TrendingDown size={13} className="text-amber-300" />}
                   <span>{(rateData?.change24h ?? 0.45) >= 0 ? '+' : ''}{rateData?.change24h ?? 0.45}%</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Link to Settlement */}
-            <div className="pt-3 border-t border-red-600/60 flex items-center justify-between gap-3 text-xs">
-              <span className="text-white/80 font-medium truncate">
+            <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-3 text-xs">
+              <span className="text-white/85 font-medium truncate">
                 {t.mbridgeBadge}
               </span>
               <Link
                 to={`/${lang}/summit/services/settlement`}
-                className="inline-flex items-center gap-1.5 font-black uppercase tracking-wider text-white hover:text-white/90 underline-offset-4 hover:underline transition-all group shrink-0"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white hover:bg-neutral-100 text-brand-800 text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md group shrink-0 cursor-pointer"
               >
                 <span>{t.calcCta}</span>
                 {isRtl ? (
@@ -206,10 +204,10 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
                 setIsExpanded(false);
               }}
               className={cn(
-                "px-4 py-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 rounded-lg shadow-xs cursor-pointer",
+                "px-4 py-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 rounded-xl cursor-pointer",
                 activeCategory === cat
-                  ? "bg-brand-800 text-white border-2 border-brand-900 shadow-md scale-105"
-                  : "bg-red-600/90 hover:bg-brand-800 text-white border border-red-700/60 hover:shadow-sm"
+                  ? "bg-brand-800 text-white shadow-xs border border-brand-900"
+                  : "bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-700"
               )}
             >
               {(t.categories as any)[cat] || cat}
@@ -224,7 +222,7 @@ export function IcaFinanceEconomicsSection({ lang }: Props) {
           </div>
         ) : filteredInsights.length === 0 ? (
           <div className="p-10 text-center bg-neutral-50 dark:bg-neutral-800/50 rounded-xl border border-neutral-200/80 dark:border-neutral-700/80 shadow-xs flex flex-col items-center justify-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center justify-center border border-red-200/50 dark:border-red-900/50">
+            <div className="w-12 h-12 rounded-full bg-brand-50 dark:bg-brand-950/40 text-brand-800 dark:text-brand-400 flex items-center justify-center border border-brand-200/50 dark:border-brand-900/50">
               <FileText size={22} />
             </div>
             <p className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 font-sans font-medium max-w-md">

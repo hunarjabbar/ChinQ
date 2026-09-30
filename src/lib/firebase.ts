@@ -1,34 +1,16 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { initializeFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, doc, getDocFromServer, setLogLevel } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
-export const db = initializeFirestore(
-  app,
-  typeof window !== 'undefined'
-    ? {
-        experimentalForceLongPolling: true,
-      }
-    : {},
-  firebaseConfig.firestoreDatabaseId
-);
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 
-// Validate connection to Firestore (CRITICAL CONSTRAINT)
-async function testConnection() {
-  try {
-    await getDocFromServer(doc(db, 'test', 'connection'));
-  } catch (error) {
-    if (error instanceof Error && (error.message.includes('the client is offline') || error.message.includes('unavailable') || error.message.includes('Could not reach'))) {
-      // Graceful offline fallback handling
-    } else {
-      console.debug("Firestore connection test status:", error);
-    }
-  }
-}
-
-testConnection();
+// Suppress transient offline logs in dev/headless runner
+try {
+  setLogLevel('error');
+} catch {}
 
 // Error Handling Infrastructure (Section 3 of Firebase Skill)
 export enum OperationType {

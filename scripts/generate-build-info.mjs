@@ -1,34 +1,32 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { execSync } from 'node:child_process';
 
-function generateBuildInfo() {
-  let commitHash = 'unknown';
-  let commitShortHash = 'unknown';
-  let commitMessage = 'unknown';
-  let branch = 'main';
+let commit = 'unknown';
+let branch = 'main';
 
-  try {
-    commitHash = execSync('git rev-parse HEAD').toString().trim();
-    commitShortHash = execSync('git rev-parse --short HEAD').toString().trim();
-    commitMessage = execSync('git log -1 --format=%s').toString().trim();
-    branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-  } catch (e) {
-    console.warn('Git info not available for build-info.json');
-  }
-
-  const info = {
-    commitHash,
-    commitShortHash,
-    commitMessage,
-    commitTimestamp: new Date().toISOString(),
-    buildTimestamp: new Date().toISOString(),
-    buildId: 'ICA-SUMMIT-2026-v1.0',
-    branch,
-    nodeVersion: process.version
-  };
-
-  fs.writeFileSync('build-info.json', JSON.stringify(info, null, 2));
-  console.log('✅ Generated build-info.json');
+try {
+  commit = execSync('git rev-parse --short HEAD', { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
+  branch = execSync('git rev-parse --abbrev-ref HEAD', { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
+} catch (e) {
+  console.log('fatal: not a git repository (or any of the parent directories): .git');
+  console.log('Git info not available for build-info.json');
 }
 
-generateBuildInfo();
+const buildInfo = {
+  version: '0.0.0',
+  commit,
+  branch,
+  builtAt: new Date().toISOString(),
+  environment: process.env.NODE_ENV || 'production'
+};
+
+fs.writeFileSync('build-info.json', JSON.stringify(buildInfo, null, 2));
+if (fs.existsSync('public')) {
+  fs.writeFileSync('public/build-info.json', JSON.stringify(buildInfo, null, 2));
+}
+if (fs.existsSync('dist')) {
+  fs.writeFileSync('dist/build-info.json', JSON.stringify(buildInfo, null, 2));
+}
+
+console.log('✅ Generated build-info.json');

@@ -15,7 +15,7 @@ export function SummitMediaPage() {
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-12">
         
         {/* Header Hero */}
-        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-start">
           <div className="flex items-center gap-2">
             <Newspaper className="w-5 h-5 text-brand-800 dark:text-brand-400" />
             <span className="text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400">
@@ -33,7 +33,7 @@ export function SummitMediaPage() {
         </div>
 
         {/* Press Releases Grid */}
-        <div className="space-y-4">
+        <div className="space-y-4 text-start">
           <h2 className="text-lg font-black text-neutral-900 dark:text-neutral-100">
             {lang === 'ar' ? 'البيانات الصحفية الرسمية' : lang === 'zh' ? '官方新闻公报' : lang === 'ckb' ? 'ڕاگەیەندراوە فەرمییەکان' : 'Official Press Communiqués'}
           </h2>
@@ -65,7 +65,7 @@ export function SummitMediaPage() {
                   <h3 className="text-sm font-black text-neutral-900 dark:text-neutral-100">{p.title[lang]}</h3>
                 </div>
                 <button className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-xs font-bold transition-colors cursor-pointer">
-                  Download PDF
+                  {lang === 'ar' ? 'تحميل PDF' : lang === 'zh' ? '下载PDF' : 'Download PDF'}
                 </button>
               </div>
             ))}

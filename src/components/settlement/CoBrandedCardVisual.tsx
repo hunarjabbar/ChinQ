@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Wifi, 
-  CreditCard, 
   RotateCw, 
-  Download, 
-  ShieldCheck, 
-  CheckCircle,
-  FileText
+  Download
 } from 'lucide-react';
 import { Locale } from '../../types';
 import { CardRegistrationData } from '../../types/settlement';
@@ -29,27 +25,11 @@ export function CoBrandedCardVisual({
   interactive = true 
 }: Props) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const isAr = lang === 'ar';
-  const isZh = lang === 'zh';
-  const isCkb = lang === 'ckb';
 
   const cardholderName = (cardData.fullNameOnCard || 'CARDHOLDER NAME').toUpperCase().slice(0, 26);
   const scheme = cardData.cardScheme || 'VISA';
   const tier = cardData.cardTier || 'PLATINUM';
   const currency = cardData.primaryCurrency || 'DUAL';
-
-  const handleExportSvg = () => {
-    const svgElement = document.getElementById('co-branded-card-svg');
-    if (!svgElement) return;
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `Qi-ICA-${scheme}-${tier}-Card.svg`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
 
   const handleExportPdf = () => {
     generateCardDossierPdf({
@@ -87,12 +67,9 @@ export function CoBrandedCardVisual({
         
         {/* FRONT FACE */}
         <div 
-          className={`absolute inset-0 w-full h-full rounded-2xl p-6 text-white overflow-hidden shadow-xl border border-red-400/40 backface-hidden transition-all duration-700 ${
+          className={`absolute inset-0 w-full h-full rounded-2xl p-6 text-white overflow-hidden shadow-xl border border-brand-700/60 backface-hidden transition-all duration-700 bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950 ${
             isFlipped ? 'rotate-y-180 opacity-0 pointer-events-none' : 'rotate-y-0 opacity-100'
           }`}
-          style={{
-            background: 'linear-gradient(135deg, brand-800 0%, brand-800 40%, brand-800 100%)'
-          }}
         >
           {/* Subtle Guilloche / Geometric Background Pattern */}
           <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
@@ -100,12 +77,12 @@ export function CoBrandedCardVisual({
           {/* Top Bar: ICA Logo Left, Qi Logo Right */}
           <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[brand-800] font-black text-xs shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-brand-800 font-black text-xs shadow-sm">
                 ICA
               </div>
               <div className="flex flex-col leading-none">
-                <span className="text-[10px] font-black tracking-widest uppercase">Iraqi-Chinese Agency</span>
-                <span className="text-[8px] text-red-200 uppercase tracking-wider">Sovereign FinTech Rail</span>
+                <span className="text-[10px] font-black tracking-widest uppercase text-white">Iraqi-Chinese Agency</span>
+                <span className="text-[8px] text-brand-200 uppercase tracking-wider">Sovereign FinTech Rail</span>
               </div>
             </div>
 
@@ -131,7 +108,7 @@ export function CoBrandedCardVisual({
             <Wifi size={20} className="rotate-90 text-white/80" />
 
             {/* Dual Currency Tag */}
-            <div className="ms-auto px-2 py-0.5 rounded bg-white/10 text-[9px] font-mono font-bold tracking-wider uppercase border border-white/20">
+            <div className="ms-auto px-2 py-0.5 rounded bg-white/15 text-[9px] font-mono font-bold tracking-wider uppercase border border-white/20">
               {currency === 'DUAL' ? 'IQD / RMB DUAL DIRECT' : `${currency} DIRECT`}
             </div>
           </div>
@@ -146,14 +123,14 @@ export function CoBrandedCardVisual({
           {/* Bottom Row: Cardholder Name, Expiry, Scheme Badge */}
           <div className="mt-4 flex items-end justify-between relative z-10">
             <div>
-              <div className="text-[7px] uppercase tracking-widest text-red-200">Cardholder</div>
+              <div className="text-[7px] uppercase tracking-widest text-brand-200">Cardholder</div>
               <div className="font-mono text-xs sm:text-sm font-bold tracking-wider text-white truncate max-w-[190px]">
                 {cardholderName}
               </div>
             </div>
 
             <div>
-              <div className="text-[7px] uppercase tracking-widest text-red-200">Expires</div>
+              <div className="text-[7px] uppercase tracking-widest text-brand-200">Expires</div>
               <div className="font-mono text-xs font-bold text-white">09/30</div>
             </div>
 
@@ -239,7 +216,7 @@ export function CoBrandedCardVisual({
 
       {/* Hidden SVG element for SVG export */}
       <svg id="co-branded-card-svg" className="hidden" width="400" height="252" viewBox="0 0 400 252" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="252" rx="16" fill="brand-800" />
+        <rect width="400" height="252" rx="16" fill="#cc0000" />
         <rect x="0" y="0" width="400" height="252" rx="16" fill="url(#grad)" />
         <text x="24" y="36" fill="#ffffff" fontSize="12" fontWeight="bold">IRAQI-CHINESE AGENCY</text>
         <text x="320" y="36" fill="#fde047" fontSize="12" fontWeight="bold">QI CARD</text>
@@ -248,8 +225,8 @@ export function CoBrandedCardVisual({
         <text x="330" y="215" fill="#ffffff" fontSize="16" fontWeight="bold">{scheme}</text>
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="brand-800" />
-            <stop offset="100%" stopColor="brand-800" />
+            <stop offset="0%" stopColor="#7c0c0c" />
+            <stop offset="100%" stopColor="#cc0000" />
           </linearGradient>
         </defs>
       </svg>

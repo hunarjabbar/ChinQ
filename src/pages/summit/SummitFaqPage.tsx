@@ -88,7 +88,7 @@ export function SummitFaqPage() {
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
+                  className="w-full p-6 text-start flex items-center justify-between gap-4 cursor-pointer"
                 >
                   <h3 className="text-sm sm:text-base font-black text-neutral-900 dark:text-neutral-100">
                     {faq.q[lang]}

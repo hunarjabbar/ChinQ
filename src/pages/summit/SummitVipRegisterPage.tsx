@@ -36,7 +36,7 @@ export function SummitVipRegisterPage() {
         {/* Header Hero */}
         <div className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-12 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-4 text-center">
           <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-brand-100 dark:bg-brand-950 text-brand-900 dark:text-brand-300 inline-block">
-            Diplomatic & Ministerial Protocol
+            {lang === 'ar' ? 'المراسم والبروتوكول الدبلوماسي' : lang === 'zh' ? '外交与部级礼宾' : 'Diplomatic & Ministerial Protocol'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
             {lang === 'ar' ? 'تسجيل الوفود الرسمية والدبلوماسية (VIP)' : lang === 'zh' ? '政要、使节与部委代表团官方注册通道' : lang === 'ckb' ? 'تۆماری شاندی فەرمی و دیپلۆماسی' : 'VIP & Diplomatic Delegation Accreditation'}
@@ -74,88 +74,88 @@ export function SummitVipRegisterPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="bg-white dark:bg-neutral-900 rounded-3xl p-8 sm:p-10 border border-neutral-200 dark:border-neutral-800 shadow-sm space-y-6">
-            <div className="space-y-4 text-xs">
+            <div className="space-y-4 text-xs text-start">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Dignitary Full Name</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Dignitary Full Name</label>
                   <input
                     type="text"
                     required
                     value={formData.officialName}
                     onChange={(e) => setFormData({ ...formData, officialName: e.target.value })}
                     placeholder="H.E. [Full Name]"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Official Title / Diplomatic Rank</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Official Title / Diplomatic Rank</label>
                   <input
                     type="text"
                     required
                     value={formData.diplomaticTitle}
                     onChange={(e) => setFormData({ ...formData, diplomaticTitle: e.target.value })}
                     placeholder="e.g. Minister of Industry / Ambassador Extraordinary"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-neutral-700 dark:text-neutral-300">Ministry / Sovereign Institution / Embassy</label>
+                <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Ministry / Sovereign Institution / Embassy</label>
                 <input
                   type="text"
                   required
                   value={formData.ministryOrEntity}
                   onChange={(e) => setFormData({ ...formData, ministryOrEntity: e.target.value })}
                   placeholder="e.g. Ministry of Industry and Minerals, Republic of Iraq"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Government / Institutional Email</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Government / Institutional Email</label>
                   <input
                     type="email"
                     required
                     value={formData.officialEmail}
                     onChange={(e) => setFormData({ ...formData, officialEmail: e.target.value })}
                     placeholder="protocol@ministry.gov.iq"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-neutral-700 dark:text-neutral-300">Protocol Officer Phone</label>
+                  <label className="font-bold text-neutral-700 dark:text-neutral-300 block mb-1">Protocol Officer Phone</label>
                   <input
                     type="tel"
                     required
                     value={formData.protocolPhone}
                     onChange={(e) => setFormData({ ...formData, protocolPhone: e.target.value })}
                     placeholder="+964 770 000 0000"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-brand-800 outline-hidden"
                   />
                 </div>
               </div>
 
               <div className="pt-2 space-y-2">
-                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer">
+                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer border border-transparent hover:border-brand-300/30 transition-all">
                   <input
                     type="checkbox"
                     checked={formData.requiresSecurityEscort}
                     onChange={(e) => setFormData({ ...formData, requiresSecurityEscort: e.target.checked })}
-                    className="rounded text-brand-800 focus:ring-brand-800"
+                    className="rounded text-brand-800 focus:ring-brand-800 w-4 h-4"
                   />
                   <span>Require Airport Motorcade & Sovereign Security Escort from ISU Airport.</span>
                 </label>
 
-                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer">
+                <label className="flex items-center gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 cursor-pointer border border-transparent hover:border-brand-300/30 transition-all">
                   <input
                     type="checkbox"
                     checked={formData.requiresBilingualAide}
                     onChange={(e) => setFormData({ ...formData, requiresBilingualAide: e.target.checked })}
-                    className="rounded text-brand-800 focus:ring-brand-800"
+                    className="rounded text-brand-800 focus:ring-brand-800 w-4 h-4"
                   />
                   <span>Assign Dedicated Institute Diplomatic Liaison Aide (Arabic/Chinese/English/Kurdish).</span>
                 </label>
@@ -164,9 +164,10 @@ export function SummitVipRegisterPage() {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-black text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
             >
-              Submit VIP Protocol Credentials →
+              <span>Submit VIP Protocol Credentials</span>
+              <ArrowRight size={15} className={isRtl ? 'rotate-180' : ''} />
             </button>
           </form>
         )}

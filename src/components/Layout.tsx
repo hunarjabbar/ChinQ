@@ -2,23 +2,23 @@ import { motion } from 'motion/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
+import { IntelligenceWireTicker } from './IntelligenceWireTicker';
 import { Locale } from '../types';
-import { EnterpriseSidebar } from './EnterpriseSidebar';
 import { SocialFooterShowcase, FloatingSocialDock } from './SocialLinks';
 import { NewsletterSignup } from './NewsletterSignup';
 import { useI18n } from '../hooks/useI18n';
 import { useSiteStore } from '../store/useSiteStore';
-import { AlertTriangle, HeartHandshake, GraduationCap, Briefcase } from 'lucide-react';
-import { SystemAnnouncementBanner } from './SystemAnnouncementBanner';
+import { HeartHandshake, GraduationCap, Briefcase } from 'lucide-react';
 import { IcaLogo } from './IcaLogo';
 import { LegalModal } from './LegalModal';
 import { FooterVisionMission } from './FooterVisionMission';
 import { TalentRegistrationModal, TalentRegistrationType } from './TalentRegistrationModal';
 import { InstitutePortalCTA } from './InstitutePortalCTA';
+import { NotificationToast } from './NotificationToast';
 
 export function Layout({ lang, children }: { lang: Locale; children: ReactNode }) {
   const { t } = useI18n(lang);
-  const { siteName, systemMaintenance, contactEmail, darkMode } = useSiteStore();
+  const { siteName, systemMaintenance, contactEmail } = useSiteStore();
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<'privacy' | 'terms'>('privacy');
   const [talentModalOpen, setTalentModalOpen] = useState(false);
@@ -39,53 +39,41 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
   }, [siteName]);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+    document.documentElement.classList.remove('dark');
+  }, []);
 
   return (
-    <div className="min-h-screen bg-paper-50 dark:bg-neutral-950 text-ink-900 dark:text-neutral-100 font-sans flex flex-col transition-colors duration-300 overflow-x-hidden">
-      <SystemAnnouncementBanner lang={lang} />
-      {systemMaintenance && (
-        <div className="w-full bg-brand-600 text-white text-center py-2 px-4 font-bold text-sm tracking-wide flex justify-center items-center gap-2">
-          <AlertTriangle size={16} /> 
-          System Maintenance: Some features may be temporarily read-only while enterprise upgrades are deployed across regional hubs.
-        </div>
-      )}
-
+    <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col transition-colors duration-300 overflow-x-hidden">
       <Header lang={lang} />
+      <IntelligenceWireTicker lang={lang} />
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center flex-grow">
         {children}
       </main>
-      <EnterpriseSidebar lang={lang} />
-      <footer id="legal" className="w-full bg-white dark:bg-neutral-900 border-t-2 border-ink-900 dark:border-neutral-700 mt-8 transition-colors duration-300">
+      <footer id="legal" className="w-full bg-slate-50/80 border-t border-slate-200 mt-8 transition-colors duration-300">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 text-xs text-neutral-700 dark:text-neutral-300 flex flex-col gap-8">
           <FooterVisionMission lang={lang} />
           {/* Top Section: Grid layout for columns */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-neutral-100 dark:border-neutral-800">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 border-b border-slate-200 dark:border-neutral-800">
             
             {/* Initiatives Column */}
             <div className="md:col-span-3 space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-brand-800 dark:text-neutral-100 border-b border-neutral-100 dark:border-neutral-800 pb-2">
+              <h4 className="text-xs font-black uppercase tracking-wider text-red-700 dark:text-neutral-100 border-b border-slate-200 dark:border-neutral-800 pb-2">
                 {t('footer.initiativesHeading')}
               </h4>
               <div className="flex flex-col gap-2.5">
-                <Link to={`/${lang}/settlement`} className="text-[brand-800] hover:underline text-xs font-bold uppercase">
+                <Link to={`/${lang}/settlement`} className="text-red-700 hover:underline text-xs font-bold uppercase">
                   {lang === 'ar' ? 'تسوية المدفوعات (IQD/RMB)' : lang === 'zh' ? '本币直接结算中心' : lang === 'ckb' ? 'پاکتاوی دراوەکان' : 'Payment Settlement'}
                 </Link>
-                <Link to={`/${lang}/settlement/card`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">
+                <Link to={`/${lang}/settlement/card`} className="text-slate-600 hover:text-red-700 text-xs font-bold uppercase">
                   {lang === 'ar' ? 'بطاقة كي وICA المشتركة' : lang === 'zh' ? 'Qi & ICA 联名商务卡' : lang === 'ckb' ? 'کارتی هاوبەشی کی' : 'Qi & ICA Co-Branded Card'}
                 </Link>
-                <Link to={`/${lang}/summit`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.summit')}</Link>
-                <Link to={`/${lang}/newsroom`} className="text-brand-800 dark:text-brand-400 hover:underline text-xs font-bold uppercase">
+                <Link to={`/${lang}/summit`} className="text-slate-600 hover:text-red-700 text-xs font-bold uppercase">{t('nav.summit')}</Link>
+                <Link to={`/${lang}/newsroom`} className="text-red-700 dark:text-red-400 hover:underline text-xs font-bold uppercase">
                   {lang === 'ar' ? 'غرفة الأخبار والمركز الإعلامي' : lang === 'zh' ? '新闻中心与媒体中心' : lang === 'ckb' ? 'ژووری هەواڵ و ناوەندی میدیا' : 'Newsroom & Media Hub'}
                 </Link>
-                <Link to={`/${lang}/chinese-center`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.chineseCenter')}</Link>
-                <Link to={`/${lang}/visa-centre`} className="text-neutral-500 hover:text-brand-800 text-xs font-bold uppercase">{t('nav.visaCentre')}</Link>
-                <Link to={`/${lang}/consultancy`} className="text-[brand-800] hover:underline text-xs font-bold uppercase">
+                <Link to={`/${lang}/chinese-center`} className="text-slate-600 hover:text-red-700 text-xs font-bold uppercase">{t('nav.chineseCenter')}</Link>
+                <Link to={`/${lang}/visa-centre`} className="text-slate-600 hover:text-red-700 text-xs font-bold uppercase">{t('nav.visaCentre')}</Link>
+                <Link to={`/${lang}/consultancy`} className="text-red-700 hover:underline text-xs font-bold uppercase">
                   {lang === 'ar' ? 'الاستشارات المالية والقانونية' : lang === 'zh' ? '战略财务与法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری دارایی و یاسایی' : 'Strategic Financial & Legal Consultancy'}
                 </Link>
               </div>
@@ -382,6 +370,9 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
         initialType={talentType}
         lang={lang}
       />
+
+      {/* Centralized Notification Floating Toast */}
+      <NotificationToast currentLocale={lang} />
     </div>
   );
 }
