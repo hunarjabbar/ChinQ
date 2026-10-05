@@ -17,6 +17,7 @@ import {
 import { useAuthStore } from '../../store/useAuthStore';
 import { getPortalTranslation } from '../../locales/portalTranslations';
 import { PortalLocale } from '../../types/portals';
+import { BottomNav } from '../mobile/BottomNav';
 
 export function LivePortalLayout() {
   const location = useLocation();
@@ -44,24 +45,24 @@ export function LivePortalLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col pb-16 md:pb-0">
       {/* Header */}
-      <header className="bg-neutral-900 border-b border-neutral-800 px-4 h-14 flex items-center justify-between sticky top-0 z-50">
+      <header className="bg-red-600 px-4 h-14 sm:h-16 flex items-center justify-between sticky top-0 z-50 shadow-lg border-none">
         <div className="flex items-center gap-3">
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors">
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <Link to={`/${currentLang}/live`} className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-[var(--color-brand-800)] rounded flex items-center justify-center font-black text-xs">LV</div>
-            <span className="font-bold text-sm tracking-tight hidden sm:block uppercase">Live Portal Broadcast Desk</span>
+            <div className="w-7 h-7 bg-white text-red-600 rounded flex items-center justify-center font-black text-xs shadow-md">LV</div>
+            <span className="font-black text-xs tracking-tight hidden sm:block uppercase text-white">Live Portal Broadcast Desk</span>
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <Link to={`/${currentLang}/live`} className="text-xs text-neutral-400 hover:text-white flex items-center gap-1">
+          <Link to={`/${currentLang}/live`} className="text-[10px] font-black uppercase text-white/70 hover:text-white flex items-center gap-1">
             <span>Public View</span>
             <ExternalLink size={12} />
           </Link>
-          <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-[10px] font-bold">
+          <div className="w-8 h-8 rounded-full bg-white/20 border border-white/20 flex items-center justify-center text-[10px] font-bold">
             {user?.name?.[0] || 'A'}
           </div>
         </div>
@@ -83,7 +84,7 @@ export function LivePortalLayout() {
                 className={`
                   flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all
                   ${isCurrent(item.href, item.exact) 
-                    ? 'bg-[var(--color-brand-800)] text-white shadow-lg shadow-red-900/10' 
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20' 
                     : 'text-neutral-400 hover:bg-neutral-900 hover:text-white'}
                 `}
               >
@@ -99,6 +100,7 @@ export function LivePortalLayout() {
           <Outlet />
         </main>
       </div>
+      <BottomNav lang={currentLang as any} />
     </div>
   );
 }

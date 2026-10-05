@@ -17,7 +17,7 @@ import {
   Download,
   FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import { Button } from '../../components/Button';
 

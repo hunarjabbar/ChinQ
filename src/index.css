@@ -9,18 +9,18 @@
   --color-gold-text: #b45309;
 
   /* Sovereign Brand Red Palette */
-  --color-brand-950: #3b0505;
-  --color-brand-900: #5c0808;
-  --color-brand-850: #7c0c0c;
+  --color-brand-950: #7f0a1e;
+  --color-brand-900: #991b1b;
+  --color-brand-850: #b91c1c;
   --color-brand-800: #cc0000;
-  --color-brand-700: #b80000;
-  --color-brand-600: #dc2626;
-  --color-brand-500: #ef4444;
-  --color-brand-400: #f87171;
-  --color-brand-300: #fca5a5;
-  --color-brand-200: #fecaca;
-  --color-brand-100: #fee2e2;
-  --color-brand-50: #fef2f2;
+  --color-brand-700: #dc2626;
+  --color-brand-600: #ef4444;
+  --color-brand-500: #f87171;
+  --color-brand-400: #fca5a5;
+  --color-brand-300: #fecaca;
+  --color-brand-200: #fee2e2;
+  --color-brand-100: #fef2f2;
+  --color-brand-50: #ffffff;
 
   /* Ink Deep Dark Palette */
   --color-ink-950: #0a0a0c;
@@ -195,11 +195,11 @@
     /* Unified Red-White-Black Palette Tokens (Part 10) */
     --color-white: #FFFFFF;
     --color-black: #000000;
-    --color-red: #C8102E;
-    --color-red-hover: #A00D26;
-    --color-red-active: #7F0A1E;
+    --color-red: #DC2626;
+    --color-red-hover: #B91C1C;
+    --color-red-active: #991B1B;
     --color-red-soft: #FEE2E2;
-    --color-red-text: #991B1B;
+    --color-red-text: #DC2626;
     --color-surface: #F9FAFB;
     --color-border: #E5E7EB;
     --color-text-muted: #4B5563;
@@ -239,9 +239,9 @@
 }
 
 @keyframes pulseRing {
-  0% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.4); }
-  70% { box-shadow: 0 0 0 12px rgba(200, 16, 46, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
 }
 
 .animate-soft-vibrate {
@@ -277,7 +277,7 @@
 
 .ica-card-interactive:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(200, 16, 46, 0.12);
+  box-shadow: 0 12px 32px rgba(220, 38, 38, 0.12);
   border-color: var(--color-red);
 }
 
@@ -303,7 +303,7 @@
 .ica-btn-primary:hover {
   background-color: var(--color-red-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(200, 16, 46, 0.15);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15);
 }
 .ica-btn-primary:active {
   background-color: var(--color-red-active);
@@ -344,7 +344,7 @@
 
 /* Payment Settlement Facilitation Portal Styles */
 .pay-hero-gradient {
-  background: linear-gradient(135deg, var(--color-brand-900) 0%, var(--color-brand-800) 50%, #7c0c0c 100%);
+  background: linear-gradient(135deg, var(--color-brand-800) 0%, var(--color-brand-700) 100%);
 }
 
 .pay-btn-primary {
@@ -359,7 +359,7 @@
 .pay-btn-primary:hover {
   background-color: var(--color-brand-700);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.25);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.25);
 }
 
 .pay-btn-secondary {
@@ -398,9 +398,9 @@
   letter-spacing: 0.05em;
 }
 .dark .pay-badge {
-  background-color: rgba(59, 5, 5, 0.5);
+  background-color: rgba(220, 38, 38, 0.1);
   color: var(--color-brand-300);
-  border-color: rgba(184, 0, 0, 0.3);
+  border-color: rgba(220, 38, 38, 0.3);
 }
 
 .pay-badge-success {

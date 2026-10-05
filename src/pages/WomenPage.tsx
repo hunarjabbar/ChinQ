@@ -7,7 +7,7 @@ import {
   ExternalLink, ChevronRight, X, Send, CheckCircle2, RefreshCw, FileText,
   ShieldCheck, ArrowLeft, Building2
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function WomenPage() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

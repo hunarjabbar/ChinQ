@@ -55,7 +55,7 @@ export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaAdminPr
 
   if (!isAuthorized) {
     return (
-      <div className="p-8 rounded-2xl bg-neutral-900 border border-red-900/50 text-center space-y-4">
+      <div className="p-8 rounded-2xl bg-neutral-900 border border-brand-900/50 text-center space-y-4">
         <AlertTriangle size={36} className="text-red-500 mx-auto" />
         <h3 className="text-lg font-black uppercase text-white">403 Forbidden — Scope Restricted</h3>
         <p className="text-xs text-neutral-400 max-w-md mx-auto">
@@ -158,7 +158,7 @@ export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaAdminPr
                     </Link>
                     <button
                       onClick={() => triggerRevalidation(`/initiatives/${init.slug}`)}
-                      className="px-2.5 py-1 rounded bg-red-950 border border-red-800 text-red-300 hover:bg-red-900"
+                      className="px-2.5 py-1 rounded bg-brand-950 border border-red-800 text-red-300 hover:bg-brand-900"
                     >
                       Revalidate
                     </button>

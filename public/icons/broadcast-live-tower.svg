@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <!-- Red Concentric Radio Waves -->
+  <!-- Inner Wave -->
+  <path d="M 184 275 A 95 95 0 1 1 328 275" stroke="#E60000" stroke-width="28" stroke-linecap="round"/>
+  <!-- Middle Wave -->
+  <path d="M 138 322 A 152 152 0 1 1 374 322" stroke="#E60000" stroke-width="28" stroke-linecap="round"/>
+  <!-- Outer Wave -->
+  <path d="M 92 368 A 208 208 0 1 1 420 368" stroke="#E60000" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- Black Transmission Tower -->
+  <!-- Top Node Circle -->
+  <circle cx="256" cy="236" r="22" stroke="#000000" stroke-width="26" fill="#FFFFFF"/>
+  <!-- Outer Legs -->
+  <path d="M 238 252 L 168 432 L 344 432 L 274 252" stroke="#000000" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top Horizontal Crossbar -->
+  <line x1="225" y1="292" x2="287" y2="292" stroke="#000000" stroke-width="24" stroke-linecap="round"/>
+  <!-- Middle Horizontal Crossbar -->
+  <line x1="207" y1="344" x2="305" y2="344" stroke="#000000" stroke-width="24" stroke-linecap="round"/>
+  <!-- X Diagonal Bracing -->
+  <line x1="208" y1="346" x2="330" y2="430" stroke="#000000" stroke-width="22" stroke-linecap="round"/>
+  <line x1="304" y1="346" x2="182" y2="430" stroke="#000000" stroke-width="22" stroke-linecap="round"/>
+</svg>

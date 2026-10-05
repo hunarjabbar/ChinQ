@@ -177,7 +177,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
     dark:
       'bg-[var(--surface-dark)] hover:bg-[var(--surface-dark-hover)] active:bg-[var(--surface-dark-active)] text-[var(--text-on-dark)] border border-[var(--surface-dark)] shadow-sm hover:shadow-[var(--shadow-chocolate-glow)] focus-visible:ring-3 focus-visible:ring-[rgba(79,9,5,0.45)]',
     destructive:
-      'bg-[var(--color-error)] hover:bg-[#700a08] active:bg-[#580806] text-[var(--text-on-accent)] border border-[var(--color-error)] shadow-sm focus-visible:ring-3 focus-visible:ring-[rgba(139,15,10,0.3)]',
+      'bg-[var(--color-error)] hover:bg-brand-800 active:bg-brand-900 text-[var(--text-on-accent)] border border-[var(--color-error)] shadow-sm focus-visible:ring-3 focus-visible:ring-[rgba(200,21,14,0.22)]',
     'icon-only':
       'w-11 h-11 sm:w-10 sm:h-10 p-0 flex items-center justify-center bg-transparent hover:bg-[var(--accent-soft)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] border border-[var(--color-border)] hover:border-[var(--accent-primary)] rounded-xl focus-visible:ring-3 focus-visible:ring-[rgba(200,21,14,0.22)]',
   };

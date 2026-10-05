@@ -64,7 +64,7 @@ export function SummitServiceDetailPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {service.capabilities[lang].map((cap, idx) => (
+            {(service.capabilities?.[lang] || []).map((cap, idx) => (
               <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-start gap-3">
                 <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 leading-snug">{cap}</span>
@@ -80,7 +80,7 @@ export function SummitServiceDetailPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {service.deliverables[lang].map((del, idx) => (
+            {(service.deliverables?.[lang] || []).map((del, idx) => (
               <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-start gap-3">
                 <FileText size={18} className="text-brand-800 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm font-medium text-neutral-800 dark:text-neutral-200 leading-snug">{del}</span>

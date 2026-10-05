@@ -7,7 +7,7 @@ import {
   Search, Globe2, Sparkles, Filter, Info, X, Send, CheckCircle2,
   BookOpen, Building2, Landmark, Utensils, Mountain
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function TourismPage() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

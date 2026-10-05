@@ -36,10 +36,10 @@ export function InstituteHub() {
       </nav>
 
       {/* Institute Hero Banner */}
-      <div className="bg-gradient-to-br from-brand-950 via-brand-900 to-ink-900 text-white rounded-3xl p-8 sm:p-12 mb-8 shadow-2xl relative overflow-hidden border border-brand-800/40">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-700/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="bg-red-600 text-white rounded-3xl p-8 sm:p-12 mb-8 shadow-2xl relative overflow-hidden border border-red-500/50">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-800/50 border border-brand-600/40 text-[11px] font-black uppercase tracking-widest text-rose-200 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-[11px] font-black uppercase tracking-widest text-white backdrop-blur-md">
             <GraduationCap size={15} />
             <span>{lang === 'ar' ? 'الذراع الفكري والأكاديمي للوكالة' : lang === 'zh' ? 'ICA 官方高级智库与学术分支' : lang === 'ckb' ? 'باڵی هزری و ئەکادیمی' : 'Sovereign Academic Think Tank'}</span>
           </div>

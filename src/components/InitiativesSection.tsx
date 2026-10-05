@@ -1,26 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Calendar, Compass } from 'lucide-react';
+import { ArrowRight, Sparkles, Compass } from 'lucide-react';
 import { Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Card } from './Card';
-
-interface Initiative {
-  id: string;
-  eyebrow: string;
-  headline: string;
-  description: string;
-  cta: string;
-  path: string;
-  tags?: string[];
-  secondaryLinks?: { label: string; path: string }[];
-}
+import { InitiativesCard, InitiativeItem } from './InitiativesCard';
 
 export function InitiativesSection({ lang }: { lang: Locale }) {
   const { t } = useI18n(lang);
   const isRtl = lang === 'ar' || lang === 'ckb';
 
-  const initiatives: Initiative[] = [
+  const initiatives: InitiativeItem[] = [
     {
       id: 'settlement',
       eyebrow: t('home.initiatives.settlement.eyebrow'),
@@ -132,10 +122,13 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
   }, []);
 
   return (
-    <section id="initiatives" className="py-16 sm:py-20 w-full bg-white">
+    <section id="initiatives" className="relative py-16 sm:py-24 w-full bg-white dark:bg-neutral-950 overflow-hidden">
+      {/* Soft Ambient Under-Glow backdrop */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-96 bg-red-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16 space-y-4">
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-800 dark:text-brand-400">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600 dark:text-red-400">
             {lang === 'ar' ? 'المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE)' : lang === 'zh' ? '中国战略与经济研究所 (CISE) 主管运营' : lang === 'ckb' ? 'پەیمانگای چینی (CISE)' : 'Chinese Institute for Strategic & Economic Studies (CISE)'}
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-ink-950 dark:text-white uppercase tracking-tighter">{t('home.initiatives.heading')}</h2>
@@ -192,52 +185,15 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
           </div>
         </Card>
 
-        {/* Tier 2: Grid of Remaining Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {initiatives.map((item) => (
-            <div
+        {/* Tier 2: 2x2 Grid of Upgraded Glassmorphism Initiatives Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {initiatives.map((item, index) => (
+            <InitiativesCard
               key={item.id}
-              className="initiative-card flex flex-col justify-between group"
-            >
-              <div className="space-y-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-800 dark:text-brand-400 mb-1">
-                  {item.eyebrow}
-                </div>
-                <h3 className="text-xl font-black text-ink-950 dark:text-white uppercase leading-tight group-hover:text-brand-800 transition-colors tracking-tight">
-                  {item.headline}
-                </h3>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed line-clamp-3 font-serif italic">
-                  {item.description}
-                </p>
-
-                {item.tags && item.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {item.tags.map((tag, idx) => (
-                      <span key={idx} className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
-                        {tag}{idx < item.tags!.length - 1 ? ' •' : ''}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-4 pt-6 mt-6 border-t border-neutral-100 dark:border-neutral-800">
-                <Link to={item.path} className="inline-flex items-center text-[10px] font-black uppercase tracking-widest transition-all text-brand-800 hover:text-brand-900 gap-2">
-                  <span>{item.cta}</span>
-                  <ArrowRight className={`transition-transform group-hover:translate-x-1 ${isRtl ? 'rotate-180' : ''}`} size={12} />
-                </Link>
-
-                {item.secondaryLinks && item.secondaryLinks.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
-                    {item.secondaryLinks.map((link, idx) => (
-                      <Link key={idx} to={link.path} className="hover:text-brand-800 transition-colors underline decoration-neutral-200 underline-offset-4">
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+              initiative={item}
+              index={index}
+              isRtl={isRtl}
+            />
           ))}
         </div>
       </div>

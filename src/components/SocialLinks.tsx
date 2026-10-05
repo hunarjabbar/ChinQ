@@ -17,7 +17,7 @@ import {
   Radio,
   Send
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Locale } from '../types';
 import { useSiteStore } from '../store/useSiteStore';
 import { BrandIcons } from './common/BrandIcons';
@@ -723,7 +723,7 @@ export function FloatingSocialDock({ lang }: { lang: Locale }) {
     <>
       <div 
         id="floating-social-dock" 
-        className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2 print:hidden"
+        className="fixed bottom-20 xl:bottom-6 right-6 z-40 flex flex-col items-end gap-2 print:hidden"
       >
         <AnimatePresence>
           {isOpen && (

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+  <!-- Camera body -->
+  <path d="M 3 6 C 3 4.895 3.895 4 5 4 L 14 4 C 15.105 4 16 4.895 16 6 L 16 18 C 16 19.105 15.105 20 14 20 L 5 20 C 3.895 20 3 19.105 3 18 Z" stroke="#DC2626" stroke-width="1.8" fill="#FEF2F2" />
+  <!-- Lens cone -->
+  <path d="M 16 9.5 L 21 7 V 17 L 16 14.5" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Aperture ring -->
+  <circle cx="8" cy="12" r="2.5" stroke="#DC2626" stroke-width="1.8" fill="#FFFFFF" />
+  <circle cx="12" cy="12" r="0.8" fill="#DC2626" />
+  <!-- Top recording spool posts -->
+  <line x1="6" y1="4" x2="6" y2="2.5" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" />
+  <line x1="13" y1="4" x2="13" y2="2.5" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" />
+</svg>

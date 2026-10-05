@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../lib/api';
 import { IcaLogo } from './IcaLogo';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { BottomNav } from './mobile/BottomNav';
 
 export function AdminLayout({ children, userRole }: { children: React.ReactNode, userRole?: string }) {
   const { lang = 'en' } = useParams<{ lang: Locale }>();
@@ -426,40 +427,42 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
       )}
 
       {/* Main Workspace */}
-      <main className="flex-1 flex flex-col min-h-screen overflow-hidden bg-paper-50">
-        <header className="h-20 bg-white border-b border-neutral-100 shrink-0 shadow-sm z-10 flex justify-center">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between h-full">
+      <main className="flex-1 flex flex-col min-h-screen overflow-hidden bg-paper-50 pb-16 sm:pb-20 md:pb-0">
+        <header className="h-16 sm:h-20 bg-red-600 md:bg-white border-none md:border-b md:border-neutral-100 shrink-0 shadow-lg md:shadow-sm z-10 flex justify-center transition-colors">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between h-full text-white md:text-brand-900">
             <div className="flex items-center gap-3 sm:gap-4">
               <button 
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden p-2 text-brand-900 hover:bg-neutral-100 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
                 aria-label="Open Secretariat Navigation"
                 title="ICA Secretariat Navigation"
               >
                 <Menu size={22} />
               </button>
-              <div className="w-1 h-6 bg-brand-800 rounded-full hidden sm:block"></div>
+              <div className="w-1 h-6 bg-white/30 md:bg-brand-800 rounded-full hidden sm:block"></div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-                <IcaLogo size={24} variant="mark" className="hidden sm:block opacity-80" />
-                <h1 className="text-xs font-black text-brand-900 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+                <IcaLogo size={24} variant="mark" className="hidden sm:block opacity-90 md:opacity-80" theme="white" />
+                <h1 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white md:text-brand-900">
                   {t('authorizedEnvironment')}
                 </h1>
-                <span className="text-xs font-medium font-bold text-brand-700 uppercase bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">{t('secretariat')}</span>
+                <span className="text-[9px] sm:text-xs font-black text-white md:text-brand-700 uppercase bg-white/20 md:bg-brand-50 px-1.5 py-0.5 rounded sm:inline hidden">{t('secretariat')}</span>
               </div>
             </div>
           <div className="flex items-center gap-3 sm:gap-4 relative">
-            <LanguageSwitcher lang={lang as Locale} />
+            <div className="hidden sm:block">
+              <LanguageSwitcher lang={lang as Locale} />
+            </div>
 
             <div className="relative">
               <button 
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="text-neutral-400 hover:text-brand-900 transition-all relative p-2.5 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-100 flex items-center justify-center cursor-pointer"
+                className="text-white md:text-neutral-400 hover:text-white md:hover:text-brand-900 transition-all relative p-2.5 rounded-xl hover:bg-white/10 md:hover:bg-neutral-50 border border-transparent flex items-center justify-center cursor-pointer"
                 aria-label="Toggle notifications"
               >
                 <Bell className="w-5 h-5" />
                 {notifications.length > 0 && (
-                  <span className="absolute top-2 end-2 w-2.5 h-2.5 bg-brand-600 rounded-full border-2 border-white"></span>
+                  <span className="absolute top-2 end-2 w-2.5 h-2.5 bg-white md:bg-brand-600 rounded-full border-2 border-red-600 md:border-white"></span>
                 )}
               </button>
 
@@ -540,6 +543,7 @@ export function AdminLayout({ children, userRole }: { children: React.ReactNode,
           </ErrorBoundary>
         </div>
       </main>
+      <BottomNav lang={lang} />
     </div>
   );
 }

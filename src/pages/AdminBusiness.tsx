@@ -5,7 +5,7 @@ import {
   DollarSign, MapPin, Tag, RefreshCw, CheckCircle2,
   ExternalLink, Sparkles, Image as ImageIcon
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface BusinessOpportunity {
   id: string;

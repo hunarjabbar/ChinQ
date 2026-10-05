@@ -4593,6 +4593,39 @@ async function startServer() {
     if (!fs.existsSync(distPath) && fs.existsSync(path.join(process.cwd(), "build"))) {
       distPath = path.join(process.cwd(), "build");
     }
+
+    // Resilient chunk fallback: resolve stale chunk hash requests to the current active chunk
+    app.use("/assets", (req, res, next) => {
+      const requestedFile = req.path.replace(/^\//, '');
+      const fullPath = path.join(distPath, "assets", requestedFile);
+
+      if (fs.existsSync(fullPath)) {
+        return next();
+      }
+
+      // Check if it's a hashed JS or CSS module (e.g. CulturalExchangeLanding-Cl-hmI6h.js)
+      const match = requestedFile.match(/^([a-zA-Z0-9_\-]+?)-[a-zA-Z0-9_\-]{4,16}\.(js|css)$/);
+      if (match) {
+        const prefix = match[1];
+        const ext = match[2];
+        const assetsDir = path.join(distPath, "assets");
+        if (fs.existsSync(assetsDir)) {
+          try {
+            const files = fs.readdirSync(assetsDir);
+            const found = files.find(f => f.startsWith(`${prefix}-`) && f.endsWith(`.${ext}`));
+            if (found) {
+              console.log(`[ChunkFallback] Redirecting stale chunk request ${requestedFile} -> ${found}`);
+              res.setHeader("Cache-Control", "no-cache");
+              return res.redirect(302, `/assets/${found}`);
+            }
+          } catch (e) {
+            console.warn("[ChunkFallback] Error reading assets directory:", e);
+          }
+        }
+      }
+
+      next();
+    });
     
     app.use(express.static(distPath, {
       setHeaders: (res, path) => {

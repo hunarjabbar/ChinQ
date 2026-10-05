@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Globe2, TrendingUp, Ship, Train, Construction, CheckCircle2 } from 'lucide-react';

@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Locale } from '../types';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Building2, 
   Send, 

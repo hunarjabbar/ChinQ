@@ -6,7 +6,7 @@ import {
   GraduationCap, Building2, Calendar, Clock, Search,
   ExternalLink, ArrowLeft, ArrowRight, BookOpen, X, Share2, CheckCircle2
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function CulturalExchangePrograms() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

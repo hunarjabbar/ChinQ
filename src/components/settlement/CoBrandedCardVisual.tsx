@@ -67,7 +67,7 @@ export function CoBrandedCardVisual({
         
         {/* FRONT FACE */}
         <div 
-          className={`absolute inset-0 w-full h-full rounded-2xl p-6 text-white overflow-hidden shadow-xl border border-brand-700/60 backface-hidden transition-all duration-700 bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950 ${
+          className={`absolute inset-0 w-full h-full rounded-2xl p-6 text-white overflow-hidden shadow-xl border border-red-500/60 backface-hidden transition-all duration-700 bg-gradient-to-br from-red-600 via-red-700 to-red-600 ${
             isFlipped ? 'rotate-y-180 opacity-0 pointer-events-none' : 'rotate-y-0 opacity-100'
           }`}
         >

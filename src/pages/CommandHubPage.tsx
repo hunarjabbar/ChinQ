@@ -163,7 +163,7 @@ export function CommandHubPage() {
           </div>
 
           {loginError && (
-            <div className="bg-red-950/80 border border-red-800 text-red-200 text-xs p-3 rounded-xl flex items-center gap-2">
+            <div className="bg-red-50 border border-red-200 text-red-600 text-xs p-3 rounded-xl flex items-center gap-2">
               <AlertTriangle size={16} />
               <span>{loginError}</span>
             </div>
@@ -373,7 +373,7 @@ export function CommandHubPage() {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-xl text-red-400 hover:bg-red-950/50 hover:text-red-300"
+                  className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-xl text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut size={14} />
                   <span>Sign Out</span>
@@ -405,8 +405,8 @@ export function CommandHubPage() {
             {/* ICA Administration (4 Portals CRUD) */}
             <div className="space-y-1">
               <div className="flex items-center justify-between px-3">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-brand-800)]">ICA Administration</span>
-                <span className="text-[9px] bg-red-950/80 text-red-400 border border-red-800/40 px-1.5 py-0.5 rounded font-mono font-bold">PORTALS</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-red-500">ICA Administration</span>
+                <span className="text-[9px] bg-red-50 text-red-600 border border-red-200 px-1.5 py-0.5 rounded font-mono font-bold">PORTALS</span>
               </div>
               <Link
                 to="/hub/ica/public"

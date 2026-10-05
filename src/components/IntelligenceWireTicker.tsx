@@ -99,13 +99,13 @@ export function IntelligenceWireTicker({ lang, className = '' }: Props) {
       id: item.id,
       slug: item.slug,
       time: item.time,
-      titleText: item.title[lang] || item.title.en
+      titleText: (item.title as any)[lang] || item.title.en
     }));
   }, [articles, lang]);
 
   return (
     <div 
-      className={`w-full bg-ink-950 text-white border-b border-brand-800/40 flex overflow-hidden h-11 relative items-center select-none shadow-sm ${className}`}
+      className={`w-full bg-red-700 text-white border-b border-red-500/30 flex overflow-hidden h-11 relative items-center select-none shadow-sm ${className}`}
       dir={isRtl ? 'rtl' : 'ltr'}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -114,13 +114,13 @@ export function IntelligenceWireTicker({ lang, className = '' }: Props) {
       role="region"
       aria-label="Intelligence Wire Live Feed"
     >
-      {/* Fixed Left Ticker Label Pill */}
-      <div className="flex-shrink-0 font-black text-white px-3 sm:px-5 border-e border-white/10 uppercase tracking-[0.18em] text-[10px] sm:text-[11px] z-20 bg-brand-800 h-full flex items-center gap-2 shadow-md">
-        <Activity size={14} className="text-amber-300 animate-pulse shrink-0" />
+      {/* Fixed Left Ticker Label Pill - INTEGRATED RED */}
+      <div className="flex-shrink-0 font-black text-white px-3 sm:px-5 border-e border-red-500/30 uppercase tracking-[0.18em] text-[10px] sm:text-[11px] z-20 bg-red-800 h-full flex items-center gap-2">
+        <Activity size={14} className="text-white animate-pulse shrink-0" />
         <span className="whitespace-nowrap font-black">
           {isAr ? 'سلك المعلومات السيادي' : isZh ? '双边主权快讯' : isCkb ? 'تێلیگرافی زانیاری' : 'Intelligence Wire'}
         </span>
-        <span className="hidden sm:inline-flex w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+        <span className="hidden sm:inline-flex w-2 h-2 rounded-full bg-white animate-ping"></span>
       </div>
 
       {/* Scrolling Stream */}
@@ -141,38 +141,38 @@ export function IntelligenceWireTicker({ lang, className = '' }: Props) {
               key={`${item.id}-${idx}`}
               type="button"
               onClick={() => navigate(`/${lang}/newsroom/${item.slug}`)}
-              className="flex items-center gap-2 text-xs font-medium cursor-pointer group hover:text-amber-300 transition-colors py-1 focus:outline-none focus:ring-1 focus:ring-amber-400 px-2 rounded"
+              className="flex items-center gap-2 text-xs font-bold cursor-pointer group hover:text-white transition-colors py-1 focus:outline-none focus:ring-1 focus:ring-red-300 px-2 rounded"
               title={`Read: ${item.titleText}`}
             >
-              <span className="text-[10px] font-mono text-brand-300 bg-white/10 px-1.5 py-0.5 rounded font-bold">
+              <span className="text-[10px] font-mono text-red-100 bg-red-800/50 px-1.5 py-0.5 rounded font-black">
                 {item.time}
               </span>
-              <span className="text-[11px] font-bold text-white/95 group-hover:text-amber-200 transition-colors">
+              <span className="text-[11px] font-black text-white group-hover:text-red-100 transition-colors uppercase">
                 {item.titleText}
               </span>
-              <span className="text-white/30 text-xs">/</span>
+              <span className="text-red-400 text-xs">/</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Right Pause / Play Indicator */}
+      {/* Right Pause / Play Indicator - INTEGRATED RED */}
       <button
         type="button"
         onClick={() => setIsPaused(!isPaused)}
-        className="hidden md:flex items-center gap-1.5 px-3 h-full border-s border-white/10 text-[10px] font-mono text-neutral-400 hover:text-white bg-ink-950 z-20 shrink-0 transition-colors cursor-pointer"
+        className="hidden md:flex items-center gap-1.5 px-3 h-full border-s border-red-500/30 text-[10px] font-mono text-red-200 hover:text-white bg-red-800/20 z-20 shrink-0 transition-colors cursor-pointer"
         title={isPaused ? 'Resume scrolling' : 'Pause ticker'}
         aria-label={isPaused ? 'Resume ticker scrolling' : 'Pause ticker scrolling'}
       >
         {isPaused ? (
           <>
-            <Play size={10} className="text-amber-400" />
-            <span>PAUSED</span>
+            <Play size={10} className="text-white" />
+            <span className="font-black">PAUSED</span>
           </>
         ) : (
           <>
-            <Pause size={10} className="text-neutral-500" />
-            <span>LIVE</span>
+            <Pause size={10} className="text-red-300" />
+            <span className="font-black">LIVE</span>
           </>
         )}
       </button>

@@ -7,7 +7,7 @@ import {
   GraduationCap, Plus, Search, Edit2, Trash2, Star,
   Calendar, Building2, Layers, RefreshCw, X, CheckCircle2, AlertCircle
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminCulturalExchange() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

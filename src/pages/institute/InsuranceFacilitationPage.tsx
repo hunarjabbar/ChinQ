@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Locale } from '../../types';
 import { useI18n } from '../../hooks/useI18n';
 import { cn } from '../../lib/utils';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 

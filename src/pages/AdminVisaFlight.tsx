@@ -10,7 +10,7 @@ import {
   Users, Download, Check, Phone, Mail, User, Compass, ChevronRight, BarChart3,
   Calendar, Award, MessageSquare, AlertTriangle, ArrowRight
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type AdminTab = 'SERVICES' | 'INQUIRIES' | 'ANALYTICS';
 type ViewMode = 'TABLE' | 'GRID';

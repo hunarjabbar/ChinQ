@@ -6,7 +6,7 @@ import {
   BookOpen, Search, Filter, Star, Sparkles, Download, 
   ExternalLink, X, Building2, Globe2, Layers, Bookmark, CheckCircle2, ChevronRight 
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function BooksPage() {
   const { lang = 'en' } = useParams<{ lang: string }>();

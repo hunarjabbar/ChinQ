@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Smartphone, Download, Copy, Check, QrCode, X, ExternalLink, ShieldCheck, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Locale } from '../types';
 
 interface AppQrModalProps {

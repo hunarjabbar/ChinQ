@@ -66,33 +66,6 @@ export function HomeSettlementSpotlight({ lang }: Props) {
           </div>
         </div>
 
-        {/* 4 Pillars Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="pay-card p-4 rounded-2xl border border-brand-200/60 dark:border-neutral-800 bg-brand-50/40 dark:bg-neutral-800/40 hover:border-brand-400 transition-all">
-            <div className="text-brand-800 dark:text-brand-400 font-black text-lg sm:text-xl font-mono">0.00%</div>
-            <div className="text-xs font-bold text-neutral-800 dark:text-neutral-100 mt-1">Zero Third-Currency Drag</div>
-            <div className="text-[11px] text-neutral-500 dark:text-neutral-400">No USD double conversion spreads</div>
-          </div>
-
-          <div className="pay-card p-4 rounded-2xl border border-brand-200/60 dark:border-neutral-800 bg-brand-50/40 dark:bg-neutral-800/40 hover:border-brand-400 transition-all">
-            <div className="text-brand-800 dark:text-brand-400 font-black text-lg sm:text-xl font-mono">24 – 48 Hours</div>
-            <div className="text-xs font-bold text-neutral-800 dark:text-neutral-100 mt-1">Direct Rapid Clearing</div>
-            <div className="text-[11px] text-neutral-500 dark:text-neutral-400">Bypasses intermediary wire holds</div>
-          </div>
-
-          <div className="pay-card p-4 rounded-2xl border border-brand-200/60 dark:border-neutral-800 bg-brand-50/40 dark:bg-neutral-800/40 hover:border-brand-400 transition-all">
-            <div className="text-brand-800 dark:text-brand-400 font-black text-lg sm:text-xl font-mono">CBI & PBoC</div>
-            <div className="text-xs font-bold text-neutral-800 dark:text-neutral-100 mt-1">Sovereign Regulatory Rail</div>
-            <div className="text-[11px] text-neutral-500 dark:text-neutral-400">CIPS & Trade Bank of Iraq channels</div>
-          </div>
-
-          <div className="pay-card p-4 rounded-2xl border border-brand-200/60 dark:border-neutral-800 bg-brand-50/40 dark:bg-neutral-800/40 hover:border-brand-400 transition-all">
-            <div className="text-brand-800 dark:text-brand-400 font-black text-lg sm:text-xl font-mono">Qi & ICA Card</div>
-            <div className="text-xs font-bold text-neutral-800 dark:text-neutral-100 mt-1">Dual-Currency FinTech</div>
-            <div className="text-[11px] text-neutral-500 dark:text-neutral-400">IQD & RMB linked wallets</div>
-          </div>
-        </div>
-
         {/* Interactive Dual-Tool Showcase (Calculator & Tracker Preview) */}
         <div className="bg-white dark:bg-neutral-900 rounded-3xl border border-brand-200 dark:border-neutral-700/80 p-6 sm:p-8 shadow-xl space-y-6">
           

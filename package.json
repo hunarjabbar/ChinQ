@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts --port 3000 --host 0.0.0.0",
-    "build": "node scripts/generate-build-info.mjs && (prisma generate || true) && vite build && node scripts/mirror-build.mjs",
+    "build": "(npx prisma generate || true) && vite build && (npx esbuild server.ts --bundle --platform=node --format=esm --packages=external --outfile=server.js || true) && node scripts/generate-build-info.mjs && node scripts/mirror-build.mjs",
     "start": "node server.ts",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit"

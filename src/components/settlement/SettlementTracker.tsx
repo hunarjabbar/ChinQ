@@ -313,7 +313,7 @@ export function SettlementTracker({ lang, initialRef = 'SETTLE-2026-000123', onR
       </div>
 
       {/* Active Stage Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-brand-50/70 via-white to-brand-50/40 dark:from-brand-950/30 dark:via-neutral-850 dark:to-brand-950/20 border border-brand-200 dark:border-brand-900/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-50/70 via-white to-red-50/40 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-900 border border-red-200 dark:border-neutral-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-brand-800 text-white flex items-center justify-center font-mono font-black text-lg shadow-md shrink-0">
             {currentStage}/8

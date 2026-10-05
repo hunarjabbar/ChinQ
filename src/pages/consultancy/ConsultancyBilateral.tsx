@@ -3,7 +3,7 @@ import { Locale } from '../../types';
 import { useI18n } from '../../hooks/useI18n';
 import { Link, useParams } from 'react-router-dom';
 import { TrendingUp, PieChart, Activity, ShieldAlert, BarChart3, ArrowRightLeft, Landmark, Wallet, Globe, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import { Disclosure } from '../../components/consultancy/Disclosure';
 

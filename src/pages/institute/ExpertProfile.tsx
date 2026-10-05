@@ -15,7 +15,7 @@ import {
   Award,
   FileText
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 export default function ExpertProfile() {
   const { lang = 'en', id } = useParams<{ lang: Locale; id: string }>();

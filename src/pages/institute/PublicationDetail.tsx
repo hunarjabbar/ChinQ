@@ -16,7 +16,7 @@ import {
   Check
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MediaRequestForm } from '../../components/institute/MediaRequestForm';
 import { useI18n } from '../../hooks/useI18n';
 import { toast } from 'sonner';

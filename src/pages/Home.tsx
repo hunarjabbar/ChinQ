@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify';
 import { SubscriptionCard } from '../components/SubscriptionCard';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';

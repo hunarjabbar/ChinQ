@@ -7,7 +7,7 @@ import {
   ExternalLink, ChevronRight, BookOpen, Layers, X,
   Share2, ArrowLeft, ArrowRight, CheckCircle2, Award, Users, Globe, Sparkles, Send, HelpCircle, PhoneCall
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function CulturalExchangeLanding() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

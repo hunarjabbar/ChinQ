@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Locale } from '../types';
 import { Globe, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../lib/utils';
 
 interface LanguageSwitcherProps {

@@ -342,7 +342,7 @@ export function AdminFinanceEconomics() {
                         deleteMutation.mutate(insight.id);
                       }
                     }}
-                    className="p-2 text-neutral-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
+                    className="p-2 text-neutral-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-brand-950/30 transition-colors"
                     title="Delete Insight"
                   >
                     <Trash2 size={16} />

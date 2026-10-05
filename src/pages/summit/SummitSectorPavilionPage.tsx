@@ -21,7 +21,7 @@ export function SummitSectorPavilionPage() {
           <span>/</span>
           <Link to={`/${lang}/summit/expo`} className="hover:text-brand-800">{lang === 'ar' ? 'المعرض' : 'Expo'}</Link>
           <span>/</span>
-          <span className="text-neutral-900 dark:text-neutral-100">{sector.name[lang]}</span>
+          <span className="text-neutral-900 dark:text-neutral-100">{sector.name?.[lang] || 'Sector'}</span>
         </div>
 
         {/* Sector Header */}
@@ -46,21 +46,21 @@ export function SummitSectorPavilionPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-neutral-100 uppercase tracking-tight">
-            {sector.name[lang]}
+            {sector.name?.[lang] || 'Sector'}
           </h1>
 
           <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 max-w-4xl leading-relaxed">
-            {sector.description[lang]}
+            {sector.description?.[lang] || 'Information about this sector will be available soon.'}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700/60 text-xs space-y-1">
               <div className="font-bold text-neutral-900 dark:text-neutral-100 uppercase">{lang === 'ar' ? 'المشترون والمشتريات العراقية المستهدفة:' : 'Target Iraqi Buyers & Procurement:'}</div>
-              <div className="text-neutral-600 dark:text-neutral-400">{sector.iraqiBuyerProfile[lang]}</div>
+              <div className="text-neutral-600 dark:text-neutral-400">{sector.iraqiBuyerProfile?.[lang] || 'Qualified Iraqi purchasers.'}</div>
             </div>
             <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700/60 text-xs space-y-1">
               <div className="font-bold text-neutral-900 dark:text-neutral-100 uppercase">{lang === 'ar' ? 'ملف المصنعين الصينيين:' : 'Chinese Manufacturer Profile:'}</div>
-              <div className="text-neutral-600 dark:text-neutral-400">{sector.chineseExhibitorProfile[lang]}</div>
+              <div className="text-neutral-600 dark:text-neutral-400">{sector.chineseExhibitorProfile?.[lang] || 'Tier-1 Chinese manufacturers.'}</div>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@ export function SummitSectorPavilionPage() {
             <span>{lang === 'ar' ? 'قاعدة معرفة المعهد وتقرير الجدوى' : 'Institute Knowledge Base & Feasibility Report'}</span>
           </div>
           <h3 className="text-lg font-black">
-            {sector.researchPillarTitle[lang]}
+            {sector.researchPillarTitle?.[lang] || 'Strategic Research Pillar'}
           </h3>
           <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-3xl">
             {lang === 'ar' 
@@ -96,7 +96,7 @@ export function SummitSectorPavilionPage() {
             {lang === 'ar' ? 'الفرص الاستثمارية والسوقية في العراق' : lang === 'zh' ? '伊拉克产业重组与市场准入机会' : lang === 'ckb' ? 'دەرفەتی بازاڕ و وەبەرهێنان لە عێراق' : 'Iraq Market & Industrial Opportunity'}
           </h2>
           <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            {sector.iraqOpportunity[lang]}
+            {sector.iraqOpportunity?.[lang] || 'Market intelligence report pending for this sector.'}
           </p>
         </div>
 

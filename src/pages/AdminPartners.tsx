@@ -2,7 +2,7 @@ import { apiFetch } from "../lib/api";
 import React, { useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Plus, Edit2, Trash2, X, Save, Image as ImageIcon } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminPartners() {
   const queryClient = useQueryClient();

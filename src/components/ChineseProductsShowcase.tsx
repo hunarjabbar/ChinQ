@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Locale, ChineseProduct } from '../types';
 import { apiFetch } from '../lib/api';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, X, ArrowUpRight, CheckCircle, ShieldCheck, Mail, Sparkles, ChevronDown, Check, SlidersHorizontal } from 'lucide-react';
 import { ErrorBoundary } from './ErrorBoundary';
 import { useNavigate } from 'react-router-dom';

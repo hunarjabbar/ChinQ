@@ -3,7 +3,7 @@ import { Locale } from '../../types';
 import { useI18n } from '../../hooks/useI18n';
 import { Link, useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { FileText, Send, CheckCircle2, Download, Copy, ArrowLeft, ShieldCheck, Globe, Building2, Landmark, Briefcase, Info } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';

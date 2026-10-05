@@ -8,7 +8,7 @@ import {
   CheckCircle2, X, Star, TrendingUp, ExternalLink, Globe2, Sparkles, AlertCircle,
   Image as ImageIcon, Eye
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function AdminWomen() {
   const queryClient = useQueryClient();

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
@@ -15,6 +15,7 @@ import { FooterVisionMission } from './FooterVisionMission';
 import { TalentRegistrationModal, TalentRegistrationType } from './TalentRegistrationModal';
 import { InstitutePortalCTA } from './InstitutePortalCTA';
 import { NotificationToast } from './NotificationToast';
+import { BottomNav } from './mobile/BottomNav';
 
 export function Layout({ lang, children }: { lang: Locale; children: ReactNode }) {
   const { t } = useI18n(lang);
@@ -43,7 +44,7 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col transition-colors duration-300 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col transition-colors duration-300 overflow-x-hidden pb-16 sm:pb-20 xl:pb-0">
       <Header lang={lang} />
       <IntelligenceWireTicker lang={lang} />
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center flex-grow">
@@ -373,6 +374,9 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
 
       {/* Centralized Notification Floating Toast */}
       <NotificationToast currentLocale={lang} />
+
+      {/* Modern Fixed Bottom Navigation Bar for Mobile and Tablet */}
+      <BottomNav lang={lang} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { Check, CreditCard, Sparkles, Loader2, Shield, Crown, Zap, BarChart3, Be
 import { useAuthStore } from '../store/useAuthStore';
 import { apiFetch } from '../lib/api';
 import { useParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function SubscriptionCard() {
   const { lang } = useParams<{ lang: string }>();

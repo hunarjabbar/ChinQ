@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Radio, Newspaper, Film, ChevronRight, Sparkles } from 'lucide-react';
+import { Radio, Newspaper, Film, Sparkles } from 'lucide-react';
 import { Locale } from '../types';
+import { BroadcastPlatformCard, BroadcastPortalItem } from './BroadcastPlatformCard';
 
 interface Props {
   lang: Locale;
@@ -15,7 +16,7 @@ export function DirectPortalAccess({ lang, className = '', variant = 'cards' }: 
   const isCkb = lang === 'ckb';
   const isRtl = isAr || isCkb;
 
-  const portals = [
+  const portals: BroadcastPortalItem[] = [
     {
       id: 'newsroom',
       title: isAr ? 'غرفة الأخبار والتقارير' : isZh ? '国际新闻中心' : isCkb ? 'ژووری هەواڵ و ڕاپۆرت' : 'ICA Global Newsroom',
@@ -24,15 +25,7 @@ export function DirectPortalAccess({ lang, className = '', variant = 'cards' }: 
       icon: Newspaper,
       href: `/${lang}/newsroom`,
       actionLabel: isAr ? 'دخول غرفة الأخبار' : isZh ? '进入新闻中心' : isCkb ? 'چوونە ژووری هەواڵ' : 'Access Newsroom',
-      theme: {
-        accentBorder: 'hover:border-brand-700',
-        iconBg: 'bg-brand-50 text-brand-800 border-brand-100 group-hover:bg-brand-800 group-hover:text-white',
-        badgeBg: 'bg-brand-50 text-brand-800 border-brand-200',
-        titleHover: 'group-hover:text-brand-800',
-        actionText: 'text-brand-800 group-hover:text-brand-900',
-        arrowBg: 'bg-brand-50 text-brand-800 group-hover:bg-brand-800 group-hover:text-white',
-        topBar: 'bg-brand-800'
-      }
+      themeType: 'newsroom'
     },
     {
       id: 'live',
@@ -43,15 +36,7 @@ export function DirectPortalAccess({ lang, className = '', variant = 'cards' }: 
       href: `/${lang}/live`,
       actionLabel: isAr ? 'مشاهدة البث المباشر' : isZh ? '观看直播' : isCkb ? 'سەیری پەخش بکە' : 'Watch Live Broadcast',
       isLivePulse: true,
-      theme: {
-        accentBorder: 'hover:border-red-600',
-        iconBg: 'bg-red-50 text-red-700 border-red-100 group-hover:bg-red-600 group-hover:text-white',
-        badgeBg: 'bg-red-50 text-red-700 border-red-200',
-        titleHover: 'group-hover:text-red-700',
-        actionText: 'text-red-700 group-hover:text-red-800',
-        arrowBg: 'bg-red-50 text-red-700 group-hover:bg-red-600 group-hover:text-white',
-        topBar: 'bg-red-600'
-      }
+      themeType: 'live'
     },
     {
       id: 'media',
@@ -61,15 +46,7 @@ export function DirectPortalAccess({ lang, className = '', variant = 'cards' }: 
       icon: Film,
       href: `/${lang}/media`,
       actionLabel: isAr ? 'استعراض الإنتاجات' : isZh ? '探索融媒体' : isCkb ? 'بگەڕێ لە میدیا' : 'Explore Media',
-      theme: {
-        accentBorder: 'hover:border-amber-600',
-        iconBg: 'bg-amber-50 text-amber-800 border-amber-200 group-hover:bg-amber-600 group-hover:text-white',
-        badgeBg: 'bg-amber-50 text-amber-900 border-amber-200',
-        titleHover: 'group-hover:text-amber-800',
-        actionText: 'text-amber-800 group-hover:text-amber-900',
-        arrowBg: 'bg-amber-50 text-amber-800 group-hover:bg-amber-600 group-hover:text-white',
-        topBar: 'bg-amber-600'
-      }
+      themeType: 'media'
     }
   ];
 
@@ -100,69 +77,33 @@ export function DirectPortalAccess({ lang, className = '', variant = 'cards' }: 
   }
 
   return (
-    <section className={`w-full my-8 ${className}`} dir={isRtl ? 'rtl' : 'ltr'}>
+    <section className={`w-full my-8 bg-white dark:bg-white ${className}`} dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 border-b border-slate-200 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 border-b border-red-100 dark:border-brand-900/30 pb-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-800 border border-brand-200 text-[11px] font-black uppercase tracking-wider mb-2">
-              <Sparkles size={12} className="text-brand-800" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 dark:bg-brand-950/60 dark:text-red-400 border border-red-200/80 dark:border-brand-900/60 text-[11px] font-black uppercase tracking-wider mb-2">
+              <Sparkles size={12} className="text-red-600 dark:text-red-400" />
               <span>{isAr ? 'الدخول المباشر للبوابات' : isZh ? '全线直达门户' : isCkb ? 'چوونەژوورەوەی ڕاستەوخۆ' : 'Direct Portal Gateways'}</span>
             </div>
-            <h2 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
               {isAr ? 'منصات الوكالة العراقية الصينية المتخصصة' : isZh ? '伊中通讯社三大核心传播平台' : isCkb ? 'سەکۆ تایبەتمەندەکانی ئاژانسی عێراقی-چینی' : 'Core Sovereign Broadcast & Information Platforms'}
             </h2>
           </div>
-          <span className="text-xs text-slate-500 hidden sm:block">
+          <span className="text-xs text-red-600/70 dark:text-red-400/70 hidden sm:block font-bold">
             {isAr ? 'وصول فوري بنقرة واحدة لكافة المنصات' : isZh ? '一键直达，覆盖新闻、直播与融媒体' : isCkb ? 'دەستپێڕاگەیشتنی خێرا بە یەک کرتە' : 'One-click direct entry to news, live broadcast & production'}
           </span>
         </div>
 
-        {/* 3 Prominent Light-Themed Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Upgraded 3 Broadcast & Information Platforms Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {portals.map((portal) => (
-            <Link
+            <BroadcastPlatformCard
               key={portal.id}
-              to={portal.href}
-              className={`relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 sm:p-7 shadow-xs group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${portal.theme.accentBorder}`}
-            >
-              {/* Top Sovereign Color Band */}
-              <div className={`absolute top-0 inset-x-0 h-1.5 ${portal.theme.topBar}`}></div>
-
-              <div className="relative z-10 space-y-4 pt-1">
-                <div className="flex items-center justify-between">
-                  <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center transition-all shadow-xs ${portal.theme.iconBg}`}>
-                    <portal.icon size={22} className="shrink-0" />
-                  </div>
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border font-mono ${portal.theme.badgeBg}`}>
-                    {portal.isLivePulse && (
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                      </span>
-                    )}
-                    <span>{portal.badge}</span>
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className={`text-lg sm:text-xl font-black tracking-tight text-slate-900 transition-colors ${portal.theme.titleHover}`}>
-                    {portal.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 mt-2 leading-relaxed font-normal">
-                    {portal.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative z-10 pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-black transition-colors">
-                <span className={portal.theme.actionText}>{portal.actionLabel}</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${portal.theme.arrowBg}`}>
-                  <ChevronRight size={15} className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </Link>
+              portal={portal}
+              isRtl={isRtl}
+            />
           ))}
         </div>
 

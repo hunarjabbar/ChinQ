@@ -6,11 +6,10 @@ let commit = 'unknown';
 let branch = 'main';
 
 try {
-  commit = execSync('git rev-parse --short HEAD', { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
-  branch = execSync('git rev-parse --abbrev-ref HEAD', { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
+  commit = execSync('git rev-parse --short HEAD 2>/dev/null', { stdio: ['pipe', 'pipe', 'ignore'] }).toString().trim() || 'unknown';
+  branch = execSync('git rev-parse --abbrev-ref HEAD 2>/dev/null', { stdio: ['pipe', 'pipe', 'ignore'] }).toString().trim() || 'main';
 } catch (e) {
-  console.log('fatal: not a git repository (or any of the parent directories): .git');
-  console.log('Git info not available for build-info.json');
+  // Git info not available in container environments
 }
 
 const buildInfo = {

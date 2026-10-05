@@ -6,7 +6,7 @@ import {
   GraduationCap, Building2, Calendar, Clock, ArrowRight,
   ExternalLink, ChevronRight, X, BookOpen, Layers
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ErrorBoundary } from './ErrorBoundary';
 
 interface CulturalExchangeSectionProps {
@@ -85,43 +85,43 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
       case 'educational-exchange':
         // Anchor 1: Deep prominent brand red
         return {
-          badge: 'bg-brand-800 text-paper-50 border-brand-700 dark:bg-brand-900 dark:text-brand-100 dark:border-brand-800',
-          dot: 'bg-paper-50',
-          cardHover: 'hover:border-brand-600'
+          badge: 'bg-red-600 text-white border-red-500 shadow-sm dark:bg-red-700',
+          dot: 'bg-white',
+          cardHover: 'hover:border-red-500'
         };
       case 'higher-education-university':
         // Anchor 2: Soft refined brand tint
         return {
-          badge: 'bg-brand-100 text-brand-900 border-brand-300 dark:bg-brand-950 dark:text-brand-200 dark:border-brand-800',
-          dot: 'bg-brand-600',
-          cardHover: 'hover:border-brand-500'
+          badge: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-700',
+          dot: 'bg-red-600',
+          cardHover: 'hover:border-red-400'
         };
       case 'arts-heritage':
         // Subsection 3: Ultra light brand blush
         return {
-          badge: 'bg-brand-50 text-brand-800 border-brand-200 dark:bg-paper-900 dark:text-brand-300 dark:border-brand-900',
-          dot: 'bg-brand-500',
-          cardHover: 'hover:border-brand-400'
+          badge: 'bg-red-50 text-red-600 border-red-100 dark:bg-red-900/10 dark:text-red-400 dark:border-red-700',
+          dot: 'bg-red-500',
+          cardHover: 'hover:border-red-300'
         };
       case 'youth-language':
         // Subsection 4: Paper neutral with brand contrast
         return {
-          badge: 'bg-paper-200 text-paper-900 border-paper-300 dark:bg-paper-800 dark:text-paper-100 dark:border-paper-700',
-          dot: 'bg-brand-700',
-          cardHover: 'hover:border-brand-400'
+          badge: 'bg-neutral-100 text-neutral-900 border-neutral-200 dark:bg-neutral-800 dark:text-neutral-100 dark:border-neutral-700',
+          dot: 'bg-red-600',
+          cardHover: 'hover:border-red-400'
         };
       case 'professional-vocational':
         // Subsection 5: Deep brand text on paper
         return {
-          badge: 'bg-paper-100 text-brand-950 border-brand-200 dark:bg-brand-950 dark:text-paper-200 dark:border-brand-900',
-          dot: 'bg-brand-600',
-          cardHover: 'hover:border-brand-500'
+          badge: 'bg-neutral-50 text-red-700 border-neutral-200 dark:bg-neutral-900 dark:text-red-300 dark:border-neutral-800',
+          dot: 'bg-red-600',
+          cardHover: 'hover:border-red-500'
         };
       default:
         return {
-          badge: 'bg-paper-100 text-paper-800 border-paper-300 dark:bg-paper-800 dark:text-paper-200 dark:border-paper-700',
-          dot: 'bg-brand-600',
-          cardHover: 'hover:border-brand-400'
+          badge: 'bg-neutral-50 text-neutral-700 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800',
+          dot: 'bg-red-600',
+          cardHover: 'hover:border-red-400'
         };
     }
   };
@@ -162,7 +162,7 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
         {/* Header Block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-neutral-800">
           <div className="space-y-2 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-brand-950/40 border border-red-200 dark:border-brand-900 text-red-700 dark:text-red-400 text-xs font-bold uppercase tracking-wider">
               <GraduationCap className="w-3.5 h-3.5" />
               <span>{t.sectionBadge}</span>
             </div>
@@ -227,7 +227,7 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
                   {typeof cat._count?.programs === 'number' && (
                     <span className={`text-[11px] px-1.5 py-0.2 rounded-full ${
                       isActive
-                        ? 'bg-red-900 text-white'
+                        ? 'bg-brand-900 text-white'
                         : 'bg-slate-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-400'
                     }`}>
                       {cat._count.programs}

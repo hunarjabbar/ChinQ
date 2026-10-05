@@ -5,7 +5,7 @@ import {
   Building2, Ticket, Plus, Edit2, Trash2, ArrowUp, ArrowDown, RotateCcw, 
   Factory, Layers, ShieldCheck, Ship, Check, Sliders, RefreshCw, FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SourcingPillarAdmin {
   id: string;

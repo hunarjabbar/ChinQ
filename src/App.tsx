@@ -17,6 +17,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { useSiteStore } from './store/useSiteStore';
 import { DevBuildInfoBadge } from './components/DevBuildInfoBadge';
 import { PageSkeleton } from './components/PageSkeleton';
+import { BottomNav } from './components/mobile/BottomNav';
 
 import { Home } from './pages/Home';
 import { ArticlePage } from './pages/ArticlePage';
@@ -30,36 +31,49 @@ function lazyWithRetry<T extends React.ComponentType<any>>(
   factory: () => Promise<{ default: T } | any>
 ) {
   return lazy(async () => {
-    const chunkReloadLockKey = 'app_chunk_reload_lock';
     try {
       const mod = await factory();
-      try {
-        window.sessionStorage.removeItem(chunkReloadLockKey);
-      } catch {}
       return mod.default ? mod : { default: mod };
     } catch (error: any) {
-      console.warn('Chunk load error, attempting immediate retry...', error);
+      console.warn('Initial chunk load error, attempting retry...', error);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 600));
         const mod = await factory();
-        try {
-          window.sessionStorage.removeItem(chunkReloadLockKey);
-        } catch {}
         return mod.default ? mod : { default: mod };
       } catch (retryError: any) {
-        console.error('Persistent chunk load failure:', retryError);
-        // If a dynamic import fails due to server restart/new bundle hashes, refresh once to retrieve latest manifest
+        console.warn('Second chunk attempt failed:', retryError);
         if (typeof window !== 'undefined') {
-          try {
-            const hasReloaded = window.sessionStorage.getItem(chunkReloadLockKey);
-            if (!hasReloaded) {
-              window.sessionStorage.setItem(chunkReloadLockKey, 'true');
-              window.location.reload();
-              return new Promise<{ default: T }>(() => {});
-            }
-          } catch {}
+          const reloadKey = 'last_chunk_reload_timestamp';
+          const lastReload = parseInt(window.sessionStorage.getItem(reloadKey) || '0', 10);
+          const now = Date.now();
+          // If we haven't reloaded within the last 10 seconds, force a reload to get latest manifest
+          if (now - lastReload > 10000) {
+            window.sessionStorage.setItem(reloadKey, now.toString());
+            window.location.reload();
+            return new Promise<{ default: T }>(() => {});
+          }
         }
-        throw retryError;
+        // Graceful non-crashing component fallback
+        return {
+          default: (() => (
+            <div className="min-h-[50vh] flex items-center justify-center p-6 text-center">
+              <div className="max-w-md p-6 bg-white dark:bg-neutral-900 rounded-2xl border border-red-200 dark:border-neutral-800 shadow-sm">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
+                  Content Updated
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-neutral-400 mb-4 leading-relaxed">
+                  This section has been updated with the latest sovereign dispatches. Please refresh to view.
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+                >
+                  Refresh Page
+                </button>
+              </div>
+            </div>
+          )) as unknown as T
+        };
       }
     }
   });
@@ -495,6 +509,20 @@ function PublicPortalRootRedirect() {
   return <Navigate to={`/${loc}/portal${subPath}${location.search}${location.hash}`} replace />;
 }
 
+function SettingsRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/settings/, '');
+  return <Navigate to={`/${loc}/admin/settings${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function ProfileRootRedirect() {
+  const loc = resolveLocaleFromEnvironment();
+  const location = useLocation();
+  const subPath = location.pathname.replace(/^\/profile/, '');
+  return <Navigate to={`/${loc}/admin${subPath}${location.search}${location.hash}`} replace />;
+}
+
 function SecretariatLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
@@ -512,8 +540,11 @@ function SecretariatLangWrapper() {
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
-        <Outlet />
+        <div className="pb-16 sm:pb-20 xl:pb-0">
+          <Outlet />
+        </div>
       </Suspense>
+      <BottomNav lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -585,9 +616,10 @@ function ImmersiveLangWrapper() {
 
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
-      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans transition-colors duration-300">
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans transition-colors duration-300 pb-16 sm:pb-20 xl:pb-0">
         <Outlet />
       </div>
+      <BottomNav lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -657,8 +689,11 @@ function SummitLangWrapper() {
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
-        <Outlet />
+        <div className="pb-16 sm:pb-20 xl:pb-0">
+          <Outlet />
+        </div>
       </Suspense>
+      <BottomNav lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -680,8 +715,11 @@ function SettlementLangWrapper() {
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
-        <Outlet />
+        <div className="pb-16 sm:pb-20 xl:pb-0">
+          <Outlet />
+        </div>
       </Suspense>
+      <BottomNav lang={safeLang} />
     </ErrorBoundary>
   );
 }
@@ -750,6 +788,10 @@ const router = createBrowserRouter([
   { path: "/ica-plus/*", element: <IcaPlusRootRedirect /> },
   { path: "/visa-flights", element: <GenericRootRedirect /> },
   { path: "/visa-flights/*", element: <GenericRootRedirect /> },
+  { path: "/settings", element: <SettingsRootRedirect /> },
+  { path: "/settings/*", element: <SettingsRootRedirect /> },
+  { path: "/profile", element: <ProfileRootRedirect /> },
+  { path: "/profile/*", element: <ProfileRootRedirect /> },
   {
     path: "/:lang/institute/settlement",
     element: <SettlementLangWrapper />,
@@ -1020,6 +1062,8 @@ const router = createBrowserRouter([
       { path: "services/cultural-exchange/faq", element: <CulturalExchangeFAQ /> },
       { path: "services/cultural-exchange/contact", element: <CulturalExchangeContact /> },
       { path: "services/cultural-exchange/*", element: <CulturalExchangeLanding /> },
+      { path: "settings", element: <Navigate to="../admin/settings" replace /> },
+      { path: "profile", element: <Navigate to="../admin" replace /> },
     ]
   },
   {

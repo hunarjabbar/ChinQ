@@ -7,7 +7,7 @@ import {
   Compass, MapPin, Plane, Calendar, ShieldCheck, 
   ChevronRight, X, Send, CheckCircle2, Sparkles, Globe2, Info
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface TourismSectionProps {
   lang?: Locale;

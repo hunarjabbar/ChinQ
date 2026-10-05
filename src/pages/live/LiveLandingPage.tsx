@@ -21,6 +21,10 @@ import { portalStore } from '../../data/portalData';
 import { getPortalTranslation } from '../../locales/portalTranslations';
 import { PortalLocale, MediaItem } from '../../types/portals';
 
+/**
+ * LiveLandingPage - Sovereign Diplomatic Broadcast & Media Hub
+ * Core component for 24/7 bilateral transmission and event feeds.
+ */
 export function LiveLandingPage() {
   const { lang = 'en' } = useParams<{ lang: string }>();
   const currentLang = (lang === 'ck' ? 'ckb' : lang) as PortalLocale;

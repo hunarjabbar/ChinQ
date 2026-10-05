@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+  <!-- Newspaper body -->
+  <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#DC2626" stroke-width="1.8" fill="#FEF2F2" />
+  <!-- Masthead bar -->
+  <path d="M 7 8 L 17 8" stroke="#DC2626" stroke-width="2" stroke-linecap="round" />
+  <!-- Text rhythm lines -->
+  <path d="M 7 12 L 13 12" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M 7 15.5 L 11 15.5" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Editorial stamp / wire photo block -->
+  <rect x="14.5" y="11" width="2.5" height="4.5" rx="0.75" fill="#DC2626" opacity="0.85" />
+</svg>

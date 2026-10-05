@@ -6,7 +6,7 @@ import {
   Award, Star, BookOpen, Download, ChevronRight, 
   X, CheckCircle2, Bookmark, Flame 
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface RecommendedBooksSectionProps {
   lang?: Locale;

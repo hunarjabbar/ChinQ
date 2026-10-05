@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Locale, translations } from '../locales';
 import { NotificationBell } from './NotificationBell';
 import { IcaLogo } from './IcaLogo';
+import { HeaderGlobalSearchBar } from './search/HeaderGlobalSearchBar';
 import { 
-  Menu, 
-  X, 
   ShieldCheck, 
   TrendingUp, 
   Building2, 
@@ -33,7 +32,6 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
   const activeLocale = lang || currentLocale || 'en';
   const location = useLocation();
   const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = translations[activeLocale];
   const isCise = location.pathname.startsWith('/institute');
   const isAr = activeLocale === 'ar';
@@ -87,16 +85,16 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full shadow-lg transition-colors" dir={isRtl ? 'rtl' : 'ltr'}>
+    <header className="sticky top-0 z-50 w-full bg-red-600 transition-colors shadow-lg" dir={isRtl ? 'rtl' : 'ltr'}>
       
-      {/* TIER 1: Sovereign Top Diplomatic Band */}
-      <div className="w-full bg-brand-950 text-white border-b border-brand-900/80 text-[11px] py-1.5 px-4 sm:px-6">
+      {/* TIER 1: Sovereign Top Diplomatic Band - INTEGRATED RED */}
+      <div className="w-full bg-red-700/30 text-red-100 border-b border-red-500/30 text-[11px] py-1.5 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           
           {/* Diplomatic Corridor Label */}
-          <div className="flex items-center gap-2 text-brand-200">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
-            <span className="font-bold tracking-wider uppercase text-[10px] sm:text-[11px]">
+          <div className="flex items-center gap-2 text-red-200">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0"></span>
+            <span className="font-black tracking-wider uppercase text-[10px] sm:text-[11px]">
               {isAr
                 ? 'الممر الاستراتيجي الثنائي • بغداد – بكين • البوابة الرسمية السيادية'
                 : isZh
@@ -111,29 +109,20 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
           <div className="hidden lg:flex items-center gap-2 font-mono text-[10px]">
             <Link
               to={`/${activeLocale}/live`}
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600/80 hover:bg-red-600 text-white font-bold transition-colors border border-red-400/30"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white text-red-600 font-black transition-colors shadow-sm"
               title="Direct Access to Live Portal"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
               <span>LIVE PORTAL</span>
             </Link>
 
             <Link
               to={`/${activeLocale}/newsroom`}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-100 font-bold transition-colors"
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/50 hover:bg-red-500 text-white font-black transition-colors"
               title="Direct Access to Newsroom"
             >
-              <Newspaper size={11} className="text-amber-300" />
+              <Newspaper size={11} className="text-white" />
               <span>NEWSROOM</span>
-            </Link>
-
-            <Link
-              to={`/${activeLocale}/media`}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-100 font-bold transition-colors"
-              title="Direct Access to Media Hub"
-            >
-              <Film size={11} className="text-amber-300" />
-              <span>MEDIA</span>
             </Link>
           </div>
 
@@ -143,10 +132,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
               <button
                 key={loc}
                 onClick={() => handleLanguageChange(loc)}
-                className={`px-2 py-0.5 rounded transition-all uppercase cursor-pointer ${
+                className={`px-2 py-0.5 rounded transition-all uppercase cursor-pointer font-black ${
                   activeLocale === loc
-                    ? 'bg-brand-800 text-amber-300 font-black shadow-xs border border-brand-700'
-                    : 'text-brand-300/80 hover:text-white hover:bg-white/10'
+                    ? 'bg-white text-red-600 shadow-sm'
+                    : 'text-red-100 hover:text-white hover:bg-white/10'
                 }`}
                 title={loc === 'ar' ? 'العربية' : loc === 'zh' ? '中文' : loc === 'ckb' ? 'کوردی' : 'English'}
               >
@@ -158,20 +147,20 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
         </div>
       </div>
 
-      {/* TIER 2: Main Brand Masthead Bar (Rich Sovereign Red) */}
-      <div className="w-full bg-brand-800 text-white border-b border-brand-700 transition-colors">
+      {/* TIER 2: Main Brand Masthead Bar - SOLID RED */}
+      <div className="w-full bg-red-600 text-white transition-colors relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between gap-4">
           
           {/* Brand Identity with Official Logo & Wordmark */}
           <Link to={`/${activeLocale}`} className="flex items-center gap-3.5 group shrink-0 select-none py-1">
-            {/* Real Official ICA Logo Emblem */}
-            <div className="shrink-0 transition-transform duration-300 group-hover:scale-105 drop-shadow-md">
-              <IcaLogo size={46} variant="mark" className="shrink-0" />
+            {/* Real Official ICA Logo Emblem - WHITE THEME */}
+            <div className="shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <IcaLogo size={46} variant="mark" theme="white" className="shrink-0 shadow-lg rounded-2xl" />
             </div>
 
             {/* Typography Masthead */}
             <div className="flex flex-col text-start leading-none">
-              <span className="text-lg sm:text-2xl font-black uppercase tracking-tight text-white group-hover:text-amber-200 transition-colors drop-shadow-xs">
+              <span className="text-lg sm:text-2xl font-black uppercase tracking-tight text-white group-hover:text-red-100 transition-colors">
                 {isAr
                   ? 'الوكالة العراقية الصينية'
                   : isZh
@@ -181,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
                   : 'IRAQI-CHINESE AGENCY'}
               </span>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase text-brand-100">
+                <span className="text-[10px] sm:text-[11px] font-black tracking-[0.22em] uppercase text-red-100/80">
                   {isAr
                     ? 'المقر السيادي العام للإعلام والتبادل الثنائي'
                     : isZh
@@ -204,14 +193,14 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
                   to={link.to}
                   className={`px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 relative ${
                     isActive
-                      ? 'bg-white/20 text-white shadow-inner border border-white/30 backdrop-blur-xs'
-                      : 'text-brand-100 hover:text-white hover:bg-white/10'
+                      ? 'bg-white text-red-600 shadow-md border border-white'
+                      : 'text-red-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  <link.icon size={14} className={isActive ? 'text-amber-300' : 'text-brand-200'} />
+                  <link.icon size={14} className={isActive ? 'text-red-600' : 'text-red-100'} />
                   <span>{link.label}</span>
                   {link.isLive && (
-                    <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                    <span className={`w-2 h-2 rounded-full animate-pulse ${isActive ? 'bg-red-600' : 'bg-white'}`}></span>
                   )}
                 </Link>
               );
@@ -223,226 +212,55 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
             {/* Notification Center */}
             <NotificationBell currentLocale={activeLocale} variant="header" />
 
-            {/* Direct Portal Inquiry CTA */}
+            {/* Direct Portal Inquiry CTA - WHITE ON RED */}
             <Link
               to={`/${activeLocale}/newsroom`}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-neutral-100 text-brand-800 font-black text-xs transition-colors shadow-md cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-white text-red-600 font-black text-xs transition-colors shadow-lg cursor-pointer hover:bg-red-50"
             >
               <span>{isAr ? 'غرفة الأخبار' : isZh ? '即时新闻' : isCkb ? 'هەواڵەکان' : 'News Desk'}</span>
               <ChevronRight size={14} className="cta-arrow" />
             </Link>
-
-            {/* Mobile Hamburger Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer focus:outline-none"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
           </div>
 
         </div>
       </div>
 
-      {/* ENRICHED MOBILE / TABLET DRAWER MENU */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-brand-950 text-white border-t border-brand-800 px-4 py-6 space-y-6 shadow-2xl max-h-[85vh] overflow-y-auto backdrop-blur-xl animate-in fade-in slide-in-from-top-4 duration-200">
-          
-          {/* Drawer Top: Direct 1-Click Portals */}
-          <div className="space-y-3">
-            <div className="text-[11px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1.5 border-b border-brand-900 pb-1.5">
-              <Sparkles size={13} />
-              <span>{isAr ? 'البوابات الرئيسية الفورية (نقرة واحدة)' : isZh ? '核心直达门户' : isCkb ? 'دەروازە سەرەکییەکان' : 'Core Direct Portals'}</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <Link
-                to={`/${activeLocale}/live`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-2xl bg-gradient-to-r from-red-600 to-brand-800 text-white flex items-center justify-between border border-red-400/40 shadow-md"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Radio size={18} className="text-amber-300 animate-pulse" />
-                  <div>
-                    <div className="text-xs font-black">{isAr ? 'البوابة الحية' : isZh ? '在线直播门户' : 'Live Portal'}</div>
-                    <div className="text-[10px] text-brand-200">24/7 Broadcast</div>
-                  </div>
-                </div>
-                <span className="text-[9px] bg-white text-brand-900 font-black px-1.5 py-0.5 rounded uppercase">LIVE</span>
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/newsroom`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white flex items-center justify-between border border-white/20 shadow-xs"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Newspaper size={18} className="text-amber-300" />
-                  <div>
-                    <div className="text-xs font-black">{isAr ? 'غرفة الأخبار' : isZh ? '国际新闻中心' : 'ICA Newsroom'}</div>
-                    <div className="text-[10px] text-brand-200">Official Wire</div>
-                  </div>
-                </div>
-                <ChevronRight size={14} className="text-brand-300" />
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/media`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white flex items-center justify-between border border-white/20 shadow-xs"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Film size={18} className="text-amber-300" />
-                  <div>
-                    <div className="text-xs font-black">{isAr ? 'المركز الإعلامي' : isZh ? '融媒体制作中心' : 'Media Hub'}</div>
-                    <div className="text-[10px] text-brand-200">Video & Audio</div>
-                  </div>
-                </div>
-                <ChevronRight size={14} className="text-brand-300" />
-              </Link>
-            </div>
+      {/* TIER 3: Clean Glass Lean Global Search Bar - UNDER THE BRAND */}
+      <div className="w-full bg-red-700/35 border-t border-red-500/25 px-4 sm:px-6 py-2 transition-all backdrop-blur-md relative z-20">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4">
+          {/* Interactive Clean Glass Lean Search Bar */}
+          <div className="w-full sm:flex-1 sm:max-w-2xl">
+            <HeaderGlobalSearchBar lang={activeLocale} />
           </div>
 
-          {/* Drawer Section 2: Strategic Bilateral Infrastructure */}
-          <div className="space-y-2">
-            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
-              {isAr ? 'البنية التحتية والاتفاقيات الثنائية' : isZh ? '双边经贸与主权结算体系' : 'Strategic Bilateral Infrastructure'}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-              <Link
-                to={`/${activeLocale}/settlement`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <CreditCard size={15} className="text-amber-400" />
-                  <span>{isAr ? 'تسوية المدفوعات السيادية (IQD/RMB)' : isZh ? '本币直接清算中心' : 'Sovereign Payment Settlement'}</span>
-                </span>
-                <span className="text-[10px] text-emerald-400 font-mono">0.0% Fee</span>
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/settlement/card`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <CreditCard size={15} className="text-amber-400" />
-                  <span>{isAr ? 'بطاقة كي وICA المشتركة' : isZh ? 'Qi & ICA 联名商务卡' : 'Qi & ICA Sovereign Card'}</span>
-                </span>
-                <span className="text-[10px] text-brand-300 font-mono">Dual-FX</span>
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/summit`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <CalendarDays size={15} className="text-amber-400" />
-                  <span>{isAr ? 'قمة العراق والصين للاستثمار 2026' : isZh ? '2026中伊投资峰会' : 'Iraq-China Summit 2026'}</span>
-                </span>
-                <span className="text-[10px] text-amber-300 font-mono">Sulaymaniyah</span>
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/consultancy`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <Briefcase size={15} className="text-amber-400" />
-                  <span>{isAr ? 'الاستشارات الاستراتيجية والقانونية' : isZh ? '战略财务与法律咨询' : 'Strategic & Legal Consultancy'}</span>
-                </span>
-                <ChevronRight size={13} className="text-neutral-500" />
-              </Link>
-            </div>
+          {/* Quick Sovereign Trending Tags on Tablet/Desktop */}
+          <div className="hidden md:flex items-center gap-2 text-xs text-red-100 shrink-0 select-none">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-red-200/80 font-black">
+              {isAr ? 'شائع:' : isZh ? '热点:' : isCkb ? 'باو:' : 'HOT:'}
+            </span>
+            <Link
+              to={`/${activeLocale}/settlement`}
+              className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-colors"
+            >
+              {isAr ? 'تسوية الدينار/اليوان' : isZh ? '第纳尔/人民币清算' : isCkb ? 'یەکلاکردنەوەی دارایی' : 'IQD/e-CNY Rail'}
+            </Link>
+            <Link
+              to={`/${activeLocale}/summit`}
+              className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-colors"
+            >
+              {isAr ? 'قمة 2026' : isZh ? '2026峰会' : isCkb ? 'لووتکە ٢٠٢٦' : 'Summit 2026'}
+            </Link>
+            <Link
+              to={`/${activeLocale}/newsroom?tag=DevelopmentRoad`}
+              className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-colors"
+            >
+              {isAr ? 'طريق التنمية' : isZh ? '发展之路' : isCkb ? 'ڕێگای گەشەپێدان' : 'Development Road'}
+            </Link>
           </div>
-
-          {/* Drawer Section 3: CISE Strategic Institute & Consular Services */}
-          <div className="space-y-2">
-            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
-              {isAr ? 'معهد الدراسات والخدمات القنصلية (CISE)' : isZh ? '中伊战略研究所与领事服务' : 'CISE Institute & Bilateral Services'}
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-              <Link
-                to={`/${activeLocale}/institute`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <Building2 size={15} className="text-brand-300" />
-                  <span>{isAr ? 'بوابة المعهد الصيني العراقي' : isZh ? '研究所总门户' : 'CISE Institute Portal'}</span>
-                </span>
-                <ChevronRight size={13} className="text-neutral-500" />
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/institute/visa-centre`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <ShieldCheck size={15} className="text-brand-300" />
-                  <span>{isAr ? 'مركز التأشيرات الثنائية' : isZh ? '双向签证服务中心' : 'Bilateral Visa Centre'}</span>
-                </span>
-                <ChevronRight size={13} className="text-neutral-500" />
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/institute/chinese-center`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <GraduationCap size={15} className="text-brand-300" />
-                  <span>{isAr ? 'المركز الصيني وتعليم اللغة' : isZh ? '中华文化与语言研修中心' : 'Chinese Language & Testing'}</span>
-                </span>
-                <ChevronRight size={13} className="text-neutral-500" />
-              </Link>
-
-              <Link
-                to={`/${activeLocale}/institute/data-hub`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-neutral-200 hover:text-white"
-              >
-                <span className="flex items-center gap-2">
-                  <TrendingUp size={15} className="text-brand-300" />
-                  <span>{isAr ? 'مركز البيانات الاقتصادية وتتبع الحزام والطريق' : isZh ? '一带一路与经贸数据中枢' : 'Data Hub & BRI Tracker'}</span>
-                </span>
-                <ChevronRight size={13} className="text-neutral-500" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Drawer Section 4: Public & Command Hub */}
-          <div className="space-y-2">
-            <div className="text-[11px] font-black uppercase tracking-wider text-brand-300 border-b border-brand-900 pb-1.5">
-              {isAr ? 'الإدارة والمنصات العامة' : isZh ? '指挥中心与公众平台' : 'Operations & Public Access'}
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <Link
-                to={`/${activeLocale}/hub`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 font-bold text-center border border-white/10"
-              >
-                {isAr ? 'مركز القيادة الموحد' : isZh ? '指挥总枢' : 'Command Hub'}
-              </Link>
-              <Link
-                to={`/${activeLocale}/portal`}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 font-bold text-center border border-white/10"
-              >
-                {isAr ? 'البوابة العامة' : isZh ? '公众门户' : 'Public Portal'}
-              </Link>
-            </div>
-          </div>
-
         </div>
-      )}
-
+      </div>
     </header>
   );
 };
+
+export default Header;

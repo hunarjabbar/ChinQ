@@ -93,7 +93,7 @@ export function ResearchBehindSummit({ lang }: ResearchBehindSummitProps) {
                   {report.tag}
                 </div>
                 <h3 className="text-sm font-black text-white group-hover:text-brand-300 transition-colors leading-snug">
-                  {report.title[lang]}
+                  {report.title?.[lang] || 'Special Report'}
                 </h3>
                 <div className="text-[11px] text-neutral-400 space-y-1">
                   <div><strong>Author:</strong> {report.author}</div>

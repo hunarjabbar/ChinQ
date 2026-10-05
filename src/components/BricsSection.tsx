@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { Globe2, TrendingUp, Landmark, ShieldCheck } from 'lucide-react';
 import { Locale } from '../types';

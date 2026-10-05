@@ -83,7 +83,8 @@ export function IcaLogo({
         width="108"
         height="108"
         rx="26"
-        fill="url(#icaRedGrad)" filter="url(#icaShadow)"
+        fill={theme === 'white' ? '#FFFFFF' : 'url(#icaRedGrad)'}
+        filter="url(#icaShadow)"
         stroke="none"
         strokeWidth="0"
         style={{ borderStyle: 'none' }}
@@ -95,11 +96,11 @@ export function IcaLogo({
           x="60"
           y="78"
           textAnchor="middle"
-          fill="#FFFFFF"
+          fill={theme === 'white' ? 'var(--color-brand-600, #DC2626)' : '#FFFFFF'}
           fontFamily="system-ui, -apple-system, sans-serif"
           fontWeight="950"
           fontSize="64"
-          letterSpacing="-1" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}
+          letterSpacing="-1" style={{ textShadow: theme === 'white' ? "none" : "0 2px 10px rgba(0,0,0,0.3)" }}
         >
           ICA
         </text>

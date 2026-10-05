@@ -132,7 +132,7 @@ END:VCALENDAR`;
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
                     <MapPin size={13} className="text-neutral-400" />
-                    <span>{session.location[lang]}</span>
+                    <span>{session.location?.[lang] || 'Venue'}</span>
                   </div>
                 </div>
 
@@ -156,10 +156,10 @@ END:VCALENDAR`;
 
               <div className="space-y-2">
                 <h3 className="text-base sm:text-lg font-black text-neutral-900 dark:text-neutral-100">
-                  {session.title[lang]}
+                  {session.title?.[lang] || 'Untitled Session'}
                 </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  {session.description[lang]}
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  {session.description?.[lang] || 'No description available.'}
                 </p>
               </div>
 
@@ -170,7 +170,7 @@ END:VCALENDAR`;
                     <BookOpen size={14} className="shrink-0" />
                     <span>{lang === 'ar' ? 'ورقة بحثية:' : lang === 'zh' ? '智库报告:' : 'Institute Paper:'}</span>
                     <Link to={`/${lang}/institute/publications`} className="underline hover:text-brand-900 dark:hover:text-white">
-                      {session.instituteResearchTitle[lang]}
+                      {session.instituteResearchTitle?.[lang] || 'View Research'}
                     </Link>
                   </div>
                 ) : (
@@ -203,23 +203,23 @@ END:VCALENDAR`;
 
               <div className="space-y-2">
                 <h3 className="text-xl font-black text-neutral-900 dark:text-neutral-100">
-                  {selectedSessionModal.title[lang]}
+                  {selectedSessionModal.title?.[lang] || 'Session Details'}
                 </h3>
                 <div className="flex items-center gap-4 text-xs font-bold text-neutral-500">
                   <span>{selectedSessionModal.time}</span>
                   <span>•</span>
-                  <span>{selectedSessionModal.location[lang]}</span>
+                  <span>{selectedSessionModal.location?.[lang] || 'Main Venue'}</span>
                 </div>
               </div>
 
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                {selectedSessionModal.description[lang]}
+                {selectedSessionModal.description?.[lang] || 'No further description available.'}
               </p>
 
               {selectedSessionModal.instituteResearchTitle && (
                 <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs space-y-1">
                   <div className="font-bold text-brand-800 dark:text-brand-300">{lang === 'ar' ? 'ورقة بحثية داعمة:' : 'Supported Knowledge Paper:'}</div>
-                  <div className="text-neutral-700 dark:text-neutral-300 font-semibold">{selectedSessionModal.instituteResearchTitle[lang]}</div>
+                  <div className="text-neutral-700 dark:text-neutral-300 font-semibold">{selectedSessionModal.instituteResearchTitle?.[lang] || 'View Research'}</div>
                   <Link to={`/${lang}/institute/publications`} className="text-brand-700 dark:text-brand-400 underline font-bold block pt-1">
                     {lang === 'ar' ? 'تحميل الدراسة من بوابة المعهد ←' : 'Download Policy Monograph from Institute Portal →'}
                   </Link>

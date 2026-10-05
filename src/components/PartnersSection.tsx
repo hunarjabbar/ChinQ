@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { motion, AnimatePresence, useAnimation } from 'motion/react';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { ExternalLink, X, Building2 } from 'lucide-react';
 import { Locale } from '../types';
 

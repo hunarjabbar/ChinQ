@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify';
 import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
-import { motion, useScroll, useSpring } from 'motion/react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Article, Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { formatDistanceToNow } from 'date-fns';

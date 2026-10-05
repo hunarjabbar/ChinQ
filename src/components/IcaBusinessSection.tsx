@@ -7,7 +7,7 @@ import {
   MapPin, DollarSign, Tag, ArrowRight, ArrowLeft, CheckCircle2, 
   Sparkles, Globe2, Briefcase, Mail, Phone, Clock, AlertCircle, X
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface BusinessOpportunity {
   id: string;

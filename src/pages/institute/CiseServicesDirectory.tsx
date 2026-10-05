@@ -248,7 +248,7 @@ export function CiseServicesDirectory() {
       route: `/${lang}/institute/services/cultural-exchange`,
       icon: GraduationCap,
       accentColor: 'border-red-500/30 hover:border-red-500',
-      tagColor: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40',
+      tagColor: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-brand-950/40',
       actionLabel: t('initiatives.card.culturalExchange.cta').replace(' →', '').replace(' ←', ''),
       features: [
         t('initiatives.card.culturalExchange.chips.universityMous'),

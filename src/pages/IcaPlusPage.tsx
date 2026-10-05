@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Search, Mic, Video as VideoIcon, Film, Clock, MapPin, PlayCircle, ExternalLink, ArrowLeft } from 'lucide-react';
 import { apiFetch } from '../lib/api';
 import { useParams, Link } from 'react-router-dom';

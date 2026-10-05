@@ -103,6 +103,19 @@ export class ErrorBoundary extends Component<Props, State> {
     window.location.href = `/${this.props.lang || 'en'}`;
   };
 
+  private safeErrorString(error: any): string {
+    if (!error) return 'Unknown Error';
+    if (typeof error === 'string') return error;
+    if (error instanceof Error) return error.message;
+    try {
+      // Handle cases where error might be an object that doesn't stringify well
+      return JSON.stringify(error, (key, value) => 
+        typeof value === 'symbol' ? value.toString() : value, 2);
+    } catch {
+      return String(error);
+    }
+  }
+
   public render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
@@ -132,9 +145,12 @@ export class ErrorBoundary extends Component<Props, State> {
                 <p className="text-xs text-amber-800/90 dark:text-amber-300 leading-relaxed">
                   {strings.subtitle}
                 </p>
-                {this.state.error?.message && (
-                  <div className="p-2.5 bg-white/80 dark:bg-black/40 border border-amber-200 dark:border-amber-900 text-[11px] text-neutral-600 dark:text-neutral-400 rounded">
-                    {strings.details}: {this.state.error.message}
+                {this.state.error && (
+                  <div className="p-2.5 bg-white/80 dark:bg-black/40 border border-amber-200 dark:border-amber-900 text-[11px] text-neutral-600 dark:text-neutral-400 rounded overflow-auto max-h-40">
+                    <div className="font-bold mb-1">{strings.details}:</div>
+                    <pre className="whitespace-pre-wrap font-mono">
+                      {this.safeErrorString(this.state.error)}
+                    </pre>
                   </div>
                 )}
                 <div className="pt-2 flex items-center gap-3">
@@ -179,10 +195,10 @@ export class ErrorBoundary extends Component<Props, State> {
               </p>
             </div>
 
-            {this.state.error?.message && (
+            {this.state.error && (
               <div className="bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 p-3.5 text-xs text-neutral-600 dark:text-neutral-400 text-start overflow-x-auto rounded-lg">
                 <span className="font-bold text-brand-800 dark:text-brand-400">{strings.details}: </span>
-                {this.state.error.message}
+                {this.safeErrorString(this.state.error)}
               </div>
             )}
 

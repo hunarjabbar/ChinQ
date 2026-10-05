@@ -6,7 +6,7 @@ import {
   Sparkles, Star, BookOpen, Download, ChevronRight, 
   ExternalLink, X, CheckCircle2, ShieldCheck, ArrowRight 
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface TrendingBooksSectionProps {
   lang?: Locale;

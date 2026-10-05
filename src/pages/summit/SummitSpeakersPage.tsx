@@ -78,7 +78,7 @@ export function SummitSpeakersPage() {
               <div className="space-y-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-800 to-neutral-900 text-white flex items-center justify-center font-black text-lg shadow-md">
-                    {spk.name[lang].slice(0, 2)}
+                    {spk.name?.[lang]?.slice(0, 2) || '??'}
                   </div>
                   {spk.isInstituteFellow && (
                     <span className="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-brand-50 dark:bg-brand-950 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
@@ -89,13 +89,13 @@ export function SummitSpeakersPage() {
 
                 <div>
                   <h3 className="text-base font-black text-neutral-900 dark:text-neutral-100">
-                    {spk.name[lang]}
+                    {spk.name?.[lang] || 'Speaker'}
                   </h3>
                   <div className="text-xs font-bold text-brand-800 dark:text-brand-400 mt-0.5">
-                    {spk.title[lang]}
+                    {spk.title?.[lang] || 'Senior Representative'}
                   </div>
                   <div className="text-xs text-neutral-500 dark:text-neutral-400">
-                    {spk.organization[lang]}
+                    {spk.organization?.[lang] || 'Partner Institution'}
                   </div>
                 </div>
 

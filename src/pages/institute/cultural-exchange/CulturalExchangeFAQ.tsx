@@ -5,7 +5,7 @@ import {
   HelpCircle, ChevronDown, ArrowLeft, ArrowRight,
   GraduationCap, Building2, CheckCircle2, ShieldCheck, Mail
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function CulturalExchangeFAQ() {
   const { lang = 'en' } = useParams<{ lang: Locale }>();

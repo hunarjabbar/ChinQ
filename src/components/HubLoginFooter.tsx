@@ -130,7 +130,7 @@ export function HubLoginFooter({ lang = 'en', className = '', useModal = true }:
             </div>
 
             {error && (
-              <div className="p-2.5 rounded-xl bg-red-950/80 border border-red-800 text-red-200 text-xs flex items-center gap-2">
+              <div className="p-2.5 rounded-xl bg-brand-950/80 border border-red-800 text-red-200 text-xs flex items-center gap-2">
                 <AlertTriangle size={14} />
                 <span>{error}</span>
               </div>

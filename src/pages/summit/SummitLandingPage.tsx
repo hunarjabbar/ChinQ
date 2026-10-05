@@ -266,23 +266,23 @@ export function SummitLandingPage() {
                     </span>
                     <span className="text-white/30" aria-hidden="true">·</span>
                     <span className="text-neutral-400 dark:text-neutral-500 font-medium">
-                      {session.location[lang]}
+                      {session.location?.[lang] || 'Main Venue'}
                     </span>
                   </div>
 
                   <h3 className="text-base font-black text-neutral-900 dark:text-neutral-100">
-                    {session.title[lang]}
+                    {session.title?.[lang] || 'Session Title'}
                   </h3>
 
                   <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    {session.description[lang]}
+                    {session.description?.[lang] || 'Detailed agenda information available on-site.'}
                   </p>
 
                   {session.instituteResearchTitle && (
                     <div className="pt-1 flex items-center gap-1.5 text-[11px] font-bold text-brand-700 dark:text-brand-300">
                       <span>{lang === 'ar' ? 'المرجع البحثي للمعهد:' : lang === 'zh' ? '智库理论支撑：' : lang === 'ckb' ? 'بنەمای توێژینەوە:' : 'Research Base:'}</span>
                       <Link to={`/${lang}/institute/publications`} className="underline hover:text-brand-900 dark:hover:text-white">
-                        {session.instituteResearchTitle[lang]}
+                        {session.instituteResearchTitle?.[lang] || 'View Research'}
                       </Link>
                     </div>
                   )}
@@ -327,15 +327,15 @@ export function SummitLandingPage() {
               >
                 <div className="space-y-3">
                   <div className="w-12 h-12 rounded-full bg-brand-800 text-white flex items-center justify-center font-black text-base shadow-sm ring-1 ring-brand-700/50">
-                    {spk.name[lang].slice(0, 2)}
+                    {spk.name?.[lang]?.slice(0, 2) || '??'}
                   </div>
                   <div>
-                    <h3 className="text-sm font-black text-neutral-900 dark:text-neutral-100">{spk.name[lang]}</h3>
-                    <div className="text-[11px] font-bold text-brand-800 dark:text-brand-400 mt-0.5">{spk.title[lang]}</div>
-                    <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{spk.organization[lang]}</div>
+                    <h3 className="text-sm font-black text-neutral-900 dark:text-neutral-100">{spk.name?.[lang] || 'Speaker'}</h3>
+                    <div className="text-[11px] font-bold text-brand-800 dark:text-brand-400 mt-0.5">{spk.title?.[lang] || 'Senior Fellow'}</div>
+                    <div className="text-[11px] text-neutral-500 dark:text-neutral-400">{spk.organization?.[lang] || 'Partner Institution'}</div>
                   </div>
                   <p className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed pt-1">
-                    {spk.bio[lang]}
+                    {spk.bio?.[lang] || 'Biography pending official release.'}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 pt-1">

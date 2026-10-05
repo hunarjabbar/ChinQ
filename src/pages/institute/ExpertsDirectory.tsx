@@ -16,7 +16,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MediaRequestForm } from '../../components/institute/MediaRequestForm';
 import { cn } from '../../lib/utils';
 

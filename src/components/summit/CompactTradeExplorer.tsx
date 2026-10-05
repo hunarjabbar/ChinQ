@@ -135,7 +135,7 @@ export function CompactTradeExplorer({ lang }: CompactTradeExplorerProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {topImports.map((item, idx) => (
             <div key={idx} className="flex items-center justify-between p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-800/40 text-xs">
-              <span className="font-semibold text-neutral-800 dark:text-neutral-200">{item.name[lang]}</span>
+              <span className="font-semibold text-neutral-800 dark:text-neutral-200">{item.name?.[lang] || 'Import Category'}</span>
               <div className="flex items-center gap-2 shrink-0">
                 <span className="font-black text-neutral-900 dark:text-neutral-100">{item.val}</span>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300">{item.share}</span>

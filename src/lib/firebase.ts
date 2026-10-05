@@ -1,10 +1,16 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer, setLogLevel } from 'firebase/firestore';
+import { initializeFirestore, doc, getDocFromServer, setLogLevel } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+
+// Use initializeFirestore with experimentalForceLongPolling: true to resolve connectivity issues 
+// like "Could not reach Cloud Firestore backend" which can occur in certain network environments.
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+}, firebaseConfig.firestoreDatabaseId);
+
 export const auth = getAuth(app);
 
 // Suppress transient offline logs in dev/headless runner

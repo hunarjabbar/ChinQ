@@ -7,7 +7,7 @@ import {
   ChevronRight, X, Send, CheckCircle2, Sparkles, Globe2, ExternalLink,
   ArrowRight, FileText, Building2
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface WomenSectionProps {
   lang?: Locale;
