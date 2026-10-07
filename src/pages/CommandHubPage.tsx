@@ -9,9 +9,17 @@ import {
   BarChart3, Settings, LogOut, KeyRound, Lock, Search, Bell, Command,
   Plus, Edit, Trash2, RotateCcw, Eye, Download, CheckCircle, AlertTriangle,
   RefreshCw, Shield, Server, FileSpreadsheet, HardDrive, Cpu, Layers,
-  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode, Radio, GraduationCap
+  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode, Radio, GraduationCap, Compass
 } from 'lucide-react';
 import { IcaAdministrationSection } from '../components/hub/IcaAdministrationSection';
+import { NavigationManagerSection } from '../components/hub/NavigationManagerSection';
+import { PublicPortalAdminSection } from '../components/hub/PublicPortalAdminSection';
+import { SecretariatAdminSection } from '../components/hub/SecretariatAdminSection';
+import { NewsroomAdminSection } from '../components/hub/NewsroomAdminSection';
+import { LiveMediaAdminSection } from '../components/hub/LiveMediaAdminSection';
+import { CulturalExchangeAdminSection } from '../components/hub/CulturalExchangeAdminSection';
+import { SubmissionsInboxSection } from '../components/hub/SubmissionsInboxSection';
+import { GenericEntityCrud } from '../components/hub/GenericEntityCrud';
 
 interface AuditLogEntry {
   id: string;
@@ -400,6 +408,15 @@ export function CommandHubPage() {
                 <LayoutDashboard size={16} />
                 <span>Dashboard Overview</span>
               </Link>
+              <Link
+                to="/hub/navigation"
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                  path.startsWith('/navigation') ? 'bg-red-600 text-white shadow-md' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white'
+                }`}
+              >
+                <Compass size={16} />
+                <span>Global Navigation CRUD</span>
+              </Link>
             </div>
 
             {/* ICA Administration (4 Portals CRUD) */}
@@ -603,11 +620,27 @@ export function CommandHubPage() {
 
         {/* Dynamic Content Display per Route */}
         <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-neutral-950">
-          {/* ICA Administration Sub-sections */}
-          {path.startsWith('/ica/public') && <IcaAdministrationSection subSection="public" lang={activeLocale} />}
-          {path.startsWith('/ica/secretariat') && <IcaAdministrationSection subSection="secretariat" lang={activeLocale} />}
-          {path.startsWith('/ica/newsroom') && <IcaAdministrationSection subSection="newsroom" lang={activeLocale} />}
-          {path.startsWith('/ica/live') && <IcaAdministrationSection subSection="live" lang={activeLocale} />}
+          {/* Navigation Manager CRUD View */}
+          {path.startsWith('/navigation') && <NavigationManagerSection lang={activeLocale} />}
+
+          {/* ICA Administration Sub-sections - FULL CRUD */}
+          {(path.startsWith('/ica/public') || path.startsWith('/ica-admin/public-portal')) && (
+            <PublicPortalAdminSection lang={activeLocale} />
+          )}
+          {(path.startsWith('/ica/secretariat') || path.startsWith('/ica-admin/secretariat')) && (
+            <SecretariatAdminSection lang={activeLocale} />
+          )}
+          {(path.startsWith('/ica/newsroom') || path.startsWith('/ica-admin/newsroom')) && (
+            <NewsroomAdminSection lang={activeLocale} />
+          )}
+          {(path.startsWith('/ica/live') || path.startsWith('/ica-admin/live')) && (
+            <LiveMediaAdminSection lang={activeLocale} />
+          )}
+
+          {/* Cultural Exchange Services Full CRUD View */}
+          {path.includes('cultural-exchange') && (
+            <CulturalExchangeAdminSection lang={activeLocale} />
+          )}
 
           {/* Dashboard View */}
           {(path === '' || path === '/') && (
@@ -685,70 +718,7 @@ export function CommandHubPage() {
           )}
 
           {/* Submissions Inbox View */}
-          {path.startsWith('/submissions') && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-black uppercase text-white">Unified Submissions Inbox</h2>
-                  <p className="text-xs text-neutral-400">Incoming service inquiries, visa applications & summit dossiers</p>
-                </div>
-                <button
-                  onClick={() => alert('Exported all filtered submission records to CSV format.')}
-                  className="bg-brand-800 text-white font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-2"
-                >
-                  <FileSpreadsheet size={14} />
-                  <span>Export CSV</span>
-                </button>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                <table className="w-full text-left text-xs text-neutral-300">
-                  <thead className="bg-neutral-950 text-neutral-500 font-bold uppercase border-b border-neutral-800">
-                    <tr>
-                      <th className="p-3">Ref ID</th>
-                      <th className="p-3">Service</th>
-                      <th className="p-3">Applicant Name</th>
-                      <th className="p-3">Status</th>
-                      <th className="p-3">PII Access</th>
-                      <th className="p-3">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-neutral-800">
-                    <tr className="hover:bg-neutral-850">
-                      <td className="p-3 font-mono text-neutral-400">SUB-2026-881</td>
-                      <td className="p-3 font-bold text-white">Visa Centre</td>
-                      <td className="p-3">
-                        {revealedPiiMap['SUB-2026-881'] ? 'Tariq Aziz (Erbil, Iraq)' : 'T**** A*** (PII Masked)'}
-                      </td>
-                      <td className="p-3">
-                        <span className="bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded-full font-bold">
-                          UNDER REVIEW
-                        </span>
-                      </td>
-                      <td className="p-3">
-                        {currentRole === 'superadmin' || currentRole === 'admin' ? (
-                          <button
-                            onClick={() => {
-                              setRevealedPiiMap(prev => ({ ...prev, 'SUB-2026-881': true }));
-                              writeAudit('reveal_pii', 'VisaSubmission', 'SUB-2026-881', null, { revealed: true });
-                            }}
-                            className="text-brand-400 hover:underline font-bold"
-                          >
-                            Reveal PII
-                          </button>
-                        ) : (
-                          <span className="text-neutral-500 italic">Restricted</span>
-                        )}
-                      </td>
-                      <td className="p-3 flex items-center gap-2">
-                        <button className="text-xs bg-neutral-800 px-2 py-1 rounded text-white hover:bg-neutral-700">Audit</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
+          {path.startsWith('/submissions') && <SubmissionsInboxSection lang={activeLocale} />}
 
           {/* Users & Roles View */}
           {path.startsWith('/users') || path.startsWith('/roles') ? (
@@ -836,39 +806,19 @@ export function CommandHubPage() {
             </div>
           )}
 
-          {/* Generic CRUD View for Institute & Services */}
-          {(path.startsWith('/institute') || path.startsWith('/services')) && !path.startsWith('/system') && !path.startsWith('/submissions') && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-black uppercase text-white">{path.replace(/^\//, '').replace(/\//g, ' > ')} CRUD Management</h2>
-                  <p className="text-xs text-neutral-400">Manage, translate, and audit content records</p>
-                </div>
-                {(currentRole === 'superadmin' || currentRole === 'admin' || currentRole === 'editor') && (
-                  <button
-                    onClick={() => alert('Create Form opened.')}
-                    className="bg-brand-800 text-white font-bold text-xs px-3 py-2 rounded-xl flex items-center gap-2"
-                  >
-                    <Plus size={14} />
-                    <span>Create Record</span>
-                  </button>
-                )}
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 space-y-4">
-                <div className="flex items-center justify-between">
-                  <input
-                    type="text"
-                    placeholder="Filter records..."
-                    className="bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-1.5 text-xs text-white"
-                  />
-                  <span className="text-xs text-neutral-400">Role permissions: <strong className="text-brand-400 uppercase">{currentRole}</strong></span>
-                </div>
-                <div className="p-8 text-center text-xs text-neutral-400 border border-dashed border-neutral-800 rounded-xl">
-                  Records for <span className="text-white font-bold">{path}</span> ready. Use the controls above to modify or publish.
-                </div>
-              </div>
-            </div>
+          {/* Active Full CRUD View for Institute & Services */}
+          {(path.startsWith('/institute') || path.startsWith('/services')) && !path.includes('cultural-exchange') && !path.startsWith('/system') && !path.startsWith('/submissions') && (
+            <GenericEntityCrud
+              sectionId={
+                path.includes('visa-centre') ? 'services-visa-centre' :
+                path.includes('chinese-centre') ? 'services-chinese-centre' :
+                path.includes('settlement') ? 'services-settlement' :
+                'public-initiatives'
+              }
+              sectionTitle={`${path.replace(/^\//, '').replace(/\//g, ' > ')} Content & Service Ledger`}
+              sectionDescription="Full administrative CRUD, style overrides, visibility schedule, and quad-lingual translations."
+              lang={activeLocale}
+            />
           )}
         </main>
       </div>

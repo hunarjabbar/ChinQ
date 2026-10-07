@@ -37,7 +37,7 @@ async function main() {
   const adminHash = await bcrypt.hash(adminPassword, 10);
   const editorHash = await bcrypt.hash(editorPassword, 10);
 
-  const admin = await prisma.user.create({
+  await prisma.user.create({
     data: {
       email: 'admin@iraqchinaagency.com',
       password: adminHash,
@@ -46,7 +46,7 @@ async function main() {
     },
   });
 
-  const adminMedia = await prisma.user.create({
+  await prisma.user.create({
     data: {
       email: 'admin@iraqchinaagency.media',
       password: adminHash,
@@ -55,7 +55,7 @@ async function main() {
     },
   });
 
-  const editorMedia = await prisma.user.create({
+  await prisma.user.create({
     data: {
       email: 'editor@iraqchinaagency.media',
       password: editorHash,
@@ -102,7 +102,7 @@ async function main() {
     },
   });
 
-  const catPolitics = await prisma.category.create({
+  await prisma.category.create({
     data: {
       slug: 'politics',
       name: 'Politics',
@@ -112,7 +112,7 @@ async function main() {
     },
   });
 
-  const catBeltRoad = await prisma.category.create({
+  await prisma.category.create({
     data: {
       slug: 'belt-road',
       name: 'Belt & Road',
@@ -122,7 +122,7 @@ async function main() {
     },
   });
 
-  const catTechnology = await prisma.category.create({
+  await prisma.category.create({
     data: {
       slug: 'technology',
       name: 'Technology',
@@ -132,7 +132,7 @@ async function main() {
     },
   });
 
-  const catOpinion = await prisma.category.create({
+  await prisma.category.create({
     data: {
       slug: 'opinion',
       name: 'Opinion',
@@ -142,16 +142,16 @@ async function main() {
     },
   });
 
-  const catAi = await prisma.category.create({
+  await prisma.category.create({
     data: { slug: 'ai', name: 'AI', nameEn: 'AI', nameAr: 'الذكاء الاصطناعي', nameZh: '人工智能' }
   });
-  const catFood = await prisma.category.create({
+  await prisma.category.create({
     data: { slug: 'food-beverage', name: 'Food & Beverage', nameEn: 'Food & Beverage', nameAr: 'الأغذية والمشروبات', nameZh: '餐饮' }
   });
-  const catExpo = await prisma.category.create({
+  await prisma.category.create({
     data: { slug: 'expo', name: 'Expo', nameEn: 'Expo', nameAr: 'معرض', nameZh: '博览会' }
   });
-  const catStats = await prisma.category.create({
+  await prisma.category.create({
     data: { slug: 'business-statistics', name: 'Business Statistics', nameEn: 'Business Statistics', nameAr: 'إحصاءات الأعمال', nameZh: '商业统计' }
   });
 
@@ -321,7 +321,7 @@ async function main() {
 
   // 7. Seed Live Event
   console.log('🔴 Creating live event...');
-  const liveEvent = await prisma.liveEvent.create({
+  await prisma.liveEvent.create({
     data: {
       slug: 'iraq-china-summit-2026',
       isActive: true,

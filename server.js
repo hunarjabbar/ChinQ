@@ -1376,6 +1376,446 @@ function registerCulturalExchangeRoutes(app, editorOrAdminMiddleware, adminMiddl
 }
 __name9(registerCulturalExchangeRoutes, "registerCulturalExchangeRoutes");
 
+// server/hubRoutes.ts
+var inMemoryAuditLogs = [
+  {
+    id: "audit_init_01",
+    actorId: "usr_superadmin",
+    actorEmail: "admin@iraqi-chineseagency.com",
+    actorRole: "SUPERADMIN",
+    action: "system_init",
+    resource: "HubEcosystem",
+    itemId: "cise-hub-core",
+    details: "Centralized Command Hub ecosystem initialized with RBAC enforcement",
+    ip: "127.0.0.1",
+    userAgent: "Internal/Node",
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  }
+];
+var inMemoryNavigationItems = [
+  {
+    id: "nav_hdr_newsroom",
+    section: "header",
+    label: { en: "Newsroom", ar: "\u063A\u0631\u0641\u0629 \u0627\u0644\u0623\u062E\u0628\u0627\u0631", zh: "\u65B0\u95FB\u4E2D\u5FC3", ckb: "\u0698\u0648\u0648\u0631\u06CC \u0647\u06D5\u0648\u0627\u06B5" },
+    slug: "newsroom",
+    href: "/newsroom",
+    icon: "Newspaper",
+    displayOrder: 1,
+    status: "active",
+    portal: "newsroom",
+    requiredScope: "public"
+  },
+  {
+    id: "nav_hdr_live",
+    section: "header",
+    label: { en: "Live Portal", ar: "\u0627\u0644\u0628\u062B \u0627\u0644\u0645\u0628\u0627\u0634\u0631", zh: "\u5728\u7EBF\u76F4\u64AD", ckb: "\u067E\u06D5\u062E\u0634\u06CC \u0632\u06CC\u0646\u062F\u0648\u0648" },
+    slug: "live",
+    href: "/live",
+    icon: "Radio",
+    displayOrder: 2,
+    status: "active",
+    portal: "live",
+    requiredScope: "public",
+    isLive: true
+  },
+  {
+    id: "nav_hdr_media",
+    section: "header",
+    label: { en: "Media Hub", ar: "\u0627\u0644\u0645\u0631\u0643\u0632 \u0627\u0644\u0625\u0639\u0644\u0627\u0645\u064A", zh: "\u878D\u5A92\u4F53\u4E2D\u5FC3", ckb: "\u0646\u0627\u0648\u06D5\u0646\u062F\u06CC \u0645\u06CC\u062F\u06CC\u0627" },
+    slug: "media",
+    href: "/media",
+    icon: "Film",
+    displayOrder: 3,
+    status: "active",
+    portal: "media-hub",
+    requiredScope: "public"
+  },
+  {
+    id: "nav_hdr_settlement",
+    section: "header",
+    label: { en: "Settlement", ar: "\u062A\u0633\u0648\u064A\u0629 \u0627\u0644\u0645\u062F\u0641\u0648\u0639\u0627\u062A", zh: "\u672C\u5E01\u7ED3\u7B97", ckb: "\u067E\u0627\u06A9\u062A\u0627\u0648\u06CC \u062F\u0631\u0627\u0648\u06D5\u06A9\u0627\u0646" },
+    slug: "settlement",
+    href: "/settlement",
+    icon: "CreditCard",
+    displayOrder: 4,
+    status: "active",
+    portal: "settlement",
+    requiredScope: "public"
+  },
+  {
+    id: "nav_hdr_institute",
+    section: "header",
+    label: { en: "Institute", ar: "\u0627\u0644\u0645\u0639\u0647\u062F \u0627\u0644\u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A", zh: "\u6218\u7565\u7814\u7A76\u6240", ckb: "\u067E\u06D5\u06CC\u0645\u0627\u0646\u06AF\u0627\u06CC \u0633\u062A\u0631\u0627\u062A\u06CC\u0698\u06CC" },
+    slug: "institute",
+    href: "/institute",
+    icon: "Building2",
+    displayOrder: 5,
+    status: "active",
+    portal: "cise",
+    requiredScope: "public"
+  },
+  {
+    id: "nav_hdr_summit",
+    section: "header",
+    label: { en: "Summit & Expo", ar: "\u0627\u0644\u0642\u0645\u0629 \u0648\u0627\u0644\u0645\u0639\u0631\u0636", zh: "\u7ECF\u8D38\u5CF0\u4F1A", ckb: "\u0644\u0648\u0648\u062A\u06A9\u06D5 \u0648 \u067E\u06CE\u0634\u0627\u0646\u06AF\u0627" },
+    slug: "summit",
+    href: "/summit",
+    icon: "CalendarDays",
+    displayOrder: 6,
+    status: "active",
+    portal: "summit",
+    requiredScope: "public"
+  },
+  {
+    id: "nav_hdr_hub",
+    section: "header",
+    label: { en: "Command Hub", ar: "\u0645\u0631\u0643\u0632 \u0627\u0644\u0642\u064A\u0627\u062F\u0629", zh: "\u6307\u6325\u4E2D\u67A2", ckb: "\u0646\u0627\u0648\u06D5\u0646\u062F\u06CC \u06A9\u06C6\u0646\u062A\u0695\u06C6\u06B5" },
+    slug: "hub",
+    href: "/hub",
+    icon: "Sparkles",
+    displayOrder: 7,
+    status: "active",
+    portal: "cise",
+    requiredScope: "editor"
+  }
+];
+function recordAudit(req, action, resource, itemId, before, after, details) {
+  const user = req.user || { id: "anonymous", email: "public@visitor.iq", role: "VIEWER" };
+  const entry = {
+    id: `audit_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+    actorId: user.id || "usr_viewer",
+    actorEmail: user.email || "viewer@visitor.iq",
+    actorRole: user.role || "VIEWER",
+    action,
+    resource,
+    itemId,
+    before,
+    after,
+    details: details || `${action} performed on ${resource}`,
+    ip: req.ip || req.socket.remoteAddress || "127.0.0.1",
+    userAgent: req.headers["user-agent"] || "Unknown",
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  inMemoryAuditLogs.unshift(entry);
+  if (inMemoryAuditLogs.length > 500) {
+    inMemoryAuditLogs.pop();
+  }
+  return entry;
+}
+function registerHubRoutes(app) {
+  app.get("/api/hub/navigation", (req, res) => {
+    res.json(inMemoryNavigationItems);
+  });
+  app.post("/api/hub/navigation", (req, res) => {
+    const userRole = (req.user?.role || req.headers["x-role"] || "VIEWER").toString().toUpperCase();
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot mutate navigation architecture" });
+    }
+    const payload = req.body;
+    if (!payload.label || !payload.slug || !payload.href) {
+      return res.status(400).json({ error: "Missing required navigation fields (label, slug, href)" });
+    }
+    const newItem = {
+      id: payload.id || `nav_${Date.now()}`,
+      section: payload.section || "header",
+      parentId: payload.parentId || null,
+      label: payload.label,
+      slug: payload.slug,
+      href: payload.href,
+      icon: payload.icon || "Link",
+      displayOrder: payload.displayOrder || inMemoryNavigationItems.length + 1,
+      status: payload.status || "active",
+      portal: payload.portal || "all",
+      requiredScope: payload.requiredScope || "public",
+      column: payload.column,
+      isExternal: payload.isExternal || false,
+      badge: payload.badge,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    inMemoryNavigationItems.push(newItem);
+    recordAudit(req, "create_navigation", "NavigationItem", newItem.id, null, newItem);
+    res.status(201).json(newItem);
+  });
+  app.put("/api/hub/navigation/:id", (req, res) => {
+    const userRole = (req.user?.role || req.headers["x-role"] || "VIEWER").toString().toUpperCase();
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot mutate navigation architecture" });
+    }
+    const index = inMemoryNavigationItems.findIndex((i) => i.id === req.params.id);
+    if (index === -1) {
+      return res.status(404).json({ error: "Navigation item not found" });
+    }
+    const before = { ...inMemoryNavigationItems[index] };
+    inMemoryNavigationItems[index] = {
+      ...inMemoryNavigationItems[index],
+      ...req.body,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    recordAudit(req, "update_navigation", "NavigationItem", req.params.id, before, inMemoryNavigationItems[index]);
+    res.json(inMemoryNavigationItems[index]);
+  });
+  app.delete("/api/hub/navigation/:id", (req, res) => {
+    const userRole = (req.user?.role || req.headers["x-role"] || "VIEWER").toString().toUpperCase();
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot delete navigation architecture" });
+    }
+    const index = inMemoryNavigationItems.findIndex((i) => i.id === req.params.id);
+    if (index === -1) {
+      return res.status(404).json({ error: "Navigation item not found" });
+    }
+    const isPermanent = req.query.permanent === "true";
+    if (isPermanent && userRole !== "SUPERADMIN") {
+      return res.status(403).json({ error: "Forbidden: Only SUPERADMIN can permanently delete navigation items" });
+    }
+    const before = inMemoryNavigationItems[index];
+    if (isPermanent) {
+      inMemoryNavigationItems.splice(index, 1);
+    } else {
+      inMemoryNavigationItems[index].status = "archived";
+    }
+    recordAudit(req, isPermanent ? "permanent_delete_navigation" : "soft_delete_navigation", "NavigationItem", req.params.id, before, null);
+    res.json({ success: true, permanent: isPermanent });
+  });
+  app.post("/api/hub/navigation/:id/restore", (req, res) => {
+    const userRole = (req.user?.role || req.headers["x-role"] || "VIEWER").toString().toUpperCase();
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot restore navigation items" });
+    }
+    const item = inMemoryNavigationItems.find((i) => i.id === req.params.id);
+    if (!item) {
+      return res.status(404).json({ error: "Navigation item not found" });
+    }
+    item.status = "active";
+    recordAudit(req, "restore_navigation", "NavigationItem", req.params.id, null, item);
+    res.json(item);
+  });
+  app.post("/api/hub/publications", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER" || !["SUPERADMIN", "ADMIN", "EDITOR"].includes(userRole)) {
+      return res.status(403).json({
+        error: "Forbidden: Viewer or unauthorized role cannot publish strategic research documents"
+      });
+    }
+    const publication = {
+      id: `pub_${Date.now()}`,
+      title: req.body.title || "Untitled Strategic Brief",
+      category: req.body.category || "POLICY_BRIEF",
+      status: "DRAFT",
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    recordAudit(req, "create_publication", "Publication", publication.id, null, publication);
+    res.status(201).json(publication);
+  });
+  app.delete("/api/hub/publications/:id", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    const isPermanent = req.query.permanent === "true";
+    if (isPermanent && userRole !== "SUPERADMIN") {
+      return res.status(403).json({
+        error: "Forbidden: Only SUPERADMIN is authorized to execute permanent record destruction"
+      });
+    }
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot delete records" });
+    }
+    recordAudit(req, isPermanent ? "permanent_delete_publication" : "soft_delete_publication", "Publication", req.params.id);
+    res.json({ success: true, id: req.params.id, permanent: isPermanent });
+  });
+  app.get("/api/hub/system", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "EDITOR" || userRole === "VIEWER" || userRole === "TRANSLATOR") {
+      return res.status(403).json({
+        error: "Forbidden: High-level system configuration and core infrastructure are restricted to Administrator and Superadmin only"
+      });
+    }
+    res.json({
+      status: "healthy",
+      buildId: "ICA-ECOSYSTEM-HUB-2026",
+      gitCommit: "1f01e83",
+      datastore: "Firestore / Prisma SQLite Synchronized",
+      environment: process.env.NODE_ENV || "development",
+      uptime: process.uptime()
+    });
+  });
+  app.get("/api/hub/audit", (req, res) => {
+    const userRole = (req.user?.role || req.headers["x-role"] || "SUPERADMIN").toString().toUpperCase();
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewing audit logs requires elevated clearance" });
+    }
+    const { action, resource, actor } = req.query;
+    let filtered = [...inMemoryAuditLogs];
+    if (action) {
+      filtered = filtered.filter((l) => l.action.toLowerCase().includes(String(action).toLowerCase()));
+    }
+    if (resource) {
+      filtered = filtered.filter((l) => l.resource.toLowerCase().includes(String(resource).toLowerCase()));
+    }
+    if (actor) {
+      filtered = filtered.filter((l) => l.actorEmail.toLowerCase().includes(String(actor).toLowerCase()));
+    }
+    res.json({
+      total: filtered.length,
+      entries: filtered
+    });
+  });
+  app.post("/api/hub/revalidate", (req, res) => {
+    const { path: path2, tag } = req.body;
+    recordAudit(req, "revalidate_cache", "Cache", tag || path2, null, { path: path2, tag, revalidatedAt: (/* @__PURE__ */ new Date()).toISOString() });
+    res.json({
+      revalidated: true,
+      path: path2 || "all",
+      tag: tag || "global-content",
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    });
+  });
+  app.get("/api/hub/submissions", (req, res) => {
+    const submissions = [
+      {
+        id: "SUB-VISA-2026-001",
+        service: "visa-centre",
+        serviceName: "Bilateral Visa Centre",
+        applicant: "Dr. Zaid Al-Rawi",
+        email: "z.alrawi@baghdad-trade.iq",
+        phone: "+964 780 112 3344",
+        status: "RECEIVED",
+        date: "2026-03-24T10:15:00Z",
+        category: "Commercial M-Visa (PRC)"
+      },
+      {
+        id: "SUB-SUMMIT-2026-002",
+        service: "summit",
+        serviceName: "Economic Summit & Expo",
+        applicant: "China State Construction Engineering",
+        email: "delegation@cscec.com.cn",
+        phone: "+86 10 8899 0011",
+        status: "APPROVED",
+        date: "2026-03-23T14:30:00Z",
+        category: "Exhibitor VIP Pavilion"
+      },
+      {
+        id: "SUB-SETTLE-2026-003",
+        service: "settlement",
+        serviceName: "Direct Payment Settlement",
+        applicant: "Al-Mansoor Import & Export",
+        email: "finance@almansoor-corp.iq",
+        phone: "+964 771 998 7766",
+        status: "PROCESSING",
+        date: "2026-03-22T09:00:00Z",
+        category: "mBridge Digital Currency Rail"
+      }
+    ];
+    res.json(submissions);
+  });
+  const inMemorySections = {};
+  app.get("/api/hub/sections", (req, res) => {
+    res.json(inMemorySections);
+  });
+  app.put("/api/hub/sections/:sectionId", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot mutate section configurations" });
+    }
+    const { sectionId } = req.params;
+    inMemorySections[sectionId] = {
+      ...inMemorySections[sectionId] || {},
+      customization: req.body,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    recordAudit(req, "update_section_customization", "Section", sectionId, null, req.body);
+    res.json(inMemorySections[sectionId]);
+  });
+  app.post("/api/hub/sections/:sectionId/items", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot create section records" });
+    }
+    const { sectionId } = req.params;
+    const item = {
+      ...req.body,
+      id: req.body.id || `card_${Date.now()}`,
+      sectionId,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    if (!inMemorySections[sectionId]) {
+      inMemorySections[sectionId] = { id: sectionId, items: [] };
+    }
+    inMemorySections[sectionId].items = inMemorySections[sectionId].items || [];
+    inMemorySections[sectionId].items.push(item);
+    recordAudit(req, "create_card", "Card", item.id, null, item);
+    res.status(201).json(item);
+  });
+  app.put("/api/hub/sections/:sectionId/items/:itemId", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot modify section records" });
+    }
+    const { sectionId, itemId } = req.params;
+    const sec = inMemorySections[sectionId];
+    if (sec && sec.items) {
+      const idx = sec.items.findIndex((i) => i.id === itemId);
+      if (idx !== -1) {
+        const before = { ...sec.items[idx] };
+        sec.items[idx] = { ...sec.items[idx], ...req.body, updatedAt: (/* @__PURE__ */ new Date()).toISOString() };
+        recordAudit(req, "update_card", "Card", itemId, before, sec.items[idx]);
+        return res.json(sec.items[idx]);
+      }
+    }
+    res.json({ id: itemId, ...req.body, updatedAt: (/* @__PURE__ */ new Date()).toISOString() });
+  });
+  app.delete("/api/hub/sections/:sectionId/items/:itemId", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot delete records" });
+    }
+    const isPermanent = req.query.permanent === "true";
+    if (isPermanent && userRole !== "SUPERADMIN") {
+      return res.status(403).json({
+        error: "Forbidden: Only SUPERADMIN is authorized to execute permanent record destruction"
+      });
+    }
+    const { sectionId, itemId } = req.params;
+    const sec = inMemorySections[sectionId];
+    if (sec && sec.items) {
+      const idx = sec.items.findIndex((i) => i.id === itemId);
+      if (idx !== -1) {
+        if (isPermanent) {
+          sec.items.splice(idx, 1);
+        } else {
+          sec.items[idx].status = "archived";
+        }
+      }
+    }
+    recordAudit(req, isPermanent ? "permanent_delete_card" : "soft_delete_card", "Card", itemId);
+    res.json({ success: true, permanent: isPermanent });
+  });
+  app.post("/api/hub/sections/:sectionId/items/:itemId/restore", (req, res) => {
+    const roleHeader = req.headers["x-role"]?.toUpperCase();
+    const userRole = req.user?.role?.toUpperCase() || roleHeader || "VIEWER";
+    if (userRole === "VIEWER") {
+      return res.status(403).json({ error: "Forbidden: Viewer cannot restore records" });
+    }
+    const { sectionId, itemId } = req.params;
+    const sec = inMemorySections[sectionId];
+    if (sec && sec.items) {
+      const item = sec.items.find((i) => i.id === itemId);
+      if (item) {
+        item.status = "active";
+        item.updatedAt = (/* @__PURE__ */ new Date()).toISOString();
+      }
+    }
+    recordAudit(req, "restore_card", "Card", itemId);
+    res.json({ success: true, id: itemId, status: "active" });
+  });
+}
+
 // server/sourcingPillarSeeder.ts
 async function seedSourcingPillars() {
   console.log("[Sourcing Seeder] Verified.");
@@ -1569,8 +2009,8 @@ async function startServer() {
         const user = req.user;
         if (res.statusCode >= 200 && res.statusCode < 300 && user) {
           let itemId = null;
-          if (responseBody && typeof responseBody === "object" && responseBody.id) {
-            itemId = responseBody.id;
+          if (responseBody && typeof responseBody === "object" && "id" in responseBody) {
+            itemId = String(responseBody.id);
           } else {
             const parts = req.path.split("/");
             if (parts.length > 3 && parts[parts.length - 1] !== "seed") {
@@ -1679,6 +2119,7 @@ async function startServer() {
   };
   registerPaymentRoutes(app, editorOrAdminMiddleware, adminMiddleware);
   registerCulturalExchangeRoutes(app, editorOrAdminMiddleware, adminMiddleware);
+  registerHubRoutes(app);
   app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
       const { email, password, name, role } = req.body;
@@ -5427,6 +5868,33 @@ async function startServer() {
     if (!fs.existsSync(distPath) && fs.existsSync(path.join(process.cwd(), "build"))) {
       distPath = path.join(process.cwd(), "build");
     }
+    app.use("/assets", (req, res, next) => {
+      const requestedFile = req.path.replace(/^\//, "");
+      const fullPath = path.join(distPath, "assets", requestedFile);
+      if (fs.existsSync(fullPath)) {
+        return next();
+      }
+      const match = requestedFile.match(/^([a-zA-Z0-9_\-]+?)-[a-zA-Z0-9_\-]{4,16}\.(js|css)$/);
+      if (match) {
+        const prefix = match[1];
+        const ext = match[2];
+        const assetsDir = path.join(distPath, "assets");
+        if (fs.existsSync(assetsDir)) {
+          try {
+            const files = fs.readdirSync(assetsDir);
+            const found = files.find((f) => f.startsWith(`${prefix}-`) && f.endsWith(`.${ext}`));
+            if (found) {
+              console.log(`[ChunkFallback] Redirecting stale chunk request ${requestedFile} -> ${found}`);
+              res.setHeader("Cache-Control", "no-cache");
+              return res.redirect(302, `/assets/${found}`);
+            }
+          } catch (e) {
+            console.warn("[ChunkFallback] Error reading assets directory:", e);
+          }
+        }
+      }
+      next();
+    });
     app.use(express.static(distPath, {
       setHeaders: (res, path2) => {
         if (path2.endsWith(".html")) {

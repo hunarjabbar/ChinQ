@@ -21,11 +21,16 @@ import {
   FileCheck,
   Ship,
   Award,
-  Cpu
+  Cpu,
+  Smartphone,
+  Building2,
+  Flame,
+  ExternalLink
 } from 'lucide-react';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { portalStore } from '../../data/portalData';
+import { useSectionControlStore } from '../../store/useSectionControlStore';
 import { getPortalTranslation } from '../../locales/portalTranslations';
 import { PortalLocale } from '../../types/portals';
 
@@ -37,6 +42,42 @@ export function IcaPublicHome() {
   const [dataVersion, setDataVersion] = useState(0);
   const [emailInput, setEmailInput] = useState('');
   const [subscribedSuccess, setSubscribedSuccess] = useState(false);
+
+  // Command Hub Controlled Sections
+  const { sections } = useSectionControlStore();
+  const heroSection = sections['public-hero'];
+  const heroCard = heroSection?.items?.[0];
+  const isHeroVisible = heroSection?.customization?.visibility !== 'hidden';
+  const heroStyles = heroCard?.customization?.styleOverrides || heroSection?.customization?.styleOverrides;
+
+  const liveBroadcastSection = sections['public-live-broadcast'];
+  const isLiveBroadcastVisible = liveBroadcastSection?.customization?.visibility !== 'hidden';
+  const liveBandItem = liveBroadcastSection?.items?.find(i => i.status === 'active') || liveBroadcastSection?.items?.[0];
+  const liveStyles = liveBandItem?.customization?.styleOverrides || liveBroadcastSection?.customization?.styleOverrides;
+
+  const wireSection = sections['public-intelligence-wire'];
+  const isWireVisible = wireSection?.customization?.visibility !== 'hidden';
+  const wireItems = wireSection?.items?.filter(i => i.status === 'active') || [];
+
+  const quickStatsSection = sections['public-quick-stats'];
+  const isQuickStatsVisible = quickStatsSection?.customization?.visibility !== 'hidden';
+  const quickStatItems = quickStatsSection?.items?.filter(i => i.status === 'active') || [];
+
+  const worldSection = sections['public-world'];
+  const isWorldVisible = worldSection?.customization?.visibility !== 'hidden';
+
+  const initiativesSection = sections['public-initiatives'];
+  const isInitiativesVisible = initiativesSection?.customization?.visibility !== 'hidden';
+  const customInitiatives = initiativesSection?.items?.filter(i => i.status === 'active') || [];
+
+  const partnersSection = sections['public-partners'];
+  const isPartnersVisible = partnersSection?.customization?.visibility !== 'hidden';
+  const partnerItems = partnersSection?.items?.filter(i => i.status === 'active') || [];
+
+  const downloadAppSection = sections['public-download-app'];
+  const isDownloadAppVisible = downloadAppSection?.customization?.visibility !== 'hidden';
+  const downloadAppItem = downloadAppSection?.items?.find(i => i.status === 'active') || downloadAppSection?.items?.[0];
+  const downloadAppStyles = downloadAppItem?.customization?.styleOverrides || downloadAppSection?.customization?.styleOverrides;
 
   useEffect(() => {
     const unsubscribe = portalStore.subscribe(() => {
@@ -78,96 +119,190 @@ export function IcaPublicHome() {
   return (
     <div className="bg-white dark:bg-neutral-900 text-ink-950 dark:text-white min-h-screen transition-colors duration-300">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-neutral-950 text-white overflow-hidden py-16 sm:py-24 border-b border-neutral-800">
-        <div className="absolute inset-0 z-0 opacity-40">
-          <img
-            src={hero.imageUrl}
-            alt={hero.title[currentLang] || hero.title.en}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent"></div>
-        </div>
+      {isHeroVisible && heroCard && (
+        <section 
+          className="relative bg-neutral-950 text-white overflow-hidden py-16 sm:py-24 border-b border-neutral-800 transition-all"
+          style={{
+            backgroundColor: heroStyles?.backgroundColor || undefined,
+            color: heroStyles?.textColor || undefined,
+            borderColor: heroStyles?.borderColor || undefined,
+            borderRadius: heroStyles?.borderRadius || undefined,
+            padding: heroStyles?.padding ? `${heroStyles.padding} 1rem` : undefined,
+            boxShadow: heroStyles?.shadow || undefined
+          }}
+        >
+          <div className="absolute inset-0 z-0 opacity-40">
+            <img
+              src={heroCard.imageUrl || '/images/hero-diplomatic.jpg'}
+              alt={heroCard.altText?.[currentLang] || heroCard.headline[currentLang]}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent"></div>
+          </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-800 text-white text-[11px] font-mono font-bold uppercase tracking-widest shadow-md">
-              <span className="w-2 h-2 rounded-full bg-white animate-soft-vibrate"></span>
-              <span>{hero.tag}</span>
-            </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-800 text-white text-[11px] font-mono font-bold uppercase tracking-widest shadow-md">
+                <span className="w-2 h-2 rounded-full bg-white animate-soft-vibrate"></span>
+                <span>{heroCard.eyebrow?.[currentLang] || 'OFFICIAL WIRE'}</span>
+              </div>
 
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
-              {hero.title[currentLang] || hero.title.en}
-            </h1>
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                {heroCard.headline[currentLang]}
+              </h1>
 
-            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-2xl font-sans">
-              {hero.excerpt[currentLang] || hero.excerpt.en}
-            </p>
+              <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-2xl font-sans">
+                {heroCard.body[currentLang]}
+              </p>
 
-            <div className="pt-4 flex flex-wrap items-center gap-4">
-              <Link
-                to={`/${currentLang}${hero.href}`}
-                className="px-6 py-3.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider shadow-xl transition-all flex items-center gap-2 hover:-translate-y-0.5"
-              >
-                <span>{t('publicPortal.readArticle')}</span>
-                <ArrowRight size={16} className="rtl:rotate-180" />
-              </Link>
+              <div className="pt-4 flex flex-wrap items-center gap-4">
+                <Link
+                  to={`/${currentLang}${heroCard.ctaHref || '/about'}`}
+                  className="px-6 py-3.5 rounded-xl bg-brand-800 hover:bg-brand-700 text-white font-black text-xs uppercase tracking-wider shadow-xl transition-all flex items-center gap-2 hover:-translate-y-0.5"
+                >
+                  <span>{heroCard.ctaLabel?.[currentLang] || t('publicPortal.readArticle')}</span>
+                  <ArrowRight size={16} className="rtl:rotate-180" />
+                </Link>
 
-              <Link
-                to={`/${currentLang}/initiatives/trade-corridor`}
-                className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider border border-white/20 transition-all flex items-center gap-2 hover:-translate-y-0.5"
-              >
-                <span>{t('publicPortal.exploreCorridor')}</span>
-              </Link>
+                <Link
+                  to={`/${currentLang}/initiatives/trade-corridor`}
+                  className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider border border-white/20 transition-all flex items-center gap-2 hover:-translate-y-0.5"
+                >
+                  <span>{t('publicPortal.exploreCorridor')}</span>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 2. WORLD SECTION (Grid of 3 International Stories) */}
-      <section className="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-neutral-200 dark:border-neutral-800 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                <Globe size={16} />
-                <span>{t('nav.world')}</span>
+      {/* LIVE BROADCAST BAND */}
+      {isLiveBroadcastVisible && liveBandItem && (
+        <section 
+          className="bg-neutral-900 border-b border-neutral-800 text-white px-4 py-3 sm:py-4 transition-all"
+          style={{
+            backgroundColor: liveStyles?.backgroundColor || undefined,
+            borderRadius: liveStyles?.borderRadius || undefined,
+            padding: liveStyles?.padding || undefined
+          }}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-red-600 text-white text-[11px] font-mono font-bold uppercase tracking-wider animate-pulse shrink-0">
+                <Radio size={13} />
+                <span>ON AIR</span>
+              </span>
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-white line-clamp-1">
+                  {liveBandItem.headline[currentLang] || liveBandItem.headline.en}
+                </h4>
+                <p className="text-[11px] text-neutral-400 hidden md:block">
+                  {liveBandItem.body[currentLang] || liveBandItem.body.en}
+                </p>
               </div>
-              <h2 className="font-serif text-2xl sm:text-4xl font-black text-ink-950 dark:text-white">
-                {t('publicPortal.worldHeading')}
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                {t('publicPortal.worldSubtitle')}
-              </p>
             </div>
-
             <Link
-              to={`/${currentLang}/world`}
-              className="text-xs font-black text-brand-800 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 uppercase tracking-wider flex items-center gap-1.5 transition-colors self-start md:self-auto"
+              to={`/${currentLang}${liveBandItem.ctaHref || '/live'}`}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold shrink-0 transition-colors self-start sm:self-auto"
             >
-              <span>{t('publicPortal.viewAllWorld')}</span>
-              <ArrowRight size={14} className="rtl:rotate-180" />
+              <span>{liveBandItem.ctaLabel?.[currentLang] || liveBandItem.ctaLabel?.en || 'Watch Live Broadcast'}</span>
+              <ArrowRight size={13} className="rtl:rotate-180" />
             </Link>
           </div>
+        </section>
+      )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {worldStories.map(story => (
-              <Card
-                key={story.id}
-                variant="portal"
-                href={`/${currentLang}/newsroom/${story.slug}`}
-                imageUrl={story.imageUrl}
-                category={story.category[currentLang] || story.category.en}
-                title={story.title[currentLang] || story.title.en}
-                excerpt={story.excerpt[currentLang] || story.excerpt.en}
-                publishDate={story.publishDate}
-                readTime={story.readTime}
-                badge={story.region}
-                ctaText={t('publicPortal.readArticle')}
-              />
-            ))}
+      {/* INTELLIGENCE WIRE TICKER */}
+      {isWireVisible && wireItems.length > 0 && (
+        <div className="bg-neutral-950 border-b border-neutral-800 py-2.5 overflow-hidden text-xs font-mono">
+          <div className="max-w-7xl mx-auto px-4 flex items-center gap-3">
+            <div className="flex items-center gap-1.5 text-red-500 font-bold shrink-0 uppercase tracking-widest text-[10px]">
+              <Flame size={12} />
+              <span>WIRE DISPATCHES:</span>
+            </div>
+            <div className="flex items-center gap-8 overflow-x-auto scrollbar-none whitespace-nowrap text-neutral-300">
+              {wireItems.map((wire, idx) => (
+                <Link
+                  key={wire.id || idx}
+                  to={`/${currentLang}${wire.ctaHref || '/newsroom'}`}
+                  className="hover:text-red-400 transition-colors flex items-center gap-2 shrink-0"
+                >
+                  <span className="text-neutral-600">[{idx + 1}]</span>
+                  <span>{wire.headline[currentLang] || wire.headline.en}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      )}
+
+      {/* QUICK STATS STRIP */}
+      {isQuickStatsVisible && quickStatItems.length > 0 && (
+        <section className="bg-neutral-900 border-b border-neutral-800 py-8 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {quickStatItems.map((stat, idx) => (
+                <div key={stat.id || idx} className="p-4 rounded-xl bg-neutral-950/50 border border-neutral-800/80">
+                  <div className="text-2xl sm:text-3xl font-mono font-black text-white">
+                    {stat.headline[currentLang] || stat.headline.en}
+                  </div>
+                  <div className="text-xs text-neutral-400 mt-1 font-medium">
+                    {stat.body[currentLang] || stat.body.en}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 2. WORLD SECTION (Grid of 3 International Stories) */}
+      {isWorldVisible && (
+        <section className="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-neutral-200 dark:border-neutral-800 gap-4">
+              <div>
+                <div className="flex items-center gap-2 text-brand-800 dark:text-brand-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                  <Globe size={16} />
+                  <span>{t('nav.world')}</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-4xl font-black text-ink-950 dark:text-white">
+                  {t('publicPortal.worldHeading')}
+                </h2>
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                  {t('publicPortal.worldSubtitle')}
+                </p>
+              </div>
+
+              <Link
+                to={`/${currentLang}/world`}
+                className="text-xs font-black text-brand-800 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 uppercase tracking-wider flex items-center gap-1.5 transition-colors self-start md:self-auto"
+              >
+                <span>{t('publicPortal.viewAllWorld')}</span>
+                <ArrowRight size={14} className="rtl:rotate-180" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {(worldSection?.items?.length ? worldSection.items.filter(i => i.status === 'active') : worldStories).map(story => (
+                <Card
+                  key={story.id}
+                  variant="portal"
+                  href={`/${currentLang}/newsroom/${'slug' in story ? story.slug : story.ctaHref?.split('/').pop()}`}
+                  imageUrl={story.imageUrl}
+                  category={('category' in story ? story.category[currentLang] || story.category.en : story.eyebrow?.[currentLang]) || ''}
+                  title={('title' in story ? story.title[currentLang] || story.title.en : story.headline[currentLang]) || ''}
+                  excerpt={('excerpt' in story ? story.excerpt[currentLang] || story.excerpt.en : story.body[currentLang]) || ''}
+                  publishDate={'publishDate' in story ? story.publishDate : story.updatedAt}
+                  readTime={'readTime' in story ? story.readTime : '5 min'}
+                  badge={'region' in story ? story.region : undefined}
+                  ctaText={t('publicPortal.readArticle')}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 3. TRENDING SECTION (Ranked list of 5 trending items) */}
       <section className="py-16 sm:py-20 bg-neutral-50 dark:bg-neutral-900/60 border-b border-neutral-200 dark:border-neutral-800 transition-colors">
@@ -220,68 +355,149 @@ export function IcaPublicHome() {
       </section>
 
       {/* 4. INITIATIVES SECTION (Seven Initiative Cards) */}
-      <section className="py-16 sm:py-24 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 text-brand-800 dark:text-brand-400 font-mono text-xs font-bold uppercase tracking-widest mb-2">
-              <Layers size={16} />
-              <span>{t('nav.initiatives')}</span>
+      {isInitiativesVisible && (
+        <section className="py-16 sm:py-24 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-2 text-brand-800 dark:text-brand-400 font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                <Layers size={16} />
+                <span>{t('nav.initiatives')}</span>
+              </div>
+              <h2 className="font-serif text-3xl sm:text-5xl font-black text-ink-950 dark:text-white">
+                {t('publicPortal.initiativesHeading')}
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                {t('publicPortal.initiativesSubtitle')}
+              </p>
             </div>
-            <h2 className="font-serif text-3xl sm:text-5xl font-black text-ink-950 dark:text-white">
-              {t('publicPortal.initiativesHeading')}
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-2">
-              {t('publicPortal.initiativesSubtitle')}
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {(customInitiatives.length ? customInitiatives : initiatives).map(init => (
+                <Link
+                  key={init.id}
+                  to={`/${currentLang}${('slug' in init ? `/initiatives/${init.slug}` : init.ctaHref)}`}
+                  className="ica-card-interactive group flex flex-col justify-between p-6 rounded-2xl bg-white dark:bg-neutral-800/80 border border-neutral-200/90 dark:border-neutral-700 hover:border-brand-700 dark:hover:border-brand-500 shadow-xs hover:shadow-xl transition-all"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950/50 border border-brand-200/60 dark:border-brand-800/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      {getInitiativeIcon('iconName' in init ? init.iconName : (init.eyebrow?.en || 'Layers'))}
+                    </div>
+
+                    <h3 className="font-serif text-xl font-black text-ink-950 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors mb-2">
+                      {('title' in init ? init.title[currentLang] || init.title.en : init.headline[currentLang])}
+                    </h3>
+
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6 line-clamp-3">
+                      {('shortDesc' in init ? init.shortDesc[currentLang] || init.shortDesc.en : init.body[currentLang])}
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="grid grid-cols-3 gap-2 py-3 border-y border-neutral-100 dark:border-neutral-700/60 mb-4">
+                      {('kpis' in init ? init.kpis : (init.chips || [])).map((kpi: any, kIdx: number) => (
+                        <div key={kIdx} className="text-center">
+                          <div className="text-xs font-mono font-black text-ink-950 dark:text-white truncate">
+                            {'metric' in kpi ? kpi.metric : kpi.en}
+                          </div>
+                          <div className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
+                            {'label' in kpi ? kpi.label[currentLang] || kpi.label.en : 'Tag'}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs font-black text-ink-950 dark:text-white uppercase tracking-wider">
+                      <span>{t('publicPortal.readArticle')}</span>
+                      <span className="text-brand-800 dark:text-brand-400 cta-arrow transition-transform">
+                        <ArrowRight size={14} className="rtl:rotate-180" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
+        </section>
+      )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {initiatives.map(init => (
-              <Link
-                key={init.id}
-                to={`/${currentLang}/initiatives/${init.slug}`}
-                className="ica-card-interactive group flex flex-col justify-between p-6 rounded-2xl bg-white dark:bg-neutral-800/80 border border-neutral-200/90 dark:border-neutral-700 hover:border-brand-700 dark:hover:border-brand-500 shadow-xs hover:shadow-xl transition-all"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950/50 border border-brand-200/60 dark:border-brand-800/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    {getInitiativeIcon(init.iconName)}
-                  </div>
-
-                  <h3 className="font-serif text-xl font-black text-ink-950 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors mb-2">
-                    {init.title[currentLang] || init.title.en}
-                  </h3>
-
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6 line-clamp-3">
-                    {init.shortDesc[currentLang] || init.shortDesc.en}
-                  </p>
-                </div>
-
-                <div>
-                  <div className="grid grid-cols-3 gap-2 py-3 border-y border-neutral-100 dark:border-neutral-700/60 mb-4">
-                    {init.kpis.map((kpi, kIdx) => (
-                      <div key={kIdx} className="text-center">
-                        <div className="text-xs font-mono font-black text-ink-950 dark:text-white">
-                          {kpi.metric}
-                        </div>
-                        <div className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
-                          {kpi.label[currentLang] || kpi.label.en}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs font-black text-ink-950 dark:text-white uppercase tracking-wider">
-                    <span>{t('publicPortal.readArticle')}</span>
-                    <span className="text-brand-800 dark:text-brand-400 cta-arrow transition-transform">
-                      <ArrowRight size={14} className="rtl:rotate-180" />
+      {/* STRATEGIC PARTNERS MARQUEE */}
+      {isPartnersVisible && partnerItems.length > 0 && (
+        <section className="py-14 bg-neutral-950 border-b border-neutral-800 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2 text-red-500 font-mono text-xs font-bold uppercase tracking-wider mb-6">
+              <Building2 size={16} />
+              <span>{t('publicPortal.partnersHeading') || 'STRATEGIC INSTITUTIONAL & INDUSTRY PARTNERS'}</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {partnerItems.map((partner, idx) => (
+                <a
+                  key={partner.id || idx}
+                  href={partner.ctaHref || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-red-600 transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-widest block mb-2">
+                      BILATERAL PARTNER
                     </span>
+                    <h4 className="text-base font-bold text-white group-hover:text-red-400 transition-colors">
+                      {partner.headline[currentLang] || partner.headline.en}
+                    </h4>
+                    <p className="text-xs text-neutral-400 mt-2 line-clamp-2">
+                      {partner.body[currentLang] || partner.body.en}
+                    </p>
                   </div>
-                </div>
-              </Link>
-            ))}
+                  <div className="mt-5 pt-3 border-t border-neutral-800/80 flex items-center justify-between text-xs text-red-400 font-bold">
+                    <span>Institutional Dossier</span>
+                    <ExternalLink size={13} />
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* DOWNLOAD APP PROMO CARD */}
+      {isDownloadAppVisible && downloadAppItem && (
+        <section 
+          className="py-12 sm:py-16 bg-neutral-900 border-b border-neutral-800 text-white"
+          style={{
+            backgroundColor: downloadAppStyles?.backgroundColor || undefined,
+            borderRadius: downloadAppStyles?.borderRadius || undefined,
+            padding: downloadAppStyles?.padding || undefined
+          }}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="p-8 sm:p-12 rounded-3xl bg-neutral-950 border border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+              <div className="space-y-4 max-w-xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950 border border-red-800/80 text-red-400 text-xs font-mono font-bold uppercase tracking-wider">
+                  <Smartphone size={14} />
+                  <span>{downloadAppItem.eyebrow?.[currentLang] || downloadAppItem.eyebrow?.en || 'OFFICIAL PWA CLIENT'}</span>
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
+                  {downloadAppItem.headline[currentLang] || downloadAppItem.headline.en}
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                  {downloadAppItem.body[currentLang] || downloadAppItem.body.en}
+                </p>
+              </div>
+              <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3 w-full sm:w-auto">
+                <Link
+                  to={`/${currentLang}${downloadAppItem.ctaHref || '/download'}`}
+                  className="px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase tracking-wider text-center shadow-lg transition-all"
+                >
+                  {downloadAppItem.ctaLabel?.[currentLang] || downloadAppItem.ctaLabel?.en || 'Install PWA App'}
+                </Link>
+                <div className="text-[11px] font-mono text-neutral-400 text-center">
+                  Zero App Store Fees • Offline Ready
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 5. FEATURED SECTION (Editor's Picks Grid) */}
       <section className="py-16 sm:py-20 bg-neutral-50 dark:bg-neutral-900/60 border-b border-neutral-200 dark:border-neutral-800 transition-colors">

@@ -1,15 +1,6 @@
-export type Locale = 'en' | 'ar' | 'zh' | 'ckb';
+import { Locale, Translation } from './types/base';
 
-export interface Translation {
-  id: string;
-  articleId: string;
-  lang: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  seoTitle?: string | null;
-  seoDesc?: string | null;
-}
+export * from './types/base';
 
 export interface Article {
   id: string;

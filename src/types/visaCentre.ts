@@ -1,4 +1,4 @@
-import { Locale } from '../types';
+import { Locale } from './base';
 
 export type VisaDirection = 'iraq-to-china' | 'china-to-iraq' | 'both';
 

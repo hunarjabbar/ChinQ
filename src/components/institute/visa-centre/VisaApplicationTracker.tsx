@@ -1,8 +1,34 @@
+"use client";
+
 import React, { useState } from 'react';
 import { Search, ShieldCheck, CheckCircle2, Clock, Calendar, AlertCircle, FileText, ArrowRight } from 'lucide-react';
 import { Locale } from '../../../types';
 import { useVisaCentreStore } from '../../../store/useVisaCentreStore';
 import { useVisaCentreI18n } from '../../../locales/visaCentreTranslations';
+
+interface VisaStatusHistory {
+  status: string;
+  timestamp: string | Date;
+  note: string;
+}
+
+interface VisaAppointment {
+  date: string;
+  time: string;
+  confirmationNumber: string;
+}
+
+interface VisaApplication {
+  referenceId: string;
+  status: string;
+  direction: string;
+  visaCategory: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  publicNotes?: string;
+  appointment?: VisaAppointment | null;
+  statusHistory?: VisaStatusHistory[];
+}
 
 interface VisaApplicationTrackerProps {
   lang: Locale;
@@ -21,7 +47,7 @@ export const VisaApplicationTracker: React.FC<VisaApplicationTrackerProps> = ({
   const [referenceId, setReferenceId] = useState(initialReferenceId);
   const [lastNameOrEmail, setLastNameOrEmail] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchResult, setSearchResult] = useState<any>(null);
+  const [searchResult, setSearchResult] = useState<VisaApplication | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -273,7 +299,7 @@ export const VisaApplicationTracker: React.FC<VisaApplicationTrackerProps> = ({
                 {lang === 'zh' ? '审理流转时间轴 (公开记录)' : lang === 'ar' ? 'التسلسل الزمني لمراحل المعاملة' : 'Dossier Review Timeline'}
               </span>
               <div className="space-y-2.5 border-l-2 border-border ps-4 ms-2">
-                {searchResult.statusHistory.map((h: any, idx: number) => (
+                {searchResult.statusHistory.map((h: VisaStatusHistory, idx: number) => (
                   <div key={idx} className="space-y-0.5 relative">
                     <div className="absolute -start-[23px] top-1 w-3 h-3 rounded-full bg-royal border-2 border-background" />
                     <div className="flex items-center justify-between text-xs">

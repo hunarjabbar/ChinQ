@@ -23,10 +23,20 @@ import { seedBusinessOpportunities } from "./server/businessOpportunitySeeder.js
 import { registerPaymentRoutes } from "./server/paymentRoutes.js";
 import { seedCulturalExchange } from "./server/culturalExchangeSeeder.js";
 import { registerCulturalExchangeRoutes } from "./server/culturalExchangeRoutes.js";
+import { registerHubRoutes } from "./server/hubRoutes.js";
 import { seedSourcingPillars } from "./server/sourcingPillarSeeder.js";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
+
+interface AuthenticatedRequest extends express.Request {
+  user?: {
+    id: string;
+    email: string;
+    role: string;
+  };
+}
+
 
 function getJwtSecret() {
   const secret = process.env.JWT_SECRET || "ica-secure-default-jwt-secret-key-2026-production";
@@ -220,22 +230,22 @@ async function startServer() {
   app.use(express.json());
 
   // Global Audit Log Middleware
-  app.use((req, res, next) => {
+  app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (['POST', 'PUT', 'DELETE'].includes(req.method) && req.path.startsWith('/api/') && !req.path.startsWith('/api/auth/')) {
       const originalJson = res.json;
-      let responseBody: any = null;
-      res.json = function(body: any) {
+      let responseBody: unknown = null;
+      res.json = function(body: unknown) {
         responseBody = body;
         return originalJson.call(this, body);
       };
       
       res.on('finish', () => {
-        const user = (req as any).user;
+        const user = (req as AuthenticatedRequest).user;
         if (res.statusCode >= 200 && res.statusCode < 300 && user) {
           // Attempt to extract item ID
-          let itemId = null;
-          if (responseBody && typeof responseBody === 'object' && responseBody.id) {
-            itemId = responseBody.id;
+          let itemId: string | null = null;
+          if (responseBody && typeof responseBody === 'object' && 'id' in (responseBody as Record<string, unknown>)) {
+            itemId = String((responseBody as Record<string, unknown>).id);
           } else {
             const parts = req.path.split('/');
             if (parts.length > 3 && parts[parts.length - 1] !== 'seed') {
@@ -366,6 +376,9 @@ async function startServer() {
 
   // Register Sino-Iraqi Cultural & Educational Exchange routes
   registerCulturalExchangeRoutes(app, editorOrAdminMiddleware, adminMiddleware);
+
+  // Register Centralized Command Hub & Navigation CRUD routes
+  registerHubRoutes(app);
   app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
       const { email, password, name, role } = req.body;
