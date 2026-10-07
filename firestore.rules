@@ -11,7 +11,7 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function isAdmin() {
+    function isCiseCommandHub() {
       return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
@@ -42,12 +42,12 @@ service cloud.firestore {
     // Public Collections (Pillar 8: Secure List Queries - not applicable for single creation)
     match /newsletter_subscribers/{subscriberId} {
       allow create: if isValidId(subscriberId) && isValidNewsletterSubscriber(request.resource.data);
-      allow read: if isAdmin();
+      allow read: if isCiseCommandHub();
     }
 
     match /contact_submissions/{submissionId} {
       allow create: if isValidId(submissionId) && isValidContactSubmission(request.resource.data);
-      allow read: if isAdmin();
+      allow read: if isCiseCommandHub();
     }
 
     // Health / Connection Test
@@ -55,10 +55,10 @@ service cloud.firestore {
       allow read: if true;
     }
 
-    // Admin Access Control
+    // CiseCommandHub Access Control
     match /admins/{uid} {
       allow read: if isSignedIn() && request.auth.uid == uid;
-      allow write: if false; // Only manageable via Firebase Console or Admin SDK
+      allow write: if false; // Only manageable via Firebase Console or CiseCommandHub SDK
     }
   }
 }

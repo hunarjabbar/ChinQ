@@ -336,9 +336,9 @@
 /* Reduced Motion (Part 11.7) */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
-    animation: none !important;
-    transition-duration: 0.001ms !important;
-    transform: none !important;
+    animation: none;
+    transition-duration: 0.001ms;
+    transform: none;
   }
 }
 

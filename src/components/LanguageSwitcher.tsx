@@ -64,7 +64,12 @@ export function LanguageSwitcher({ lang: propLang }: LanguageSwitcherProps) {
       <AnimatePresence>
         {isOpen && (
           <>
-            <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+            <button
+              type="button"
+              aria-label="Close language selector"
+              className="fixed inset-0 z-40 bg-transparent border-none w-full h-full cursor-default"
+              onClick={() => setIsOpen(false)}
+            />
             <motion.div 
               initial={{ opacity: 0, y: 8, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}

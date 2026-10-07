@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, Suspense, lazy } from 'react';
 import { Layout } from './components/Layout';
 import { InstituteLayout } from './components/institute/InstituteLayout';
-import { AdminLayout } from './components/AdminLayout';
+import { CiseCommandHubLayout } from './components/CiseCommandHubLayout';
 import { NewsroomLayout } from './components/newsroom/NewsroomLayout';
 import { LivePortalLayout } from './components/live/LivePortalLayout';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -79,37 +79,37 @@ function lazyWithRetry<T extends React.ComponentType<any>>(
   });
 }
 
-const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const CiseCommandHubDashboard = lazyWithRetry(() => import('./pages/CiseCommandHubDashboard').then(m => ({ default: m.CiseCommandHubDashboard })));
 const SearchPage = lazyWithRetry(() => import('./pages/SearchPage'));
-const AdminArticles = lazyWithRetry(() => import('./pages/AdminArticles').then(m => ({ default: m.AdminArticles })));
-const AdminArticleNew = lazyWithRetry(() => import('./pages/AdminArticleNew').then(m => ({ default: m.AdminArticleNew })));
-const AdminAuditLogs = lazyWithRetry(() => import('./pages/AdminAuditLogs').then(m => ({ default: m.AdminAuditLogs })));
-const AdminBrics = lazyWithRetry(() => import('./pages/AdminBrics').then(m => ({ default: m.AdminBrics })));
-const AdminChineseProducts = lazyWithRetry(() => import('./pages/AdminChineseProducts').then(m => ({ default: m.AdminChineseProducts })));
-const AdminBusiness = lazyWithRetry(() => import('./pages/AdminBusiness'));
-const AdminVideos = lazyWithRetry(() => import('./pages/AdminVideos'));
-const AdminUsers = lazyWithRetry(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })));
-const AdminMedia = lazyWithRetry(() => import('./pages/AdminMedia').then(m => ({ default: m.AdminMedia })));
-const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings').then(m => ({ default: m.AdminSettings })));
+const CiseCommandHubArticles = lazyWithRetry(() => import('./pages/CiseCommandHubArticles').then(m => ({ default: m.CiseCommandHubArticles })));
+const CiseCommandHubArticleNew = lazyWithRetry(() => import('./pages/CiseCommandHubArticleNew').then(m => ({ default: m.CiseCommandHubArticleNew })));
+const CiseCommandHubAuditLogs = lazyWithRetry(() => import('./pages/CiseCommandHubAuditLogs').then(m => ({ default: m.CiseCommandHubAuditLogs })));
+const CiseCommandHubBrics = lazyWithRetry(() => import('./pages/CiseCommandHubBrics').then(m => ({ default: m.CiseCommandHubBrics })));
+const CiseCommandHubChineseProducts = lazyWithRetry(() => import('./pages/CiseCommandHubChineseProducts').then(m => ({ default: m.CiseCommandHubChineseProducts })));
+const CiseCommandHubBusiness = lazyWithRetry(() => import('./pages/CiseCommandHubBusiness'));
+const CiseCommandHubVideos = lazyWithRetry(() => import('./pages/CiseCommandHubVideos'));
+const CiseCommandHubUsers = lazyWithRetry(() => import('./pages/CiseCommandHubUsers').then(m => ({ default: m.CiseCommandHubUsers })));
+const CiseCommandHubMedia = lazyWithRetry(() => import('./pages/CiseCommandHubMedia').then(m => ({ default: m.CiseCommandHubMedia })));
+const CiseCommandHubSettings = lazyWithRetry(() => import('./pages/CiseCommandHubSettings').then(m => ({ default: m.CiseCommandHubSettings })));
 const About = lazyWithRetry(() => import('./pages/About').then(m => ({ default: m.About })));
 const JoinUs = lazyWithRetry(() => import('./pages/JoinUs').then(m => ({ default: m.JoinUs })));
 const BooksPage = lazyWithRetry(() => import('./pages/BooksPage').then(m => ({ default: m.BooksPage })));
-const AdminBooks = lazyWithRetry(() => import('./pages/AdminBooks').then(m => ({ default: m.AdminBooks })));
+const CiseCommandHubBooks = lazyWithRetry(() => import('./pages/CiseCommandHubBooks').then(m => ({ default: m.CiseCommandHubBooks })));
 const TourismPage = lazyWithRetry(() => import('./pages/TourismPage').then(m => ({ default: m.TourismPage })));
-const AdminTourism = lazyWithRetry(() => import('./pages/AdminTourism').then(m => ({ default: m.AdminTourism })));
+const CiseCommandHubTourism = lazyWithRetry(() => import('./pages/CiseCommandHubTourism').then(m => ({ default: m.CiseCommandHubTourism })));
 const WomenPage = lazyWithRetry(() => import('./pages/WomenPage').then(m => ({ default: m.WomenPage })));
-const AdminWomen = lazyWithRetry(() => import('./pages/AdminWomen').then(m => ({ default: m.AdminWomen })));
+const CiseCommandHubWomen = lazyWithRetry(() => import('./pages/CiseCommandHubWomen').then(m => ({ default: m.CiseCommandHubWomen })));
 const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
-const AdminVisaFlight = lazyWithRetry(() => import('./pages/AdminVisaFlight').then(m => ({ default: m.AdminVisaFlight })));
+const CiseCommandHubVisaFlight = lazyWithRetry(() => import('./pages/CiseCommandHubVisaFlight').then(m => ({ default: m.CiseCommandHubVisaFlight })));
 const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
 const IcaPlusPage = lazyWithRetry(() => import('./pages/IcaPlusPage').then(m => ({ default: m.IcaPlusPage })));
-const AdminIcaPlus = lazyWithRetry(() => import('./pages/AdminIcaPlus'));
-const AdminPodcasts = lazyWithRetry(() => import('./pages/AdminPodcasts'));
-const AdminLiveEvents = lazyWithRetry(() => import('./pages/AdminLiveEvents'));
-const AdminPartners = lazyWithRetry(() => import('./pages/AdminPartners'));
-const AdminSourcing = lazyWithRetry(() => import('./pages/AdminSourcing'));
-const AdminFinanceEconomics = lazyWithRetry(() => import('./pages/AdminFinanceEconomics').then(m => ({ default: m.AdminFinanceEconomics })));
-const AdminPayments = lazyWithRetry(() => import('./pages/AdminPayments').then(m => ({ default: m.AdminPayments })));
+const CiseCommandHubIcaPlus = lazyWithRetry(() => import('./pages/CiseCommandHubIcaPlus'));
+const CiseCommandHubPodcasts = lazyWithRetry(() => import('./pages/CiseCommandHubPodcasts'));
+const CiseCommandHubLiveEvents = lazyWithRetry(() => import('./pages/CiseCommandHubLiveEvents'));
+const CiseCommandHubPartners = lazyWithRetry(() => import('./pages/CiseCommandHubPartners'));
+const CiseCommandHubSourcing = lazyWithRetry(() => import('./pages/CiseCommandHubSourcing'));
+const CiseCommandHubFinanceEconomics = lazyWithRetry(() => import('./pages/CiseCommandHubFinanceEconomics').then(m => ({ default: m.CiseCommandHubFinanceEconomics })));
+const CiseCommandHubPayments = lazyWithRetry(() => import('./pages/CiseCommandHubPayments').then(m => ({ default: m.CiseCommandHubPayments })));
 const CulturalExchangeLanding = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeLanding').then(m => ({ default: m.CulturalExchangeLanding })));
 const CulturalExchangePrograms = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangePrograms').then(m => ({ default: m.CulturalExchangePrograms })));
 const CulturalExchangeProgramDetail = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeProgramDetail').then(m => ({ default: m.CulturalExchangeProgramDetail })));
@@ -117,7 +117,7 @@ const CulturalExchangePartners = lazyWithRetry(() => import('./pages/institute/c
 const CulturalExchangeApply = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeApply').then(m => ({ default: m.CulturalExchangeApply })));
 const CulturalExchangeFAQ = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeFAQ').then(m => ({ default: m.CulturalExchangeFAQ })));
 const CulturalExchangeContact = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeContact').then(m => ({ default: m.CulturalExchangeContact })));
-const AdminCulturalExchange = lazyWithRetry(() => import('./pages/AdminCulturalExchange'));
+const CiseCommandHubCulturalExchange = lazyWithRetry(() => import('./pages/CiseCommandHubCulturalExchange'));
 
 // Portal 1: ICA Public Portal Pages
 const IcaPublicHome = lazyWithRetry(() => import('./pages/public/IcaPublicHome').then(m => ({ default: m.IcaPublicHome })));
@@ -130,7 +130,7 @@ const IcaMediaPage = lazyWithRetry(() => import('./pages/public/IcaMediaPage').t
 const IcaAboutPage = lazyWithRetry(() => import('./pages/public/IcaAboutPage').then(m => ({ default: m.IcaAboutPage })));
 const IcaContactPage = lazyWithRetry(() => import('./pages/public/IcaContactPage').then(m => ({ default: m.IcaContactPage })));
 
-// Portal 2: Secretariat Command Hub Pages
+// Portal 2: CISE Command Hub Pages
 const SecretariatHubLayout = lazyWithRetry(() => import('./pages/secretariat/SecretariatHubLayout').then(m => ({ default: m.SecretariatHubLayout })));
 const SecretariatDashboard = lazyWithRetry(() => import('./pages/secretariat/SecretariatDashboard').then(m => ({ default: m.SecretariatDashboard })));
 const SecretariatContentCrud = lazyWithRetry(() => import('./pages/secretariat/SecretariatContentCrud').then(m => ({ default: m.SecretariatContentCrud })));
@@ -229,7 +229,7 @@ const VisaCentreDisclaimer = lazyWithRetry(() => import('./pages/institute/visa-
 const ChineseCentreLanding = lazyWithRetry(() => import('./pages/institute/ChineseCentreLanding').then(m => ({ default: m.ChineseCentreLanding })));
 const InsuranceFacilitationPage = lazyWithRetry(() => import('./pages/institute/InsuranceFacilitationPage').then(m => ({ default: m.InsuranceFacilitationPage })));
 const CiseServicesDirectory = lazyWithRetry(() => import('./pages/institute/CiseServicesDirectory').then(m => ({ default: m.CiseServicesDirectory })));
-const AdminVisaCentre = lazyWithRetry(() => import('./pages/AdminVisaCentre').then(m => ({ default: m.AdminVisaCentre })));
+const CiseCommandHubVisaCentre = lazyWithRetry(() => import('./pages/CiseCommandHubVisaCentre').then(m => ({ default: m.CiseCommandHubVisaCentre })));
 
 // Strategic Financial & Legal Consultancy
 const ConsultancyLanding = lazyWithRetry(() => import('./pages/consultancy/ConsultancyLanding').then(m => ({ default: m.ConsultancyLanding })));
@@ -398,11 +398,11 @@ function SummitRootRedirect() {
   return <Navigate to={`/${loc}/summit${summitSubPath}${location.search}${location.hash}`} replace />;
 }
 
-function AdminRootRedirect() {
+function CiseCommandHubRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
-  const adminSubPath = location.pathname.replace(/^\/admin/, '');
-  return <Navigate to={`/${loc}/admin${adminSubPath}${location.search}${location.hash}`} replace />;
+  const adminSubPath = location.pathname.replace(/^\/hub-admin/, '');
+  return <Navigate to={`/${loc}/hub/management${adminSubPath}${location.search}${location.hash}`} replace />;
 }
 
 function SettlementRootRedirect() {
@@ -513,14 +513,14 @@ function SettingsRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
   const subPath = location.pathname.replace(/^\/settings/, '');
-  return <Navigate to={`/${loc}/admin/settings${subPath}${location.search}${location.hash}`} replace />;
+  return <Navigate to={`/${loc}/hub/management/settings${subPath}${location.search}${location.hash}`} replace />;
 }
 
 function ProfileRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
   const subPath = location.pathname.replace(/^\/profile/, '');
-  return <Navigate to={`/${loc}/admin${subPath}${location.search}${location.hash}`} replace />;
+  return <Navigate to={`/${loc}/hub/management${subPath}${location.search}${location.hash}`} replace />;
 }
 
 function SecretariatLangWrapper() {
@@ -624,7 +624,7 @@ function ImmersiveLangWrapper() {
   );
 }
 
-function AdminLangWrapper() {
+function CiseCommandHubLangWrapper() {
   const { lang } = useParams<{ lang: string }>();
   const location = useLocation();
   const { isValidLang, safeLang, isCkbAlias } = useLanguageSetup(lang);
@@ -635,14 +635,14 @@ function AdminLangWrapper() {
   }
 
   if (!isValidLang) {
-    return <Navigate to="/en/admin" replace />;
+    return <Navigate to="/../hub/management" replace />;
   }
 
   return (
     <ErrorBoundary key={location.key} lang={safeLang}>
-      <AdminLayout>
+      <CiseCommandHubLayout>
         <Outlet />
-      </AdminLayout>
+      </CiseCommandHubLayout>
     </ErrorBoundary>
   );
 }
@@ -726,6 +726,37 @@ function SettlementLangWrapper() {
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
+  {
+    path: "/:lang/hub/management",
+    element: <CiseCommandHubLangWrapper />,
+    children: [
+      { index: true, element: <CiseCommandHubDashboard /> },
+      { path: "articles", element: <CiseCommandHubArticles /> },
+      { path: "articles/new", element: <CiseCommandHubArticleNew /> },
+      { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
+      { path: "women", element: <CiseCommandHubWomen /> },
+      { path: "tourism", element: <CiseCommandHubTourism /> },
+      { path: "cultural-exchange", element: <CiseCommandHubCulturalExchange /> },
+      { path: "visa-flights", element: <CiseCommandHubVisaFlight /> },
+      { path: "podcasts", element: <CiseCommandHubIcaPlus /> },
+      { path: "icaplus", element: <CiseCommandHubIcaPlus /> },
+      { path: "live-events", element: <CiseCommandHubLiveEvents /> },
+      { path: "books", element: <CiseCommandHubBooks /> },
+      { path: "finance-economics", element: <CiseCommandHubFinanceEconomics /> },
+      { path: "market", element: <CiseCommandHubFinanceEconomics /> },
+      { path: "payments", element: <CiseCommandHubPayments /> },
+      { path: "partners", element: <CiseCommandHubPartners /> },
+      { path: "business", element: <CiseCommandHubBusiness /> },
+      { path: "sourcing", element: <CiseCommandHubSourcing /> },
+      { path: "audit-logs", element: <CiseCommandHubAuditLogs /> },
+      { path: "brics", element: <CiseCommandHubBrics /> },
+      { path: "chinese-products", element: <CiseCommandHubChineseProducts /> },
+      { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
+      { path: "users", element: <CiseCommandHubUsers /> },
+      { path: "media", element: <CiseCommandHubMedia /> },
+      { path: "settings", element: <CiseCommandHubSettings /> }
+    ]
+  },
   { path: "/hub", element: <CommandHubPage /> },
   { path: "/hub/*", element: <CommandHubPage /> },
   { path: "/:lang/hub", element: <CommandHubPage /> },
@@ -734,8 +765,8 @@ const router = createBrowserRouter([
   { path: "/institute/*", element: <InstituteRootRedirect /> },
   { path: "/summit", element: <SummitRootRedirect /> },
   { path: "/summit/*", element: <SummitRootRedirect /> },
-  { path: "/admin", element: <AdminRootRedirect /> },
-  { path: "/admin/*", element: <AdminRootRedirect /> },
+  { path: "/hub/management", element: <CiseCommandHubRootRedirect /> },
+  { path: "/hub/management/*", element: <CiseCommandHubRootRedirect /> },
   { path: "/secretariat", element: <SecretariatRootRedirect /> },
   { path: "/secretariat/*", element: <SecretariatRootRedirect /> },
   { path: "/portal", element: <PublicPortalRootRedirect /> },
@@ -1062,8 +1093,8 @@ const router = createBrowserRouter([
       { path: "services/cultural-exchange/faq", element: <CulturalExchangeFAQ /> },
       { path: "services/cultural-exchange/contact", element: <CulturalExchangeContact /> },
       { path: "services/cultural-exchange/*", element: <CulturalExchangeLanding /> },
-      { path: "settings", element: <Navigate to="../admin/settings" replace /> },
-      { path: "profile", element: <Navigate to="../admin" replace /> },
+      { path: "settings", element: <Navigate to="../hub/management/settings" replace /> },
+      { path: "profile", element: <Navigate to="../hub/management" replace /> },
     ]
   },
   {
@@ -1105,73 +1136,73 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "/:lang/newsroom/admin",
-    element: <AdminLangWrapper />,
+    path: "/:lang/newsroom/hub",
+    element: <CiseCommandHubLangWrapper />,
     children: [
       {
         element: <NewsroomLayout />,
         children: [
-          { index: true, element: <AdminDashboard /> },
-          { path: "articles", element: <AdminArticles /> },
-          { path: "categories", element: <AdminArticles /> }, // Placeholder
-          { path: "tags", element: <AdminArticles /> }, // Placeholder
-          { path: "authors", element: <AdminUsers /> }, // Placeholder
-          { path: "feeds", element: <AdminArticles /> }, // Placeholder
-          { path: "analytics", element: <AdminDashboard /> }, // Placeholder
-          { path: "settings", element: <AdminSettings /> }
+          { index: true, element: <CiseCommandHubDashboard /> },
+          { path: "articles", element: <CiseCommandHubArticles /> },
+          { path: "categories", element: <CiseCommandHubArticles /> }, // Placeholder
+          { path: "tags", element: <CiseCommandHubArticles /> }, // Placeholder
+          { path: "authors", element: <CiseCommandHubUsers /> }, // Placeholder
+          { path: "feeds", element: <CiseCommandHubArticles /> }, // Placeholder
+          { path: "analytics", element: <CiseCommandHubDashboard /> }, // Placeholder
+          { path: "settings", element: <CiseCommandHubSettings /> }
         ]
       }
     ]
   },
   {
-    path: "/:lang/live/admin",
-    element: <AdminLangWrapper />,
+    path: "/:lang/live/hub",
+    element: <CiseCommandHubLangWrapper />,
     children: [
       {
         element: <LivePortalLayout />,
         children: [
-          { index: true, element: <AdminDashboard /> },
-          { path: "streams", element: <AdminLiveEvents /> },
-          { path: "movies", element: <AdminVideos /> },
-          { path: "drama", element: <AdminVideos /> },
-          { path: "documentary", element: <AdminVideos /> },
-          { path: "exchange", element: <AdminVideos /> },
-          { path: "schedule", element: <AdminLiveEvents /> },
-          { path: "analytics", element: <AdminDashboard /> },
-          { path: "settings", element: <AdminSettings /> }
+          { index: true, element: <CiseCommandHubDashboard /> },
+          { path: "streams", element: <CiseCommandHubLiveEvents /> },
+          { path: "movies", element: <CiseCommandHubVideos /> },
+          { path: "drama", element: <CiseCommandHubVideos /> },
+          { path: "documentary", element: <CiseCommandHubVideos /> },
+          { path: "exchange", element: <CiseCommandHubVideos /> },
+          { path: "schedule", element: <CiseCommandHubLiveEvents /> },
+          { path: "analytics", element: <CiseCommandHubDashboard /> },
+          { path: "settings", element: <CiseCommandHubSettings /> }
         ]
       }
     ]
   },
   {
-    path: "/:lang/admin",
-    element: <AdminLangWrapper />,
+    path: "/:lang/hub/management",
+    element: <CiseCommandHubLangWrapper />,
     children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: "articles", element: <AdminArticles /> },
-      { path: "articles/new", element: <AdminArticleNew /> },
-      { path: "articles/:id", element: <AdminArticleNew /> },
-      { path: "women", element: <AdminWomen /> },
-      { path: "tourism", element: <AdminTourism /> },
-      { path: "cultural-exchange", element: <AdminCulturalExchange /> },
-      { path: "visa-flights", element: <AdminVisaFlight /> },
-      { path: "podcasts", element: <AdminIcaPlus /> },
-      { path: "icaplus", element: <AdminIcaPlus /> },
-      { path: "live-events", element: <AdminLiveEvents /> },
-      { path: "books", element: <AdminBooks /> },
-      { path: "finance-economics", element: <AdminFinanceEconomics /> },
-      { path: "market", element: <AdminFinanceEconomics /> },
-      { path: "payments", element: <AdminPayments /> },
-      { path: "partners", element: <AdminPartners /> },
-      { path: "business", element: <AdminBusiness /> },
-      { path: "sourcing", element: <AdminSourcing /> },
-                { path: "audit-logs", element: <AdminAuditLogs /> },
-          { path: "brics", element: <AdminBrics /> },
-          { path: "chinese-products", element: <AdminChineseProducts /> },
-          { path: "visa-centre", element: <AdminVisaCentre /> },
-          { path: "users", element: <AdminUsers /> },
-      { path: "media", element: <AdminMedia /> },
-      { path: "settings", element: <AdminSettings /> }
+      { index: true, element: <CiseCommandHubDashboard /> },
+      { path: "articles", element: <CiseCommandHubArticles /> },
+      { path: "articles/new", element: <CiseCommandHubArticleNew /> },
+      { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
+      { path: "women", element: <CiseCommandHubWomen /> },
+      { path: "tourism", element: <CiseCommandHubTourism /> },
+      { path: "cultural-exchange", element: <CiseCommandHubCulturalExchange /> },
+      { path: "visa-flights", element: <CiseCommandHubVisaFlight /> },
+      { path: "podcasts", element: <CiseCommandHubIcaPlus /> },
+      { path: "icaplus", element: <CiseCommandHubIcaPlus /> },
+      { path: "live-events", element: <CiseCommandHubLiveEvents /> },
+      { path: "books", element: <CiseCommandHubBooks /> },
+      { path: "finance-economics", element: <CiseCommandHubFinanceEconomics /> },
+      { path: "market", element: <CiseCommandHubFinanceEconomics /> },
+      { path: "payments", element: <CiseCommandHubPayments /> },
+      { path: "partners", element: <CiseCommandHubPartners /> },
+      { path: "business", element: <CiseCommandHubBusiness /> },
+      { path: "sourcing", element: <CiseCommandHubSourcing /> },
+                { path: "audit-logs", element: <CiseCommandHubAuditLogs /> },
+          { path: "brics", element: <CiseCommandHubBrics /> },
+          { path: "chinese-products", element: <CiseCommandHubChineseProducts /> },
+          { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
+          { path: "users", element: <CiseCommandHubUsers /> },
+      { path: "media", element: <CiseCommandHubMedia /> },
+      { path: "settings", element: <CiseCommandHubSettings /> }
     ]
   },
   { path: "*", element: <NotFound /> }

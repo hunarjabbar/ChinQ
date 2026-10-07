@@ -863,8 +863,8 @@ export function TalentRegistrationModal({ isOpen, onClose, initialType = 'volunt
                   <div>
                     <h4 className="font-black text-sm sm:text-base text-emerald-900 dark:text-emerald-300">
                       {type === 'volunteer'
-                        ? (isAr ? 'تم تسجيل وتوثيق المتطوع بنجاح ومزامنته في الإدارة' : isZh ? '志愿者档案登记成功并已实时同步至后台' : 'Volunteer Registration Logged & Synchronized with Admin')
-                        : (isAr ? 'تم تسجيل التدريب المهني والبحثي بنجاح ومزامنته في الإدارة' : isZh ? '实习与研学人事档案登记成功并已实时同步至后台' : 'Internship Dossier Logged & Synchronized with Admin')
+                        ? (isAr ? 'تم تسجيل وتوثيق المتطوع بنجاح ومزامنته في الإدارة' : isZh ? '志愿者档案登记成功并已实时同步至后台' : 'Volunteer Registration Logged & Synchronized with Command Hub')
+                        : (isAr ? 'تم تسجيل التدريب المهني والبحثي بنجاح ومزامنته في الإدارة' : isZh ? '实习与研学人事档案登记成功并已实时同步至后台' : 'Internship Dossier Logged & Synchronized with Command Hub')
                       }
                     </h4>
                     <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">

@@ -13,16 +13,16 @@ export function CiseHubFooterLogin({ lang = 'en', className = '' }: CiseHubFoote
 
   const labels = {
     badge: {
-      en: 'Sovereign Control Centre',
-      ar: 'مركز القيادة السيادي',
-      zh: '智库主权指挥中心',
-      ckb: 'سەنتەری فەرماندەیی سەروەری'
+      en: 'CISE Command Hub',
+      ar: 'مركز القيادة السيادي CISE',
+      zh: 'CISE 智库主权指挥中心',
+      ckb: 'سەنتەری فەرماندەیی باڵای CISE'
     },
     title: {
       en: 'CISE Command Hub',
-      ar: 'بوابة قيادة المعهد الصيني',
+      ar: 'بوابة قيادة المعهد الصيني CISE',
       zh: 'CISE 智库指挥中心入口',
-      ckb: 'دەروازەی فەرماندەیی پەیمانگا'
+      ckb: 'دەروازەی فەرماندەیی پەیمانگای CISE'
     },
     subtitle: {
       en: 'Authenticated portal access for accredited CISE fellows, researchers, and administrators.',
@@ -31,10 +31,10 @@ export function CiseHubFooterLogin({ lang = 'en', className = '' }: CiseHubFoote
       ckb: 'پلاتفۆرمی چوونەژوورەوەی پارێزراو بۆ شارەزایان و توێژەرانی پەیمانگا.'
     },
     cta: {
-      en: 'Enter Command Hub',
-      ar: 'دخول مركز القيادة',
-      zh: '进入指挥中心',
-      ckb: 'چوونەژوورەوەی فەرماندەیی'
+      en: 'Enter CISE Command Hub',
+      ar: 'دخول مركز القيادة CISE',
+      zh: '进入 CISE 指挥中心',
+      ckb: 'چوونەژوورەوەی فەرماندەیی CISE'
     }
   };
 

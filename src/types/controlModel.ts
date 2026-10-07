@@ -38,7 +38,7 @@ export interface HistoryRevision {
   snapshot: Record<string, unknown>;
 }
 
-export interface AdminControlledCard {
+export interface CiseCommandHubControlledCard {
   id: string;
   sectionId: string;
   eyebrow?: LocalizedString;
@@ -56,14 +56,14 @@ export interface AdminControlledCard {
   updatedAt: string;
 }
 
-export interface AdminControlledSection {
+export interface CiseCommandHubControlledSection {
   id: string;
   portal: 'public' | 'secretariat' | 'newsroom' | 'live' | 'services';
   slug: string;
   name: LocalizedString;
   description?: LocalizedString;
   customization: CustomizationModel;
-  items: AdminControlledCard[];
+  items: CiseCommandHubControlledCard[];
   status: 'active' | 'draft' | 'archived';
   updatedAt: string;
 }

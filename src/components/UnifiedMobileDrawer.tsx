@@ -207,7 +207,7 @@ export function UnifiedMobileDrawer({ isOpen, onClose, lang, onOpenDownloadApp }
             )}
           </div>
 
-          {/* Direct Link to Centralized Command Hub */}
+          {/* Direct Link to Centralized CISE Command Hub */}
           <div className="pt-2">
             <Link
               to="/hub"
@@ -216,7 +216,7 @@ export function UnifiedMobileDrawer({ isOpen, onClose, lang, onOpenDownloadApp }
             >
               <div className="flex items-center gap-2.5">
                 <Sparkles className="w-4 h-4 text-brand-300" />
-                <span>{lang === 'ar' ? 'مركز القيادة الموحد (Hub)' : lang === 'zh' ? '综合指挥管控中枢 (Hub)' : lang === 'ckb' ? 'ناوەندی کۆنتڕۆڵی باڵا (Hub)' : 'Command Hub (Control Centre)'}</span>
+                <span>{lang === 'ar' ? 'مركز القيادة الموحد CISE' : lang === 'zh' ? 'CISE 综合指挥管控中枢' : lang === 'ckb' ? 'ناوەندی کۆنتڕۆڵی باڵای CISE' : 'CISE Command Hub'}</span>
               </div>
               <ChevronRight className="w-4 h-4 rtl:rotate-180" />
             </Link>

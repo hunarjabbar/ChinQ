@@ -110,7 +110,7 @@ export function UnifiedCommandPalette({ isOpen, onClose, lang }: Props) {
     {
       id: 'cmd_nav_hub',
       category: 'navigation',
-      title: 'Go to CISE Command Hub (Control Centre)',
+      title: 'Go to CISE Command Hub',
       subtitle: '/hub',
       icon: Command,
       action: () => { navigate('/hub'); onClose(); }

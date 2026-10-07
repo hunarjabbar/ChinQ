@@ -821,7 +821,7 @@ export function JoinUs() {
                   {/* Structured Address Block */}
                   <div className="bg-paper-50 dark:bg-neutral-900/90 p-3.5 border border-neutral-200 dark:border-neutral-700 space-y-2.5">
                     <span className="block text-xs font-black uppercase tracking-wider text-brand-900 dark:text-white">
-                      Administrative Address Dossier
+                      CiseCommandHubistrative Address Dossier
                     </span>
                     <div className="grid grid-cols-2 gap-2">
                       <div>
@@ -1062,7 +1062,7 @@ export function JoinUs() {
                       <span className="font-bold text-brand-800 dark:text-brand-400 capitalize">{formData.role}</span>
                     </div>
                     <div className="col-span-2 pt-1 border-t border-neutral-200 dark:border-neutral-700">
-                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">Administrative Address</span>
+                      <span className="text-xs text-neutral-400 block uppercase font-bold tracking-wider">CiseCommandHubistrative Address</span>
                       <span className="font-bold text-neutral-700 dark:text-neutral-300 text-xs">
                         House {formData.addressHouseNo || '—'}, Street {formData.addressStreetNo || '—'}, {formData.addressDistrictName || '—'} (Dist. {formData.addressDistrictNumber || '—'})
                       </span>

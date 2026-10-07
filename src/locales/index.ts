@@ -110,7 +110,7 @@ export const translations: Record<Locale, Translations> = {
       services: 'Institute Services',
       settlement: 'Payment Settlement',
       summit: 'Iraq-China Summit',
-      hub: 'Command Hub',
+      hub: 'CISE Command Hub',
       backToIca: '← BACK TO ICA',
     },
     newsroom: {
@@ -209,7 +209,7 @@ export const translations: Record<Locale, Translations> = {
       services: 'خدمات المعهد',
       settlement: 'تسهيل التسويات المالية',
       summit: 'القمة والمعرض الاقتصادي',
-      hub: 'مركز القيادة والتحكم',
+      hub: 'مركز القيادة الموحد CISE',
       backToIca: '← العودة للوكالة',
     },
     newsroom: {
@@ -308,7 +308,7 @@ export const translations: Record<Locale, Translations> = {
       services: '研究所专属服务',
       settlement: '跨境支付与双边结算',
       summit: '伊中经济峰会暨博览会',
-      hub: '中央指挥中枢',
+      hub: 'CISE 综合指挥管控中枢',
       backToIca: '← 返回通讯社首页',
     },
     newsroom: {
@@ -407,7 +407,7 @@ export const translations: Record<Locale, Translations> = {
       services: 'خزمەتگوزارییەکانی پەیمانگا',
       settlement: 'ئاسانکاری پارەدان و یەکلاییکردنەوە',
       summit: 'لووتکە و پێشانگای ئابووری عێراق-چین',
-      hub: 'ناوەندی فەرماندەیی و کۆنترۆڵ',
+      hub: 'ناوەندی فەرماندەیی باڵای CISE',
       backToIca: '← گەڕانەوە بۆ ئاژانس',
     },
     newsroom: {

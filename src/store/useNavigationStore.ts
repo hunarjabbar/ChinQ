@@ -79,7 +79,7 @@ export const INITIAL_NAVIGATION_ITEMS: NavigationItem[] = [
   {
     id: 'nav_hdr_hub',
     section: 'header',
-    label: { en: 'Command Hub', ar: 'مركز القيادة', zh: '指挥中枢', ckb: 'ناوەندی کۆنتڕۆڵ' },
+    label: { en: 'CISE Command Hub', ar: 'مركز القيادة CISE', zh: 'CISE指挥中枢', ckb: 'ناوەندی کۆنتڕۆڵی CISE' },
     slug: 'hub',
     href: '/hub',
     icon: 'Sparkles',
@@ -451,7 +451,7 @@ export const INITIAL_NAVIGATION_ITEMS: NavigationItem[] = [
   {
     id: 'nav_sb_ica_admin',
     section: 'sidebar',
-    label: { en: 'ICA Portals Admin', ar: 'إدارة بوابات الوكالة الأربعة', zh: '通讯社四大门户管控', ckb: 'بەڕێوەبردنی دەروازەکان' },
+    label: { en: 'ICA Portals CiseCommandHub', ar: 'إدارة بوابات الوكالة الأربعة', zh: '通讯社四大门户管控', ckb: 'بەڕێوەبردنی دەروازەکان' },
     slug: 'ica-admin',
     href: '/hub/ica/public',
     icon: 'Globe',

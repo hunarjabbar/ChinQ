@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { 
-  AdminControlledSection, 
-  AdminControlledCard, 
+  CiseCommandHubControlledSection, 
+  CiseCommandHubControlledCard, 
   CustomizationModel, 
   StyleOverrides, 
   VisibilityState,
@@ -10,7 +10,7 @@ import {
 import { Locale } from '../types';
 
 export interface SectionControlState {
-  sections: Record<string, AdminControlledSection>;
+  sections: Record<string, CiseCommandHubControlledSection>;
   activeFilter: 'all' | 'active' | 'draft' | 'archived';
   isLoading: boolean;
   
@@ -19,9 +19,9 @@ export interface SectionControlState {
   toggleSectionVisibility: (sectionId: string) => void;
   
   // Card/Entity CRUD
-  addCard: (sectionId: string, card: Omit<AdminControlledCard, 'id' | 'createdAt' | 'updatedAt' | 'history'>) => Promise<AdminControlledCard>;
-  updateCard: (sectionId: string, cardId: string, updates: Partial<AdminControlledCard>) => Promise<AdminControlledCard | null>;
-  duplicateCard: (sectionId: string, cardId: string) => Promise<AdminControlledCard | null>;
+  addCard: (sectionId: string, card: Omit<CiseCommandHubControlledCard, 'id' | 'createdAt' | 'updatedAt' | 'history'>) => Promise<CiseCommandHubControlledCard>;
+  updateCard: (sectionId: string, cardId: string, updates: Partial<CiseCommandHubControlledCard>) => Promise<CiseCommandHubControlledCard | null>;
+  duplicateCard: (sectionId: string, cardId: string) => Promise<CiseCommandHubControlledCard | null>;
   softDeleteCard: (sectionId: string, cardId: string) => Promise<boolean>;
   restoreCard: (sectionId: string, cardId: string) => Promise<boolean>;
   permanentDeleteCard: (sectionId: string, cardId: string) => Promise<boolean>;
@@ -49,7 +49,7 @@ const DEFAULT_STYLE_OVERRIDES: StyleOverrides = {
   shadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
 };
 
-const INITIAL_SECTIONS: Record<string, AdminControlledSection> = {
+const INITIAL_SECTIONS: Record<string, CiseCommandHubControlledSection> = {
   // 1. Hero Section
   'public-hero': {
     id: 'public-hero',
@@ -485,7 +485,7 @@ export const useSectionControlStore = create<SectionControlState>((set, get) => 
 
   addCard: async (sectionId, cardData) => {
     const id = `card_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`;
-    const newCard: AdminControlledCard = {
+    const newCard: CiseCommandHubControlledCard = {
       ...cardData,
       id,
       sectionId,
@@ -530,7 +530,7 @@ export const useSectionControlStore = create<SectionControlState>((set, get) => 
   },
 
   updateCard: async (sectionId, cardId, updates) => {
-    let updated: AdminControlledCard | null = null;
+    let updated: CiseCommandHubControlledCard | null = null;
 
     set(state => {
       const section = state.sections[sectionId];

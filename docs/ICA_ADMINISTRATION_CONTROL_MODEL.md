@@ -1,11 +1,11 @@
-# ICA Administration Control Model & CRUD Architectural Specification
+# ICA CiseCommandHubistration Control Model & CRUD Architectural Specification
 
 ## 1. Overview
-The ICA Command Hub (Control Centre) provides unified, centralized, quad-lingual management across all public and sovereign administrative surfaces for the Iraqi-Chinese Agency (ICA) ecosystem.
+The CISE Command Hub provides unified, centralized, quad-lingual management across all public and sovereign administrative surfaces for the Iraqi-Chinese Agency (ICA) ecosystem.
 
 ## 2. Control Scope
-Every card, component, section, and navigation item on the public website is governed via the Command Hub.
-- **Navigation Entities**: Header Navigation, Footer Columns & Links, Mobile Drawer, Breadcrumb Hierarchy, and Command Hub Sidebar.
+Every card, component, section, and navigation item on the public website is governed via the CISE Command Hub.
+- **Navigation Entities**: Header Navigation, Footer Columns & Links, Mobile Drawer, Breadcrumb Hierarchy, and CISE Command Hub Sidebar.
 - **Home Page Sections**:
   1. Hero Section
   2. Live Broadcast Band

@@ -29,14 +29,14 @@ export function LivePortalLayout() {
 
   const navItems = [
     { label: 'Dashboard', href: `/${currentLang}/live/admin`, icon: LayoutDashboard, exact: true },
-    { label: 'Live Streams', href: `/${currentLang}/live/admin/streams`, icon: Radio },
-    { label: 'Movies', href: `/${currentLang}/live/admin/movies`, icon: Film },
-    { label: 'Drama', href: `/${currentLang}/live/admin/drama`, icon: Tv },
-    { label: 'Documentary', href: `/${currentLang}/live/admin/documentary`, icon: Clapperboard },
-    { label: 'Exchange Videos', href: `/${currentLang}/live/admin/exchange`, icon: Video },
-    { label: 'Schedule', href: `/${currentLang}/live/admin/schedule`, icon: Calendar },
-    { label: 'Analytics', href: `/${currentLang}/live/admin/analytics`, icon: BarChart3 },
-    { label: 'Settings', href: `/${currentLang}/live/admin/settings`, icon: Settings },
+    { label: 'Live Streams', href: `/${currentLang}/live/hub-admin/streams`, icon: Radio },
+    { label: 'Movies', href: `/${currentLang}/live/hub-admin/movies`, icon: Film },
+    { label: 'Drama', href: `/${currentLang}/live/hub-admin/drama`, icon: Tv },
+    { label: 'Documentary', href: `/${currentLang}/live/hub-admin/documentary`, icon: Clapperboard },
+    { label: 'Exchange Videos', href: `/${currentLang}/live/hub-admin/exchange`, icon: Video },
+    { label: 'Schedule', href: `/${currentLang}/live/hub-admin/schedule`, icon: Calendar },
+    { label: 'Analytics', href: `/${currentLang}/live/hub-admin/analytics`, icon: BarChart3 },
+    { label: 'Settings', href: `/${currentLang}/live/hub-admin/settings`, icon: Settings },
   ];
 
   const isCurrent = (href: string, exact = false) => {

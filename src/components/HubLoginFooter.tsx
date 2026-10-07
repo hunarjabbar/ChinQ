@@ -22,7 +22,7 @@ export function HubLoginFooter({ lang = 'en', className = '', useModal = true }:
 
   const labels = {
     adminAccess: {
-      en: 'Admin Access',
+      en: 'Hub Access',
       ar: 'دخول الإدارة',
       zh: '管理员入口',
       ckb: 'دەروازەی بەڕێوەبەر'
@@ -40,10 +40,10 @@ export function HubLoginFooter({ lang = 'en', className = '', useModal = true }:
       ckb: 'چوونەژوورەوەی ڕێپێدراو'
     },
     modalDesc: {
-      en: 'Enter your accredited CISE credentials to access the Command Hub.',
-      ar: 'أدخل بيانات الاعتماد المعتمدة للوصول إلى مركز القيادة.',
-      zh: '请输入您的 CISE 官方凭据以进入指挥控制中心。',
-      ckb: 'زانیارییەکانی خۆت بنووسە بۆ چوونەژوورەوە.'
+      en: 'Enter your accredited CISE credentials to access the CISE Command Hub.',
+      ar: 'أدخل بيانات الاعتماد المعتمدة للوصول إلى مركز القيادة CISE.',
+      zh: '请输入您的 CISE 官方凭据以进入 CISE 指挥管控中枢。',
+      ckb: 'زانیارییەکانی خۆت بنووسە بۆ چوونەژوورەوەی ناوەندی فەرماندەیی CISE.'
     },
     loginBtn: {
       en: 'Authenticate',
@@ -78,7 +78,7 @@ export function HubLoginFooter({ lang = 'en', className = '', useModal = true }:
       {
         id: 'usr_admin',
         email,
-        name: email.split('@')[0] || 'Admin User',
+        name: email.split('@')[0] || 'Hub User',
         role: 'ADMIN'
       },
       'quick_hub_token_2026'

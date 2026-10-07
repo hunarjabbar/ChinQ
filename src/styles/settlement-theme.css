@@ -200,8 +200,8 @@
   .pay-tab::after,
   .animate-pay-pulse,
   .animate-stepper-pulse {
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
+    transform: none;
+    animation: none;
+    transition: none;
   }
 }

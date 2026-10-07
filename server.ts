@@ -65,7 +65,7 @@ function getGeminiClient() {
 }
 
 
-async function ensureAdminAccount() {
+async function ensureCiseCommandHubAccount() {
   try {
     const adminEmail = 'admin@iraqi-chineseagency.com';
     const existing = await prisma.user.findUnique({ where: { email: adminEmail } });
@@ -102,7 +102,7 @@ async function ensureAdminAccount() {
 async function runStartupSeeders() {
   try {
     console.log("🌱 Starting background database seeders...");
-    await ensureAdminAccount();
+    await ensureCiseCommandHubAccount();
     await autoSeedMoreNews();
     await seedOpinions();
     await seedStudies();
@@ -255,7 +255,7 @@ async function startServer() {
           
           let resource = req.path.replace('/api/', '').split('/')[0];
           if (resource === 'admin') {
-            resource = req.path.replace('/api/admin/', '').split('/')[0];
+            resource = req.path.replace('/api/hub/', '').split('/')[0];
           }
           
           // Truncate details
@@ -377,7 +377,7 @@ async function startServer() {
   // Register Sino-Iraqi Cultural & Educational Exchange routes
   registerCulturalExchangeRoutes(app, editorOrAdminMiddleware, adminMiddleware);
 
-  // Register Centralized Command Hub & Navigation CRUD routes
+  // Register Centralized CISE Command Hub & Navigation CRUD routes
   registerHubRoutes(app);
   app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
@@ -409,7 +409,7 @@ async function startServer() {
   });
 
 
-  app.get("/api/admin/audit-logs", adminMiddleware, async (req, res) => {
+  app.get("/api/hub/audit-logs", adminMiddleware, async (req, res) => {
     try {
       const logs = await prisma.auditLog.findMany({
         orderBy: { createdAt: 'desc' },
@@ -517,7 +517,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/announcement", adminMiddleware, async (req, res) => {
+  app.post("/api/hub/announcement", adminMiddleware, async (req, res) => {
     try {
       const { contentEn, contentAr, contentZh, contentCkb, type, isActive } = req.body;
       
@@ -544,7 +544,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/announcements", adminMiddleware, async (req, res) => {
+  app.get("/api/hub/announcements", adminMiddleware, async (req, res) => {
     try {
       const announcements = await prisma.systemAnnouncement.findMany({
         orderBy: { createdAt: "desc" }
@@ -1067,7 +1067,7 @@ async function startServer() {
   };
 
   app.post("/api/updates", handleLiveUpdate);
-  app.post("/api/admin/live/:eventId/updates", handleLiveUpdate);
+  app.post("/api/hub/live/:eventId/updates", handleLiveUpdate);
 
   // Purge/Revalidate specific cache tags
   app.post("/api/cache/revalidate", async (req, res) => {
@@ -1329,9 +1329,9 @@ async function startServer() {
     });
   });
 
-  // 3. Admin CRUD
-  // --- BRICS Topics Admin ---
-  app.get("/api/admin/brics-topics", editorOrAdminMiddleware, async (req, res) => {
+  // 3. CiseCommandHub CRUD
+  // --- BRICS Topics CiseCommandHub ---
+  app.get("/api/hub/brics-topics", editorOrAdminMiddleware, async (req, res) => {
     try {
       const topics = await prisma.bricsTopic.findMany({
         orderBy: { createdAt: 'desc' }
@@ -1343,7 +1343,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/brics-topics", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/brics-topics", editorOrAdminMiddleware, async (req, res) => {
     try {
       const topic = await prisma.bricsTopic.create({
         data: req.body
@@ -1355,7 +1355,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -1373,7 +1373,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/brics-topics/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.bricsTopic.delete({
         where: { id: req.params.id }
@@ -1385,7 +1385,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/chinese-products", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/chinese-products", editorOrAdminMiddleware, async (req, res) => {
     try {
       const products = await prisma.chineseProduct.findMany({
         orderBy: { order: 'asc' }
@@ -1397,7 +1397,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/chinese-products", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/chinese-products", editorOrAdminMiddleware, async (req, res) => {
     try {
       const product = await prisma.chineseProduct.create({
         data: req.body
@@ -1409,7 +1409,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -1427,7 +1427,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/chinese-products/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.chineseProduct.delete({
         where: { id: req.params.id }
@@ -1439,7 +1439,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/finance-insights", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/finance-insights", editorOrAdminMiddleware, async (req, res) => {
     try {
       const insights = await prisma.financeInsight.findMany({
         orderBy: [
@@ -1454,7 +1454,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/finance-insights", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/finance-insights", editorOrAdminMiddleware, async (req, res) => {
     try {
       const {
         titleEn, titleAr, titleZh, titleCkb,
@@ -1494,7 +1494,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -1521,7 +1521,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/finance-insights/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.financeInsight.delete({
         where: { id: req.params.id }
@@ -1533,7 +1533,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/articles", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/articles", editorOrAdminMiddleware, async (req, res) => {
     try {
       const articles = await prisma.article.findMany({
         orderBy: { updatedAt: "desc" },
@@ -1568,7 +1568,7 @@ async function startServer() {
         },
       });
 
-      // Also record in PaymentOrder table for full Admin Portal integration
+      // Also record in PaymentOrder table for full CISE Command Hub integration
       const refNo = `SUB-${Date.now().toString().slice(-6)}`;
       try {
         await prisma.paymentOrder.create({
@@ -2922,7 +2922,7 @@ async function startServer() {
         },
       });
 
-      // Synchronize with User database table so it appears in Admin Portal
+      // Synchronize with User database table so it appears in CISE Command Hub
       const uniqueSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
       const uniqueCodeNum = Math.floor(1000 + Math.random() * 9000);
       const defaultExpiry = new Date();
@@ -2976,7 +2976,7 @@ async function startServer() {
           credentialExpiryDate: defaultExpiry,
           renewalCount: 0
         }
-      }).catch(err => console.error("Admin user sync note:", err));
+      }).catch(err => console.error("CiseCommandHub user sync note:", err));
 
       res.json({ success: true, application });
     } catch (e: any) {
@@ -3041,7 +3041,7 @@ async function startServer() {
     }
   });
 
-  // Admin Partnership Applications Management
+  // CiseCommandHub Partnership Applications Management
   // ----- PARTNERS API -----
   app.get("/api/partners", async (req, res) => {
     try {
@@ -3085,7 +3085,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/sourcing", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/sourcing", editorOrAdminMiddleware, async (req, res) => {
     try {
       const inquiries = await prisma.sourcingInquiry.findMany({
         orderBy: { createdAt: "desc" },
@@ -3097,7 +3097,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/sourcing/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/sourcing/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const inquiry = await prisma.sourcingInquiry.update({
         where: { id: req.params.id },
@@ -3110,7 +3110,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/sourcing/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/sourcing/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.sourcingInquiry.delete({
         where: { id: req.params.id },
@@ -3140,7 +3140,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/sourcing/pillars", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/sourcing/pillars", editorOrAdminMiddleware, async (req, res) => {
     try {
       let count = await prisma.sourcingPillar.count();
       if (count === 0) {
@@ -3156,7 +3156,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/sourcing/pillars", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/sourcing/pillars", editorOrAdminMiddleware, async (req, res) => {
     try {
       const data = { ...req.body };
       if (!data.titleEn) {
@@ -3181,7 +3181,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/sourcing/pillars/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/sourcing/pillars/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -3199,7 +3199,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/sourcing/pillars/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/sourcing/pillars/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       await prisma.sourcingPillar.delete({ where: { id } });
@@ -3210,7 +3210,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/sourcing/pillars/reorder", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/sourcing/pillars/reorder", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { items } = req.body;
       if (!Array.isArray(items)) {
@@ -3232,7 +3232,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/sourcing/pillars/reset-defaults", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/sourcing/pillars/reset-defaults", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.sourcingPillar.deleteMany({});
       await seedSourcingPillars();
@@ -3244,7 +3244,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/partners", authMiddleware, async (req, res) => {
+  app.get("/api/hub/partners", authMiddleware, async (req, res) => {
     try {
       const partners = await prisma.partner.findMany({
         orderBy: { order: "asc" },
@@ -3256,7 +3256,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/partners", authMiddleware, async (req, res) => {
+  app.post("/api/hub/partners", authMiddleware, async (req, res) => {
     try {
       const partner = await prisma.partner.create({
         data: req.body,
@@ -3268,7 +3268,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/partners/:id", authMiddleware, async (req, res) => {
+  app.put("/api/hub/partners/:id", authMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -3286,7 +3286,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/partners/:id", authMiddleware, async (req, res) => {
+  app.delete("/api/hub/partners/:id", authMiddleware, async (req, res) => {
     try {
       await prisma.partner.delete({
         where: { id: req.params.id },
@@ -3650,7 +3650,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/business-opportunities", editorOrAdminMiddleware, async (req, res) => {
+  app.get("/api/hub/business-opportunities", editorOrAdminMiddleware, async (req, res) => {
     try {
       const opportunities = await prisma.businessOpportunity.findMany({
         orderBy: [{ order: "asc" }, { createdAt: "desc" }],
@@ -3662,7 +3662,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/business-opportunities", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/business-opportunities", editorOrAdminMiddleware, async (req, res) => {
     try {
       const {
         titleEn,
@@ -3738,7 +3738,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/business-opportunities/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.put("/api/hub/business-opportunities/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       const { id } = req.params;
       const data = { ...req.body };
@@ -3762,7 +3762,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/business-opportunities/:id", editorOrAdminMiddleware, async (req, res) => {
+  app.delete("/api/hub/business-opportunities/:id", editorOrAdminMiddleware, async (req, res) => {
     try {
       await prisma.businessOpportunity.delete({
         where: { id: req.params.id },
@@ -3774,7 +3774,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/business-opportunities/seed", editorOrAdminMiddleware, async (req, res) => {
+  app.post("/api/hub/business-opportunities/seed", editorOrAdminMiddleware, async (req, res) => {
     try {
       await seedBusinessOpportunities();
       const count = await prisma.businessOpportunity.count();
@@ -3785,7 +3785,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/applications", authMiddleware, async (req, res) => {
+  app.get("/api/hub/applications", authMiddleware, async (req, res) => {
     try {
       const apps = await prisma.partnershipApplication.findMany({
         orderBy: { createdAt: "desc" },
@@ -3797,7 +3797,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/applications/:id", authMiddleware, async (req, res) => {
+  app.put("/api/hub/applications/:id", authMiddleware, async (req, res) => {
     try {
       const { status } = req.body;
       const app = await prisma.partnershipApplication.update({
@@ -3812,7 +3812,7 @@ async function startServer() {
   });
 
   app.delete(
-    "/api/admin/applications/:id",
+    "/api/hub/applications/:id",
     authMiddleware,
     async (req, res) => {
       try {
@@ -3827,8 +3827,8 @@ async function startServer() {
     },
   );
 
-  // Admin Telex Dispatches Management
-  app.get("/api/admin/telexes", authMiddleware, async (req, res) => {
+  // CiseCommandHub Telex Dispatches Management
+  app.get("/api/hub/telexes", authMiddleware, async (req, res) => {
     try {
       const telexes = await prisma.telexDispatch.findMany({
         orderBy: { createdAt: "desc" },
@@ -3840,7 +3840,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/telexes/:id", authMiddleware, async (req, res) => {
+  app.put("/api/hub/telexes/:id", authMiddleware, async (req, res) => {
     try {
       const { status } = req.body;
       const tlx = await prisma.telexDispatch.update({
@@ -3854,7 +3854,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/telexes/:id", authMiddleware, async (req, res) => {
+  app.delete("/api/hub/telexes/:id", authMiddleware, async (req, res) => {
     try {
       await prisma.telexDispatch.delete({
         where: { id: req.params.id },
@@ -3866,8 +3866,8 @@ async function startServer() {
     }
   });
 
-  // Admin Studies Management
-  app.post("/api/admin/studies", authMiddleware, async (req: any, res: any) => {
+  // CiseCommandHub Studies Management
+  app.post("/api/hub/studies", authMiddleware, async (req: any, res: any) => {
     try {
       const {
         slug,
@@ -3893,7 +3893,7 @@ async function startServer() {
       let author = await prisma.user.findFirst({ where: { role: "ADMIN" } });
       if (!author) {
         author = await prisma.user.create({
-          data: { email: "admin@test.com", name: "Admin", role: "ADMIN" },
+          data: { email: "admin@test.com", name: "CiseCommandHub", role: "ADMIN" },
         });
       }
 
@@ -3942,7 +3942,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/studies/:id", authMiddleware, async (req, res) => {
+  app.delete("/api/hub/studies/:id", authMiddleware, async (req, res) => {
     try {
       await prisma.study.delete({
         where: { id: req.params.id },
@@ -3955,7 +3955,7 @@ async function startServer() {
   });
 
 
-  app.post("/api/admin/articles", authMiddleware, async (req: any, res: any) => {
+  app.post("/api/hub/articles", authMiddleware, async (req: any, res: any) => {
     const { slug, categoryId, imageUrl, translations, status: requestedStatus } = req.body;
     try {
       const userRole = req.user?.role || "ADMIN";
@@ -3970,7 +3970,7 @@ async function startServer() {
       }
       if (!author) {
         author = await prisma.user.create({
-          data: { email: "admin@test.com", name: "Admin", role: "ADMIN" },
+          data: { email: "admin@test.com", name: "CiseCommandHub", role: "ADMIN" },
         });
       }
 
@@ -4037,7 +4037,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/articles/:id/approve", authMiddleware, async (req: any, res: any) => {
+  app.post("/api/hub/articles/:id/approve", authMiddleware, async (req: any, res: any) => {
     try {
       const userRole = req.user?.role;
       if (userRole !== "ADMIN") {
@@ -4069,7 +4069,7 @@ async function startServer() {
             action: "APPROVE_ARTICLE",
             resource: "ARTICLE",
             itemId: article.id,
-            details: `Automated Log: Article "${article.slug}" status was changed from PENDING to PUBLISHED by Admin.`,
+            details: `Automated Log: Article "${article.slug}" status was changed from PENDING to PUBLISHED by CiseCommandHub.`,
           }
         });
       }
@@ -4084,7 +4084,7 @@ async function startServer() {
 
   
 
-  app.get("/api/admin/articles/:id", authMiddleware, async (req: any, res: any) => {
+  app.get("/api/hub/articles/:id", authMiddleware, async (req: any, res: any) => {
     try {
       const article = await prisma.article.findUnique({
         where: { id: req.params.id },
@@ -4098,7 +4098,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/articles/:id", authMiddleware, async (req: any, res: any) => {
+  app.put("/api/hub/articles/:id", authMiddleware, async (req: any, res: any) => {
     try {
       const { slug, categoryId, imageUrl, translations } = req.body;
       const article = await prisma.article.update({
@@ -4146,7 +4146,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/articles/:id", authMiddleware, async (req, res) => {
+  app.delete("/api/hub/articles/:id", authMiddleware, async (req, res) => {
     try {
       await prisma.articleTranslation.deleteMany({
         where: { articleId: req.params.id }
@@ -4161,7 +4161,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/news-search", editorOrAdminMiddleware, aiSearchLimiter, async (req, res) => {
+  app.post("/api/hub/news-search", editorOrAdminMiddleware, aiSearchLimiter, async (req, res) => {
     try {
       const { country, topic } = req.body;
       const query = country
@@ -4254,7 +4254,7 @@ async function startServer() {
             return res.json({ success: true, articles });
           }
         } catch (aiErr) {
-          console.warn("[AI Admin News Search API] Falling back to database articles:", aiErr);
+          console.warn("[AI CiseCommandHub News Search API] Falling back to database articles:", aiErr);
         }
       }
 
@@ -4294,9 +4294,9 @@ async function startServer() {
     res.json(cats);
   });
 
-  // 4. Admin Users management
+  // 4. CiseCommandHub Users management
   
-  app.get("/api/admin/subscribers", authMiddleware, async (req, res) => {
+  app.get("/api/hub/subscribers", authMiddleware, async (req, res) => {
     try {
       const subscribers = await prisma.newsletterSubscriber.findMany({
         orderBy: { createdAt: 'desc' }
@@ -4307,7 +4307,7 @@ async function startServer() {
     }
   });
 
-  app.get("/api/admin/users", adminMiddleware, async (req, res) => {
+  app.get("/api/hub/users", adminMiddleware, async (req, res) => {
     try {
       let users = await prisma.user.findMany({
         orderBy: { createdAt: "desc" },
@@ -4362,7 +4362,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/users", adminMiddleware, async (req, res) => {
+  app.post("/api/hub/users", adminMiddleware, async (req, res) => {
     const { 
       name, email, role, department, title, clearanceLevel, badgeStatus, digitalId, memberCode,
       nationality, passportOrIdNumber, asaishCode, iraqiInfoCard, addressHouseNo, addressStreetNo, addressDistrictName, addressDistrictNumber,
@@ -4417,7 +4417,7 @@ async function startServer() {
     }
   });
 
-  app.put("/api/admin/users/:id", adminMiddleware, async (req, res) => {
+  app.put("/api/hub/users/:id", adminMiddleware, async (req, res) => {
     const {
       name,
       email,
@@ -4482,7 +4482,7 @@ async function startServer() {
     }
   });
 
-  app.post("/api/admin/users/:id/renew", adminMiddleware, async (req, res) => {
+  app.post("/api/hub/users/:id/renew", adminMiddleware, async (req, res) => {
     try {
       const existing = await prisma.user.findUnique({ where: { id: req.params.id } });
       if (!existing) return res.status(404).json({ error: "Member not found" });
@@ -4508,7 +4508,7 @@ async function startServer() {
     }
   });
 
-  app.delete("/api/admin/users/:id", adminMiddleware, async (req, res) => {
+  app.delete("/api/hub/users/:id", adminMiddleware, async (req, res) => {
     try {
       await prisma.user.delete({
         where: { id: req.params.id },

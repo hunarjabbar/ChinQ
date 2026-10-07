@@ -26,7 +26,7 @@ export const inMemoryAuditLogs: HubAuditLogEntry[] = [
     action: "system_init",
     resource: "HubEcosystem",
     itemId: "cise-hub-core",
-    details: "Centralized Command Hub ecosystem initialized with RBAC enforcement",
+    details: "Centralized CISE Command Hub ecosystem initialized with RBAC enforcement",
     ip: "127.0.0.1",
     userAgent: "Internal/Node",
     timestamp: new Date().toISOString()
@@ -111,7 +111,7 @@ export let inMemoryNavigationItems: any[] = [
   {
     id: "nav_hdr_hub",
     section: "header",
-    label: { en: "Command Hub", ar: "مركز القيادة", zh: "指挥中枢", ckb: "ناوەندی کۆنتڕۆڵ" },
+    label: { en: "CISE Command Hub", ar: "مركز القيادة CISE", zh: "CISE 指挥中枢", ckb: "ناوەندی کۆنتڕۆڵی CISE" },
     slug: "hub",
     href: "/hub",
     icon: "Sparkles",

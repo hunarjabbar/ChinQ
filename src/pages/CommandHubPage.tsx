@@ -13,11 +13,11 @@ import {
 } from 'lucide-react';
 import { IcaAdministrationSection } from '../components/hub/IcaAdministrationSection';
 import { NavigationManagerSection } from '../components/hub/NavigationManagerSection';
-import { PublicPortalAdminSection } from '../components/hub/PublicPortalAdminSection';
-import { SecretariatAdminSection } from '../components/hub/SecretariatAdminSection';
-import { NewsroomAdminSection } from '../components/hub/NewsroomAdminSection';
-import { LiveMediaAdminSection } from '../components/hub/LiveMediaAdminSection';
-import { CulturalExchangeAdminSection } from '../components/hub/CulturalExchangeAdminSection';
+import { PublicPortalCiseCommandHubSection } from '../components/hub/PublicPortalCiseCommandHubSection';
+import { SecretariatCiseCommandHubSection } from '../components/hub/SecretariatCiseCommandHubSection';
+import { NewsroomCiseCommandHubSection } from '../components/hub/NewsroomCiseCommandHubSection';
+import { LiveMediaCiseCommandHubSection } from '../components/hub/LiveMediaCiseCommandHubSection';
+import { CulturalExchangeCiseCommandHubSection } from '../components/hub/CulturalExchangeCiseCommandHubSection';
 import { SubmissionsInboxSection } from '../components/hub/SubmissionsInboxSection';
 import { GenericEntityCrud } from '../components/hub/GenericEntityCrud';
 
@@ -167,7 +167,7 @@ export function CommandHubPage() {
               CISE
             </div>
             <h1 className="text-2xl font-black uppercase tracking-tight text-white">CISE Command Hub</h1>
-            <p className="text-xs text-neutral-400">Chinese Institute for Strategic and Economic Studies Control Center</p>
+            <p className="text-xs text-neutral-400">Chinese Institute for Strategic and Economic Studies CISE Command Hub</p>
           </div>
 
           {loginError && (
@@ -279,7 +279,7 @@ export function CommandHubPage() {
             </div>
             <div>
               <span className="text-sm font-black text-white uppercase tracking-wider block">CISE Command Hub</span>
-              <span className="text-[10px] text-neutral-400 font-medium block">Control Centre</span>
+              <span className="text-[10px] text-neutral-400 font-medium block">CISE Command Hub</span>
             </div>
           </Link>
 
@@ -293,7 +293,7 @@ export function CommandHubPage() {
               className="bg-transparent text-white font-bold uppercase focus:outline-none cursor-pointer text-xs"
             >
               <option value="superadmin">Superadmin</option>
-              <option value="admin">Admin</option>
+              <option value="admin">CiseCommandHub</option>
               <option value="reviewer">Reviewer</option>
               <option value="editor">Editor</option>
               <option value="translator">Translator</option>
@@ -625,21 +625,21 @@ export function CommandHubPage() {
 
           {/* ICA Administration Sub-sections - FULL CRUD */}
           {(path.startsWith('/ica/public') || path.startsWith('/ica-admin/public-portal')) && (
-            <PublicPortalAdminSection lang={activeLocale} />
+            <PublicPortalCiseCommandHubSection lang={activeLocale} />
           )}
           {(path.startsWith('/ica/secretariat') || path.startsWith('/ica-admin/secretariat')) && (
-            <SecretariatAdminSection lang={activeLocale} />
+            <SecretariatCiseCommandHubSection lang={activeLocale} />
           )}
           {(path.startsWith('/ica/newsroom') || path.startsWith('/ica-admin/newsroom')) && (
-            <NewsroomAdminSection lang={activeLocale} />
+            <NewsroomCiseCommandHubSection lang={activeLocale} />
           )}
           {(path.startsWith('/ica/live') || path.startsWith('/ica-admin/live')) && (
-            <LiveMediaAdminSection lang={activeLocale} />
+            <LiveMediaCiseCommandHubSection lang={activeLocale} />
           )}
 
           {/* Cultural Exchange Services Full CRUD View */}
           {path.includes('cultural-exchange') && (
-            <CulturalExchangeAdminSection lang={activeLocale} />
+            <CulturalExchangeCiseCommandHubSection lang={activeLocale} />
           )}
 
           {/* Dashboard View */}
@@ -647,7 +647,7 @@ export function CommandHubPage() {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-black uppercase tracking-tight text-white">Control Centre Dashboard</h2>
+                  <h2 className="text-xl font-black uppercase tracking-tight text-white">CISE Command Hub Dashboard</h2>
                   <p className="text-xs text-neutral-400">CISE Sovereign Intelligence & Administrative Surface</p>
                 </div>
                 <button

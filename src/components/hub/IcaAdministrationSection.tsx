@@ -28,12 +28,12 @@ import { portalStore } from '../../data/portalData';
 import { useAuthStore } from '../../store/useAuthStore';
 import { PortalScope, NewsroomArticle, MediaItem, PublicInitiative } from '../../types/portals';
 
-interface IcaAdminProps {
+interface IcaCiseCommandHubProps {
   subSection: 'public' | 'secretariat' | 'newsroom' | 'live';
   lang?: string;
 }
 
-export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaAdminProps) {
+export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaCiseCommandHubProps) {
   const { user } = useAuthStore();
   const [dataVersion, setDataVersion] = useState(0);
   const [revalidationLog, setRevalidationLog] = useState<string | null>(null);
@@ -126,7 +126,7 @@ export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaAdminPr
             </div>
           </div>
 
-          {/* Initiatives Quick CRUD in Command Hub */}
+          {/* Initiatives Quick CRUD in CISE Command Hub */}
           <div className="p-5 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-black uppercase text-white tracking-wider flex items-center gap-2">
@@ -276,7 +276,7 @@ export function IcaAdministrationSection({ subSection, lang = 'en' }: IcaAdminPr
             </div>
           </div>
 
-          {/* Quick Article CRUD in Command Hub */}
+          {/* Quick Article CRUD in CISE Command Hub */}
           <div className="p-5 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-black uppercase text-white tracking-wider flex items-center gap-2">

@@ -19,7 +19,7 @@ export async function publishLiveUpdate(data: any) {
       contentCk: data.contentCk || data.contentCkb || '',
       contentCkb: data.contentCkb || data.contentCk || '',
     };
-    const res = await apiFetch(`/api/admin/live/${data.eventId}/updates`, {
+    const res = await apiFetch(`/api/hub/live/${data.eventId}/updates`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

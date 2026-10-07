@@ -812,8 +812,8 @@ export function registerInstituteRoutes(
     }
   });
 
-  // 11. Admin Endpoints for Reviewing Media Requests & Syndication Applications
-  app.get("/api/admin/institute/media-requests", editorOrAdminMiddleware, async (req: Request, res: Response) => {
+  // 11. CiseCommandHub Endpoints for Reviewing Media Requests & Syndication Applications
+  app.get("/api/hub/institute/media-requests", editorOrCiseCommandHubMiddleware, async (req: Request, res: Response) => {
     try {
       const records = await prisma.partnershipApplication.findMany({
         where: {
@@ -827,7 +827,7 @@ export function registerInstituteRoutes(
     }
   });
 
-  app.get("/api/admin/institute/syndication-applications", editorOrAdminMiddleware, async (req: Request, res: Response) => {
+  app.get("/api/hub/institute/syndication-applications", editorOrCiseCommandHubMiddleware, async (req: Request, res: Response) => {
     try {
       const records = await prisma.partnershipApplication.findMany({
         where: {

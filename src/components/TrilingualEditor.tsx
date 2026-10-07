@@ -56,7 +56,7 @@ export function TrilingualEditor() {
     queryKey: ['admin-article', id],
     queryFn: async () => {
       if (!id) return null;
-      const res = await apiFetch('/api/admin/articles/' + id);
+      const res = await apiFetch('/api/hub/articles/' + id);
       if (!res.ok) throw new Error('Failed to load article');
       return res.json();
     },
@@ -92,7 +92,7 @@ export function TrilingualEditor() {
   // Article creation mutation
   const publishMutation = useMutation({
     mutationFn: async (payload: any) => {
-      const endpoint = id ? '/api/admin/articles/' + id : '/api/admin/articles';
+      const endpoint = id ? '/api/hub/articles/' + id : '/api/hub/articles';
       const method = id ? 'PUT' : 'POST';
       const res = await apiFetch(endpoint, {
         method,
@@ -111,7 +111,7 @@ export function TrilingualEditor() {
       queryClient.invalidateQueries({ queryKey: ['admin-articles'] });
       setStatusMessage({ type: 'success', text: 'Article published successfully across all 4 languages!' });
       setTimeout(() => {
-        navigate(`/${lang || 'en'}/admin/articles`);
+        navigate(`/${lang || 'en'}/hub-admin/articles`);
       }, 1500);
     },
     onError: (err: any) => {

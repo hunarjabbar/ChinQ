@@ -43,7 +43,7 @@ export function IcaPublicHome() {
   const [emailInput, setEmailInput] = useState('');
   const [subscribedSuccess, setSubscribedSuccess] = useState(false);
 
-  // Command Hub Controlled Sections
+  // CISE Command Hub Controlled Sections
   const { sections } = useSectionControlStore();
   const heroSection = sections['public-hero'];
   const heroCard = heroSection?.items?.[0];

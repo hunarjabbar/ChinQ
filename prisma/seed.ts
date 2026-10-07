@@ -41,7 +41,7 @@ async function main() {
     data: {
       email: 'admin@iraqchinaagency.com',
       password: adminHash,
-      name: 'System Admin',
+      name: 'System CiseCommandHub',
       role: 'ADMIN',
     },
   });
@@ -50,7 +50,7 @@ async function main() {
     data: {
       email: 'admin@iraqchinaagency.media',
       password: adminHash,
-      name: 'Test Admin',
+      name: 'Test CiseCommandHub',
       role: 'ADMIN',
     },
   });
@@ -457,7 +457,7 @@ async function main() {
   }
 
 
-  // 8. Seed Admin Credentials (Development Only)
+  // 8. Seed CiseCommandHub Credentials (Development Only)
   if (process.env.NODE_ENV !== 'production') {
     console.log('🔒 Seeding admin credentials for development...');
     
@@ -469,7 +469,7 @@ async function main() {
       },
       {
         email: "admin@iraqi-chineseagency.com",
-        name: "ICA Sovereign Admin",
+        name: "ICA Sovereign CiseCommandHub",
         role: "ADMIN",
       }
     ];

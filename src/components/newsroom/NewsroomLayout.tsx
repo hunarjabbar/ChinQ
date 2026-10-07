@@ -28,13 +28,13 @@ export function NewsroomLayout() {
 
   const navItems = [
     { label: 'Dashboard', href: `/${currentLang}/newsroom/admin`, icon: LayoutDashboard, exact: true },
-    { label: 'Articles', href: `/${currentLang}/newsroom/admin/articles`, icon: FileText },
-    { label: 'Categories', href: `/${currentLang}/newsroom/admin/categories`, icon: Grid },
-    { label: 'Tags', href: `/${currentLang}/newsroom/admin/tags`, icon: Tags },
-    { label: 'Authors', href: `/${currentLang}/newsroom/admin/authors`, icon: Users },
-    { label: 'Feeds', href: `/${currentLang}/newsroom/admin/feeds`, icon: Rss },
-    { label: 'Analytics', href: `/${currentLang}/newsroom/admin/analytics`, icon: BarChart3 },
-    { label: 'Settings', href: `/${currentLang}/newsroom/admin/settings`, icon: Settings },
+    { label: 'Articles', href: `/${currentLang}/newsroom/hub-admin/articles`, icon: FileText },
+    { label: 'Categories', href: `/${currentLang}/newsroom/hub-admin/categories`, icon: Grid },
+    { label: 'Tags', href: `/${currentLang}/newsroom/hub-admin/tags`, icon: Tags },
+    { label: 'Authors', href: `/${currentLang}/newsroom/hub-admin/authors`, icon: Users },
+    { label: 'Feeds', href: `/${currentLang}/newsroom/hub-admin/feeds`, icon: Rss },
+    { label: 'Analytics', href: `/${currentLang}/newsroom/hub-admin/analytics`, icon: BarChart3 },
+    { label: 'Settings', href: `/${currentLang}/newsroom/hub-admin/settings`, icon: Settings },
   ];
 
   const isCurrent = (href: string, exact = false) => {

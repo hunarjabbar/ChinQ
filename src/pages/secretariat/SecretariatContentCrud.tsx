@@ -428,7 +428,7 @@ export function SecretariatContentCrud() {
                           }
                         }}
                         className="p-1.5 rounded-lg border border-red-200 text-[var(--color-brand-800)] hover:bg-red-50 transition-colors cursor-pointer"
-                        title="Permanent Delete (SuperAdmin Only)"
+                        title="Permanent Delete (Superadmin Only)"
                       >
                         <X size={13} />
                       </button>

@@ -83,7 +83,7 @@ export interface VisaCentreDictionary {
   statusRefused: string;
   statusClosed: string;
 
-  // Command Hub
+  // CISE Command Hub
   hubTitle: string;
   hubOverview: string;
   hubVisaTypes: string;
@@ -183,7 +183,7 @@ export const VISA_CENTRE_I18N: Record<Locale, VisaCentreDictionary> = {
     statusRefused: 'Consular Refusal',
     statusClosed: 'Case Closed',
 
-    hubTitle: 'Visa Centre Command Hub',
+    hubTitle: 'CISE Command Hub • Visa Centre',
     hubOverview: 'Operational Overview & Key Metrics',
     hubVisaTypes: 'Visa Categories',
     hubServices: 'Services Catalogue',
@@ -280,7 +280,7 @@ export const VISA_CENTRE_I18N: Record<Locale, VisaCentreDictionary> = {
     statusRefused: 'رفض قنصلي',
     statusClosed: 'معاملة مكتملة ومغلقة',
 
-    hubTitle: 'مركز التحكم الإداري لمركز التأشيرات',
+    hubTitle: 'مركز القيادة الموحد CISE • مركز التأشيرات',
     hubOverview: 'نظرة عامة ومؤشرات الأداء',
     hubVisaTypes: 'تصنيفات التأشيرات',
     hubServices: 'دليل الخدمات',
@@ -377,7 +377,7 @@ export const VISA_CENTRE_I18N: Record<Locale, VisaCentreDictionary> = {
     statusRefused: '领事拒签',
     statusClosed: '案卷结案归档',
 
-    hubTitle: '签证中心管理总枢纽',
+    hubTitle: 'CISE 综合指挥管控中枢 • 签证中心',
     hubOverview: '运营概览与核心效能指标',
     hubVisaTypes: '签证类型库维护',
     hubServices: '咨询服务项目管理',
@@ -474,7 +474,7 @@ export const VISA_CENTRE_I18N: Record<Locale, VisaCentreDictionary> = {
     statusRefused: 'ڕەتکردنەوەی کۆنسوڵگەری',
     statusClosed: 'مامەڵە تەواو و داخراوە',
 
-    hubTitle: 'ژووری کۆنتڕۆڵی ناوەندی ڤیزا',
+    hubTitle: 'ناوەندی فەرماندەیی باڵای CISE • سەنتەری ڤیزا',
     hubOverview: 'پوختەی کارەکان و پێوەرە سەرەکییەکان',
     hubVisaTypes: 'بەڕێوەبردنی جۆرەکانی ڤیزا',
     hubServices: 'لیستی خزمەتگوزارییەکان',

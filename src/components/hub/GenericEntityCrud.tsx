@@ -4,7 +4,7 @@ import {
   Search, SlidersHorizontal, Palette, Globe, Clock, History, AlertTriangle,
   CheckCircle, Save, X, ExternalLink, Calendar, Sparkles, Shield
 } from 'lucide-react';
-import { AdminControlledCard, VisibilityState, StyleOverrides } from '../../types/controlModel';
+import { CiseCommandHubControlledCard, VisibilityState, StyleOverrides } from '../../types/controlModel';
 import { useSectionControlStore } from '../../store/useSectionControlStore';
 import { useAuthStore } from '../../store/useAuthStore';
 import { Locale } from '../../types';
@@ -47,7 +47,7 @@ export function GenericEntityCrud({
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingCard, setEditingCard] = useState<AdminControlledCard | null>(null);
+  const [editingCard, setEditingCard] = useState<CiseCommandHubControlledCard | null>(null);
   const [activeFormTab, setActiveFormTab] = useState<'content' | 'style' | 'visibility' | 'localization' | 'history' | 'danger'>('content');
 
   // Form State
@@ -147,7 +147,7 @@ export function GenericEntityCrud({
   };
 
   // Open Edit Modal
-  const handleOpenEdit = (card: AdminControlledCard) => {
+  const handleOpenEdit = (card: CiseCommandHubControlledCard) => {
     setEditingCard(card);
     setFormHeadlineEn(card.headline.en || '');
     setFormHeadlineAr(card.headline.ar || '');
@@ -301,7 +301,7 @@ export function GenericEntityCrud({
         <div>
           <div className="flex items-center gap-2 text-xs font-mono font-bold text-red-500 uppercase tracking-widest mb-1">
             <Shield size={14} />
-            <span>CISE Control Centre • Administrative Surface</span>
+            <span>CISE Command Hub • Administrative Surface</span>
           </div>
           <h2 className="text-xl font-black uppercase text-white">{sectionTitle}</h2>
           {sectionDescription && (

@@ -56,7 +56,7 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'initiatives.tech': 'Sovereign Tech & AI Innovation',
 
     // Secretariat Hub
-    'secretariat.title': 'Secretariat Command Hub',
+    'secretariat.title': 'CISE Command Hub',
     'secretariat.subtitle': 'General Secretariat administrative interface, governance ledger, and content orchestration.',
     'secretariat.dashboard': 'Overview Dashboard',
     'secretariat.content': 'Content CRUD',
@@ -132,14 +132,14 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'livePortal.playEpisode': 'Play Series',
 
     // CISE Command Hub Peer Integration
-    'hub.icaAdmin.section': 'ICA Administration',
-    'hub.icaAdmin.publicPortal': 'Public Portal',
-    'hub.icaAdmin.secretariat': 'Secretariat',
-    'hub.icaAdmin.newsroom': 'ICA Media & Newsroom',
-    'hub.icaAdmin.livePortal': 'Live Portal',
-    'hub.icaAdmin.scopeEnforced': 'Access Scoped by Portal Role',
-    'hub.icaAdmin.openPublicSite': 'Launch External Surface',
-    'hub.icaAdmin.quickCreate': 'Publish Dispatch',
+    'hub.icaAdministration.section': 'ICA Administration',
+    'hub.icaAdministration.publicPortal': 'Public Portal',
+    'hub.icaAdministration.secretariat': 'Secretariat',
+    'hub.icaAdministration.newsroom': 'ICA Media & Newsroom',
+    'hub.icaAdministration.livePortal': 'Live Portal',
+    'hub.icaAdministration.scopeEnforced': 'Access Scoped by Portal Role',
+    'hub.icaAdministration.openPublicSite': 'Launch External Surface',
+    'hub.icaAdministration.quickCreate': 'Publish Dispatch',
   },
   ar: {
     // Nav & Common
@@ -192,7 +192,7 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'initiatives.tech': 'الابتكار التكنولوجي والذكاء الاصطناعي',
 
     // Secretariat Hub
-    'secretariat.title': 'مركز قيادة الأمانة العامة',
+    'secretariat.title': 'مركز القيادة الموحد CISE',
     'secretariat.subtitle': 'واجهة الإدارة والحوكمة والتنسيق المؤسسي للأمانة العامة للوكالة.',
     'secretariat.dashboard': 'لوحة المعلومات العامة',
     'secretariat.content': 'إدارة المحتوى',
@@ -268,14 +268,14 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'livePortal.playEpisode': 'تشغيل الحلقة',
 
     // CISE Command Hub Peer Integration
-    'hub.icaAdmin.section': 'إدارة الوكالة العراقية الصينية',
-    'hub.icaAdmin.publicPortal': 'البوابة العامة',
-    'hub.icaAdmin.secretariat': 'الأمانة العامة',
-    'hub.icaAdmin.newsroom': 'إعلام وغرفة أخبار الوكالة',
-    'hub.icaAdmin.livePortal': 'بوابة البث الحي',
-    'hub.icaAdmin.scopeEnforced': 'الوصول محدد بنطاق وصلاحيات الدور',
-    'hub.icaAdmin.openPublicSite': 'فتح الواجهة الخارجية',
-    'hub.icaAdmin.quickCreate': 'نشر برقية جديدة',
+    'hub.icaAdministration.section': 'إدارة الوكالة العراقية الصينية',
+    'hub.icaAdministration.publicPortal': 'البوابة العامة',
+    'hub.icaAdministration.secretariat': 'الأمانة العامة',
+    'hub.icaAdministration.newsroom': 'إعلام وغرفة أخبار الوكالة',
+    'hub.icaAdministration.livePortal': 'بوابة البث الحي',
+    'hub.icaAdministration.scopeEnforced': 'الوصول محدد بنطاق وصلاحيات الدور',
+    'hub.icaAdministration.openPublicSite': 'فتح الواجهة الخارجية',
+    'hub.icaAdministration.quickCreate': 'نشر برقية جديدة',
   },
   zh: {
     // Nav & Common
@@ -328,7 +328,7 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'initiatives.tech': '主权数字科技与AI创新',
 
     // Secretariat Hub
-    'secretariat.title': '联合秘书处管理指挥中心',
+    'secretariat.title': 'CISE 综合指挥管控中枢',
     'secretariat.subtitle': '总秘书处日常运维、主权治理档案及全平台内容调度中枢。',
     'secretariat.dashboard': '总览仪表盘',
     'secretariat.content': '内容增删改查',
@@ -404,14 +404,14 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'livePortal.playEpisode': '播放剧集',
 
     // CISE Command Hub Peer Integration
-    'hub.icaAdmin.section': '伊中机构行政管理体系',
-    'hub.icaAdmin.publicPortal': '公共门户',
-    'hub.icaAdmin.secretariat': '联合秘书处',
-    'hub.icaAdmin.newsroom': 'ICA 媒体与新闻中心',
-    'hub.icaAdmin.livePortal': '直播与多媒体',
-    'hub.icaAdmin.scopeEnforced': '已根据用户角色范围执行安全隔离',
-    'hub.icaAdmin.openPublicSite': '打开外部展示端',
-    'hub.icaAdmin.quickCreate': '快速发布公报',
+    'hub.icaAdministration.section': '伊中机构行政管理体系',
+    'hub.icaAdministration.publicPortal': '公共门户',
+    'hub.icaAdministration.secretariat': '联合秘书处',
+    'hub.icaAdministration.newsroom': 'ICA 媒体与新闻中心',
+    'hub.icaAdministration.livePortal': '直播与多媒体',
+    'hub.icaAdministration.scopeEnforced': '已根据用户角色范围执行安全隔离',
+    'hub.icaAdministration.openPublicSite': '打开外部展示端',
+    'hub.icaAdministration.quickCreate': '快速发布公报',
   },
   ckb: {
     // Nav & Common
@@ -464,7 +464,7 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'initiatives.tech': 'داهێنانی تەکنەلۆژی و زیرەکی دەستکرد',
 
     // Secretariat Hub
-    'secretariat.title': 'ناوەندی دەستەی بەڕێوەبردنی سکرتاریەت',
+    'secretariat.title': 'ناوەندی فەرماندەیی باڵای CISE',
     'secretariat.subtitle': 'ڕووکاری بەڕێوەبردن، حوکمڕانی و ڕێکخستنی ناوەڕۆکی سکرتاریەتی ئاژانس.',
     'secretariat.dashboard': 'داشبۆردی گشتی',
     'secretariat.content': 'بەڕێوەبردنی ناوەڕۆک',
@@ -540,14 +540,14 @@ export const portalTranslations: Record<'en' | 'ar' | 'zh' | 'ckb', PortalTransl
     'livePortal.playEpisode': 'لێدانی بەش',
 
     // CISE Command Hub Peer Integration
-    'hub.icaAdmin.section': 'بەڕێوەبردنی ئاژانسی عێراقی-چینی',
-    'hub.icaAdmin.publicPortal': 'دەروازەی گشتی',
-    'hub.icaAdmin.secretariat': 'سکرتاریەت',
-    'hub.icaAdmin.newsroom': 'میدیا و ژووری هەواڵی ICA',
-    'hub.icaAdmin.livePortal': 'پەخشی ڕاستەوخۆ',
-    'hub.icaAdmin.scopeEnforced': 'دەسەڵاتەکان بەپێی سنووری کار دیاریکراون',
-    'hub.icaAdmin.openPublicSite': 'کردنەوەی ماڵپەڕی دەرەکی',
-    'hub.icaAdmin.quickCreate': 'بڵاوکردنەوەی بروسکە',
+    'hub.icaAdministration.section': 'بەڕێوەبردنی ئاژانسی عێراقی-چینی',
+    'hub.icaAdministration.publicPortal': 'دەروازەی گشتی',
+    'hub.icaAdministration.secretariat': 'سکرتاریەت',
+    'hub.icaAdministration.newsroom': 'میدیا و ژووری هەواڵی ICA',
+    'hub.icaAdministration.livePortal': 'پەخشی ڕاستەوخۆ',
+    'hub.icaAdministration.scopeEnforced': 'دەسەڵاتەکان بەپێی سنووری کار دیاریکراون',
+    'hub.icaAdministration.openPublicSite': 'کردنەوەی ماڵپەڕی دەرەکی',
+    'hub.icaAdministration.quickCreate': 'بڵاوکردنەوەی بروسکە',
   }
 };
 

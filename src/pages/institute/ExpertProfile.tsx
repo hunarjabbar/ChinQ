@@ -71,9 +71,9 @@ export default function ExpertProfile() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Linkedin size={18} /></a>
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Twitter size={18} /></a>
-                <a href="#" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Globe size={18} /></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Linkedin size={18} /></a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X Profile" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Twitter size={18} /></a>
+                <a href="https://iraqi-chineseagency.com" target="_blank" rel="noopener noreferrer" aria-label="Official Website" className="p-3 bg-[#F8FAFC] dark:bg-neutral-900 rounded-xl text-neutral-400 hover:text-[var(--color-brand-800)] transition-all border border-neutral-100 dark:border-neutral-800"><Globe size={18} /></a>
               </div>
               <button className="w-full py-4 bg-[var(--color-ink-900)] text-white rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl flex items-center justify-center gap-3">
                 <MessageSquare size={16} />

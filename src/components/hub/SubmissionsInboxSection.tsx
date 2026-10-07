@@ -116,7 +116,7 @@ export function SubmissionsInboxSection({ lang = 'en' }: SubmissionsInboxSection
         <div>
           <div className="flex items-center gap-2 text-xs font-mono font-bold text-red-500 uppercase tracking-widest mb-1">
             <Inbox size={14} />
-            <span>CISE Control Centre • Unified Submissions Inbox</span>
+            <span>CISE Command Hub • Unified Submissions Inbox</span>
           </div>
           <h2 className="text-xl font-black uppercase text-white">Sovereign Service Queue</h2>
           <p className="text-xs text-neutral-400 mt-0.5">
