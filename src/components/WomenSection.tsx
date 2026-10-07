@@ -298,7 +298,7 @@ export function WomenSection({ lang = 'en' }: WomenSectionProps) {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-red-950/30 via-transparent to-transparent pointer-events-none" />
 
                       {/* Visually Differentiated Taxonomy Badges */}
                       <div className="absolute top-2.5 start-2.5 end-2.5 flex items-center justify-between gap-1.5 z-10 pointer-events-none">

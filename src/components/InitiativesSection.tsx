@@ -5,6 +5,7 @@ import { Locale } from '../types';
 import { useI18n } from '../hooks/useI18n';
 import { Card } from './Card';
 import { InitiativesCard, InitiativeItem } from './InitiativesCard';
+import { portalStore } from '../data/portalData';
 
 export function InitiativesSection({ lang }: { lang: Locale }) {
   const { t } = useI18n(lang);
@@ -13,113 +14,75 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
   const initiatives: InitiativeItem[] = [
     {
       id: 'settlement',
-      eyebrow: t('home.initiatives.settlement.eyebrow'),
-      headline: t('home.initiatives.settlement.headline'),
-      description: t('home.initiatives.settlement.description'),
-      cta: t('home.initiatives.settlement.cta'),
+      eyebrow: lang === 'ar' ? 'مسار المقاصة السيادي' : lang === 'zh' ? '主权清算通道' : lang === 'ckb' ? 'هێڵی پاکتاوی سەروەری' : 'Sovereign Clearing Rail',
+      headline: t('home.initiatives.settlement.headline') || 'Sovereign Settlement Gateway',
+      description: t('home.initiatives.settlement.description') || 'Direct IQD to RMB bilateral settlement rails bypassing third-party currency drag.',
+      cta: t('home.initiatives.settlement.cta') || 'Access Settlement Gateway',
       path: `/${lang}/institute/settlement`,
       tags: [
-        t('home.initiatives.settlement.fxSpread'),
-        t('home.initiatives.settlement.speed'),
-        t('home.initiatives.settlement.regulated'),
-        t('home.initiatives.settlement.card')
-      ],
-      secondaryLinks: [
-        { label: t('home.initiatives.settlement.qiCardLabel'), path: `/${lang}/institute/settlement/card` },
-        { label: t('home.initiatives.settlement.calculatorLabel'), path: `/${lang}/institute/settlement/calculator` }
+        t('home.initiatives.settlement.fxSpread') || '0% USD FX Drag',
+        t('home.initiatives.settlement.speed') || 'T+0 Settlement',
+        t('home.initiatives.settlement.regulated') || 'Central Bank Aligned'
       ]
     },
     {
       id: 'insurance',
-      eyebrow: t('home.initiatives.insurance.eyebrow'),
-      headline: t('home.initiatives.insurance.headline'),
-      description: t('home.initiatives.insurance.description'),
-      cta: t('home.initiatives.insurance.cta'),
+      eyebrow: lang === 'ar' ? 'تسهيل التأمين السيادي' : lang === 'zh' ? '主权保险促进' : lang === 'ckb' ? 'ئاسانکاری بیمەی سەروەری' : 'Sovereign Insurance Facilitation',
+      headline: t('home.initiatives.insurance.headline') || 'Sinosure & Risk Mitigation Desk',
+      description: t('home.initiatives.insurance.description') || 'Comprehensive sovereign credit insurance, cargo protection, and political risk coverage for bilateral trade.',
+      cta: t('home.initiatives.insurance.cta') || 'Explore Insurance Desk',
       path: `/${lang}/institute/insurance-facilitation`,
       tags: [
-        t('home.initiatives.insurance.tag.sinosure'),
-        t('home.initiatives.insurance.tag.cargo'),
-        t('home.initiatives.insurance.tag.credit'),
-        t('home.initiatives.insurance.tag.political')
+        t('home.initiatives.insurance.tag.sinosure') || 'Sinosure Aligned',
+        t('home.initiatives.insurance.tag.cargo') || 'Cargo Shipping',
+        t('home.initiatives.insurance.tag.credit') || 'Buyer Credit'
       ]
     },
     {
-      id: 'chinese-center',
-      eyebrow: t('chineseCentre.section.eyebrow'),
-      headline: t('chineseCentre.section.headline'),
-      description: t('chineseCentre.section.body'),
-      cta: t('home.initiatives.learnMore'),
-      path: `/${lang}/institute/chinese-center`,
-      tags: t('chineseCentre.section.chips').split(' · ')
-    },
-    {
-      id: 'visa-centre',
-      eyebrow: t('visaCentre.section.eyebrow'),
-      headline: t('visaCentre.section.headline'),
-      description: t('visaCentre.section.body'),
-      cta: t('home.initiatives.learnMore'),
-      path: `/${lang}/institute/visa-centre`,
-      tags: t('visaCentre.section.chips').split(' · ')
+      id: 'summit',
+      eyebrow: lang === 'ar' ? 'الملتقى السنوي · السليمانية' : lang === 'zh' ? '年度双边峰会 · 苏莱曼尼亚' : lang === 'ckb' ? 'کۆبوونەوەی ساڵانە · سلێمانی' : 'Annual Convening · Sulaymaniyah',
+      headline: t('summit.section.headline') || 'Iraq-China Bilateral Summit & Expo',
+      description: t('summit.section.body') || 'Annual high-level convening in Sulaymaniyah featuring 11 key economic sector pavilions and B2B matchmaking.',
+      cta: (t('summit.section.cta') || 'Enter Summit Hub').replace(' →', '').replace(' ←', ''),
+      path: `/${lang}/institute/summit`,
+      tags: (t('summit.section.chips') || '11 Sector Pavilions · B2B Matchmaking · VIP Delegation').split(' · ')
     },
     {
       id: 'consultancy',
-      eyebrow: t('initiatives.card.consultancy.eyebrow'),
-      headline: t('initiatives.card.consultancy.headline'),
-      description: t('initiatives.card.consultancy.body'),
-      cta: t('initiatives.card.consultancy.cta'),
+      eyebrow: lang === 'ar' ? 'الاستشارات العابرة للحدود' : lang === 'zh' ? '跨境财税与战略法律咨询' : lang === 'ckb' ? 'ڕاوێژکاری سنووربەزێن' : 'Cross-Border Strategic Advisory',
+      headline: t('initiatives.card.consultancy.headline') || 'Bilateral Trade & Legal Advisory',
+      description: t('initiatives.card.consultancy.body') || 'Expert legal, fiscal, and regulatory navigation for enterprises operating across Iraq, China, and the Kurdistan Region.',
+      cta: t('initiatives.card.consultancy.cta') || 'Consult Advisory Desk',
       path: `/${lang}/institute/consultancy`,
       tags: [
-        t('initiatives.card.consultancy.tag.legal'),
-        t('initiatives.card.consultancy.tag.financial'),
-        t('initiatives.card.consultancy.tag.investment')
-      ],
-      secondaryLinks: [
-        { label: lang === 'ar' ? 'الاستثمار بالعراق' : lang === 'zh' ? '投资伊拉克' : lang === 'ckb' ? 'وەبەرهێنان لە عێراق' : 'Iraq-Bound', path: `/${lang}/institute/consultancy/iraq-bound` },
-        { label: lang === 'ar' ? 'دخول السوق الصيني' : lang === 'zh' ? '进入中国' : lang === 'ckb' ? 'بازاڕی چین' : 'China-Bound', path: `/${lang}/institute/consultancy/china-bound` }
+        t('initiatives.card.consultancy.tag.legal') || 'Bilateral Legal',
+        t('initiatives.card.consultancy.tag.financial') || 'Fiscal Structuring',
+        t('initiatives.card.consultancy.tag.investment') || 'Investment Advisory'
       ]
     },
     {
+      id: 'visa-centre',
+      eyebrow: lang === 'ar' ? 'مركز الاستشارات والفيزا' : lang === 'zh' ? '双边签证咨询与服务中心' : lang === 'ckb' ? 'ناوەندی ڕاوێژکاری ڤیزا' : 'Bilateral Visa Advisory & Facilitation',
+      headline: t('visaCentre.section.headline') || 'Consular & Diplomatic Visa Services',
+      description: t('visaCentre.section.body') || 'Streamlined diplomatic, business, and academic visa advisory with direct coordination between consular authorities.',
+      cta: (t('visaCentre.section.cta') || 'Access Visa Centre').replace(' →', '').replace(' ←', ''),
+      path: `/${lang}/institute/visa-centre`,
+      tags: (t('visaCentre.section.chips') || 'Diplomatic Visas · Business Fast-Track · Consular Assistance').split(' · ')
+    },
+    {
       id: 'cultural-exchange',
-      eyebrow: t('initiatives.card.culturalExchange.eyebrow'),
-      headline: t('initiatives.card.culturalExchange.headline'),
-      description: t('initiatives.card.culturalExchange.body'),
-      cta: t('initiatives.card.culturalExchange.cta'),
+      eyebrow: lang === 'ar' ? 'التبادل الشعبي والثقافي' : lang === 'zh' ? '民间与文化交流' : lang === 'ckb' ? 'ئاڵوگۆڕی گەلی و کولتووری' : 'People-to-People & Cultural Exchange',
+      headline: t('initiatives.card.culturalExchange.headline') || 'Academic Consortia & Cultural Exchange',
+      description: t('initiatives.card.culturalExchange.body') || 'University partnerships, HSK language certification, student fellowships, and civilizational dialogues.',
+      cta: (t('initiatives.card.culturalExchange.cta') || 'Explore Cultural Exchange').replace(' →', '').replace(' ←', ''),
       path: `/${lang}/institute/services/cultural-exchange`,
       tags: [
-        t('initiatives.card.culturalExchange.chips.universityMous'),
-        t('initiatives.card.culturalExchange.chips.studentFellowships'),
-        t('initiatives.card.culturalExchange.chips.artsResidencies'),
-        t('initiatives.card.culturalExchange.chips.civilizationalDialogue')
-      ],
-      secondaryLinks: [
-        { label: lang === 'ar' ? 'دليل البرامج' : lang === 'zh' ? '全部项目' : lang === 'ckb' ? 'بەرنامەکان' : 'All Programs', path: `/${lang}/institute/services/cultural-exchange/programs` },
-        { label: lang === 'ar' ? 'الجامعات الشريكة' : lang === 'zh' ? '合作高校' : lang === 'ckb' ? 'زانکۆ هاوبەشەکان' : 'Partners', path: `/${lang}/institute/services/cultural-exchange/partners` }
+        t('initiatives.card.culturalExchange.chips.universityMous') || 'University MoUs',
+        t('initiatives.card.culturalExchange.chips.studentFellowships') || 'Student Fellowships',
+        t('initiatives.card.culturalExchange.chips.artsResidencies') || 'Arts Residencies'
       ]
     }
   ];
-
-  const summitChips = t('summit.section.chips').split(' · ');
-
-  const [hasScrolledIn, setHasScrolledIn] = React.useState(false);
-  const heroRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const element = heroRef.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasScrolledIn(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section id="initiatives" className="relative py-16 sm:py-24 w-full bg-white dark:bg-neutral-950 overflow-hidden">
@@ -128,65 +91,19 @@ export function InitiativesSection({ lang }: { lang: Locale }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16 space-y-4">
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-red-600 dark:text-red-400">
-            {lang === 'ar' ? 'المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE)' : lang === 'zh' ? '中国战略与经济研究所 (CISE) 主管运营' : lang === 'ckb' ? 'پەیمانگای چینی (CISE)' : 'Chinese Institute for Strategic & Economic Studies (CISE)'}
+          <div className="text-xs font-black uppercase tracking-[0.3em] text-red-600 dark:text-red-400">
+            {lang === 'ar' ? 'المعهد الصيني للدراسات الاستراتيجية والاقتصادية (CISE)' : lang === 'zh' ? '中国战略与经济研究所 (CISE)' : lang === 'ckb' ? 'پەیمانگای چینی (CISE)' : 'Chinese Institute for Strategic & Economic Studies (CISE)'}
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-ink-950 dark:text-white uppercase tracking-tighter">{t('home.initiatives.heading')}</h2>
-          <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-2xl mx-auto font-serif leading-relaxed italic">{t('home.initiatives.subheading')}</p>
+          <h2 className="text-2xl md:text-4xl font-black text-white bg-red-600 dark:bg-red-700 px-6 py-5 rounded-2xl shadow-md inline-block max-w-4xl uppercase tracking-tight">
+            {lang === 'ar' ? 'الخدمات المؤسسية والمبادرات الثنائية' : lang === 'zh' ? '智库机构服务与双边战略举措' : lang === 'ckb' ? 'خزمەتگوزارییە دامەزراوەییەکان و دەستپێشخەرییە دوولایەنەکان' : 'Institutional Services & Bilateral Initiatives'}
+          </h2>
+          <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-2xl mx-auto font-serif leading-relaxed italic">
+            {lang === 'ar' ? 'مسارات المقاصة السيادية، والحد من المخاطر المؤسسية، والملتقيات الثنائية، والبنية التحتية الأكاديمية المتخصصة برعاية المعهد.' : lang === 'zh' ? '由中伊战略研究所（CISE）主导运营的主权清算通道、机构风险对冲、双边高规格峰会与专业语言学术基础设施。' : lang === 'ckb' ? 'هێڵی پاکتاوی سەروەری دراو، کەمکردنەوەی مەترسی، کۆبوونەوەی دوولایەنە و ژێرخانی ئەکادیمی تایبەتمەند لەژێر چاودێری پەیمانگا.' : 'Sovereign clearing rails, institutional risk mitigation, bilateral convening, and specialized academic infrastructure anchored by CISE.'}
+          </p>
         </div>
 
-        {/* Tier 1: Full-width Hero Banner for Summit */}
-        <Card
-          variant="hero"
-          ref={heroRef}
-          className="relative overflow-hidden p-8 sm:p-12 md:p-14 rounded-3xl bg-brand-800 border border-brand-700 text-white mb-16 transition-all duration-300 shadow-xl"
-        >
-          <div className="relative z-10 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[10px] font-black uppercase tracking-[0.25em] mb-5">
-              <Sparkles size={12} className="text-amber-300 animate-pulse" />
-              <span>{t('summit.section.eyebrow')}</span>
-            </div>
-            
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-5 leading-[1.05]">
-              {t('summit.section.headline')}
-            </h3>
-
-            <p className="text-white/95 text-sm sm:text-base lg:text-lg leading-relaxed mb-8 max-w-3xl font-normal">
-              {t('summit.section.body')}
-            </p>
-
-            {summitChips && summitChips.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-8">
-                {summitChips.map((chip: string, idx: number) => (
-                  <span key={idx} className="bg-white/10 text-white border border-white/20 text-xs font-bold px-3.5 py-1 rounded-full">
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link 
-                to={`/${lang}/summit`} 
-                className="bg-white hover:bg-neutral-100 text-brand-800 px-7 py-3.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shadow-md flex items-center gap-2.5 group cursor-pointer"
-              >
-                <span>{t('summit.section.cta').replace(' →', '').replace(' ←', '')}</span>
-                <ArrowRight size={14} className={`transition-transform group-hover:translate-x-1 ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
-              </Link>
-              
-              <Link 
-                to={`/${lang}/summit/agenda`} 
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3.5 rounded-xl text-xs font-bold tracking-wide transition-all flex items-center gap-2 group cursor-pointer"
-              >
-                <span>{t('summit.section.secondary').replace(' →', '').replace(' ←', '')}</span>
-                <Compass size={14} className={`transition-transform group-hover:rotate-45 ${isRtl ? 'rotate-180' : ''}`} />
-              </Link>
-            </div>
-          </div>
-        </Card>
-
-        {/* Tier 2: 2x2 Grid of Upgraded Glassmorphism Initiatives Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {/* 3-Column Grid of Institutional Services & Bilateral Initiatives */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {initiatives.map((item, index) => (
             <InitiativesCard
               key={item.id}

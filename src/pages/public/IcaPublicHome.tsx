@@ -372,35 +372,39 @@ export function IcaPublicHome() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {(customInitiatives.length ? customInitiatives : initiatives).map(init => (
+              {initiatives.map(init => (
                 <Link
                   key={init.id}
-                  to={`/${currentLang}${('slug' in init ? `/initiatives/${init.slug}` : init.ctaHref)}`}
+                  to={`/${currentLang}/initiatives/${init.slug}`}
                   className="ica-card-interactive group flex flex-col justify-between p-6 rounded-2xl bg-white dark:bg-neutral-800/80 border border-neutral-200/90 dark:border-neutral-700 hover:border-brand-700 dark:hover:border-brand-500 shadow-xs hover:shadow-xl transition-all"
                 >
                   <div>
                     <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950/50 border border-brand-200/60 dark:border-brand-800/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                      {getInitiativeIcon('iconName' in init ? init.iconName : (init.eyebrow?.en || 'Layers'))}
+                      {getInitiativeIcon(init.iconName)}
+                    </div>
+
+                    <div className="text-[10px] font-mono font-bold text-brand-800 dark:text-brand-400 uppercase tracking-widest mb-1.5">
+                      {init.pillar}
                     </div>
 
                     <h3 className="font-serif text-xl font-black text-ink-950 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors mb-2">
-                      {('title' in init ? init.title[currentLang] || init.title.en : init.headline[currentLang])}
+                      {init.title[currentLang] || init.title.en}
                     </h3>
 
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6 line-clamp-3">
-                      {('shortDesc' in init ? init.shortDesc[currentLang] || init.shortDesc.en : init.body[currentLang])}
+                      {init.shortDesc[currentLang] || init.shortDesc.en}
                     </p>
                   </div>
 
                   <div>
                     <div className="grid grid-cols-3 gap-2 py-3 border-y border-neutral-100 dark:border-neutral-700/60 mb-4">
-                      {('kpis' in init ? init.kpis : (init.chips || [])).map((kpi: any, kIdx: number) => (
+                      {init.kpis.map((kpi, kIdx) => (
                         <div key={kIdx} className="text-center">
                           <div className="text-xs font-mono font-black text-ink-950 dark:text-white truncate">
-                            {'metric' in kpi ? kpi.metric : kpi.en}
+                            {kpi.metric}
                           </div>
                           <div className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
-                            {'label' in kpi ? kpi.label[currentLang] || kpi.label.en : 'Tag'}
+                            {kpi.label[currentLang] || kpi.label.en}
                           </div>
                         </div>
                       ))}

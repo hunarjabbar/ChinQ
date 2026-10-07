@@ -465,7 +465,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 via-transparent to-transparent" />
                   
                   <div className="absolute top-3 start-3 flex gap-2">
                     <span className="px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider bg-brand-800 text-white rounded-md shadow-xs">

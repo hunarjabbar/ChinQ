@@ -481,7 +481,7 @@ export function Home() {
                           />
                         )}
                         {isLocked && (
-                          <div className="absolute inset-0 bg-ink-950/40 backdrop-blur-xs flex items-center justify-center">
+                          <div className="absolute inset-0 bg-brand-950/30 backdrop-blur-xs flex items-center justify-center">
                             <div className="bg-white text-ink-950 text-[10px] px-3 py-1 font-black uppercase tracking-widest shadow-xl border border-neutral-200">
                               <Lock size={12} className="inline me-1.5" />
                               {lang === 'ar' ? 'مغلق' : 'Premium Access'}
@@ -914,7 +914,7 @@ export function Home() {
                                   referrerPolicy="no-referrer"
                                 />
                                 {isRelatedLocked && (
-                                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-amber-400">
+                                  <div className="absolute inset-0 bg-brand-950/30 flex items-center justify-center text-amber-400">
                                     <Lock size={10} />
                                   </div>
                                 )}

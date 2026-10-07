@@ -153,11 +153,7 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
   }, [programs]);
 
   return (
-    <section className="w-full bg-slate-50/50 dark:bg-neutral-950 border-y border-slate-200 dark:border-neutral-800 py-12 md:py-16 my-8 transition-colors duration-300 relative overflow-hidden">
-      {/* Background radial atmosphere using brand tokens */}
-      <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 rounded-full bg-red-600/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 rounded-full bg-red-800/5 blur-3xl pointer-events-none" />
-
+    <section className="w-full bg-white dark:bg-neutral-900 border-y border-slate-200 dark:border-neutral-800 py-12 md:py-16 my-8 transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header Block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-neutral-800">
@@ -305,18 +301,18 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.35, delay: idx * 0.05 }}
                     whileHover={{ y: -4 }}
-                    className={`bg-paper-50 dark:bg-paper-900 border border-paper-200 dark:border-paper-800 rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group ${theme.cardHover}`}
+                    className={`bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group ${theme.cardHover}`}
                   >
                     {/* Top Image & Visual Anchor */}
                     <div>
-                      <div className="relative h-52 w-full bg-paper-200 dark:bg-paper-800 overflow-hidden">
+                      <div className="relative h-52 w-full bg-slate-100 dark:bg-neutral-800 overflow-hidden">
                         <img
                           src={prog.coverImage}
                           alt={getProgramTitle(prog)}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-paper-950/85 via-paper-950/25 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                         {/* Category badge */}
                         <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3">
@@ -422,7 +418,7 @@ function CulturalExchangeContent({ lang = 'en' }: { lang: Locale }) {
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-paper-950 via-paper-950/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-950/40 via-transparent to-transparent" />
 
                 <button
                   onClick={() => setActiveModalProgram(null)}

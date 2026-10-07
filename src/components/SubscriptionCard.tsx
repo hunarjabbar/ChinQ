@@ -171,7 +171,7 @@ export function SubscriptionCard() {
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-8 bg-gradient-to-br from-brand-900 via-brand-800 to-ink-900 text-white text-center relative overflow-hidden group shadow-xl rounded-xl border border-brand-500/30"
+        className="p-8 bg-brand-800 text-white text-center relative overflow-hidden group shadow-xl rounded-xl border border-brand-500/30"
       >
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
         <div className="relative z-10 flex flex-col items-center justify-center">

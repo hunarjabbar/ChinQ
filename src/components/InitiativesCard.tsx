@@ -32,7 +32,7 @@ export function InitiativesCard({ initiative, index, isRtl = false }: Initiative
         delay: index * 0.08,
       }}
       whileHover={{ y: -8 }}
-      className="relative group flex flex-col justify-between rounded-3xl"
+      className="relative group flex flex-col justify-between rounded-3xl h-full"
     >
       {/* 2. Soft Red Blurry Under-Glow behind the glass card borders */}
       <div
@@ -41,10 +41,10 @@ export function InitiativesCard({ initiative, index, isRtl = false }: Initiative
       />
 
       {/* 1. Glassmorphism Base Card */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-7 sm:p-8 rounded-3xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-lg border border-white/50 dark:border-white/10 group-hover:border-red-200 dark:group-hover:border-red-500/40 shadow-lg shadow-neutral-900/5 transition-colors duration-300">
+      <div className="relative z-10 flex flex-col justify-between h-full p-8 rounded-3xl bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-white/60 dark:border-white/10 group-hover:border-red-300 dark:group-hover:border-red-500/50 shadow-xl shadow-neutral-950/5 transition-all duration-300">
         <div className="space-y-4">
           {/* Eyebrow */}
-          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-600 dark:text-red-400">
+          <div className="text-xs font-black uppercase tracking-[0.25em] text-red-600 dark:text-red-400">
             {initiative.eyebrow}
           </div>
 
@@ -54,54 +54,36 @@ export function InitiativesCard({ initiative, index, isRtl = false }: Initiative
           </h3>
 
           {/* Description */}
-          <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-[15px] leading-relaxed font-serif italic line-clamp-3">
+          <p className="text-neutral-600 dark:text-neutral-300 text-sm leading-relaxed font-serif italic mb-4">
             {initiative.description}
           </p>
 
-          {/* Tags */}
           {initiative.tags && initiative.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-2">
-              {initiative.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-red-50/70 dark:bg-neutral-800/80 text-brand-900 dark:text-neutral-300 border border-red-100/70 dark:border-neutral-700/60"
-                >
-                  {tag}
-                </span>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-neutral-500 dark:text-neutral-400 pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
+              {initiative.tags.map((tag, tIdx) => (
+                <React.Fragment key={tIdx}>
+                  <span>{tag}</span>
+                  {tIdx < initiative.tags!.length - 1 && <span className="text-neutral-300 dark:text-neutral-700" aria-hidden="true">·</span>}
+                </React.Fragment>
               ))}
             </div>
           )}
         </div>
 
-        {/* Action & Secondary Links */}
-        <div className="space-y-4 pt-6 mt-6 border-t border-neutral-200/60 dark:border-neutral-800">
+        {/* Action Button */}
+        <div className="pt-8 mt-8 border-t border-neutral-200/60 dark:border-neutral-800">
           <Link
             to={initiative.path}
-            className="inline-flex items-center text-xs font-black uppercase tracking-wider text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 gap-2 group/cta"
+            className="w-full inline-flex items-center justify-between px-6 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-red-600/20 hover:shadow-red-600/40 transition-all duration-300 group/cta"
           >
             <span>{initiative.cta}</span>
             <ArrowRight
-              size={14}
+              size={18}
               className={`transition-transform duration-300 group-hover:translate-x-1.5 ${
                 isRtl ? 'rotate-180 group-hover:-translate-x-1.5' : ''
               }`}
             />
           </Link>
-
-          {initiative.secondaryLinks && initiative.secondaryLinks.length > 0 && (
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider pt-1">
-              {initiative.secondaryLinks.map((link, idx) => (
-                <Link
-                  key={idx}
-                  to={link.path}
-                  className="hover:text-red-600 dark:hover:text-red-400 transition-colors inline-flex items-center gap-1 underline decoration-neutral-300 dark:decoration-neutral-700 underline-offset-4"
-                >
-                  <span>{link.label}</span>
-                  <ChevronRight size={10} className={isRtl ? 'rotate-180' : ''} />
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </motion.div>
