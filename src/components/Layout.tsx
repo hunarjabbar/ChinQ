@@ -35,6 +35,7 @@ import { TalentRegistrationModal, TalentRegistrationType } from './TalentRegistr
 import { InstitutePortalCTA } from './InstitutePortalCTA';
 import { NotificationToast } from './NotificationToast';
 import { BottomNav } from './mobile/BottomNav';
+import { GlazedLanguageModal } from './GlazedLanguageModal';
 
 export function Layout({ lang, children }: { lang: Locale; children: ReactNode }) {
   const { t } = useI18n(lang);
@@ -417,6 +418,9 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
 
       {/* Modern Fixed Bottom Navigation Bar for Mobile and Tablet */}
       <BottomNav lang={lang} />
+
+      {/* Sovereign Global Language Selection Card Modal */}
+      <GlazedLanguageModal lang={lang} triggerOnly={true} />
     </div>
   );
 }

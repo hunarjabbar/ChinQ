@@ -4584,15 +4584,16 @@ async function startServer() {
   app.use('/assets/images', express.static(path.join(process.cwd(), 'src/assets/images')));
 
   // --- Vite Middleware & Static Production Serving ---
-  const useStaticProd = fs.existsSync(path.join(process.cwd(), "dist")) || fs.existsSync(path.join(process.cwd(), "build"));
+  const isProduction = process.env.NODE_ENV === "production";
+  const forceStatic = process.env.SERVE_STATIC === "true";
 
-  if (process.env.NODE_ENV !== "production" && !useStaticProd) {
+  if (!isProduction && !forceStatic) {
     const vite = await createViteServer({
       server: { middlewareMode: true, allowedHosts: true },
       appType: "spa",
     });
 
-    // Ensure no-cache for development to fix preview update issues (Stage 1 Part B.5)
+    // Ensure no-cache for development to fix preview update issues
     app.use((req, res, next) => {
       res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
       res.setHeader("Pragma", "no-cache");
@@ -4603,7 +4604,7 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     let distPath = path.join(process.cwd(), "dist");
-    if (!fs.existsSync(distPath) && fs.existsSync(path.join(process.cwd(), "build"))) {
+    if (!fs.existsSync(path.join(distPath, "index.html")) && fs.existsSync(path.join(process.cwd(), "build", "index.html"))) {
       distPath = path.join(process.cwd(), "build");
     }
 
@@ -4649,11 +4650,28 @@ async function startServer() {
     }));
 
     app.get("*", (req, res, next) => {
-      // Guard for static assets to avoid SPA fallback hijacking (Stage 1 Part B.16)
+      // Guard for static assets to avoid SPA fallback hijacking
       if (req.path.match(/\.(css|js|woff2|png|jpg|jpeg|svg|ico|webp|json|map)$/)) {
         return res.status(404).end();
       }
-      res.sendFile(path.join(distPath, "index.html"));
+
+      let indexPath = path.join(distPath, "index.html");
+      if (!fs.existsSync(indexPath)) {
+        if (fs.existsSync(path.join(process.cwd(), "build", "index.html"))) {
+          indexPath = path.join(process.cwd(), "build", "index.html");
+        } else if (fs.existsSync(path.join(process.cwd(), "index.html"))) {
+          indexPath = path.join(process.cwd(), "index.html");
+        }
+      }
+
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error("Error serving index.html:", err);
+          if (!res.headersSent) {
+            res.status(200).send("<!doctype html><html><head><meta http-equiv='refresh' content='2'></head><body><h3>Application build updating...</h3></body></html>");
+          }
+        }
+      });
     });
   }
 

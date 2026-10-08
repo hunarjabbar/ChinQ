@@ -91,16 +91,9 @@ const CiseCommandHubVideos = lazyWithRetry(() => import('./pages/CiseCommandHubV
 const CiseCommandHubUsers = lazyWithRetry(() => import('./pages/CiseCommandHubUsers').then(m => ({ default: m.CiseCommandHubUsers })));
 const CiseCommandHubMedia = lazyWithRetry(() => import('./pages/CiseCommandHubMedia').then(m => ({ default: m.CiseCommandHubMedia })));
 const CiseCommandHubSettings = lazyWithRetry(() => import('./pages/CiseCommandHubSettings').then(m => ({ default: m.CiseCommandHubSettings })));
+const CiseCommandHubLanguages = lazyWithRetry(() => import('./components/hub/CiseCommandHubLanguages').then(m => ({ default: m.CiseCommandHubLanguages })));
 const About = lazyWithRetry(() => import('./pages/About').then(m => ({ default: m.About })));
 const JoinUs = lazyWithRetry(() => import('./pages/JoinUs').then(m => ({ default: m.JoinUs })));
-const BooksPage = lazyWithRetry(() => import('./pages/BooksPage').then(m => ({ default: m.BooksPage })));
-const CiseCommandHubBooks = lazyWithRetry(() => import('./pages/CiseCommandHubBooks').then(m => ({ default: m.CiseCommandHubBooks })));
-const TourismPage = lazyWithRetry(() => import('./pages/TourismPage').then(m => ({ default: m.TourismPage })));
-const CiseCommandHubTourism = lazyWithRetry(() => import('./pages/CiseCommandHubTourism').then(m => ({ default: m.CiseCommandHubTourism })));
-const WomenPage = lazyWithRetry(() => import('./pages/WomenPage').then(m => ({ default: m.WomenPage })));
-const CiseCommandHubWomen = lazyWithRetry(() => import('./pages/CiseCommandHubWomen').then(m => ({ default: m.CiseCommandHubWomen })));
-const VisaFlightPage = lazyWithRetry(() => import('./pages/VisaFlightPage').then(m => ({ default: m.VisaFlightPage })));
-const CiseCommandHubVisaFlight = lazyWithRetry(() => import('./pages/CiseCommandHubVisaFlight').then(m => ({ default: m.CiseCommandHubVisaFlight })));
 const PodcastsPage = lazyWithRetry(() => import('./pages/PodcastsPage'));
 const IcaPlusPage = lazyWithRetry(() => import('./pages/IcaPlusPage').then(m => ({ default: m.IcaPlusPage })));
 const CiseCommandHubIcaPlus = lazyWithRetry(() => import('./pages/CiseCommandHubIcaPlus'));
@@ -381,7 +374,11 @@ export function resolveLocaleFromEnvironment(): 'en' | 'ar' | 'zh' | 'ckb' {
 function RootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
-  return <Navigate to={`/${loc}${location.search}${location.hash}`} replace />;
+  const searchParams = new URLSearchParams(location.search);
+  // Welcoming entrance signal when visitors enter the global link
+  searchParams.set('welcome', '1');
+  const searchStr = `?${searchParams.toString()}`;
+  return <Navigate to={`/${loc}${searchStr}${location.hash}`} replace />;
 }
 
 function InstituteRootRedirect() {
@@ -506,7 +503,10 @@ function PublicPortalRootRedirect() {
   const loc = resolveLocaleFromEnvironment();
   const location = useLocation();
   const subPath = location.pathname.replace(/^\/(portal|public)/, '');
-  return <Navigate to={`/${loc}/portal${subPath}${location.search}${location.hash}`} replace />;
+  const searchParams = new URLSearchParams(location.search);
+  searchParams.set('welcome', '1');
+  const searchStr = `?${searchParams.toString()}`;
+  return <Navigate to={`/${loc}/portal${subPath}${searchStr}${location.hash}`} replace />;
 }
 
 function SettingsRootRedirect() {
@@ -521,6 +521,16 @@ function ProfileRootRedirect() {
   const location = useLocation();
   const subPath = location.pathname.replace(/^\/profile/, '');
   return <Navigate to={`/${loc}/hub/management${subPath}${location.search}${location.hash}`} replace />;
+}
+
+function CiseCommandHubLanguagesWrapper() {
+  const { lang } = useParams<{ lang: string }>();
+  const safeLang = (lang === 'ar' || lang === 'zh' || lang === 'ckb' ? lang : 'en') as any;
+  return (
+    <Suspense fallback={<PageSkeleton />}>
+      <CiseCommandHubLanguages lang={safeLang} />
+    </Suspense>
+  );
 }
 
 function SecretariatLangWrapper() {
@@ -538,7 +548,7 @@ function SecretariatLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
         <div className="pb-16 sm:pb-20 xl:pb-0">
           <Outlet />
@@ -592,9 +602,11 @@ function LangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <Layout lang={safeLang}>
-        <Outlet />
+        <Suspense fallback={<PageSkeleton />}>
+          <Outlet />
+        </Suspense>
       </Layout>
     </ErrorBoundary>
   );
@@ -615,9 +627,11 @@ function ImmersiveLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <div className="min-h-screen bg-[#0a0a0a] text-white font-sans transition-colors duration-300 pb-16 sm:pb-20 xl:pb-0">
-        <Outlet />
+        <Suspense fallback={<PageSkeleton />}>
+          <Outlet />
+        </Suspense>
       </div>
       <BottomNav lang={safeLang} />
     </ErrorBoundary>
@@ -639,9 +653,11 @@ function CiseCommandHubLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <CiseCommandHubLayout>
-        <Outlet />
+        <Suspense fallback={<PageSkeleton />}>
+          <Outlet />
+        </Suspense>
       </CiseCommandHubLayout>
     </ErrorBoundary>
   );
@@ -662,7 +678,7 @@ function InstituteLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <InstituteLayout lang={safeLang}>
         <Suspense fallback={<PageSkeleton />}>
           <Outlet />
@@ -687,7 +703,7 @@ function SummitLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
         <div className="pb-16 sm:pb-20 xl:pb-0">
           <Outlet />
@@ -713,7 +729,7 @@ function SettlementLangWrapper() {
   }
 
   return (
-    <ErrorBoundary key={location.key} lang={safeLang}>
+    <ErrorBoundary lang={safeLang}>
       <Suspense fallback={<PageSkeleton />}>
         <div className="pb-16 sm:pb-20 xl:pb-0">
           <Outlet />
@@ -734,14 +750,10 @@ const router = createBrowserRouter([
       { path: "articles", element: <CiseCommandHubArticles /> },
       { path: "articles/new", element: <CiseCommandHubArticleNew /> },
       { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
-      { path: "women", element: <CiseCommandHubWomen /> },
-      { path: "tourism", element: <CiseCommandHubTourism /> },
       { path: "cultural-exchange", element: <CiseCommandHubCulturalExchange /> },
-      { path: "visa-flights", element: <CiseCommandHubVisaFlight /> },
       { path: "podcasts", element: <CiseCommandHubIcaPlus /> },
       { path: "icaplus", element: <CiseCommandHubIcaPlus /> },
       { path: "live-events", element: <CiseCommandHubLiveEvents /> },
-      { path: "books", element: <CiseCommandHubBooks /> },
       { path: "finance-economics", element: <CiseCommandHubFinanceEconomics /> },
       { path: "market", element: <CiseCommandHubFinanceEconomics /> },
       { path: "payments", element: <CiseCommandHubPayments /> },
@@ -754,6 +766,7 @@ const router = createBrowserRouter([
       { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
       { path: "users", element: <CiseCommandHubUsers /> },
       { path: "media", element: <CiseCommandHubMedia /> },
+      { path: "languages", element: <CiseCommandHubLanguagesWrapper /> },
       { path: "settings", element: <CiseCommandHubSettings /> }
     ]
   },
@@ -979,15 +992,11 @@ const router = createBrowserRouter([
       { path: "article/*", element: <LegacyNewsRedirect /> },
       { path: "category/*", element: <LegacyNewsRedirect /> },
       { path: "join", element: <JoinUs /> },
-      { path: "women", element: <WomenPage /> },
-      { path: "tourism", element: <TourismPage /> },
       { path: "cultural-exchange", element: <LegacyCulturalExchangeRedirect /> },
       { path: "cultural-exchange/*", element: <LegacyCulturalExchangeRedirect /> },
-      { path: "books", element: <BooksPage /> },
       { path: "podcasts", element: <PodcastsPage /> },
       { path: "ica-plus", element: <Navigate to="../media/ica-plus" replace /> },
       { path: "media/ica-plus", element: <IcaPlusPage /> },
-      { path: "visa-flights", element: <VisaFlightPage /> },
       { path: "consultancy", element: <ConsultancyLanding /> },
       { path: "consultancy/about", element: <ConsultancyAbout /> },
       { path: "consultancy/iraq-bound", element: <ConsultancyIraqBound /> },
@@ -1182,14 +1191,14 @@ const router = createBrowserRouter([
       { path: "articles", element: <CiseCommandHubArticles /> },
       { path: "articles/new", element: <CiseCommandHubArticleNew /> },
       { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
-      { path: "women", element: <CiseCommandHubWomen /> },
-      { path: "tourism", element: <CiseCommandHubTourism /> },
+      { path: "women", element: <CiseCommandHubMedia /> },
+      { path: "tourism", element: <CiseCommandHubBrics /> },
       { path: "cultural-exchange", element: <CiseCommandHubCulturalExchange /> },
-      { path: "visa-flights", element: <CiseCommandHubVisaFlight /> },
+      { path: "visa-flights", element: <CiseCommandHubPartners /> },
       { path: "podcasts", element: <CiseCommandHubIcaPlus /> },
       { path: "icaplus", element: <CiseCommandHubIcaPlus /> },
       { path: "live-events", element: <CiseCommandHubLiveEvents /> },
-      { path: "books", element: <CiseCommandHubBooks /> },
+      { path: "books", element: <CiseCommandHubBrics /> },
       { path: "finance-economics", element: <CiseCommandHubFinanceEconomics /> },
       { path: "market", element: <CiseCommandHubFinanceEconomics /> },
       { path: "payments", element: <CiseCommandHubPayments /> },
@@ -1202,6 +1211,7 @@ const router = createBrowserRouter([
           { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
           { path: "users", element: <CiseCommandHubUsers /> },
       { path: "media", element: <CiseCommandHubMedia /> },
+      { path: "languages", element: <CiseCommandHubLanguagesWrapper /> },
       { path: "settings", element: <CiseCommandHubSettings /> }
     ]
   },

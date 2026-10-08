@@ -10,6 +10,7 @@ import { apiFetch } from '../lib/api';
 import { IcaLogo } from './IcaLogo';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { BottomNav } from './mobile/BottomNav';
+import { GlazedLanguageModal } from './GlazedLanguageModal';
 
 export function CiseCommandHubLayout({ children, userRole }: { children: React.ReactNode, userRole?: string }) {
   const { lang = 'en' } = useParams<{ lang: Locale }>();
@@ -77,12 +78,8 @@ export function CiseCommandHubLayout({ children, userRole }: { children: React.R
     { name: t('articlesRegistry'), href: `/${lang}/hub/management/articles`, icon: FileText, adminOnly: false },
     { name: t('dashboard'), href: `/${lang}/hub/management`, icon: LayoutDashboard, adminOnly: true },
     { name: t('bricsObservatory'), href: `/${lang}/hub/management/brics`, icon: Globe2, adminOnly: true },
-    { name: t('womenLeadership'), href: `/${lang}/hub/management/women`, icon: UserIcon, adminOnly: true },
-    { name: t('tourismPortal'), href: `/${lang}/hub/management/tourism`, icon: Compass, adminOnly: true },
-    { name: t('booksLibrary'), href: `/${lang}/hub/management/books`, icon: BookOpen, adminOnly: true },
     { name: lang === 'ar' ? 'التبادل الثقافي والتعليمي' : lang === 'zh' ? '人文与教育交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری و زانستی' : 'Cultural & Educational Exchange', href: `/${lang}/hub/management/cultural-exchange`, icon: GraduationCap, adminOnly: true },
     { name: 'ICA+ Media', href: `/${lang}/hub/management/icaplus`, icon: Mic, adminOnly: true },
-    { name: t('visaFlights'), href: `/${lang}/hub/management/visa-flights`, icon: Plane, adminOnly: true },
     { name: lang === 'ar' ? 'المالية والاقتصاد' : lang === 'zh' ? '财经与宏观经济' : lang === 'ckb' ? 'دارایی و ئابووری' : 'Finance & Economics', href: `/${lang}/hub/management/finance-economics`, icon: TrendingUp, adminOnly: false },
     { name: t('paymentsSettlement'), href: `/${lang}/hub/management/payments`, icon: Coins, adminOnly: true },
     { name: t('liveCommand'), href: `/${lang}/hub/management?tab=live`, icon: Radio, adminOnly: true },
@@ -94,6 +91,7 @@ export function CiseCommandHubLayout({ children, userRole }: { children: React.R
     { name: t('mediaLibrary'), href: `/${lang}/hub/management/media`, icon: ImageIcon, adminOnly: true },
     { name: t('userManagement'), href: `/${lang}/hub/management/users`, icon: Users, adminOnly: true },
     { name: t('auditLogs'), href: `/${lang}/hub/management/audit-logs`, icon: ClipboardList, adminOnly: true },
+    { name: lang === 'ar' ? 'اللغات والتعريب السيادي' : lang === 'zh' ? '全球语言与本地化管理' : lang === 'ckb' ? 'زمان و ناوخۆیی‌کردن' : 'Languages & Localization', href: `/${lang}/hub/management/languages`, icon: Globe2, adminOnly: true },
     { name: t('systemSettings'), href: `/${lang}/hub/management/settings`, icon: Settings, adminOnly: true },
   ].filter(item => !item.adminOnly || user?.role === 'ADMIN');
 
@@ -549,6 +547,7 @@ export function CiseCommandHubLayout({ children, userRole }: { children: React.R
         </div>
       </main>
       <BottomNav lang={lang} />
+      <GlazedLanguageModal lang={lang as Locale} triggerOnly={true} />
     </div>
   );
 }

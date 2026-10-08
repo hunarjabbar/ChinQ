@@ -9,7 +9,7 @@ import {
   BarChart3, Settings, LogOut, KeyRound, Lock, Search, Bell, Command,
   Plus, Edit, Trash2, RotateCcw, Eye, Download, CheckCircle, AlertTriangle,
   RefreshCw, Shield, Server, FileSpreadsheet, HardDrive, Cpu, Layers,
-  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode, Radio, GraduationCap, Compass
+  ChevronRight, ArrowUpRight, Filter, ChevronDown, Check, X, QrCode, Radio, GraduationCap, Compass, Languages
 } from 'lucide-react';
 import { IcaAdministrationSection } from '../components/hub/IcaAdministrationSection';
 import { NavigationManagerSection } from '../components/hub/NavigationManagerSection';
@@ -18,6 +18,7 @@ import { SecretariatCiseCommandHubSection } from '../components/hub/SecretariatC
 import { NewsroomCiseCommandHubSection } from '../components/hub/NewsroomCiseCommandHubSection';
 import { LiveMediaCiseCommandHubSection } from '../components/hub/LiveMediaCiseCommandHubSection';
 import { CulturalExchangeCiseCommandHubSection } from '../components/hub/CulturalExchangeCiseCommandHubSection';
+import { CiseCommandHubLanguages } from '../components/hub/CiseCommandHubLanguages';
 import { SubmissionsInboxSection } from '../components/hub/SubmissionsInboxSection';
 import { GenericEntityCrud } from '../components/hub/GenericEntityCrud';
 
@@ -614,6 +615,10 @@ export function CommandHubPage() {
                 <HardDrive size={16} />
                 <span>Backup</span>
               </Link>
+              <Link to="/hub/languages" className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-neutral-400 hover:bg-neutral-800 hover:text-white">
+                <Languages size={16} />
+                <span>Languages</span>
+              </Link>
             </div>
           </div>
         </aside>
@@ -622,6 +627,11 @@ export function CommandHubPage() {
         <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-neutral-950">
           {/* Navigation Manager CRUD View */}
           {path.startsWith('/navigation') && <NavigationManagerSection lang={activeLocale} />}
+
+          {/* Languages & Localization CRUD View */}
+          {path.includes('/languages') && (
+            <CiseCommandHubLanguages lang={activeLocale} />
+          )}
 
           {/* ICA Administration Sub-sections - FULL CRUD */}
           {(path.startsWith('/ica/public') || path.startsWith('/ica-admin/public-portal')) && (

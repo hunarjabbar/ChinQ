@@ -15,13 +15,8 @@ import { ADDITIONAL_TOPICS } from '../data/topics';
 import IcaBusinessSection from '../components/IcaBusinessSection';
 import { ContactUs } from '../components/ContactUs';
 import { IcaFinanceEconomicsSection } from '../components/IcaFinanceEconomicsSection';
-import { TrendingBooksSection } from '../components/TrendingBooksSection';
 import PartnersSection from "../components/PartnersSection";
-import { RecommendedBooksSection } from '../components/RecommendedBooksSection';
 import { CulturalExchangeSection } from '../components/CulturalExchangeSection';
-import { TourismSection } from '../components/TourismSection';
-import { WomenSection } from '../components/WomenSection';
-import { VisaFlightSection } from '../components/VisaFlightSection';
 import { InitiativesSection } from '../components/InitiativesSection';
 import { HomeSettlementSpotlight } from '../components/settlement/HomeSettlementSpotlight';
 import { DirectPortalAccess } from '../components/DirectPortalAccess';
@@ -695,81 +690,7 @@ export function Home() {
         </ErrorBoundary>
       </div>
 
-      <div className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Women Leadership & Policy Forum">
-          <WomenSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      <div className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Trending Bilateral Publications">
-          <TrendingBooksSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      <div className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Recommended Academic Spotlight">
-          <RecommendedBooksSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* 8. Travel & Mobility Cluster */}
-      <div id="mobility" className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Sino-Iraqi Aviation & E-Visa Hub">
-          <VisaFlightSection lang={lang} />
-        </ErrorBoundary>
-      </div>
-
-      <div id="tourism" className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Bilateral Tourism & Heritage Showcase">
-          <TourismSection lang={lang as Locale} />
-        </ErrorBoundary>
-      </div>
-
-      {/* 9. Specialized Industry Tracks */}
-      <div className="w-full my-6">
-        <ErrorBoundary inline lang={lang} title="Specialized Bilateral Industry Tracks">
-            <section className="bg-transparent border-0 relative shadow-none p-6 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-              {['ai', 'food-beverage', 'expo', 'business-statistics'].map((catSlug) => {
-                const sectionArticles = articles.filter(a => a.category?.slug === catSlug).slice(0, 3);
-                if (sectionArticles.length === 0) return null;
-                
-                let title = '';
-                if (catSlug === 'ai') title = t('ai');
-                if (catSlug === 'food-beverage') title = t('foodBeverage');
-                if (catSlug === 'expo') title = t('expo');
-                if (catSlug === 'business-statistics') title = t('businessStats');
-                
-                return (
-                  <div key={catSlug} className="p-4 sm:p-5 flex flex-col space-y-4 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 relative group shadow-none overflow-hidden">
-                    <h3 className="text-sm sm:text-base uppercase font-black tracking-widest text-brand-800 dark:text-neutral-100 border-b-2 border-brand-800 pb-1 w-fit">
-                      {title}
-                    </h3>
-                    {sectionArticles.map((article) => (
-                      <div 
-                        key={article.id}
-                        onClick={() => navigate(`/${lang}/newsroom/${article.slug}`)}
-                        className="cursor-pointer group/item hover:bg-white/60 dark:hover:bg-white/[0.08] p-3 -mx-2 rounded-lg transition-all duration-300 hover:scale-[1.01]"
-                      >
-                        <h4 className="text-sm font-bold leading-tight group-hover/item:text-brand-700 text-ink-900 dark:text-neutral-100 transition-colors line-clamp-3">
-                          {getTranslation(article)?.title}
-                        </h4>
-                        <p className="text-xs text-gray-500 dark:text-neutral-400 mt-1 uppercase font-bold opacity-70">
-                          {new Date(article.createdAt).toLocaleDateString(dateLocale.code)}
-                        </p>
-                      </div>
-                    ))}
-                    <div className="absolute -bottom-4 left-4 right-4 h-6 bg-white/90 dark:bg-neutral-900/90 blur-xl pointer-events-none" />
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        </ErrorBoundary>
-      </div>
-
-      {/* 10. Credibility Closing (Placement #2) */}
+      {/* 8. Credibility Closing */}
       <div className="w-full my-6">
         <ErrorBoundary inline lang={lang} title="Strategic Partners">
           <PartnersSection lang={lang as Locale} />

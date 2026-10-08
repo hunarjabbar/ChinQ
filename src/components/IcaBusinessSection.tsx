@@ -332,27 +332,27 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
   return (
     <section 
       id="ica-business-hub" 
-      className="w-full bg-white dark:bg-neutral-900 border-y border-slate-200 dark:border-neutral-700 shadow-xs p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
+      className="w-full bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800 shadow-xs p-6 sm:p-8 md:p-10 my-6 transition-colors duration-300"
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 text-brand-800 dark:bg-brand-950/40 dark:text-brand-300 text-xs font-bold uppercase tracking-wider mb-4 border border-brand-200 dark:border-brand-800/40">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800/60 text-xs font-black uppercase tracking-wider mb-4 shadow-xs">
             <Building2 className="w-3.5 h-3.5" />
             {t.badge}
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-neutral-900 dark:text-white tracking-tight leading-tight mb-4">
             {t.title}
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-neutral-300 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
             {t.desc}
           </p>
         </div>
 
         {/* 4 Sovereign Investor Guarantees Grid */}
         <div className="mb-14">
-          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-800 dark:text-brand-400 mb-6">
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-red-600 mb-6">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{t.guaranteesTitle}</span>
           </div>
@@ -363,20 +363,20 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
               return (
               <div 
                 key={idx}
-                className="bg-white dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700/80 rounded-2xl p-5 shadow-xs hover:border-brand-700 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 shadow-xs hover:border-red-500 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-8 h-8 rounded-xl bg-brand-50 text-brand-800 dark:bg-brand-950/50 dark:text-brand-300 font-bold text-sm flex items-center justify-center mb-3 border border-brand-200/60 dark:border-brand-800/40">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-bold text-sm flex items-center justify-center mb-3 border border-red-200/80 dark:border-red-800/60">
                     {minimalSigns[idx % minimalSigns.length]}
                   </div>
-                  <h4 className="text-sm font-black text-slate-900 dark:text-white mb-2 leading-snug">
+                  <h4 className="text-sm font-black text-neutral-900 dark:text-white mb-2 leading-snug">
                     {g.title}
                   </h4>
-                  <p className="text-xs text-slate-600 dark:text-neutral-300 leading-relaxed font-normal">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal">
                     {g.desc}
                   </p>
                 </div>
-                <div className="pt-3 mt-3 border-t border-slate-100 dark:border-neutral-700/60 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                <div className="pt-3 mt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                   <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                   <span>Verified Legal Immunity</span>
                 </div>
@@ -388,7 +388,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
 
         {/* Official Investment Laws Download Bar */}
         <div className="relative mb-16">
-          <div className="relative z-10 p-6 sm:p-8 md:p-10 bg-brand-800 border border-brand-700 text-white rounded-3xl shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 transition-all duration-300">
+          <div className="relative z-10 p-6 sm:p-8 md:p-10 bg-gradient-to-r from-red-600 via-red-600 to-red-700 border border-red-600 text-white rounded-3xl shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 transition-all duration-300">
             <div className="flex items-start gap-4 sm:gap-5 max-w-2xl">
               <div className="p-3.5 bg-white/15 border border-white/25 text-white rounded-2xl shrink-0 mt-0.5 shadow-sm">
                 <FileText className="w-7 h-7" />
@@ -436,10 +436,10 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                 <button
                   key={catKey}
                   onClick={() => setSelectedCategory(catKey)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                  className={`px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
                     isActive
-                      ? 'bg-brand-800 text-white shadow-sm'
-                      : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-700'
+                      ? 'bg-red-600 text-white border border-red-600 shadow-sm'
+                      : 'bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 hover:border-red-500 hover:text-red-600 hover:bg-red-50/50 dark:hover:bg-red-950/20'
                   }`}
                 >
                   <span>{(labelObj as any)[lang] || (labelObj as any).en}</span>
@@ -454,7 +454,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
           {filteredOpportunities.map((opp) => (
             <div
               key={opp.id}
-              className="group bg-white dark:bg-neutral-800 border border-neutral-200/90 dark:border-neutral-700 rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Photo with Overlay Badges */}
@@ -465,14 +465,14 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   
                   <div className="absolute top-3 start-3 flex gap-2">
-                    <span className="px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider bg-brand-800 text-white rounded-md shadow-xs">
+                    <span className="px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-red-600 text-white rounded-lg shadow-xs">
                       {opp.category}
                     </span>
                     {opp.featured && (
-                      <span className="px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider bg-amber-500 text-black rounded-md flex items-center gap-1 shadow-xs">
+                      <span className="px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-amber-500 text-white rounded-lg flex items-center gap-1 shadow-xs">
                         <Sparkles className="w-3 h-3" />
                         Featured
                       </span>
@@ -481,15 +481,15 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
 
                   <div className="absolute bottom-3 start-3 end-3 flex items-center justify-between text-xs text-white">
                     <div className="flex items-center gap-1.5 font-bold drop-shadow-md truncate">
-                      <Tag className="w-3.5 h-3.5 text-brand-400 shrink-0" />
+                      <Tag className="w-3.5 h-3.5 text-red-400 shrink-0" />
                       <span className="truncate">{opp.sector}</span>
                     </div>
-                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-sm uppercase tracking-wider ${
+                    <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase tracking-wider shadow-xs ${
                       opp.status === 'OPEN' 
-                        ? 'bg-emerald-600/90' 
+                        ? 'bg-emerald-600 text-white' 
                         : opp.status === 'ACTIVE' 
-                        ? 'bg-blue-600/90' 
-                        : 'bg-amber-600/90'
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-amber-600 text-white'
                     }`}>
                       {opp.status}
                     </span>
@@ -498,7 +498,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
 
                 {/* Card Text Content */}
                 <div className="p-5 sm:p-6">
-                  <h3 className="text-base sm:text-lg font-black text-neutral-900 dark:text-white leading-snug mb-2.5 group-hover:text-brand-800 dark:group-hover:text-brand-400 transition-colors line-clamp-2">
+                  <h3 className="text-base sm:text-lg font-black text-neutral-900 dark:text-white leading-snug mb-2.5 group-hover:text-red-600 transition-colors line-clamp-2">
                     {getLocalized(opp, 'title')}
                   </h3>
 
@@ -506,9 +506,9 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                     {getLocalized(opp, 'summary')}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs pt-4 border-t border-neutral-100 dark:border-neutral-700/70 text-neutral-600 dark:text-neutral-300">
+                  <div className="grid grid-cols-2 gap-2 text-xs pt-4 border-t border-neutral-100 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300">
                     <div className="flex items-center gap-1.5 truncate">
-                      <DollarSign className="w-4 h-4 text-brand-700 dark:text-brand-400 shrink-0" />
+                      <DollarSign className="w-4 h-4 text-red-600 shrink-0" />
                       <span className="font-bold text-neutral-900 dark:text-white truncate">
                         {opp.investmentValue}
                       </span>
@@ -521,20 +521,21 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                 </div>
               </div>
 
-              {/* Card Footer Button */}
+              {/* Card Footer Button: Bounded Clean Red Shape with Crisp White Font */}
               <div className="p-5 pt-0">
                 <button
+                  type="button"
                   onClick={() => {
                     setSelectedOpportunity(opp);
                     setInquiryStatus('IDLE');
                   }}
-                  className="w-full py-2.5 px-4 bg-neutral-900 hover:bg-brand-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                  className="w-full py-3 px-4 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5"
                 >
                   <span>{t.viewProspectus}</span>
                   {isRtl ? (
-                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <ArrowLeft className="w-3.5 h-3.5 text-white" />
                   ) : (
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
                   )}
                 </button>
               </div>
@@ -543,7 +544,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
         </div>
 
         {/* Bottom Fast Action Links */}
-        <div className="mt-12 py-8 sm:py-10 px-6 sm:px-10 rounded-3xl bg-brand-800 border border-brand-700 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300">
+        <div className="mt-12 py-8 sm:py-10 px-6 sm:px-10 rounded-3xl bg-gradient-to-r from-red-600 via-red-600 to-red-700 border border-red-600 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300">
           <div className="flex items-center gap-4 text-start">
             <div className="p-3.5 bg-white/15 border border-white/25 text-white rounded-2xl shadow-sm shrink-0">
               <Globe2 className="w-6 h-6" />
@@ -563,7 +564,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
           </div>
           <Link
             to={`/${lang}/settlement`}
-            className="px-7 py-3.5 bg-white hover:bg-neutral-100 text-brand-800 text-xs sm:text-sm font-black rounded-xl transition-all shadow-md hover:shadow-lg shrink-0 tracking-wider uppercase flex items-center gap-2 group cursor-pointer"
+            className="px-7 py-3.5 bg-white hover:bg-neutral-100 text-red-600 text-xs sm:text-sm font-black rounded-xl transition-all shadow-md hover:shadow-lg shrink-0 tracking-wider uppercase flex items-center gap-2 group cursor-pointer"
           >
             <span>{lang === 'ar' ? 'الانتقال إلى مكتب التسوية' : lang === 'zh' ? '前往双边结算与集采台' : lang === 'ckb' ? 'بڕۆ بۆ دەفتەری دارایی' : 'Go to Settlement & Sourcing'}</span>
             <span className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">{isRtl ? '←' : '→'}</span>
@@ -603,7 +604,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                 </button>
                 <div className="absolute bottom-4 start-6 end-6 text-white">
                   <div className="flex gap-2 mb-2">
-                    <span className="px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider bg-brand-800 text-white rounded-md">
+                    <span className="px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider bg-red-600 text-white rounded-md">
                       {selectedOpportunity.category}
                     </span>
                     <span className="px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider bg-emerald-600 text-white rounded-md">
@@ -640,7 +641,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                     <span className="text-neutral-400 block text-[10px] uppercase font-semibold">
                       Sector Focus
                     </span>
-                    <span className="font-bold text-brand-800 dark:text-brand-400 text-sm truncate block">
+                    <span className="font-bold text-red-600 dark:text-red-400 text-sm truncate block">
                       {selectedOpportunity.sector}
                     </span>
                   </div>
@@ -659,7 +660,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                 {/* Expression of Interest Form */}
                 <div className="pt-6 border-t border-neutral-200 dark:border-neutral-700">
                   <h4 className="text-sm font-bold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
-                    <Briefcase className="w-4 h-4 text-brand-800" />
+                    <Briefcase className="w-4 h-4 text-red-600" />
                     {t.expressInterest}
                   </h4>
                   <p className="text-xs text-neutral-500 mb-4">
@@ -680,7 +681,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                           placeholder="Your Full Name / Delegate"
                           value={inquiryName}
                           onChange={(e) => setInquiryName(e.target.value)}
-                          className="text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-brand-800"
+                          className="text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-red-600 focus:ring-1 focus:ring-red-600/30"
                         />
                         <input
                           type="email"
@@ -688,7 +689,7 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                           placeholder="Official Enterprise Email"
                           value={inquiryEmail}
                           onChange={(e) => setInquiryEmail(e.target.value)}
-                          className="text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-brand-800"
+                          className="text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-red-600 focus:ring-1 focus:ring-red-600/30"
                         />
                       </div>
                       <input
@@ -697,27 +698,27 @@ export default function IcaBusinessSection({ lang }: { lang: Locale }) {
                         placeholder="Company / State Corporation / Consortium Name"
                         value={inquiryCompany}
                         onChange={(e) => setInquiryCompany(e.target.value)}
-                        className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-brand-800"
+                        className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-red-600 focus:ring-1 focus:ring-red-600/30"
                       />
                       <textarea
                         rows={2}
                         placeholder="Brief proposal, capital scale or specific inquiry regarding this opportunity..."
                         value={inquiryMessage}
                         onChange={(e) => setInquiryMessage(e.target.value)}
-                        className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-brand-800"
+                        className="w-full text-xs px-3.5 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-xl focus:outline-hidden focus:border-red-600 focus:ring-1 focus:ring-red-600/30"
                       />
                       <div className="flex items-center justify-end gap-3 pt-2">
                         <button
                           type="button"
                           onClick={() => setSelectedOpportunity(null)}
-                          className="px-4 py-2 text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl"
+                          className="px-4 py-2 text-xs font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
                         >
                           Close
                         </button>
                         <button
                           type="submit"
                           disabled={inquiryStatus === 'SENDING'}
-                          className="px-5 py-2 bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold rounded-xl transition-all shadow-xs disabled:opacity-50"
+                          className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                         >
                           {inquiryStatus === 'SENDING' ? 'Transmitting...' : 'Submit Dispatch'}
                         </button>

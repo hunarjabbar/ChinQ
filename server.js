@@ -5850,8 +5850,9 @@ async function startServer() {
   });
   app.use("/src/assets/images", express.static(path.join(process.cwd(), "src/assets/images")));
   app.use("/assets/images", express.static(path.join(process.cwd(), "src/assets/images")));
-  const useStaticProd = fs.existsSync(path.join(process.cwd(), "dist")) || fs.existsSync(path.join(process.cwd(), "build"));
-  if (process.env.NODE_ENV !== "production" && !useStaticProd) {
+  const isProduction = process.env.NODE_ENV === "production";
+  const forceStatic = process.env.SERVE_STATIC === "true";
+  if (!isProduction && !forceStatic) {
     const vite = await createViteServer({
       server: { middlewareMode: true, allowedHosts: true },
       appType: "spa"
@@ -5865,7 +5866,7 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     let distPath = path.join(process.cwd(), "dist");
-    if (!fs.existsSync(distPath) && fs.existsSync(path.join(process.cwd(), "build"))) {
+    if (!fs.existsSync(path.join(distPath, "index.html")) && fs.existsSync(path.join(process.cwd(), "build", "index.html"))) {
       distPath = path.join(process.cwd(), "build");
     }
     app.use("/assets", (req, res, next) => {
@@ -5906,7 +5907,22 @@ async function startServer() {
       if (req.path.match(/\.(css|js|woff2|png|jpg|jpeg|svg|ico|webp|json|map)$/)) {
         return res.status(404).end();
       }
-      res.sendFile(path.join(distPath, "index.html"));
+      let indexPath = path.join(distPath, "index.html");
+      if (!fs.existsSync(indexPath)) {
+        if (fs.existsSync(path.join(process.cwd(), "build", "index.html"))) {
+          indexPath = path.join(process.cwd(), "build", "index.html");
+        } else if (fs.existsSync(path.join(process.cwd(), "index.html"))) {
+          indexPath = path.join(process.cwd(), "index.html");
+        }
+      }
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error("Error serving index.html:", err);
+          if (!res.headersSent) {
+            res.status(200).send("<!doctype html><html><head><meta http-equiv='refresh' content='2'></head><body><h3>Application build updating...</h3></body></html>");
+          }
+        }
+      });
     });
   }
   const server = app.listen(PORT, "0.0.0.0", () => {

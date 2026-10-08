@@ -27,6 +27,7 @@ import { LanguageSwitcher } from '../LanguageSwitcher';
 import { CiseHubFooterLogin } from './CiseHubFooterLogin';
 import { HubLoginFooter } from '../HubLoginFooter';
 import { BottomNav } from '../mobile/BottomNav';
+import { GlazedLanguageModal } from '../GlazedLanguageModal';
 
 interface InstituteLayoutProps {
   children: React.ReactNode;
@@ -571,6 +572,9 @@ export function InstituteLayout({ children, lang }: InstituteLayoutProps) {
 
       {/* Modern Fixed Bottom Navigation Bar for Mobile and Tablet */}
       <BottomNav lang={lang} />
+
+      {/* Global Language Selection Card Modal */}
+      <GlazedLanguageModal lang={lang} triggerOnly={true} />
     </div>
   );
 }

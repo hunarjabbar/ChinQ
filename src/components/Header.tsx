@@ -8,6 +8,7 @@ import { UnifiedSearchOverlay } from './UnifiedSearchOverlay';
 import { UnifiedCommandPalette } from './UnifiedCommandPalette';
 import { UnifiedMobileDrawer } from './UnifiedMobileDrawer';
 import { useNavigationStore } from '../store/useNavigationStore';
+import { openGlobalLanguageModal } from './GlazedLanguageModal';
 import { 
   ShieldCheck, 
   TrendingUp, 
@@ -183,7 +184,17 @@ export const Header: React.FC<HeaderProps> = ({ lang, currentLocale, setLocale }
             </div>
 
             {/* Language Switcher Controls */}
-            <div className="flex items-center gap-1 shrink-0 font-bold text-[10px]">
+            <div className="flex items-center gap-1.5 shrink-0 font-bold text-[10px]">
+              <button
+                type="button"
+                onClick={() => openGlobalLanguageModal()}
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white text-red-700 hover:bg-red-100 font-black text-[10px] tracking-wider transition-all cursor-pointer shadow-xs border border-white"
+                title="Open Global Language Selection Card"
+              >
+                <Globe2 size={11} className="text-red-600" />
+                <span>GLOBAL</span>
+              </button>
+
               {(['en', 'ar', 'zh', 'ckb'] as Locale[]).map((loc) => (
                 <button
                   key={loc}
