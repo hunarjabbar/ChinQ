@@ -25,6 +25,8 @@ import { seedCulturalExchange } from "./server/culturalExchangeSeeder.js";
 import { registerCulturalExchangeRoutes } from "./server/culturalExchangeRoutes.js";
 import { registerHubRoutes } from "./server/hubRoutes.js";
 import { seedSourcingPillars } from "./server/sourcingPillarSeeder.js";
+import { seedCompositionEngine } from "./server/compositionSeeder.js";
+import { registerCompositionRoutes } from "./server/compositionRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -121,6 +123,7 @@ async function runStartupSeeders() {
     await seedBusinessOpportunities();
     await seedCulturalExchange();
     await seedSourcingPillars();
+    await seedCompositionEngine();
     console.log("✅ All background database seeders completed successfully.");
   } catch (err) {
     console.error("⚠️ Error running background seeders:", err);
@@ -379,6 +382,9 @@ async function startServer() {
 
   // Register Centralized CISE Command Hub & Navigation CRUD routes
   registerHubRoutes(app);
+
+  // Register Public Website Sections Composition Engine routes
+  registerCompositionRoutes(app, editorOrAdminMiddleware, adminMiddleware);
   app.post("/api/auth/register", registerLimiter, async (req, res) => {
     try {
       const { email, password, name, role } = req.body;

@@ -294,17 +294,6 @@ export const INITIAL_NAVIGATION_ITEMS: NavigationItem[] = [
     status: 'active',
     portal: 'ica-plus',
   },
-  {
-    id: 'nav_ftr_med_books',
-    section: 'footer',
-    column: 'media',
-    label: { en: 'Sovereign Books & Academic Library', ar: 'المكتبة الأكاديمية والكتب السيادية', zh: '主权图书馆与经典学术著作', ckb: 'کتێبخانەی ئەکادیمی و سەروەری' },
-    slug: 'books',
-    href: '/books',
-    displayOrder: 4,
-    status: 'active',
-    portal: 'ica-public',
-  },
 
   // ================= FOOTER - LEGAL =================
   {

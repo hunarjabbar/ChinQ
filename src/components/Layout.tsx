@@ -285,9 +285,6 @@ export function Layout({ lang, children }: { lang: Locale; children: ReactNode }
               <div className="flex flex-col gap-2">
                 {[
                   { id: 'newsroom', to: `/${lang}/newsroom`, label: lang === 'ar' ? 'غرفة الأخبار والمركز الإعلامي' : lang === 'zh' ? '新闻与媒体中心' : lang === 'ckb' ? 'هەواڵ و ناوەندی میدیا' : 'Newsroom & Media Hub' },
-                  { id: 'women', to: `/${lang}/women`, label: lang === 'ar' ? 'بوابة المرأة والسياسات' : lang === 'zh' ? '女性与双边政策专区' : lang === 'ckb' ? 'دەروازەی سەرکردایەتی ژنان' : 'Women Leadership Portal' },
-                  { id: 'tourism', to: `/${lang}/tourism`, label: lang === 'ar' ? 'بوابة السياحة والتبادل' : lang === 'zh' ? '文旅与双向遗产门户' : lang === 'ckb' ? 'دەروازەی گەشتیاری دوولایەنە' : 'Bilateral Tourism Portal' },
-                  { id: 'books', to: `/${lang}/books`, label: lang === 'ar' ? 'المكتبة المستقلة' : lang === 'zh' ? '主权书库与学术图书' : lang === 'ckb' ? 'کتێبخانەی سەربەخۆ' : 'Sovereign Books Library' },
                   { id: 'projects', to: `/${lang}#projects`, label: lang === 'ar' ? 'متابعة مشاريع البنية التحتية' : lang === 'zh' ? '基建管道跟踪' : lang === 'ckb' ? 'پڕۆژەکانی ژێرخان' : 'Infrastructure Pipeline', targetId: 'projects' },
                   { id: 'legal-desk', to: `/${lang}#legal`, label: lang === 'ar' ? 'القوانين والامتثال' : lang === 'zh' ? '法规与合规' : lang === 'ckb' ? 'یاسا و پابەندبوون' : 'Legal & Regulatory Desk', targetId: 'legal' },
                   { id: 'directory', to: `/${lang}#directory`, label: lang === 'ar' ? 'دليل الشركات الموردة' : lang === 'zh' ? '企业供应商名录' : lang === 'ckb' ? 'پێڕستی کۆمپانیاکان' : 'Enterprise Supplier Directory', targetId: 'directory' },

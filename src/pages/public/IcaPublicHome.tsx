@@ -33,6 +33,7 @@ import { portalStore } from '../../data/portalData';
 import { useSectionControlStore } from '../../store/useSectionControlStore';
 import { getPortalTranslation } from '../../locales/portalTranslations';
 import { PortalLocale } from '../../types/portals';
+import { PublicPageRenderer } from '../../components/public-sections/public-page-renderer';
 
 export function IcaPublicHome() {
   const { lang = 'en' } = useParams<{ lang: string }>();
@@ -117,7 +118,8 @@ export function IcaPublicHome() {
   };
 
   return (
-    <div className="bg-white dark:bg-neutral-900 text-ink-950 dark:text-white min-h-screen transition-colors duration-300">
+    <PublicPageRenderer routeKey="home" slug="home">
+      <div className="bg-white dark:bg-neutral-900 text-ink-950 dark:text-white min-h-screen transition-colors duration-300">
       {/* 1. HERO SECTION */}
       {isHeroVisible && heroCard && (
         <section 
@@ -650,6 +652,7 @@ export function IcaPublicHome() {
         </div>
       </section>
     </div>
+    </PublicPageRenderer>
   );
 }
 

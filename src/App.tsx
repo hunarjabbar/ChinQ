@@ -84,7 +84,6 @@ const SearchPage = lazyWithRetry(() => import('./pages/SearchPage'));
 const CiseCommandHubArticles = lazyWithRetry(() => import('./pages/CiseCommandHubArticles').then(m => ({ default: m.CiseCommandHubArticles })));
 const CiseCommandHubArticleNew = lazyWithRetry(() => import('./pages/CiseCommandHubArticleNew').then(m => ({ default: m.CiseCommandHubArticleNew })));
 const CiseCommandHubAuditLogs = lazyWithRetry(() => import('./pages/CiseCommandHubAuditLogs').then(m => ({ default: m.CiseCommandHubAuditLogs })));
-const CiseCommandHubBrics = lazyWithRetry(() => import('./pages/CiseCommandHubBrics').then(m => ({ default: m.CiseCommandHubBrics })));
 const CiseCommandHubChineseProducts = lazyWithRetry(() => import('./pages/CiseCommandHubChineseProducts').then(m => ({ default: m.CiseCommandHubChineseProducts })));
 const CiseCommandHubBusiness = lazyWithRetry(() => import('./pages/CiseCommandHubBusiness'));
 const CiseCommandHubVideos = lazyWithRetry(() => import('./pages/CiseCommandHubVideos'));
@@ -111,6 +110,7 @@ const CulturalExchangeApply = lazyWithRetry(() => import('./pages/institute/cult
 const CulturalExchangeFAQ = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeFAQ').then(m => ({ default: m.CulturalExchangeFAQ })));
 const CulturalExchangeContact = lazyWithRetry(() => import('./pages/institute/cultural-exchange/CulturalExchangeContact').then(m => ({ default: m.CulturalExchangeContact })));
 const CiseCommandHubCulturalExchange = lazyWithRetry(() => import('./pages/CiseCommandHubCulturalExchange'));
+const CiseCommandHubPublicSections = lazyWithRetry(() => import('./pages/CiseCommandHubPublicSections'));
 
 // Portal 1: ICA Public Portal Pages
 const IcaPublicHome = lazyWithRetry(() => import('./pages/public/IcaPublicHome').then(m => ({ default: m.IcaPublicHome })));
@@ -747,6 +747,7 @@ const router = createBrowserRouter([
     element: <CiseCommandHubLangWrapper />,
     children: [
       { index: true, element: <CiseCommandHubDashboard /> },
+      { path: "sections", element: <CiseCommandHubPublicSections /> },
       { path: "articles", element: <CiseCommandHubArticles /> },
       { path: "articles/new", element: <CiseCommandHubArticleNew /> },
       { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
@@ -761,7 +762,6 @@ const router = createBrowserRouter([
       { path: "business", element: <CiseCommandHubBusiness /> },
       { path: "sourcing", element: <CiseCommandHubSourcing /> },
       { path: "audit-logs", element: <CiseCommandHubAuditLogs /> },
-      { path: "brics", element: <CiseCommandHubBrics /> },
       { path: "chinese-products", element: <CiseCommandHubChineseProducts /> },
       { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
       { path: "users", element: <CiseCommandHubUsers /> },
@@ -820,18 +820,10 @@ const router = createBrowserRouter([
   { path: "/about/*", element: <GenericRootRedirect /> },
   { path: "/contact", element: <GenericRootRedirect /> },
   { path: "/contact/*", element: <GenericRootRedirect /> },
-  { path: "/books", element: <GenericRootRedirect /> },
-  { path: "/books/*", element: <GenericRootRedirect /> },
-  { path: "/tourism", element: <GenericRootRedirect /> },
-  { path: "/tourism/*", element: <GenericRootRedirect /> },
-  { path: "/women", element: <GenericRootRedirect /> },
-  { path: "/women/*", element: <GenericRootRedirect /> },
   { path: "/podcasts", element: <GenericRootRedirect /> },
   { path: "/podcasts/*", element: <GenericRootRedirect /> },
   { path: "/ica-plus", element: <IcaPlusRootRedirect /> },
   { path: "/ica-plus/*", element: <IcaPlusRootRedirect /> },
-  { path: "/visa-flights", element: <GenericRootRedirect /> },
-  { path: "/visa-flights/*", element: <GenericRootRedirect /> },
   { path: "/settings", element: <SettingsRootRedirect /> },
   { path: "/settings/*", element: <SettingsRootRedirect /> },
   { path: "/profile", element: <ProfileRootRedirect /> },
@@ -1188,26 +1180,22 @@ const router = createBrowserRouter([
     element: <CiseCommandHubLangWrapper />,
     children: [
       { index: true, element: <CiseCommandHubDashboard /> },
+      { path: "sections", element: <CiseCommandHubPublicSections /> },
       { path: "articles", element: <CiseCommandHubArticles /> },
       { path: "articles/new", element: <CiseCommandHubArticleNew /> },
       { path: "articles/:id", element: <CiseCommandHubArticleNew /> },
-      { path: "women", element: <CiseCommandHubMedia /> },
-      { path: "tourism", element: <CiseCommandHubBrics /> },
       { path: "cultural-exchange", element: <CiseCommandHubCulturalExchange /> },
-      { path: "visa-flights", element: <CiseCommandHubPartners /> },
       { path: "podcasts", element: <CiseCommandHubIcaPlus /> },
       { path: "icaplus", element: <CiseCommandHubIcaPlus /> },
       { path: "live-events", element: <CiseCommandHubLiveEvents /> },
-      { path: "books", element: <CiseCommandHubBrics /> },
       { path: "finance-economics", element: <CiseCommandHubFinanceEconomics /> },
       { path: "market", element: <CiseCommandHubFinanceEconomics /> },
       { path: "payments", element: <CiseCommandHubPayments /> },
       { path: "partners", element: <CiseCommandHubPartners /> },
       { path: "business", element: <CiseCommandHubBusiness /> },
       { path: "sourcing", element: <CiseCommandHubSourcing /> },
-                { path: "audit-logs", element: <CiseCommandHubAuditLogs /> },
-          { path: "brics", element: <CiseCommandHubBrics /> },
-          { path: "chinese-products", element: <CiseCommandHubChineseProducts /> },
+      { path: "audit-logs", element: <CiseCommandHubAuditLogs /> },
+      { path: "chinese-products", element: <CiseCommandHubChineseProducts /> },
           { path: "visa-centre", element: <CiseCommandHubVisaCentre /> },
           { path: "users", element: <CiseCommandHubUsers /> },
       { path: "media", element: <CiseCommandHubMedia /> },

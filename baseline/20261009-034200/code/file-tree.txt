@@ -1,0 +1,22 @@
+# Baseline File Tree Snapshot
+Generated at: 2026-10-09T03:42:00Z
+Environment: AI Studio Applet Workspace (Non-git Sandbox)
+
+Files and Directories:
+- /server.ts
+- /server/db.ts
+- /server/hubRoutes.ts
+- /server/compositionRoutes.ts
+- /server/compositionSeeder.ts
+- /prisma/schema.prisma
+- /prisma/dev2.db
+- /src/App.tsx
+- /src/main.tsx
+- /src/index.css
+- /src/components/CiseCommandHubLayout.tsx
+- /src/components/composition/SectionRenderer.tsx
+- /src/pages/CiseCommandHubPublicSections.tsx
+- /src/pages/Home.tsx
+- /package.json
+- /tsconfig.json
+- /vite.config.ts

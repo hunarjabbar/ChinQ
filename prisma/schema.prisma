@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev2.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -740,4 +740,101 @@ model CulturalExchangeProgram {
   order               Int                      @default(0)
   createdAt           DateTime                 @default(now())
   updatedAt           DateTime                 @updatedAt
+}
+
+model Page {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  path         String        @unique
+  title        String        @default("{}") // Serialized Json: LocalizedString
+  description  String?       @default("{}") // Serialized Json: LocalizedString
+  pillar       String        @default("GENERAL")
+  sections     PageSection[]
+  status       String        @default("draft")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  createdBy    String?
+  updatedBy    String?
+
+  @@index([status])
+  @@index([pillar])
+}
+
+model PageSection {
+  id             String            @id @default(cuid())
+  pageId         String
+  page           Page              @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  type           String
+  name           String
+  displayOrder   Int               @default(0)
+  visibility     String            @default("visible")
+  scheduleFrom   DateTime?
+  scheduleTo     DateTime?
+  styleOverride  String?           @default("{}") // Serialized Json
+  localeOverride String?           @default("{}") // Serialized Json
+  config         String?           @default("{}") // Serialized Json
+  items          SectionItem[]
+  revisions      SectionRevision[]
+  status         String            @default("draft")
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  createdBy      String?
+  updatedBy      String?
+
+  @@index([pageId, displayOrder])
+  @@index([type])
+  @@index([status])
+}
+
+model SectionItem {
+  id           String      @id @default(cuid())
+  sectionId    String
+  section      PageSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  title        String      @default("{}") // Serialized Json: LocalizedString
+  subtitle     String?     @default("{}") // Serialized Json: LocalizedString
+  body         String?     @default("{}") // Serialized Json: LocalizedString
+  image        String?
+  imageAlt     String?     @default("{}") // Serialized Json: LocalizedString
+  ctaLabel     String?     @default("{}") // Serialized Json: LocalizedString
+  ctaHref      String?
+  icon         String?
+  metadata     String?     @default("{}") // Serialized Json
+  displayOrder Int         @default(0)
+  visibility   String      @default("visible")
+  status       String      @default("draft")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  createdBy    String?
+  updatedBy    String?
+
+  @@index([sectionId, displayOrder])
+  @@index([status])
+}
+
+model SectionTemplate {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  type          String
+  name          String   @default("{}") // Serialized Json: LocalizedString
+  description   String   @default("{}") // Serialized Json: LocalizedString
+  defaultConfig String   @default("{}") // Serialized Json
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+}
+
+model SectionRevision {
+  id        String      @id @default(cuid())
+  sectionId String
+  section   PageSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  snapshot  String      @default("{}") // Serialized Json
+  actorId   String
+  action    String
+  timestamp DateTime    @default(now())
+
+  @@index([sectionId, timestamp])
+  @@index([actorId])
 }

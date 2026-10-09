@@ -1,6 +1,6 @@
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './ErrorBoundary';
-import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp, Building2, GraduationCap } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileText, BookOpen, Radio, Image as ImageIcon, Users, Settings, Briefcase, Ship, LogOut, Bell, KeySquare, Mail, Lock, User as UserIcon, Compass, Mic, Video, Activity, Plane, Coins, Check, Menu, X, Globe2, TrendingUp, Building2, GraduationCap, Layers } from 'lucide-react';
 import { Locale } from '../types';
 import { useAuthStore } from '../store/useAuthStore';
 import { useI18n } from '../hooks/useI18n';
@@ -75,9 +75,9 @@ export function CiseCommandHubLayout({ children, userRole }: { children: React.R
   ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
   const navItems = [
+    { name: lang === 'ar' ? 'أقسام الموقع العام' : lang === 'zh' ? '公开网站版块管理' : lang === 'ckb' ? 'بەشەکانی ماڵپەڕی گشتی' : 'Public Website Sections', href: `/${lang}/hub/management/sections`, icon: Layers, adminOnly: false },
     { name: t('articlesRegistry'), href: `/${lang}/hub/management/articles`, icon: FileText, adminOnly: false },
     { name: t('dashboard'), href: `/${lang}/hub/management`, icon: LayoutDashboard, adminOnly: true },
-    { name: t('bricsObservatory'), href: `/${lang}/hub/management/brics`, icon: Globe2, adminOnly: true },
     { name: lang === 'ar' ? 'التبادل الثقافي والتعليمي' : lang === 'zh' ? '人文与教育交流' : lang === 'ckb' ? 'ئاڵوگۆڕی کولتووری و زانستی' : 'Cultural & Educational Exchange', href: `/${lang}/hub/management/cultural-exchange`, icon: GraduationCap, adminOnly: true },
     { name: 'ICA+ Media', href: `/${lang}/hub/management/icaplus`, icon: Mic, adminOnly: true },
     { name: lang === 'ar' ? 'المالية والاقتصاد' : lang === 'zh' ? '财经与宏观经济' : lang === 'ckb' ? 'دارایی و ئابووری' : 'Finance & Economics', href: `/${lang}/hub/management/finance-economics`, icon: TrendingUp, adminOnly: false },
